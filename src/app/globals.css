@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+body {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Lenis Smooth Scroll CSS Overrides */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Custom Typography Utility Classes using Next.js Google Font Variables */
+.font-serif-display {
+  font-family: var(--font-playfair), Georgia, serif;
+}
+
+.font-sans-ui {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f2923;
+  border-radius: 4px;
+  border: 1px solid rgba(109, 173, 69, 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6DAD45;
+}
+
+/* Brand Colors: Primary Black #000000, White #FFFFFF, Brand Green #6DAD45 */
+
+/* Glow effects */
+.brand-glow {
+  box-shadow: 0 0 35px -5px rgba(109, 173, 69, 0.25);
+}
+
+.brand-glow-lg {
+  box-shadow: 0 0 70px 0px rgba(109, 173, 69, 0.2);
+}
+
+.brand-glow-sm {
+  box-shadow: 0 0 15px -2px rgba(109, 173, 69, 0.35);
+}
+
+.brand-text-glow {
+  text-shadow: 0 0 20px rgba(109, 173, 69, 0.4);
+}
+
+/* Custom Subtle Gradients & Panels */
+.card-gradient {
+  background: linear-gradient(135deg, rgba(20, 24, 20, 0.8) 0%, rgba(8, 8, 8, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card-gradient:hover {
+  border-color: rgba(109, 173, 69, 0.4);
+}
+
+.glass-header {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.glass-panel {
+  background: rgba(18, 18, 18, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Smooth SVG transitions */
+.path-pulse {
+  stroke-dasharray: 10;
+  animation: dash 30s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+/* Marquee infinite ticker */
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
