@@ -34,64 +34,58 @@ export default function SolutionsPage() {
 
   const capabilities: Capability[] = [
     {
-      id: "solar-wind",
+      id: "renewable-energy",
       tag: "01 / RENEWABLE ENERGY",
-      title: "Solar + Wind",
-      description: "Utility scale solar EPC, wind energy, hybrid systems and turnkey renewable power plants.",
-      fullDetails:
-        "Complete EPC execution for utility-scale solar parks, rooftop installations, and wind-solar hybrid projects. We manage land acquisition assistance, micro-siting, solar panel stringing, inverter stations, and full synchronization to state and national grids.",
-      specs: ["Utility Scale & C&I", "Tracker Integration", "PPA & Open Access Support"],
+      title: "Renewable Energy",
+      description: "Solar Parks, Rooftop, C&I, O&M, Wind Farms",
+      fullDetails: "Complete execution and engineering for solar parks, commercial & industrial rooftop installations, utility-scale wind farms, and long-term O&M management.",
+      specs: ["Solar Parks", "Rooftop & C&I", "Comprehensive O&M", "Wind Farms"],
       icon: Sun,
     },
     {
-      id: "bess",
-      tag: "02 / ENERGY STORAGE",
-      title: "BESS",
-      description: "Battery storage systems for renewable integration, peak shaving, and grid resilience.",
-      fullDetails:
-        "Containerized utility-scale Battery Energy Storage Systems (BESS) designed for grid stability, peak load management, and frequency regulation. Integration with lithium iron phosphate (LFP) chemistry and advanced EMS software.",
-      specs: ["Containerized Systems", "Peak Load Shaving", "Grid Frequency Regulation"],
-      icon: Battery,
-    },
-    {
-      id: "agrivoltaics",
-      tag: "03 / AGRIVOLTAICS",
-      title: "Solar + Agriculture",
-      description: "Dual-use land solutions combining high-yield agriculture and solar power generation.",
-      fullDetails:
-        "Elevated mounting structures and tailored solar panel pitch designed specifically for agricultural farming beneath arrays (PM-KUSUM Component A & C). Maximizes land revenue density while retaining agricultural productivity.",
-      specs: ["PM-KUSUM Aligned", "Elevated Clearance", "Soil & Water Preservation"],
-      icon: Sprout,
-    },
-    {
-      id: "substations",
-      tag: "04 / GRID INFRASTRUCTURE",
-      title: "Substations",
-      description: "High-voltage substations, transmission lines, power evacuation, and electrical BOP.",
-      fullDetails:
-        "33kV, 132kV, 220kV, and 400kV substation design, procurement, testing, and commissioning. Turnkey transmission line corridor construction with SCADA automation and state utility approval handling.",
-      specs: ["Up to 400kV GIS/AIS", "Transmission Corridors", "SCADA & Protection Systems"],
+      id: "grid-substations",
+      tag: "02 / GRID & SUBSTATIONS",
+      title: "Grid & Substations",
+      description: "HT/LT systems, Substations, Evacuation lines, Protection, Grid connectivity.",
+      fullDetails: "High-voltage and low-voltage electrical systems, AIS/GIS substations, power evacuation line corridors, relay protection, and seamless DISCOM grid connectivity.",
+      specs: ["HT/LT Systems", "Substations (GIS/AIS)", "Evacuation Lines", "Protection & SCADA", "Grid Connectivity"],
       icon: Zap,
     },
     {
-      id: "infrastructure",
-      tag: "05 / CIVIL INFRASTRUCTURE",
-      title: "Roads + Bridges + Buildings",
-      description: "Access roads, bridges, drainage networks, and civil works executed with EPC discipline.",
-      fullDetails:
-        "Civil infrastructure required for remote energy project sites including heavy payload access roads, drainage culverts, bridges, boundary walls, and control room buildings built to withstand harsh weather.",
-      specs: ["Heavy Load Access Roads", "Pre-cast Reinforced Bridges", "Site Grading & Drainage"],
-      icon: Route,
+      id: "civil-infrastructure",
+      tag: "03 / CIVIL INFRASTRUCTURE",
+      title: "Civil Infrastructure",
+      description: "Roads, Buildings, Foundations, Industrial civil works, Project Infrastructure.",
+      fullDetails: "Heavy-payload access roads, control room buildings, structural equipment foundations, industrial civil works, and comprehensive project site infrastructure.",
+      specs: ["Access Roads", "Buildings & Control Rooms", "Equipment Foundations", "Industrial Civil Works", "Project Infrastructure"],
+      icon: Building2,
     },
     {
-      id: "pmc-epcm",
-      tag: "06 / PROJECT SERVICES",
-      title: "PMC + EPCM + Turnkey",
-      description: "Project management consultancy, EPCM contracts, and full-scope turnkey EPC execution.",
-      fullDetails:
-        "Full lifecycle project management consultancy, owner engineering services, procurement oversight, and complete turnkey contract execution with guaranteed performance ratios.",
-      specs: ["Owner Engineering", "Quality Audit & Testing", "Performance Ratio Guarantees"],
-      icon: Building2,
+      id: "agrivoltaics",
+      tag: "04 / AGRIVOLTAICS",
+      title: "Agrivoltaics",
+      description: "Solar with agriculture, Land optimization, Farmer-linked models.",
+      fullDetails: "Dual-use land solutions integrating solar power generation with active farming, optimizing land revenue density and implementing farmer-linked PM-KUSUM models.",
+      specs: ["Solar with Agriculture", "Land Optimization", "Farmer-Linked PM-KUSUM Models"],
+      icon: Sprout,
+    },
+    {
+      id: "bess",
+      tag: "05 / BESS",
+      title: "BESS",
+      description: "BESS, Solar + Storage, Backup and Peak-load solutions.",
+      fullDetails: "Utility-scale containerized Battery Energy Storage Systems (BESS), solar + storage integration, emergency backup power, and peak-load shaving.",
+      specs: ["Containerized BESS", "Solar + Storage Hybrids", "Backup Power", "Peak-Load Shaving"],
+      icon: Battery,
+    },
+    {
+      id: "project-delivery",
+      tag: "06 / PROJECT DELIVERY",
+      title: "Project Delivery",
+      description: "EPC, PMC, EPCM, Turnkey",
+      fullDetails: "Full-scope turnkey EPC execution, Project Management Consultancy (PMC), EPCM contracting, and owner engineering services.",
+      specs: ["Turnkey EPC", "PMC Consultancy", "EPCM Contracting", "Full Lifecycle Delivery"],
+      icon: Route,
     },
   ];
 
@@ -191,41 +185,45 @@ export default function SolutionsPage() {
             </p>
           </ScrollReveal>
 
-          {/* 6 Capabilities Cards Grid (Image 1 Exact Layout) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* 6 Capabilities Cards Grid (Exact UI matching reference images) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {capabilities.map((item, index) => {
               const IconComp = item.icon;
               return (
                 <motion.div
                   key={item.id}
-                  initial={{ opacity: 0, y: 60, scale: 0.95 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: false, amount: 0.2 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: (index % 3) * 0.15,
-                    ease: "easeOut",
-                  }}
-                  whileHover={{ y: -8, scale: 1.02 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: index * 0.08 }}
+                  whileHover={{ y: -6, scale: 1.01 }}
                   onClick={() => setSelectedCapability(item)}
-                  className="card-gradient rounded-3xl p-8 sm:p-10 relative group cursor-pointer overflow-hidden flex flex-col justify-between min-h-[320px] transition-all duration-300 hover:border-[#6DAD45]/60 hover:shadow-2xl hover:shadow-[#6DAD45]/20 backdrop-blur-xl bg-[#0B0F0B]"
+                  className="group relative rounded-[28px] bg-[#0A0E0A] border border-white/10 hover:border-[#5EE72D]/50 p-8 sm:p-9 flex flex-col justify-between min-h-[290px] cursor-pointer overflow-hidden transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-[#5EE72D]/10"
                 >
-                  {/* Top Tag */}
+                  {/* Subtle Radial Green Glow in Bottom Right on Hover */}
+                  <div className="absolute -bottom-12 -right-12 w-44 h-44 bg-[#5EE72D]/5 rounded-full blur-2xl group-hover:bg-[#5EE72D]/20 transition-all duration-500 pointer-events-none" />
+
                   <div>
-                    <div className="text-[10px] font-mono tracking-widest text-[#6DAD45] uppercase mb-8">
+                    {/* Top Tag */}
+                    <div className="text-[11px] font-mono tracking-widest text-[#5EE72D] uppercase mb-8 font-semibold">
                       {item.tag}
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-3xl font-serif-display font-medium text-white mb-4 group-hover:text-[#6DAD45] transition-colors leading-tight">
+                    <h3 className="text-2xl sm:text-3xl font-serif-display font-medium text-white mb-3 group-hover:text-[#5EE72D] transition-colors leading-tight">
                       {item.title}
                     </h3>
+
+                    {/* Description */}
+                    <p className="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
+                      {item.description}
+                    </p>
                   </div>
 
-                  {/* Bottom Corner Arrow */}
-                  <div className="pt-6 flex items-center justify-between">
-                    <ArrowUpRight className="w-5 h-5 text-[#6DAD45] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    <IconComp className="w-6 h-6 text-zinc-600 group-hover:text-[#6DAD45] transition-colors" />
+                  {/* Bottom Bar with Arrow & Icon */}
+                  <div className="pt-8 flex items-center justify-between z-10 relative">
+                    <ArrowUpRight className="w-5 h-5 text-[#5EE72D] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    <IconComp className="w-5 h-5 text-zinc-600 group-hover:text-[#5EE72D] transition-colors" />
                   </div>
                 </motion.div>
               );

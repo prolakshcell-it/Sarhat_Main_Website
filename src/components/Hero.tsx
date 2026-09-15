@@ -23,8 +23,8 @@ export default function Hero({ onOpenQuote }: HeroProps) {
 
   // Soft, floating slide out from left (-50px -> 0px) with motion blur
   const itemSoftLeftVariants: Variants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       x: -50,
       filter: "blur(8px)",
     },

@@ -1,8 +1,22 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp, ShieldCheck } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
+  const [wordIndex, setWordIndex] = useState(0);
+  const rotatingWords = ["SOLAR", "INFRA", "BESS", "AGRI", "LEISURE"];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIndex((prevIndex) => (prevIndex + 1) % rotatingWords.length);
+    }, 2200);
+    return () => clearInterval(interval);
+  }, [rotatingWords.length]);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -14,16 +28,35 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-white/10">
           {/* Brand Info Column */}
           <div className="lg:col-span-2 space-y-4">
-            {/* Exact Logo: SARHAT [Green Dot] EPC */}
-            <div className="flex items-center group shrink-0 select-none">
-              <div className="font-sans-ui text-2xl font-black tracking-tighter text-white flex items-baseline leading-none">
-                <span className="font-black text-white uppercase tracking-tighter">SARHAT</span>
-                <span className="w-2.5 h-2.5 rounded-full bg-[#6DAD45] inline-block mx-1 shrink-0 self-baseline shadow-[0_0_10px_#6DAD45]"></span>
-                <span className="text-xs font-extrabold text-white uppercase tracking-wider ml-0.5 opacity-90">
-                  EPC
-                </span>
+            {/* Exact Logo: SARHAT [Green Dot] Rotating Words */}
+            <Link href="/" className="flex items-center group shrink-0 select-none">
+              <div className="font-sans-ui text-2xl font-black tracking-tighter text-white flex items-center leading-none">
+                <Image
+                  src="/images/logo.png"
+                  alt="SARHAT"
+                  width={280}
+                  height={95}
+                  className="h-12 sm:h-16 md:h-18 w-auto object-contain"
+                />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#6DAD45] inline-block mx-1.5 shrink-0 self-center translate-y-1 sm:translate-y-1.5 shadow-[0_0_10px_#6DAD45]"></span>
+
+                {/* Continuous Animated Vertical Text Ticker for Logo Words */}
+                <div className="h-5 overflow-hidden inline-flex items-center ml-0.5 min-w-[50px] sm:min-w-[65px] relative translate-y-1 sm:translate-y-1.5">
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={rotatingWords[wordIndex]}
+                      initial={{ y: 12, opacity: 0, filter: "blur(3px)" }}
+                      animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                      exit={{ y: -12, opacity: 0, filter: "blur(3px)" }}
+                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      className="text-xs sm:text-sm font-bold uppercase tracking-wider block text-[#6DAD45]"
+                    >
+                      {rotatingWords[wordIndex]}
+                    </motion.span>
+                  </AnimatePresence>
+                </div>
               </div>
-            </div>
+            </Link>
             <p className="text-xs text-zinc-400 font-light max-w-sm leading-relaxed">
               Renewable energy generation, battery storage (BESS), substations, and civil infrastructure delivered under one connected execution mindset.
             </p>
@@ -127,12 +160,19 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-mono">
-          <div>
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-mono">
+          {/* Left: Copyright */}
+          <div className="whitespace-nowrap">
             © {new Date().getFullYear()} SARHAT EPC PVT. LTD. ALL RIGHTS RESERVED.
           </div>
 
-          <div className="flex items-center gap-6">
+          {/* Middle: Powered by Prolaksh */}
+          <div className="text-[11px] tracking-widest text-zinc-400 uppercase font-mono font-medium">
+            POWERED BY <span className="text-zinc-200 font-bold">PROLAKSH</span>
+          </div>
+
+          {/* Right: Policy Links & Back To Top */}
+          <div className="flex items-center gap-6 whitespace-nowrap">
             <a href="#" className="hover:text-zinc-300 transition-colors">
               PRIVACY POLICY
             </a>

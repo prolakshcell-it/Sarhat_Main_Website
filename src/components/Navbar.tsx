@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface NavbarProps {
   onOpenQuote: () => void;
@@ -15,7 +16,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
   const [wordIndex, setWordIndex] = useState(0);
 
   // Dynamic related words that rotate continuously in logo
-  const rotatingWords = ["EPC", "SOLAR", "BESS", "ENERGY", "INFRA", "STORAGE", "GRID"];
+  const rotatingWords = ["SOLAR", "INFRA", "BESS", "AGRI", "LEISURE"];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,78 +33,77 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
   // Word rotator interval (changes every 2.2 seconds)
   useEffect(() => {
     const interval = setInterval(() => {
-      setWordIndex((prev) => (prev + 1) % rotatingWords.length);
+      setWordIndex((prevIndex) => (prevIndex + 1) % rotatingWords.length);
     }, 2200);
     return () => clearInterval(interval);
   }, [rotatingWords.length]);
 
-  // Main navigation links (matching exact reference design)
-  const mainNavLinks = [
-    { label: "ABOUT US", href: "/about" },
-    { label: "OUR SOLUTIONS", href: "/solutions" },
-    { label: "PORTFOLIO", href: "/#execution" },
-    { label: "PROJECT INTELLIGENCE", href: "/#intelligence" },
-    { label: "NEWS & INSIGHTS", href: "/insights" },
+  const topNavLinks = [
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Solutions", href: "/solutions" },
+    { label: "Careers", href: "/careers" },
+    { label: "Insights", href: "/insights" },
+    { label: "Contact", href: "/contact" },
   ];
 
-  // Utility top links
-  const topNavLinks = [
-    { label: "CAREERS", href: "/careers" },
-    { label: "CONTACT", href: "/contact" },
+  const mainNavLinks = [
+    { label: "ABOUT", href: "/about" },
+    { label: "SOLUTIONS", href: "/solutions" },
+    { label: "PORTFOLIO", href: "/#execution" },
+    { label: "FOOTPRINT", href: "/#footprint" },
+    { label: "INTELLIGENCE", href: "/#intelligence" },
+    { label: "INSIGHTS", href: "/insights" },
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 font-sans-ui">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-sans-ui">
       {/* Top Sub-Bar (Utility Header matching reference image) */}
-      <div className="bg-black/40 border-b border-white/10 text-[10px] sm:text-[11px] font-semibold tracking-wider text-zinc-300 py-2 px-4 sm:px-8 lg:px-12 backdrop-blur-md transition-all duration-300">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Left Sub-Header Tagline */}
-          <div className="flex items-center gap-2 uppercase tracking-[0.18em] text-zinc-300 font-medium text-[10px] sm:text-[11px]">
-            <span>ENERGY + INFRASTRUCTURE / PAN-INDIA EXECUTION</span>
-          </div>
-
-          {/* Right Sub-Header Links (CAREERS / CONTACT) */}
-          <div className="hidden sm:flex items-center gap-7 text-[11px] font-bold tracking-widest text-zinc-200">
-            {topNavLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="hover:text-white transition-colors duration-200 uppercase"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
+      <div className="bg-black/90 border-b border-white/10 text-zinc-400 py-2 px-4 sm:px-8 lg:px-12 text-[10px] sm:text-[11px] tracking-wider uppercase flex justify-between items-center select-none backdrop-blur-md">
+        <div className="flex items-center gap-2 uppercase tracking-[0.18em] text-zinc-400 font-medium text-[10px] sm:text-[11px]">
+          <span>ENERGY + INFRASTRUCTURE / PAN-INDIA EXECUTION</span>
+        </div>
+        <div className="flex items-center gap-6 text-[10px] sm:text-[11px] font-bold tracking-widest text-zinc-300">
+          <Link href="/careers" className="hover:text-white transition-colors uppercase">
+            CAREERS
+          </Link>
+          <Link href="/contact" className="hover:text-white transition-colors uppercase">
+            CONTACT
+          </Link>
         </div>
       </div>
 
       {/* Main Navigation Bar */}
       <div
-        className={`w-full transition-all duration-300 border-b ${
-          scrolled
-            ? "bg-black/75 backdrop-blur-2xl py-3.5 border-white/15 shadow-2xl shadow-black/80"
-            : "bg-black/35 backdrop-blur-xl py-4 border-white/10"
-        }`}
+        className={`w-full transition-all duration-300 border-b ${scrolled
+          ? "bg-black/75 backdrop-blur-2xl py-3.5 border-white/15 shadow-2xl shadow-black/80"
+          : "bg-black/35 backdrop-blur-xl py-4 border-white/10"
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 flex items-center justify-between">
-          {/* Brand Logo with Dynamic Rotating Words (SARHAT . EPC -> SOLAR -> BESS -> ENERGY -> INFRA) */}
+          {/* Brand Logo with Dynamic Rotating Words (SARHAT . SOLAR -> INFRA -> BESS -> AGRI -> LEISURE) */}
           <Link href="/" className="flex items-center group shrink-0 select-none">
-            <div className="text-xl sm:text-2xl font-black tracking-tighter text-white flex items-baseline leading-none">
-              <span className="font-black text-white uppercase tracking-tighter text-2xl sm:text-3xl">SARHAT</span>
-              <span className="w-2.5 h-2.5 rounded-full bg-[#5EE72D] inline-block mx-1 shrink-0 self-baseline group-hover:scale-125 transition-transform shadow-[0_0_10px_#5EE72D]"></span>
-              
+            <div className="text-xl sm:text-2xl font-black tracking-tighter text-white flex items-center leading-none">
+              <Image
+                src="/images/logo.png"
+                alt="SARHAT"
+                width={260}
+                height={88}
+                className="h-11 sm:h-14 md:h-16 w-auto object-contain"
+                priority
+              />
+              <span className="w-2 h-2 rounded-full bg-[#5EE72D] inline-block mx-1.5 shrink-0 self-center translate-y-1 sm:translate-y-2.5 group-hover:scale-125 transition-transform shadow-[0_0_8px_#5EE72D]"></span>
+
               {/* Continuous Animated Vertical Text Ticker for Logo Words */}
-              <div className="h-6 overflow-hidden inline-flex items-center ml-0.5 min-w-[60px] sm:min-w-[75px] relative">
+              <div className="h-5 overflow-hidden inline-flex items-center ml-0.5 min-w-[50px] sm:min-w-[65px] relative translate-y-1 sm:translate-y-2.5">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={rotatingWords[wordIndex]}
-                    initial={{ y: 14, opacity: 0, filter: "blur(4px)" }}
+                    initial={{ y: 12, opacity: 0, filter: "blur(3px)" }}
                     animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                    exit={{ y: -14, opacity: 0, filter: "blur(4px)" }}
-                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                    className={`text-xs sm:text-sm font-black uppercase tracking-wider block ${
-                      rotatingWords[wordIndex] === "EPC" ? "text-white" : "text-[#5EE72D]"
-                    }`}
+                    exit={{ y: -12, opacity: 0, filter: "blur(3px)" }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    className="text-[10px] sm:text-xs font-bold uppercase tracking-wider block text-[#5EE72D]"
                   >
                     {rotatingWords[wordIndex]}
                   </motion.span>
@@ -204,7 +204,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </header >
   );
 }
 
