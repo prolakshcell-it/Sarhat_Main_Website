@@ -50,10 +50,10 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
   const mainNavLinks = [
     { label: "ABOUT", href: "/about" },
     { label: "SOLUTIONS", href: "/solutions" },
+    { label: "PORTFOLIO", href: "/#execution" },
     { label: "FOOTPRINT", href: "/#footprint" },
     { label: "INTELLIGENCE", href: "/#intelligence" },
     { label: "INSIGHTS", href: "/insights" },
-
   ];
 
   return (

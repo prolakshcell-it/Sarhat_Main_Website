@@ -160,12 +160,19 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-mono">
-          <div>
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-mono">
+          {/* Left: Copyright */}
+          <div className="whitespace-nowrap">
             © {new Date().getFullYear()} SARHAT EPC PVT. LTD. ALL RIGHTS RESERVED.
           </div>
 
-          <div className="flex items-center gap-6">
+          {/* Middle: Powered by Prolaksh */}
+          <div className="text-[11px] tracking-widest text-zinc-400 uppercase font-mono font-medium">
+            POWERED BY <span className="text-zinc-200 font-bold">PROLAKSH</span>
+          </div>
+
+          {/* Right: Policy Links & Back To Top */}
+          <div className="flex items-center gap-6 whitespace-nowrap">
             <a href="#" className="hover:text-zinc-300 transition-colors">
               PRIVACY POLICY
             </a>
