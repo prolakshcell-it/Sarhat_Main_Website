@@ -51,7 +51,7 @@ export default function Hero({ onOpenQuote }: HeroProps) {
           preload="auto"
           poster="/images/hero-solar.jpg"
           suppressHydrationWarning
-          className="w-full h-full object-cover opacity-85 scale-105 transition-opacity duration-1000 pointer-events-none"
+          className="w-full h-full object-cover opacity-100 scale-105 transition-opacity duration-1000 pointer-events-none"
         >
           <source src="/generate_in_k_hd.mp4" type="video/mp4" />
           {/* Fallback image */}
@@ -60,14 +60,13 @@ export default function Hero({ onOpenQuote }: HeroProps) {
             alt="SARHAT EPC Solar Power Plant"
             fill
             priority
-            className="object-cover object-center opacity-85"
+            className="object-cover object-center opacity-100"
           />
         </video>
 
-        {/* Tailored Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/70 pointer-events-none"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent pointer-events-none"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#5EE72D]/20 via-transparent to-transparent pointer-events-none"></div>
+        {/* Minimal Light Vignette for Text Contrast */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent pointer-events-none"></div>
       </div>
 
       {/* Main Content Container (Centered in Viewport) */}
@@ -78,22 +77,10 @@ export default function Hero({ onOpenQuote }: HeroProps) {
           animate="visible"
           className="max-w-4xl"
         >
-          {/* Top Animated Badges - Soft left blur slide */}
-          <motion.div variants={itemSoftLeftVariants} className="flex flex-wrap items-center gap-3 mb-5">
-            <span className="px-3.5 py-1.5 bg-black/75 border border-[#5EE72D]/60 text-[#5EE72D] font-bold text-[10px] sm:text-[11px] uppercase tracking-widest rounded-full flex items-center gap-2 backdrop-blur-md shadow-2xl brand-glow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#5EE72D] animate-ping"></span>
-              SARHAT.EPC / ENERGY × INFRASTRUCTURE
-            </span>
-            <span className="inline-flex items-center gap-1.5 text-[11px] text-zinc-300 font-mono backdrop-blur-sm px-3 py-1 rounded-full bg-black/50 border border-white/10">
-              <Activity className="w-3.5 h-3.5 text-[#5EE72D] animate-pulse" />
-              47 MW UTILITY CAPACITY ACTIVE
-            </span>
-          </motion.div>
-
           {/* Hero Headline - Soft left blur slide */}
           <motion.h1
             variants={itemSoftLeftVariants}
-            className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.75rem] font-serif-display font-medium tracking-tight text-white leading-[1.1] mb-5 [text-shadow:_0_4px_24px_rgba(0,0,0,0.95)]"
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-[2.5rem] font-serif-display font-medium tracking-tight text-white leading-[1.1] mb-5 [text-shadow:_0_4px_24px_rgba(0,0,0,0.95)]"
           >
             We build the{" "}
             <span className="italic font-normal text-[#5EE72D] relative inline-block drop-shadow-[0_0_30px_rgba(94,231,45,0.7)]">
