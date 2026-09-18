@@ -63,16 +63,16 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
           {!submitted ? (
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <span className="w-2 h-2 rounded-full bg-[#6DAD45] animate-ping"></span>
-                <span className="text-xs font-mono text-[#6DAD45] uppercase tracking-widest">
-                  SARHAT EPC CONSULTATION
+                <span className="w-2 h-2 rounded-full bg-[#5EE72D] animate-ping"></span>
+                <span className="text-xs font-mono text-[#5EE72D] uppercase tracking-widest">
+                  SARHAT EPC PROJECT DISCUSSION
                 </span>
               </div>
               <h3 className="text-3xl font-serif-display font-medium text-white mb-2">
-                Request Project Proposal
+                Discuss Your Project
               </h3>
               <p className="text-xs text-zinc-400 font-light mb-6">
-                Fill in your project requirements and our engineering execution team will prepare an initial site assessment within 24 hours.
+                Tell us about your upcoming project requirements. Our engineering team will review your site parameters and schedule a direct technical discussion.
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -87,7 +87,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                       placeholder="e.g. Vikram Sharma"
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#6DAD45]"
+                      className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#5EE72D]"
                     />
                   </div>
                   <div>
@@ -100,7 +100,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                       placeholder="e.g. Acme Renewables Pvt Ltd"
                       value={form.company}
                       onChange={(e) => setForm({ ...form, company: e.target.value })}
-                      className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#6DAD45]"
+                      className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#5EE72D]"
                     />
                   </div>
                 </div>
@@ -116,7 +116,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                       placeholder="vikram@acme.com"
                       value={form.email}
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#6DAD45]"
+                      className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#5EE72D]"
                     />
                   </div>
                   <div>
@@ -129,7 +129,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                       placeholder="+91 98765 43210"
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#6DAD45]"
+                      className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#5EE72D]"
                     />
                   </div>
                 </div>
@@ -142,7 +142,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                     <select
                       value={form.vertical}
                       onChange={(e) => setForm({ ...form, vertical: e.target.value })}
-                      className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#6DAD45]"
+                      className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#5EE72D]"
                     >
                       <option value="Solar EPC">Solar EPC (Utility / C&I)</option>
                       <option value="BESS Storage">BESS Energy Storage</option>
@@ -158,7 +158,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                     <select
                       value={form.scale}
                       onChange={(e) => setForm({ ...form, scale: e.target.value })}
-                      className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#6DAD45]"
+                      className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#5EE72D]"
                     >
                       <option value="Under 5 MW">Under 5 MW</option>
                       <option value="5 - 20 MW">5 - 20 MW</option>
@@ -170,43 +170,43 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
 
                 <div>
                   <label className="block text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-1">
-                    Project Details & Site Location
+                    Project Discussion & Site Scope
                   </label>
                   <textarea
                     rows={3}
-                    placeholder="Provide land availability, district, grid distance, or specific timeline goals..."
+                    placeholder="Provide land availability, district location, grid connectivity goals, or technical queries..."
                     value={form.details}
                     onChange={(e) => setForm({ ...form, details: e.target.value })}
-                    className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#6DAD45]"
+                    className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#5EE72D]"
                   ></textarea>
                 </div>
 
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full bg-[#6DAD45] hover:bg-[#599335] text-black font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg shadow-[#6DAD45]/20"
+                    className="w-full bg-[#5EE72D] hover:bg-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest py-3.5 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg shadow-[#5EE72D]/20"
                   >
-                    <span>Submit Proposal Request</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <span>Submit Discussion Request</span>
+                    <ArrowRight className="w-4 h-4 text-black" />
                   </button>
                 </div>
 
                 <div className="flex items-center justify-center gap-2 text-[10px] text-zinc-500 pt-2 font-mono">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#6DAD45]" />
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#5EE72D]" />
                   <span>ISO 9001:2015 Confidential Engineering Data Safeguard</span>
                 </div>
               </form>
             </div>
           ) : (
             <div className="text-center py-8 space-y-4">
-              <div className="w-16 h-16 rounded-full bg-[#6DAD45]/20 border border-[#6DAD45] flex items-center justify-center mx-auto">
-                <CheckCircle2 className="w-8 h-8 text-[#6DAD45]" />
+              <div className="w-16 h-16 rounded-full bg-[#5EE72D]/20 border border-[#5EE72D] flex items-center justify-center mx-auto">
+                <CheckCircle2 className="w-8 h-8 text-[#5EE72D]" />
               </div>
               <h3 className="text-3xl font-serif-display font-medium text-white">
-                Proposal Request Received
+                Project Discussion Request Received
               </h3>
               <p className="text-xs text-zinc-300 font-light max-w-md mx-auto leading-relaxed">
-                Thank you, <span className="text-white font-semibold">{form.name}</span>. Our lead EPC engineer for <span className="text-[#6DAD45] font-mono">{form.vertical}</span> has been assigned to your request and will reach out to {form.email} shortly.
+                Thank you, <span className="text-white font-semibold">{form.name}</span>. Our lead EPC engineer for <span className="text-[#5EE72D] font-mono">{form.vertical}</span> has been notified and will reach out to {form.email} to discuss your project.
               </p>
 
               <button

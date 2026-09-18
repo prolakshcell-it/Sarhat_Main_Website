@@ -12,10 +12,13 @@ interface Capability {
   id: string;
   tag: string;
   title: string;
+  headline?: string;
   description: string;
   fullDetails: string;
   specs: string[];
   icon: any;
+  image?: string;
+  accentColor?: string;
 }
 
 interface ServiceStage {
@@ -35,57 +38,75 @@ export default function SolutionsPage() {
   const capabilities: Capability[] = [
     {
       id: "renewable-energy",
-      tag: "01 / RENEWABLE ENERGY",
+      tag: "RENEWABLE ENERGY",
       title: "Renewable Energy",
+      headline: "Solar Parks, Rooftop & Wind",
       description: "Solar Parks, Rooftop, C&I, O&M, Wind Farms",
       fullDetails: "Complete execution and engineering for solar parks, commercial & industrial rooftop installations, utility-scale wind farms, and long-term O&M management.",
       specs: ["Solar Parks", "Rooftop & C&I", "Comprehensive O&M", "Wind Farms"],
       icon: Sun,
+      image: "/images/hero-solar.jpg",
+      accentColor: "#6DAD45",
     },
     {
       id: "grid-substations",
-      tag: "02 / GRID & SUBSTATIONS",
+      tag: "GRID & SUBSTATIONS",
       title: "Grid & Substations",
+      headline: "Substations & Connectivity",
       description: "HT/LT systems, Substations, Evacuation lines, Protection, Grid connectivity.",
       fullDetails: "High-voltage and low-voltage electrical systems, AIS/GIS substations, power evacuation line corridors, relay protection, and seamless DISCOM grid connectivity.",
       specs: ["HT/LT Systems", "Substations (GIS/AIS)", "Evacuation Lines", "Protection & SCADA", "Grid Connectivity"],
       icon: Zap,
+      image: "/images/bess-substation.jpg",
+      accentColor: "#6DAD45",
     },
     {
       id: "civil-infrastructure",
-      tag: "03 / CIVIL INFRASTRUCTURE",
+      tag: "CIVIL INFRASTRUCTURE",
       title: "Civil Infrastructure",
+      headline: "Industrial Civil & Works",
       description: "Roads, Buildings, Foundations, Industrial civil works, Project Infrastructure.",
       fullDetails: "Heavy-payload access roads, control room buildings, structural equipment foundations, industrial civil works, and comprehensive project site infrastructure.",
       specs: ["Access Roads", "Buildings & Control Rooms", "Equipment Foundations", "Industrial Civil Works", "Project Infrastructure"],
       icon: Building2,
+      image: "/images/india-map-tactical.jpg",
+      accentColor: "#6DAD45",
     },
     {
       id: "agrivoltaics",
-      tag: "04 / AGRIVOLTAICS",
+      tag: "AGRIVOLTAICS",
       title: "Agrivoltaics",
+      headline: "Solar + Agriculture",
       description: "Solar with agriculture, Land optimization, Farmer-linked models.",
       fullDetails: "Dual-use land solutions integrating solar power generation with active farming, optimizing land revenue density and implementing farmer-linked PM-KUSUM models.",
       specs: ["Solar with Agriculture", "Land Optimization", "Farmer-Linked PM-KUSUM Models"],
       icon: Sprout,
+      image: "/images/hero-solar.jpg",
+      accentColor: "#6DAD45",
     },
     {
       id: "bess",
-      tag: "05 / BESS",
+      tag: "BESS",
       title: "BESS",
+      headline: "Energy Storage Solutions",
       description: "BESS, Solar + Storage, Backup and Peak-load solutions.",
       fullDetails: "Utility-scale containerized Battery Energy Storage Systems (BESS), solar + storage integration, emergency backup power, and peak-load shaving.",
       specs: ["Containerized BESS", "Solar + Storage Hybrids", "Backup Power", "Peak-Load Shaving"],
       icon: Battery,
+      image: "/images/bess-substation.jpg",
+      accentColor: "#6DAD45",
     },
     {
       id: "project-delivery",
-      tag: "06 / PROJECT DELIVERY",
+      tag: "PROJECT DELIVERY",
       title: "Project Delivery",
+      headline: "Turnkey EPC & PMC",
       description: "EPC, PMC, EPCM, Turnkey",
       fullDetails: "Full-scope turnkey EPC execution, Project Management Consultancy (PMC), EPCM contracting, and owner engineering services.",
       specs: ["Turnkey EPC", "PMC Consultancy", "EPCM Contracting", "Full Lifecycle Delivery"],
       icon: Route,
+      image: "/images/hero-solar.jpg",
+      accentColor: "#6DAD45",
     },
   ];
 
@@ -167,7 +188,7 @@ export default function SolutionsPage() {
             {/* Tag */}
             <div className="text-xs font-semibold tracking-widest text-[#6DAD45] uppercase mb-4 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#6DAD45] animate-ping"></span>
-              02 / CAPABILITIES
+              SOLUTIONS CAPABILITIES
             </div>
 
             {/* Main Editorial Headline */}
@@ -233,7 +254,7 @@ export default function SolutionsPage() {
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* 03 / SERVICE ROADMAP - LIGHT CONTRAST SECTION (IMAGE 2) */}
+      {/* SERVICE ROADMAP - LIGHT CONTRAST SECTION (IMAGE 2) */}
       {/* ------------------------------------------------------------- */}
       <section className="py-28 bg-[#f2f4f2] text-black relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -242,7 +263,7 @@ export default function SolutionsPage() {
               <div>
                 <div className="text-xs font-semibold tracking-widest text-[#6DAD45] uppercase mb-3 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-[#6DAD45] animate-ping"></span>
-                  03 / SERVICE ROADMAP
+                  SERVICE ROADMAP
                 </div>
                 <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-black tracking-tight leading-tight">
                   The same road. <br />
@@ -414,10 +435,10 @@ export default function SolutionsPage() {
                 <a
                   href="#contact"
                   onClick={() => setSelectedCapability(null)}
-                  className="bg-[#6DAD45] text-black font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-full hover:bg-[#5b9637] transition-colors flex items-center gap-2"
+                  className="bg-[#5EE72D] text-black font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-full hover:bg-[#4ed423] transition-colors flex items-center gap-2"
                 >
-                  REQUEST {selectedCapability.title.toUpperCase()} PROPOSAL
-                  <ArrowUpRight className="w-4 h-4" />
+                  DISCUSS {selectedCapability.title.toUpperCase()} PROJECT
+                  <ArrowUpRight className="w-4 h-4 text-black" />
                 </a>
               </div>
             </motion.div>

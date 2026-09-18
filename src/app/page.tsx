@@ -10,6 +10,7 @@ import ExecutionCurve from "@/components/ExecutionCurve";
 import ProjectIntelligence from "@/components/ProjectIntelligence";
 import EPCCapabilities from "@/components/EPCCapabilities";
 import FootprintMap from "@/components/FootprintMap";
+import Partners from "@/components/Partners";
 import PeopleFirst from "@/components/PeopleFirst";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
@@ -44,7 +45,7 @@ export default function Home() {
         {/* 01 / Solutions Capabilities */}
         <SolutionsGrid />
 
-        {/* 02 / The Curve of Execution */}
+        {/* 02 / The Curve of Execution (Portfolio) */}
         <ExecutionCurve />
 
         {/* 03 / Smart Project Intelligence Screening Tool */}
@@ -53,10 +54,13 @@ export default function Home() {
         {/* 04 / One-Halt EPC Capability */}
         <EPCCapabilities />
 
-        {/* 05 / Pan-India Footprint Map */}
+        {/* 05 / Pan-India Footprint Map (Footprints) */}
         <FootprintMap />
 
-        {/* 06 / People First & Culture */}
+        {/* 06 / Strategic Partners & Ecosystem */}
+        <Partners />
+
+        {/* 07 / People First & Culture */}
         <PeopleFirst />
 
         {/* Final Call To Action */}

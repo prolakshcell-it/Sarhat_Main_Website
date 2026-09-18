@@ -22,7 +22,7 @@ export interface Capability {
 export const capabilities: Capability[] = [
   {
     id: "renewable-energy",
-    tag: "01 / RENEWABLE ENERGY",
+    tag: "RENEWABLE ENERGY",
     title: "Renewable Energy",
     headline: "Solar Parks, Rooftop & Wind",
     description: "Solar Parks, Rooftop, C&I, O&M, Wind Farms",
@@ -34,7 +34,7 @@ export const capabilities: Capability[] = [
   },
   {
     id: "grid-substations",
-    tag: "02 / GRID & SUBSTATIONS",
+    tag: "GRID & SUBSTATIONS",
     title: "Grid & Substations",
     headline: "Substations & Connectivity",
     description: "HT/LT systems, Substations, Evacuation lines, Protection, Grid connectivity.",
@@ -46,7 +46,7 @@ export const capabilities: Capability[] = [
   },
   {
     id: "civil-infrastructure",
-    tag: "03 / CIVIL INFRASTRUCTURE",
+    tag: "CIVIL INFRASTRUCTURE",
     title: "Civil Infrastructure",
     headline: "Industrial Civil & Works",
     description: "Roads, Buildings, Foundations, Industrial civil works, Project Infrastructure.",
@@ -58,7 +58,7 @@ export const capabilities: Capability[] = [
   },
   {
     id: "agrivoltaics",
-    tag: "04 / AGRIVOLTAICS",
+    tag: "AGRIVOLTAICS",
     title: "Agrivoltaics",
     headline: "Solar + Agriculture",
     description: "Solar with agriculture, Land optimization, Farmer-linked models.",
@@ -70,7 +70,7 @@ export const capabilities: Capability[] = [
   },
   {
     id: "bess",
-    tag: "05 / BESS",
+    tag: "BESS",
     title: "BESS",
     headline: "Energy Storage Solutions",
     description: "BESS, Solar + Storage, Backup and Peak-load solutions.",
@@ -82,7 +82,7 @@ export const capabilities: Capability[] = [
   },
   {
     id: "project-delivery",
-    tag: "06 / PROJECT DELIVERY",
+    tag: "PROJECT DELIVERY",
     title: "Project Delivery",
     headline: "Turnkey EPC & PMC",
     description: "EPC, PMC, EPCM, Turnkey",
@@ -108,7 +108,7 @@ export default function SolutionsGrid() {
             <div>
               <div className="text-xs font-semibold tracking-widest text-[#5EE72D] uppercase mb-3 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#5EE72D] animate-ping"></span>
-                01 / CAPABILITIES
+                SOLUTIONS CAPABILITIES
               </div>
               <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight">
                 Six capabilities. <br />

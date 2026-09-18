@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X, ChevronDown, FolderKanban, MapPin } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -13,6 +13,8 @@ interface NavbarProps {
 export default function Navbar({ onOpenQuote }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [projectsDropdownOpen, setProjectsDropdownOpen] = useState(false);
+  const [mobileProjectsOpen, setMobileProjectsOpen] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
 
   // Dynamic related words that rotate continuously in logo
@@ -47,27 +49,18 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
     { label: "Contact", href: "/contact" },
   ];
 
-  const mainNavLinks = [
-    { label: "ABOUT", href: "/about" },
-    { label: "SOLUTIONS", href: "/solutions" },
-    { label: "PORTFOLIO", href: "/#execution" },
-    { label: "FOOTPRINT", href: "/#footprint" },
-    { label: "INTELLIGENCE", href: "/#intelligence" },
-    { label: "INSIGHTS", href: "/insights" },
-  ];
-
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-sans-ui">
       {/* Top Sub-Bar (Utility Header matching reference image) */}
       <div className="bg-black/90 border-b border-white/10 text-zinc-400 py-2 px-4 sm:px-8 lg:px-12 text-[10px] sm:text-[11px] tracking-wider uppercase flex justify-between items-center select-none backdrop-blur-md">
         <div className="flex items-center gap-2 uppercase tracking-[0.18em] text-zinc-400 font-medium text-[10px] sm:text-[11px]">
-          <span>ENERGY + INFRASTRUCTURE / PAN-INDIA EXECUTION</span>
+          <span>PAN-INDIA EPC & RENEWABLE INFRASTRUCTURE</span>
         </div>
         <div className="flex items-center gap-6 text-[10px] sm:text-[11px] font-bold tracking-widest text-zinc-300">
-          <Link href="/careers" className="hover:text-white transition-colors uppercase">
+          <Link href="/careers" className="hover:text-[#5EE72D] transition-colors uppercase">
             CAREERS
           </Link>
-          <Link href="/contact" className="hover:text-white transition-colors uppercase">
+          <Link href="/contact" className="hover:text-[#5EE72D] transition-colors uppercase">
             CONTACT
           </Link>
         </div>
@@ -81,7 +74,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
           }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 flex items-center justify-between">
-          {/* Brand Logo with Dynamic Rotating Words (SARHAT . SOLAR -> INFRA -> BESS -> AGRI -> LEISURE) */}
+          {/* Brand Logo with Dynamic Rotating Words */}
           <Link href="/" className="flex items-center group shrink-0 select-none">
             <div className="text-xl sm:text-2xl font-black tracking-tighter text-white flex items-center leading-none">
               <Image
@@ -114,16 +107,113 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
 
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-7 text-[11px] sm:text-[12px] uppercase font-bold tracking-widest text-zinc-200">
-            {mainNavLinks.map((link) => (
+            {/* 1. SOLUTIONS */}
+            <Link
+              href="/solutions"
+              className="relative py-1 hover:text-[#5EE72D] transition-colors duration-200 group whitespace-nowrap"
+            >
+              SOLUTIONS
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#5EE72D] transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+
+            {/* 2. PROJECTS (Dropdown: Portfolio & Footprints) */}
+            <div
+              className="relative py-1 group cursor-pointer"
+              onMouseEnter={() => setProjectsDropdownOpen(true)}
+              onMouseLeave={() => setProjectsDropdownOpen(false)}
+            >
               <Link
-                key={link.label}
-                href={link.href}
-                className="relative py-1 hover:text-[#5EE72D] transition-colors duration-200 group whitespace-nowrap"
+                href="/projects"
+                className="flex items-center gap-1.5 hover:text-[#5EE72D] transition-colors duration-200 whitespace-nowrap"
               >
-                {link.label}
-                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#5EE72D] transition-all duration-300 group-hover:w-full"></span>
+                <span>PROJECTS</span>
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${projectsDropdownOpen ? "rotate-180 text-[#5EE72D]" : ""}`} />
               </Link>
-            ))}
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#5EE72D] transition-all duration-300 group-hover:w-full"></span>
+
+              {/* Projects Dropdown Panel */}
+              <AnimatePresence>
+                {projectsDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 mt-2 w-56 bg-[#0A0E0A]/95 border border-white/15 rounded-2xl shadow-2xl backdrop-blur-2xl p-2 z-50 overflow-hidden"
+                  >
+                    <Link
+                      href="/projects"
+                      className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-[#5EE72D]/10 hover:text-[#5EE72D] transition-all group/item"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover/item:border-[#5EE72D]/30 group-hover/item:bg-[#5EE72D]/20">
+                        <FolderKanban className="w-4 h-4 text-zinc-300 group-hover/item:text-[#5EE72D]" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold uppercase tracking-wider text-white group-hover/item:text-[#5EE72D]">
+                          PORTFOLIO
+                        </div>
+                        <div className="text-[9px] text-zinc-400 font-light normal-case">
+                          National project portfolio & work
+                        </div>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/projects#footprint"
+                      className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-[#5EE72D]/10 hover:text-[#5EE72D] transition-all group/item mt-1"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover/item:border-[#5EE72D]/30 group-hover/item:bg-[#5EE72D]/20">
+                        <MapPin className="w-4 h-4 text-zinc-300 group-hover/item:text-[#5EE72D]" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold uppercase tracking-wider text-white group-hover/item:text-[#5EE72D]">
+                          FOOTPRINTS
+                        </div>
+                        <div className="text-[9px] text-zinc-400 font-light normal-case">
+                          Pan-India map & regional hubs
+                        </div>
+                      </div>
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* 3. INTELLIGENCE */}
+            <Link
+              href="/#intelligence"
+              className="relative py-1 hover:text-[#5EE72D] transition-colors duration-200 group whitespace-nowrap"
+            >
+              INTELLIGENCE
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#5EE72D] transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+
+            {/* 4. PARTNERS */}
+            <Link
+              href="/#partners"
+              className="relative py-1 hover:text-[#5EE72D] transition-colors duration-200 group whitespace-nowrap"
+            >
+              PARTNERS
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#5EE72D] transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+
+            {/* 5. INSIGHTS */}
+            <Link
+              href="/insights"
+              className="relative py-1 hover:text-[#5EE72D] transition-colors duration-200 group whitespace-nowrap"
+            >
+              INSIGHTS
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#5EE72D] transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+
+            {/* 6. ABOUT */}
+            <Link
+              href="/about"
+              className="relative py-1 hover:text-[#5EE72D] transition-colors duration-200 group whitespace-nowrap"
+            >
+              ABOUT
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#5EE72D] transition-all duration-300 group-hover:w-full"></span>
+            </Link>
           </nav>
 
           {/* CTA Button & Mobile Menu Toggle */}
@@ -132,7 +222,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
               onClick={onOpenQuote}
               className="bg-[#5EE72D] hover:bg-[#4ed423] text-black font-extrabold text-[11px] sm:text-xs tracking-wider uppercase px-6 py-2.5 rounded-full transition-all duration-300 shadow-md shadow-[#5EE72D]/25 transform hover:scale-[1.03] active:scale-[0.98]"
             >
-              GET A QUOTE
+              DISCUSS A PROJECT
             </button>
 
             {/* Mobile / Tablet Toggle */}
@@ -163,17 +253,86 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
                 SARHAT EPC NAVIGATION
               </div>
 
-              {mainNavLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-base sm:text-lg font-bold uppercase tracking-wider text-zinc-100 hover:text-[#5EE72D] transition-colors py-2 border-b border-zinc-900 flex justify-between items-center"
+              {/* Mobile Solutions */}
+              <Link
+                href="/solutions"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-base sm:text-lg font-bold uppercase tracking-wider text-zinc-100 hover:text-[#5EE72D] transition-colors py-2 border-b border-zinc-900 flex justify-between items-center"
+              >
+                <span>SOLUTIONS</span>
+                <ArrowUpRight className="w-4 h-4 text-zinc-500" />
+              </Link>
+
+              {/* Mobile Projects Accordion */}
+              <div className="border-b border-zinc-900 py-2">
+                <button
+                  onClick={() => setMobileProjectsOpen(!mobileProjectsOpen)}
+                  className="w-full text-base sm:text-lg font-bold uppercase tracking-wider text-zinc-100 hover:text-[#5EE72D] transition-colors flex justify-between items-center"
                 >
-                  <span>{link.label}</span>
-                  <ArrowUpRight className="w-4 h-4 text-zinc-500" />
-                </Link>
-              ))}
+                  <span>PROJECTS</span>
+                  <ChevronDown className={`w-4 h-4 text-zinc-400 transition-transform ${mobileProjectsOpen ? "rotate-180 text-[#5EE72D]" : ""}`} />
+                </button>
+                {mobileProjectsOpen && (
+                  <div className="pl-4 pt-3 flex flex-col gap-2.5">
+                    <Link
+                      href="/#execution"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-sm font-semibold uppercase tracking-wider text-zinc-300 hover:text-[#5EE72D] flex items-center gap-2"
+                    >
+                      <FolderKanban className="w-4 h-4 text-[#5EE72D]" />
+                      <span>PORTFOLIO</span>
+                    </Link>
+                    <Link
+                      href="/#footprint"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-sm font-semibold uppercase tracking-wider text-zinc-300 hover:text-[#5EE72D] flex items-center gap-2"
+                    >
+                      <MapPin className="w-4 h-4 text-[#5EE72D]" />
+                      <span>FOOTPRINTS</span>
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* Mobile Intelligence */}
+              <Link
+                href="/#intelligence"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-base sm:text-lg font-bold uppercase tracking-wider text-zinc-100 hover:text-[#5EE72D] transition-colors py-2 border-b border-zinc-900 flex justify-between items-center"
+              >
+                <span>INTELLIGENCE</span>
+                <ArrowUpRight className="w-4 h-4 text-zinc-500" />
+              </Link>
+
+              {/* Mobile Partners */}
+              <Link
+                href="/#partners"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-base sm:text-lg font-bold uppercase tracking-wider text-zinc-100 hover:text-[#5EE72D] transition-colors py-2 border-b border-zinc-900 flex justify-between items-center"
+              >
+                <span>PARTNERS</span>
+                <ArrowUpRight className="w-4 h-4 text-zinc-500" />
+              </Link>
+
+              {/* Mobile Insights */}
+              <Link
+                href="/insights"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-base sm:text-lg font-bold uppercase tracking-wider text-zinc-100 hover:text-[#5EE72D] transition-colors py-2 border-b border-zinc-900 flex justify-between items-center"
+              >
+                <span>INSIGHTS</span>
+                <ArrowUpRight className="w-4 h-4 text-zinc-500" />
+              </Link>
+
+              {/* Mobile About */}
+              <Link
+                href="/about"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-base sm:text-lg font-bold uppercase tracking-wider text-zinc-100 hover:text-[#5EE72D] transition-colors py-2 border-b border-zinc-900 flex justify-between items-center"
+              >
+                <span>ABOUT</span>
+                <ArrowUpRight className="w-4 h-4 text-zinc-500" />
+              </Link>
 
               <div className="pt-2 flex flex-col gap-3 border-t border-white/10 mt-2">
                 {topNavLinks.map((link) => (
@@ -196,7 +355,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
                   }}
                   className="w-full bg-[#5EE72D] text-black font-extrabold py-3.5 rounded-full text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-xl shadow-[#5EE72D]/30"
                 >
-                  GET A QUOTE
+                  DISCUSS A PROJECT
                   <ArrowUpRight className="w-4 h-4" />
                 </button>
               </div>
@@ -204,7 +363,8 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
           </motion.div>
         )}
       </AnimatePresence>
-    </header >
+    </header>
   );
 }
+
 

@@ -170,7 +170,7 @@ export default function ExecutionCurve() {
             <div>
               <div className="text-xs font-semibold tracking-widest text-[#5EE72D] uppercase mb-3 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#5EE72D] animate-ping"></span>
-                02 / THE CURVE OF EXECUTION
+                THE CURVE OF EXECUTION
               </div>
               <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight">
                 A project journey <br />
