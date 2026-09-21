@@ -146,7 +146,7 @@ export default function InsightsPage() {
             {/* Tag */}
             <div className="text-xs font-semibold tracking-widest text-[#6DAD45] uppercase mb-4 flex items-center gap-2 font-mono">
               <span className="w-2 h-2 rounded-full bg-[#6DAD45] animate-ping"></span>
-              04 / NEWS + INSIGHTS
+              NEWS & INSIGHTS
             </div>
 
             <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 max-w-4xl">
@@ -162,7 +162,7 @@ export default function InsightsPage() {
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* SECTION 04 / NEWS + INSIGHTS & GRID */}
+      {/* SECTION NEWS + INSIGHTS & GRID */}
       {/* ------------------------------------------------------------- */}
       <section className="py-24 bg-black relative z-10 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -171,7 +171,7 @@ export default function InsightsPage() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
               <div>
                 <div className="text-xs font-mono font-semibold tracking-widest text-[#6DAD45] uppercase mb-3">
-                  04 / NEWS + INSIGHTS
+                  NEWS & INSIGHTS
                 </div>
                 <h2 className="text-4xl sm:text-5xl font-serif-display font-medium text-white tracking-tight leading-tight max-w-2xl">
                   Built from Sarhat’s <br />

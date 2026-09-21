@@ -69,7 +69,7 @@ export default function ProjectIntelligence() {
           <div>
             <div className="text-xs font-semibold tracking-widest text-[#6DAD45] uppercase mb-3 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#6DAD45]"></span>
-              03 / SMART PROJECT INTELLIGENCE
+              SMART PROJECT INTELLIGENCE
             </div>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight">
               Before you build it, <br />

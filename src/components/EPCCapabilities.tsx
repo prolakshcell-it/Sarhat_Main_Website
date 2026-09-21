@@ -29,7 +29,7 @@ export default function EPCCapabilities() {
         <ScrollReveal direction="up" distance={40}>
           <div className="text-xs font-semibold tracking-widest text-[#6DAD45] uppercase mb-3 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#6DAD45] animate-ping"></span>
-            04 / ONE-HALT EPC CAPABILITY
+            ONE-HALT EPC CAPABILITY
           </div>
         </ScrollReveal>
 

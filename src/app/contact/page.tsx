@@ -54,7 +54,7 @@ export default function ContactPage() {
             {/* Tag 05 / CONTACT */}
             <div className="text-xs font-semibold tracking-widest text-[#6DAD45] uppercase mb-4 flex items-center gap-2 font-mono">
               <span className="w-2 h-2 rounded-full bg-[#6DAD45] animate-ping"></span>
-              05 / CONTACT
+              GET IN TOUCH
             </div>
 
             <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 max-w-4xl">

@@ -56,7 +56,7 @@ export default function AboutPage() {
             {/* Tag & Editorial Title */}
             <div className="text-xs font-semibold tracking-widest text-[#6DAD45] uppercase mb-4 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#6DAD45] animate-ping"></span>
-              01 / ABOUT SARHAT
+              ABOUT SARHAT
             </div>
 
             <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 max-w-5xl">
@@ -200,7 +200,7 @@ export default function AboutPage() {
               <div>
                 <div className="text-xs font-semibold tracking-widest text-[#6DAD45] uppercase mb-3 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-[#6DAD45] animate-ping"></span>
-                  02 / THE SARHAT EFFECT
+                  THE SARHAT EFFECT
                 </div>
                 <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight">
                   As project risk falls, <br />
@@ -326,7 +326,7 @@ export default function AboutPage() {
               <ScrollReveal direction="right" distance={40}>
                 <div className="text-xs font-semibold tracking-widest text-[#6DAD45] uppercase mb-3 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-[#6DAD45]"></span>
-                  03 / OUR CULTURE
+                  OUR CULTURE & PEOPLE FIRST
                 </div>
 
                 <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-white tracking-tight leading-tight mb-6">
@@ -416,7 +416,7 @@ export default function AboutPage() {
           <ScrollReveal direction="up" distance={40} delay={0.15}>
             <div className="mb-12">
               <div className="text-xs font-mono text-[#6DAD45] uppercase tracking-widest mb-3">
-                03 / SARHAT EXECUTION FLIGHT
+                SARHAT EXECUTION RADAR
               </div>
               <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-white tracking-tight leading-tight mb-4">
                 Challenges move. <br />
@@ -487,7 +487,7 @@ export default function AboutPage() {
               <div>
                 <div className="text-xs font-semibold tracking-widest text-[#6DAD45] uppercase mb-3 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-[#6DAD45] animate-ping"></span>
-                  04 / CLIMATE IMPACT
+                  CLIMATE IMPACT & SUSTAINABILITY
                 </div>
                 <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight">
                   Measure the impact. <br />
@@ -564,7 +564,7 @@ export default function AboutPage() {
               <div className="absolute top-0 right-0 w-80 h-80 bg-[#6DAD45]/15 rounded-full blur-3xl pointer-events-none"></div>
 
               <span className="text-xs font-mono text-[#6DAD45] uppercase tracking-widest block mb-4">
-                05 / THE ROAD AHEAD
+                THE ROAD AHEAD
               </span>
 
               <h2 className="text-4xl sm:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-6 max-w-3xl">
