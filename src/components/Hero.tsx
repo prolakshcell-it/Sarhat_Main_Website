@@ -120,7 +120,7 @@ export default function Hero({ onOpenQuote }: HeroProps) {
               onClick={onOpenQuote}
               className="bg-[#5EE72D] hover:bg-[#4ed423] text-black font-extrabold text-[11px] sm:text-xs uppercase tracking-wider px-7 py-3.5 rounded-full transition-all duration-300 shadow-xl shadow-[#5EE72D]/25 hover:shadow-[#5EE72D]/40 flex items-center gap-2.5 group relative overflow-hidden"
             >
-              <span className="relative z-10">EXPLORE OUR SOLUTIONS</span>
+              <span className="relative z-10">DISCUSS A PROJECT</span>
               <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform relative z-10" />
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
             </motion.button>

@@ -104,33 +104,43 @@ export default function Footer() {
           {/* Method & Footprint Column */}
           <div>
             <h4 className="text-xs font-semibold text-white uppercase tracking-widest mb-4">
-              METHODOLOGY
+              NAVIGATION
             </h4>
             <ul className="space-y-2.5 text-xs text-zinc-400">
               <li>
-                <a href="#execution" className="hover:text-[#6DAD45] transition-colors">
-                  The Curve of Execution
+                <Link href="/solutions" className="hover:text-[#5EE72D] transition-colors">
+                  Solutions Capabilities
+                </Link>
+              </li>
+              <li>
+                <a href="#execution" className="hover:text-[#5EE72D] transition-colors">
+                  Portfolio (Execution Curve)
                 </a>
               </li>
               <li>
-                <a href="#intelligence" className="hover:text-[#6DAD45] transition-colors">
-                  Project Intelligence Tool
+                <a href="#footprint" className="hover:text-[#5EE72D] transition-colors">
+                  Footprints (Pan-India)
                 </a>
               </li>
               <li>
-                <a href="#about" className="hover:text-[#6DAD45] transition-colors">
-                  One-Halt EPC Mindset
+                <a href="#intelligence" className="hover:text-[#5EE72D] transition-colors">
+                  Project Intelligence
                 </a>
               </li>
               <li>
-                <a href="#footprint" className="hover:text-[#6DAD45] transition-colors">
-                  Pan-India Footprint
+                <a href="#partners" className="hover:text-[#5EE72D] transition-colors">
+                  Strategic Partners
                 </a>
               </li>
               <li>
-                <a href="#people" className="hover:text-[#6DAD45] transition-colors">
-                  People & Culture
-                </a>
+                <Link href="/insights" className="hover:text-[#5EE72D] transition-colors">
+                  EPC Insights
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:text-[#5EE72D] transition-colors">
+                  About Sarhat
+                </Link>
               </li>
             </ul>
           </div>

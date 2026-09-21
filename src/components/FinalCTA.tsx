@@ -52,10 +52,10 @@ export default function FinalCTA({ onOpenQuote }: FinalCTAProps) {
             <div className="flex flex-col sm:flex-row lg:flex-col gap-4 shrink-0">
               <button
                 onClick={onOpenQuote}
-                className="bg-[#6DAD45] hover:bg-[#5b9538] text-black font-bold text-xs uppercase tracking-widest px-8 py-5 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-2xl shadow-[#6DAD45]/30 flex items-center justify-center gap-3 group"
+                className="bg-[#5EE72D] hover:bg-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-5 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-2xl shadow-[#5EE72D]/30 flex items-center justify-center gap-3 group"
               >
-                <span>Talk to Builders →</span>
-                <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <span>Discuss a Project</span>
+                <ArrowUpRight className="w-5 h-5 text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </button>
 
               <a
