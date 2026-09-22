@@ -133,30 +133,48 @@ export default function InsightsPage() {
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-[#6DAD45] selection:text-black relative overflow-x-hidden font-sans-ui">
+    <main className="min-h-screen bg-[#F8FAF8] text-[#0F172A] selection:bg-[#D4E012] selection:text-black relative overflow-x-hidden font-sans-ui">
       {/* Floating Transparent Navbar */}
       <Navbar onOpenQuote={() => setQuoteModalOpen(true)} />
 
       {/* ------------------------------------------------------------- */}
       {/* HERO SECTION */}
       {/* ------------------------------------------------------------- */}
-      <section className="pt-36 pb-16 border-b border-white/10 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative min-h-screen w-full flex items-center pt-28 pb-16 overflow-hidden z-10 border-b border-neutral-900 bg-black select-none">
+        {/* Background Image Layer */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero-solar.jpg"
+            alt="Sarhat Energy Insights Background"
+            fill
+            priority
+            className="object-cover object-center opacity-85"
+          />
+          {/* Dark Scrim */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/65 to-black/30 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black pointer-events-none"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-left">
           <ScrollReveal direction="up" distance={30}>
-            {/* Tag */}
-            <div className="text-xs font-semibold tracking-widest text-[#6DAD45] uppercase mb-4 flex items-center gap-2 font-mono">
-              <span className="w-2 h-2 rounded-full bg-[#6DAD45] animate-ping"></span>
-              NEWS & INSIGHTS
+            <div className="max-w-4xl text-left">
+              {/* Tag */}
+              <div className="text-xs font-mono font-extrabold tracking-widest text-[#D4E012] uppercase mb-4 flex items-center justify-start gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#D4E012] animate-ping shadow-[0_0_8px_#D4E012]"></span>
+                NEWS & INSIGHTS
+              </div>
+
+              {/* Title */}
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 max-w-4xl text-left drop-shadow-lg">
+                Useful thinking. <br />
+                <span className="text-[#D4E012] italic font-normal">Better decisions.</span>
+              </h1>
+
+              {/* Paragraph */}
+              <p className="text-lg sm:text-xl text-slate-200 font-normal max-w-3xl leading-relaxed text-left drop-shadow-md">
+                Technical, commercial and policy content that helps developers, businesses, farmers and infrastructure leaders understand India’s energy transition.
+              </p>
             </div>
-
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 max-w-4xl">
-              Useful thinking. <br />
-              <span className="text-white">Better decisions.</span>
-            </h1>
-
-            <p className="text-lg sm:text-xl text-zinc-300 font-light max-w-3xl leading-relaxed">
-              Technical, commercial and policy content that helps developers, businesses, farmers and infrastructure leaders understand India’s energy transition.
-            </p>
           </ScrollReveal>
         </div>
       </section>
@@ -164,22 +182,22 @@ export default function InsightsPage() {
       {/* ------------------------------------------------------------- */}
       {/* SECTION NEWS + INSIGHTS & GRID */}
       {/* ------------------------------------------------------------- */}
-      <section className="py-24 bg-black relative z-10 border-b border-white/10">
+      <section className="py-24 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Sub Header */}
           <ScrollReveal direction="up" distance={40}>
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
               <div>
-                <div className="text-xs font-mono font-semibold tracking-widest text-[#6DAD45] uppercase mb-3">
+                <div className="text-xs font-mono font-semibold tracking-widest text-[#707B00] uppercase mb-3">
                   NEWS & INSIGHTS
                 </div>
-                <h2 className="text-4xl sm:text-5xl font-serif-display font-medium text-white tracking-tight leading-tight max-w-2xl">
+                <h2 className="text-4xl sm:text-5xl font-serif-display font-medium text-[#0F172A] tracking-tight leading-tight max-w-2xl">
                   Built from Sarhat’s <br />
-                  <span className="text-white">own thinking.</span>
+                  <span className="text-[#0F172A]">own thinking.</span>
                 </h2>
               </div>
 
-              <p className="text-zinc-400 font-light text-sm sm:text-base max-w-md leading-relaxed">
+              <p className="text-slate-600 font-light text-sm sm:text-base max-w-md leading-relaxed">
                 Selected stories and explainers pulled from the live Sarhat Energy insights library, covering solar markets, PM-KUSUM, safety, policy and renewable infrastructure.
               </p>
             </div>
@@ -192,11 +210,11 @@ export default function InsightsPage() {
                 <div
                   key={article.id}
                   onClick={() => setSelectedArticle(article)}
-                  className="bg-[#0B0D0B] border border-white/15 rounded-3xl overflow-hidden flex flex-col justify-between hover:border-[#6DAD45]/60 transition-all duration-300 group cursor-pointer shadow-2xl hover:-translate-y-1.5"
+                  className="bg-white border border-slate-200/80 rounded-3xl overflow-hidden flex flex-col justify-between hover:border-[#6DAD45]/60 transition-all duration-300 group cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-1.5"
                 >
                   <div>
                     {/* Image Header with Green Badge Overlay */}
-                    <div className="relative w-full h-52 overflow-hidden bg-zinc-900">
+                    <div className="relative w-full h-52 overflow-hidden bg-slate-100">
                       <Image
                         src={article.image}
                         alt={article.title}
@@ -205,24 +223,24 @@ export default function InsightsPage() {
                         unoptimized
                       />
                       <div className="absolute top-4 left-4">
-                        <span className="bg-[#6DAD45] text-black font-extrabold text-[10px] font-mono tracking-widest uppercase px-3 py-1 rounded-full shadow-md">
+                        <span className="bg-[#D4E012] text-slate-950 font-extrabold text-[10px] font-mono tracking-widest uppercase px-3 py-1 rounded-full shadow-md">
                           {article.badge}
                         </span>
                       </div>
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0B0D0B] via-transparent to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-white/40 via-transparent to-transparent"></div>
                     </div>
 
                     {/* Body Content */}
                     <div className="p-6 sm:p-7 space-y-3">
-                      <div className="text-[11px] font-mono text-zinc-500">
+                      <div className="text-[11px] font-mono text-slate-500">
                         {article.date} · {article.author}
                       </div>
 
-                      <h3 className="text-lg sm:text-xl font-serif-display font-medium text-white group-hover:text-[#6DAD45] transition-colors leading-snug">
+                      <h3 className="text-lg sm:text-xl font-serif-display font-medium text-[#0F172A] group-hover:text-[#707B00] transition-colors leading-snug">
                         {article.title}
                       </h3>
 
-                      <p className="text-xs text-zinc-400 font-light leading-relaxed line-clamp-3 pt-1">
+                      <p className="text-xs text-slate-600 font-light leading-relaxed line-clamp-3 pt-1">
                         {article.excerpt}
                       </p>
                     </div>
@@ -230,9 +248,9 @@ export default function InsightsPage() {
 
                   {/* Read Link Footer */}
                   <div className="px-6 sm:px-7 pb-6 pt-2">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#6DAD45] uppercase tracking-wider group-hover:text-white transition-colors">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#707B00] uppercase tracking-wider group-hover:text-[#0F172A] transition-colors">
                       <span>Read on Sarhat</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 text-[#6DAD45] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      <ArrowUpRight className="w-3.5 h-3.5 text-[#707B00] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </span>
                   </div>
                 </div>
@@ -251,23 +269,23 @@ export default function InsightsPage() {
       {/* Article Detail Reader Modal */}
       <AnimatePresence>
         {selectedArticle && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/85 backdrop-blur-md overflow-y-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-[#0F120F] border border-white/20 rounded-3xl max-w-2xl w-full relative shadow-2xl overflow-hidden my-8"
+              className="bg-slate-950 border border-slate-800 rounded-3xl max-w-2xl w-full relative shadow-2xl overflow-hidden my-8 text-white"
             >
               {/* Close Button */}
               <button
                 onClick={() => setSelectedArticle(null)}
-                className="absolute top-4 right-4 z-20 text-zinc-300 hover:text-white p-2 rounded-full bg-black/70 border border-white/20 backdrop-blur-md"
+                className="absolute top-4 right-4 z-20 text-slate-300 hover:text-white p-2 rounded-full bg-slate-900/80 border border-slate-800 backdrop-blur-md cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
 
               {/* Cover Image */}
-              <div className="relative w-full h-64 sm:h-72 bg-zinc-900">
+              <div className="relative w-full h-64 sm:h-72 bg-slate-900">
                 <Image
                   src={selectedArticle.image}
                   alt={selectedArticle.title}
@@ -276,25 +294,25 @@ export default function InsightsPage() {
                   unoptimized
                 />
                 <div className="absolute top-6 left-6">
-                  <span className="bg-[#6DAD45] text-black font-extrabold text-[10px] font-mono tracking-widest uppercase px-3 py-1.5 rounded-full shadow-lg">
+                  <span className="bg-[#D4E012] text-slate-950 font-extrabold text-[10px] font-mono tracking-widest uppercase px-3 py-1.5 rounded-full shadow-lg">
                     {selectedArticle.badge}
                   </span>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F120F] via-transparent to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
               </div>
 
               {/* Modal Content */}
               <div className="p-6 sm:p-10 space-y-6">
-                <div className="flex items-center gap-4 text-xs font-mono text-zinc-400 border-b border-white/10 pb-4">
+                <div className="flex items-center gap-4 text-xs font-mono text-slate-400 border-b border-slate-800 pb-4">
                   <span className="flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-[#6DAD45]" />
+                    <Calendar className="w-3.5 h-3.5 text-[#D4E012]" />
                     {selectedArticle.date}
                   </span>
                   <span>•</span>
                   <span>By {selectedArticle.author}</span>
                   <span>•</span>
                   <span className="flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5 text-[#6DAD45]" />
+                    <Clock className="w-3.5 h-3.5 text-[#D4E012]" />
                     {selectedArticle.readTime}
                   </span>
                 </div>
@@ -303,20 +321,20 @@ export default function InsightsPage() {
                   {selectedArticle.title}
                 </h2>
 
-                <div className="space-y-4 text-sm text-zinc-300 font-light leading-relaxed pt-2">
+                <div className="space-y-4 text-sm text-slate-300 font-light leading-relaxed pt-2">
                   {selectedArticle.content.map((paragraph, index) => (
                     <p key={index}>{paragraph}</p>
                   ))}
                 </div>
 
-                <div className="pt-6 border-t border-white/10 flex items-center justify-between">
-                  <div className="text-xs font-mono text-[#6DAD45] flex items-center gap-2">
+                <div className="pt-6 border-t border-slate-800 flex items-center justify-between">
+                  <div className="text-xs font-mono text-[#D4E012] flex items-center gap-2">
                     <BookOpen className="w-4 h-4" />
                     <span>SARHAT INSIGHTS LIBRARY</span>
                   </div>
                   <button
                     onClick={() => setSelectedArticle(null)}
-                    className="bg-[#6DAD45] text-black font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-full hover:bg-[#5b9538] transition-colors"
+                    className="bg-[#D4E012] text-slate-950 font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-full hover:bg-[#c2ce0f] transition-colors cursor-pointer"
                   >
                     Close Article
                   </button>

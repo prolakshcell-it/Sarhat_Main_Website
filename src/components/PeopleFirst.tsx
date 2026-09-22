@@ -30,22 +30,22 @@ export default function PeopleFirst() {
   ];
 
   return (
-    <section id="people" className="py-28 bg-black relative z-10 border-b border-white/10">
+    <section id="people" className="py-28 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal direction="up" distance={40}>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
             <div>
-              <div className="text-xs font-semibold tracking-widest text-[#6DAD45] uppercase mb-3 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#6DAD45] animate-ping"></span>
+              <div className="text-xs font-mono font-extrabold tracking-widest text-[#707B00] uppercase mb-3 flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#8A9600] animate-ping"></span>
                 PEOPLE FIRST & CULTURE
               </div>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
                 When people rise, <br />
                 <span className="text-[#6DAD45]">the company rises.</span>
               </h2>
             </div>
-            <p className="text-zinc-400 font-light text-base max-w-md leading-relaxed">
+            <p className="text-slate-600 font-normal text-base max-w-md leading-relaxed">
               Our culture is built around ownership, responsibility, learning, care and the belief that great projects are built by people who feel trusted to do great work.
             </p>
           </div>
@@ -63,19 +63,19 @@ export default function PeopleFirst() {
                 viewport={{ once: false, amount: 0.2 }}
                 transition={{ delay: idx * 0.15, duration: 0.7 }}
                 whileHover={{ y: -8 }}
-                className="card-gradient rounded-3xl p-8 relative flex flex-col justify-between min-h-[280px] border border-white/15 hover:border-[#6DAD45]/50 transition-all shadow-xl"
+                className="bg-white rounded-3xl p-8 relative flex flex-col justify-between min-h-[280px] border border-slate-200/90 hover:border-[#D4E012] transition-all shadow-xl shadow-slate-200/50"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-[10px] font-mono tracking-widest text-[#6DAD45] uppercase">
+                    <span className="text-[10px] font-mono font-bold tracking-widest text-[#707B00] uppercase">
                       {val.tag}
                     </span>
-                    <IconComp className="w-5 h-5 text-zinc-400" />
+                    <IconComp className="w-5 h-5 text-slate-400" />
                   </div>
-                  <h3 className="text-2xl font-serif-display font-medium text-white mb-3">
+                  <h3 className="text-2xl font-serif-display font-bold text-slate-900 mb-3">
                     {val.title}
                   </h3>
-                  <p className="text-xs text-zinc-300 font-light leading-relaxed">
+                  <p className="text-xs text-slate-600 font-normal leading-relaxed">
                     {val.description}
                   </p>
                 </div>
