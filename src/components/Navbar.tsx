@@ -51,69 +51,74 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-sans-ui">
-      {/* Top Sub-Bar (Utility Header matching reference image) */}
-      <div className="bg-black/90 border-b border-white/10 text-zinc-400 py-2 px-4 sm:px-8 lg:px-12 text-[10px] sm:text-[11px] tracking-wider uppercase flex justify-between items-center select-none backdrop-blur-md">
-        <div className="flex items-center gap-2 uppercase tracking-[0.18em] text-zinc-400 font-medium text-[10px] sm:text-[11px]">
-          <span>PAN-INDIA EPC & RENEWABLE INFRASTRUCTURE</span>
-        </div>
-        <div className="flex items-center gap-6 text-[10px] sm:text-[11px] font-bold tracking-widest text-zinc-300">
-          <Link href="/careers" className="hover:text-[#5EE72D] transition-colors uppercase">
-            CAREERS
-          </Link>
-          <Link href="/contact" className="hover:text-[#5EE72D] transition-colors uppercase">
-            CONTACT
-          </Link>
+      {/* Top Sub-Bar (Solid Black Utility Header) */}
+      <div className="bg-black text-slate-200 py-1.5 select-none">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 text-[10px] sm:text-[11px] tracking-wider uppercase flex justify-between items-center">
+          <div className="flex items-center gap-2 uppercase tracking-[0.18em] text-slate-200 font-semibold text-[10px] sm:text-[11px]">
+            <span className="w-2 h-2 rounded-full bg-[#D4E012] inline-block animate-pulse shadow-[0_0_8px_#D4E012]"></span>
+            <span>अक्षय ऊर्जा • सुदृढ़ आधारभूत संरचना</span>
+          </div>
+          <div className="flex items-center gap-6 text-[10px] sm:text-[11px] font-bold tracking-widest text-slate-200">
+            <Link href="/careers" className="hover:text-[#D4E012] transition-colors uppercase">
+              CAREERS
+            </Link>
+            <Link href="/contact" className="hover:text-[#D4E012] transition-colors uppercase">
+              CONTACT
+            </Link>
+          </div>
         </div>
       </div>
 
-      {/* Main Navigation Bar */}
+      {/* Main Navigation Bar (Completely Transparent Header Container) */}
       <div
-        className={`w-full transition-all duration-300 border-b ${scrolled
-          ? "bg-black/75 backdrop-blur-2xl py-3.5 border-white/15 shadow-2xl shadow-black/80"
-          : "bg-black/35 backdrop-blur-xl py-4 border-white/10"
+        className={`w-full transition-all duration-300 ${scrolled
+          ? "bg-black/90 py-3 shadow-2xl backdrop-blur-xl border-b border-neutral-900/40"
+          : "bg-transparent py-3.5"
           }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 flex items-center justify-between">
-          {/* Brand Logo with Dynamic Rotating Words */}
-          <Link href="/" className="flex items-center group shrink-0 select-none">
-            <div className="text-xl sm:text-2xl font-black tracking-tighter text-white flex items-center leading-none">
-              <Image
-                src="/images/logo.png"
-                alt="SARHAT"
-                width={260}
-                height={88}
-                className="h-11 sm:h-14 md:h-16 w-auto object-contain"
-                priority
-              />
-              <span className="w-2 h-2 rounded-full bg-[#5EE72D] inline-block mx-1.5 shrink-0 self-center translate-y-1 sm:translate-y-2.5 group-hover:scale-125 transition-transform shadow-[0_0_8px_#5EE72D]"></span>
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 grid grid-cols-2 lg:grid-cols-3 items-center">
+          {/* Brand Logo with Dynamic Rotating Words (Left Aligned) */}
+          <div className="flex items-center justify-start">
+            <Link href="/" className="flex items-center group shrink-0 select-none">
+              <div className="text-xl sm:text-2xl font-black tracking-tighter text-white flex items-center leading-none">
+                <Image
+                  src="/images/logo.png"
+                  alt="SARHAT"
+                  width={260}
+                  height={88}
+                  className="h-10 sm:h-12 md:h-14 w-auto object-contain"
+                  priority
+                />
+                <span className="w-2 h-2 rounded-full bg-[#D4E012] inline-block mx-1.5 shrink-0 self-center translate-y-1 sm:translate-y-2 group-hover:scale-125 transition-transform shadow-[0_0_10px_#D4E012]"></span>
 
-              {/* Continuous Animated Vertical Text Ticker for Logo Words */}
-              <div className="h-5 overflow-hidden inline-flex items-center ml-0.5 min-w-[50px] sm:min-w-[65px] relative translate-y-1 sm:translate-y-2.5">
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={rotatingWords[wordIndex]}
-                    initial={{ y: 12, opacity: 0, filter: "blur(3px)" }}
-                    animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                    exit={{ y: -12, opacity: 0, filter: "blur(3px)" }}
-                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    className="text-[10px] sm:text-xs font-bold uppercase tracking-wider block text-[#5EE72D]"
-                  >
-                    {rotatingWords[wordIndex]}
-                  </motion.span>
-                </AnimatePresence>
+                {/* Continuous Animated Vertical Text Ticker for Logo Words */}
+                <div className="h-5 overflow-hidden inline-flex items-center ml-0.5 min-w-[50px] sm:min-w-[65px] relative translate-y-1 sm:translate-y-2">
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={rotatingWords[wordIndex]}
+                      initial={{ y: 12, opacity: 0, filter: "blur(3px)" }}
+                      animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                      exit={{ y: -12, opacity: 0, filter: "blur(3px)" }}
+                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      className="text-[10px] sm:text-xs font-bold uppercase tracking-wider block text-[#D4E012]"
+                    >
+                      {rotatingWords[wordIndex]}
+                    </motion.span>
+                  </AnimatePresence>
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </div>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-7 text-[11px] sm:text-[12px] uppercase font-bold tracking-widest text-zinc-200">
+          {/* Desktop Navigation Links (Center Aligned) */}
+          <nav className="hidden lg:flex items-center justify-center gap-5 xl:gap-8 text-[11px] sm:text-[12px] uppercase font-bold tracking-widest text-slate-100">
             {/* 1. SOLUTIONS */}
             <Link
               href="/solutions"
-              className="relative py-1 hover:text-[#5EE72D] transition-colors duration-200 group whitespace-nowrap"
+              className="relative py-1 hover:text-[#D4E012] transition-colors duration-200 group whitespace-nowrap"
             >
               SOLUTIONS
-              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#5EE72D] transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#D4E012] transition-all duration-300 group-hover:w-full"></span>
             </Link>
 
             {/* 2. PROJECTS (Dropdown: Portfolio & Footprints) */}
@@ -124,12 +129,12 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
             >
               <Link
                 href="/projects"
-                className="flex items-center gap-1.5 hover:text-[#5EE72D] transition-colors duration-200 whitespace-nowrap"
+                className="flex items-center gap-1.5 hover:text-[#D4E012] transition-colors duration-200 whitespace-nowrap"
               >
                 <span>PROJECTS</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${projectsDropdownOpen ? "rotate-180 text-[#5EE72D]" : ""}`} />
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${projectsDropdownOpen ? "rotate-180 text-[#D4E012]" : ""}`} />
               </Link>
-              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#5EE72D] transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#D4E012] transition-all duration-300 group-hover:w-full"></span>
 
               {/* Projects Dropdown Panel */}
               <AnimatePresence>
@@ -139,20 +144,20 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.95 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-full left-0 mt-2 w-56 bg-[#0A0E0A]/95 border border-white/15 rounded-2xl shadow-2xl backdrop-blur-2xl p-2 z-50 overflow-hidden"
+                    className="absolute top-full left-0 mt-2 w-56 bg-black border border-neutral-800 rounded-2xl shadow-2xl p-2 z-50 overflow-hidden"
                   >
                     <Link
                       href="/projects"
-                      className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-[#5EE72D]/10 hover:text-[#5EE72D] transition-all group/item"
+                      className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-[#D4E012]/15 hover:text-[#D4E012] transition-all group/item"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover/item:border-[#5EE72D]/30 group-hover/item:bg-[#5EE72D]/20">
-                        <FolderKanban className="w-4 h-4 text-zinc-300 group-hover/item:text-[#5EE72D]" />
+                      <div className="w-8 h-8 rounded-lg bg-slate-800/80 border border-slate-700 flex items-center justify-center shrink-0 group-hover/item:border-[#D4E012]/50 group-hover/item:bg-[#D4E012]/20">
+                        <FolderKanban className="w-4 h-4 text-slate-300 group-hover/item:text-[#D4E012]" />
                       </div>
                       <div>
-                        <div className="text-xs font-bold uppercase tracking-wider text-white group-hover/item:text-[#5EE72D]">
+                        <div className="text-xs font-bold uppercase tracking-wider text-white group-hover/item:text-[#D4E012]">
                           PORTFOLIO
                         </div>
-                        <div className="text-[9px] text-zinc-400 font-light normal-case">
+                        <div className="text-[9px] text-slate-400 font-light normal-case">
                           National project portfolio & work
                         </div>
                       </div>
@@ -160,16 +165,16 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
 
                     <Link
                       href="/projects#footprint"
-                      className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-[#5EE72D]/10 hover:text-[#5EE72D] transition-all group/item mt-1"
+                      className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-[#D4E012]/15 hover:text-[#D4E012] transition-all group/item mt-1"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover/item:border-[#5EE72D]/30 group-hover/item:bg-[#5EE72D]/20">
-                        <MapPin className="w-4 h-4 text-zinc-300 group-hover/item:text-[#5EE72D]" />
+                      <div className="w-8 h-8 rounded-lg bg-slate-800/80 border border-slate-700 flex items-center justify-center shrink-0 group-hover/item:border-[#D4E012]/50 group-hover/item:bg-[#D4E012]/20">
+                        <MapPin className="w-4 h-4 text-slate-300 group-hover/item:text-[#D4E012]" />
                       </div>
                       <div>
-                        <div className="text-xs font-bold uppercase tracking-wider text-white group-hover/item:text-[#5EE72D]">
+                        <div className="text-xs font-bold uppercase tracking-wider text-white group-hover/item:text-[#D4E012]">
                           FOOTPRINTS
                         </div>
-                        <div className="text-[9px] text-zinc-400 font-light normal-case">
+                        <div className="text-[9px] text-slate-400 font-light normal-case">
                           Pan-India map & regional hubs
                         </div>
                       </div>
@@ -182,45 +187,45 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
             {/* 3. INTELLIGENCE */}
             <Link
               href="/#intelligence"
-              className="relative py-1 hover:text-[#5EE72D] transition-colors duration-200 group whitespace-nowrap"
+              className="relative py-1 hover:text-[#D4E012] transition-colors duration-200 group whitespace-nowrap"
             >
               INTELLIGENCE
-              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#5EE72D] transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#D4E012] transition-all duration-300 group-hover:w-full"></span>
             </Link>
 
             {/* 4. PARTNERS */}
             <Link
               href="/#partners"
-              className="relative py-1 hover:text-[#5EE72D] transition-colors duration-200 group whitespace-nowrap"
+              className="relative py-1 hover:text-[#D4E012] transition-colors duration-200 group whitespace-nowrap"
             >
               PARTNERS
-              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#5EE72D] transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#D4E012] transition-all duration-300 group-hover:w-full"></span>
             </Link>
 
             {/* 5. INSIGHTS */}
             <Link
               href="/insights"
-              className="relative py-1 hover:text-[#5EE72D] transition-colors duration-200 group whitespace-nowrap"
+              className="relative py-1 hover:text-[#D4E012] transition-colors duration-200 group whitespace-nowrap"
             >
               INSIGHTS
-              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#5EE72D] transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#D4E012] transition-all duration-300 group-hover:w-full"></span>
             </Link>
 
             {/* 6. ABOUT */}
             <Link
               href="/about"
-              className="relative py-1 hover:text-[#5EE72D] transition-colors duration-200 group whitespace-nowrap"
+              className="relative py-1 hover:text-[#D4E012] transition-colors duration-200 group whitespace-nowrap"
             >
               ABOUT
-              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#5EE72D] transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#D4E012] transition-all duration-300 group-hover:w-full"></span>
             </Link>
           </nav>
 
-          {/* CTA Button & Mobile Menu Toggle */}
-          <div className="flex items-center gap-4 shrink-0">
+          {/* CTA Button & Mobile Menu Toggle (Right Aligned) */}
+          <div className="flex items-center justify-end gap-4 shrink-0">
             <button
               onClick={onOpenQuote}
-              className="bg-[#5EE72D] hover:bg-[#4ed423] text-black font-extrabold text-[11px] sm:text-xs tracking-wider uppercase px-6 py-2.5 rounded-full transition-all duration-300 shadow-md shadow-[#5EE72D]/25 transform hover:scale-[1.03] active:scale-[0.98]"
+              className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-[11px] sm:text-xs tracking-wider uppercase px-6 py-2.5 rounded-full transition-all duration-300 shadow-md shadow-[#D4E012]/30 transform hover:scale-[1.03] active:scale-[0.98] whitespace-nowrap"
             >
               DISCUSS A PROJECT
             </button>

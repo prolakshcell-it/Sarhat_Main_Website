@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Sun, Battery, Sprout, Zap, Route, Building2, X, CheckCircle2, ArrowRight } from "lucide-react";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
@@ -41,7 +42,7 @@ export default function SolutionsPage() {
       tag: "RENEWABLE ENERGY",
       title: "Renewable Energy",
       headline: "Solar Parks, Rooftop & Wind",
-      description: "Solar Parks, Rooftop, C&I, O&M, Wind Farms",
+      description: "Solar Parks, Rooftop, C&I, Wind Farms & O&M",
       fullDetails: "Complete execution and engineering for solar parks, commercial & industrial rooftop installations, utility-scale wind farms, and long-term O&M management.",
       specs: ["Solar Parks", "Rooftop & C&I", "Comprehensive O&M", "Wind Farms"],
       icon: Sun,
@@ -49,11 +50,23 @@ export default function SolutionsPage() {
       accentColor: "#6DAD45",
     },
     {
-      id: "grid-substations",
-      tag: "GRID & SUBSTATIONS",
-      title: "Grid & Substations",
-      headline: "Substations & Connectivity",
-      description: "HT/LT systems, Substations, Evacuation lines, Protection, Grid connectivity.",
+      id: "bess-storage",
+      tag: "BESS & STORAGE",
+      title: "BESS & Storage",
+      headline: "Energy Storage Solutions",
+      description: "Containerized BESS, Solar + Storage, Backup and Peak-load solutions.",
+      fullDetails: "Utility-scale containerized Battery Energy Storage Systems (BESS), solar + storage integration, emergency backup power, and peak-load shaving.",
+      specs: ["Containerized BESS", "Solar + Storage Hybrids", "Backup Power", "Peak-Load Shaving"],
+      icon: Battery,
+      image: "/images/bess-substation.jpg",
+      accentColor: "#6DAD45",
+    },
+    {
+      id: "energy-infrastructure",
+      tag: "ENERGY INFRASTRUCTURE",
+      title: "Energy Infrastructure",
+      headline: "Substations & Grid Connectivity",
+      description: "HT/LT systems, Substations, Evacuation lines, Grid connectivity.",
       fullDetails: "High-voltage and low-voltage electrical systems, AIS/GIS substations, power evacuation line corridors, relay protection, and seamless DISCOM grid connectivity.",
       specs: ["HT/LT Systems", "Substations (GIS/AIS)", "Evacuation Lines", "Protection & SCADA", "Grid Connectivity"],
       icon: Zap,
@@ -70,42 +83,6 @@ export default function SolutionsPage() {
       specs: ["Access Roads", "Buildings & Control Rooms", "Equipment Foundations", "Industrial Civil Works", "Project Infrastructure"],
       icon: Building2,
       image: "/images/india-map-tactical.jpg",
-      accentColor: "#6DAD45",
-    },
-    {
-      id: "agrivoltaics",
-      tag: "AGRIVOLTAICS",
-      title: "Agrivoltaics",
-      headline: "Solar + Agriculture",
-      description: "Solar with agriculture, Land optimization, Farmer-linked models.",
-      fullDetails: "Dual-use land solutions integrating solar power generation with active farming, optimizing land revenue density and implementing farmer-linked PM-KUSUM models.",
-      specs: ["Solar with Agriculture", "Land Optimization", "Farmer-Linked PM-KUSUM Models"],
-      icon: Sprout,
-      image: "/images/hero-solar.jpg",
-      accentColor: "#6DAD45",
-    },
-    {
-      id: "bess",
-      tag: "BESS",
-      title: "BESS",
-      headline: "Energy Storage Solutions",
-      description: "BESS, Solar + Storage, Backup and Peak-load solutions.",
-      fullDetails: "Utility-scale containerized Battery Energy Storage Systems (BESS), solar + storage integration, emergency backup power, and peak-load shaving.",
-      specs: ["Containerized BESS", "Solar + Storage Hybrids", "Backup Power", "Peak-Load Shaving"],
-      icon: Battery,
-      image: "/images/bess-substation.jpg",
-      accentColor: "#6DAD45",
-    },
-    {
-      id: "project-delivery",
-      tag: "PROJECT DELIVERY",
-      title: "Project Delivery",
-      headline: "Turnkey EPC & PMC",
-      description: "EPC, PMC, EPCM, Turnkey",
-      fullDetails: "Full-scope turnkey EPC execution, Project Management Consultancy (PMC), EPCM contracting, and owner engineering services.",
-      specs: ["Turnkey EPC", "PMC Consultancy", "EPCM Contracting", "Full Lifecycle Delivery"],
-      icon: Route,
-      image: "/images/hero-solar.jpg",
       accentColor: "#6DAD45",
     },
   ];
@@ -170,44 +147,65 @@ export default function SolutionsPage() {
   const [activeStage, setActiveStage] = useState<ServiceStage>(serviceStages[0]);
 
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-[#6DAD45] selection:text-black relative overflow-x-hidden font-sans-ui">
+    <main className="min-h-screen bg-[#F8FAF8] text-[#0F172A] selection:bg-[#D4E012] selection:text-black relative overflow-x-hidden font-sans-ui">
+      {/* Soft Ambient Porcelain Flares */}
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-b from-[#D4E012]/15 via-[#6DAD45]/10 to-transparent rounded-full blur-[130px] pointer-events-none z-0"></div>
+
       {/* Navbar */}
       <Navbar onOpenQuote={() => setQuoteModalOpen(true)} />
 
       {/* ------------------------------------------------------------- */}
-      {/* 02 / CAPABILITIES - TOP HERO & 6 CARDS GRID (IMAGE 1) */}
+      {/* 01 / HERO SECTION */}
       {/* ------------------------------------------------------------- */}
-      <section className="pt-36 pb-28 border-b border-white/10 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal direction="up" distance={30}>
-            {/* Breadcrumb */}
-            <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-500 mb-6">
-              HOME / OUR SOLUTIONS
-            </div>
+      <section className="relative min-h-screen w-full flex items-center pt-28 pb-16 overflow-hidden z-10 border-b border-neutral-900 bg-black select-none">
+        {/* Background Image Layer (Fully Visible) */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero-solar.jpg"
+            alt="Sarhat Solutions Execution Background"
+            fill
+            priority
+            className="object-cover object-center opacity-85"
+          />
+          {/* Dark Scrim */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/65 to-black/30 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black pointer-events-none"></div>
+        </div>
 
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+          <ScrollReveal direction="up" distance={30}>
             {/* Tag */}
-            <div className="text-xs font-semibold tracking-widest text-[#6DAD45] uppercase mb-4 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#6DAD45] animate-ping"></span>
-              SOLUTIONS CAPABILITIES
+            <div className="text-xs font-mono font-extrabold tracking-widest text-[#D4E012] uppercase mb-4 flex items-center justify-start gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#D4E012] animate-ping shadow-[0_0_8px_#D4E012]"></span>
+              SOLUTIONS & CAPABILITIES
             </div>
 
             {/* Main Editorial Headline */}
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 max-w-5xl">
-              Six capabilities. <br />
-              <span className="text-white font-normal">One connected way to build.</span>
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 max-w-5xl drop-shadow-lg">
+              Four Core capabilities. <br />
+              <span className="text-[#D4E012] italic font-normal">One connected way to build.</span>
             </h1>
 
-            {/* Subheadline with green accent text */}
-            <p className="text-lg sm:text-xl text-zinc-300 font-light max-w-3xl leading-relaxed mb-16">
-              From renewable generation and storage to grid and civil infrastructure, our solutions are designed to work together.{" "}
-              <span className="text-[#6DAD45] font-semibold">
-                Hover a solution to reveal the execution layer.
-              </span>
+            {/* Subheadline with yellow accent text */}
+            <p className="text-lg sm:text-xl text-slate-200 font-normal max-w-3xl leading-relaxed mb-6 drop-shadow-md">
+              From renewable generation and storage to grid and civil infrastructure, our solutions are designed to work together seamlessly across India.
             </p>
           </ScrollReveal>
+        </div>
+      </section>
 
-          {/* 6 Capabilities Cards Grid (Exact UI matching reference images) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      {/* ------------------------------------------------------------- */}
+      {/* 02 / CAPABILITIES GRID (BELOW HERO IMAGE) */}
+      {/* ------------------------------------------------------------- */}
+      <section className="py-20 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-xs font-mono font-extrabold tracking-widest text-[#707B00] uppercase mb-8 flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#8A9600] animate-ping"></span>
+            TURNKEY EXECUTION VERTICALS
+          </div>
+
+          {/* 4 Capabilities Cards Grid (2x2 Grid) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             {capabilities.map((item, index) => {
               const IconComp = item.icon;
               return (
@@ -219,32 +217,32 @@ export default function SolutionsPage() {
                   transition={{ duration: 0.5, delay: index * 0.08 }}
                   whileHover={{ y: -6, scale: 1.01 }}
                   onClick={() => setSelectedCapability(item)}
-                  className="group relative rounded-[28px] bg-[#0A0E0A] border border-white/10 hover:border-[#5EE72D]/50 p-8 sm:p-9 flex flex-col justify-between min-h-[290px] cursor-pointer overflow-hidden transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-[#5EE72D]/10"
+                  className="group relative rounded-[28px] bg-white border border-slate-200/90 hover:border-[#D4E012] p-8 sm:p-9 flex flex-col justify-between min-h-[290px] cursor-pointer overflow-hidden transition-all duration-300 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-[#D4E012]/20"
                 >
                   {/* Subtle Radial Green Glow in Bottom Right on Hover */}
-                  <div className="absolute -bottom-12 -right-12 w-44 h-44 bg-[#5EE72D]/5 rounded-full blur-2xl group-hover:bg-[#5EE72D]/20 transition-all duration-500 pointer-events-none" />
+                  <div className="absolute -bottom-12 -right-12 w-44 h-44 bg-[#D4E012]/10 rounded-full blur-2xl group-hover:bg-[#D4E012]/25 transition-all duration-500 pointer-events-none" />
 
                   <div>
                     {/* Top Tag */}
-                    <div className="text-[11px] font-mono tracking-widest text-[#5EE72D] uppercase mb-8 font-semibold">
+                    <div className="text-[11px] font-mono tracking-widest text-[#707B00] uppercase mb-8 font-bold">
                       {item.tag}
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-2xl sm:text-3xl font-serif-display font-medium text-white mb-3 group-hover:text-[#5EE72D] transition-colors leading-tight">
+                    <h3 className="text-2xl sm:text-3xl font-serif-display font-bold text-slate-900 mb-3 group-hover:text-[#707B00] transition-colors leading-tight">
                       {item.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed">
                       {item.description}
                     </p>
                   </div>
 
                   {/* Bottom Bar with Arrow & Icon */}
                   <div className="pt-8 flex items-center justify-between z-10 relative">
-                    <ArrowUpRight className="w-5 h-5 text-[#5EE72D] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    <IconComp className="w-5 h-5 text-zinc-600 group-hover:text-[#5EE72D] transition-colors" />
+                    <ArrowUpRight className="w-5 h-5 text-[#707B00] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    <IconComp className="w-5 h-5 text-slate-400 group-hover:text-[#707B00] transition-colors" />
                   </div>
                 </motion.div>
               );
@@ -254,31 +252,31 @@ export default function SolutionsPage() {
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* SERVICE ROADMAP - LIGHT CONTRAST SECTION (IMAGE 2) */}
+      {/* SERVICE ROADMAP - LIGHT PORCELAIN CONTRAST SECTION */}
       {/* ------------------------------------------------------------- */}
-      <section className="py-28 bg-[#f2f4f2] text-black relative z-10">
+      <section className="py-28 bg-white text-slate-900 relative z-10 border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal direction="up" distance={40}>
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
               <div>
-                <div className="text-xs font-semibold tracking-widest text-[#6DAD45] uppercase mb-3 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#6DAD45] animate-ping"></span>
+                <div className="text-xs font-mono font-extrabold tracking-widest text-[#707B00] uppercase mb-3 flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#8A9600] animate-ping"></span>
                   SERVICE ROADMAP
                 </div>
-                <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-black tracking-tight leading-tight">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
                   The same road. <br />
                   <span className="text-[#6DAD45]">A smarter project.</span>
                 </h2>
               </div>
-              <p className="text-zinc-600 font-light text-base max-w-md leading-relaxed">
+              <p className="text-slate-600 font-normal text-base max-w-md leading-relaxed">
                 From feasibility to O&M, each stage is connected. Hover or tap a stage to see the handoff.
               </p>
             </div>
           </ScrollReveal>
 
-          {/* Interactive Light Mode Curve (Image 2) */}
+          {/* Interactive Light Mode Curve */}
           <ScrollReveal direction="up" distance={50} delay={0.2}>
-            <div className="bg-white rounded-3xl p-8 sm:p-12 border border-zinc-200 shadow-xl relative overflow-hidden mb-12">
+            <div className="bg-[#F8FAF8] rounded-3xl p-8 sm:p-12 border border-slate-200/90 shadow-xl relative overflow-hidden mb-12">
               <div className="relative w-full h-[260px] sm:h-[300px]">
                 <svg
                   className="w-full h-full overflow-visible"
@@ -289,14 +287,14 @@ export default function SolutionsPage() {
                   <path
                     d="M 10 70 C 20 15, 32 15, 42 65 C 50 105, 66 105, 74 35 C 80 5, 85 10, 90 20"
                     fill="none"
-                    stroke="rgba(109, 173, 69, 0.3)"
+                    stroke="rgba(112, 123, 0, 0.25)"
                     strokeWidth="6"
                   />
                   {/* Bright green curve line */}
                   <path
                     d="M 10 70 C 20 15, 32 15, 42 65 C 50 105, 66 105, 74 35 C 80 5, 85 10, 90 20"
                     fill="none"
-                    stroke="#6DAD45"
+                    stroke="#707B00"
                     strokeWidth="3"
                   />
 
@@ -315,7 +313,7 @@ export default function SolutionsPage() {
                             cy={st.cy}
                             r="7"
                             fill="none"
-                            stroke="#6DAD45"
+                            stroke="#707B00"
                             strokeWidth="2"
                             className="animate-ping"
                           />
@@ -324,8 +322,8 @@ export default function SolutionsPage() {
                           cx={st.cx}
                           cy={st.cy}
                           r={isActive ? "5" : "4"}
-                          fill={isActive ? "#6DAD45" : "#000000"}
-                          stroke={isActive ? "#000000" : "#6DAD45"}
+                          fill={isActive ? "#707B00" : "#0F172A"}
+                          stroke={isActive ? "#0F172A" : "#707B00"}
                           strokeWidth="2"
                           className="transition-all duration-300 group-hover:scale-125"
                         />
@@ -346,11 +344,10 @@ export default function SolutionsPage() {
                         top: `${st.cy}%`,
                         transform: "translate(-50%, -150%)",
                       }}
-                      className={`absolute font-sans-ui text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full transition-all duration-300 whitespace-nowrap shadow-md ${
-                        isActive
-                          ? "bg-[#6DAD45] text-black font-bold scale-110 shadow-lg"
-                          : "bg-white text-zinc-700 hover:text-black border border-zinc-300 hover:border-[#6DAD45]"
-                      }`}
+                      className={`absolute font-sans-ui text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full transition-all duration-300 whitespace-nowrap shadow-md ${isActive
+                        ? "bg-gradient-to-r from-[#D4E012] to-[#5EE72D] text-black font-extrabold scale-110 shadow-lg"
+                        : "bg-white text-slate-700 hover:text-slate-900 border border-slate-300 hover:border-[#707B00]"
+                        }`}
                     >
                       <span className="font-mono opacity-70 mr-1">{st.num}</span>
                       {st.name}
@@ -369,10 +366,10 @@ export default function SolutionsPage() {
             transition={{ duration: 0.3 }}
             className="text-center max-w-2xl mx-auto py-4"
           >
-            <h3 className="text-3xl font-serif-display font-medium text-black mb-3">
+            <h3 className="text-3xl font-serif-display font-bold text-slate-900 mb-3">
               {activeStage.headline}
             </h3>
-            <p className="text-sm text-zinc-600 font-light leading-relaxed">
+            <p className="text-sm text-slate-600 font-normal leading-relaxed">
               {activeStage.description}
             </p>
           </motion.div>

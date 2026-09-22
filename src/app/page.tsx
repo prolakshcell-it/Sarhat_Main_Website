@@ -30,8 +30,10 @@ export default function Home() {
 
   return (
     <SmoothScroll>
-      <main className="min-h-screen bg-black text-white selection:bg-[#6DAD45] selection:text-black relative">
-        {/* Interactive Fluid Canvas Gradient Background across Full Home Page */}
+      <main className="min-h-screen bg-[#F8FAF8] text-[#0F172A] selection:bg-[#D4E012] selection:text-black relative overflow-x-hidden font-sans-ui">
+        {/* Soft Ambient Porcelain Flares */}
+        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-b from-[#D4E012]/15 via-[#6DAD45]/10 to-transparent rounded-full blur-[130px] pointer-events-none z-0"></div>
+        <div className="absolute top-[30%] right-0 w-[500px] h-[500px] bg-gradient-to-l from-emerald-400/10 via-[#D4E012]/10 to-transparent rounded-full blur-[110px] pointer-events-none z-0"></div>
 
         {/* Navigation */}
         <Navbar onOpenQuote={handleOpenQuote} />

@@ -64,24 +64,24 @@ const partnerCategories: PartnerCategory[] = [
 
 export default function Partners() {
   return (
-    <section id="partners" className="py-24 sm:py-28 bg-black relative z-10 border-b border-white/10 select-none font-sans-ui overflow-hidden">
+    <section id="partners" className="py-24 sm:py-28 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 select-none font-sans-ui overflow-hidden">
       {/* Background Subtle Gradient Glow */}
-      <div className="absolute top-1/3 right-0 w-96 h-96 bg-[#5EE72D]/5 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-10 left-10 w-80 h-80 bg-[#5EE72D]/5 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute top-1/3 right-0 w-96 h-96 bg-[#D4E012]/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-10 left-10 w-80 h-80 bg-[#6DAD45]/10 rounded-full blur-[100px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ScrollReveal>
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
-              <div className="text-xs font-mono text-[#5EE72D] uppercase tracking-widest mb-3 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#5EE72D] animate-ping"></span>
+              <div className="text-xs font-mono font-extrabold text-[#707B00] uppercase tracking-widest mb-3 flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#8A9600] animate-ping"></span>
                 ECOSYSTEM & ALLIANCES
               </div>
-              <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-white tracking-tight">
-                Our Strategic <span className="text-[#5EE72D] italic">Partners</span>
+              <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 tracking-tight">
+                Our Strategic <span className="text-[#707B00] italic">Partners</span>
               </h2>
             </div>
-            <p className="text-xs sm:text-sm text-zinc-400 font-light max-w-md leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 font-normal max-w-md leading-relaxed">
               We collaborate with world-class equipment manufacturers, grid utilities, state transmission corporations, and leading clean energy financiers to ensure turnkey execution excellence.
             </p>
           </div>
@@ -93,17 +93,17 @@ export default function Partners() {
             const IconComponent = category.icon;
             return (
               <ScrollReveal key={category.title} delay={idx * 0.1}>
-                <div className="bg-[#0A0E0A] border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-[#5EE72D]/40 transition-all duration-300 relative group shadow-xl">
+                <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 hover:border-[#D4E012] transition-all duration-300 relative group shadow-xl shadow-slate-200/50">
                   {/* Category Header */}
-                  <div className="flex items-center gap-4 mb-4 pb-4 border-b border-white/10">
-                    <div className="w-10 h-10 rounded-xl bg-[#5EE72D]/10 border border-[#5EE72D]/30 flex items-center justify-center shrink-0">
-                      <IconComponent className="w-5 h-5 text-[#5EE72D]" />
+                  <div className="flex items-center gap-4 mb-4 pb-4 border-b border-slate-200">
+                    <div className="w-10 h-10 rounded-xl bg-[#D4E012]/20 border border-[#D4E012]/40 flex items-center justify-center shrink-0">
+                      <IconComponent className="w-5 h-5 text-[#707B00]" />
                     </div>
                     <div>
-                      <h3 className="text-xs font-bold text-white uppercase tracking-widest font-mono">
+                      <h3 className="text-xs font-bold text-slate-900 uppercase tracking-widest font-mono">
                         {category.title}
                       </h3>
-                      <p className="text-[11px] text-zinc-400 font-light mt-0.5">
+                      <p className="text-[11px] text-slate-500 font-normal mt-0.5">
                         {category.subtitle}
                       </p>
                     </div>
@@ -114,17 +114,17 @@ export default function Partners() {
                     {category.partners.map((partner) => (
                       <div
                         key={partner.name}
-                        className="bg-black/60 border border-white/5 rounded-xl p-3.5 hover:border-[#5EE72D]/30 hover:bg-black/90 transition-all duration-200"
+                        className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 hover:border-[#D4E012] hover:bg-white transition-all duration-200"
                       >
                         <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-bold text-white tracking-wide">
+                          <span className="text-xs font-bold text-slate-900 tracking-wide">
                             {partner.name}
                           </span>
-                          <span className="text-[9px] font-mono text-[#5EE72D] bg-[#5EE72D]/10 px-2 py-0.5 rounded-full border border-[#5EE72D]/20">
+                          <span className="text-[9px] font-mono font-bold text-[#707B00] bg-[#D4E012]/20 px-2 py-0.5 rounded-full border border-[#D4E012]/30">
                             {partner.location}
                           </span>
                         </div>
-                        <p className="text-[10px] text-zinc-400 font-light line-clamp-1">
+                        <p className="text-[10px] text-slate-500 font-normal line-clamp-1">
                           {partner.role}
                         </p>
                       </div>
@@ -138,16 +138,16 @@ export default function Partners() {
 
         {/* Bottom Banner */}
         <ScrollReveal delay={0.4}>
-          <div className="mt-12 bg-gradient-to-r from-zinc-900/80 via-black to-zinc-900/80 border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="mt-12 bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl shadow-slate-200/50">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#5EE72D]/20 border border-[#5EE72D] flex items-center justify-center shrink-0">
-                <ShieldCheck className="w-6 h-6 text-[#5EE72D]" />
+              <div className="w-12 h-12 rounded-2xl bg-[#D4E012]/20 border border-[#D4E012] flex items-center justify-center shrink-0">
+                <ShieldCheck className="w-6 h-6 text-[#707B00]" />
               </div>
               <div>
-                <h4 className="text-sm font-bold text-white uppercase tracking-wider font-mono">
+                <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider font-mono">
                   ISO & BIS COMPLIANT SUPPLY CHAIN MANAGEMENT
                 </h4>
-                <p className="text-xs text-zinc-400 font-light mt-0.5 max-w-xl">
+                <p className="text-xs text-slate-600 font-normal mt-0.5 max-w-xl">
                   Every vendor and component deployed across Sarhat project sites undergoes rigorous Tier-1 ALMM certification, factory acceptance testing (FAT), and strict quality audits.
                 </p>
               </div>
@@ -155,7 +155,7 @@ export default function Partners() {
 
             <a
               href="#contact"
-              className="bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-full transition-colors font-mono shrink-0 whitespace-nowrap border border-white/15"
+              className="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-full transition-colors font-mono shrink-0 whitespace-nowrap shadow-md"
             >
               BECOME A SUPPLIER / PARTNER
             </a>

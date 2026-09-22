@@ -22,10 +22,26 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#050505] text-white border-t border-white/10 pt-16 pb-12 relative z-10 font-sans-ui">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="bg-[#050905] text-white border-t border-slate-800 pt-16 pb-12 relative z-10 font-sans-ui overflow-hidden">
+      {/* Bespoke Renewable Infrastructure Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/footer-bg.jpg"
+          alt="Sarhat Renewable Energy Infrastructure Twilight"
+          fill
+          quality={95}
+          className="object-cover object-center opacity-75 transform scale-105 transition-opacity duration-700"
+        />
+        {/* Balanced Gradient Overlays: Makes image clearly visible while keeping text 100% crisp */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050905]/85 via-[#050905]/65 to-[#050905]/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#050905]/80 via-transparent to-[#050905]/80"></div>
+        <div className="absolute bottom-0 left-0 w-[600px] h-[350px] bg-[#6DAD45]/20 rounded-full blur-[130px] pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-[500px] h-[300px] bg-[#D4E012]/15 rounded-full blur-[120px] pointer-events-none"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Top Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-slate-800">
           {/* Brand Info Column */}
           <div className="lg:col-span-2 space-y-4">
             {/* Exact Logo: SARHAT [Green Dot] Rotating Words */}
@@ -49,7 +65,7 @@ export default function Footer() {
                       animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
                       exit={{ y: -12, opacity: 0, filter: "blur(3px)" }}
                       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                      className="text-xs sm:text-sm font-bold uppercase tracking-wider block text-[#6DAD45]"
+                      className="text-xs sm:text-sm font-bold uppercase tracking-wider block text-[#D4E012]"
                     >
                       {rotatingWords[wordIndex]}
                     </motion.span>
@@ -57,88 +73,83 @@ export default function Footer() {
                 </div>
               </div>
             </Link>
-            <p className="text-xs text-zinc-400 font-light max-w-sm leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-300 font-medium max-w-sm leading-relaxed">
               Renewable energy generation, battery storage (BESS), substations, and civil infrastructure delivered under one connected execution mindset.
             </p>
 
-            <div className="pt-2 flex items-center gap-2 text-xs text-[#6DAD45] font-mono">
-              <ShieldCheck className="w-4 h-4 text-[#6DAD45]" />
-              <span>ISO 9001:2015 & OHSAS 45001 CERTIFIED</span>
+            <div className="pt-2 flex items-center gap-2 text-xs text-[#6DAD45] font-mono font-bold">
+              <ShieldCheck className="w-4.5 h-4.5 text-[#6DAD45]" />
+              <span>ISO 9001:2015 &amp; OHSAS 45001 CERTIFIED</span>
             </div>
           </div>
 
           {/* Solutions Column */}
           <div>
-            <h4 className="text-xs font-semibold text-white uppercase tracking-widest mb-4">
+            <h4 className="text-xs sm:text-sm font-bold text-white uppercase tracking-widest mb-4">
               OUR SOLUTIONS
             </h4>
-            <ul className="space-y-2.5 text-xs text-zinc-400">
+            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
               <li>
-                <a href="#solutions" className="hover:text-[#6DAD45] transition-colors">
-                  Solar + Wind EPC
-                </a>
+                <Link href="/solutions#renewable-energy" className="hover:text-[#D4E012] transition-colors">
+                  Renewable Energy
+                </Link>
               </li>
               <li>
-                <a href="#solutions" className="hover:text-[#6DAD45] transition-colors">
-                  BESS Storage Systems
-                </a>
+                <Link href="/solutions#bess-storage" className="hover:text-[#D4E012] transition-colors">
+                  BESS &amp; Storage
+                </Link>
               </li>
               <li>
-                <a href="#solutions" className="hover:text-[#6DAD45] transition-colors">
-                  Agrivoltaics (PM-KUSUM)
-                </a>
+                <Link href="/solutions#energy-infrastructure" className="hover:text-[#D4E012] transition-colors">
+                  Energy Infrastructure
+                </Link>
               </li>
               <li>
-                <a href="#solutions" className="hover:text-[#6DAD45] transition-colors">
-                  High Voltage Substations
-                </a>
-              </li>
-              <li>
-                <a href="#solutions" className="hover:text-[#6DAD45] transition-colors">
-                  Civil Roads & Bridges
-                </a>
+                <Link href="/solutions#civil-infrastructure" className="hover:text-[#D4E012] transition-colors">
+                  Civil Infrastructure
+                </Link>
               </li>
             </ul>
           </div>
 
           {/* Method & Footprint Column */}
           <div>
-            <h4 className="text-xs font-semibold text-white uppercase tracking-widest mb-4">
+            <h4 className="text-xs sm:text-sm font-bold text-white uppercase tracking-widest mb-4">
               NAVIGATION
             </h4>
-            <ul className="space-y-2.5 text-xs text-zinc-400">
+            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
               <li>
-                <Link href="/solutions" className="hover:text-[#5EE72D] transition-colors">
+                <Link href="/solutions" className="hover:text-[#D4E012] transition-colors">
                   Solutions Capabilities
                 </Link>
               </li>
               <li>
-                <a href="#execution" className="hover:text-[#5EE72D] transition-colors">
+                <a href="#execution" className="hover:text-[#D4E012] transition-colors">
                   Portfolio (Execution Curve)
                 </a>
               </li>
               <li>
-                <a href="#footprint" className="hover:text-[#5EE72D] transition-colors">
+                <a href="#footprint" className="hover:text-[#D4E012] transition-colors">
                   Footprints (Pan-India)
                 </a>
               </li>
               <li>
-                <a href="#intelligence" className="hover:text-[#5EE72D] transition-colors">
+                <a href="#intelligence" className="hover:text-[#D4E012] transition-colors">
                   Project Intelligence
                 </a>
               </li>
               <li>
-                <a href="#partners" className="hover:text-[#5EE72D] transition-colors">
+                <a href="#partners" className="hover:text-[#D4E012] transition-colors">
                   Strategic Partners
                 </a>
               </li>
               <li>
-                <Link href="/insights" className="hover:text-[#5EE72D] transition-colors">
+                <Link href="/insights" className="hover:text-[#D4E012] transition-colors">
                   EPC Insights
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-[#5EE72D] transition-colors">
+                <Link href="/about" className="hover:text-[#D4E012] transition-colors">
                   About Sarhat
                 </Link>
               </li>
@@ -147,21 +158,21 @@ export default function Footer() {
 
           {/* Insights Newsletter Column */}
           <div>
-            <h4 className="text-xs font-semibold text-white uppercase tracking-widest mb-4">
+            <h4 className="text-xs sm:text-sm font-bold text-white uppercase tracking-widest mb-4">
               EPC INSIGHTS
             </h4>
-            <p className="text-xs text-zinc-400 font-light mb-3">
+            <p className="text-xs sm:text-sm text-slate-300 font-medium mb-3">
               Subscribe to regulatory DISCOM updates and renewable energy market intelligence.
             </p>
             <form onSubmit={(e) => e.preventDefault()} className="space-y-2">
               <input
                 type="email"
                 placeholder="engineering@company.com"
-                className="w-full bg-black border border-white/15 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-[#6DAD45]"
+                className="w-full bg-slate-900/90 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-[#D4E012] font-medium"
               />
               <button
                 type="submit"
-                className="w-full bg-[#6DAD45] text-black font-bold text-xs uppercase tracking-wider py-2 rounded-lg hover:bg-[#5b9538] transition-colors"
+                className="w-full bg-gradient-to-r from-[#D4E012] to-[#6DAD45] text-black font-extrabold text-xs uppercase tracking-wider py-2.5 rounded-lg hover:brightness-110 transition-all shadow-md"
               >
                 Subscribe
               </button>
@@ -170,28 +181,28 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-mono">
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-mono font-semibold">
           {/* Left: Copyright */}
           <div className="whitespace-nowrap">
             © {new Date().getFullYear()} SARHAT EPC PVT. LTD. ALL RIGHTS RESERVED.
           </div>
 
           {/* Middle: Powered by Prolaksh */}
-          <div className="text-[11px] tracking-widest text-zinc-400 uppercase font-mono font-medium">
-            POWERED BY <span className="text-zinc-200 font-bold">PROLAKSH</span>
+          <div className="text-[11px] tracking-widest text-slate-400 uppercase font-mono font-bold">
+            POWERED BY <span className="text-white font-extrabold">PROLAKSH</span>
           </div>
 
           {/* Right: Policy Links & Back To Top */}
           <div className="flex items-center gap-6 whitespace-nowrap">
-            <a href="#" className="hover:text-zinc-300 transition-colors">
+            <a href="#" className="hover:text-white transition-colors">
               PRIVACY POLICY
             </a>
-            <a href="#" className="hover:text-zinc-300 transition-colors">
+            <a href="#" className="hover:text-white transition-colors">
               TERMS OF SERVICE
             </a>
             <button
               onClick={scrollToTop}
-              className="flex items-center gap-1 text-[#6DAD45] hover:text-white transition-colors"
+              className="flex items-center gap-1.5 text-[#D4E012] font-bold hover:text-white transition-colors"
             >
               <span>BACK TO TOP</span>
               <ArrowUp className="w-4 h-4" />

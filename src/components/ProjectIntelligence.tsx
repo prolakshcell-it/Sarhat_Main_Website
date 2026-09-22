@@ -62,21 +62,21 @@ export default function ProjectIntelligence() {
   };
 
   return (
-    <section id="intelligence" className="py-24 bg-black relative z-10 border-b border-white/10">
+    <section id="intelligence" className="py-24 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div>
-            <div className="text-xs font-semibold tracking-widest text-[#6DAD45] uppercase mb-3 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#6DAD45]"></span>
+            <div className="text-xs font-mono font-extrabold tracking-widest text-[#707B00] uppercase mb-3 flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#8A9600] animate-ping"></span>
               SMART PROJECT INTELLIGENCE
             </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
               Before you build it, <br />
               <span className="text-[#6DAD45]">know what can move it.</span>
             </h2>
           </div>
-          <p className="text-zinc-400 font-light text-base max-w-md leading-relaxed">
+          <p className="text-slate-600 font-normal text-base max-w-md leading-relaxed">
             Use Sarhat&apos;s early-stage screening tool to analyze project readiness, grid proximity, land suitability, and ROI potential.
           </p>
         </div>
@@ -84,40 +84,40 @@ export default function ProjectIntelligence() {
         {/* Screening Tool Box */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Form Controls Column */}
-          <div className="lg:col-span-7 card-gradient rounded-3xl p-8 border border-white/15">
-            <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/10">
-              <span className="text-xs font-mono text-[#6DAD45] uppercase tracking-widest flex items-center gap-2">
+          <div className="lg:col-span-7 bg-white rounded-3xl p-8 border border-slate-200/90 shadow-xl shadow-slate-200/50">
+            <div className="flex items-center justify-between mb-8 pb-4 border-b border-slate-200">
+              <span className="text-xs font-mono font-bold text-[#707B00] uppercase tracking-widest flex items-center gap-2">
                 <SlidersHorizontal className="w-4 h-4" /> INPUT PROJECT MATRIX
               </span>
-              <span className="text-xs text-zinc-500 font-mono">CONFIDENTIAL ANALYSIS</span>
+              <span className="text-xs text-slate-500 font-mono font-bold">CONFIDENTIAL ANALYSIS</span>
             </div>
 
             <form onSubmit={handleRunScreen} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {/* Pin Code Input */}
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-600 mb-2">
                   PROJECT PIN CODE
                 </label>
                 <input
                   type="text"
                   value={formData.pinCode}
                   onChange={(e) => setFormData({ ...formData, pinCode: e.target.value })}
-                  className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-3 text-sm font-mono text-white focus:outline-none focus:border-[#6DAD45]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-mono text-slate-900 focus:outline-none focus:border-[#707B00] transition-colors"
                 />
               </div>
 
               {/* State Selection */}
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-600 mb-2">
                   STATE
                 </label>
                 <select
                   value={formData.state}
                   onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                  className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-3 text-sm font-mono text-white focus:outline-none focus:border-[#6DAD45]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-mono text-slate-900 focus:outline-none focus:border-[#707B00] transition-colors"
                 >
                   {states.map((s) => (
-                    <option key={s} value={s} className="bg-zinc-900 text-white">
+                    <option key={s} value={s} className="bg-white text-slate-900">
                       {s}
                     </option>
                   ))}
@@ -126,16 +126,16 @@ export default function ProjectIntelligence() {
 
               {/* Land Availability */}
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-600 mb-2">
                   LAND STATUS
                 </label>
                 <select
                   value={formData.landAvailability}
                   onChange={(e) => setFormData({ ...formData, landAvailability: e.target.value })}
-                  className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-3 text-sm font-mono text-white focus:outline-none focus:border-[#6DAD45]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-mono text-slate-900 focus:outline-none focus:border-[#707B00] transition-colors"
                 >
                   {landOptions.map((opt) => (
-                    <option key={opt} value={opt} className="bg-zinc-900 text-white">
+                    <option key={opt} value={opt} className="bg-white text-slate-900">
                       {opt}
                     </option>
                   ))}
@@ -144,7 +144,7 @@ export default function ProjectIntelligence() {
 
               {/* Substation Distance */}
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-600 mb-2">
                   SUBSTATION PROXIMITY
                 </label>
                 <select
@@ -152,10 +152,10 @@ export default function ProjectIntelligence() {
                   onChange={(e) =>
                     setFormData({ ...formData, substationDistance: e.target.value })
                   }
-                  className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-3 text-sm font-mono text-white focus:outline-none focus:border-[#6DAD45]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-mono text-slate-900 focus:outline-none focus:border-[#707B00] transition-colors"
                 >
                   {distanceOptions.map((d) => (
-                    <option key={d} value={d} className="bg-zinc-900 text-white">
+                    <option key={d} value={d} className="bg-white text-slate-900">
                       {d}
                     </option>
                   ))}
@@ -164,16 +164,16 @@ export default function ProjectIntelligence() {
 
               {/* Target COD */}
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-600 mb-2">
                   TARGET COD
                 </label>
                 <select
                   value={formData.targetCod}
                   onChange={(e) => setFormData({ ...formData, targetCod: e.target.value })}
-                  className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-3 text-sm font-mono text-white focus:outline-none focus:border-[#6DAD45]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-mono text-slate-900 focus:outline-none focus:border-[#707B00] transition-colors"
                 >
                   {codOptions.map((c) => (
-                    <option key={c} value={c} className="bg-zinc-900 text-white">
+                    <option key={c} value={c} className="bg-white text-slate-900">
                       {c}
                     </option>
                   ))}
@@ -182,16 +182,16 @@ export default function ProjectIntelligence() {
 
               {/* EPC Scope */}
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-600 mb-2">
                   PREFERRED MODEL
                 </label>
                 <select
                   value={formData.epcScope}
                   onChange={(e) => setFormData({ ...formData, epcScope: e.target.value })}
-                  className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-3 text-sm font-mono text-white focus:outline-none focus:border-[#6DAD45]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-mono text-slate-900 focus:outline-none focus:border-[#707B00] transition-colors"
                 >
                   {scopeOptions.map((sc) => (
-                    <option key={sc} value={sc} className="bg-zinc-900 text-white">
+                    <option key={sc} value={sc} className="bg-white text-slate-900">
                       {sc}
                     </option>
                   ))}
@@ -201,25 +201,25 @@ export default function ProjectIntelligence() {
               <div className="sm:col-span-2 pt-4">
                 <button
                   type="submit"
-                  className="w-full bg-[#6DAD45] hover:bg-[#5a9436] text-black font-bold text-xs uppercase tracking-widest py-4 rounded-xl shadow-xl shadow-[#6DAD45]/20 flex items-center justify-center gap-2 transition-all"
+                  className="w-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest py-4 rounded-xl shadow-xl shadow-[#D4E012]/25 flex items-center justify-center gap-2 transition-all cursor-pointer"
                 >
-                  <Calculator className="w-4 h-4" />
+                  <Calculator className="w-4 h-4 text-black" />
                   <span>Run Project Screen →</span>
                 </button>
               </div>
             </form>
           </div>
 
-          {/* Results Output Column */}
-          <div className="lg:col-span-5 bg-[#090C09] rounded-3xl p-8 border border-[#6DAD45]/30 flex flex-col justify-between relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#6DAD45]/15 rounded-full blur-2xl pointer-events-none"></div>
+          {/* Results Output Column (High-Contrast Slate-900 Feature Panel) */}
+          <div className="lg:col-span-5 bg-slate-900 text-white rounded-3xl p-8 border border-slate-800 flex flex-col justify-between relative overflow-hidden shadow-2xl">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4E012]/15 rounded-full blur-2xl pointer-events-none"></div>
 
             <div>
               <div className="flex items-center justify-between mb-6">
-                <span className="text-[10px] font-mono text-[#6DAD45] uppercase tracking-widest flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#6DAD45]" /> HIGH EPC FEASIBILITY SCORE
+                <span className="text-[10px] font-mono font-bold text-[#D4E012] uppercase tracking-widest flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#D4E012]" /> HIGH EPC FEASIBILITY SCORE
                 </span>
-                <span className="px-3 py-1 bg-[#6DAD45]/20 text-[#6DAD45] font-mono text-xs font-bold rounded-full">
+                <span className="px-3 py-1 bg-[#D4E012]/20 text-[#D4E012] font-mono text-xs font-bold rounded-full border border-[#D4E012]/30">
                   94.2 / 100
                 </span>
               </div>
@@ -227,39 +227,39 @@ export default function ProjectIntelligence() {
               <h3 className="text-2xl font-serif-display font-medium text-white mb-2">
                 Ready when you are.
               </h3>
-              <p className="text-xs text-zinc-400 font-light mb-6">
-                Based on your inputs for <span className="text-white font-mono">{formData.state}</span> ({formData.pinCode}), grid evacuation and land titling parameters indicate rapid project execution potential.
+              <p className="text-xs text-slate-300 font-light mb-6">
+                Based on your inputs for <span className="text-white font-mono font-bold">{formData.state}</span> ({formData.pinCode}), grid evacuation and land titling parameters indicate rapid project execution potential.
               </p>
 
               {/* Status Pills */}
               <div className="space-y-3 mb-8">
-                <div className="bg-black/60 p-3.5 rounded-xl border border-white/10 flex items-center justify-between text-xs">
-                  <span className="text-zinc-400">GRID PROXIMITY</span>
-                  <span className="text-[#6DAD45] font-semibold flex items-center gap-1">
+                <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
+                  <span className="text-slate-400">GRID PROXIMITY</span>
+                  <span className="text-[#16A34A] font-semibold flex items-center gap-1">
                     <CheckCircle2 className="w-3.5 h-3.5" /> High Feasibility ({formData.substationDistance})
                   </span>
                 </div>
-                <div className="bg-black/60 p-3.5 rounded-xl border border-white/10 flex items-center justify-between text-xs">
-                  <span className="text-zinc-400">LAND TITLE STATUS</span>
-                  <span className="text-[#6DAD45] font-semibold flex items-center gap-1">
+                <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
+                  <span className="text-slate-400">LAND TITLE STATUS</span>
+                  <span className="text-[#16A34A] font-semibold flex items-center gap-1">
                     <CheckCircle2 className="w-3.5 h-3.5" /> Verified Scope
                   </span>
                 </div>
-                <div className="bg-black/60 p-3.5 rounded-xl border border-white/10 flex items-center justify-between text-xs">
-                  <span className="text-zinc-400">ESTIMATED COD TIMELINE</span>
+                <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
+                  <span className="text-slate-400">ESTIMATED COD TIMELINE</span>
                   <span className="text-white font-mono">{formData.targetCod}</span>
                 </div>
               </div>
             </div>
 
-            <div className="pt-6 border-t border-white/10 space-y-3">
+            <div className="pt-6 border-t border-slate-800 space-y-3">
               <a
                 href="#contact"
-                className="w-full bg-white hover:bg-zinc-200 text-black font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl flex items-center justify-center gap-2 transition-colors"
+                className="w-full bg-white hover:bg-slate-100 text-slate-900 font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-md"
               >
                 Download Detailed Feasibility Report
               </a>
-              <p className="text-[10px] text-zinc-500 text-center font-mono">
+              <p className="text-[10px] text-slate-400 text-center font-mono font-semibold">
                 Official SARHAT EPC Project Screening Algorithm v2.4
               </p>
             </div>
