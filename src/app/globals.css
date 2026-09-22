@@ -1,10 +1,15 @@
 @import "tailwindcss";
 
 body {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #F8FAF8;
+  color: #0F172A;
   font-family: var(--font-montserrat), system-ui, sans-serif;
   overflow-x: hidden;
+}
+
+::selection {
+  background-color: #D4E012;
+  color: #000000;
 }
 
 /* Lenis Smooth Scroll CSS Overrides */
@@ -37,25 +42,20 @@ html.lenis, html.lenis body {
   font-family: var(--font-montserrat), system-ui, sans-serif;
 }
 
-/* Custom scrollbar */
+/* Hide scrollbars globally while preserving scroll functionality */
+html, body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
 ::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #000000;
-}
-::-webkit-scrollbar-thumb {
-  background: #1f2923;
-  border-radius: 4px;
-  border: 1px solid rgba(109, 173, 69, 0.2);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #6DAD45;
+  display: none;
+  width: 0px;
+  height: 0px;
+  background: transparent;
 }
 
-/* Brand Colors: Primary Black #000000, White #FFFFFF, Brand Green #6DAD45 */
-
-/* Glow effects */
+/* Brand Glow & Accent Effects */
 .brand-glow {
   box-shadow: 0 0 35px -5px rgba(109, 173, 69, 0.25);
 }
@@ -69,29 +69,59 @@ html.lenis, html.lenis body {
 }
 
 .brand-text-glow {
-  text-shadow: 0 0 20px rgba(109, 173, 69, 0.4);
+  color: #16A34A;
 }
 
-/* Custom Subtle Gradients & Panels */
+.solar-glow {
+  box-shadow: 0 10px 30px -5px rgba(212, 224, 18, 0.35);
+}
+
+.solar-text-glow {
+  color: #707B00;
+}
+
+/* Custom Crisp Porcelain & Light Slate Utility Cards */
 .card-gradient {
-  background: linear-gradient(135deg, rgba(20, 24, 20, 0.8) 0%, rgba(8, 8, 8, 0.95) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #FFFFFF;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05);
+  transition: all 0.3s ease;
 }
 
 .card-gradient:hover {
-  border-color: rgba(109, 173, 69, 0.4);
+  border-color: rgba(212, 224, 18, 0.8);
+  box-shadow: 0 15px 35px -5px rgba(212, 224, 18, 0.2);
+}
+
+.luminous-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 12px 32px -8px rgba(15, 23, 42, 0.07);
+  transition: all 0.3s ease;
+}
+
+.luminous-card:hover {
+  border-color: #D4E012;
+  box-shadow: 0 16px 40px -10px rgba(109, 173, 69, 0.18);
+}
+
+.white-panel {
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(15, 23, 42, 0.9);
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.25);
 }
 
 .glass-header {
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(15, 23, 42, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
 
 .glass-panel {
-  background: rgba(18, 18, 18, 0.75);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 /* Smooth SVG transitions */

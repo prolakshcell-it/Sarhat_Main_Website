@@ -9,41 +9,41 @@ interface FinalCTAProps {
 
 export default function FinalCTA({ onOpenQuote }: FinalCTAProps) {
   return (
-    <section id="contact" className="py-24 bg-black relative z-10 border-b border-white/10">
+    <section id="contact" className="py-24 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-br from-[#0B1209] via-[#050A04] to-black rounded-3xl p-8 sm:p-14 border border-[#6DAD45]/40 relative overflow-hidden shadow-2xl">
+        <div className="bg-slate-900 text-white rounded-3xl p-8 sm:p-14 border border-slate-800 relative overflow-hidden shadow-2xl">
           {/* Ambient Glow */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#6DAD45]/15 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#D4E012]/15 rounded-full blur-3xl pointer-events-none"></div>
 
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-10">
             <div className="max-w-2xl">
-              <div className="text-xs font-mono text-[#6DAD45] uppercase tracking-widest mb-4 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#6DAD45] animate-ping"></span>
+              <div className="text-xs font-mono font-bold text-[#D4E012] uppercase tracking-widest mb-4 flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#D4E012] animate-ping shadow-[0_0_8px_#D4E012]"></span>
                 BE A PROJECT PARTNER // GET IN TOUCH
               </div>
 
               <h2 className="text-4xl sm:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-6">
                 Have a project <br />
-                <span className="text-[#6DAD45] italic">worth building?</span>
+                <span className="text-[#D4E012] italic">worth building?</span>
               </h2>
 
-              <p className="text-zinc-300 font-light text-base sm:text-lg leading-relaxed mb-8">
+              <p className="text-slate-300 font-normal text-base sm:text-lg leading-relaxed mb-8">
                 Solar. BESS Storage. Substations. Agrivoltaics. Roads. Bridges. Buildings. Tell us where you want to build and let&apos;s map the execution path together.
               </p>
 
               {/* Direct Contact Info */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-white/10 text-xs text-zinc-400">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-800 text-xs text-slate-300 font-mono">
                 <div className="flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-[#6DAD45]" />
-                  <span>projects@sarhatepc.com</span>
+                  <Mail className="w-4 h-4 text-[#D4E012]" />
+                  <span>info@sarhatenergy.com</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-[#6DAD45]" />
-                  <span>+91 98765 43210</span>
+                  <Phone className="w-4 h-4 text-[#D4E012]" />
+                  <span>+91 9266 7111 25</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-[#6DAD45]" />
-                  <span>Noida / New Delhi, India</span>
+                  <MapPin className="w-4 h-4 text-[#D4E012]" />
+                  <span>Ghaziabad, U.P., India</span>
                 </div>
               </div>
             </div>
@@ -52,7 +52,7 @@ export default function FinalCTA({ onOpenQuote }: FinalCTAProps) {
             <div className="flex flex-col sm:flex-row lg:flex-col gap-4 shrink-0">
               <button
                 onClick={onOpenQuote}
-                className="bg-[#5EE72D] hover:bg-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-5 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-2xl shadow-[#5EE72D]/30 flex items-center justify-center gap-3 group"
+                className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-5 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-2xl shadow-[#D4E012]/30 flex items-center justify-center gap-3 group cursor-pointer"
               >
                 <span>Discuss a Project</span>
                 <ArrowUpRight className="w-5 h-5 text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -60,7 +60,7 @@ export default function FinalCTA({ onOpenQuote }: FinalCTAProps) {
 
               <a
                 href="#solutions"
-                className="glass-panel hover:bg-white/10 text-white font-semibold text-xs uppercase tracking-widest px-8 py-5 rounded-full transition-all border border-white/20 text-center flex items-center justify-center gap-2"
+                className="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs uppercase tracking-widest px-8 py-5 rounded-full transition-all border border-slate-700 text-center flex items-center justify-center gap-2 shadow-md"
               >
                 <span>Explore Capabilities</span>
               </a>

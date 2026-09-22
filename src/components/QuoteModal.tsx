@@ -47,15 +47,15 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.9, opacity: 0, y: 20 }}
           onClick={(e) => e.stopPropagation()}
-          className="bg-[#0A0E0A] border border-[#6DAD45]/40 rounded-3xl p-8 sm:p-10 max-w-xl w-full relative shadow-2xl overflow-hidden my-8"
+          className="bg-slate-950 border border-slate-700/80 rounded-3xl p-8 sm:p-10 max-w-xl w-full relative shadow-2xl overflow-hidden my-8"
         >
           {/* Ambient Glow */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#6DAD45]/15 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#D4E012]/15 rounded-full blur-3xl pointer-events-none"></div>
 
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 text-zinc-400 hover:text-white p-2 rounded-full bg-zinc-900 border border-white/10"
+            className="absolute top-6 right-6 text-slate-400 hover:text-white p-2 rounded-full bg-slate-900 border border-slate-700"
           >
             <X className="w-5 h-5" />
           </button>
@@ -63,22 +63,22 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
           {!submitted ? (
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <span className="w-2 h-2 rounded-full bg-[#5EE72D] animate-ping"></span>
-                <span className="text-xs font-mono text-[#5EE72D] uppercase tracking-widest">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#D4E012] animate-ping shadow-[0_0_8px_#D4E012]"></span>
+                <span className="text-xs font-mono text-[#D4E012] uppercase tracking-widest font-bold">
                   SARHAT EPC PROJECT DISCUSSION
                 </span>
               </div>
               <h3 className="text-3xl font-serif-display font-medium text-white mb-2">
                 Discuss Your Project
               </h3>
-              <p className="text-xs text-zinc-400 font-light mb-6">
+              <p className="text-xs text-slate-300 font-light mb-6">
                 Tell us about your upcoming project requirements. Our engineering team will review your site parameters and schedule a direct technical discussion.
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-1">
+                    <label className="block text-[11px] font-mono text-slate-300 uppercase tracking-wider mb-1">
                       Full Name *
                     </label>
                     <input
@@ -87,11 +87,11 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                       placeholder="e.g. Vikram Sharma"
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#5EE72D]"
+                      className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4E012]"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-1">
+                    <label className="block text-[11px] font-mono text-slate-300 uppercase tracking-wider mb-1">
                       Organization / Company *
                     </label>
                     <input
@@ -100,14 +100,14 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                       placeholder="e.g. Acme Renewables Pvt Ltd"
                       value={form.company}
                       onChange={(e) => setForm({ ...form, company: e.target.value })}
-                      className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#5EE72D]"
+                      className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4E012]"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-1">
+                    <label className="block text-[11px] font-mono text-slate-300 uppercase tracking-wider mb-1">
                       Email Address *
                     </label>
                     <input
@@ -116,11 +116,11 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                       placeholder="vikram@acme.com"
                       value={form.email}
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#5EE72D]"
+                      className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4E012]"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-1">
+                    <label className="block text-[11px] font-mono text-slate-300 uppercase tracking-wider mb-1">
                       Phone Number *
                     </label>
                     <input
@@ -129,36 +129,35 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                       placeholder="+91 98765 43210"
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#5EE72D]"
+                      className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4E012]"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-1">
+                    <label className="block text-[11px] font-mono text-slate-300 uppercase tracking-wider mb-1">
                       Primary Vertical
                     </label>
                     <select
                       value={form.vertical}
                       onChange={(e) => setForm({ ...form, vertical: e.target.value })}
-                      className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#5EE72D]"
+                      className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4E012]"
                     >
-                      <option value="Solar EPC">Solar EPC (Utility / C&I)</option>
-                      <option value="BESS Storage">BESS Energy Storage</option>
-                      <option value="Agrivoltaics">Agrivoltaics (PM-KUSUM)</option>
-                      <option value="Substations">High-Voltage Substations</option>
-                      <option value="Civil Infrastructure">Roads, Bridges & Civil</option>
+                      <option value="Renewable Energy">Renewable Energy (Solar, Wind, O&M)</option>
+                      <option value="BESS & Storage">BESS & Storage Systems</option>
+                      <option value="Energy Infrastructure">Energy Infrastructure (Substations, Grid)</option>
+                      <option value="Civil Infrastructure">Civil Infrastructure (Roads, Buildings, Works)</option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-1">
+                    <label className="block text-[11px] font-mono text-slate-300 uppercase tracking-wider mb-1">
                       Target Capacity / Scale
                     </label>
                     <select
                       value={form.scale}
                       onChange={(e) => setForm({ ...form, scale: e.target.value })}
-                      className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#5EE72D]"
+                      className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4E012]"
                     >
                       <option value="Under 5 MW">Under 5 MW</option>
                       <option value="5 - 20 MW">5 - 20 MW</option>
@@ -169,7 +168,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-1">
+                  <label className="block text-[11px] font-mono text-slate-300 uppercase tracking-wider mb-1">
                     Project Discussion & Site Scope
                   </label>
                   <textarea
@@ -177,41 +176,41 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                     placeholder="Provide land availability, district location, grid connectivity goals, or technical queries..."
                     value={form.details}
                     onChange={(e) => setForm({ ...form, details: e.target.value })}
-                    className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#5EE72D]"
+                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4E012]"
                   ></textarea>
                 </div>
 
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full bg-[#5EE72D] hover:bg-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest py-3.5 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg shadow-[#5EE72D]/20"
+                    className="w-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-[#D4E012]/20"
                   >
                     <span>Submit Discussion Request</span>
                     <ArrowRight className="w-4 h-4 text-black" />
                   </button>
                 </div>
 
-                <div className="flex items-center justify-center gap-2 text-[10px] text-zinc-500 pt-2 font-mono">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#5EE72D]" />
+                <div className="flex items-center justify-center gap-2 text-[10px] text-slate-400 pt-2 font-mono">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#D4E012]" />
                   <span>ISO 9001:2015 Confidential Engineering Data Safeguard</span>
                 </div>
               </form>
             </div>
           ) : (
             <div className="text-center py-8 space-y-4">
-              <div className="w-16 h-16 rounded-full bg-[#5EE72D]/20 border border-[#5EE72D] flex items-center justify-center mx-auto">
-                <CheckCircle2 className="w-8 h-8 text-[#5EE72D]" />
+              <div className="w-16 h-16 rounded-full bg-[#D4E012]/20 border border-[#D4E012] flex items-center justify-center mx-auto">
+                <CheckCircle2 className="w-8 h-8 text-[#D4E012]" />
               </div>
               <h3 className="text-3xl font-serif-display font-medium text-white">
                 Project Discussion Request Received
               </h3>
-              <p className="text-xs text-zinc-300 font-light max-w-md mx-auto leading-relaxed">
-                Thank you, <span className="text-white font-semibold">{form.name}</span>. Our lead EPC engineer for <span className="text-[#5EE72D] font-mono">{form.vertical}</span> has been notified and will reach out to {form.email} to discuss your project.
+              <p className="text-xs text-slate-300 font-light max-w-md mx-auto leading-relaxed">
+                Thank you, <span className="text-white font-semibold">{form.name}</span>. Our lead EPC engineer for <span className="text-[#D4E012] font-mono">{form.vertical}</span> has been notified and will reach out to {form.email} to discuss your project.
               </p>
 
               <button
                 onClick={handleReset}
-                className="bg-zinc-800 hover:bg-zinc-700 text-white text-xs uppercase tracking-widest px-6 py-2.5 rounded-full transition-colors font-mono"
+                className="bg-slate-800 hover:bg-slate-700 text-white text-xs uppercase tracking-widest px-6 py-2.5 rounded-full transition-colors font-mono"
               >
                 Close Window
               </button>

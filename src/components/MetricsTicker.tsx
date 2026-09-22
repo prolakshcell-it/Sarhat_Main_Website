@@ -39,21 +39,21 @@ export default function MetricsTicker() {
   ];
 
   return (
-    <section className="bg-black border-y border-white/10 relative z-20 overflow-hidden">
+    <section className="bg-[#F8FAF8] border-y border-slate-200/80 relative z-20 overflow-hidden font-sans-ui">
       {/* Verticals Marquee Banner */}
-      <div className="bg-[#050505] py-3 border-b border-white/5 overflow-hidden">
-        <div className="flex whitespace-nowrap animate-marquee gap-8 text-[11px] font-mono tracking-widest text-zinc-400 uppercase">
+      <div className="bg-white py-3 border-b border-slate-200/80 overflow-hidden shadow-sm">
+        <div className="flex whitespace-nowrap animate-marquee gap-8 text-[11px] font-mono tracking-widest text-slate-700 uppercase font-semibold">
           <div className="flex items-center gap-8 shrink-0">
-            <span className="text-[#6DAD45] font-semibold">SOLAR EPC</span> • ROOFTOP • C&I • UTILITY SCALE
-            <span className="text-[#6DAD45] font-semibold">BESS</span> • STORAGE • GRID SUPPORT
-            <span className="text-[#6DAD45] font-semibold">PM-KUSUM</span> • AGRIVOLTAICS • POWER EVACUATION
-            <span className="text-[#6DAD45] font-semibold">INFRASTRUCTURE</span> • ROADS • BRIDGES • BUILDINGS
+            <span className="text-[#707B00] font-bold">SOLAR EPC</span> • ROOFTOP • C&I • UTILITY SCALE
+            <span className="text-[#16A34A] font-bold">BESS</span> • STORAGE • GRID SUPPORT
+            <span className="text-[#707B00] font-bold">PM-KUSUM</span> • AGRIVOLTAICS • POWER EVACUATION
+            <span className="text-[#16A34A] font-bold">INFRASTRUCTURE</span> • ROADS • BRIDGES • BUILDINGS
           </div>
           <div className="flex items-center gap-8 shrink-0">
-            <span className="text-[#6DAD45] font-semibold">SOLAR EPC</span> • ROOFTOP • C&I • UTILITY SCALE
-            <span className="text-[#6DAD45] font-semibold">BESS</span> • STORAGE • GRID SUPPORT
-            <span className="text-[#6DAD45] font-semibold">PM-KUSUM</span> • AGRIVOLTAICS • POWER EVACUATION
-            <span className="text-[#6DAD45] font-semibold">INFRASTRUCTURE</span> • ROADS • BRIDGES • BUILDINGS
+            <span className="text-[#707B00] font-bold">SOLAR EPC</span> • ROOFTOP • C&I • UTILITY SCALE
+            <span className="text-[#16A34A] font-bold">BESS</span> • STORAGE • GRID SUPPORT
+            <span className="text-[#707B00] font-bold">PM-KUSUM</span> • AGRIVOLTAICS • POWER EVACUATION
+            <span className="text-[#16A34A] font-bold">INFRASTRUCTURE</span> • ROADS • BRIDGES • BUILDINGS
           </div>
         </div>
       </div>
@@ -70,19 +70,19 @@ export default function MetricsTicker() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="card-gradient rounded-2xl p-6 relative group overflow-hidden transition-all duration-300 hover:border-[#6DAD45]/40"
+                className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-xl shadow-slate-200/50 relative group overflow-hidden transition-all duration-300 hover:border-[#D4E012]"
               >
-                <div className="absolute top-0 right-0 w-24 h-24 bg-[#6DAD45]/5 rounded-bl-full pointer-events-none group-hover:bg-[#6DAD45]/15 transition-all"></div>
+                <div className="absolute top-0 right-0 w-24 h-24 bg-[#D4E012]/10 rounded-bl-full pointer-events-none group-hover:bg-[#D4E012]/25 transition-all"></div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-[10px] font-semibold tracking-widest text-[#6DAD45] uppercase">
+                  <span className="text-[10px] font-mono font-bold tracking-widest text-[#707B00] uppercase">
                     {item.label}
                   </span>
-                  <IconComponent className="w-5 h-5 text-zinc-500 group-hover:text-[#6DAD45] transition-colors" />
+                  <IconComponent className="w-5 h-5 text-slate-400 group-hover:text-[#16A34A] transition-colors" />
                 </div>
-                <div className="font-serif-display text-4xl sm:text-5xl font-bold text-white tracking-tight mb-2 group-hover:text-[#6DAD45] transition-colors">
+                <div className="font-serif-display text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-2 group-hover:text-[#707B00] transition-colors">
                   {item.value}
                 </div>
-                <div className="text-xs text-zinc-400 font-light">
+                <div className="text-xs text-slate-600 font-medium">
                   {item.subText}
                 </div>
               </motion.div>
@@ -91,7 +91,7 @@ export default function MetricsTicker() {
         </div>
 
         {/* Secondary Execution Bar */}
-        <div className="mt-8 pt-8 border-t border-white/5 grid grid-cols-2 md:grid-cols-4 gap-6">
+        {/* <div className="mt-8 pt-8 border-t border-slate-200/80 grid grid-cols-2 md:grid-cols-4 gap-6">
           {executionPillars.map((pillar, i) => (
             <motion.div
               key={pillar.text}
@@ -101,15 +101,15 @@ export default function MetricsTicker() {
               transition={{ delay: 0.3 + i * 0.1 }}
               className="flex items-center gap-4"
             >
-              <span className="font-serif-display text-3xl font-bold text-[#6DAD45]/80">
+              <span className="font-serif-display text-3xl font-extrabold text-[#707B00]">
                 {pillar.num}
               </span>
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-300 leading-tight">
+              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-700 leading-tight">
                 {pillar.text}
               </span>
             </motion.div>
           ))}
-        </div>
+        </div> */}
       </div>
     </section>
   );

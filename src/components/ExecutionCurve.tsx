@@ -41,8 +41,8 @@ export default function ExecutionCurve() {
       title: "Discover",
       headline: "Site Intelligence & Grid Assessment",
       description: "We evaluate land topography, solar irradiance metrics, substation proximity, and regulatory permissions to map total project feasibility.",
-      color: "#5EE72D",
-      bgGlow: "rgba(94, 231, 45, 0.2)",
+      color: "#D4E012",
+      bgGlow: "rgba(212, 224, 18, 0.25)",
       icon: Compass,
       angle: -90, // Top
       checklist: [
@@ -113,8 +113,8 @@ export default function ExecutionCurve() {
       title: "Commission",
       headline: "Grid Synchronization & COD",
       description: "High-voltage insulation testing, SCADA telemetry calibration, DISCOM grid synchronization, and Commercial Operation Date (COD) handover.",
-      color: "#10B981",
-      bgGlow: "rgba(16, 185, 129, 0.2)",
+      color: "#16A34A",
+      bgGlow: "rgba(22, 163, 74, 0.25)",
       icon: Zap,
       angle: 150, // Bottom Left
       checklist: [
@@ -161,23 +161,23 @@ export default function ExecutionCurve() {
   const activePhase = phases[activeIndex];
 
   return (
-    <section id="execution" className="py-24 sm:py-28 bg-black text-white relative z-10 border-b border-white/10 select-none overflow-hidden font-sans-ui">
+    <section id="execution" className="py-24 sm:py-28 bg-slate-950 text-white relative z-10 border-b border-slate-800 select-none overflow-hidden font-sans-ui">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header Badge & Editorial Title matching previous content */}
         <ScrollReveal direction="up" distance={35}>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
             <div>
-              <div className="text-xs font-semibold tracking-widest text-[#5EE72D] uppercase mb-3 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#5EE72D] animate-ping"></span>
+              <div className="text-xs font-mono font-bold tracking-widest text-[#D4E012] uppercase mb-3 flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#D4E012] animate-ping shadow-[0_0_8px_#D4E012]"></span>
                 THE CURVE OF EXECUTION
               </div>
               <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight">
                 A project journey <br />
-                <span className="text-[#5EE72D] relative inline-block">
+                <span className="text-[#D4E012] relative inline-block">
                   with a clear curve.
                   <svg
-                    className="absolute -bottom-2 left-0 w-full h-3 text-[#5EE72D]"
+                    className="absolute -bottom-2 left-0 w-full h-3 text-[#D4E012]"
                     viewBox="0 0 100 20"
                     preserveAspectRatio="none"
                   >
@@ -191,7 +191,7 @@ export default function ExecutionCurve() {
                 </span>
               </h2>
             </div>
-            <p className="text-zinc-300 font-light text-base max-w-md leading-relaxed">
+            <p className="text-slate-300 font-light text-base max-w-md leading-relaxed">
               6 core phases in sequence. The roadmap lights up as the project moves from discovery to long-term operations.
             </p>
           </div>
@@ -245,7 +245,7 @@ export default function ExecutionCurve() {
                     className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xl relative ${
                       isActive
                         ? "scale-110 shadow-2xl border-2 border-white"
-                        : "bg-zinc-900/90 border border-white/15 hover:border-white/40"
+                        : "bg-slate-900/90 border border-slate-700 hover:border-slate-500"
                     }`}
                     style={{
                       backgroundColor: isActive ? phase.color : undefined,
@@ -260,8 +260,8 @@ export default function ExecutionCurve() {
                   <div
                     className={`mt-2 py-1 px-3 rounded-xl border text-[10px] sm:text-[11px] font-mono uppercase tracking-wider font-bold transition-all duration-300 whitespace-nowrap backdrop-blur-md shadow-lg ${
                       isActive
-                        ? "bg-white text-black border-white scale-105 shadow-2xl"
-                        : "bg-black/80 text-zinc-300 border-white/20 group-hover:border-white/50 group-hover:text-white"
+                        ? "bg-white text-slate-900 border-white scale-105 shadow-2xl"
+                        : "bg-slate-900/90 text-slate-300 border-slate-700 group-hover:border-slate-500 group-hover:text-white"
                     }`}
                   >
                     <span className="opacity-60 mr-1.5">{phase.phaseNumber}</span>
@@ -279,7 +279,7 @@ export default function ExecutionCurve() {
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.85, y: -10 }}
                         transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                        className={`hidden sm:block absolute z-50 w-64 p-2.5 bg-black/95 border-2 rounded-2xl backdrop-blur-2xl shadow-[0_0_40px_rgba(0,0,0,0.95)] pointer-events-auto ${
+                        className={`hidden sm:block absolute z-50 w-64 p-2.5 bg-slate-900/95 border-2 rounded-2xl backdrop-blur-2xl shadow-[0_0_40px_rgba(0,0,0,0.95)] pointer-events-auto ${
                           phase.angle === -90
                             ? "bottom-full mb-3 left-1/2 -translate-x-1/2"
                             : phase.angle === 90
@@ -292,14 +292,14 @@ export default function ExecutionCurve() {
                         onClick={(e) => e.stopPropagation()}
                       >
                         {/* Preview Image at Clicked Node */}
-                        <div className="relative w-full h-28 rounded-xl overflow-hidden mb-2 border border-white/20">
+                        <div className="relative w-full h-28 rounded-xl overflow-hidden mb-2 border border-slate-700">
                           <Image
                             src={phase.image}
                             alt={phase.title}
                             fill
                             className="object-cover"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
                           <span
                             className="absolute top-2 left-2 text-[9px] font-mono font-bold px-2 py-0.5 rounded text-black uppercase shadow-md"
                             style={{ backgroundColor: phase.color }}
@@ -319,7 +319,7 @@ export default function ExecutionCurve() {
                               style={{ backgroundColor: phase.color }}
                             ></span>
                           </div>
-                          <p className="text-[10px] text-zinc-300 font-light leading-snug">
+                          <p className="text-[10px] text-slate-300 font-light leading-snug">
                             {phase.caption}
                           </p>
                         </div>
@@ -333,7 +333,7 @@ export default function ExecutionCurve() {
             {/* --------------------------------------------------------- */}
             {/* CENTER ACTIVE SPOTLIGHT CIRCLE CARD */}
             {/* --------------------------------------------------------- */}
-            <div className="relative z-20 w-[275px] h-[275px] sm:w-[340px] sm:h-[340px] rounded-full bg-black/90 border-2 border-white/20 backdrop-blur-2xl shadow-[0_0_60px_rgba(0,0,0,0.9)] flex flex-col items-center justify-center text-center p-6 sm:p-8 overflow-hidden">
+            <div className="relative z-20 w-[275px] h-[275px] sm:w-[340px] sm:h-[340px] rounded-full bg-slate-900/95 border-2 border-slate-700 backdrop-blur-2xl shadow-[0_0_60px_rgba(0,0,0,0.9)] flex flex-col items-center justify-center text-center p-6 sm:p-8 overflow-hidden">
               
               {/* Dynamic Color Accent Ring */}
               <div
@@ -368,16 +368,16 @@ export default function ExecutionCurve() {
                   </h3>
 
                   {/* Description */}
-                  <p className="text-[10px] sm:text-[11px] text-zinc-300 font-light leading-relaxed mb-3 max-w-[240px] sm:max-w-[260px] line-clamp-2">
+                  <p className="text-[10px] sm:text-[11px] text-slate-300 font-light leading-relaxed mb-3 max-w-[240px] sm:max-w-[260px] line-clamp-2">
                     {activePhase.description}
                   </p>
 
                   {/* Checklist with animated icons */}
                   <div className="space-y-1.5 text-left w-full max-w-[230px] sm:max-w-[250px]">
                     {activePhase.checklist.map((item) => (
-                      <div key={item} className="flex items-center gap-2 text-[10px] sm:text-[11px] text-zinc-200 font-medium">
+                      <div key={item} className="flex items-start gap-2 text-[10px] sm:text-[11px] text-slate-200 font-medium">
                         <CheckCircle2
-                          className="w-3.5 h-3.5 shrink-0"
+                          className="w-3.5 h-3.5 shrink-0 mt-0.5"
                           style={{ color: activePhase.color }}
                         />
                         <span className="truncate">{item}</span>
@@ -397,7 +397,7 @@ export default function ExecutionCurve() {
         <div className="flex items-center justify-center gap-4 mt-8">
           <button
             onClick={() => setActiveIndex((prev) => (prev === 0 ? phases.length - 1 : prev - 1))}
-            className="p-3 rounded-full bg-zinc-900 border border-white/15 text-zinc-300 hover:text-white hover:border-[#5EE72D] transition-colors"
+            className="p-3 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:border-[#D4E012] transition-colors"
             aria-label="Previous Phase"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -405,7 +405,7 @@ export default function ExecutionCurve() {
 
           <button
             onClick={() => setIsPlaying(!isPlaying)}
-            className="px-6 py-2.5 rounded-full bg-[#5EE72D] hover:bg-[#4ed423] text-black font-extrabold text-xs uppercase tracking-wider flex items-center gap-2 transition-all shadow-lg shadow-[#5EE72D]/20 transform hover:scale-105 active:scale-95"
+            className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-wider flex items-center gap-2 transition-all shadow-lg shadow-[#D4E012]/20 transform hover:scale-105 active:scale-95"
           >
             {isPlaying ? (
               <>
@@ -422,7 +422,7 @@ export default function ExecutionCurve() {
 
           <button
             onClick={() => setActiveIndex((prev) => (prev + 1) % phases.length)}
-            className="p-3 rounded-full bg-zinc-900 border border-white/15 text-zinc-300 hover:text-white hover:border-[#5EE72D] transition-colors"
+            className="p-3 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:border-[#D4E012] transition-colors"
             aria-label="Next Phase"
           >
             <ChevronRight className="w-5 h-5" />
