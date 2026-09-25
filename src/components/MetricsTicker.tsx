@@ -6,7 +6,7 @@ import { Zap, Leaf, MapPin, Layers } from "lucide-react";
 export default function MetricsTicker() {
   const metrics = [
     {
-      value: "47 MW",
+      value: "47.77 MW",
       label: "SERVED TO BUILD",
       subText: "Utility & C&I Renewable Solar Capacity",
       icon: Zap,
@@ -18,7 +18,7 @@ export default function MetricsTicker() {
       icon: Leaf,
     },
     {
-      value: "6",
+      value: "7+",
       label: "PORTFOLIO STATES",
       subText: "Pan-India Execution Footprint",
       icon: MapPin,

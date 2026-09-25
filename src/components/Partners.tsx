@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Cpu, Zap, Building2, Landmark, Layers } from "lucide-react";
+import { ShieldCheck, Cpu, Zap, Building2, Landmark } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
 interface PartnerCategory {
@@ -70,7 +70,7 @@ export default function Partners() {
       <div className="absolute bottom-10 left-10 w-80 h-80 bg-[#6DAD45]/10 rounded-full blur-[100px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <ScrollReveal>
+        <ScrollReveal direction="right" distance={60}>
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
               <div className="text-xs font-mono font-extrabold text-[#707B00] uppercase tracking-widest mb-3 flex items-center gap-2">
@@ -87,20 +87,21 @@ export default function Partners() {
           </div>
         </ScrollReveal>
 
-        {/* Categories Grid */}
+        {/* Categories Grid - Alternating Side Slide In */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {partnerCategories.map((category, idx) => {
             const IconComponent = category.icon;
+            const slideDirection = idx % 2 === 0 ? "right" : "left";
             return (
-              <ScrollReveal key={category.title} delay={idx * 0.1}>
-                <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 hover:border-[#D4E012] transition-all duration-300 relative group shadow-xl shadow-slate-200/50">
+              <ScrollReveal key={category.title} delay={idx * 0.1} direction={slideDirection} distance={80}>
+                <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 hover:border-[#D4E012] transition-all duration-300 relative group shadow-xl shadow-slate-200/50 h-full">
                   {/* Category Header */}
                   <div className="flex items-center gap-4 mb-4 pb-4 border-b border-slate-200">
                     <div className="w-10 h-10 rounded-xl bg-[#D4E012]/20 border border-[#D4E012]/40 flex items-center justify-center shrink-0">
                       <IconComponent className="w-5 h-5 text-[#707B00]" />
                     </div>
                     <div>
-                      <h3 className="text-xs font-bold text-slate-900 uppercase tracking-widest font-mono">
+                      <h3 className="text-xs sm:text-sm font-mono font-bold text-slate-900 uppercase tracking-wider">
                         {category.title}
                       </h3>
                       <p className="text-[11px] text-slate-500 font-normal mt-0.5">
@@ -109,22 +110,22 @@ export default function Partners() {
                     </div>
                   </div>
 
-                  {/* Partner Cards Grid */}
+                  {/* Partner Items */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {category.partners.map((partner) => (
                       <div
                         key={partner.name}
-                        className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 hover:border-[#D4E012] hover:bg-white transition-all duration-200"
+                        className="bg-slate-50 border border-slate-200/80 rounded-xl p-3 hover:border-[#707B00]/40 transition-colors"
                       >
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-bold text-slate-900 tracking-wide">
+                        <div className="flex items-center justify-between gap-2 mb-1">
+                          <span className="text-xs font-bold text-slate-900 font-serif-display">
                             {partner.name}
                           </span>
-                          <span className="text-[9px] font-mono font-bold text-[#707B00] bg-[#D4E012]/20 px-2 py-0.5 rounded-full border border-[#D4E012]/30">
+                          <span className="text-[9px] font-mono text-slate-400 bg-slate-200/70 px-1.5 py-0.5 rounded">
                             {partner.location}
                           </span>
                         </div>
-                        <p className="text-[10px] text-slate-500 font-normal line-clamp-1">
+                        <p className="text-[10px] text-slate-600 font-normal leading-tight">
                           {partner.role}
                         </p>
                       </div>
@@ -135,32 +136,6 @@ export default function Partners() {
             );
           })}
         </div>
-
-        {/* Bottom Banner */}
-        <ScrollReveal delay={0.4}>
-          <div className="mt-12 bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl shadow-slate-200/50">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#D4E012]/20 border border-[#D4E012] flex items-center justify-center shrink-0">
-                <ShieldCheck className="w-6 h-6 text-[#707B00]" />
-              </div>
-              <div>
-                <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider font-mono">
-                  ISO & BIS COMPLIANT SUPPLY CHAIN MANAGEMENT
-                </h4>
-                <p className="text-xs text-slate-600 font-normal mt-0.5 max-w-xl">
-                  Every vendor and component deployed across Sarhat project sites undergoes rigorous Tier-1 ALMM certification, factory acceptance testing (FAT), and strict quality audits.
-                </p>
-              </div>
-            </div>
-
-            <a
-              href="#contact"
-              className="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-full transition-colors font-mono shrink-0 whitespace-nowrap shadow-md"
-            >
-              BECOME A SUPPLIER / PARTNER
-            </a>
-          </div>
-        </ScrollReveal>
       </div>
     </section>
   );

@@ -181,7 +181,7 @@ export default function CareersPage() {
               <div className="bg-white border border-slate-200/80 shadow-sm rounded-2xl p-6 sm:p-8 relative overflow-hidden group hover:border-[#6DAD45]/40 transition-colors">
                 <div className="absolute -bottom-10 -right-10 w-28 h-28 bg-[#6DAD45]/10 rounded-full blur-2xl pointer-events-none"></div>
                 <div className="font-serif-display text-4xl sm:text-5xl font-bold text-[#707B00] tracking-tight mb-3">
-                  6
+                  7+
                 </div>
                 <div className="text-[10px] sm:text-[11px] font-mono text-slate-500 uppercase tracking-widest">
                   PORTFOLIO STATES
@@ -192,7 +192,7 @@ export default function CareersPage() {
               <div className="bg-white border border-slate-200/80 shadow-sm rounded-2xl p-6 sm:p-8 relative overflow-hidden group hover:border-[#6DAD45]/40 transition-colors">
                 <div className="absolute -bottom-10 -right-10 w-28 h-28 bg-[#6DAD45]/10 rounded-full blur-2xl pointer-events-none"></div>
                 <div className="font-serif-display text-4xl sm:text-5xl font-bold text-[#707B00] tracking-tight mb-3">
-                  47 MW
+                  47.77 MW
                 </div>
                 <div className="text-[10px] sm:text-[11px] font-mono text-slate-500 uppercase tracking-widest">
                   SERVED TO BUILD
@@ -235,11 +235,10 @@ export default function CareersPage() {
                   <button
                     key={filter}
                     onClick={() => setActiveFilter(filter)}
-                    className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-all duration-300 cursor-pointer ${
-                      isActive
-                        ? "bg-[#D4E012] text-slate-950 font-bold shadow-md shadow-[#D4E012]/20"
-                        : "bg-white border border-slate-200 hover:border-slate-300 text-slate-700"
-                    }`}
+                    className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-all duration-300 cursor-pointer ${isActive
+                      ? "bg-[#D4E012] text-slate-950 font-bold shadow-md shadow-[#D4E012]/20"
+                      : "bg-white border border-slate-200 hover:border-slate-300 text-slate-700"
+                      }`}
                   >
                     {filter}
                   </button>

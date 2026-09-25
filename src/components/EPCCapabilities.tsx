@@ -24,9 +24,9 @@ export default function EPCCapabilities() {
   ];
 
   return (
-    <section id="about" className="py-28 bg-white relative z-10 border-b border-slate-200/80 font-sans-ui">
+    <section id="about" className="py-28 bg-white relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal direction="up" distance={40}>
+        <ScrollReveal direction="right" distance={50}>
           <div className="text-xs font-mono font-extrabold tracking-widest text-[#707B00] uppercase mb-3 flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-[#8A9600] animate-ping"></span>
             ONE-HALT EPC CAPABILITY
@@ -34,9 +34,9 @@ export default function EPCCapabilities() {
         </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Main Hero Card with Scroll Reveal */}
+          {/* Main Hero Card - Sliding in from Left */}
           <div className="lg:col-span-7">
-            <ScrollReveal direction="left" distance={50}>
+            <ScrollReveal direction="right" distance={80}>
               <div className="bg-[#F8FAF8] rounded-3xl p-8 sm:p-12 border border-slate-200/90 flex flex-col justify-between relative overflow-hidden h-full shadow-xl shadow-slate-200/50">
                 <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-[#D4E012]/15 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -69,18 +69,18 @@ export default function EPCCapabilities() {
             </ScrollReveal>
           </div>
 
-          {/* 3 Pillar Cards Stack with Staggered Scroll Motion */}
+          {/* 3 Pillar Cards Stack - Sliding in from Right */}
           <div className="lg:col-span-5 flex flex-col justify-between gap-4">
             {pillars.map((p, idx) => {
               const IconComp = p.icon;
               return (
                 <motion.div
                   key={p.title}
-                  initial={{ opacity: 0, x: 40 }}
+                  initial={{ opacity: 0, x: 80 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: false, amount: 0.2 }}
-                  transition={{ delay: idx * 0.15, duration: 0.7 }}
-                  whileHover={{ x: 6 }}
+                  transition={{ delay: idx * 0.15, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  whileHover={{ x: -6 }}
                   className="bg-white border border-slate-200/90 rounded-2xl p-6 hover:border-[#D4E012] transition-all shadow-md"
                 >
                   <div className="flex items-center gap-3 mb-2">

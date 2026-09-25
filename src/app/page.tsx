@@ -15,7 +15,7 @@ import PeopleFirst from "@/components/PeopleFirst";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
-
+import ScrollFadeSection from "@/components/ScrollFadeSection";
 
 export default function Home() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
@@ -45,28 +45,44 @@ export default function Home() {
         <MetricsTicker />
 
         {/* 01 / Solutions Capabilities */}
-        <SolutionsGrid />
+        <ScrollFadeSection>
+          <SolutionsGrid />
+        </ScrollFadeSection>
 
         {/* 02 / The Curve of Execution (Portfolio) */}
-        <ExecutionCurve />
+        <ScrollFadeSection>
+          <ExecutionCurve />
+        </ScrollFadeSection>
 
         {/* 03 / Smart Project Intelligence Screening Tool */}
-        <ProjectIntelligence />
+        <ScrollFadeSection>
+          <ProjectIntelligence />
+        </ScrollFadeSection>
 
         {/* 04 / One-Halt EPC Capability */}
-        <EPCCapabilities />
+        <ScrollFadeSection>
+          <EPCCapabilities />
+        </ScrollFadeSection>
 
         {/* 05 / Pan-India Footprint Map (Footprints) */}
-        <FootprintMap />
+        <ScrollFadeSection>
+          <FootprintMap />
+        </ScrollFadeSection>
 
         {/* 06 / Strategic Partners & Ecosystem */}
-        <Partners />
+        <ScrollFadeSection>
+          <Partners />
+        </ScrollFadeSection>
 
         {/* 07 / People First & Culture */}
-        <PeopleFirst />
+        <ScrollFadeSection>
+          <PeopleFirst />
+        </ScrollFadeSection>
 
         {/* Final Call To Action */}
-        <FinalCTA onOpenQuote={handleOpenQuote} />
+        <ScrollFadeSection>
+          <FinalCTA onOpenQuote={handleOpenQuote} />
+        </ScrollFadeSection>
 
         {/* Footer */}
         <Footer />
