@@ -68,11 +68,14 @@ export default function Hero({ onOpenQuote }: HeroProps) {
           alt="SARHAT EPC Solar Power Plant"
           fill
           priority
-          className="object-cover object-center opacity-85"
+          className="object-cover object-center opacity-90"
         />
 
         {/* Dark Scrim for High-Contrast Readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/80 pointer-events-none"></div>
+
+        {/* Dark Feathered Bottom Boundary Gradient Fade */}
+        <div className="absolute bottom-0 inset-x-0 h-56 sm:h-80 bg-gradient-to-t from-black via-black/85 via-50% to-transparent pointer-events-none z-10"></div>
       </motion.div>
 
       {/* Main Content Container (Immediate scroll-fade + motion blur + float on scroll down) */}

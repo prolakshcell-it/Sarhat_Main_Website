@@ -12,6 +12,8 @@ import EPCCapabilities from "@/components/EPCCapabilities";
 import FootprintMap from "@/components/FootprintMap";
 import Partners from "@/components/Partners";
 import PeopleFirst from "@/components/PeopleFirst";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import FAQSection from "@/components/FAQSection";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
@@ -77,6 +79,16 @@ export default function Home() {
         {/* 07 / People First & Culture */}
         <ScrollFadeSection>
           <PeopleFirst />
+        </ScrollFadeSection>
+
+        {/* 08 / Client & Partner Testimonials */}
+        <ScrollFadeSection>
+          <TestimonialsSection />
+        </ScrollFadeSection>
+
+        {/* 09 / Frequently Asked Questions */}
+        <ScrollFadeSection>
+          <FAQSection />
         </ScrollFadeSection>
 
         {/* Final Call To Action */}

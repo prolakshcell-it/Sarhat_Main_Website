@@ -1,4 +1,53 @@
 @import "tailwindcss";
+@import "maplibre-gl/dist/maplibre-gl.css";
+@import "leaflet/dist/leaflet.css";
+
+/* MapLibre GL Custom Popup Overrides */
+.maplibregl-popup-content {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 1.25rem !important;
+}
+
+.maplibregl-popup-anchor-bottom .maplibregl-popup-tip,
+.maplibregl-popup-anchor-top .maplibregl-popup-tip,
+.maplibregl-popup-anchor-left .maplibregl-popup-tip,
+.maplibregl-popup-anchor-right .maplibregl-popup-tip {
+  border-top-color: #0f172a !important;
+  border-bottom-color: #0f172a !important;
+}
+
+.maplibregl-popup-close-button {
+  color: #ffffff !important;
+  font-size: 18px !important;
+  padding: 6px 10px !important;
+  z-index: 50 !important;
+}
+
+/* Leaflet Custom Marker Container overrides */
+.custom-mapbox-marker-container {
+  background: transparent !important;
+  border: none !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 1.25rem !important;
+}
+
+.leaflet-popup-tip {
+  background: #0f172a !important;
+}
+
+.leaflet-popup-close-button {
+  color: #ffffff !important;
+  font-size: 16px !important;
+  top: 10px !important;
+  right: 12px !important;
+}
 
 body {
   background-color: #F8FAF8;
