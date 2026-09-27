@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
-import { ArrowRight, ChevronDown, Compass, ShieldCheck, Play, Activity } from "lucide-react";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
+import { ChevronDown, ArrowDown } from "lucide-react";
 import Image from "next/image";
 
 interface HeroProps {
@@ -9,7 +10,26 @@ interface HeroProps {
 }
 
 export default function Hero({ onOpenQuote }: HeroProps) {
-  // Ultra-Smooth & Soft Staggered Left-Slide Animation Variants
+  const containerRef = useRef<HTMLElement>(null);
+
+  // Parallax & Scroll Fade-out Tracking
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Background slow cinematic zoom, dynamic opacity fade & darkening scrim as user scrolls down
+  const bgScale = useTransform(scrollYProgress, [0, 0.8], [1.03, 1.15]);
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.2]);
+  const bgDim = useTransform(scrollYProgress, [0, 0.5], [0.3, 0.85]);
+
+  // Immediate scroll fade & smooth upward float for Hero Content
+  const contentY = useTransform(scrollYProgress, [0, 0.3], ["0px", "-60px"]);
+  const contentScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.95]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+  const contentFilter = useTransform(scrollYProgress, [0, 0.25], ["blur(0px)", "blur(10px)"]);
+
+  // Ultra-Smooth & Soft Staggered Animation Variants
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -21,52 +41,63 @@ export default function Hero({ onOpenQuote }: HeroProps) {
     },
   };
 
-  // Soft, floating slide out from left (-50px -> 0px) with motion blur
-  const itemSoftLeftVariants: Variants = {
+  const itemSoftVariants: Variants = {
     hidden: {
       opacity: 0,
-      x: -50,
+      y: 30,
       filter: "blur(8px)",
     },
     visible: {
       opacity: 1,
-      x: 0,
+      y: 0,
       filter: "blur(0px)",
       transition: {
-        duration: 1.6,
-        ease: [0.22, 1, 0.36, 1], // Ultra-soft luxury easing curve
+        duration: 1.4,
+        ease: [0.22, 1, 0.36, 1],
       },
     },
   };
 
   return (
-    <section className="relative h-screen min-h-[680px] max-h-[1080px] w-full flex flex-col justify-between overflow-hidden bg-slate-950 select-none">
-      {/* Background Image Layer */}
-      <div className="absolute inset-0 z-0">
+    <section
+      ref={containerRef}
+      className="relative h-screen min-h-[560px] sm:min-h-[680px] max-h-[1080px] w-full flex flex-col justify-between items-center overflow-hidden bg-slate-950 select-none"
+    >
+      {/* Cinematic Background Image Layer with Dynamic Zoom & Dynamic Opacity Fade */}
+      <motion.div style={{ scale: bgScale, opacity: bgOpacity }} className="absolute inset-0 z-0 h-full w-full">
         <Image
           src="/images/hero-solar.jpg"
           alt="SARHAT EPC Solar Power Plant"
           fill
           priority
-          className="object-cover object-center opacity-85 scale-105"
+          className="object-cover object-center opacity-90"
         />
 
-        {/* Dark Scrim for High-Contrast Readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-black/25 pointer-events-none"></div>
-      </div>
+        {/* Dynamic Darkening Scrim on Scroll */}
+        <motion.div
+          style={{ opacity: bgDim }}
+          className="absolute inset-0 bg-black pointer-events-none"
+        />
 
-      {/* Main Content Container (Centered in Viewport) */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto pt-32 sm:pt-36 pb-4">
+        {/* High-Contrast Readability Gradient Scrim */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/30 via-50% to-black/90 pointer-events-none"></div>
+      </motion.div>
+
+      {/* Main Content Container (Immediate scroll-fade + motion blur + scale float on scroll down) */}
+      <motion.div
+        style={{ y: contentY, scale: contentScale, opacity: contentOpacity, filter: contentFilter }}
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto pt-32 sm:pt-36 pb-4 flex flex-col items-center text-center will-change-transform"
+      >
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-5xl"
+          className="max-w-4xl flex flex-col items-center text-center"
         >
-          {/* Hero Headline - Soft left blur slide */}
+          {/* Hero Headline */}
           <motion.h1
-            variants={itemSoftLeftVariants}
-            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.1] mb-5 [text-shadow:_0_4px_24px_rgba(0,0,0,0.95)]"
+            variants={itemSoftVariants}
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.1] mb-6 [text-shadow:_0_4px_24px_rgba(0,0,0,0.95)]"
           >
             We build the{" "}
             <span className="italic font-normal text-[#D4E012] relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
@@ -91,61 +122,51 @@ export default function Hero({ onOpenQuote }: HeroProps) {
             that move India forward.
           </motion.h1>
 
-          {/* Subheading - Soft left blur slide */}
+          {/* Subheading */}
           <motion.p
-            variants={itemSoftLeftVariants}
-            className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-100 font-normal max-w-xl leading-relaxed mb-8 tracking-wide [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)]"
+            variants={itemSoftVariants}
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-100 font-normal max-w-2xl leading-relaxed mb-9 tracking-wide [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)]"
           >
             Renewable energy, storage, substations and infrastructure, brought together by one execution mindset.
           </motion.p>
 
-          {/* Animated CTA Buttons - Soft left blur slide */}
-          <motion.div variants={itemSoftLeftVariants} className="flex flex-wrap items-center gap-4 sm:gap-5">
-            <motion.button
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              onClick={onOpenQuote}
-              className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-[11px] sm:text-xs uppercase tracking-wider px-7 py-3.5 rounded-full transition-all duration-300 shadow-xl shadow-[#D4E012]/30 flex items-center gap-2.5 group relative overflow-hidden"
+          {/* Action CTA Buttons */}
+          <motion.div variants={itemSoftVariants} className="flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="#about"
+              className="inline-flex items-center gap-2.5 bg-white hover:bg-[#D4E012] text-slate-950 font-extrabold text-xs sm:text-sm uppercase tracking-wider px-7 py-3.5 sm:px-8 sm:py-4 rounded-full transition-all duration-300 transform hover:scale-[1.04] active:scale-[0.98] shadow-2xl shadow-black/50 group cursor-pointer border border-white/20"
             >
-              <span className="relative z-10">DISCUSS A PROJECT</span>
-              <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform relative z-10" />
-              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-            </motion.button>
-
-            <motion.a
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              href="#footprint"
-              className="glass-panel hover:bg-white/20 text-white font-bold text-[11px] sm:text-xs uppercase tracking-wider px-7 py-3.5 rounded-full transition-all duration-300 border border-white/30 flex items-center gap-2 shadow-2xl backdrop-blur-md"
-            >
-              <span>SEE OUR FOOTPRINT</span>
-              <Compass className="w-4 h-4 text-slate-200" />
-            </motion.a>
+              <span>Explore What We Do</span>
+              <ArrowDown className="w-4 h-4 text-slate-950 group-hover:translate-y-1 transition-transform" />
+            </a>
           </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
 
-      {/* Bottom Floating Info Bar - Soft Left Blur Slide */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-6">
+      {/* Bottom Floating Info Bar (Fades out seamlessly on scroll) */}
+      <motion.div
+        style={{ opacity: contentOpacity, filter: contentFilter }}
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-8 sm:pb-12 will-change-transform"
+      >
         <motion.div
-          initial={{ opacity: 0, x: -50, filter: "blur(6px)" }}
-          animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ delay: 0.9, duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
-          className="border-t border-white/20 pt-4 flex flex-col md:flex-row md:items-center justify-between gap-4"
+          className="flex flex-col items-center justify-center text-center"
         >
-          <a
-            href="#about"
-            className="flex items-center gap-2 text-xs uppercase tracking-widest text-slate-200 hover:text-[#D4E012] transition-colors [text-shadow:_0_1px_8px_rgba(0,0,0,0.9)] font-medium"
-          >
-            <ChevronDown className="w-4 h-4 text-[#D4E012] animate-bounce" />
-            <span>Scroll to discover execution methodology</span>
+          {/* Small Animated Mouse Scroll Indicator */}
+          <a href="#about" aria-label="Explore About Section" className="flex flex-col items-center gap-1 cursor-pointer group">
+            <div className="w-4 h-7 sm:w-5 sm:h-8 rounded-full border-2 border-white/50 group-hover:border-[#D4E012] flex justify-center pt-1.5 backdrop-blur-sm shadow-[0_4px_12px_rgba(0,0,0,0.5)] transition-colors">
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                className="w-1 h-1.5 rounded-full bg-[#D4E012] shadow-[0_0_8px_#D4E012]"
+              />
+            </div>
+            <ChevronDown className="w-3.5 h-3.5 text-[#D4E012] animate-bounce -mt-0.5" />
           </a>
-
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }
-
-
-

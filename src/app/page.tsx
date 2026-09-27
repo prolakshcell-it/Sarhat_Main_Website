@@ -1,21 +1,24 @@
 "use client";
 
 import { useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import MetricsTicker from "@/components/MetricsTicker";
 import SolutionsGrid from "@/components/SolutionsGrid";
 import ExecutionCurve from "@/components/ExecutionCurve";
-import ProjectIntelligence from "@/components/ProjectIntelligence";
 import EPCCapabilities from "@/components/EPCCapabilities";
+import WhyChooseUs from "@/components/WhyChooseUs";
+import TrustedByLogos from "@/components/TrustedByLogos";
 import FootprintMap from "@/components/FootprintMap";
-import Partners from "@/components/Partners";
 import PeopleFirst from "@/components/PeopleFirst";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import FAQSection from "@/components/FAQSection";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
-
+import ScrollFadeSection from "@/components/ScrollFadeSection";
 
 export default function Home() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
@@ -30,7 +33,7 @@ export default function Home() {
 
   return (
     <SmoothScroll>
-      <main className="min-h-screen bg-[#F8FAF8] text-[#0F172A] selection:bg-[#D4E012] selection:text-black relative overflow-x-hidden font-sans-ui">
+      <main className="min-h-screen bg-[#F8FAF8] text-[#0F172A] selection:bg-[#D4E012] selection:text-black relative overflow-x-clip font-sans-ui">
         {/* Soft Ambient Porcelain Flares */}
         <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-b from-[#D4E012]/15 via-[#6DAD45]/10 to-transparent rounded-full blur-[130px] pointer-events-none z-0"></div>
         <div className="absolute top-[30%] right-0 w-[500px] h-[500px] bg-gradient-to-l from-emerald-400/10 via-[#D4E012]/10 to-transparent rounded-full blur-[110px] pointer-events-none z-0"></div>
@@ -38,38 +41,69 @@ export default function Home() {
         {/* Navigation */}
         <Navbar onOpenQuote={handleOpenQuote} />
 
-        {/* Hero Section */}
-        <Hero onOpenQuote={handleOpenQuote} />
+        {/* Sticky Hero Section (Static background while scrolling down) */}
+        <div className="sticky top-0 z-0 w-full h-screen">
+          <Hero onOpenQuote={handleOpenQuote} />
+        </div>
 
-        {/* Metrics Ticker Bar */}
-        <MetricsTicker />
+        {/* Main Content Sections (Slides UP over the static Hero image) */}
+        <div className="relative z-10 bg-[#F8FAF8] border-t border-slate-200/60 shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
+          {/* Metrics Ticker Bar */}
+          <MetricsTicker />
 
-        {/* 01 / Solutions Capabilities */}
-        <SolutionsGrid />
+          {/* 01 / One-Halt EPC Capability (About Us) */}
+          <ScrollFadeSection>
+            <EPCCapabilities />
+          </ScrollFadeSection>
 
-        {/* 02 / The Curve of Execution (Portfolio) */}
-        <ExecutionCurve />
+          {/* 02 / Solutions Capabilities */}
+          <ScrollFadeSection>
+            <SolutionsGrid />
+          </ScrollFadeSection>
 
-        {/* 03 / Smart Project Intelligence Screening Tool */}
-        <ProjectIntelligence />
+          {/* 03 / The Curve of Execution (Portfolio) */}
+          <ScrollFadeSection>
+            <ExecutionCurve />
+          </ScrollFadeSection>
 
-        {/* 04 / One-Halt EPC Capability */}
-        <EPCCapabilities />
+          {/* 06 / Why Choose Us */}
+          <ScrollFadeSection>
+            <WhyChooseUs />
+          </ScrollFadeSection>
 
-        {/* 05 / Pan-India Footprint Map (Footprints) */}
-        <FootprintMap />
+          {/* 05 / Trusted By Industry Leaders Marquee */}
+          <ScrollFadeSection>
+            <TrustedByLogos />
+          </ScrollFadeSection>
 
-        {/* 06 / Strategic Partners & Ecosystem */}
-        <Partners />
+          {/* 05 / Pan-India Footprint Map (Footprints) */}
+          <ScrollFadeSection>
+            <FootprintMap />
+          </ScrollFadeSection>
 
-        {/* 07 / People First & Culture */}
-        <PeopleFirst />
+          {/* 07 / People First & Culture */}
+          <ScrollFadeSection>
+            <PeopleFirst />
+          </ScrollFadeSection>
 
-        {/* Final Call To Action */}
-        <FinalCTA onOpenQuote={handleOpenQuote} />
+          {/* 08 / Client & Partner Testimonials */}
+          <ScrollFadeSection>
+            <TestimonialsSection />
+          </ScrollFadeSection>
 
-        {/* Footer */}
-        <Footer />
+          {/* 09 / Frequently Asked Questions */}
+          <ScrollFadeSection>
+            <FAQSection />
+          </ScrollFadeSection>
+
+          {/* Final Call To Action */}
+          <ScrollFadeSection>
+            <FinalCTA onOpenQuote={handleOpenQuote} />
+          </ScrollFadeSection>
+
+          {/* Footer */}
+          <Footer />
+        </div>
 
         {/* Consultation Modal */}
         <QuoteModal isOpen={quoteModalOpen} onClose={handleCloseQuote} />

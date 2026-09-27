@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Compass, Eye, ShieldAlert } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
 
 export default function EPCCapabilities() {
@@ -24,77 +26,129 @@ export default function EPCCapabilities() {
   ];
 
   return (
-    <section id="about" className="py-28 bg-white relative z-10 border-b border-slate-200/80 font-sans-ui">
+    <section id="about" className="py-24 sm:py-28 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Top Centered Section Header */}
         <ScrollReveal direction="up" distance={40}>
-          <div className="text-xs font-mono font-extrabold tracking-widest text-[#707B00] uppercase mb-3 flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#8A9600] animate-ping"></span>
-            ONE-HALT EPC CAPABILITY
+          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+            <div className="inline-flex items-center justify-center px-6 sm:px-8 py-2 sm:py-2.5 rounded-full bg-white border border-[#707B00]/40 text-[#707B00] font-mono font-bold text-xs sm:text-sm uppercase tracking-[0.2em] shadow-sm mb-6">
+              ABOUT US
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+              India&apos;s Trusted Solar & EPC Partner <br />
+              <span className="text-[#6DAD45] italic relative inline-block">
+                — Built on Experience.
+                <svg
+                  className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                  viewBox="0 0 100 20"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M0 15 Q 50 0 100 15"
+                    stroke="currentColor"
+                    strokeWidth="3.5"
+                    fill="transparent"
+                  />
+                </svg>
+              </span>
+            </h2>
+
+            <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+              Sarhat Energy & Infrastructure is a premier turnkey Solar EPC and renewable infrastructure company building utility-scale solar, C&I rooftops, BESS storage, and EHV substations across India.
+            </p>
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Main Hero Card with Scroll Reveal */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Left Text & Info Column */}
           <div className="lg:col-span-7">
-            <ScrollReveal direction="left" distance={50}>
-              <div className="bg-[#F8FAF8] rounded-3xl p-8 sm:p-12 border border-slate-200/90 flex flex-col justify-between relative overflow-hidden h-full shadow-xl shadow-slate-200/50">
-                <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-[#D4E012]/15 rounded-full blur-3xl pointer-events-none"></div>
-
-                <div>
-                  <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-                    One project. <br />
-                    <span className="text-[#6DAD45]">One connected</span> execution mindset.
-                  </h2>
-                  <p className="text-slate-600 font-normal text-base sm:text-lg leading-relaxed max-w-xl mb-10">
-                    We connect generation, storage, grid evacuation and civil infrastructure into one single project view so the handoff between disciplines does not become someone else&apos;s problem.
+            <ScrollReveal direction="right" distance={60}>
+              <div>
+                {/* Paragraph Content */}
+                <div className="space-y-4 text-slate-600 font-normal text-base sm:text-lg leading-relaxed mb-8">
+                  <p>
+                    Our in-house engineering and execution mindset connects site topography, electrical SLDs, procurement, DISCOM grid clearances, and 24/7 telemetry under one single project view for faster execution and long-term reliability.
+                  </p>
+                  <p className="text-sm sm:text-base text-slate-500">
+                    We deliver end-to-end EPC services tailored for commercial manufacturing plants, ground-mounted IPP solar parks, and government utility projects with zero compromise on safety and quality.
                   </p>
                 </div>
 
-                <div className="flex flex-wrap gap-4">
+                {/* 3 Pillar Feature Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-10">
+                  {pillars.map((p) => {
+                    const Icon = p.icon;
+                    return (
+                      <div
+                        key={p.title}
+                        className="bg-white border border-slate-200/90 rounded-2xl p-3.5 shadow-sm hover:border-[#707B00] transition-colors"
+                      >
+                        <div className="flex items-center gap-2 mb-1">
+                          <Icon className="w-4 h-4 text-[#707B00] shrink-0" />
+                          <h4 className="text-xs font-bold text-slate-900 font-sans-ui">
+                            {p.title}
+                          </h4>
+                        </div>
+                        <p className="text-[11px] text-slate-500 leading-tight">
+                          {p.description}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* CTA Action Buttons */}
+                <div className="flex flex-wrap items-center gap-4">
+                  <Link
+                    href="/about"
+                    className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"
+                  >
+                    <span>Learn More About Us</span>
+                    <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
+                  </Link>
+
                   <a
                     href="#solutions"
-                    className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-6 py-3.5 rounded-full transition-all flex items-center gap-2 shadow-lg shadow-[#D4E012]/20"
+                    className="inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-slate-900 font-extrabold text-xs uppercase tracking-widest px-6 py-4 rounded-full transition-all border border-slate-300 shadow-sm"
                   >
-                    <span>See our capabilities</span>
-                    <ArrowRight className="w-4 h-4 text-black" />
-                  </a>
-                  <a
-                    href="#intelligence"
-                    className="bg-white hover:bg-slate-100 text-slate-900 font-bold text-xs uppercase tracking-widest px-6 py-3.5 rounded-full transition-all border border-slate-300 shadow-sm"
-                  >
-                    Private Project Readiness
+                    <span>Our Capabilities</span>
                   </a>
                 </div>
               </div>
             </ScrollReveal>
           </div>
 
-          {/* 3 Pillar Cards Stack with Staggered Scroll Motion */}
-          <div className="lg:col-span-5 flex flex-col justify-between gap-4">
-            {pillars.map((p, idx) => {
-              const IconComp = p.icon;
-              return (
+          {/* Right Image & Overlay Badge Column */}
+          <div className="lg:col-span-5 relative">
+            <ScrollReveal direction="left" distance={60}>
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200/90 h-[420px] sm:h-[500px] w-full group">
+                <Image
+                  src="/images/hero-solar.jpg"
+                  alt="Sarhat Solar EPC Team & Infrastructure"
+                  fill
+                  className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+
+                {/* Floating Experience / Capacity Badge */}
                 <motion.div
-                  key={p.title}
-                  initial={{ opacity: 0, x: 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: false, amount: 0.2 }}
-                  transition={{ delay: idx * 0.15, duration: 0.7 }}
-                  whileHover={{ x: 6 }}
-                  className="bg-white border border-slate-200/90 rounded-2xl p-6 hover:border-[#D4E012] transition-all shadow-md"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4, duration: 0.6 }}
+                  className="absolute bottom-5 left-5 z-20 bg-[#D4E012] text-black p-5 rounded-2xl shadow-2xl border border-black/10 max-w-[210px]"
                 >
-                  <div className="flex items-center gap-3 mb-2">
-                    <IconComp className="w-4.5 h-4.5 text-[#707B00]" />
-                    <h3 className="text-lg font-serif-display font-bold text-slate-900">
-                      {p.title}
-                    </h3>
+                  <div className="text-3xl font-serif-display font-black tracking-tight text-black leading-none mb-1">
+                    47.77+ MW
                   </div>
-                  <p className="text-xs text-slate-600 font-normal leading-relaxed">
-                    {p.description}
-                  </p>
+                  <div className="text-[11px] font-mono font-extrabold uppercase tracking-wider text-slate-900 leading-tight">
+                    Turnkey Renewable Solar Capacity Delivered
+                  </div>
                 </motion.div>
-              );
-            })}
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>
