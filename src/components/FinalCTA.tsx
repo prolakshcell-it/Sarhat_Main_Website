@@ -24,7 +24,21 @@ export default function FinalCTA({ onOpenQuote }: FinalCTAProps) {
 
               <h2 className="text-4xl sm:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-6">
                 Have a project <br />
-                <span className="text-[#D4E012] italic">worth building?</span>
+                <span className="text-[#D4E012] italic relative inline-block">
+                  worth building?
+                  <svg
+                    className="absolute -bottom-2 left-0 w-full h-3 text-[#D4E012]"
+                    viewBox="0 0 100 20"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M0 15 Q 50 0 100 15"
+                      stroke="currentColor"
+                      strokeWidth="3.5"
+                      fill="transparent"
+                    />
+                  </svg>
+                </span>
               </h2>
 
               <p className="text-slate-300 font-normal text-base sm:text-lg leading-relaxed mb-8">

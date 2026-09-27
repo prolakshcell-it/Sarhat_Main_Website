@@ -14,8 +14,10 @@ import {
   Pause,
   ChevronLeft,
   ChevronRight,
+  ArrowRight,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
 
 interface Phase {
@@ -166,32 +168,30 @@ export default function ExecutionCurve() {
         
         {/* Header Badge & Editorial Title matching previous content */}
         <ScrollReveal direction="up" distance={35}>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-            <div>
-              <div className="text-xs font-mono font-bold tracking-widest text-[#D4E012] uppercase mb-3 flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#D4E012] animate-ping shadow-[0_0_8px_#D4E012]"></span>
-                THE CURVE OF EXECUTION
-              </div>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight">
-                A project journey <br />
-                <span className="text-[#D4E012] relative inline-block">
-                  with a clear curve.
-                  <svg
-                    className="absolute -bottom-2 left-0 w-full h-3 text-[#D4E012]"
-                    viewBox="0 0 100 20"
-                    preserveAspectRatio="none"
-                  >
-                    <path
-                      d="M0 15 Q 50 0 100 15"
-                      stroke="currentColor"
-                      strokeWidth="3.5"
-                      fill="transparent"
-                    />
-                  </svg>
-                </span>
-              </h2>
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900 border border-[#D4E012]/30 text-[11px] font-mono font-bold tracking-widest text-[#D4E012] uppercase mb-4 shadow-sm backdrop-blur-md">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#D4E012] animate-ping shadow-[0_0_8px_#D4E012]"></span>
+              THE CURVE OF EXECUTION
             </div>
-            <p className="text-slate-300 font-light text-base max-w-md leading-relaxed">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-4">
+              A project journey <br />
+              <span className="text-[#D4E012] relative inline-block">
+                with a clear curve.
+                <svg
+                  className="absolute -bottom-2 left-0 w-full h-3 text-[#D4E012]"
+                  viewBox="0 0 100 20"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M0 15 Q 50 0 100 15"
+                    stroke="currentColor"
+                    strokeWidth="3.5"
+                    fill="transparent"
+                  />
+                </svg>
+              </span>
+            </h2>
+            <p className="text-slate-300 font-light text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
               6 core phases in sequence. The roadmap lights up as the project moves from discovery to long-term operations.
             </p>
           </div>
@@ -201,7 +201,7 @@ export default function ExecutionCurve() {
         {/* RADIAL 6-PHASE INTERACTIVE LIFECYCLE CANVAS */}
         {/* ------------------------------------------------------------- */}
         <ScrollReveal direction="up" distance={45} delay={0.15}>
-          <div className="relative w-full max-w-5xl mx-auto aspect-square max-h-[700px] min-h-[560px] sm:min-h-[620px] flex items-center justify-center my-4">
+          <div className="relative w-full max-w-5xl mx-auto aspect-square max-h-[700px] min-h-[480px] sm:min-h-[620px] scale-[0.82] xs:scale-90 sm:scale-100 origin-center flex items-center justify-center my-2 sm:my-4">
             
             {/* Background Radial Glow */}
             <div
@@ -281,9 +281,9 @@ export default function ExecutionCurve() {
                         transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                         className={`hidden sm:block absolute z-50 w-64 p-2.5 bg-slate-900/95 border-2 rounded-2xl backdrop-blur-2xl shadow-[0_0_40px_rgba(0,0,0,0.95)] pointer-events-auto ${
                           phase.angle === -90
-                            ? "bottom-full mb-3 left-1/2 -translate-x-1/2"
-                            : phase.angle === 90
                             ? "top-full mt-3 left-1/2 -translate-x-1/2"
+                            : phase.angle === 90
+                            ? "bottom-full mb-3 left-1/2 -translate-x-1/2"
                             : phase.angle > -90 && phase.angle < 90
                             ? "left-full ml-4 top-1/2 -translate-y-1/2"
                             : "right-full mr-4 top-1/2 -translate-y-1/2"
@@ -428,6 +428,19 @@ export default function ExecutionCurve() {
             <ChevronRight className="w-5 h-5" />
           </button>
         </div>
+
+        {/* Section CTA Button */}
+        <ScrollReveal direction="up" distance={30} delay={0.2}>
+          <div className="mt-12 text-center">
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"
+            >
+              <span>Explore Project Portfolio</span>
+              <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </ScrollReveal>
 
       </div>
     </section>
