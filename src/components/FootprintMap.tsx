@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import { MapPin, Compass, Building2 } from "lucide-react";
+import { MapPin, Compass, Building2, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
 import { ProjectSite } from "./MapboxInteractiveMap";
 
@@ -32,15 +33,26 @@ export default function FootprintMap() {
         {/* Section Header */}
         <ScrollReveal direction="up" distance={40}>
           <div className="text-center max-w-3xl mx-auto mb-10">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#707B00]/30 text-[11px] font-bold text-[#707B00] uppercase tracking-widest mb-4 shadow-sm backdrop-blur-md">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#707B00] animate-ping"></span>
+            <div className="inline-flex items-center justify-center px-6 sm:px-8 py-2 sm:py-2.5 rounded-full bg-white border border-[#707B00]/40 text-[#707B00] font-mono font-bold text-xs sm:text-sm uppercase tracking-[0.2em] shadow-sm mb-6">
               PAN-INDIA OPERATIONAL FOOTPRINT
             </div>
 
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium tracking-tight text-slate-900 leading-tight mb-4">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium tracking-tight text-slate-900 leading-tight mb-6">
               Built across India. <br />
-              <span className="bg-gradient-to-r from-[#707B00] via-[#5EE72D] to-[#16A34A] bg-clip-text text-transparent italic font-serif-display font-medium">
+              <span className="text-[#6DAD45] italic relative inline-block">
                 Core Operating Footprint.
+                <svg
+                  className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                  viewBox="0 0 100 20"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M0 15 Q 50 0 100 15"
+                    stroke="currentColor"
+                    strokeWidth="3.5"
+                    fill="transparent"
+                  />
+                </svg>
               </span>
             </h2>
 
@@ -71,6 +83,19 @@ export default function FootprintMap() {
                 onSelectSite={(site) => setSelectedSite(site)}
               />
             </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Section CTA Button */}
+        <ScrollReveal direction="up" distance={30} delay={0.25}>
+          <div className="mt-12 text-center">
+            <Link
+              href="/projects#footprint"
+              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"
+            >
+              <span>Explore Regional Hubs & Footprints</span>
+              <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </ScrollReveal>
       </div>

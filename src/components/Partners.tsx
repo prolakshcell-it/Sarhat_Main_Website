@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Cpu, Zap, Building2, Landmark } from "lucide-react";
+import { ShieldCheck, Cpu, Zap, Building2, Landmark, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
 
 interface PartnerCategory {
@@ -70,18 +71,30 @@ export default function Partners() {
       <div className="absolute bottom-10 left-10 w-80 h-80 bg-[#6DAD45]/10 rounded-full blur-[100px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <ScrollReveal direction="right" distance={60}>
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-            <div>
-              <div className="text-xs font-mono font-extrabold text-[#707B00] uppercase tracking-widest mb-3 flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#8A9600] animate-ping"></span>
-                ECOSYSTEM & ALLIANCES
-              </div>
-              <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 tracking-tight">
-                Our Strategic <span className="text-[#707B00] italic">Partners</span>
-              </h2>
+        <ScrollReveal direction="up" distance={40}>
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center justify-center px-6 sm:px-8 py-2 sm:py-2.5 rounded-full bg-white border border-[#707B00]/40 text-[#707B00] font-mono font-bold text-xs sm:text-sm uppercase tracking-[0.2em] shadow-sm mb-6">
+              ECOSYSTEM & ALLIANCES
             </div>
-            <p className="text-xs sm:text-sm text-slate-600 font-normal max-w-md leading-relaxed">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-4">
+              Our Strategic <br />
+              <span className="text-[#6DAD45] italic relative inline-block">
+                Ecosystem & Partners.
+                <svg
+                  className="absolute -bottom-2 left-0 w-full h-2.5 text-[#6DAD45]"
+                  viewBox="0 0 100 20"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M0 15 Q 50 0 100 15"
+                    stroke="currentColor"
+                    strokeWidth="3.5"
+                    fill="transparent"
+                  />
+                </svg>
+              </span>
+            </h2>
+            <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
               We collaborate with world-class equipment manufacturers, grid utilities, state transmission corporations, and leading clean energy financiers to ensure turnkey execution excellence.
             </p>
           </div>
@@ -136,6 +149,19 @@ export default function Partners() {
             );
           })}
         </div>
+
+        {/* Section CTA Button */}
+        <ScrollReveal direction="up" distance={30} delay={0.25}>
+          <div className="mt-12 text-center">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"
+            >
+              <span>Partner With Us</span>
+              <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

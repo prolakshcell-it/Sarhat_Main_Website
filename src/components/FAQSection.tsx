@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, HelpCircle, MessageSquare, ArrowUpRight } from "lucide-react";
+import { ChevronDown, HelpCircle, MessageSquare, ArrowUpRight, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
 
 interface FAQItem {
@@ -74,20 +75,10 @@ export default function FAQSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal direction="up" distance={40}>
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F8FAF8] border border-[#707B00]/30 text-[11px] font-bold text-[#707B00] uppercase tracking-widest mb-4 shadow-sm">
-              <HelpCircle className="w-4 h-4 text-[#707B00]" />
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <div className="inline-flex items-center justify-center px-6 sm:px-8 py-2 sm:py-2.5 rounded-full bg-white border border-[#707B00]/40 text-[#707B00] font-mono font-bold text-xs sm:text-sm uppercase tracking-[0.2em] shadow-sm mb-2">
               FREQUENTLY ASKED QUESTIONS
             </div>
-
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium tracking-tight text-slate-900 leading-tight mb-4">
-              Clear answers for <br />
-              <span className="text-[#6DAD45] italic">your project execution.</span>
-            </h2>
-
-            <p className="text-slate-600 font-normal text-base sm:text-lg leading-relaxed">
-              Find technical details regarding Sarhat&apos;s EPC engineering scope, substation grid approvals, BESS energy storage, and statutory project clearances.
-            </p>
           </div>
         </ScrollReveal>
 
@@ -106,11 +97,10 @@ export default function FAQSection() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveCategory(tab.id as any)}
-                  className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
-                    isActive
+                  className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${isActive
                       ? "bg-slate-900 text-white shadow-lg shadow-slate-900/20 scale-105"
                       : "bg-[#F8FAF8] text-slate-700 border border-slate-200/90 hover:border-[#707B00] hover:text-slate-900"
-                  }`}
+                    }`}
                 >
                   {tab.label}
                 </button>
@@ -126,11 +116,10 @@ export default function FAQSection() {
             return (
               <ScrollReveal key={faq.id} delay={index * 0.05} direction={index % 2 === 0 ? "right" : "left"}>
                 <div
-                  className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
-                    isOpen
+                  className={`rounded-2xl border transition-all duration-300 overflow-hidden ${isOpen
                       ? "bg-[#F8FAF8] border-[#707B00]/60 shadow-xl shadow-slate-200/50"
                       : "bg-white border-slate-200/90 hover:border-slate-300 shadow-sm"
-                  }`}
+                    }`}
                 >
                   <button
                     onClick={() => toggleAccordion(faq.id)}
@@ -146,9 +135,8 @@ export default function FAQSection() {
                     </div>
 
                     <div
-                      className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ${
-                        isOpen ? "bg-[#D4E012] text-slate-900 rotate-180" : "bg-slate-100 text-slate-500"
-                      }`}
+                      className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ${isOpen ? "bg-[#D4E012] text-slate-900 rotate-180" : "bg-slate-100 text-slate-500"
+                        }`}
                     >
                       <ChevronDown className="w-5 h-5" />
                     </div>
@@ -175,24 +163,16 @@ export default function FAQSection() {
           })}
         </div>
 
-        {/* Bottom Consultation Box */}
-        <ScrollReveal direction="up" distance={30} delay={0.2}>
-          <div className="max-w-2xl mx-auto mt-16 p-6 rounded-2xl bg-slate-900 text-white border border-slate-800 text-center flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xl">
-            <div className="text-left">
-              <h4 className="text-sm font-bold font-serif-display text-white mb-1">
-                Have a specific project question?
-              </h4>
-              <p className="text-xs text-slate-400">
-                Speak directly with our senior EPC engineering team.
-              </p>
-            </div>
-            <a
-              href="#contact"
-              className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-wider px-6 py-3 rounded-full transition-all shrink-0 flex items-center gap-2 shadow-lg shadow-[#D4E012]/20"
+        {/* Section CTA Button */}
+        <ScrollReveal direction="up" distance={30} delay={0.25}>
+          <div className="mt-14 text-center">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"
             >
-              <span>Get Answers</span>
-              <ArrowUpRight className="w-4 h-4 text-black" />
-            </a>
+              <span>Have More Questions? Contact Us</span>
+              <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </ScrollReveal>
       </div>

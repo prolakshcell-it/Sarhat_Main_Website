@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Quote, Star, ChevronLeft, ChevronRight, Building2, MapPin, CheckCircle2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { Quote, Star, ChevronLeft, ChevronRight, CheckCircle2, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
 
 interface Testimonial {
@@ -71,177 +72,146 @@ const testimonials: Testimonial[] = [
     projectType: "Solar + BESS Grid Evacuation",
     highlightMetric: "Zero Frequency Drift",
   },
+  {
+    id: "5",
+    quote:
+      "From topographic survey to final CEIG safety certificate, Sarhat's single-window execution eliminated multi-vendor chaos for our industrial rooftop solar microgrid.",
+    author: "Meera Nair",
+    role: "VP Operations",
+    company: "Apex Agro Manufacturing",
+    location: "Haryana & Punjab",
+    rating: 5,
+    projectCapacity: "8.4 MW",
+    projectType: "Rooftop Solar & Microgrid",
+    highlightMetric: "Zero Operational Lag",
+  },
 ];
 
 export default function TestimonialsSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
-  const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
-  const current = testimonials[currentIndex];
+  // Repeat items for seamless infinite continuous scroll loop
+  const marqueeItems = [...testimonials, ...testimonials, ...testimonials];
 
   return (
-    <section id="testimonials" className="py-24 sm:py-28 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden">
+    <section id="testimonials" className="py-24 sm:py-28 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden select-none">
       {/* Background Ambient Glow */}
       <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#D4E012]/10 rounded-full blur-[130px] pointer-events-none"></div>
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#6DAD45]/10 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <ScrollReveal direction="right" distance={50}>
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-            <div>
-              <div className="text-xs font-mono font-extrabold text-[#707B00] uppercase tracking-widest mb-3 flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#8A9600] animate-ping"></span>
-                CLIENT & PARTNER ENDORSEMENTS
-              </div>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
-                Trusted by India&apos;s <br />
-                <span className="text-[#6DAD45] italic">Clean Energy Leaders.</span>
-              </h2>
+        <ScrollReveal direction="up" distance={40}>
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <div className="inline-flex items-center justify-center px-6 sm:px-8 py-2 sm:py-2.5 rounded-full bg-white border border-[#707B00]/40 text-[#707B00] font-mono font-bold text-xs sm:text-sm uppercase tracking-[0.2em] shadow-sm mb-6">
+              CLIENT & PARTNER ENDORSEMENTS
             </div>
-            <p className="text-slate-600 font-normal text-base max-w-md leading-relaxed">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+              Trusted by India&apos;s <br />
+              <span className="text-[#6DAD45] italic relative inline-block">
+                Clean Energy Leaders.
+                <svg
+                  className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                  viewBox="0 0 100 20"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M0 15 Q 50 0 100 15"
+                    stroke="currentColor"
+                    strokeWidth="3.5"
+                    fill="transparent"
+                  />
+                </svg>
+              </span>
+            </h2>
+            <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
               Read how our turnkey EPC execution, substation engineering, and grid connectivity deliver measurable performance across India.
             </p>
           </div>
         </ScrollReveal>
+      </div>
 
-        {/* Featured Testimonial Spotlight Card */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Main Card */}
-          <div className="lg:col-span-8">
-            <ScrollReveal direction="right" distance={70}>
-              <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/90 shadow-2xl relative overflow-hidden flex flex-col justify-between h-full min-h-[400px]">
-                <Quote className="w-16 h-16 text-[#D4E012]/40 absolute top-6 right-8 pointer-events-none" />
+      {/* Horizontal Cards Slider Track (Moving Left to Right continuously) */}
+      <div
+        className="relative w-full overflow-hidden mt-4 py-4"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
+        {/* Side Gradient Fade Masks */}
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#F8FAF8] via-[#F8FAF8]/90 to-transparent z-20 pointer-events-none"></div>
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#F8FAF8] via-[#F8FAF8]/90 to-transparent z-20 pointer-events-none"></div>
 
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={current.id}
-                    initial={{ opacity: 0, x: 30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -30 }}
-                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    className="relative z-10 flex flex-col justify-between h-full"
-                  >
-                    <div>
-                      {/* Rating Stars & Capacity Tag */}
-                      <div className="flex items-center justify-between gap-4 mb-6">
-                        <div className="flex items-center gap-1">
-                          {[...Array(current.rating)].map((_, i) => (
-                            <Star key={i} className="w-4 h-4 fill-[#EAB308] text-[#EAB308]" />
-                          ))}
-                        </div>
-                        <span className="px-3 py-1 bg-slate-900 text-white font-mono text-xs font-bold rounded-full">
-                          {current.projectCapacity} • {current.projectType}
-                        </span>
-                      </div>
-
-                      {/* Testimonial Quote */}
-                      <p className="text-lg sm:text-2xl font-serif-display font-medium text-slate-800 leading-relaxed mb-8">
-                        &ldquo;{current.quote}&rdquo;
-                      </p>
-                    </div>
-
-                    {/* Author & Highlight Footer */}
-                    <div className="pt-6 border-t border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                      <div>
-                        <h4 className="text-lg font-bold text-slate-900 font-serif-display">
-                          {current.author}
-                        </h4>
-                        <div className="text-xs text-slate-600 font-mono flex items-center gap-2 mt-0.5">
-                          <span>{current.role}</span>
-                          <span>•</span>
-                          <span className="font-bold text-[#707B00]">{current.company}</span>
-                        </div>
-                      </div>
-
-                      <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#D4E012]/20 border border-[#D4E012]/50 text-[#707B00] font-mono text-xs font-bold rounded-xl shrink-0">
-                        <CheckCircle2 className="w-4 h-4 text-[#16A34A]" />
-                        <span>{current.highlightMetric}</span>
-                      </div>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-
-                {/* Slider Controls */}
-                <div className="flex items-center gap-3 mt-8 pt-4 border-t border-slate-100">
-                  <button
-                    onClick={prevTestimonial}
-                    className="w-10 h-10 rounded-full border border-slate-300 hover:border-[#707B00] bg-slate-50 hover:bg-white flex items-center justify-center text-slate-700 transition-colors cursor-pointer"
-                    aria-label="Previous Testimonial"
-                  >
-                    <ChevronLeft className="w-5 h-5" />
-                  </button>
-                  <button
-                    onClick={nextTestimonial}
-                    className="w-10 h-10 rounded-full border border-slate-300 hover:border-[#707B00] bg-slate-50 hover:bg-white flex items-center justify-center text-slate-700 transition-colors cursor-pointer"
-                    aria-label="Next Testimonial"
-                  >
-                    <ChevronRight className="w-5 h-5" />
-                  </button>
-                  <span className="text-xs font-mono text-slate-500 font-bold ml-2">
-                    0{currentIndex + 1} / 0{testimonials.length}
+        {/* Continuous Motion Track (Moving Left to Right) */}
+        <motion.div
+          animate={{ x: isPaused ? undefined : ["-50%", "0%"] }}
+          transition={{
+            x: {
+              repeat: Infinity,
+              repeatType: "loop",
+              duration: 35,
+              ease: "linear",
+            },
+          }}
+          className="flex gap-6 w-max cursor-grab active:cursor-grabbing"
+        >
+          {marqueeItems.map((item, idx) => (
+            <div
+              key={`${item.id}-${idx}`}
+              className="w-[340px] sm:w-[420px] shrink-0 bg-white rounded-3xl p-7 border border-slate-200/90 shadow-xl shadow-slate-200/50 hover:border-[#D4E012] hover:shadow-2xl transition-all duration-300 flex flex-col justify-between relative group"
+            >
+              <div>
+                {/* Rating & Location Tag */}
+                <div className="flex items-center justify-between gap-2 mb-5">
+                  <div className="flex items-center gap-1">
+                    {[...Array(item.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-[#EAB308] text-[#EAB308]" />
+                    ))}
+                  </div>
+                  <span className="px-3 py-1 bg-slate-100 border border-slate-200/90 text-slate-600 font-mono text-[10px] font-bold rounded-full tracking-wider uppercase">
+                    {item.location}
                   </span>
                 </div>
+
+                {/* Quote */}
+                <p className="text-sm sm:text-base font-serif-display font-medium text-slate-800 leading-relaxed mb-6 line-clamp-4">
+                  &ldquo;{item.quote}&rdquo;
+                </p>
               </div>
-            </ScrollReveal>
-          </div>
 
-          {/* Testimonial List Grid (Right Column) */}
-          <div className="lg:col-span-4 flex flex-col justify-between gap-4">
-            {testimonials.map((item, idx) => {
-              const isSelected = idx === currentIndex;
-              return (
-                <motion.div
-                  key={item.id}
-                  onClick={() => setCurrentIndex(idx)}
-                  initial={{ opacity: 0, x: 60 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: false, amount: 0.2 }}
-                  transition={{ delay: idx * 0.1, duration: 0.6 }}
-                  whileHover={{ x: -4 }}
-                  className={`p-5 rounded-2xl border transition-all cursor-pointer ${
-                    isSelected
-                      ? "bg-slate-900 text-white border-slate-900 shadow-xl"
-                      : "bg-white text-slate-800 border-slate-200 hover:border-[#D4E012]"
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <span
-                      className={`text-[10px] font-mono font-bold uppercase tracking-wider ${
-                        isSelected ? "text-[#D4E012]" : "text-[#707B00]"
-                      }`}
-                    >
-                      {item.company}
-                    </span>
-                    <span
-                      className={`text-[10px] font-mono px-2 py-0.5 rounded ${
-                        isSelected ? "bg-white/10 text-slate-300" : "bg-slate-100 text-slate-600"
-                      }`}
-                    >
-                      {item.location}
-                    </span>
-                  </div>
-
-                  <h5 className="text-xs font-bold line-clamp-1 mb-1">{item.author}</h5>
-                  <p
-                    className={`text-[11px] line-clamp-2 leading-relaxed ${
-                      isSelected ? "text-slate-300" : "text-slate-600"
-                    }`}
-                  >
-                    {item.quote}
+              {/* Author & Footer */}
+              <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+                <div>
+                  <h4 className="text-sm font-bold text-slate-900 font-serif-display group-hover:text-[#707B00] transition-colors">
+                    {item.author}
+                  </h4>
+                  <p className="text-[11px] text-slate-500 font-mono mt-0.5">
+                    {item.role} • <span className="font-bold text-[#707B00]">{item.company}</span>
                   </p>
-                </motion.div>
-              );
-            })}
+                </div>
+
+                <div className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#D4E012]/20 border border-[#D4E012]/50 text-[#707B00] font-mono text-[10px] font-bold rounded-xl shrink-0">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#16A34A]" />
+                  <span>{item.highlightMetric}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Section CTA Button */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <ScrollReveal direction="up" distance={30} delay={0.25}>
+          <div className="mt-14 text-center">
+            <Link
+              href="/insights"
+              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"
+            >
+              <span>Read More Insights & Stories</span>
+              <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

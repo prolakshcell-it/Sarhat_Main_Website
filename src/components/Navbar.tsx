@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Menu, X, ChevronDown, FolderKanban, MapPin } from "lucide-react";
+import { ArrowUpRight, Menu, X, ChevronDown, FolderKanban, MapPin, Truck, Wrench, Handshake } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -15,6 +15,8 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [projectsDropdownOpen, setProjectsDropdownOpen] = useState(false);
   const [mobileProjectsOpen, setMobileProjectsOpen] = useState(false);
+  const [partnersDropdownOpen, setPartnersDropdownOpen] = useState(false);
+  const [mobilePartnersOpen, setMobilePartnersOpen] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
 
   // Dynamic related words that rotate continuously in logo
@@ -193,14 +195,87 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
               <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#D4E012] transition-all duration-300 group-hover:w-full"></span>
             </Link>
 
-            {/* 4. PARTNERS */}
-            <Link
-              href="/#partners"
-              className="relative py-1 hover:text-[#D4E012] transition-colors duration-200 group whitespace-nowrap"
+            {/* 4. PARTNERS (Dropdown: Supply, Execution & Project Partnerships) */}
+            <div
+              className="relative py-1 group cursor-pointer"
+              onMouseEnter={() => setPartnersDropdownOpen(true)}
+              onMouseLeave={() => setPartnersDropdownOpen(false)}
             >
-              PARTNERS
+              <div
+                className="flex items-center gap-1.5 hover:text-[#D4E012] transition-colors duration-200 whitespace-nowrap"
+              >
+                <span>PARTNERS</span>
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${partnersDropdownOpen ? "rotate-180 text-[#D4E012]" : ""}`} />
+              </div>
               <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#D4E012] transition-all duration-300 group-hover:w-full"></span>
-            </Link>
+
+              {/* Partners Dropdown Panel */}
+              <AnimatePresence>
+                {partnersDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 mt-2 w-64 bg-black border border-neutral-800 rounded-2xl shadow-2xl p-2 z-50 overflow-hidden"
+                  >
+                    {/* a) Supply Partners */}
+                    <Link
+                      href="/contact?type=vendor"
+                      className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-[#D4E012]/15 hover:text-[#D4E012] transition-all group/item"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-slate-800/80 border border-slate-700 flex items-center justify-center shrink-0 group-hover/item:border-[#D4E012]/50 group-hover/item:bg-[#D4E012]/20">
+                        <Truck className="w-4 h-4 text-slate-300 group-hover/item:text-[#D4E012]" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold uppercase tracking-wider text-white group-hover/item:text-[#D4E012]">
+                          SUPPLY PARTNERS
+                        </div>
+                        <div className="text-[9px] text-slate-400 font-light normal-case">
+                          Register as a vendor
+                        </div>
+                      </div>
+                    </Link>
+
+                    {/* b) Execution Partners */}
+                    <Link
+                      href="/contact?type=contractor"
+                      className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-[#D4E012]/15 hover:text-[#D4E012] transition-all group/item mt-1"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-slate-800/80 border border-slate-700 flex items-center justify-center shrink-0 group-hover/item:border-[#D4E012]/50 group-hover/item:bg-[#D4E012]/20">
+                        <Wrench className="w-4 h-4 text-slate-300 group-hover/item:text-[#D4E012]" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold uppercase tracking-wider text-white group-hover/item:text-[#D4E012]">
+                          EXECUTION PARTNERS
+                        </div>
+                        <div className="text-[9px] text-slate-400 font-light normal-case">
+                          Register as a contractor
+                        </div>
+                      </div>
+                    </Link>
+
+                    {/* c) Project Partnerships */}
+                    <Link
+                      href="/contact?type=partnership"
+                      className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-[#D4E012]/15 hover:text-[#D4E012] transition-all group/item mt-1"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-slate-800/80 border border-slate-700 flex items-center justify-center shrink-0 group-hover/item:border-[#D4E012]/50 group-hover/item:bg-[#D4E012]/20">
+                        <Handshake className="w-4 h-4 text-slate-300 group-hover/item:text-[#D4E012]" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold uppercase tracking-wider text-white group-hover/item:text-[#D4E012]">
+                          PROJECT PARTNERSHIPS
+                        </div>
+                        <div className="text-[9px] text-slate-400 font-light normal-case">
+                          Discuss a partnership
+                        </div>
+                      </div>
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
             {/* 5. INSIGHTS */}
             <Link
@@ -309,15 +384,55 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
                 <ArrowUpRight className="w-4 h-4 text-zinc-500" />
               </Link>
 
-              {/* Mobile Partners */}
-              <Link
-                href="/#partners"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-base sm:text-lg font-bold uppercase tracking-wider text-zinc-100 hover:text-[#5EE72D] transition-colors py-2 border-b border-zinc-900 flex justify-between items-center"
-              >
-                <span>PARTNERS</span>
-                <ArrowUpRight className="w-4 h-4 text-zinc-500" />
-              </Link>
+              {/* Mobile Partners Accordion */}
+              <div className="border-b border-zinc-900 py-2">
+                <button
+                  onClick={() => setMobilePartnersOpen(!mobilePartnersOpen)}
+                  className="w-full text-base sm:text-lg font-bold uppercase tracking-wider text-zinc-100 hover:text-[#5EE72D] transition-colors flex justify-between items-center"
+                >
+                  <span>PARTNERS</span>
+                  <ChevronDown className={`w-4 h-4 text-zinc-400 transition-transform ${mobilePartnersOpen ? "rotate-180 text-[#5EE72D]" : ""}`} />
+                </button>
+                {mobilePartnersOpen && (
+                  <div className="pl-4 pt-3 flex flex-col gap-3">
+                    <Link
+                      href="/contact?type=vendor"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-xs font-semibold uppercase tracking-wider text-zinc-200 hover:text-[#5EE72D] flex items-center gap-2.5"
+                    >
+                      <Truck className="w-4 h-4 text-[#5EE72D] shrink-0" />
+                      <div>
+                        <div className="font-bold text-white">SUPPLY PARTNERS</div>
+                        <div className="text-[10px] text-zinc-400 font-normal normal-case">Register as a vendor</div>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/contact?type=contractor"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-xs font-semibold uppercase tracking-wider text-zinc-200 hover:text-[#5EE72D] flex items-center gap-2.5"
+                    >
+                      <Wrench className="w-4 h-4 text-[#5EE72D] shrink-0" />
+                      <div>
+                        <div className="font-bold text-white">EXECUTION PARTNERS</div>
+                        <div className="text-[10px] text-zinc-400 font-normal normal-case">Register as a contractor</div>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/contact?type=partnership"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-xs font-semibold uppercase tracking-wider text-zinc-200 hover:text-[#5EE72D] flex items-center gap-2.5"
+                    >
+                      <Handshake className="w-4 h-4 text-[#5EE72D] shrink-0" />
+                      <div>
+                        <div className="font-bold text-white">PROJECT PARTNERSHIPS</div>
+                        <div className="text-[10px] text-zinc-400 font-normal normal-case">Discuss a partnership</div>
+                      </div>
+                    </Link>
+                  </div>
+                )}
+              </div>
 
               {/* Mobile Insights */}
               <Link
