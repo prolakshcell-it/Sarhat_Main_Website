@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "maplibre-gl/dist/maplibre-gl.css";
 @import "leaflet/dist/leaflet.css";
+@import "maplibre-gl/dist/maplibre-gl.css";
 
 /* MapLibre GL Custom Popup Overrides */
 .maplibregl-popup-content {
