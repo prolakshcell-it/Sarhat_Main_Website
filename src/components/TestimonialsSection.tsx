@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Quote, Star, ChevronLeft, ChevronRight, CheckCircle2, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
+import AnimatedPillBadge from "./AnimatedPillBadge";
 
 interface Testimonial {
   id: string;
@@ -103,9 +104,9 @@ export default function TestimonialsSection() {
         {/* Section Header */}
         <ScrollReveal direction="up" distance={40}>
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <div className="inline-flex items-center justify-center px-6 sm:px-8 py-2 sm:py-2.5 rounded-full bg-white border border-[#707B00]/40 text-[#707B00] font-mono font-bold text-xs sm:text-sm uppercase tracking-[0.2em] shadow-sm mb-6">
+            <AnimatedPillBadge className="mb-6">
               CLIENT & PARTNER ENDORSEMENTS
-            </div>
+            </AnimatedPillBadge>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
               Trusted by India&apos;s <br />
               <span className="text-[#6DAD45] italic relative inline-block">

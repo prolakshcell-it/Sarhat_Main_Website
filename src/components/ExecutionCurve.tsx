@@ -19,6 +19,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
+import AnimatedPillBadge from "./AnimatedPillBadge";
 
 interface Phase {
   id: string;
@@ -169,10 +170,9 @@ export default function ExecutionCurve() {
         {/* Header Badge & Editorial Title matching previous content */}
         <ScrollReveal direction="up" distance={35}>
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900 border border-[#D4E012]/30 text-[11px] font-mono font-bold tracking-widest text-[#D4E012] uppercase mb-4 shadow-sm backdrop-blur-md">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#D4E012] animate-ping shadow-[0_0_8px_#D4E012]"></span>
+            <AnimatedPillBadge darkBg className="mb-6">
               THE CURVE OF EXECUTION
-            </div>
+            </AnimatedPillBadge>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-4">
               A project journey <br />
               <span className="text-[#D4E012] relative inline-block">
@@ -279,11 +279,11 @@ export default function ExecutionCurve() {
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.85, y: -10 }}
                         transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                        className={`hidden sm:block absolute z-50 w-64 p-2.5 bg-slate-900/95 border-2 rounded-2xl backdrop-blur-2xl shadow-[0_0_40px_rgba(0,0,0,0.95)] pointer-events-auto ${
+                        className={`hidden lg:block absolute z-50 w-60 p-2.5 bg-slate-900/95 border-2 rounded-2xl backdrop-blur-2xl shadow-[0_0_40px_rgba(0,0,0,0.95)] pointer-events-auto ${
                           phase.angle === -90
-                            ? "top-full mt-3 left-1/2 -translate-x-1/2"
+                            ? "bottom-full mb-4 left-1/2 -translate-x-1/2"
                             : phase.angle === 90
-                            ? "bottom-full mb-3 left-1/2 -translate-x-1/2"
+                            ? "top-full mt-4 left-1/2 -translate-x-1/2"
                             : phase.angle > -90 && phase.angle < 90
                             ? "left-full ml-4 top-1/2 -translate-y-1/2"
                             : "right-full mr-4 top-1/2 -translate-y-1/2"

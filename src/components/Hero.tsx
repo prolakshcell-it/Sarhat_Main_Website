@@ -2,8 +2,9 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
-import { ChevronDown, ArrowDown } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import Image from "next/image";
+import ScrollIndicator from "./ScrollIndicator";
 
 interface HeroProps {
   onOpenQuote: () => void;
@@ -144,29 +145,7 @@ export default function Hero({ onOpenQuote }: HeroProps) {
       </motion.div>
 
       {/* Bottom Floating Info Bar (Fades out seamlessly on scroll) */}
-      <motion.div
-        style={{ opacity: contentOpacity, filter: contentFilter }}
-        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-8 sm:pb-12 will-change-transform"
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ delay: 0.9, duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col items-center justify-center text-center"
-        >
-          {/* Small Animated Mouse Scroll Indicator */}
-          <a href="#about" aria-label="Explore About Section" className="flex flex-col items-center gap-1 cursor-pointer group">
-            <div className="w-4 h-7 sm:w-5 sm:h-8 rounded-full border-2 border-white/50 group-hover:border-[#D4E012] flex justify-center pt-1.5 backdrop-blur-sm shadow-[0_4px_12px_rgba(0,0,0,0.5)] transition-colors">
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-                className="w-1 h-1.5 rounded-full bg-[#D4E012] shadow-[0_0_8px_#D4E012]"
-              />
-            </div>
-            <ChevronDown className="w-3.5 h-3.5 text-[#D4E012] animate-bounce -mt-0.5" />
-          </a>
-        </motion.div>
-      </motion.div>
+      <ScrollIndicator targetId="about" opacity={contentOpacity} filter={contentFilter} />
     </section>
   );
 }

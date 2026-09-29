@@ -1,13 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import SmoothScroll from "@/components/SmoothScroll";
 import { ArrowUpRight, X, Clock, Calendar, Share2, BookOpen } from "lucide-react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
+import ScrollIndicator from "@/components/ScrollIndicator";
 
 interface Article {
   id: string;
@@ -131,66 +133,111 @@ const articles: Article[] = [
 export default function InsightsPage() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+  const containerRef = useRef<HTMLElement>(null);
+
+  // Parallax & Scroll Fade-out Tracking
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const bgScale = useTransform(scrollYProgress, [0, 0.8], [1.03, 1.15]);
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.2]);
+  const bgDim = useTransform(scrollYProgress, [0, 0.5], [0.3, 0.85]);
+
+  const contentY = useTransform(scrollYProgress, [0, 0.3], ["0px", "-60px"]);
+  const contentScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.95]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+  const contentFilter = useTransform(scrollYProgress, [0, 0.25], ["blur(0px)", "blur(10px)"]);
 
   return (
-    <main className="min-h-screen bg-[#F8FAF8] text-[#0F172A] selection:bg-[#D4E012] selection:text-black relative overflow-x-hidden font-sans-ui">
-      {/* Floating Transparent Navbar */}
-      <Navbar onOpenQuote={() => setQuoteModalOpen(true)} />
+    <SmoothScroll>
+      <main className="min-h-screen bg-[#F8FAF8] text-[#0F172A] selection:bg-[#D4E012] selection:text-black relative overflow-x-clip font-sans-ui">
+        {/* Floating Transparent Navbar */}
+        <Navbar onOpenQuote={() => setQuoteModalOpen(true)} />
 
-      {/* ------------------------------------------------------------- */}
-      {/* HERO SECTION */}
-      {/* ------------------------------------------------------------- */}
-      <section className="relative min-h-screen w-full flex items-center pt-28 pb-16 overflow-hidden z-10 border-b border-neutral-900 bg-black select-none">
-        {/* Background Image Layer */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/hero-solar.jpg"
-            alt="Sarhat Energy Insights Background"
-            fill
-            priority
-            className="object-cover object-center opacity-85"
-          />
-          {/* Dark Scrim */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/65 to-black/30 pointer-events-none"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black pointer-events-none"></div>
+        {/* ------------------------------------------------------------- */}
+        {/* HERO SECTION (Sticky background & Centered Content) */}
+        {/* ------------------------------------------------------------- */}
+        <div className="sticky top-0 z-0 w-full h-screen">
+          <section ref={containerRef} className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none">
+            {/* Background Image Layer */}
+            <motion.div style={{ scale: bgScale, opacity: bgOpacity }} className="absolute inset-0 z-0 h-full w-full">
+              <Image
+                src="/images/hero-solar.jpg"
+                alt="Sarhat Energy Insights Background"
+                fill
+                priority
+                className="object-cover object-center opacity-85"
+              />
+              <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
+              {/* Dark Scrim */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90 pointer-events-none"></div>
+            </motion.div>
+
+            <motion.div
+              style={{ y: contentY, scale: contentScale, opacity: contentOpacity, filter: contentFilter }}
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-28 flex flex-col items-center text-center will-change-transform"
+            >
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: {
+                      staggerChildren: 0.12,
+                      delayChildren: 0.1,
+                    },
+                  },
+                }}
+                className="max-w-4xl flex flex-col items-center text-center"
+              >
+                {/* Title */}
+                <motion.h1
+                  variants={{
+                    hidden: { opacity: 0, y: 25 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+                  }}
+                  className="text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center max-w-4xl drop-shadow-lg"
+                >
+                  Useful thinking. <br />
+                  <span className="italic font-normal text-white">
+                    Better <span className="text-[#D4E012]">decisions.</span>
+                  </span>
+                </motion.h1>
+
+                {/* Description Paragraph */}
+                <motion.p
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+                  }}
+                  className="text-base sm:text-lg text-slate-100 font-normal max-w-2xl text-center leading-relaxed drop-shadow-md"
+                >
+                  Technical, commercial and policy content that helps developers, businesses, farmers and infrastructure leaders understand India’s energy transition.
+                </motion.p>
+              </motion.div>
+            </motion.div>
+
+            {/* Bottom Mouse Scroll Indicator */}
+            <ScrollIndicator opacity={contentOpacity} filter={contentFilter} />
+          </section>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-left">
-          <ScrollReveal direction="up" distance={30}>
-            <div className="max-w-4xl text-left">
-              {/* Tag */}
-              <div className="text-xs font-mono font-extrabold tracking-widest text-[#D4E012] uppercase mb-4 flex items-center justify-start gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#D4E012] animate-ping shadow-[0_0_8px_#D4E012]"></span>
-                NEWS & INSIGHTS
-              </div>
-
-              {/* Title */}
-              <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 max-w-4xl text-left drop-shadow-lg">
-                Useful thinking. <br />
-                <span className="text-[#D4E012] italic font-normal">Better decisions.</span>
-              </h1>
-
-              {/* Paragraph */}
-              <p className="text-lg sm:text-xl text-slate-200 font-normal max-w-3xl leading-relaxed text-left drop-shadow-md">
-                Technical, commercial and policy content that helps developers, businesses, farmers and infrastructure leaders understand India’s energy transition.
-              </p>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+      {/* Main Content Sections (Slides UP over static Hero) */}
+      <div className="relative z-10 bg-[#F8FAF8] border-t border-slate-200/60 shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
 
       {/* ------------------------------------------------------------- */}
       {/* SECTION NEWS + INSIGHTS & GRID */}
       {/* ------------------------------------------------------------- */}
-      <section className="py-24 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80">
+      <section className="py-12 sm:py-16 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Sub Header */}
           <ScrollReveal direction="up" distance={40}>
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
               <div>
-                <div className="text-xs font-mono font-semibold tracking-widest text-[#707B00] uppercase mb-3">
-                  NEWS & INSIGHTS
-                </div>
                 <h2 className="text-4xl sm:text-5xl font-serif-display font-medium text-[#0F172A] tracking-tight leading-tight max-w-2xl">
                   Built from Sarhat’s <br />
                   <span className="text-[#0F172A]">own thinking.</span>
@@ -259,6 +306,7 @@ export default function InsightsPage() {
           </ScrollReveal>
         </div>
       </section>
+      </div>
 
       {/* Footer */}
       <Footer />
@@ -345,5 +393,6 @@ export default function InsightsPage() {
         )}
       </AnimatePresence>
     </main>
+  </SmoothScroll>
   );
 }
