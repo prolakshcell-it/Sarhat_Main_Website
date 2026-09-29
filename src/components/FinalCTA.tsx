@@ -17,11 +17,6 @@ export default function FinalCTA({ onOpenQuote }: FinalCTAProps) {
 
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-10">
             <div className="max-w-2xl">
-              <div className="text-xs font-mono font-bold text-[#D4E012] uppercase tracking-widest mb-4 flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#D4E012] animate-ping shadow-[0_0_8px_#D4E012]"></span>
-                BE A PROJECT PARTNER // GET IN TOUCH
-              </div>
-
               <h2 className="text-4xl sm:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-6">
                 Have a project <br />
                 <span className="text-[#D4E012] italic relative inline-block">

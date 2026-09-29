@@ -105,6 +105,37 @@ html, body {
   background: transparent;
 }
 
+/* Custom Visible Scrollbar Utility for Navbars, Dropdowns & Modals */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 224, 18, 0.5) rgba(15, 23, 42, 0.6);
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  display: block !important;
+  width: 6px !important;
+  height: 6px !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6) !important;
+  border-radius: 9999px !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(212, 224, 18, 0.45) !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(212, 224, 18, 0.2) !important;
+  transition: background 0.2s ease !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 224, 18, 0.85) !important;
+  box-shadow: 0 0 10px rgba(212, 224, 18, 0.6) !important;
+}
+
 /* Brand Glow & Accent Effects */
 .brand-glow {
   box-shadow: 0 0 35px -5px rgba(109, 173, 69, 0.25);
@@ -204,4 +235,18 @@ html, body {
   100% {
     transform: translateX(-50%);
   }
+}
+
+/* Rotating Gradient Border Beam Animation */
+@keyframes border-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-border-spin {
+  animation: border-spin 3.5s linear infinite;
 }
