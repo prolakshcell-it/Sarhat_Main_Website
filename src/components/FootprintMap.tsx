@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { MapPin, Compass, Building2, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
+import AnimatedPillBadge from "./AnimatedPillBadge";
 import { ProjectSite } from "./MapboxInteractiveMap";
 
 // Dynamically import MapboxInteractiveMap with SSR disabled to prevent Leaflet window SSR errors
@@ -33,9 +34,9 @@ export default function FootprintMap() {
         {/* Section Header */}
         <ScrollReveal direction="up" distance={40}>
           <div className="text-center max-w-3xl mx-auto mb-10">
-            <div className="inline-flex items-center justify-center px-6 sm:px-8 py-2 sm:py-2.5 rounded-full bg-white border border-[#707B00]/40 text-[#707B00] font-mono font-bold text-xs sm:text-sm uppercase tracking-[0.2em] shadow-sm mb-6">
+            <AnimatedPillBadge className="mb-6">
               PAN-INDIA OPERATIONAL FOOTPRINT
-            </div>
+            </AnimatedPillBadge>
 
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium tracking-tight text-slate-900 leading-tight mb-6">
               Built across India. <br />

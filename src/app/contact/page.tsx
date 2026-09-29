@@ -1,19 +1,38 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import SmoothScroll from "@/components/SmoothScroll";
 import {
   ArrowUpRight,
   ChevronDown,
   CheckCircle2,
 } from "lucide-react";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
+import ScrollIndicator from "@/components/ScrollIndicator";
 
 export default function ContactPage() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
+  const containerRef = useRef<HTMLElement>(null);
+
+  // Parallax & Scroll Fade-out Tracking
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const bgScale = useTransform(scrollYProgress, [0, 0.8], [1.03, 1.15]);
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.2]);
+  const bgDim = useTransform(scrollYProgress, [0, 0.5], [0.3, 0.85]);
+
+  const contentY = useTransform(scrollYProgress, [0, 0.3], ["0px", "-60px"]);
+  const contentScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.95]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+  const contentFilter = useTransform(scrollYProgress, [0, 0.25], ["blur(0px)", "blur(10px)"]);
   const [formData, setFormData] = useState({
     name: "",
     company: "",
@@ -41,33 +60,55 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#F8FAF8] text-[#0F172A] selection:bg-[#D4E012] selection:text-black relative overflow-x-hidden font-sans-ui">
-      {/* Floating Transparent Navbar */}
-      <Navbar onOpenQuote={() => setQuoteModalOpen(true)} />
+    <SmoothScroll>
+      <main className="min-h-screen bg-[#F8FAF8] text-[#0F172A] selection:bg-[#D4E012] selection:text-black relative overflow-x-clip font-sans-ui">
+        {/* Floating Transparent Navbar */}
+        <Navbar onOpenQuote={() => setQuoteModalOpen(true)} />
 
-      {/* ------------------------------------------------------------- */}
-      {/* HERO SECTION: 05 / CONTACT */}
-      {/* ------------------------------------------------------------- */}
-      <section className="pt-36 pb-16 border-b border-slate-200/80 relative z-10 bg-[#F8FAF8]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal direction="up" distance={30}>
-            {/* Tag 05 / CONTACT */}
-            <div className="text-xs font-semibold tracking-widest text-[#707B00] uppercase mb-4 flex items-center gap-2 font-mono">
-              <span className="w-2 h-2 rounded-full bg-[#707B00] animate-ping"></span>
-              GET IN TOUCH
-            </div>
+        {/* ------------------------------------------------------------- */}
+        {/* HERO SECTION: 05 / CONTACT (Sticky background & Centered Content) */}
+        {/* ------------------------------------------------------------- */}
+        <div className="sticky top-0 z-0 w-full h-screen">
+          <section ref={containerRef} className="relative h-full w-full flex flex-col items-center justify-center overflow-hidden bg-black text-white select-none">
+            {/* Background Image Layer */}
+            <motion.div style={{ scale: bgScale, opacity: bgOpacity }} className="absolute inset-0 z-0 h-full w-full">
+              <Image
+                src="/images/hero-solar.jpg"
+                alt="Contact Sarhat Energy"
+                fill
+                priority
+                className="object-cover object-center opacity-85"
+              />
+              <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
+              {/* Soft Dark Vignette Scrim */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/50 to-black/95 pointer-events-none"></div>
+            </motion.div>
 
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-[#0F172A] leading-[1.08] mb-6 max-w-4xl">
-              Let’s build <br className="hidden sm:inline" />
-              <span>what’s next.</span>
-            </h1>
+            <motion.div
+              style={{ y: contentY, scale: contentScale, opacity: contentOpacity, filter: contentFilter }}
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 flex flex-col items-center text-center will-change-transform"
+            >
+              <ScrollReveal direction="up" distance={30}>
+                <div className="max-w-4xl flex flex-col items-center text-center">
+                  <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center max-w-4xl drop-shadow-lg">
+                    Let’s build <br className="hidden sm:inline" />
+                    <span className="text-[#D4E012] italic font-normal">what’s next.</span>
+                  </h1>
 
-            <p className="text-lg sm:text-xl text-slate-600 font-light max-w-2xl leading-relaxed">
-              Share the project, location, capacity and challenge. We will route the requirement to the right team.
-            </p>
-          </ScrollReveal>
+                  <p className="text-lg sm:text-xl text-slate-200 font-normal max-w-2xl text-center leading-relaxed drop-shadow-md">
+                    Share the project, location, capacity and challenge. We will route the requirement to the right team.
+                  </p>
+                </div>
+              </ScrollReveal>
+            </motion.div>
+
+            {/* Mouse Scroll Indicator */}
+            <ScrollIndicator opacity={contentOpacity} filter={contentFilter} />
+          </section>
         </div>
-      </section>
+
+      {/* Main Content Sections (Slides UP over static Hero) */}
+      <div className="relative z-10 bg-[#F8FAF8] border-t border-slate-200/60 shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
 
       {/* ------------------------------------------------------------- */}
       {/* MAIN SECTION: FORM & OFFICE DETAILS */}
@@ -79,10 +120,6 @@ export default function ContactPage() {
             <div className="lg:col-span-6">
               <ScrollReveal direction="left" distance={40}>
                 <div className="bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-8 shadow-sm relative">
-                  <div className="text-[11px] font-mono font-bold tracking-widest text-[#707B00] uppercase mb-6 flex items-center gap-2">
-                    START A PROJECT
-                  </div>
-
                   {submitted ? (
                     <motion.div
                       initial={{ opacity: 0, scale: 0.95 }}
@@ -190,9 +227,6 @@ export default function ContactPage() {
             <div className="lg:col-span-6 space-y-8 lg:pl-6 pt-4">
               <ScrollReveal direction="right" distance={40}>
                 <div className="space-y-6">
-                  <div className="text-[11px] font-mono font-bold tracking-widest text-[#707B00] uppercase flex items-center gap-2">
-                    OFFICE
-                  </div>
 
                   <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-[#0F172A] tracking-tight leading-tight">
                     Ghaziabad, <br />
@@ -297,6 +331,7 @@ export default function ContactPage() {
           </ScrollReveal>
         </div>
       </section>
+      </div>
 
       {/* Footer */}
       <Footer />
@@ -304,5 +339,6 @@ export default function ContactPage() {
       {/* Consultation Modal */}
       <QuoteModal isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} />
     </main>
+  </SmoothScroll>
   );
 }

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, HelpCircle, MessageSquare, ArrowUpRight, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
+import AnimatedPillBadge from "./AnimatedPillBadge";
 
 interface FAQItem {
   id: string;
@@ -76,9 +77,9 @@ export default function FAQSection() {
         {/* Section Header */}
         <ScrollReveal direction="up" distance={40}>
           <div className="text-center max-w-3xl mx-auto mb-10">
-            <div className="inline-flex items-center justify-center px-6 sm:px-8 py-2 sm:py-2.5 rounded-full bg-white border border-[#707B00]/40 text-[#707B00] font-mono font-bold text-xs sm:text-sm uppercase tracking-[0.2em] shadow-sm mb-2">
+            <AnimatedPillBadge className="mb-2">
               FREQUENTLY ASKED QUESTIONS
-            </div>
+            </AnimatedPillBadge>
           </div>
         </ScrollReveal>
 

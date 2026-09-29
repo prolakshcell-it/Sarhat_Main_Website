@@ -41,7 +41,7 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${montserrat.variable} dark scroll-smooth antialiased`}
     >
-      <body className="bg-black text-white font-sans-ui selection:bg-[#6DAD45] selection:text-black min-h-screen overflow-x-hidden">
+      <body className="bg-black text-white font-sans-ui selection:bg-[#6DAD45] selection:text-black min-h-screen overflow-x-clip">
         {children}
       </body>
     </html>
