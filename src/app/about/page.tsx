@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import SmoothScroll from "@/components/SmoothScroll";
 import {
@@ -92,7 +92,7 @@ export default function AboutPage() {
     },
   ];
 
-  const [activeValueIndex, setActiveValueIndex] = useState<number>(1);
+  const [activeValueIndex, setActiveValueIndex] = useState<number>(0);
 
   const coreValues = [
     {
@@ -120,6 +120,14 @@ export default function AboutPage() {
       icon: Leaf,
     },
   ];
+
+  // Auto-rotation loop for Our Values circles without needing hover/click
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveValueIndex((prev) => (prev + 1) % coreValues.length);
+    }, 3200);
+    return () => clearInterval(interval);
+  }, [coreValues.length]);
 
   const handlePlayClick = () => {
     if (videoRef.current) {
@@ -215,7 +223,7 @@ export default function AboutPage() {
                     hidden: { opacity: 0, y: 20 },
                     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
                   }}
-                  className="text-base sm:text-lg text-slate-100 font-normal max-w-2xl text-center leading-relaxed drop-shadow-md"
+                  className="text-base sm:text-lg text-slate-100 font-normal max-w-5xl text-center leading-relaxed drop-shadow-md"
                 >
                   We bring people, engineering and execution together to turn clean–energy and infrastructure ideas into practical projects that create value for businesses, communities and India.
                 </motion.p>
@@ -306,7 +314,16 @@ export default function AboutPage() {
 
                     {/* Long Editorial Paragraph */}
                     <p className="text-slate-600 font-normal text-base sm:text-lg leading-relaxed text-justify">
-                      Sarhat is an integrated clean energy infrastructure company delivering end-to-end solutions across Engineering, Procurement &amp; Construction (EPC), Project Management Consultancy (PMC), and Operations &amp; Maintenance (O&amp;M). Our expertise spans Solar Power, Battery Energy Storage Systems (BESS), Wind Energy, and Agrivoltaics Projects, supporting projects from concept and engineering through commissioning and long-term asset management. Driven by innovation and execution excellence, Sarhat Infra is expanding into Green Hydrogen and next-generation energy technologies to accelerate the transition towards a sustainable, resilient, and low-carbon energy future.
+                      Sarhat Energy is India’s emerging clean-energy EPCM partner, combining
+breakthrough solar technologies with disciplined project execution for
+residential, commercial, industrial, institutional and solar-park clients. From
+detailed engineering to installation, commissioning and long-term
+maintenance, we stay with every project - turning rooftops and open land into
+reliable, revenue-generating energy assets.
+Our Transmission & Sub-Station Division extends that expertise to the grid
+itself, delivering high-voltage lines and sub-stations up to 400 kV, while our
+infrastructure arm builds the roads, bridges and buildings that projects
+depend on.
                     </p>
                   </ScrollReveal>
                 </div>
@@ -433,28 +450,33 @@ export default function AboutPage() {
           {/* ------------------------------------------------------------- */}
           {/* 04.5 / OUR CORE VALUES SECTION (INTERCONNECTED CIRCLES REFERENCE DESIGN) */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-28 bg-[#09120B] border-b border-slate-800/90 relative z-10 text-white overflow-hidden select-none">
-            {/* Soft Radial Ambient Yellow Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[550px] bg-[#D4E012]/10 rounded-full blur-[140px] pointer-events-none" />
+          <section className="py-28 bg-[#070D08] border-b border-slate-800/90 relative z-10 text-white overflow-hidden select-none">
+            {/* Dynamic Radial Ambient Spotlight shifting with active index */}
+            <div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-gradient-to-tr from-[#D4E012]/15 via-[#5EE72D]/10 to-transparent rounded-full blur-[150px] pointer-events-none transition-all duration-700"
+            />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <ScrollReveal direction="up" distance={30}>
-                {/* Pill Tag (Matching Reference Image) */}
+                {/* Website Brand Pill Badge */}
                 <div className="flex justify-center mb-4">
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D4E012]/15 border border-[#D4E012]/40 text-[#D4E012] text-xs font-mono font-bold uppercase tracking-widest backdrop-blur-md">
-                    <span className="w-2.5 h-2.5 rounded-sm bg-[#D4E012] shadow-[0_0_10px_#D4E012]" />
-                    <span>OUR VALUES</span>
-                  </div>
+                  <AnimatedPillBadge className="mb-2">
+                    Our Core Values
+                  </AnimatedPillBadge>
                 </div>
 
-                {/* Headline (Matching Reference Image) */}
-                <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight text-center max-w-4xl mx-auto leading-[1.12] mb-16 drop-shadow-lg">
+                {/* Main Headline (2 lines website style) */}
+                <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-bold text-white tracking-tight text-center max-w-4xl mx-auto leading-tight mb-4 drop-shadow-lg">
                   Engineering Excellence for the <br />
                   <span className="text-[#D4E012] italic font-normal">Net-Zero Era</span>
                 </h2>
+
+                <p className="text-base sm:text-lg text-slate-300 font-normal max-w-3xl text-center leading-relaxed mx-auto mb-14 drop-shadow-md">
+                  Our foundational execution principles driving engineering quality, site safety, and sustainable impact across India.
+                </p>
               </ScrollReveal>
 
-              {/* 3 Interconnected Overlapping Circles Container (Matching Reference Image) */}
+              {/* 3 Interconnected Overlapping Circles Container */}
               <ScrollReveal direction="up" distance={40} delay={0.15}>
                 <div className="relative max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-6 md:gap-0 my-6">
                   {coreValues.map((item, index) => {
@@ -464,47 +486,80 @@ export default function AboutPage() {
                     return (
                       <motion.div
                         key={item.id}
+                        onClick={() => setActiveValueIndex(index)}
                         onMouseEnter={() => setActiveValueIndex(index)}
-                        whileHover={{ scale: 1.06 }}
+                        whileHover={{ scale: 1.07 }}
                         transition={{ duration: 0.35, ease: "easeOut" }}
-                        className={`relative w-[300px] h-[300px] sm:w-[340px] sm:h-[340px] lg:w-[380px] lg:h-[380px] rounded-full p-7 sm:p-10 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-500 backdrop-blur-2xl ${index > 0 ? "md:-ml-10 lg:-ml-14" : ""
-                          } ${isActive
-                            ? "bg-slate-950/95 border-2 border-[#D4E012] shadow-[0_0_50px_rgba(212,224,18,0.35)] z-30 scale-105"
-                            : "bg-slate-950/65 border border-white/20 hover:border-[#D4E012]/70 hover:bg-slate-950/85 z-10 opacity-90 hover:opacity-100"
-                          }`}
+                        className={`relative w-[300px] h-[300px] sm:w-[340px] sm:h-[340px] lg:w-[385px] lg:h-[385px] rounded-full p-7 sm:p-10 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-500 backdrop-blur-2xl ${
+                          index > 0 ? "md:-ml-10 lg:-ml-14" : ""
+                        } ${
+                          isActive
+                            ? "bg-slate-950/95 border-2 border-[#D4E012] shadow-[0_0_60px_rgba(212,224,18,0.45)] z-30 scale-105"
+                            : "bg-slate-950/65 border border-white/20 hover:border-[#D4E012]/70 hover:bg-slate-950/85 z-10 opacity-85 hover:opacity-100"
+                        }`}
                       >
-                        {/* Glowing Arc Segment Ring on Active Circle (Matching Reference Image) */}
+                        {/* Double Spinning Arc Rings on Active Circle */}
                         {isActive && (
-                          <svg
-                            className="absolute inset-0 w-full h-full pointer-events-none animate-spin"
-                            style={{ animationDuration: "14s" }}
-                            viewBox="0 0 100 100"
-                          >
-                            <circle
-                              cx="50"
-                              cy="50"
-                              r="48.5"
-                              fill="none"
-                              stroke="#D4E012"
-                              strokeWidth="1.5"
-                              strokeDasharray="35 125"
-                              className="opacity-90"
-                            />
-                          </svg>
+                          <>
+                            <svg
+                              className="absolute inset-0 w-full h-full pointer-events-none animate-spin origin-center"
+                              style={{ animationDuration: "12s" }}
+                              viewBox="0 0 100 100"
+                            >
+                              <circle
+                                cx="50"
+                                cy="50"
+                                r="48.5"
+                                fill="none"
+                                stroke="#D4E012"
+                                strokeWidth="1.8"
+                                strokeDasharray="40 140"
+                                className="opacity-95"
+                              />
+                            </svg>
+                            <svg
+                              className="absolute inset-0 w-full h-full pointer-events-none origin-center"
+                              style={{ animation: "spin 8s linear infinite reverse" }}
+                              viewBox="0 0 100 100"
+                            >
+                              <circle
+                                cx="50"
+                                cy="50"
+                                r="46"
+                                fill="none"
+                                stroke="#5EE72D"
+                                strokeWidth="1.2"
+                                strokeDasharray="25 110"
+                                className="opacity-70"
+                              />
+                            </svg>
+                          </>
                         )}
 
-                        {/* Top Icon Badge (Yellow Circle with Icon) */}
+                        {/* Top Number Tag */}
+                        <span
+                          className={`absolute top-6 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border transition-all ${
+                            isActive
+                              ? "bg-[#D4E012] text-slate-950 border-[#D4E012] shadow-sm"
+                              : "bg-slate-900/80 text-slate-400 border-white/10"
+                          }`}
+                        >
+                          VALUE {item.num}
+                        </span>
+
+                        {/* Top Icon Badge */}
                         <div
-                          className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mb-5 shadow-lg transition-all duration-300 ${isActive
-                              ? "bg-[#D4E012] text-slate-950 shadow-[0_0_22px_rgba(212,224,18,0.6)] scale-110"
+                          className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mt-4 mb-4 shadow-lg transition-all duration-300 ${
+                            isActive
+                              ? "bg-[#D4E012] text-slate-950 shadow-[0_0_25px_rgba(212,224,18,0.6)] scale-110"
                               : "bg-[#D4E012]/20 border border-[#D4E012]/50 text-[#D4E012]"
-                            }`}
+                          }`}
                         >
                           <IconComp className="w-7 h-7 text-slate-950 stroke-[2.2]" />
                         </div>
 
                         {/* Title */}
-                        <h3 className="text-2xl sm:text-3xl font-serif-display font-bold text-white mb-3 tracking-tight">
+                        <h3 className="text-2xl sm:text-3xl font-serif-display font-bold text-white mb-2 tracking-tight">
                           {item.title}
                         </h3>
 
@@ -515,6 +570,22 @@ export default function AboutPage() {
                       </motion.div>
                     );
                   })}
+                </div>
+
+                {/* Auto-Rotation Progress Indicator Dots */}
+                <div className="flex items-center justify-center gap-2 mt-8">
+                  {coreValues.map((v, i) => (
+                    <button
+                      key={v.id}
+                      onClick={() => setActiveValueIndex(i)}
+                      className={`h-2.5 rounded-full transition-all duration-500 ${
+                        activeValueIndex === i
+                          ? "w-8 bg-[#D4E012] shadow-[0_0_12px_#D4E012]"
+                          : "w-2.5 bg-slate-700 hover:bg-slate-500"
+                      }`}
+                      title={`Jump to ${v.title}`}
+                    />
+                  ))}
                 </div>
               </ScrollReveal>
             </div>

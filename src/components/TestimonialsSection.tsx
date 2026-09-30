@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Quote, Star, ChevronLeft, ChevronRight, CheckCircle2, ArrowRight } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight, CheckCircle2, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
 import AnimatedPillBadge from "./AnimatedPillBadge";
@@ -89,10 +89,43 @@ const testimonials: Testimonial[] = [
 ];
 
 export default function TestimonialsSection() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Repeat items for seamless infinite continuous scroll loop
-  const marqueeItems = [...testimonials, ...testimonials, ...testimonials];
+  // Automatic Left-to-Right Auto-scroll with loop & hover pause
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      if (scrollContainerRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+        if (scrollLeft + clientWidth >= scrollWidth - 30) {
+          scrollContainerRef.current.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          scrollContainerRef.current.scrollBy({ left: 430, behavior: "smooth" });
+        }
+      }
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const handlePrev = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -430, behavior: "smooth" });
+    }
+  };
+
+  const handleNext = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      if (scrollLeft + clientWidth >= scrollWidth - 30) {
+        scrollContainerRef.current.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        scrollContainerRef.current.scrollBy({ left: 430, behavior: "smooth" });
+      }
+    }
+  };
 
   return (
     <section id="testimonials" className="py-24 sm:py-28 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden select-none">
@@ -101,64 +134,67 @@ export default function TestimonialsSection() {
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#6DAD45]/10 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
+        {/* Section Header & Single Set of Navigation Controls */}
         <ScrollReveal direction="up" distance={40}>
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <AnimatedPillBadge className="mb-6">
-              CLIENT & PARTNER ENDORSEMENTS
-            </AnimatedPillBadge>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-              Trusted by India&apos;s <br />
-              <span className="text-[#6DAD45] italic relative inline-block">
-                Clean Energy Leaders.
-                <svg
-                  className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
-                  viewBox="0 0 100 20"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M0 15 Q 50 0 100 15"
-                    stroke="currentColor"
-                    strokeWidth="3.5"
-                    fill="transparent"
-                  />
-                </svg>
-              </span>
-            </h2>
-            <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-              Read how our turnkey EPC execution, substation engineering, and grid connectivity deliver measurable performance across India.
-            </p>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div className="max-w-2xl">
+              <AnimatedPillBadge className="mb-6">
+                CLIENT & PARTNER ENDORSEMENTS
+              </AnimatedPillBadge>
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
+                Trusted by India&apos;s <br />
+                <span className="text-[#6DAD45] italic relative inline-block">
+                  Clean Energy Leaders.
+                  <svg
+                    className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                    viewBox="0 0 100 20"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M0 15 Q 50 0 100 15"
+                      stroke="currentColor"
+                      strokeWidth="3.5"
+                      fill="transparent"
+                    />
+                  </svg>
+                </span>
+              </h2>
+            </div>
+
+            {/* Single Set of Navigation Arrows (Top Right Header) */}
+            <div className="flex items-center gap-3 shrink-0">
+              <button
+                onClick={handlePrev}
+                aria-label="Previous Testimonial"
+                className="w-12 h-12 rounded-full bg-white border-2 border-slate-200 hover:border-[#6DAD45] hover:bg-slate-900 hover:text-[#D4E012] text-slate-800 shadow-md flex items-center justify-center transition-all duration-300 transform active:scale-95 cursor-pointer group"
+              >
+                <ChevronLeft className="w-6 h-6 transition-transform group-hover:-translate-x-0.5" />
+              </button>
+
+              <button
+                onClick={handleNext}
+                aria-label="Next Testimonial"
+                className="w-12 h-12 rounded-full bg-white border-2 border-slate-200 hover:border-[#6DAD45] hover:bg-slate-900 hover:text-[#D4E012] text-slate-800 shadow-md flex items-center justify-center transition-all duration-300 transform active:scale-95 cursor-pointer group"
+              >
+                <ChevronRight className="w-6 h-6 transition-transform group-hover:translate-x-0.5" />
+              </button>
+            </div>
           </div>
         </ScrollReveal>
       </div>
 
-      {/* Horizontal Cards Slider Track (Moving Left to Right continuously) */}
-      <div
-        className="relative w-full overflow-hidden mt-4 py-4"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
-        {/* Side Gradient Fade Masks */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#F8FAF8] via-[#F8FAF8]/90 to-transparent z-20 pointer-events-none"></div>
-        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#F8FAF8] via-[#F8FAF8]/90 to-transparent z-20 pointer-events-none"></div>
-
-        {/* Continuous Motion Track (Moving Left to Right) */}
-        <motion.div
-          animate={{ x: isPaused ? undefined : ["-50%", "0%"] }}
-          transition={{
-            x: {
-              repeat: Infinity,
-              repeatType: "loop",
-              duration: 35,
-              ease: "linear",
-            },
-          }}
-          className="flex gap-6 w-max cursor-grab active:cursor-grabbing"
+      {/* Horizontal Cards Slider Track (Auto-Scrolling, Pause on Hover) */}
+      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          ref={scrollContainerRef}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          className="flex gap-6 overflow-x-auto scroll-smooth py-4 px-2 sm:px-4 snap-x scrollbar-none"
         >
-          {marqueeItems.map((item, idx) => (
+          {testimonials.map((item) => (
             <div
-              key={`${item.id}-${idx}`}
-              className="w-[340px] sm:w-[420px] shrink-0 bg-white rounded-3xl p-7 border border-slate-200/90 shadow-xl shadow-slate-200/50 hover:border-[#D4E012] hover:shadow-2xl transition-all duration-300 flex flex-col justify-between relative group"
+              key={item.id}
+              className="snap-start w-[300px] sm:w-[420px] shrink-0 bg-white rounded-3xl p-7 border border-slate-200/90 shadow-xl shadow-slate-200/50 hover:border-[#6DAD45] hover:shadow-2xl transition-all duration-300 flex flex-col justify-between relative group"
             >
               <div>
                 {/* Rating & Location Tag */}
@@ -197,7 +233,7 @@ export default function TestimonialsSection() {
               </div>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* Section CTA Button */}

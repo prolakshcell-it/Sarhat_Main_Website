@@ -23,7 +23,9 @@ import {
   Truck,
   Wrench,
   Check,
+  HardHat,
 } from "lucide-react";
+import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -36,7 +38,7 @@ export default function PartnersPage() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [activeFaqTab, setActiveFaqTab] = useState<"Partnership" | "Joining" | "Responsibilities">("Partnership");
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
-  const [selectedPartnerType, setSelectedPartnerType] = useState<string>("Solar Sales Partner");
+  const [selectedPartnerType, setSelectedPartnerType] = useState<string>("Solar Project Partner");
   const [activeOrbitNode, setActiveOrbitNode] = useState<number | null>(0);
   const containerRef = useRef<HTMLElement>(null);
 
@@ -67,7 +69,7 @@ export default function PartnersPage() {
     city: "",
     state: "",
     profession: "",
-    partnerType: "Solar Sales Partner",
+    partnerType: "Solar Project Partner",
     experience: "",
     message: "",
   });
@@ -201,7 +203,7 @@ export default function PartnersPage() {
       {
         question: "What are the types of Solar Partners at Sarhat?",
         answer:
-          "We offer three flexible partnership tracks: Solar Sales Partner (zero technical hassle, focus on lead generation & network building), Solar Project Partner (co-execution for contractors, civil engineers, & EPC firms), and Supply Partner (equipment suppliers & OEMs).",
+          "We offer flexible partnership tracks: Solar Project Partner (for sales lead generation, network building, & project co-execution) and Supply Partner (equipment suppliers & OEMs).",
       },
       {
         question: "Who can become a Solar Partner?",
@@ -216,7 +218,7 @@ export default function PartnersPage() {
       {
         question: "Do I need technical knowledge to become a partner?",
         answer:
-          "Not at all for Sales Partners! Sarhat's dedicated technical team manages site feasibility assessments, string design, single line diagrams (SLD), DISCOM approvals, procurement, and turnkey installation.",
+          "Not at all for sales and lead generation partners! Sarhat's dedicated technical team manages site feasibility assessments, string design, single line diagrams (SLD), DISCOM approvals, procurement, and turnkey installation.",
       },
     ],
     Joining: [
@@ -297,8 +299,8 @@ export default function PartnersPage() {
                   </h1>
 
                   {/* Subtitle Paragraph */}
-                  <p className="text-sm sm:text-base md:text-lg text-slate-200 font-normal max-w-2xl text-center leading-relaxed mb-6 tracking-wide drop-shadow-md">
-                    Join India&apos;s growing solar economy. Earn commissions as a Solar Sales Partner or co-execute projects as a Solar Project Partner — with Sarhat&apos;s full technical, marketing, and lead support behind you.
+                  <p className="text-sm sm:text-base md:text-lg text-slate-200 font-normal max-w-5xl text-center leading-relaxed mb-6 tracking-wide drop-shadow-md">
+                    Join India&apos;s growing solar economy. Earn commissions on lead referrals or co-execute projects as a Solar Project Partner — with Sarhat&apos;s full technical, marketing, and lead support behind you.
                   </p>
 
                   {/* Accent Yellow Underline */}
@@ -393,8 +395,8 @@ export default function PartnersPage() {
                           }}
                           onClick={() => setActiveOrbitNode(idx)}
                           className={`absolute pointer-events-auto cursor-pointer transition-all duration-300 flex items-center gap-2.5 bg-white border ${isActive
-                              ? "border-[#D4E012] ring-4 ring-[#D4E012]/30 shadow-xl scale-110 z-30"
-                              : "border-slate-200 shadow-md hover:border-[#6DAD45] hover:scale-105"
+                            ? "border-[#D4E012] ring-4 ring-[#D4E012]/30 shadow-xl scale-110 z-30"
+                            : "border-slate-200 shadow-md hover:border-[#6DAD45] hover:scale-105"
                             } rounded-full px-3.5 py-2 sm:px-4 sm:py-2.5 max-w-[160px] sm:max-w-[200px]`}
                         >
                           <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#D4E012]/20 border border-[#D4E012]/40 flex items-center justify-center shrink-0">
@@ -450,9 +452,9 @@ export default function PartnersPage() {
                 </div>
               </ScrollReveal>
 
-              {/* Cards Stack (3 Distinct Models: Sales, Project, Supply) */}
+              {/* Cards Stack (2 Flexible Models: Project Partner, Supply Partner) */}
               <div className="space-y-8">
-                {/* CARD 01: Solar Sales Partner */}
+                {/* CARD 01: Solar Project Partner */}
                 <ScrollReveal direction="up" distance={40}>
                   <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xl hover:border-[#D4E012] transition-all duration-300 p-8 sm:p-10 relative overflow-hidden group">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -461,71 +463,6 @@ export default function PartnersPage() {
                         <div className="relative flex items-center justify-center">
                           <span className="text-8xl sm:text-9xl font-serif-display font-bold text-slate-100 select-none group-hover:text-[#D4E012]/15 transition-colors">
                             01
-                          </span>
-                          <div className="absolute w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#D4E012]/20 border border-[#D4E012]/40 flex items-center justify-center shadow-md">
-                            <TrendingUp className="w-10 h-10 text-[#707B00]" />
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Middle Details */}
-                      <div className="lg:col-span-6 space-y-4">
-                        <div className="flex flex-wrap items-center gap-3">
-                          <span className="px-3 py-1 rounded-md bg-[#D4E012]/20 text-[#707B00] border border-[#D4E012]/40 font-mono font-bold text-xs uppercase tracking-wider">
-                            SALES-DRIVEN
-                          </span>
-                          <span className="text-xs text-slate-500 font-semibold uppercase tracking-wider font-mono">
-                            No Experience Needed
-                          </span>
-                        </div>
-
-                        <h3 className="text-2xl sm:text-3xl font-serif-display font-medium text-slate-900 tracking-tight">
-                          Solar Sales Partner
-                        </h3>
-
-                        <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                          Best for entrepreneurs, real estate agents, insurance advisors, and individuals with strong local networks. You identify prospects and generate leads — Sarhat&apos;s technical team handles site surveys, proposals, installation, and everything else. You earn a commission on every converted project.
-                        </p>
-                      </div>
-
-                      {/* Right Bullet Points & Action */}
-                      <div className="lg:col-span-3 space-y-6 lg:border-l lg:border-slate-100 lg:pl-8">
-                        <ul className="space-y-3">
-                          <li className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
-                            <CheckCircle2 className="w-4 h-4 text-[#6DAD45] shrink-0 mt-0.5" />
-                            <span>Earn on every converted lead</span>
-                          </li>
-                          <li className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
-                            <CheckCircle2 className="w-4 h-4 text-[#6DAD45] shrink-0 mt-0.5" />
-                            <span>No technical expertise needed</span>
-                          </li>
-                          <li className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
-                            <CheckCircle2 className="w-4 h-4 text-[#6DAD45] shrink-0 mt-0.5" />
-                            <span>Marketing &amp; pitch material provided</span>
-                          </li>
-                        </ul>
-
-                        <button
-                          onClick={() => selectPartnerTypeCard("Solar Sales Partner")}
-                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-7 py-3.5 rounded-full transition-all shadow-lg shadow-[#D4E012]/20 group/btn"
-                        >
-                          <span>Apply as Sales Partner</span>
-                          <ArrowUpRight className="w-4 h-4 text-black group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </ScrollReveal>
-
-                {/* CARD 02: Solar Project Partner */}
-                <ScrollReveal direction="up" distance={40}>
-                  <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xl hover:border-[#D4E012] transition-all duration-300 p-8 sm:p-10 relative overflow-hidden group">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                      {/* Left Number Visual */}
-                      <div className="lg:col-span-3 flex items-center justify-center">
-                        <div className="relative flex items-center justify-center">
-                          <span className="text-8xl sm:text-9xl font-serif-display font-bold text-slate-100 select-none group-hover:text-[#D4E012]/15 transition-colors">
-                            02
                           </span>
                           <div className="absolute w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#D4E012]/20 border border-[#D4E012]/40 flex items-center justify-center shadow-md">
                             <Wrench className="w-10 h-10 text-[#707B00]" />
@@ -537,10 +474,10 @@ export default function PartnersPage() {
                       <div className="lg:col-span-6 space-y-4">
                         <div className="flex flex-wrap items-center gap-3">
                           <span className="px-3 py-1 rounded-md bg-[#D4E012]/20 text-[#707B00] border border-[#D4E012]/40 font-mono font-bold text-xs uppercase tracking-wider">
-                            TECHNICAL &amp; EPC
+                            SALES &amp; EPC CO-EXECUTION
                           </span>
                           <span className="text-xs text-slate-500 font-semibold uppercase tracking-wider font-mono">
-                            Co-Execute Projects
+                            Lead Gen &amp; Project Execution
                           </span>
                         </div>
 
@@ -549,7 +486,7 @@ export default function PartnersPage() {
                         </h3>
 
                         <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                          Designed for electrical contractors, civil engineers, EPC firms, and technically skilled entrepreneurs. You co-execute solar installations alongside Sarhat&apos;s engineering teams — benefiting from shared procurement rates, engineering support, and a proven project delivery system.
+                          Designed for sales professionals, real estate agents, electrical contractors, civil engineers, and EPC firms. Whether you generate sales leads for high commissions or co-execute solar installations alongside Sarhat&apos;s engineering teams, this model offers full technical support, shared procurement rates, and flexible earnings.
                         </p>
                       </div>
 
@@ -558,11 +495,15 @@ export default function PartnersPage() {
                         <ul className="space-y-3">
                           <li className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
                             <CheckCircle2 className="w-4 h-4 text-[#6DAD45] shrink-0 mt-0.5" />
+                            <span>Earn commissions on sales leads</span>
+                          </li>
+                          <li className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
+                            <CheckCircle2 className="w-4 h-4 text-[#6DAD45] shrink-0 mt-0.5" />
                             <span>Co-execute projects with Sarhat</span>
                           </li>
                           <li className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
                             <CheckCircle2 className="w-4 h-4 text-[#6DAD45] shrink-0 mt-0.5" />
-                            <span>Access to engineering support</span>
+                            <span>Full technical &amp; marketing support</span>
                           </li>
                           <li className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
                             <CheckCircle2 className="w-4 h-4 text-[#6DAD45] shrink-0 mt-0.5" />
@@ -582,7 +523,7 @@ export default function PartnersPage() {
                   </div>
                 </ScrollReveal>
 
-                {/* CARD 03: Supply Partner (Equipment Vendors & OEMs) */}
+                {/* CARD 02: Supply Partner (Equipment Vendors & OEMs) */}
                 <ScrollReveal direction="up" distance={40}>
                   <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xl hover:border-[#D4E012] transition-all duration-300 p-8 sm:p-10 relative overflow-hidden group">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -590,7 +531,7 @@ export default function PartnersPage() {
                       <div className="lg:col-span-3 flex items-center justify-center">
                         <div className="relative flex items-center justify-center">
                           <span className="text-8xl sm:text-9xl font-serif-display font-bold text-slate-100 select-none group-hover:text-[#D4E012]/15 transition-colors">
-                            03
+                            02
                           </span>
                           <div className="absolute w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#D4E012]/20 border border-[#D4E012]/40 flex items-center justify-center shadow-md">
                             <Truck className="w-10 h-10 text-[#707B00]" />
@@ -635,13 +576,78 @@ export default function PartnersPage() {
                           </li>
                         </ul>
 
-                        <button
-                          onClick={() => selectPartnerTypeCard("Supply Partner")}
+                        <Link
+                          href="/supply-partners"
                           className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-7 py-3.5 rounded-full transition-all shadow-lg shadow-[#D4E012]/20 group/btn"
                         >
-                          <span>Register as Supply Partner</span>
+                          <span>Explore Supply Partners</span>
                           <ArrowUpRight className="w-4 h-4 text-black group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                        </button>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+
+                {/* CARD 03: Execution Contractors */}
+                <ScrollReveal direction="up" distance={40}>
+                  <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xl hover:border-[#D4E012] transition-all duration-300 p-8 sm:p-10 relative overflow-hidden group">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                      {/* Left Number Visual */}
+                      <div className="lg:col-span-3 flex items-center justify-center">
+                        <div className="relative flex items-center justify-center">
+                          <span className="text-8xl sm:text-9xl font-serif-display font-bold text-slate-100 select-none group-hover:text-[#D4E012]/15 transition-colors">
+                            03
+                          </span>
+                          <div className="absolute w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#D4E012]/20 border border-[#D4E012]/40 flex items-center justify-center shadow-md">
+                            <HardHat className="w-10 h-10 text-[#707B00]" />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Middle Details */}
+                      <div className="lg:col-span-6 space-y-4">
+                        <div className="flex flex-wrap items-center gap-3">
+                          <span className="px-3 py-1 rounded-md bg-[#D4E012]/20 text-[#707B00] border border-[#D4E012]/40 font-mono font-bold text-xs uppercase tracking-wider">
+                            SITE EXECUTION
+                          </span>
+                          <span className="text-xs text-slate-500 font-semibold uppercase tracking-wider font-mono">
+                            Empanelled Subcontractors
+                          </span>
+                        </div>
+
+                        <h3 className="text-2xl sm:text-3xl font-serif-display font-medium text-slate-900 tracking-tight">
+                          Execution Contractors
+                        </h3>
+
+                        <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                          Empanelled contractor network for civil earthworks, pile foundation casting, AC/DC electrical cabling, solar PV structure mounting, and 33kV/132kV EHV substation erection teams across India.
+                        </p>
+                      </div>
+
+                      {/* Right Bullet Points & Action */}
+                      <div className="lg:col-span-3 space-y-6 lg:border-l lg:border-slate-100 lg:pl-8">
+                        <ul className="space-y-3">
+                          <li className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
+                            <CheckCircle2 className="w-4 h-4 text-[#6DAD45] shrink-0 mt-0.5" />
+                            <span>Pan-India project bidding</span>
+                          </li>
+                          <li className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
+                            <CheckCircle2 className="w-4 h-4 text-[#6DAD45] shrink-0 mt-0.5" />
+                            <span>Timely milestone RA payouts</span>
+                          </li>
+                          <li className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
+                            <CheckCircle2 className="w-4 h-4 text-[#6DAD45] shrink-0 mt-0.5" />
+                            <span>Full site safety &amp; engineering support</span>
+                          </li>
+                        </ul>
+
+                        <Link
+                          href="/execution-contractors"
+                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-7 py-3.5 rounded-full transition-all shadow-lg shadow-[#D4E012]/20 group/btn"
+                        >
+                          <span>Explore Execution Contractors</span>
+                          <ArrowUpRight className="w-4 h-4 text-black group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -786,7 +792,7 @@ export default function PartnersPage() {
                             city: "",
                             state: "",
                             profession: "",
-                            partnerType: "Solar Sales Partner",
+                            partnerType: "Solar Project Partner",
                             experience: "",
                             message: "",
                           });
@@ -913,8 +919,7 @@ export default function PartnersPage() {
                             <option value="" disabled>
                               Partner Type *
                             </option>
-                            <option value="Solar Sales Partner">Solar Sales Partner</option>
-                            <option value="Solar Project Partner">Solar Project Partner</option>
+                            <option value="Solar Project Partner">Solar Project Partner (Sales &amp; Execution)</option>
                             <option value="Supply Partner">Supply Partner (Vendors &amp; OEMs)</option>
                             <option value="Execution Partner">Execution Partner (Contractor)</option>
                           </select>
@@ -961,14 +966,14 @@ export default function PartnersPage() {
                         <div
                           onClick={() => setIsVerified(!isVerified)}
                           className={`inline-flex items-center gap-4 border rounded-lg px-4 py-3 cursor-pointer select-none transition-all ${isVerified
-                              ? "bg-slate-900 border-slate-800 text-white"
-                              : "bg-slate-900/90 border-slate-800 text-slate-200 hover:bg-slate-900"
+                            ? "bg-slate-900 border-slate-800 text-white"
+                            : "bg-slate-900/90 border-slate-800 text-slate-200 hover:bg-slate-900"
                             }`}
                         >
                           <div
                             className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${isVerified
-                                ? "bg-[#D4E012] border-[#D4E012] text-black"
-                                : "border-slate-500 bg-slate-800"
+                              ? "bg-[#D4E012] border-[#D4E012] text-black"
+                              : "border-slate-500 bg-slate-800"
                               }`}
                           >
                             {isVerified && <Check className="w-3.5 h-3.5 stroke-[3]" />}
@@ -1036,8 +1041,8 @@ export default function PartnersPage() {
                           setOpenFaqIndex(0);
                         }}
                         className={`px-6 py-2.5 rounded-full text-xs font-extrabold tracking-wider transition-all ${activeFaqTab === tab
-                            ? "bg-gradient-to-r from-[#D4E012] to-[#5EE72D] text-black shadow-md shadow-[#D4E012]/20"
-                            : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                          ? "bg-gradient-to-r from-[#D4E012] to-[#5EE72D] text-black shadow-md shadow-[#D4E012]/20"
+                          : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                           }`}
                       >
                         {tab}

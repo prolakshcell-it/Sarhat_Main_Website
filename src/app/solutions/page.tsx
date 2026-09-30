@@ -128,7 +128,7 @@ export default function SolutionsPage() {
   // In-Depth Solution Details Breakdown (Matching reference Images 1 & 2 format)
   const detailedSolutions = [
     {
-      id: "renewable-depth",
+      id: "renewable-energy",
       title: "Renewable Energy Solutions",
       badge: "01 • RENEWABLE POWER GENERATION",
       headline:
@@ -166,7 +166,7 @@ export default function SolutionsPage() {
       ],
     },
     {
-      id: "bess-depth",
+      id: "bess-storage",
       title: "BESS & Battery Storage",
       badge: "02 • ENERGY STORAGE SYSTEMS",
       headline:
@@ -204,11 +204,11 @@ export default function SolutionsPage() {
       ],
     },
     {
-      id: "grid-depth",
+      id: "energy-infrastructure",
       title: "Energy & Grid Infrastructure",
-      badge: "03 • SUBSTATIONS & EVACUATION",
+      badge: "03 • ENERGY INFRASTRUCTURE",
       headline:
-        "Reliable power evacuation infrastructure connecting clean energy assets directly to state transmission utilities.",
+        "Reliable power energy infrastructure connecting clean energy assets directly to state transmission utilities.",
       description:
         "We engineer, construct, and commission 33kV, 132kV, and 220kV substations, transmission lines, and SCADA protection bays to ensure zero-delay DISCOM synchronization.",
       image: "/images/substation-project.jpg",
@@ -242,7 +242,7 @@ export default function SolutionsPage() {
       ],
     },
     {
-      id: "civil-depth",
+      id: "civil-infrastructure",
       title: "Civil & Industrial Infrastructure",
       badge: "04 • HEAVY CIVIL WORKS",
       headline:
@@ -421,7 +421,7 @@ export default function SolutionsPage() {
                       transition: { duration: 0.8, ease: "easeOut" },
                     },
                   }}
-                  className="text-base sm:text-lg text-slate-100 font-normal max-w-3xl text-center leading-relaxed drop-shadow-md"
+                  className="text-base sm:text-lg text-slate-100 font-normal max-w-5xl text-center leading-relaxed drop-shadow-md"
                 >
                   From the ground beneath a solar plant to the grid that carries its power, Sarhat brings engineering, civil works and on-site execution together under one connected model.
                 </motion.p>
@@ -447,7 +447,7 @@ export default function SolutionsPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-28">
               {detailedSolutions.map((sol, index) => (
                 <ScrollReveal key={sol.id}>
-                  <div className="space-y-10">
+                  <div id={sol.id} className="space-y-10 scroll-mt-32">
                     {/* Top Section Badge & Header */}
                     <AnimatedPillBadge className="mb-4">
                       {sol.badge}
@@ -581,8 +581,8 @@ export default function SolutionsPage() {
                           key={st.id}
                           onClick={() => setActiveStageIndex(idx)}
                           className={`p-3.5 rounded-2xl text-left transition-all duration-300 flex flex-col justify-between cursor-pointer border ${isActive
-                              ? "bg-gradient-to-br from-[#D4E012] to-[#5EE72D] text-black font-bold border-[#D4E012] shadow-lg shadow-[#D4E012]/20 scale-105"
-                              : "bg-[#0b1f13] text-slate-300 border-[#1a422a] hover:border-slate-300 hover:text-white"
+                            ? "bg-gradient-to-br from-[#D4E012] to-[#5EE72D] text-black font-bold border-[#D4E012] shadow-lg shadow-[#D4E012]/20 scale-105"
+                            : "bg-[#0b1f13] text-slate-300 border-[#1a422a] hover:border-slate-300 hover:text-white"
                             }`}
                         >
                           <span

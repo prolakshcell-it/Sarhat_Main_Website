@@ -32,7 +32,16 @@ export default function EPCCapabilities() {
 
               {/* Long Editorial Paragraph */}
               <p className="text-slate-600 font-normal text-base sm:text-lg leading-relaxed text-justify mb-8">
-                Sarhat is an integrated clean energy infrastructure company delivering end-to-end solutions across Engineering, Procurement &amp; Construction (EPC), Project Management Consultancy (PMC), and Operations &amp; Maintenance (O&amp;M). Our expertise spans Solar Power, Battery Energy Storage Systems (BESS), Wind Energy, and Agrivoltaics Projects, supporting projects from concept and engineering through commissioning and long-term asset management. Driven by innovation and execution excellence, Sarhat Infra is expanding into Green Hydrogen and next-generation energy technologies to accelerate the transition towards a sustainable, resilient, and low-carbon energy future.
+                Sarhat Energy is India’s emerging clean-energy EPCM partner, combining
+                breakthrough solar technologies with disciplined project execution for
+                residential, commercial, industrial, institutional and solar-park clients. From
+                detailed engineering to installation, commissioning and long-term
+                maintenance, we stay with every project - turning rooftops and open land into
+                reliable, revenue-generating energy assets.
+                Our Transmission & Sub-Station Division extends that expertise to the grid
+                itself, delivering high-voltage lines and sub-stations up to 400 kV, while our
+                infrastructure arm builds the roads, bridges and buildings that projects
+                depend on.
               </p>
 
               {/* CTA Action Button */}

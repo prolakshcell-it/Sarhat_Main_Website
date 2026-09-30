@@ -78,7 +78,7 @@ export default function MainProjectsPage() {
                 <h1 className="text-4xl sm:text-6xl font-serif-display font-medium text-white tracking-tight drop-shadow-lg text-center mb-4">
                   Our Execution <span className="text-[#D4E012] italic font-normal">Portfolio</span>
                 </h1>
-                <p className="text-slate-200 font-normal text-base sm:text-lg max-w-2xl text-center leading-relaxed drop-shadow-md mb-6">
+                <p className="text-slate-200 font-normal text-base sm:text-lg max-w-5xl text-center leading-relaxed drop-shadow-md mb-6">
                   Utility solar power plants, extra high voltage grid substations, BESS storage reserves, and PM-KUSUM agrivoltaics delivered across India.
                 </p>
 
@@ -101,7 +101,10 @@ export default function MainProjectsPage() {
         <div className="relative z-10 bg-[#F8FAF8] border-t border-slate-200/60 shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
 
         {/* Footprint Map Section */}
-        <FootprintMap />
+        <FootprintMap
+          selectedStateSlug={selectedStateSlug}
+          onSelectState={(slug) => setSelectedStateSlug(slug)}
+        />
 
         {/* State Projects Showcase Section */}
         <section id="state-portfolio-details" className="py-24 bg-white relative z-10 border-b border-slate-200/80">

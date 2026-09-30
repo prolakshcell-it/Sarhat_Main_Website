@@ -10,7 +10,6 @@ import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import SmoothScroll from "@/components/SmoothScroll";
-import FinalCTA from "@/components/FinalCTA";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 
 import {
@@ -80,13 +79,13 @@ export default function ConnectWithUsPage() {
       btnBg: "bg-blue-600 hover:bg-blue-500 text-white",
     },
     {
-      name: "X (Twitter)",
-      handle: "@SarhatEnergy",
-      url: "https://x.com/sarhatenergy",
-      description: "Real-time updates on renewable energy policy, state DISCOM grid interconnections, and clean tech discussions.",
-      icon: TwitterIcon,
-      accentBorder: "hover:border-sky-500/50",
-      btnBg: "bg-slate-900 hover:bg-slate-800 text-white border border-slate-700",
+      name: "Instagram",
+      handle: "@sarhat_infrastructure",
+      url: "https://instagram.com/sarhatenergy",
+      description: "Behind-the-scenes look at site life, safety drills, engineering teams, field exchange programs, and green culture.",
+      icon: InstagramIcon,
+      accentBorder: "hover:border-pink-500/50",
+      btnBg: "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white",
     },
     {
       name: "YouTube",
@@ -98,13 +97,13 @@ export default function ConnectWithUsPage() {
       btnBg: "bg-red-600 hover:bg-red-500 text-white",
     },
     {
-      name: "Instagram",
-      handle: "@sarhat_infrastructure",
-      url: "https://instagram.com/sarhatenergy",
-      description: "Behind-the-scenes look at site life, safety drills, engineering teams, field exchange programs, and green culture.",
-      icon: InstagramIcon,
-      accentBorder: "hover:border-pink-500/50",
-      btnBg: "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white",
+      name: "X (Twitter)",
+      handle: "@SarhatEnergy",
+      url: "https://x.com/sarhatenergy",
+      description: "Real-time updates on renewable energy policy, state DISCOM grid interconnections, and clean tech discussions.",
+      icon: TwitterIcon,
+      accentBorder: "hover:border-sky-500/50",
+      btnBg: "bg-slate-900 hover:bg-slate-800 text-white border border-slate-700",
     },
   ];
 
@@ -148,7 +147,7 @@ export default function ConnectWithUsPage() {
                     Connect With <span className="text-[#D4E012] italic font-normal">Sarhat</span>
                   </h1>
 
-                  <p className="text-base sm:text-lg text-slate-200 font-normal max-w-3xl text-center leading-relaxed mb-8 drop-shadow-md">
+                  <p className="text-base sm:text-lg text-slate-200 font-normal max-w-5xl text-center leading-relaxed mb-8 drop-shadow-md">
                     Stay connected with our execution journey across official social media channels, news updates, media press rooms, and direct communication hubs.
                   </p>
                 </div>
@@ -238,73 +237,6 @@ export default function ConnectWithUsPage() {
             </div>
           </section>
 
-          {/* ------------------------------------------------------------- */}
-          {/* SECTION 2: DIRECT CONTACT & HQ CARD */}
-          {/* ------------------------------------------------------------- */}
-          <section className="py-20 sm:py-28 bg-[#FAFBF9] border-b border-slate-200/80 relative z-10">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-              <ScrollReveal>
-                <div className="bg-slate-950 border border-slate-800 rounded-3xl p-8 sm:p-14 relative overflow-hidden shadow-2xl text-white">
-                  {/* Subtle Background Glow */}
-                  <div className="absolute top-0 right-0 w-80 h-80 bg-[#D4E012]/10 rounded-full blur-3xl pointer-events-none" />
-
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-                    <div className="lg:col-span-8 space-y-6">
-                      <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#D4E012]/15 border border-[#D4E012]/30 text-[#D4E012] text-xs font-mono font-bold uppercase tracking-wider">
-                        <Sparkles className="w-3.5 h-3.5 text-[#D4E012]" />
-                        <span>CORPORATE COMMUNICATIONS</span>
-                      </div>
-
-                      <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-white tracking-tight">
-                        Direct Enquiries & <span className="text-[#D4E012] italic font-normal">Partnerships</span>
-                      </h2>
-
-                      <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-normal max-w-2xl">
-                        Have a project proposal, vendor query, or media enquiry? Our corporate team responds promptly to all valid business communications.
-                      </p>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                        <div className="flex items-center gap-3.5 p-4 bg-slate-900/90 border border-slate-800 rounded-2xl">
-                          <div className="w-10 h-10 rounded-xl bg-[#D4E012]/15 border border-[#D4E012]/30 flex items-center justify-center text-[#D4E012] shrink-0">
-                            <Mail className="w-5 h-5" />
-                          </div>
-                          <div>
-                            <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">EMAIL ENQUIRIES</div>
-                            <div className="text-xs font-bold text-white">info@sarhatenergy.com</div>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-3.5 p-4 bg-slate-900/90 border border-slate-800 rounded-2xl">
-                          <div className="w-10 h-10 rounded-xl bg-[#5EE72D]/15 border border-[#5EE72D]/30 flex items-center justify-center text-[#5EE72D] shrink-0">
-                            <MapPin className="w-5 h-5" />
-                          </div>
-                          <div>
-                            <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">HEADQUARTERS</div>
-                            <div className="text-xs font-bold text-white">Ghaziabad, India</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="lg:col-span-4 flex justify-center">
-                      <button
-                        onClick={() => setQuoteModalOpen(true)}
-                        className="w-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-slate-950 font-extrabold text-xs uppercase tracking-widest py-4 px-6 rounded-2xl transition-all shadow-xl shadow-[#D4E012]/20 flex items-center justify-center gap-2 cursor-pointer transform hover:scale-[1.03] active:scale-[0.98]"
-                      >
-                        <MessageSquare className="w-4 h-4 text-slate-950" />
-                        <span>Send Direct Message</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </ScrollReveal>
-            </div>
-          </section>
-
-          {/* ------------------------------------------------------------- */}
-          {/* FINAL CTA SECTION */}
-          {/* ------------------------------------------------------------- */}
-          <FinalCTA onOpenQuote={() => setQuoteModalOpen(true)} />
 
         </div>
 

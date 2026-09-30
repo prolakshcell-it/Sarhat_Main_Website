@@ -137,7 +137,7 @@ export default function ContactPage() {
                     <span className="text-[#D4E012] italic font-normal">what’s next.</span>
                   </h1>
 
-                  <p className="text-lg sm:text-xl text-slate-200 font-normal max-w-2xl text-center leading-relaxed drop-shadow-md">
+                  <p className="text-lg sm:text-xl text-slate-200 font-normal max-w-5xl text-center leading-relaxed drop-shadow-md">
                     Share the project, location, capacity and challenge. We will route the requirement to the right team.
                   </p>
                 </div>

@@ -2,7 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import { RotateCcw, Plus, Minus } from "lucide-react";
-import L from "leaflet";
+import type * as LType from "leaflet";
+
+let L: typeof LType | null = null;
+if (typeof window !== "undefined") {
+  L = require("leaflet");
+}
 
 export interface SubProject {
   id: string;
@@ -548,7 +553,7 @@ export default function MapboxInteractiveMap({ onSelectSite, selectedSiteId }: M
   const MAP_ZOOM = 4.8;
 
   useEffect(() => {
-    if (!mapContainerRef.current || mapInstanceRef.current) return;
+    if (!L || !mapContainerRef.current || mapInstanceRef.current) return;
 
     // Create Leaflet Map instance with 2D Flat view, grab cursor & touchpad zoom enabled
     const map = L.map(mapContainerRef.current, {
@@ -611,21 +616,17 @@ export default function MapboxInteractiveMap({ onSelectSite, selectedSiteId }: M
             <span>${site.activeProjects} Facilities</span>
           </div>
 
-          <div class="space-y-1.5 max-h-[180px] overflow-y-auto pr-1">
-            <div class="text-[9px] font-mono text-slate-400 uppercase tracking-wider font-bold mb-1">State Client Facilities:</div>
-            ${site.subProjects.map(sp => `
-              <div class="bg-slate-950/90 p-2 rounded-xl border border-slate-800 text-[10px] text-left">
-                <div class="flex items-center justify-between gap-1 font-bold text-white">
-                  <span class="truncate">${sp.client}</span>
-                  <span class="text-[#D4E012] font-mono shrink-0">${sp.capacityMW}</span>
-                </div>
-                <div class="text-slate-300 text-[9.5px] mt-0.5 flex items-center justify-between">
-                  <span>📍 ${sp.location}</span>
-                  <span class="text-slate-400 font-mono">${sp.scheme}</span>
-                </div>
-                ${sp.clientAddress ? `<div class="text-slate-400 text-[8.5px] font-light leading-tight mt-1 pt-1 border-t border-slate-800/80">${sp.clientAddress}</div>` : ''}
-              </div>
-            `).join('')}
+          <div class="mt-2 pt-2 border-t border-slate-800 text-center">
+            <p class="text-[10px] font-mono text-slate-300 font-medium mb-2">
+              ${site.subProjects.length} Facilities & Solar Parks in ${site.state}
+            </p>
+            <button
+              onclick="const el = document.getElementById('footprint-roster-table'); if(el) el.scrollIntoView({behavior:'smooth'});"
+              class="w-full inline-flex items-center justify-center gap-1.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] text-black font-mono font-extrabold text-xs uppercase tracking-wider py-2.5 px-4 rounded-xl shadow-md hover:brightness-110 transition-all cursor-pointer"
+            >
+              <span>View More (${site.subProjects.length} Facilities)</span>
+              <span>&rarr;</span>
+            </button>
           </div>
         </div>
       `;

@@ -81,13 +81,12 @@ interface MegaMenuData {
 export default function Navbar({ onOpenQuote }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<"solutions" | "projects" | "partners" | "about" | null>(null);
+  const [activeDropdown, setActiveDropdown] = useState<"solutions" | "partners" | "about" | null>(null);
   const [activeItemIndex, setActiveItemIndex] = useState<number>(0);
   const [wordIndex, setWordIndex] = useState(0);
 
   // Mobile Accordion states
   const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
-  const [mobileProjectsOpen, setMobileProjectsOpen] = useState(false);
   const [mobilePartnersOpen, setMobilePartnersOpen] = useState(false);
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
 
@@ -113,7 +112,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
   }, [rotatingWords.length]);
 
   // Mega Menu Content Definition matching website color palette & exact layout
-  const megaMenuData: Record<"solutions" | "projects" | "partners" | "about", MegaMenuData> = {
+  const megaMenuData: Record<"solutions" | "partners" | "about", MegaMenuData> = {
     solutions: {
       tag: "SERVICES & CAPABILITIES",
       bottomText: "From design and procurement to EPCM, PMC, and long-term asset O&M.",
@@ -127,7 +126,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
             "Providing precision technical blueprints, turnkey EPC execution, and long-term asset management for utility-scale solar parks, commercial & industrial rooftop installations, and wind energy farms.",
           specs: ["Solar Parks", "Rooftop & C&I", "Comprehensive O&M", "Wind Farms"],
           icon: Sun,
-          href: "/solutions",
+          href: "/solutions#renewable-energy",
         },
         {
           id: "bess-storage",
@@ -137,7 +136,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
             "Utility-scale containerized Battery Energy Storage Systems (BESS), solar + storage hybrid integration, emergency backup power, and peak-load shaving to optimize power dispatch.",
           specs: ["Containerized BESS", "Solar + Storage Hybrids", "Backup Power", "Peak-Load Shaving"],
           icon: Battery,
-          href: "/solutions",
+          href: "/solutions#bess-storage",
         },
         {
           id: "energy-infrastructure",
@@ -147,7 +146,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
             "High-voltage and low-voltage electrical systems, AIS/GIS substations, power evacuation line corridors, relay protection SCADA, and seamless DISCOM grid connectivity.",
           specs: ["HT/LT Systems", "Substations (GIS/AIS)", "Evacuation Lines", "Protection & SCADA"],
           icon: Zap,
-          href: "/solutions",
+          href: "/solutions#energy-infrastructure",
         },
         {
           id: "civil-infrastructure",
@@ -157,54 +156,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
             "Heavy-payload access roads, control room buildings, structural equipment foundations, industrial civil works, and comprehensive project site infrastructure.",
           specs: ["Access Roads", "Buildings & Control Rooms", "Equipment Foundations", "Industrial Civil"],
           icon: Building2,
-          href: "/solutions",
-        },
-      ],
-    },
-    projects: {
-      tag: "EXECUTION & FOOTPRINTS",
-      bottomText: "Over 250+ MW of solar and energy infrastructure delivered with 100% execution discipline.",
-      bottomCtaText: "Discuss a project",
-      items: [
-        {
-          id: "national-portfolio",
-          title: "National Portfolio",
-          headline: "Utility Solar & Storage Projects",
-          description:
-            "Delivered utility-scale solar power plants, EHV grid substations, BESS storage reserves, and PM-KUSUM agrivoltaics installed across India.",
-          specs: ["250+ MW Capacity", "Utility Scale", "PM-KUSUM Agrivoltaics", "Turnkey EPC"],
-          icon: FolderKanban,
-          href: "/projects",
-        },
-        {
-          id: "regional-footprints",
-          title: "Geographical Footprints",
-          headline: "Pan-India Regional State Hubs",
-          description:
-            "Interactive state-by-state execution footprints spanning Uttar Pradesh, Rajasthan, Gujarat, Maharashtra, Madhya Pradesh, and Bihar.",
-          specs: ["8+ Key States", "DISCOM Approvals", "Local Site Control", "Regional Logistics"],
-          icon: MapPin,
-          href: "/projects#footprint",
-        },
-        {
-          id: "ehv-substations",
-          title: "EHV Substation Corridors",
-          headline: "Grid Evacuation & Substation Bays",
-          description:
-            "Extra High Voltage 220kV and 132kV grid bay allocations, transmission corridors, and DISCOM power evacuation readiness.",
-          specs: ["220 kV Corridors", "AIS & GIS Substations", "SCADA Integration", "Grid Compliance"],
-          icon: Zap,
-          href: "/projects",
-        },
-        {
-          id: "state-hubs",
-          title: "State Portfolio Pages",
-          headline: "Regional Energy Project Hubs",
-          description:
-            "Dedicated state project portfolios detailing nodal DISCOMs, installed capacities, and site deliverables for each state.",
-          specs: ["Uttar Pradesh Hub", "Rajasthan Hub", "Gujarat Hub", "Madhya Pradesh Hub"],
-          icon: Building2,
-          href: "/projects/uttar-pradesh",
+          href: "/solutions#civil-infrastructure",
         },
       ],
     },
@@ -214,24 +166,14 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
       bottomCtaText: "Become a partner",
       items: [
         {
-          id: "solar-sales-partner",
-          title: "Solar Sales Partner",
-          headline: "Earn Commissions on Solar Leads",
-          description:
-            "Ideal for entrepreneurs, real estate consultants, and networkers. You identify prospects and generate leads while Sarhat handles site surveys, design, installation, and backend execution.",
-          specs: ["High Commission Payouts", "Zero Technical Requirement", "Marketing Toolkits", "Direct Payouts"],
-          icon: Handshake,
-          href: "/partners",
-        },
-        {
           id: "solar-project-partner",
           title: "Solar Project Partner",
-          headline: "Co-Execute Projects with Sarhat",
+          headline: "Sales Lead Gen & Project Co-Execution",
           description:
-            "Designed for electrical contractors, civil engineers, and EPC firms to co-execute solar installations backed by Sarhat's engineering and shared procurement rates.",
-          specs: ["Co-Execution Model", "Engineering Blueprints", "Shared Procurement Rates", "Quality Oversight"],
+            "Designed for sales networkers, electrical contractors, civil engineers, and EPC firms. Earn commissions on lead referrals or co-execute solar projects backed by Sarhat's engineering.",
+          specs: ["High Commissions", "Co-Execution Model", "Engineering Blueprints", "Shared Procurement Rates"],
           icon: Wrench,
-          href: "/partners#partner-types",
+          href: "/partners",
         },
         {
           id: "supply-partner",
@@ -241,7 +183,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
             "High-volume procurement contracts for module OEMs, inverter manufacturers, cable suppliers, transformers, and electrical equipment vendors.",
           specs: ["Tier-1 Suppliers", "High Volume Procurement", "Transparent Onboarding", "Prompt Payout Cycles"],
           icon: Truck,
-          href: "/partners#partner-types",
+          href: "/supply-partners",
         },
         {
           id: "execution-contractors",
@@ -251,7 +193,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
             "Join Sarhat's empanelled vendor network for piling, structural erection, AC/DC cabling, and substation civil works.",
           specs: ["Empanelled Contractors", "Pan-India Projects", "Safety Compliance", "Long-Term Contracts"],
           icon: FolderKanban,
-          href: "/partners#apply",
+          href: "/execution-contractors",
         },
       ],
     },
@@ -355,7 +297,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
     },
   };
 
-  const handleDropdownOpen = (menuKey: "solutions" | "projects" | "partners" | "about") => {
+  const handleDropdownOpen = (menuKey: "solutions" | "partners" | "about") => {
     setActiveDropdown(menuKey);
     setActiveItemIndex(0);
   };
@@ -455,28 +397,14 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
               ></span>
             </div>
 
-            {/* 2. PROJECTS (Dropdown) */}
-            <div
-              className="relative py-2 group cursor-pointer"
-              onMouseEnter={() => handleDropdownOpen("projects")}
+            {/* 2. PROJECTS (Direct Link) */}
+            <Link
+              href="/projects"
+              className="relative py-2 hover:text-[#D4E012] transition-colors duration-200 group whitespace-nowrap"
             >
-              <Link
-                href="/projects"
-                className="flex items-center gap-1.5 hover:text-[#D4E012] transition-colors duration-200 whitespace-nowrap"
-              >
-                <span>PROJECTS</span>
-                <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    activeDropdown === "projects" ? "rotate-180 text-[#D4E012]" : ""
-                  }`}
-                />
-              </Link>
-              <span
-                className={`absolute bottom-0 left-0 h-[2px] bg-[#D4E012] transition-all duration-300 ${
-                  activeDropdown === "projects" ? "w-full" : "w-0 group-hover:w-full"
-                }`}
-              ></span>
-            </div>
+              PROJECTS
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#D4E012] transition-all duration-300 group-hover:w-full"></span>
+            </Link>
 
             {/* 3. PARTNERS (Dropdown) */}
             <div
@@ -804,35 +732,15 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
                 )}
               </div>
 
-              {/* Mobile Projects Accordion */}
-              <div className="border-b border-zinc-900 py-2">
-                <button
-                  onClick={() => setMobileProjectsOpen(!mobileProjectsOpen)}
-                  className="w-full text-base sm:text-lg font-bold uppercase tracking-wider text-zinc-100 hover:text-[#D4E012] transition-colors flex justify-between items-center"
-                >
-                  <span>PROJECTS</span>
-                  <ChevronDown
-                    className={`w-4 h-4 text-zinc-400 transition-transform ${
-                      mobileProjectsOpen ? "rotate-180 text-[#D4E012]" : ""
-                    }`}
-                  />
-                </button>
-                {mobileProjectsOpen && (
-                  <div className="pl-4 pt-3 flex flex-col gap-2.5">
-                    {megaMenuData.projects.items.map((item) => (
-                      <Link
-                        key={item.id}
-                        href={item.href}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="text-xs font-semibold uppercase tracking-wider text-zinc-300 hover:text-[#D4E012] flex items-center gap-2"
-                      >
-                        <FolderKanban className="w-4 h-4 text-[#D4E012]" />
-                        <span>{item.title}</span>
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+              {/* Mobile Projects Direct Link */}
+              <Link
+                href="/projects"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-base sm:text-lg font-bold uppercase tracking-wider text-zinc-100 hover:text-[#D4E012] transition-colors py-2 border-b border-zinc-900 flex justify-between items-center"
+              >
+                <span>PROJECTS</span>
+                <ArrowUpRight className="w-4 h-4 text-zinc-500" />
+              </Link>
 
               {/* Mobile Partners Accordion */}
               <div className="border-b border-zinc-900 py-2">

@@ -214,7 +214,7 @@ export default function LeadershipPage() {
                     <span className="text-[#D4E012] italic font-normal">Energy & Engineering Excellence</span>
                   </h1>
 
-                  <p className="text-base sm:text-xl text-slate-200 max-w-3xl text-center leading-relaxed font-normal drop-shadow-md">
+                  <p className="text-base sm:text-xl text-slate-200 max-w-5xl text-center leading-relaxed font-normal drop-shadow-md">
                     Our executive team leads our culture of innovation, inclusion, and operational excellence—supporting our teams across India to thrive and succeed in driving the clean energy transition.
                   </p>
                 </div>

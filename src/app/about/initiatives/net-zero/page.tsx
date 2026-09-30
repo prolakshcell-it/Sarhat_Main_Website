@@ -78,7 +78,7 @@ export default function NetZeroPage() {
                     <span className="text-[#D4E012] italic font-normal">Infrastructure Solutions</span>
                   </h1>
 
-                  <p className="text-base sm:text-xl text-slate-200 max-w-3xl text-center leading-relaxed font-normal drop-shadow-md">
+                  <p className="text-base sm:text-xl text-slate-200 max-w-5xl text-center leading-relaxed font-normal drop-shadow-md">
                     Accelerating enterprise decarbonization through utility-scale renewable generation, battery storage reserves, and zero-carbon industrial grid solutions.
                   </p>
                 </div>

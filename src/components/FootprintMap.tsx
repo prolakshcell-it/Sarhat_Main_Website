@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import {
   MapPin,
@@ -29,12 +29,50 @@ const MapboxInteractiveMap = dynamic(() => import("./MapboxInteractiveMap"), {
   ),
 });
 
-export default function FootprintMap() {
-  const [selectedSite, setSelectedSite] = useState<ProjectSite | null>(projectSites[0]); // Default to Rajasthan
+interface FootprintMapProps {
+  selectedStateSlug?: string;
+  onSelectState?: (slug: string) => void;
+}
+
+const siteIdToSlugMap: Record<string, string> = {
+  rj: "rajasthan",
+  up: "uttar-pradesh",
+  gj: "gujarat",
+  mp: "madhya-pradesh",
+  ka: "karnataka",
+};
+
+const slugToSiteIdMap: Record<string, string> = {
+  rajasthan: "rj",
+  "uttar-pradesh": "up",
+  gujarat: "gj",
+  "madhya-pradesh": "mp",
+  karnataka: "ka",
+};
+
+export default function FootprintMap({ selectedStateSlug, onSelectState }: FootprintMapProps) {
+  const initialSiteId = selectedStateSlug ? slugToSiteIdMap[selectedStateSlug] || "up" : "up";
+  const [selectedSite, setSelectedSite] = useState<ProjectSite | null>(
+    projectSites.find((s) => s.id === initialSiteId) || projectSites[0]
+  );
   const [statusFilter, setStatusFilter] = useState<string>("all");
+
+  useEffect(() => {
+    if (selectedStateSlug) {
+      const siteId = slugToSiteIdMap[selectedStateSlug];
+      const match = projectSites.find((s) => s.id === siteId);
+      if (match) {
+        setSelectedSite(match);
+      }
+    }
+  }, [selectedStateSlug]);
 
   const handleStateClick = (site: ProjectSite) => {
     setSelectedSite(site);
+    const targetSlug = siteIdToSlugMap[site.id.toLowerCase()] || site.id.toLowerCase();
+    if (onSelectState) {
+      onSelectState(targetSlug);
+    }
   };
 
   // Helper for status badge styling
@@ -182,7 +220,7 @@ export default function FootprintMap() {
         {/* ============================================================= */}
         {selectedSite && (
           <ScrollReveal direction="up" distance={35} delay={0.2}>
-            <div className="bg-white rounded-3xl border border-slate-200/90 shadow-2xl p-6 sm:p-8 relative overflow-hidden">
+            <div id="footprint-roster-table" className="bg-white rounded-3xl border border-slate-200/90 shadow-2xl p-6 sm:p-8 relative overflow-hidden scroll-mt-24">
               {/* Header Info */}
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 mb-6 border-b border-slate-200">
                 <div>
@@ -218,54 +256,20 @@ export default function FootprintMap() {
                       FACILITIES
                     </span>
                     <span className="text-xl sm:text-2xl font-bold font-mono text-slate-900">
-                      {selectedSite.activeProjects} Sites
+                      {selectedSite.subProjects.length} Sites
                     </span>
                   </div>
                 </div>
               </div>
 
-              {/* Status Filter Bar & Project Count */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
-                    <Filter className="w-3.5 h-3.5 text-slate-700" /> Filter Projects:
-                  </span>
-                  <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-mono">
-                    <button
-                      onClick={() => setStatusFilter("all")}
-                      className={`px-3 py-1 rounded-lg font-bold transition-all ${
-                        statusFilter === "all"
-                          ? "bg-slate-900 text-white shadow-sm"
-                          : "text-slate-600 hover:text-slate-900"
-                      }`}
-                    >
-                      ALL ({selectedSite.subProjects.length})
-                    </button>
-                    <button
-                      onClick={() => setStatusFilter("completed")}
-                      className={`px-3 py-1 rounded-lg font-bold transition-all ${
-                        statusFilter === "completed"
-                          ? "bg-emerald-600 text-white shadow-sm"
-                          : "text-slate-600 hover:text-slate-900"
-                      }`}
-                    >
-                      COMPLETED
-                    </button>
-                    <button
-                      onClick={() => setStatusFilter("ongoing")}
-                      className={`px-3 py-1 rounded-lg font-bold transition-all ${
-                        statusFilter === "ongoing"
-                          ? "bg-sky-600 text-white shadow-sm"
-                          : "text-slate-600 hover:text-slate-900"
-                      }`}
-                    >
-                      ONGOING
-                    </button>
-                  </div>
-                </div>
-
+              {/* Table Header Bar Showing All Facilities */}
+              <div className="flex items-center justify-between gap-4 mb-5 pb-3 border-b border-slate-100">
+                <span className="text-xs font-mono font-extrabold text-[#707B00] uppercase tracking-wider flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#6DAD45]" />
+                  ALL OPERATIONAL FACILITIES & CLIENT RECORDS ({selectedSite.subProjects.length})
+                </span>
                 <span className="text-xs font-mono text-slate-500 font-semibold">
-                  Showing {filteredSubProjects?.length} of {selectedSite.subProjects.length} Facilities
+                  Showing All {selectedSite.subProjects.length} Facilities
                 </span>
               </div>
 
@@ -282,8 +286,8 @@ export default function FootprintMap() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-200 text-xs sm:text-sm bg-white">
-                    {filteredSubProjects && filteredSubProjects.length > 0 ? (
-                      filteredSubProjects.map((project, idx) => (
+                    {selectedSite.subProjects && selectedSite.subProjects.length > 0 ? (
+                      selectedSite.subProjects.map((project, idx) => (
                         <tr
                           key={project.id}
                           className="hover:bg-slate-50/80 transition-colors"

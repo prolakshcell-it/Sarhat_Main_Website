@@ -205,7 +205,7 @@ export default function OurApproachPage() {
                       transition: { duration: 0.8, ease: "easeOut" },
                     },
                   }}
-                  className="text-base sm:text-lg text-slate-100 font-normal max-w-2xl text-center leading-relaxed drop-shadow-md"
+                  className="text-base sm:text-lg text-slate-100 font-normal max-w-5xl text-center leading-relaxed drop-shadow-md"
                 >
                   Engineering discipline, site-first execution, and transparent handoffs that eliminate friction and maximize asset yields across India&apos;s clean energy transition.
                 </motion.p>

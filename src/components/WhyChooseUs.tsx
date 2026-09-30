@@ -64,7 +64,7 @@ export default function WhyChooseUs() {
             </AnimatedPillBadge>
 
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-              The Sarhat Advantage. <br />
+              The Sarhat Advantage <br />
               <span className="text-[#6DAD45] italic relative inline-block whitespace-nowrap">
                 Built for Performance & Trust.
                 <svg
