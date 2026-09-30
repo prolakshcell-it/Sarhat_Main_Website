@@ -170,7 +170,7 @@ export default function ConnectWithUsPage() {
           {/* ------------------------------------------------------------- */}
           <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80 relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              
+
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-3xl mx-auto mb-16">
                   <AnimatedPillBadge className="mb-4">
@@ -280,7 +280,7 @@ export default function ConnectWithUsPage() {
                           </div>
                           <div>
                             <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">HEADQUARTERS</div>
-                            <div className="text-xs font-bold text-white">New Delhi, India</div>
+                            <div className="text-xs font-bold text-white">Ghaziabad, India</div>
                           </div>
                         </div>
                       </div>

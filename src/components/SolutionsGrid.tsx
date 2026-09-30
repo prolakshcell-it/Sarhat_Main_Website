@@ -82,13 +82,13 @@ export default function SolutionsGrid() {
 
         {/* Section Header */}
         <ScrollReveal direction="up" distance={40}>
-          <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="text-center max-w-5xl mx-auto mb-14">
             <AnimatedPillBadge className="mb-6">
               SOLUTIONS CAPABILITIES
             </AnimatedPillBadge>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-              Bulit on Solar.Growing into infrasturcture <br />
-              <span className="text-[#6DAD45] italic relative inline-block">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+              <span className="inline-block whitespace-nowrap">Built on Solar. Growing into infrastructure.</span> <br />
+              <span className="text-[#6DAD45] italic relative inline-block whitespace-nowrap">
                 One connected way to build.
                 <svg
                   className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"

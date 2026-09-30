@@ -636,7 +636,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
                                   isSelected ? "text-white" : "text-slate-200"
                                 } ${isSubheading ? "text-[11px] font-mono" : ""}`}
                               >
-                                {isSubheading ? `↳ ${item.title}` : item.title}
+                                {item.title}
                               </div>
                             </div>
                           </div>
