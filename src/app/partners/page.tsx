@@ -326,9 +326,9 @@ export default function PartnersPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <ScrollReveal direction="up" distance={40}>
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                  <div className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-white border border-[#707B00]/40 text-[#707B00] font-mono font-bold text-xs uppercase tracking-[0.2em] shadow-sm mb-6">
+                  <AnimatedPillBadge className="mb-6">
                     Partner Benefits
-                  </div>
+                  </AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-4">
                     Why Partner With <br />
                     <span className="text-[#6DAD45] italic relative inline-block">
@@ -751,9 +751,9 @@ export default function PartnersPage() {
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <ScrollReveal direction="up" distance={40}>
                 <div className="text-center max-w-2xl mx-auto mb-12">
-                  <div className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-white border border-[#707B00]/40 text-[#707B00] font-mono font-bold text-xs uppercase tracking-[0.2em] shadow-sm mb-6">
+                  <AnimatedPillBadge className="mb-6">
                     Apply Now
-                  </div>
+                  </AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-3">
                     Partner <span className="text-[#6DAD45] italic">Application.</span>
                   </h2>
@@ -1011,9 +1011,9 @@ export default function PartnersPage() {
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={40}>
                 <div className="text-center max-w-2xl mx-auto mb-12">
-                  <div className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-white border border-[#707B00]/40 text-[#707B00] font-mono font-bold text-xs uppercase tracking-[0.2em] shadow-sm mb-6">
+                  <AnimatedPillBadge className="mb-6">
                     Partner FAQs
-                  </div>
+                  </AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-3">
                     Frequently Asked <span className="text-[#6DAD45] italic">Questions.</span>
                   </h2>

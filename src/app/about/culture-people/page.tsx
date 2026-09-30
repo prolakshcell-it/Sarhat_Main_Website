@@ -12,6 +12,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import SmoothScroll from "@/components/SmoothScroll";
 import FinalCTA from "@/components/FinalCTA";
+import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 
 import {
   Users,
@@ -122,9 +123,9 @@ export default function CulturePeoplePage() {
           <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80 relative z-10">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
               <ScrollReveal direction="up" distance={30}>
-                <div className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-[#F3F7EE] border border-[#707B00]/30 text-[#707B00] font-mono font-bold text-xs uppercase tracking-[0.2em] mb-8">
+                <AnimatedPillBadge className="mb-8">
                   CULTURE & PURPOSE
-                </div>
+                </AnimatedPillBadge>
 
                 <p className="text-xl sm:text-2xl md:text-3xl font-serif-display font-normal text-slate-900 leading-relaxed tracking-tight max-w-4xl mx-auto">
                   <span className="font-semibold text-slate-950">Our culture, core values and team members drive our success.</span> We are a values-led company which informs how we engage with others as we aim to create{" "}
@@ -228,9 +229,9 @@ export default function CulturePeoplePage() {
               {/* Section Header */}
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-                  <div className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-[#F3F7EE] border border-[#707B00]/30 text-[#707B00] font-mono font-bold text-xs uppercase tracking-[0.2em] mb-4">
+                  <AnimatedPillBadge className="mb-4">
                     OUR GUIDING PRINCIPLES
-                  </div>
+                  </AnimatedPillBadge>
                   <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight mb-4">
                     Our core <span className="text-[#6DAD45] italic font-normal">values</span>
                   </h2>

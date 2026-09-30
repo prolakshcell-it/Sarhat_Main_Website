@@ -11,6 +11,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import SmoothScroll from "@/components/SmoothScroll";
 import FinalCTA from "@/components/FinalCTA";
+import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 
 import {
   Share2,
@@ -172,9 +173,9 @@ export default function ConnectWithUsPage() {
               
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                  <div className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-[#F3F7EE] border border-[#707B00]/30 text-[#707B00] font-mono font-bold text-xs uppercase tracking-[0.2em] mb-4">
+                  <AnimatedPillBadge className="mb-4">
                     OFFICIAL SOCIAL CHANNELS
-                  </div>
+                  </AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 tracking-tight">
                     Follow Our <span className="text-[#6DAD45] italic font-normal">Execution Journey</span>
                   </h2>

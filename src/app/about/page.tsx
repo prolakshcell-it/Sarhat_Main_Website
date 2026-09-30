@@ -29,6 +29,7 @@ import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 
 export default function AboutPage() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
@@ -239,10 +240,9 @@ export default function AboutPage() {
 
             {/* Who We Are Section (Matching Image 1 in Website Theme) */}
             <div className="text-center max-w-4xl mx-auto mb-16">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#6DAD45]/15 border border-[#6DAD45]/30 text-[#6DAD45] text-xs font-mono font-bold uppercase tracking-wider mb-4">
-                <span className="w-2 h-2 rounded-full bg-[#6DAD45]" />
-                <span>WHO WE ARE</span>
-              </div>
+              <AnimatedPillBadge className="mb-4">
+                WHO WE ARE
+              </AnimatedPillBadge>
               <h2 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium text-[#0F172A] tracking-tight leading-tight mb-6">
                 Who We Are
               </h2>

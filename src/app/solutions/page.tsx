@@ -23,6 +23,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
+import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import SmoothScroll from "@/components/SmoothScroll";
 import FinalCTA from "@/components/FinalCTA";
@@ -448,10 +449,9 @@ export default function SolutionsPage() {
                 <ScrollReveal key={sol.id}>
                   <div className="space-y-10">
                     {/* Top Section Badge & Header */}
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#6DAD45]/15 border border-[#6DAD45]/30 text-[#6DAD45] text-xs font-mono font-bold uppercase tracking-wider">
-                      <span className="w-2 h-2 rounded-full bg-[#6DAD45]" />
-                      <span>{sol.badge}</span>
-                    </div>
+                    <AnimatedPillBadge className="mb-4">
+                      {sol.badge}
+                    </AnimatedPillBadge>
 
                     {/* Editorial Description Block (Image 1 & 2 Style) */}
                     <div className="max-w-4xl space-y-4">
@@ -544,10 +544,9 @@ export default function SolutionsPage() {
               <ScrollReveal>
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
                   <div>
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#D4E012]/15 border border-[#D4E012]/40 text-[#D4E012] text-xs font-mono font-bold uppercase tracking-wider mb-3 backdrop-blur-md">
-                      <Layers className="w-3.5 h-3.5 text-[#D4E012]" />
-                      <span>THE SERVICE ROADMAP</span>
-                    </div>
+                    <AnimatedPillBadge darkBg className="mb-3">
+                      THE SERVICE ROADMAP
+                    </AnimatedPillBadge>
                     <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-white tracking-tight leading-tight">
                       The same road. <br />
                       <span className="text-[#D4E012] italic">A smarter project.</span>

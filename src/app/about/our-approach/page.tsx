@@ -11,6 +11,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import FivePrinciplesInteractive from "@/components/FivePrinciplesInteractive";
 import FinalCTA from "@/components/FinalCTA";
+import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import {
   ChevronRight,
   ArrowRight,
@@ -228,10 +229,9 @@ export default function OurApproachPage() {
                 {/* Left Content Column */}
                 <div className="lg:col-span-7 space-y-6">
                   <ScrollReveal>
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#6DAD45]/15 border border-[#6DAD45]/30 text-[#6DAD45] text-xs font-mono font-bold uppercase tracking-wider mb-2">
-                      <span className="w-2 h-2 rounded-full bg-[#6DAD45]" />
-                      <span>END-TO-END CAPABILITY</span>
-                    </div>
+                    <AnimatedPillBadge className="mb-2">
+                      END-TO-END CAPABILITY
+                    </AnimatedPillBadge>
 
                     <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-[#0F172A] tracking-tight leading-tight">
                       From concept to completion, <br />
@@ -307,10 +307,9 @@ export default function OurApproachPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#6DAD45]/15 border border-[#6DAD45]/30 text-[#6DAD45] text-xs font-mono font-bold uppercase tracking-wider mb-3">
-                    <Layers className="w-3.5 h-3.5 text-[#6DAD45]" />
-                    <span>STEP-BY-STEP WORKFLOW</span>
-                  </div>
+                  <AnimatedPillBadge className="mb-3">
+                    STEP-BY-STEP WORKFLOW
+                  </AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-[#0F172A] tracking-tight">
                     Turnkey Execution Lifecycle
                   </h2>
@@ -344,10 +343,9 @@ export default function OurApproachPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
                 <div className="mb-14 text-center max-w-3xl mx-auto">
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#D4E012]/20 border border-[#D4E012]/40 text-[#0F172A] text-xs font-mono font-bold uppercase tracking-wider mb-3">
-                    <span className="w-2 h-2 rounded-full bg-[#D4E012]" />
-                    <span>TRACK RECORD</span>
-                  </div>
+                  <AnimatedPillBadge className="mb-3">
+                    TRACK RECORD
+                  </AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-[#0F172A] tracking-tight mb-3">
                     Projects delivered
                   </h2>

@@ -33,6 +33,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
+import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import ScrollIndicator from "@/components/ScrollIndicator";
 
 interface JobRole {
@@ -393,9 +394,9 @@ export default function CareersPage() {
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-4xl mx-auto mb-16">
                   {/* Yellow/Lime Pill Badge */}
-                  <div className="inline-block px-5 py-2 rounded-full bg-[#D4E012] text-slate-950 font-bold text-xs uppercase tracking-wider shadow-sm mb-6">
+                  <AnimatedPillBadge className="mb-6">
                     Why Join Us
-                  </div>
+                  </AnimatedPillBadge>
 
                   {/* Main Headline with Yellow Highlight */}
                   <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-bold text-slate-900 tracking-tight leading-tight mb-6">
@@ -489,9 +490,9 @@ export default function CareersPage() {
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-4xl mx-auto mb-16">
                   {/* Yellow/Lime Pill Badge */}
-                  <div className="inline-block px-5 py-2 rounded-full bg-[#D4E012] text-slate-950 font-bold text-xs uppercase tracking-wider shadow-sm mb-6">
+                  <AnimatedPillBadge className="mb-6">
                     Employee Benefits
-                  </div>
+                  </AnimatedPillBadge>
 
                   {/* Main Headline */}
                   <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-bold text-slate-900 tracking-tight leading-tight mb-6">
@@ -688,9 +689,9 @@ export default function CareersPage() {
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-4xl mx-auto mb-16">
                   {/* Yellow/Lime Pill Badge */}
-                  <div className="inline-block px-5 py-2 rounded-full bg-[#D4E012] text-slate-950 font-bold text-xs uppercase tracking-wider shadow-sm mb-6">
+                  <AnimatedPillBadge className="mb-6">
                     Life @ Sarhat
-                  </div>
+                  </AnimatedPillBadge>
 
                   {/* Main Headline */}
                   <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-bold text-slate-900 tracking-tight leading-tight mb-6">
@@ -847,9 +848,9 @@ export default function CareersPage() {
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-4xl mx-auto mb-12">
                   {/* Yellow/Lime Pill Badge */}
-                  <div className="inline-block px-5 py-2 rounded-full bg-[#D4E012] text-slate-950 font-bold text-xs uppercase tracking-wider shadow-sm mb-6">
+                  <AnimatedPillBadge className="mb-6">
                     Open Positions
-                  </div>
+                  </AnimatedPillBadge>
 
                   {/* Main Headline */}
                   <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-bold text-slate-900 tracking-tight leading-tight mb-6">
@@ -1136,9 +1137,9 @@ export default function CareersPage() {
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-3xl mx-auto mb-16">
                   {/* Yellow/Lime Pill Badge */}
-                  <div className="inline-block px-5 py-2 rounded-full bg-[#D4E012] text-slate-950 font-bold text-xs uppercase tracking-wider shadow-sm mb-6">
+                  <AnimatedPillBadge className="mb-6">
                     Careers FAQs
-                  </div>
+                  </AnimatedPillBadge>
 
                   {/* Main Headline */}
                   <h2 className="text-3xl sm:text-5xl font-serif-display font-bold text-slate-900 tracking-tight leading-tight mb-6">
