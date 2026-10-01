@@ -30,6 +30,7 @@ import {
   Shield,
   Smile,
   Flame,
+  Quote,
 } from "lucide-react";
 
 export default function CulturePeoplePage() {
@@ -120,16 +121,28 @@ export default function CulturePeoplePage() {
           {/* ------------------------------------------------------------- */}
           {/* SECTION 1: CULTURE STATEMENT OVERVIEW */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80 relative z-10">
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80 relative z-10 overflow-hidden">
+            {/* Subtle background quote mark watermark */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-slate-100 font-serif text-[280px] sm:text-[340px] leading-none pointer-events-none select-none opacity-40">
+              &ldquo;
+            </div>
+
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
               <ScrollReveal direction="up" distance={30}>
-                <AnimatedPillBadge className="mb-8">
+                <AnimatedPillBadge className="mb-6">
                   CULTURE & PURPOSE
                 </AnimatedPillBadge>
 
-                <p className="text-xl sm:text-2xl md:text-3xl font-serif-display font-normal text-slate-900 leading-relaxed tracking-tight max-w-4xl mx-auto">
+                {/* Big Inverted Quote Icon Accent Box */}
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-br from-[#D4E012]/30 to-[#6DAD45]/20 border border-[#D4E012]/50 flex items-center justify-center mx-auto mb-8 shadow-sm">
+                  <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-[#707B00] rotate-180" />
+                </div>
+
+                <p className="text-xl sm:text-2xl md:text-3xl font-serif-display font-normal text-slate-900 leading-relaxed tracking-tight max-w-4xl mx-auto relative">
+                  <span className="text-[#6DAD45] font-serif text-4xl sm:text-6xl inline-block -translate-y-1 sm:-translate-y-2 mr-1 sm:mr-2 select-none">&ldquo;</span>
                   <span className="font-semibold text-slate-950">Our culture, core values and team members drive our success.</span> We are a values-led company which informs how we engage with others as we aim to create{" "}
                   <span className="text-[#6DAD45] italic font-normal">sustained value for our people, partners and planet</span>. At Sarhat, we pride ourselves on creating a culture of safety, being respectful and working with integrity. Through our VIBES programme, we foster a sense of belonging, understanding and inclusivity. Our people are the foundation of our success; we invest in their continuous growth and development, supporting driven people with a range of diverse perspectives to thrive.
+                  <span className="text-[#6DAD45] font-serif text-4xl sm:text-6xl inline-block translate-y-2 sm:translate-y-3 ml-1 sm:ml-2 select-none">&rdquo;</span>
                 </p>
               </ScrollReveal>
             </div>

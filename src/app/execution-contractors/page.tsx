@@ -389,12 +389,10 @@ export default function ExecutionContractorsPage() {
                   </h1>
 
                   {/* Subtitle Paragraph */}
-                  <p className="text-sm sm:text-base md:text-lg text-slate-200 font-normal max-w-4xl text-center leading-relaxed mb-6 tracking-wide drop-shadow-md">
-                    Join Sarhat&apos;s verified contractor network for civil, electrical, substation, and mechanical solar project execution across India. Timely milestone RA payouts, continuous project pipeline, and full engineering support.
-                  </p>
+                  <p className="text-sm sm:text-base md:text-lg text-slate-200 font-normal max-w-3xl text-center leading-relaxed mb-6 tracking-wide drop-shadow-md">
+                    Join Sarhat&apos;s verified contractor network for civil, electrical, substation, and mechanical solar project execution across India. <br className="hidden sm:block" />
 
-                  {/* Accent Yellow Underline */}
-                  <div className="w-20 h-1.5 bg-[#D4E012] rounded-full shadow-[0_0_12px_#D4E012] mx-auto"></div>
+                  </p>
                 </div>
               </ScrollReveal>
             </motion.div>
@@ -929,18 +927,16 @@ export default function ExecutionContractorsPage() {
                       <div className="pt-1">
                         <div
                           onClick={() => setIsVerified(!isVerified)}
-                          className={`inline-flex items-center gap-4 border rounded-lg px-4 py-3 cursor-pointer select-none transition-all ${
-                            isVerified
+                          className={`inline-flex items-center gap-4 border rounded-lg px-4 py-3 cursor-pointer select-none transition-all ${isVerified
                               ? "bg-slate-900 border-slate-800 text-white"
                               : "bg-slate-900/90 border-slate-800 text-slate-200 hover:bg-slate-900"
-                          }`}
+                            }`}
                         >
                           <div
-                            className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
-                              isVerified
+                            className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${isVerified
                                 ? "bg-[#D4E012] border-[#D4E012] text-black"
                                 : "border-slate-500 bg-slate-800"
-                            }`}
+                              }`}
                           >
                             {isVerified && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                           </div>
@@ -1003,11 +999,10 @@ export default function ExecutionContractorsPage() {
                       setActiveFaqTab(tab);
                       setOpenFaqIndex(0);
                     }}
-                    className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${
-                      activeFaqTab === tab
+                    className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${activeFaqTab === tab
                         ? "bg-slate-900 text-white shadow-md"
                         : "bg-white text-slate-600 border border-slate-200 hover:border-[#D4E012]"
-                    }`}
+                      }`}
                   >
                     {tab}
                   </button>
@@ -1031,9 +1026,8 @@ export default function ExecutionContractorsPage() {
                           {faq.question}
                         </span>
                         <ChevronDown
-                          className={`w-5 h-5 text-slate-500 shrink-0 transition-transform duration-300 ${
-                            isOpen ? "rotate-180 text-[#707B00]" : ""
-                          }`}
+                          className={`w-5 h-5 text-slate-500 shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 text-[#707B00]" : ""
+                            }`}
                         />
                       </button>
                       <AnimatePresence>

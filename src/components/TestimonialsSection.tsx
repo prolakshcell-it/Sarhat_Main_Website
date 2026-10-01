@@ -134,51 +134,30 @@ export default function TestimonialsSection() {
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#6DAD45]/10 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header & Single Set of Navigation Controls */}
+        {/* Section Header */}
         <ScrollReveal direction="up" distance={40}>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-            <div className="max-w-2xl">
-              <AnimatedPillBadge className="mb-6">
-                CLIENT & PARTNER ENDORSEMENTS
-              </AnimatedPillBadge>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
-                Trusted by India&apos;s <br />
-                <span className="text-[#6DAD45] italic relative inline-block">
-                  Clean Energy Leaders.
-                  <svg
-                    className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
-                    viewBox="0 0 100 20"
-                    preserveAspectRatio="none"
-                  >
-                    <path
-                      d="M0 15 Q 50 0 100 15"
-                      stroke="currentColor"
-                      strokeWidth="3.5"
-                      fill="transparent"
-                    />
-                  </svg>
-                </span>
-              </h2>
-            </div>
-
-            {/* Single Set of Navigation Arrows (Top Right Header) */}
-            <div className="flex items-center gap-3 shrink-0">
-              <button
-                onClick={handlePrev}
-                aria-label="Previous Testimonial"
-                className="w-12 h-12 rounded-full bg-white border-2 border-slate-200 hover:border-[#6DAD45] hover:bg-slate-900 hover:text-[#D4E012] text-slate-800 shadow-md flex items-center justify-center transition-all duration-300 transform active:scale-95 cursor-pointer group"
-              >
-                <ChevronLeft className="w-6 h-6 transition-transform group-hover:-translate-x-0.5" />
-              </button>
-
-              <button
-                onClick={handleNext}
-                aria-label="Next Testimonial"
-                className="w-12 h-12 rounded-full bg-white border-2 border-slate-200 hover:border-[#6DAD45] hover:bg-slate-900 hover:text-[#D4E012] text-slate-800 shadow-md flex items-center justify-center transition-all duration-300 transform active:scale-95 cursor-pointer group"
-              >
-                <ChevronRight className="w-6 h-6 transition-transform group-hover:translate-x-0.5" />
-              </button>
-            </div>
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
+            <AnimatedPillBadge className="mb-6">
+              CLIENT & PARTNER ENDORSEMENTS
+            </AnimatedPillBadge>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
+              Trusted by India&apos;s <br />
+              <span className="text-[#6DAD45] italic relative inline-block">
+                Clean Energy Leaders.
+                <svg
+                  className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                  viewBox="0 0 100 20"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M0 15 Q 50 0 100 15"
+                    stroke="currentColor"
+                    strokeWidth="3.5"
+                    fill="transparent"
+                  />
+                </svg>
+              </span>
+            </h2>
           </div>
         </ScrollReveal>
       </div>
@@ -194,11 +173,11 @@ export default function TestimonialsSection() {
           {testimonials.map((item) => (
             <div
               key={item.id}
-              className="snap-start w-[300px] sm:w-[420px] shrink-0 bg-white rounded-3xl p-7 border border-slate-200/90 shadow-xl shadow-slate-200/50 hover:border-[#6DAD45] hover:shadow-2xl transition-all duration-300 flex flex-col justify-between relative group"
+              className="snap-start w-[300px] sm:w-[420px] shrink-0 bg-white rounded-3xl p-7 border border-slate-200/90 shadow-xl shadow-slate-200/50 hover:border-[#6DAD45] hover:shadow-2xl transition-all duration-300 flex flex-col justify-between text-center relative group"
             >
               <div>
                 {/* Rating & Location Tag */}
-                <div className="flex items-center justify-between gap-2 mb-5">
+                <div className="flex items-center justify-center gap-3 mb-5">
                   <div className="flex items-center gap-1">
                     {[...Array(item.rating)].map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-[#EAB308] text-[#EAB308]" />
@@ -210,13 +189,13 @@ export default function TestimonialsSection() {
                 </div>
 
                 {/* Quote */}
-                <p className="text-sm sm:text-base font-serif-display font-medium text-slate-800 leading-relaxed mb-6 line-clamp-4">
+                <p className="text-sm sm:text-base font-serif-display font-medium text-slate-800 leading-relaxed mb-6 line-clamp-4 text-center">
                   &ldquo;{item.quote}&rdquo;
                 </p>
               </div>
 
               {/* Author & Footer */}
-              <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+              <div className="pt-4 border-t border-slate-100 flex flex-col items-center justify-center text-center gap-2">
                 <div>
                   <h4 className="text-sm font-bold text-slate-900 font-serif-display group-hover:text-[#707B00] transition-colors">
                     {item.author}
@@ -226,7 +205,7 @@ export default function TestimonialsSection() {
                   </p>
                 </div>
 
-                <div className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#D4E012]/20 border border-[#D4E012]/50 text-[#707B00] font-mono text-[10px] font-bold rounded-xl shrink-0">
+                <div className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#D4E012]/20 border border-[#D4E012]/50 text-[#707B00] font-mono text-[10px] font-bold rounded-xl mt-1">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#16A34A]" />
                   <span>{item.highlightMetric}</span>
                 </div>
@@ -234,12 +213,31 @@ export default function TestimonialsSection() {
             </div>
           ))}
         </div>
+
+        {/* Navigation Arrows (Centered Below Cards Slider) */}
+        <div className="flex items-center justify-center gap-3 mt-6">
+          <button
+            onClick={handlePrev}
+            aria-label="Previous Testimonial"
+            className="w-12 h-12 rounded-full bg-white border-2 border-slate-200 hover:border-[#6DAD45] hover:bg-slate-900 hover:text-[#D4E012] text-slate-800 shadow-md flex items-center justify-center transition-all duration-300 transform active:scale-95 cursor-pointer group"
+          >
+            <ChevronLeft className="w-6 h-6 transition-transform group-hover:-translate-x-0.5" />
+          </button>
+
+          <button
+            onClick={handleNext}
+            aria-label="Next Testimonial"
+            className="w-12 h-12 rounded-full bg-white border-2 border-slate-200 hover:border-[#6DAD45] hover:bg-slate-900 hover:text-[#D4E012] text-slate-800 shadow-md flex items-center justify-center transition-all duration-300 transform active:scale-95 cursor-pointer group"
+          >
+            <ChevronRight className="w-6 h-6 transition-transform group-hover:translate-x-0.5" />
+          </button>
+        </div>
       </div>
 
       {/* Section CTA Button */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ScrollReveal direction="up" distance={30} delay={0.25}>
-          <div className="mt-14 text-center">
+          <div className="mt-10 text-center">
             <Link
               href="/insights"
               className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"

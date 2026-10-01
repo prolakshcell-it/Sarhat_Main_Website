@@ -53,29 +53,28 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#050905] text-white border-t border-slate-800 pt-16 pb-12 relative z-10 font-sans-ui overflow-hidden">
-      {/* Bespoke Renewable Infrastructure Background Image */}
-      <div className="absolute inset-0 z-0">
+    <footer className="bg-[#070C08] text-white border-t border-slate-800/80 pt-16 pb-10 relative z-10 font-sans-ui overflow-hidden">
+      {/* Background Image with Clean Deep Overlay */}
+      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
         <Image
           src="/images/footer-bg.jpg"
-          alt="Sarhat Renewable Energy Infrastructure Twilight"
+          alt="Sarhat Renewable Energy Infrastructure"
           fill
-          quality={95}
-          className="object-cover object-center opacity-75 transform scale-105 transition-opacity duration-700"
+          quality={90}
+          className="object-cover object-center"
         />
-        {/* Balanced Gradient Overlays: Makes image clearly visible while keeping text 100% crisp */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050905]/85 via-[#050905]/65 to-[#050905]/90"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#050905]/80 via-transparent to-[#050905]/80"></div>
-        <div className="absolute bottom-0 left-0 w-[600px] h-[350px] bg-[#6DAD45]/20 rounded-full blur-[130px] pointer-events-none"></div>
-        <div className="absolute top-0 right-0 w-[500px] h-[300px] bg-[#D4E012]/15 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#070C08] via-[#070C08]/90 to-[#070C08]"></div>
       </div>
 
+      {/* Subtle Glow Accents */}
+      <div className="absolute bottom-0 left-0 w-[500px] h-[300px] bg-[#6DAD45]/10 rounded-full blur-[140px] pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-[400px] h-[250px] bg-[#D4E012]/10 rounded-full blur-[120px] pointer-events-none"></div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Top Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-16 border-b border-slate-800">
-          {/* Brand Info Column */}
-          <div className="lg:col-span-2 space-y-4">
-            {/* Exact Logo: SARHAT [Green Dot] Rotating Words */}
+        {/* Main Footer Grid - Balanced 4 Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-14 border-b border-slate-800/80">
+          {/* Brand Column (5 cols) */}
+          <div className="lg:col-span-5 space-y-5">
             <Link href="/" className="flex items-center group shrink-0 select-none">
               <div className="font-sans-ui text-2xl font-black tracking-tighter text-white flex items-center leading-none">
                 <Image
@@ -83,20 +82,18 @@ export default function Footer() {
                   alt="SARHAT"
                   width={280}
                   height={95}
-                  className="h-12 sm:h-16 md:h-18 w-auto object-contain"
+                  className="h-10 sm:h-12 w-auto object-contain"
                 />
-                <span className="w-2.5 h-2.5 rounded-full bg-[#6DAD45] inline-block mx-1.5 shrink-0 self-center translate-y-1 sm:translate-y-1.5 shadow-[0_0_10px_#6DAD45]"></span>
-
-                {/* Continuous Animated Vertical Text Ticker for Logo Words */}
-                <div className="h-5 overflow-hidden inline-flex items-center ml-0.5 min-w-[50px] sm:min-w-[65px] relative translate-y-1 sm:translate-y-1.5">
+                <span className="w-2 h-2 rounded-full bg-[#6DAD45] inline-block mx-1.5 shrink-0 self-center translate-y-1 shadow-[0_0_10px_#6DAD45]"></span>
+                <div className="h-5 overflow-hidden inline-flex items-center ml-0.5 min-w-[55px] relative translate-y-1">
                   <AnimatePresence mode="wait">
                     <motion.span
                       key={rotatingWords[wordIndex]}
-                      initial={{ y: 12, opacity: 0, filter: "blur(3px)" }}
-                      animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                      exit={{ y: -12, opacity: 0, filter: "blur(3px)" }}
-                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                      className="text-xs sm:text-sm font-bold uppercase tracking-wider block text-[#D4E012]"
+                      initial={{ y: 10, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -10, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="text-xs font-bold uppercase tracking-wider block text-[#D4E012]"
                     >
                       {rotatingWords[wordIndex]}
                     </motion.span>
@@ -104,120 +101,135 @@ export default function Footer() {
                 </div>
               </div>
             </Link>
-            <p className="text-xs sm:text-sm text-slate-300 font-medium max-w-sm leading-relaxed">
-              Renewable energy generation, battery storage (BESS), substations, and civil infrastructure delivered under one connected execution mindset.
+
+            <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed max-w-md">
+              Engineering high-yield solar parks, utility-scale BESS storage, high-voltage substations, and resilient civil infrastructure across India.
             </p>
 
-            <div className="pt-2 flex items-center gap-2 text-xs text-[#6DAD45] font-mono font-bold">
-              <ShieldCheck className="w-4.5 h-4.5 text-[#6DAD45]" />
+            <div className="flex items-center gap-2 text-xs text-[#6DAD45] font-mono font-semibold">
+              <ShieldCheck className="w-4 h-4 text-[#6DAD45]" />
               <span>ISO 9001:2015 &amp; OHSAS 45001 CERTIFIED</span>
             </div>
 
-            {/* Social Media Links */}
-            <div className="pt-2 flex items-center gap-2.5">
+            {/* Social Links */}
+            <div className="pt-1 flex items-center gap-2">
               <a
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="w-9 h-9 rounded-xl bg-slate-900/90 border border-slate-700/80 flex items-center justify-center text-slate-300 hover:text-black hover:bg-[#D4E012] hover:border-[#D4E012] transition-all duration-300 shadow-md group cursor-pointer"
+                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-black hover:bg-[#D4E012] hover:border-[#D4E012] transition-all duration-300"
               >
-                <div className="transition-transform group-hover:scale-110">
-                  <SocialLinkedin />
-                </div>
+                <SocialLinkedin />
               </a>
               <a
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Twitter / X"
-                className="w-9 h-9 rounded-xl bg-slate-900/90 border border-slate-700/80 flex items-center justify-center text-slate-300 hover:text-black hover:bg-[#D4E012] hover:border-[#D4E012] transition-all duration-300 shadow-md group cursor-pointer"
+                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-black hover:bg-[#D4E012] hover:border-[#D4E012] transition-all duration-300"
               >
-                <div className="transition-transform group-hover:scale-110">
-                  <SocialTwitter />
-                </div>
+                <SocialTwitter />
               </a>
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="w-9 h-9 rounded-xl bg-slate-900/90 border border-slate-700/80 flex items-center justify-center text-slate-300 hover:text-black hover:bg-[#D4E012] hover:border-[#D4E012] transition-all duration-300 shadow-md group cursor-pointer"
+                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-black hover:bg-[#D4E012] hover:border-[#D4E012] transition-all duration-300"
               >
-                <div className="transition-transform group-hover:scale-110">
-                  <SocialInstagram />
-                </div>
+                <SocialInstagram />
               </a>
               <a
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="w-9 h-9 rounded-xl bg-slate-900/90 border border-slate-700/80 flex items-center justify-center text-slate-300 hover:text-black hover:bg-[#D4E012] hover:border-[#D4E012] transition-all duration-300 shadow-md group cursor-pointer"
+                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-black hover:bg-[#D4E012] hover:border-[#D4E012] transition-all duration-300"
               >
-                <div className="transition-transform group-hover:scale-110">
-                  <SocialFacebook />
-                </div>
+                <SocialFacebook />
               </a>
               <a
                 href="https://youtube.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="YouTube"
-                className="w-9 h-9 rounded-xl bg-slate-900/90 border border-slate-700/80 flex items-center justify-center text-slate-300 hover:text-black hover:bg-[#D4E012] hover:border-[#D4E012] transition-all duration-300 shadow-md group cursor-pointer"
+                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-black hover:bg-[#D4E012] hover:border-[#D4E012] transition-all duration-300"
               >
-                <div className="transition-transform group-hover:scale-110">
-                  <SocialYoutube />
-                </div>
+                <SocialYoutube />
               </a>
             </div>
           </div>
 
-          {/* Solutions Column */}
-          <div>
-            <h4 className="text-xs sm:text-sm font-bold text-white uppercase tracking-widest mb-4">
-              OUR SOLUTIONS
+          {/* Column 2: Our Solutions (2 cols) */}
+          <div className="lg:col-span-2">
+            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-widest mb-4">
+              SOLUTIONS
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
+            <ul className="space-y-2.5 text-xs text-slate-300 font-medium">
               <li>
                 <Link href="/solutions#renewable-energy" className="hover:text-[#D4E012] transition-colors">
-                  Renewable Energy (Solar &amp; Wind)
+                  Solar &amp; Wind Energy
                 </Link>
               </li>
               <li>
                 <Link href="/solutions#bess-storage" className="hover:text-[#D4E012] transition-colors">
-                  BESS &amp; Battery Storage
+                  BESS &amp; Storage
                 </Link>
               </li>
               <li>
                 <Link href="/solutions#energy-infrastructure" className="hover:text-[#D4E012] transition-colors">
-                  Substations &amp; Grid Infrastructure
+                  Substations &amp; Grid
                 </Link>
               </li>
               <li>
                 <Link href="/solutions#civil-infrastructure" className="hover:text-[#D4E012] transition-colors">
-                  Industrial Civil Infrastructure
+                  Civil Infrastructure
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Website Navigation Column */}
-          <div>
-            <h4 className="text-xs sm:text-sm font-bold text-white uppercase tracking-widest mb-4">
-              NAVIGATION
+          {/* Column 3: Company (2 cols) */}
+          <div className="lg:col-span-2">
+            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-widest mb-4">
+              COMPANY
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
+            <ul className="space-y-2.5 text-xs text-slate-300 font-medium">
               <li>
-                <Link href="/" className="hover:text-[#D4E012] transition-colors">
-                  Home
+                <Link href="/about" className="hover:text-[#D4E012] transition-colors">
+                  About Sarhat
                 </Link>
               </li>
               <li>
-                <Link href="/solutions" className="hover:text-[#D4E012] transition-colors">
-                  Solutions &amp; Services
+                <Link href="/about/our-story" className="hover:text-[#D4E012] transition-colors">
+                  Our Story &amp; Milestones
                 </Link>
               </li>
+              <li>
+                <Link href="/about/initiatives" className="hover:text-[#D4E012] transition-colors">
+                  Sustainability
+                </Link>
+              </li>
+              <li>
+                <Link href="/careers" className="hover:text-[#D4E012] transition-colors">
+                  Careers &amp; Life
+                </Link>
+              </li>
+              <li>
+                <Link href="/insights" className="hover:text-[#D4E012] transition-colors">
+                  Insights &amp; News
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 4: Ecosystem & Network (3 cols) */}
+          <div className="lg:col-span-3">
+            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-widest mb-4">
+              ECOSYSTEM &amp; NETWORK
+            </h4>
+            <ul className="space-y-2.5 text-xs text-slate-300 font-medium mb-5">
               <li>
                 <Link href="/projects" className="hover:text-[#D4E012] transition-colors">
                   Projects &amp; Footprints
@@ -238,69 +250,39 @@ export default function Footer() {
                   Execution Contractors
                 </Link>
               </li>
-              <li>
-                <Link href="/insights" className="hover:text-[#D4E012] transition-colors">
-                  Insights &amp; Market Stories
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="hover:text-[#D4E012] transition-colors">
-                  About Sarhat
-                </Link>
-              </li>
-              <li>
-                <Link href="/about/our-story" className="hover:text-[#D4E012] transition-colors">
-                  Our Story &amp; Milestones
-                </Link>
-              </li>
-              <li>
-                <Link href="/about/initiatives" className="hover:text-[#D4E012] transition-colors">
-                  Key Sustainability Initiatives
-                </Link>
-              </li>
-              <li>
-                <Link href="/careers" className="hover:text-[#D4E012] transition-colors">
-                  Careers &amp; Life at Sarhat
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-[#D4E012] transition-colors">
-                  Discuss a Project / Contact
-                </Link>
-              </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Bar: Interchanged Left & Right + Added Cookie Policy */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-mono font-semibold">
-          {/* Left: Policy Links (Privacy Policy, Terms of Service, Cookie Policy) */}
-          <div className="flex items-center gap-4 sm:gap-6 whitespace-nowrap">
+        {/* Bottom Bar */}
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-mono">
+          {/* Policy Links */}
+          <div className="flex items-center gap-4 whitespace-nowrap">
             <a href="#" className="hover:text-[#D4E012] transition-colors">
               PRIVACY POLICY
             </a>
-            <span className="text-slate-700">•</span>
+            <span className="text-slate-800">•</span>
             <a href="#" className="hover:text-[#D4E012] transition-colors">
               TERMS OF SERVICE
             </a>
-            <span className="text-slate-700">•</span>
+            <span className="text-slate-800">•</span>
             <a href="#" className="hover:text-[#D4E012] transition-colors">
               COOKIE POLICY
             </a>
           </div>
 
-          {/* Middle: Powered by Prolaksh */}
+          {/* Powered by */}
           <div className="text-[11px] tracking-widest text-slate-400 uppercase font-mono font-bold">
             POWERED BY <span className="text-white font-extrabold">PROLAKSH</span>
           </div>
 
-          {/* Right: Copyright & Back To Top */}
-          <div className="flex items-center gap-4 whitespace-nowrap">
+          {/* Copyright & Scroll Top */}
+          <div className="flex items-center gap-3 whitespace-nowrap">
             <span>© {new Date().getFullYear()} SARHAT EPC PVT. LTD. ALL RIGHTS RESERVED.</span>
             <button
               onClick={scrollToTop}
               aria-label="Back to Top"
-              className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-800/80 border border-slate-700 text-[#D4E012] hover:bg-[#D4E012] hover:text-black transition-all duration-300 ml-1 shadow-md cursor-pointer"
+              className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-900 border border-slate-800 text-[#D4E012] hover:bg-[#D4E012] hover:text-black transition-all ml-1 shadow-md cursor-pointer"
             >
               <ArrowUp className="w-4 h-4" />
             </button>

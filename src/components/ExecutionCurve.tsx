@@ -10,8 +10,6 @@ import {
   Zap,
   RefreshCw,
   CheckCircle2,
-  Play,
-  Pause,
   ChevronLeft,
   ChevronRight,
   ArrowRight,
@@ -156,16 +154,14 @@ export default function ExecutionCurve() {
 
   // Active step index
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
 
-  // Auto-play rotation effect
+  // Auto-play rotation effect (continuous)
   useEffect(() => {
-    if (!isPlaying) return;
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % phases.length);
     }, 3200);
     return () => clearInterval(interval);
-  }, [isPlaying, phases.length]);
+  }, [phases.length]);
 
   const activePhase = phases[activeIndex];
   const ActiveIcon = activePhase.icon;
@@ -503,7 +499,7 @@ export default function ExecutionCurve() {
         </ScrollReveal>
 
         {/* ------------------------------------------------------------- */}
-        {/* INTERACTIVE CONTROLS BAR (Play/Pause & Step Navigation) */}
+        {/* INTERACTIVE CONTROLS BAR (Step Navigation) */}
         {/* ------------------------------------------------------------- */}
         <div className="flex items-center justify-center gap-3 sm:gap-4 mt-6 sm:mt-8">
           <button
@@ -514,23 +510,6 @@ export default function ExecutionCurve() {
             aria-label="Previous Phase"
           >
             <ChevronLeft className="w-5 h-5" />
-          </button>
-
-          <button
-            onClick={() => setIsPlaying(!isPlaying)}
-            className="px-5 sm:px-6 py-2.5 rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-[11px] sm:text-xs uppercase tracking-wider flex items-center gap-2 transition-all shadow-lg shadow-[#D4E012]/20 transform hover:scale-105 active:scale-95"
-          >
-            {isPlaying ? (
-              <>
-                <Pause className="w-4 h-4 text-black fill-current" />
-                <span>PAUSE CYCLE</span>
-              </>
-            ) : (
-              <>
-                <Play className="w-4 h-4 text-black fill-current" />
-                <span>AUTO PLAY ROADMAP</span>
-              </>
-            )}
           </button>
 
           <button
