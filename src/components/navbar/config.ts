@@ -57,6 +57,8 @@ export interface MegaNavEntry {
   items: NavItemLink[];
   featured?: FeaturedContent;
   viewAllLabel?: string;
+  /** Plain link to `href` with no dropdown (desktop) or accordion (mobile). */
+  linkOnly?: boolean;
 }
 
 /** Edit this array to change the desktop mega menus and the mobile accordion together. */
@@ -115,6 +117,7 @@ export const navigationConfig: MegaNavEntry[] = [
     key: "projects",
     label: "Projects",
     type: "mega",
+    linkOnly: true,
     href: "/projects",
     tag: "Projects",
     width: 980,

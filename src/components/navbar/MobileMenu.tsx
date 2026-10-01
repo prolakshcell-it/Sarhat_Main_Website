@@ -33,6 +33,21 @@ function MobileAccordion({
   onNavigate: () => void;
 }) {
   const panelId = `mobile-acc-${entry.key}`;
+  if (entry.linkOnly) {
+    return (
+      <li>
+        <Link
+          href={entry.href}
+          onClick={onNavigate}
+          aria-current={active ? "page" : undefined}
+          className={`${ROW} ${FOCUS} ${active ? "text-[#D4E012]" : "text-white"}`}
+        >
+          <span>{entry.label}</span>
+          <ArrowUpRight className="h-5 w-5 text-slate-400" />
+        </Link>
+      </li>
+    );
+  }
   return (
     <li>
       <button

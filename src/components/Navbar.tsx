@@ -267,7 +267,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
                   controlsId="mega-menu-panel"
                   isOpen={open === entry.key}
                   isActive={isEntryActive(entry, pathname)}
-                  onPointerEnter={(e) => onTriggerEnter(entry.key, e)}
+                  onPointerEnter={(e) => (entry.linkOnly ? open && closeMenu() : onTriggerEnter(entry.key, e))}
                   onPointerLeave={() => hoverTimer.current && clearTimeout(hoverTimer.current)}
                   onClick={(e) => onTriggerClick(entry.key, e)}
                   onKeyDown={(e) => onTriggerKeyDown(entry.key, e)}
