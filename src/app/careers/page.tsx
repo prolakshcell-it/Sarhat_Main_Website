@@ -35,7 +35,7 @@ import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import ScrollIndicator from "@/components/ScrollIndicator";
-import InteractiveBenefitsOrbit from "@/components/InteractiveBenefitsOrbit";
+import EmployeeBenefits from "@/components/employee-benefits/EmployeeBenefits";
 import InspiringCultureSection from "@/components/InspiringCultureSection";
 
 interface JobRole {
@@ -412,9 +412,9 @@ export default function CareersPage() {
           </section>
 
           {/* ------------------------------------------------------------- */}
-          {/* SECTION 2: EMPLOYEE BENEFITS (INTERACTIVE STAGGERED ORBIT) */}
+          {/* SECTION 2: EMPLOYEE BENEFITS (CAREER GROWTH LADDER) */}
           {/* ------------------------------------------------------------- */}
-          <InteractiveBenefitsOrbit />
+          <EmployeeBenefits />
 
           {/* ------------------------------------------------------------- */}
           {/* SECTION: A CULTURE THAT INSPIRES, A TEAM THAT EMPOWERS */}
