@@ -4,9 +4,9 @@ import {
   Zap,
   Building2,
   Factory,
-  FolderKanban,
   Handshake,
-  Cpu,
+  Package,
+  HardHat,
   Wrench,
   Users,
   Newspaper,
@@ -55,8 +55,8 @@ export interface MegaNavEntry {
   /** Columns the link list uses inside the panel. */
   columns: 1 | 2;
   items: NavItemLink[];
-  featured: FeaturedContent;
-  viewAllLabel: string;
+  featured?: FeaturedContent;
+  viewAllLabel?: string;
 }
 
 /** Edit this array to change the desktop mega menus and the mobile accordion together. */
@@ -173,39 +173,32 @@ export const navigationConfig: MegaNavEntry[] = [
     viewAllLabel: "View all partner programs",
     items: [
       {
-        id: "technology-partners",
-        title: "Technology Partners",
-        description: "OEMs and Tier-1 equipment suppliers.",
-        icon: Cpu,
+        id: "supply-partners",
+        title: "Supply Partners",
+        description: "Register as a Vendor",
+        icon: Package,
         href: "/supply-partners",
       },
       {
-        id: "strategic-partners",
-        title: "Strategic Partners",
-        description: "Lead generation and project co-execution.",
-        icon: Handshake,
-        href: "/partners",
-      },
-      {
-        id: "epc-partners",
-        title: "EPC Partners",
-        description: "Empanelled civil and electrical contractors.",
-        icon: Wrench,
+        id: "execution-partners",
+        title: "Execution Partners",
+        description: "Register as a Contractor",
+        icon: HardHat,
         href: "/execution-contractors",
       },
       {
-        id: "our-clients",
-        title: "Our Clients",
-        description: "See the projects we have delivered.",
-        icon: FolderKanban,
-        href: "/projects",
+        id: "project-partnerships",
+        title: "Project Partnerships",
+        description: "Discuss a Partnership",
+        icon: Handshake,
+        href: "/partners",
       },
     ],
     featured: {
       eyebrow: "Partner with us",
       title: "Building stronger energy ecosystems",
       lead: "Grow alongside India's solar market.",
-      text: "Programs for suppliers, contractors and sales networks.",
+      text: "Programs for suppliers, contractors and project partners.",
       cta: "Partner with Sarhat",
       href: "/partners",
       image: "/images/partner-hero-bg.jpg",
@@ -348,4 +341,6 @@ export const utilityLinks = [
 ];
 
 export const isEntryActive = (entry: MegaNavEntry, pathname: string) =>
-  [entry.href, ...(entry.match ?? [])].some((p) => pathname === p || pathname.startsWith(p + "/"));
+  [entry.href, ...(entry.match ?? [])].some(
+    (p) => pathname === p || pathname.startsWith(p + "/"),
+  );

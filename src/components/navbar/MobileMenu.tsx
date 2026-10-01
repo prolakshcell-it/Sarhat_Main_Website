@@ -5,9 +5,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, ChevronRight, Minus, Plus, X } from "lucide-react";
-import { isEntryActive, navigationConfig, utilityLinks, type MegaNavEntry } from "./config";
+import {
+  isEntryActive,
+  navigationConfig,
+  utilityLinks,
+  type MegaNavEntry,
+} from "./config";
 
-const FOCUS = "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4E012]";
+const FOCUS =
+  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4E012]";
 const ROW =
   "flex min-h-[56px] w-full items-center justify-between gap-3 border-b border-white/10 px-1 text-left text-base font-bold uppercase tracking-[0.12em] transition-colors";
 
@@ -37,7 +43,11 @@ function MobileAccordion({
         className={`${ROW} ${FOCUS} ${open || active ? "text-[#D4E012]" : "text-white"}`}
       >
         <span>{entry.label}</span>
-        {open ? <Minus className="h-5 w-5" /> : <Plus className="h-5 w-5 text-slate-400" />}
+        {open ? (
+          <Minus className="h-5 w-5" />
+        ) : (
+          <Plus className="h-5 w-5 text-slate-400" />
+        )}
       </button>
       <AnimatePresence initial={false}>
         {open && (
@@ -59,26 +69,35 @@ function MobileAccordion({
                       onClick={onNavigate}
                       className={`flex min-h-[48px] items-center gap-3 rounded-xl px-3 py-2 text-slate-200 transition-colors hover:bg-white/5 hover:text-white ${FOCUS}`}
                     >
-                      <Icon className="h-5 w-5 shrink-0 text-[#D4E012]" strokeWidth={1.75} />
+                      <Icon
+                        className="h-5 w-5 shrink-0 text-[#D4E012]"
+                        strokeWidth={1.75}
+                      />
                       <span className="min-w-0 flex-1">
-                        <span className="block text-[15px] font-semibold">{item.title}</span>
-                        <span className="block text-[13px] leading-snug text-slate-400">{item.description}</span>
+                        <span className="block text-[15px] font-semibold">
+                          {item.title}
+                        </span>
+                        <span className="block text-[13px] leading-snug text-slate-400">
+                          {item.description}
+                        </span>
                       </span>
                       <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
                     </Link>
                   </li>
                 );
               })}
-              <li>
-                <Link
-                  href={entry.href}
-                  onClick={onNavigate}
-                  className={`flex min-h-[44px] items-center gap-2 px-3 text-xs font-bold uppercase tracking-[0.14em] text-[#D4E012] ${FOCUS}`}
-                >
-                  {entry.viewAllLabel}
-                  <ArrowUpRight className="h-4 w-4" />
-                </Link>
-              </li>
+              {entry.viewAllLabel && (
+                <li>
+                  <Link
+                    href={entry.href}
+                    onClick={onNavigate}
+                    className={`flex min-h-[44px] items-center gap-2 px-3 text-xs font-bold uppercase tracking-[0.14em] text-[#D4E012] ${FOCUS}`}
+                  >
+                    {entry.viewAllLabel}
+                    <ArrowUpRight className="h-4 w-4" />
+                  </Link>
+                </li>
+              )}
             </ul>
           </motion.div>
         )}
@@ -143,8 +162,19 @@ export default function MobileMenu({
             className="fixed inset-y-0 right-0 z-[70] flex h-dvh w-full max-w-md flex-col border-l border-white/10 bg-[#05080C] font-sans-ui text-white lg:hidden"
           >
             <div className="flex shrink-0 items-center justify-between border-b border-white/10 px-5 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))]">
-              <Link href="/" onClick={onClose} aria-label="Sarhat home" className={`rounded-md ${FOCUS}`}>
-                <Image src="/images/logo.png" alt="SARHAT" width={260} height={88} className="h-11 w-auto object-contain" />
+              <Link
+                href="/"
+                onClick={onClose}
+                aria-label="Sarhat home"
+                className={`rounded-md ${FOCUS}`}
+              >
+                <Image
+                  src="/images/logo.png"
+                  alt="SARHAT"
+                  width={260}
+                  height={88}
+                  className="h-11 w-auto object-contain"
+                />
               </Link>
               <button
                 ref={closeRef}
@@ -171,7 +201,11 @@ export default function MobileMenu({
                     open={expanded === entry.key}
                     active={isEntryActive(entry, pathname)}
                     reduce={reduce}
-                    onToggle={() => setExpanded((cur) => (cur === entry.key ? null : entry.key))}
+                    onToggle={() =>
+                      setExpanded((cur) =>
+                        cur === entry.key ? null : entry.key,
+                      )
+                    }
                     onNavigate={onClose}
                   />
                 ))}
