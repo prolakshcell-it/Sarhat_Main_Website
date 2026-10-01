@@ -33,7 +33,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
+import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import InteractiveBenefitsOrbit from "@/components/InteractiveBenefitsOrbit";
+import InspiringCultureSection from "@/components/InspiringCultureSection";
 
 interface JobRole {
   id: string;
@@ -162,7 +165,6 @@ export default function CareersPage() {
   const [selectedDept, setSelectedDept] = useState<string>("All");
   const [selectedLoc, setSelectedLoc] = useState<string>("All");
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
-  const [activeBenefitIndex, setActiveBenefitIndex] = useState<number>(0);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -214,7 +216,7 @@ export default function CareersPage() {
 
   const handleApplySelectRole = (roleTitle: string) => {
     setFormData((prev) => ({ ...prev, role: roleTitle }));
-    const formElement = document.getElementById("application-form-section");
+    const formElement = document.getElementById("current-openings") || document.getElementById("application-form-section");
     if (formElement) {
       formElement.scrollIntoView({ behavior: "smooth" });
     }
@@ -244,52 +246,6 @@ export default function CareersPage() {
       }, 4000);
     }, 1200);
   };
-
-  // 6 Employee Benefits Items for Orbit Diagram
-  const benefits = [
-    {
-      id: "salary",
-      title: "Competitive Salary",
-      subtitle: "Market-aligned compensation with performance-based increments and rewards.",
-      icon: Wallet,
-      angle: 270, // Top (12 o'clock)
-    },
-    {
-      id: "learning",
-      title: "Learning & Development",
-      subtitle: "In-house technical training, certifications, PVsyst exposure, and hands-on site learning.",
-      icon: GraduationCap,
-      angle: 330, // Top Right (2 o'clock)
-    },
-    {
-      id: "health",
-      title: "Health & Wellness",
-      subtitle: "Medical insurance coverage for you and your family plus health programs.",
-      icon: Heart,
-      angle: 30, // Bottom Right (4 o'clock)
-    },
-    {
-      id: "flexibility",
-      title: "Flexible Environment",
-      subtitle: "Collaborative workspace with a healthy work-life balance and open communication.",
-      icon: Coffee,
-      angle: 90, // Bottom (6 o'clock)
-    },
-    {
-      id: "progression",
-      title: "Career Progression",
-      subtitle: "Clear growth paths with regular reviews, mentorship, and internal promotions.",
-      icon: TrendingUp,
-      angle: 150, // Bottom Left (8 o'clock)
-    },
-    {
-      id: "mission",
-      title: "Green Mission",
-      subtitle: "Be part of India's most impactful renewable energy and infrastructure transition.",
-      icon: Sun,
-      angle: 210, // Top Left (10 o'clock)
-    },
-  ];
 
   return (
     <SmoothScroll>
@@ -333,49 +289,23 @@ export default function CareersPage() {
                   <p className="text-base sm:text-lg text-slate-200 font-normal max-w-3xl text-center leading-relaxed mb-8 drop-shadow-md">
                     Join Sarhat as we expand from solar EPC into renewable energy, storage, grid infrastructure and civil execution. We value ownership, learning, safety, and people who want to build things that last.
                   </p>
+
+                  {/* Current Openings Pill Outline Button */}
+                  <button
+                    onClick={() => {
+                      const el = document.getElementById("current-openings");
+                      if (el) {
+                        el.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }}
+                    className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full border border-white text-white font-sans-ui text-sm sm:text-base font-medium tracking-wide hover:bg-white hover:text-slate-950 transition-all duration-300 shadow-xl hover:scale-105 active:scale-95 group cursor-pointer"
+                  >
+                    <span>Current Openings</span>
+                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </button>
                 </div>
               </ScrollReveal>
 
-              {/* Stats Bar */}
-              <ScrollReveal direction="up" distance={40} delay={0.15}>
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 w-full max-w-5xl">
-                  <div className="bg-black/75 backdrop-blur-xl border border-white/20 rounded-2xl p-4 text-center shadow-2xl">
-                    <div className="font-serif-display text-3xl sm:text-4xl font-bold text-[#D4E012] tracking-tight mb-1">
-                      11-50
-                    </div>
-                    <div className="text-[10px] font-mono text-slate-300 uppercase tracking-widest">
-                      CURRENT SIZE RANGE
-                    </div>
-                  </div>
-
-                  <div className="bg-black/75 backdrop-blur-xl border border-white/20 rounded-2xl p-4 text-center shadow-2xl">
-                    <div className="font-serif-display text-3xl sm:text-4xl font-bold text-white tracking-tight mb-1">
-                      2024
-                    </div>
-                    <div className="text-[10px] font-mono text-slate-300 uppercase tracking-widest">
-                      FOUNDED
-                    </div>
-                  </div>
-
-                  <div className="bg-black/75 backdrop-blur-xl border border-white/20 rounded-2xl p-4 text-center shadow-2xl">
-                    <div className="font-serif-display text-3xl sm:text-4xl font-bold text-[#5EE72D] tracking-tight mb-1">
-                      7+
-                    </div>
-                    <div className="text-[10px] font-mono text-slate-300 uppercase tracking-widest">
-                      PORTFOLIO STATES
-                    </div>
-                  </div>
-
-                  <div className="bg-black/75 backdrop-blur-xl border border-white/20 rounded-2xl p-4 text-center shadow-2xl">
-                    <div className="font-serif-display text-3xl sm:text-4xl font-bold text-white tracking-tight mb-1">
-                      47.77 MW
-                    </div>
-                    <div className="text-[10px] font-mono text-slate-300 uppercase tracking-widest">
-                      SERVED TO BUILD
-                    </div>
-                  </div>
-                </div>
-              </ScrollReveal>
             </motion.div>
 
             {/* Mouse Scroll Indicator */}
@@ -393,9 +323,9 @@ export default function CareersPage() {
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-4xl mx-auto mb-16">
                   {/* Yellow/Lime Pill Badge */}
-                  <div className="inline-block px-5 py-2 rounded-full bg-[#D4E012] text-slate-950 font-bold text-xs uppercase tracking-wider shadow-sm mb-6">
+                  <AnimatedPillBadge className="mb-6">
                     Why Join Us
-                  </div>
+                  </AnimatedPillBadge>
 
                   {/* Main Headline with Yellow Highlight */}
                   <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-bold text-slate-900 tracking-tight leading-tight mb-6">
@@ -482,203 +412,14 @@ export default function CareersPage() {
           </section>
 
           {/* ------------------------------------------------------------- */}
-          {/* SECTION 2: EMPLOYEE BENEFITS (REFERENCE IMAGE 2) */}
+          {/* SECTION 2: EMPLOYEE BENEFITS (INTERACTIVE STAGGERED ORBIT) */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-24 bg-white border-b border-slate-200/80 relative z-10 overflow-hidden">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <ScrollReveal direction="up" distance={30}>
-                <div className="text-center max-w-4xl mx-auto mb-16">
-                  {/* Yellow/Lime Pill Badge */}
-                  <div className="inline-block px-5 py-2 rounded-full bg-[#D4E012] text-slate-950 font-bold text-xs uppercase tracking-wider shadow-sm mb-6">
-                    Employee Benefits
-                  </div>
+          <InteractiveBenefitsOrbit />
 
-                  {/* Main Headline */}
-                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-bold text-slate-900 tracking-tight leading-tight mb-6">
-                    What We <span className="text-[#707B00]">Offer You</span>
-                  </h2>
-
-                  {/* Subtitle */}
-                  <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-3xl mx-auto">
-                    We believe great work deserves great support. Here's what you get when you join Sarhat Energy & Infrastructure.
-                  </p>
-                </div>
-              </ScrollReveal>
-
-              {/* Central Circular Orbital Diagram (Desktop & Tablet) */}
-              <ScrollReveal direction="up" distance={40} delay={0.15}>
-                <div className="relative max-w-5xl mx-auto min-h-[560px] flex items-center justify-center my-8">
-                  {/* SVG Outer Dotted Orbit Line */}
-                  <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 600 600">
-                    <circle
-                      cx="300"
-                      cy="300"
-                      r="220"
-                      fill="none"
-                      stroke="#D4E012"
-                      strokeWidth="2"
-                      strokeDasharray="6 6"
-                      className="opacity-75"
-                    />
-                  </svg>
-
-                  {/* Center Circle Image Frame */}
-                  <div className="relative w-56 h-56 sm:w-64 sm:h-64 rounded-full p-2 bg-gradient-to-br from-[#D4E012] to-[#5EE72D] shadow-2xl z-20 overflow-hidden flex items-center justify-center">
-                    <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white">
-                      <Image
-                        src="/images/hero-solar.jpg"
-                        alt="Sarhat Site Engineers"
-                        fill
-                        className="object-cover object-center"
-                      />
-                      <div className="absolute inset-0 bg-slate-950/20 backdrop-blur-[1px]" />
-                      <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 text-white z-10">
-                        <div className="w-8 h-8 rounded-full bg-[#D4E012] text-black flex items-center justify-center mb-1 font-bold text-xs">
-                          ★
-                        </div>
-                        <span className="font-serif-display font-bold text-sm text-white drop-shadow-md">
-                          Sarhat Team
-                        </span>
-                        <span className="text-[10px] font-mono text-[#D4E012]">37+ Specialists</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 6 Orbit Benefit Nodes (Positioned around the center circle) */}
-                  <div className="hidden md:block absolute inset-0 pointer-events-auto">
-                    {/* 1. Competitive Salary (Top) */}
-                    <div className="absolute top-2 left-1/2 -translate-x-1/2 flex flex-col items-center text-center max-w-[200px]">
-                      <button
-                        onClick={() => setActiveBenefitIndex(0)}
-                        className={`w-14 h-14 rounded-full border-2 flex items-center justify-center mb-2 shadow-lg transition-all duration-300 ${
-                          activeBenefitIndex === 0
-                            ? "bg-[#D4E012] border-[#707B00] text-black scale-115 shadow-[#D4E012]/50"
-                            : "bg-white border-[#D4E012]/60 text-[#707B00] hover:border-[#707B00]"
-                        }`}
-                      >
-                        <Wallet className="w-6 h-6" />
-                      </button>
-                      <h4 className="text-xs font-serif-display font-bold text-slate-900 mb-0.5">Competitive Salary</h4>
-                      <p className="text-[11px] text-slate-500 font-normal leading-tight">
-                        Market-aligned compensation with performance increments.
-                      </p>
-                    </div>
-
-                    {/* 2. Learning & Development (Top Right) */}
-                    <div className="absolute top-24 right-10 flex flex-col items-start text-left max-w-[210px]">
-                      <button
-                        onClick={() => setActiveBenefitIndex(1)}
-                        className={`w-14 h-14 rounded-full border-2 flex items-center justify-center mb-2 shadow-lg transition-all duration-300 ${
-                          activeBenefitIndex === 1
-                            ? "bg-[#D4E012] border-[#707B00] text-black scale-115 shadow-[#D4E012]/50"
-                            : "bg-white border-[#D4E012]/60 text-[#707B00] hover:border-[#707B00]"
-                        }`}
-                      >
-                        <GraduationCap className="w-6 h-6" />
-                      </button>
-                      <h4 className="text-xs font-serif-display font-bold text-slate-900 mb-0.5">Learning & Development</h4>
-                      <p className="text-[11px] text-slate-500 font-normal leading-tight">
-                        In-house technical training, certifications & site exposure.
-                      </p>
-                    </div>
-
-                    {/* 3. Health & Wellness (Bottom Right) */}
-                    <div className="absolute bottom-24 right-10 flex flex-col items-start text-left max-w-[210px]">
-                      <button
-                        onClick={() => setActiveBenefitIndex(2)}
-                        className={`w-14 h-14 rounded-full border-2 flex items-center justify-center mb-2 shadow-lg transition-all duration-300 ${
-                          activeBenefitIndex === 2
-                            ? "bg-[#D4E012] border-[#707B00] text-black scale-115 shadow-[#D4E012]/50"
-                            : "bg-white border-[#D4E012]/60 text-[#707B00] hover:border-[#707B00]"
-                        }`}
-                      >
-                        <Heart className="w-6 h-6" />
-                      </button>
-                      <h4 className="text-xs font-serif-display font-bold text-slate-900 mb-0.5">Health & Wellness</h4>
-                      <p className="text-[11px] text-slate-500 font-normal leading-tight">
-                        Medical insurance coverage for you and your family.
-                      </p>
-                    </div>
-
-                    {/* 4. Flexible Environment (Bottom) */}
-                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex flex-col items-center text-center max-w-[200px]">
-                      <button
-                        onClick={() => setActiveBenefitIndex(3)}
-                        className={`w-14 h-14 rounded-full border-2 flex items-center justify-center mb-2 shadow-lg transition-all duration-300 ${
-                          activeBenefitIndex === 3
-                            ? "bg-[#D4E012] border-[#707B00] text-black scale-115 shadow-[#D4E012]/50"
-                            : "bg-white border-[#D4E012]/60 text-[#707B00] hover:border-[#707B00]"
-                        }`}
-                      >
-                        <Coffee className="w-6 h-6" />
-                      </button>
-                      <h4 className="text-xs font-serif-display font-bold text-slate-900 mb-0.5">Flexible Environment</h4>
-                      <p className="text-[11px] text-slate-500 font-normal leading-tight">
-                        Collaborative workspace with a healthy work-life balance.
-                      </p>
-                    </div>
-
-                    {/* 5. Career Progression (Bottom Left) */}
-                    <div className="absolute bottom-24 left-10 flex flex-col items-end text-right max-w-[210px]">
-                      <button
-                        onClick={() => setActiveBenefitIndex(4)}
-                        className={`w-14 h-14 rounded-full border-2 flex items-center justify-center mb-2 shadow-lg transition-all duration-300 ${
-                          activeBenefitIndex === 4
-                            ? "bg-[#D4E012] border-[#707B00] text-black scale-115 shadow-[#D4E012]/50"
-                            : "bg-white border-[#D4E012]/60 text-[#707B00] hover:border-[#707B00]"
-                        }`}
-                      >
-                        <TrendingUp className="w-6 h-6" />
-                      </button>
-                      <h4 className="text-xs font-serif-display font-bold text-slate-900 mb-0.5">Career Progression</h4>
-                      <p className="text-[11px] text-slate-500 font-normal leading-tight">
-                        Clear growth paths with regular reviews & promotions.
-                      </p>
-                    </div>
-
-                    {/* 6. Green Mission (Top Left) */}
-                    <div className="absolute top-24 left-10 flex flex-col items-end text-right max-w-[210px]">
-                      <button
-                        onClick={() => setActiveBenefitIndex(5)}
-                        className={`w-14 h-14 rounded-full border-2 flex items-center justify-center mb-2 shadow-lg transition-all duration-300 ${
-                          activeBenefitIndex === 5
-                            ? "bg-[#D4E012] border-[#707B00] text-black scale-115 shadow-[#D4E012]/50"
-                            : "bg-white border-[#D4E012]/60 text-[#707B00] hover:border-[#707B00]"
-                        }`}
-                      >
-                        <Sun className="w-6 h-6" />
-                      </button>
-                      <h4 className="text-xs font-serif-display font-bold text-slate-900 mb-0.5">Green Mission</h4>
-                      <p className="text-[11px] text-slate-500 font-normal leading-tight">
-                        Be part of India's most impactful clean energy mission.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Mobile Responsive Grid for Benefits */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden mt-8">
-                  {benefits.map((b) => {
-                    const IconComp = b.icon;
-                    return (
-                      <div
-                        key={b.id}
-                        className="bg-[#F8FAF8] border border-slate-200/90 rounded-2xl p-5 flex items-start gap-4 shadow-sm"
-                      >
-                        <div className="w-12 h-12 rounded-full bg-[#D4E012]/20 border border-[#D4E012] flex items-center justify-center text-[#707B00] shrink-0">
-                          <IconComp className="w-5 h-5" />
-                        </div>
-                        <div>
-                          <h4 className="text-sm font-serif-display font-bold text-slate-900 mb-1">{b.title}</h4>
-                          <p className="text-xs text-slate-600 font-normal leading-relaxed">{b.subtitle}</p>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </ScrollReveal>
-            </div>
-          </section>
+          {/* ------------------------------------------------------------- */}
+          {/* SECTION: A CULTURE THAT INSPIRES, A TEAM THAT EMPOWERS */}
+          {/* ------------------------------------------------------------- */}
+          <InspiringCultureSection />
 
           {/* ------------------------------------------------------------- */}
           {/* SECTION: LIFE @ SARHAT ENERGY (REFERENCE IMAGE) */}
@@ -688,9 +429,9 @@ export default function CareersPage() {
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-4xl mx-auto mb-16">
                   {/* Yellow/Lime Pill Badge */}
-                  <div className="inline-block px-5 py-2 rounded-full bg-[#D4E012] text-slate-950 font-bold text-xs uppercase tracking-wider shadow-sm mb-6">
+                  <AnimatedPillBadge className="mb-6">
                     Life @ Sarhat
-                  </div>
+                  </AnimatedPillBadge>
 
                   {/* Main Headline */}
                   <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-bold text-slate-900 tracking-tight leading-tight mb-6">
@@ -842,14 +583,14 @@ export default function CareersPage() {
           {/* ------------------------------------------------------------- */}
           {/* SECTION 3: OPEN POSITIONS & APPLICATION FORM (REFERENCE IMAGE 3) */}
           {/* ------------------------------------------------------------- */}
-          <section id="application-form-section" className="py-24 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10">
+          <section id="current-openings" className="py-24 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10 scroll-mt-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-4xl mx-auto mb-12">
                   {/* Yellow/Lime Pill Badge */}
-                  <div className="inline-block px-5 py-2 rounded-full bg-[#D4E012] text-slate-950 font-bold text-xs uppercase tracking-wider shadow-sm mb-6">
+                  <AnimatedPillBadge className="mb-6">
                     Open Positions
-                  </div>
+                  </AnimatedPillBadge>
 
                   {/* Main Headline */}
                   <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-bold text-slate-900 tracking-tight leading-tight mb-6">
@@ -1136,9 +877,9 @@ export default function CareersPage() {
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-3xl mx-auto mb-16">
                   {/* Yellow/Lime Pill Badge */}
-                  <div className="inline-block px-5 py-2 rounded-full bg-[#D4E012] text-slate-950 font-bold text-xs uppercase tracking-wider shadow-sm mb-6">
+                  <AnimatedPillBadge className="mb-6">
                     Careers FAQs
-                  </div>
+                  </AnimatedPillBadge>
 
                   {/* Main Headline */}
                   <h2 className="text-3xl sm:text-5xl font-serif-display font-bold text-slate-900 tracking-tight leading-tight mb-6">

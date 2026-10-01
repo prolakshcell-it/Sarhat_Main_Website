@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, ArrowRight, Sun, Battery, Sprout, Zap, Route, Building2, X } from "lucide-react";
+import { ArrowUpRight, ArrowRight, Sun, Battery, Zap, Building2, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
@@ -55,7 +55,7 @@ export const capabilities: Capability[] = [
     fullDetails: "High-voltage and low-voltage electrical systems, AIS/GIS substations, power evacuation line corridors, relay protection, and seamless DISCOM grid connectivity.",
     specs: ["HT/LT Systems", "Substations (GIS/AIS)", "Evacuation Lines", "Protection & SCADA", "Grid Connectivity"],
     icon: Zap,
-    image: "/images/bess-substation.jpg",
+    image: "/images/substation-project.jpg",
     accentColor: "#5EE72D",
   },
   {
@@ -67,7 +67,7 @@ export const capabilities: Capability[] = [
     fullDetails: "Heavy-payload access roads, control room buildings, structural equipment foundations, industrial civil works, and comprehensive project site infrastructure.",
     specs: ["Access Roads", "Buildings & Control Rooms", "Equipment Foundations", "Industrial Civil Works", "Project Infrastructure"],
     icon: Building2,
-    image: "/images/india-map-tactical.jpg",
+    image: "/images/agrivoltaics-project.jpg",
     accentColor: "#5EE72D",
   },
 ];
@@ -78,17 +78,18 @@ export default function SolutionsGrid() {
 
   return (
     <section id="solutions" className="py-24 sm:py-28 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 select-none overflow-hidden font-sans-ui">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Full Viewport Width Outer Container - Touching Left & Right Edges */}
+      <div className="w-full max-w-none px-0">
 
         {/* Section Header */}
         <ScrollReveal direction="up" distance={40}>
-          <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="text-center max-w-5xl mx-auto mb-12 px-4 sm:px-6 lg:px-8">
             <AnimatedPillBadge className="mb-6">
               SOLUTIONS CAPABILITIES
             </AnimatedPillBadge>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-              Bulit on Solar.Growing into infrasturcture <br />
-              <span className="text-[#6DAD45] italic relative inline-block">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+              <span className="inline-block whitespace-nowrap">Built on Solar. Growing into infrastructure.</span> <br />
+              <span className="text-[#6DAD45] italic relative inline-block whitespace-nowrap">
                 One connected way to build.
                 <svg
                   className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
@@ -105,146 +106,119 @@ export default function SolutionsGrid() {
               </span>
             </h2>
             <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-              From renewable generation and storage to grid and civil infrastructure, our solutions are designed to work together.{" "}
-              <span className="text-[#707B00] font-semibold">
-                Hover any card to expand its capability view.
-              </span>
+              From renewable generation and storage to grid and civil infrastructure, our solutions are designed to work together.
             </p>
           </div>
         </ScrollReveal>
 
         {/* ------------------------------------------------------------- */}
-        {/* EXPANDING HORIZONTAL IMAGE ACCORDION GALLERY */}
+        {/* FULL-WIDTH SLANTED PARALLELOGRAM INTERACTIVE IMAGE ACCORDION */}
         {/* ------------------------------------------------------------- */}
         <ScrollReveal direction="up" distance={50} delay={0.15}>
-          <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 h-auto lg:h-[500px] w-full max-w-7xl mx-auto">
+          {/* Top Edge-to-Edge Sarhat Brand Rule Line */}
+          <div className="w-full h-1 bg-gradient-to-r from-[#6DAD45] via-[#D4E012] to-[#5EE72D] mb-4" />
+
+          {/* Edge-to-Edge Slanted Gallery */}
+          <div className="flex flex-col lg:flex-row gap-2 sm:gap-3 h-auto lg:h-[550px] w-full px-1 sm:px-2 lg:px-3 overflow-hidden py-1">
             {capabilities.map((item, index) => {
               const isActive = index === activeIndex;
-              const IconComp = item.icon;
 
               return (
                 <div
                   key={item.id}
                   onMouseEnter={() => setActiveIndex(index)}
                   onClick={() => setActiveIndex(index)}
-                  className={`relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-800 ease-[0.22,1,0.36,1] border ${isActive
-                    ? "lg:flex-[3.5] h-[400px] lg:h-full border-slate-400 shadow-2xl shadow-slate-300/60"
-                    : "lg:flex-[0.8] h-[90px] lg:h-full border-slate-200/90 hover:border-[#D4E012] bg-white"
-                    }`}
+                  className={`relative overflow-hidden cursor-pointer transition-all duration-700 ease-[0.22,1,0.36,1] border-2 border-white shadow-2xl ${
+                    isActive
+                      ? "lg:flex-[3.8] h-[460px] lg:h-full rounded-2xl z-20 shadow-slate-950/70"
+                      : "lg:flex-[0.9] h-[110px] lg:h-full rounded-2xl border-white/90 hover:border-[#D4E012] bg-slate-950 z-10"
+                  } lg:-skew-x-[6deg] group`}
                 >
-                  {/* Cover Background Image */}
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className={`object-cover transition-all duration-1000 ease-[0.22,1,0.36,1] ${isActive ? "scale-100 opacity-90" : "scale-110 opacity-30 grayscale group-hover:grayscale-0"
+                  {/* Un-skew Inner Wrapper so text and photos remain 100% straight */}
+                  <div className="relative h-full w-full lg:skew-x-[6deg] lg:scale-110">
+                    {/* Cover Background Image — 100% Bright, Crisp & Clear (Zero Grayscale/Fade) */}
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      priority={index === 0}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className={`object-cover object-center transition-all duration-700 ease-out brightness-105 contrast-105 ${
+                        isActive ? "scale-100 opacity-100" : "scale-100 opacity-90 hover:opacity-100"
                       }`}
-                  />
+                    />
 
-                  {/* Gradient Dark Overlays */}
-                  <div
-                    className={`absolute inset-0 transition-opacity duration-800 ${isActive
-                      ? "bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent"
-                      : "bg-slate-950/70 hover:bg-slate-950/40"
+                    {/* Soft Gradient Overlay at Bottom only (leaving top/middle image 100% clear & bright) */}
+                    <div
+                      className={`absolute inset-0 transition-opacity duration-700 ${
+                        isActive
+                          ? "bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"
+                          : "bg-slate-950/40 hover:bg-slate-950/20"
                       }`}
-                  ></div>
+                    />
 
-                  {/* ACTIVE EXPANDED CARD CONTENT */}
-                  {isActive ? (
-                    <motion.div
-                      initial={{ opacity: 0, x: -20, filter: "blur(6px)" }}
-                      animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-                      className="absolute inset-0 p-6 sm:p-10 flex flex-col justify-between z-20"
-                    >
-                      {/* Top Bar inside Active Card */}
-                      <div className="flex items-center justify-between">
-                        <span className="px-3.5 py-1 bg-slate-900/80 border border-white/20 text-white font-mono text-[10px] sm:text-[11px] font-bold rounded-full backdrop-blur-md uppercase tracking-wider flex items-center gap-2">
-                          <span
-                            className="w-2 h-2 rounded-full animate-ping bg-[#D4E012]"
-                          ></span>
+                    {/* ACTIVE EXPANDED CARD CONTENT */}
+                    {isActive ? (
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                        className="absolute inset-0 p-6 sm:p-10 flex flex-col justify-end z-20"
+                      >
+                        <div className="flex items-start gap-4">
+                          {/* Vertical Sarhat Volt Accent Bar */}
+                          <div className="w-1.5 h-24 bg-gradient-to-b from-[#D4E012] via-[#6DAD45] to-[#5EE72D] rounded-full shrink-0 mt-1 shadow-[0_0_15px_#D4E012]" />
+
+                          <div className="max-w-xl">
+                            {/* Top Sarhat Lime Pill Badge */}
+                            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md bg-[#6DAD45]/30 border border-[#6DAD45]/70 backdrop-blur-md text-[#D4E012] font-mono text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider mb-3 shadow-lg">
+                              <span className="w-2 h-2 rounded-full animate-ping bg-[#D4E012]" />
+                              {item.tag}
+                            </div>
+
+                            {/* Headline */}
+                            <h3 className="text-2xl sm:text-4xl font-serif-display font-medium text-white mb-2 leading-tight drop-shadow-lg">
+                              {item.headline}
+                            </h3>
+
+                            {/* Description */}
+                            <p className="text-xs sm:text-sm text-slate-100 font-normal leading-relaxed mb-6 max-w-lg drop-shadow-md">
+                              {item.description}
+                            </p>
+
+                            {/* Sarhat Brand CTA Button */}
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setModalCapability(item);
+                              }}
+                              className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-[11px] uppercase tracking-wider px-6 py-3 rounded-full transition-all shadow-xl shadow-[#D4E012]/30 flex items-center gap-2 group cursor-pointer"
+                            >
+                              <span>DISCOVER MORE</span>
+                              <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
+                            </button>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ) : (
+                      /* COLLAPSED NARROW STRIP VIEW */
+                      <div className="absolute inset-0 p-4 flex flex-col items-center justify-center text-center z-20">
+                        {/* Centered Multi-Line Uppercase Title with Backdrop Pill */}
+                        <div className="bg-slate-950/70 backdrop-blur-xs px-3 py-2 rounded-xl text-xs sm:text-sm font-extrabold text-white tracking-widest uppercase leading-snug text-center max-w-[140px] shadow-lg border border-white/20 group-hover:border-[#D4E012]">
                           {item.tag}
-                        </span>
-
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setModalCapability(item);
-                          }}
-                          className="p-3 rounded-full bg-white/10 hover:bg-[#D4E012] text-white hover:text-black border border-white/20 transition-colors backdrop-blur-md group"
-                          aria-label="View Full Details"
-                        >
-                          <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                        </button>
-                      </div>
-
-                      {/* Bottom Info inside Active Card */}
-                      <div className="max-w-xl">
-                        {/* Dot indicator matching reference images */}
-                        <div className="flex items-center gap-2 mb-2">
-                          <span
-                            className="w-2.5 h-2.5 rounded-full bg-[#D4E012] shadow-[0_0_10px_#D4E012]"
-                          ></span>
-                          <span className="text-xs font-mono font-semibold text-slate-200 uppercase tracking-widest">
-                            {item.title}
-                          </span>
-                        </div>
-
-                        <h3 className="text-2xl sm:text-4xl font-serif-display font-medium text-white mb-3 leading-tight drop-shadow-md">
-                          {item.headline}
-                        </h3>
-
-                        <p className="text-xs sm:text-sm text-slate-200 font-normal leading-relaxed mb-4 max-w-lg drop-shadow-sm">
-                          {item.description}
-                        </p>
-
-                        <div className="flex items-center gap-3">
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setModalCapability(item);
-                            }}
-                            className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-[11px] uppercase tracking-wider px-5 py-2.5 rounded-full transition-all shadow-lg shadow-[#D4E012]/20 flex items-center gap-2"
-                          >
-                            <span>INSPECT SPECIFICATIONS</span>
-                            <ArrowUpRight className="w-4 h-4 text-black" />
-                          </button>
                         </div>
                       </div>
-                    </motion.div>
-                  ) : (
-                    /* COLLAPSED CARD STRIP VIEW */
-                    <div className="absolute inset-0 p-4 sm:p-6 flex lg:flex-col items-center justify-between z-20">
-                      {/* Top Icon */}
-                      <div className="w-10 h-10 rounded-xl bg-slate-900/80 border border-white/15 flex items-center justify-center text-[#D4E012] backdrop-blur-md">
-                        <IconComp className="w-5 h-5 text-[#D4E012]" />
-                      </div>
-
-                      {/* Rotated Vertical Title for Desktop Accordion Strip */}
-                      <div className="hidden lg:block [writing-mode:vertical-lr] rotate-180 text-xs font-bold text-slate-200 uppercase tracking-widest whitespace-nowrap">
-                        {item.title}
-                      </div>
-
-                      {/* Horizontal Title for Mobile Accordion Strip */}
-                      <div className="lg:hidden text-xs font-bold text-slate-200 uppercase tracking-wider">
-                        {item.title}
-                      </div>
-
-                      {/* Bottom Number */}
-                      <span className="text-[10px] font-mono font-bold text-slate-400">
-                        0{index + 1}
-                      </span>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               );
             })}
           </div>
         </ScrollReveal>
 
-        {/* Section CTA Button */}
+        {/* Section Bottom CTA Button */}
         <ScrollReveal direction="up" distance={30} delay={0.2}>
-          <div className="mt-14 text-center">
+          <div className="mt-14 text-center px-4">
             <Link
               href="/solutions"
               className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"

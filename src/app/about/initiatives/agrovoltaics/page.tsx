@@ -78,7 +78,7 @@ export default function AgroVoltaicsPage() {
                     <span className="text-[#D4E012] italic font-normal">(PM-KUSUM Solar)</span>
                   </h1>
 
-                  <p className="text-base sm:text-xl text-slate-200 max-w-3xl text-center leading-relaxed font-normal drop-shadow-md">
+                  <p className="text-base sm:text-xl text-slate-200 max-w-5xl text-center leading-relaxed font-normal drop-shadow-md">
                     Dual-use land optimization harvesting clean solar power above active farmlands while elevating rural agricultural productivity across India.
                   </p>
                 </div>

@@ -12,6 +12,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import SmoothScroll from "@/components/SmoothScroll";
 import FinalCTA from "@/components/FinalCTA";
+import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 
 import {
   Users,
@@ -29,6 +30,7 @@ import {
   Shield,
   Smile,
   Flame,
+  Quote,
 } from "lucide-react";
 
 export default function CulturePeoplePage() {
@@ -99,7 +101,7 @@ export default function CulturePeoplePage() {
                     <span className="text-[#D4E012] italic font-normal">guide every project.</span>
                   </h1>
 
-                  <p className="text-base sm:text-lg text-slate-200 font-normal max-w-3xl text-center leading-relaxed mb-8 drop-shadow-md">
+                  <p className="text-base sm:text-lg text-slate-200 font-normal max-w-5xl text-center leading-relaxed mb-8 drop-shadow-md">
                     At Sarhat, our strength lies in our people. We foster an execution-driven, safety-first culture where engineering excellence meets deep mutual respect.
                   </p>
                 </div>
@@ -119,16 +121,28 @@ export default function CulturePeoplePage() {
           {/* ------------------------------------------------------------- */}
           {/* SECTION 1: CULTURE STATEMENT OVERVIEW */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80 relative z-10">
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80 relative z-10 overflow-hidden">
+            {/* Subtle background quote mark watermark */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-slate-100 font-serif text-[280px] sm:text-[340px] leading-none pointer-events-none select-none opacity-40">
+              &ldquo;
+            </div>
+
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
               <ScrollReveal direction="up" distance={30}>
-                <div className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-[#F3F7EE] border border-[#707B00]/30 text-[#707B00] font-mono font-bold text-xs uppercase tracking-[0.2em] mb-8">
+                <AnimatedPillBadge className="mb-6">
                   CULTURE & PURPOSE
+                </AnimatedPillBadge>
+
+                {/* Big Inverted Quote Icon Accent Box */}
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-br from-[#D4E012]/30 to-[#6DAD45]/20 border border-[#D4E012]/50 flex items-center justify-center mx-auto mb-8 shadow-sm">
+                  <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-[#707B00] rotate-180" />
                 </div>
 
-                <p className="text-xl sm:text-2xl md:text-3xl font-serif-display font-normal text-slate-900 leading-relaxed tracking-tight max-w-4xl mx-auto">
+                <p className="text-xl sm:text-2xl md:text-3xl font-serif-display font-normal text-slate-900 leading-relaxed tracking-tight max-w-4xl mx-auto relative">
+                  <span className="text-[#6DAD45] font-serif text-4xl sm:text-6xl inline-block -translate-y-1 sm:-translate-y-2 mr-1 sm:mr-2 select-none">&ldquo;</span>
                   <span className="font-semibold text-slate-950">Our culture, core values and team members drive our success.</span> We are a values-led company which informs how we engage with others as we aim to create{" "}
                   <span className="text-[#6DAD45] italic font-normal">sustained value for our people, partners and planet</span>. At Sarhat, we pride ourselves on creating a culture of safety, being respectful and working with integrity. Through our VIBES programme, we foster a sense of belonging, understanding and inclusivity. Our people are the foundation of our success; we invest in their continuous growth and development, supporting driven people with a range of diverse perspectives to thrive.
+                  <span className="text-[#6DAD45] font-serif text-4xl sm:text-6xl inline-block translate-y-2 sm:translate-y-3 ml-1 sm:ml-2 select-none">&rdquo;</span>
                 </p>
               </ScrollReveal>
             </div>
@@ -228,9 +242,9 @@ export default function CulturePeoplePage() {
               {/* Section Header */}
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-                  <div className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-[#F3F7EE] border border-[#707B00]/30 text-[#707B00] font-mono font-bold text-xs uppercase tracking-[0.2em] mb-4">
+                  <AnimatedPillBadge className="mb-4">
                     OUR GUIDING PRINCIPLES
-                  </div>
+                  </AnimatedPillBadge>
                   <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight mb-4">
                     Our core <span className="text-[#6DAD45] italic font-normal">values</span>
                   </h2>
@@ -328,73 +342,6 @@ export default function CulturePeoplePage() {
             </div>
           </section>
 
-          {/* ------------------------------------------------------------- */}
-          {/* SECTION 4: CAREERS BANNER (SPLIT SCREEN IMAGE & DARK CTA) */}
-          {/* ------------------------------------------------------------- */}
-          <section className="py-20 sm:py-28 bg-[#F8FAF8] relative z-10">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <ScrollReveal direction="up" distance={30}>
-                <div className="grid grid-cols-1 lg:grid-cols-12 rounded-3xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-950">
-                  
-                  {/* Left Column: Engineer Photo */}
-                  <div className="lg:col-span-6 relative min-h-[380px] sm:min-h-[460px]">
-                    <Image
-                      src="/images/hero-solar.jpg"
-                      alt="Sarhat Engineer Solar Site Worker"
-                      fill
-                      priority
-                      className="object-cover object-center"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-                    
-                    {/* Floating Badge on Image */}
-                    <div className="absolute bottom-6 left-6 right-6 bg-black/75 backdrop-blur-md border border-white/20 p-5 rounded-2xl text-white">
-                      <div className="text-xs font-mono font-bold text-[#D4E012] uppercase tracking-wider">
-                        SARHAT FIELD LEADERSHIP
-                      </div>
-                      <div className="text-sm font-medium text-slate-200 mt-1">
-                        Empowered teams building India&apos;s renewable energy backbone.
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Right Column: Dark Slate Brand CTA Box */}
-                  <div className="lg:col-span-6 bg-gradient-to-br from-slate-950 via-slate-900 to-[#0B132B] p-8 sm:p-14 flex flex-col justify-center text-white relative overflow-hidden">
-                    {/* Subtle Brand Accent Glow */}
-                    <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#D4E012]/15 rounded-full blur-3xl pointer-events-none" />
-                    <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-[#6DAD45]/15 rounded-full blur-3xl pointer-events-none" />
-
-                    <div className="relative z-10">
-                      <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#D4E012]/15 border border-[#D4E012]/30 text-[#D4E012] text-xs font-mono font-bold uppercase tracking-wider mb-6 backdrop-blur-md">
-                        <Sparkles className="w-3.5 h-3.5 text-[#D4E012]" />
-                        <span>CAREERS AT SARHAT</span>
-                      </div>
-
-                      <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-white tracking-tight leading-tight mb-6">
-                        Join Sarhat <br />
-                        <span className="text-[#D4E012] italic font-normal">& Build the Future.</span>
-                      </h2>
-
-                      <p className="text-slate-200 text-sm sm:text-base leading-relaxed font-normal mb-8">
-                        Choose a career where you are empowered to &apos;be the change&apos;. If you are passionate about supporting the energy transition and are looking to join a company focused on delivering renewable energy and battery storage solutions, visit our careers page to find out more about working at Sarhat.
-                      </p>
-
-                      <div>
-                        <Link
-                          href="/careers"
-                          className="inline-flex items-center gap-3 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-slate-950 font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all shadow-xl shadow-[#D4E012]/20 hover:scale-[1.03] active:scale-[0.98] group cursor-pointer"
-                        >
-                          <span>FIND YOUR NEXT ROLE</span>
-                          <ArrowRight className="w-4 h-4 text-slate-950 group-hover:translate-x-1 transition-transform" />
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </ScrollReveal>
-            </div>
-          </section>
 
           {/* ------------------------------------------------------------- */}
           {/* FINAL CTA SECTION */}

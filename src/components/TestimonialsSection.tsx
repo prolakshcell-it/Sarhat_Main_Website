@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Quote, Star, ChevronLeft, ChevronRight, CheckCircle2, ArrowRight } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight, CheckCircle2, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
 import AnimatedPillBadge from "./AnimatedPillBadge";
@@ -89,10 +89,43 @@ const testimonials: Testimonial[] = [
 ];
 
 export default function TestimonialsSection() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Repeat items for seamless infinite continuous scroll loop
-  const marqueeItems = [...testimonials, ...testimonials, ...testimonials];
+  // Automatic Left-to-Right Auto-scroll with loop & hover pause
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      if (scrollContainerRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+        if (scrollLeft + clientWidth >= scrollWidth - 30) {
+          scrollContainerRef.current.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          scrollContainerRef.current.scrollBy({ left: 430, behavior: "smooth" });
+        }
+      }
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const handlePrev = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -430, behavior: "smooth" });
+    }
+  };
+
+  const handleNext = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      if (scrollLeft + clientWidth >= scrollWidth - 30) {
+        scrollContainerRef.current.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        scrollContainerRef.current.scrollBy({ left: 430, behavior: "smooth" });
+      }
+    }
+  };
 
   return (
     <section id="testimonials" className="py-24 sm:py-28 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden select-none">
@@ -103,11 +136,11 @@ export default function TestimonialsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <ScrollReveal direction="up" distance={40}>
-          <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
             <AnimatedPillBadge className="mb-6">
               CLIENT & PARTNER ENDORSEMENTS
             </AnimatedPillBadge>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
               Trusted by India&apos;s <br />
               <span className="text-[#6DAD45] italic relative inline-block">
                 Clean Energy Leaders.
@@ -125,44 +158,26 @@ export default function TestimonialsSection() {
                 </svg>
               </span>
             </h2>
-            <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-              Read how our turnkey EPC execution, substation engineering, and grid connectivity deliver measurable performance across India.
-            </p>
           </div>
         </ScrollReveal>
       </div>
 
-      {/* Horizontal Cards Slider Track (Moving Left to Right continuously) */}
-      <div
-        className="relative w-full overflow-hidden mt-4 py-4"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
-        {/* Side Gradient Fade Masks */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#F8FAF8] via-[#F8FAF8]/90 to-transparent z-20 pointer-events-none"></div>
-        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#F8FAF8] via-[#F8FAF8]/90 to-transparent z-20 pointer-events-none"></div>
-
-        {/* Continuous Motion Track (Moving Left to Right) */}
-        <motion.div
-          animate={{ x: isPaused ? undefined : ["-50%", "0%"] }}
-          transition={{
-            x: {
-              repeat: Infinity,
-              repeatType: "loop",
-              duration: 35,
-              ease: "linear",
-            },
-          }}
-          className="flex gap-6 w-max cursor-grab active:cursor-grabbing"
+      {/* Horizontal Cards Slider Track (Auto-Scrolling, Pause on Hover) */}
+      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          ref={scrollContainerRef}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          className="flex gap-6 overflow-x-auto scroll-smooth py-4 px-2 sm:px-4 snap-x scrollbar-none"
         >
-          {marqueeItems.map((item, idx) => (
+          {testimonials.map((item) => (
             <div
-              key={`${item.id}-${idx}`}
-              className="w-[340px] sm:w-[420px] shrink-0 bg-white rounded-3xl p-7 border border-slate-200/90 shadow-xl shadow-slate-200/50 hover:border-[#D4E012] hover:shadow-2xl transition-all duration-300 flex flex-col justify-between relative group"
+              key={item.id}
+              className="snap-start w-[300px] sm:w-[420px] shrink-0 bg-white rounded-3xl p-7 border border-slate-200/90 shadow-xl shadow-slate-200/50 hover:border-[#6DAD45] hover:shadow-2xl transition-all duration-300 flex flex-col justify-between text-center relative group"
             >
               <div>
                 {/* Rating & Location Tag */}
-                <div className="flex items-center justify-between gap-2 mb-5">
+                <div className="flex items-center justify-center gap-3 mb-5">
                   <div className="flex items-center gap-1">
                     {[...Array(item.rating)].map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-[#EAB308] text-[#EAB308]" />
@@ -174,13 +189,13 @@ export default function TestimonialsSection() {
                 </div>
 
                 {/* Quote */}
-                <p className="text-sm sm:text-base font-serif-display font-medium text-slate-800 leading-relaxed mb-6 line-clamp-4">
+                <p className="text-sm sm:text-base font-serif-display font-medium text-slate-800 leading-relaxed mb-6 line-clamp-4 text-center">
                   &ldquo;{item.quote}&rdquo;
                 </p>
               </div>
 
               {/* Author & Footer */}
-              <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+              <div className="pt-4 border-t border-slate-100 flex flex-col items-center justify-center text-center gap-2">
                 <div>
                   <h4 className="text-sm font-bold text-slate-900 font-serif-display group-hover:text-[#707B00] transition-colors">
                     {item.author}
@@ -190,20 +205,39 @@ export default function TestimonialsSection() {
                   </p>
                 </div>
 
-                <div className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#D4E012]/20 border border-[#D4E012]/50 text-[#707B00] font-mono text-[10px] font-bold rounded-xl shrink-0">
+                <div className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#D4E012]/20 border border-[#D4E012]/50 text-[#707B00] font-mono text-[10px] font-bold rounded-xl mt-1">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#16A34A]" />
                   <span>{item.highlightMetric}</span>
                 </div>
               </div>
             </div>
           ))}
-        </motion.div>
+        </div>
+
+        {/* Navigation Arrows (Centered Below Cards Slider) */}
+        <div className="flex items-center justify-center gap-3 mt-6">
+          <button
+            onClick={handlePrev}
+            aria-label="Previous Testimonial"
+            className="w-12 h-12 rounded-full bg-white border-2 border-slate-200 hover:border-[#6DAD45] hover:bg-slate-900 hover:text-[#D4E012] text-slate-800 shadow-md flex items-center justify-center transition-all duration-300 transform active:scale-95 cursor-pointer group"
+          >
+            <ChevronLeft className="w-6 h-6 transition-transform group-hover:-translate-x-0.5" />
+          </button>
+
+          <button
+            onClick={handleNext}
+            aria-label="Next Testimonial"
+            className="w-12 h-12 rounded-full bg-white border-2 border-slate-200 hover:border-[#6DAD45] hover:bg-slate-900 hover:text-[#D4E012] text-slate-800 shadow-md flex items-center justify-center transition-all duration-300 transform active:scale-95 cursor-pointer group"
+          >
+            <ChevronRight className="w-6 h-6 transition-transform group-hover:translate-x-0.5" />
+          </button>
+        </div>
       </div>
 
       {/* Section CTA Button */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ScrollReveal direction="up" distance={30} delay={0.25}>
-          <div className="mt-14 text-center">
+          <div className="mt-10 text-center">
             <Link
               href="/insights"
               className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"

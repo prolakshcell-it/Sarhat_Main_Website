@@ -58,14 +58,14 @@ export default function WhyChooseUs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <ScrollReveal direction="up" distance={40}>
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-4xl mx-auto mb-16">
             <AnimatedPillBadge className="mb-6">
               WHY CHOOSE US
             </AnimatedPillBadge>
 
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-              The Sarhat Advantage. <br />
-              <span className="text-[#6DAD45] italic relative inline-block">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+              The Sarhat Advantage <br />
+              <span className="text-[#6DAD45] italic relative inline-block whitespace-nowrap">
                 Built for Performance & Trust.
                 <svg
                   className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"

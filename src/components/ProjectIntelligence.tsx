@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, Play, ShieldAlert, Sparkles, SlidersHorizontal, Calculator, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import AnimatedPillBadge from "./AnimatedPillBadge";
 
 interface FormState {
   pinCode: string;
@@ -67,9 +68,9 @@ export default function ProjectIntelligence() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center justify-center px-6 sm:px-8 py-2 sm:py-2.5 rounded-full bg-white border border-[#707B00]/40 text-[#707B00] font-mono font-bold text-xs sm:text-sm uppercase tracking-[0.2em] shadow-sm mb-6">
+          <AnimatedPillBadge className="mb-6">
             SMART PROJECT INTELLIGENCE
-          </div>
+          </AnimatedPillBadge>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
             Before you build it, <br />
             <span className="text-[#6DAD45] italic relative inline-block">

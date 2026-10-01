@@ -16,6 +16,7 @@ import {
   Globe,
   CheckCircle2,
 } from "lucide-react";
+import AnimatedPillBadge from "./AnimatedPillBadge";
 
 export interface PrincipleStage {
   id: string;
@@ -123,10 +124,9 @@ export default function FivePrinciplesInteractive({
       {/* Section Sub-Header / Title bar */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 px-2 gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#D4E012]/15 border border-[#D4E012]/40 text-[#D4E012] text-xs font-mono font-bold uppercase tracking-widest mb-3 backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-[#D4E012] animate-pulse" />
-            <span>THE 5 DELIVERY PRINCIPLES IN PRACTICE</span>
-          </div>
+          <AnimatedPillBadge darkBg className="mb-3">
+            THE 5 DELIVERY PRINCIPLES IN PRACTICE
+          </AnimatedPillBadge>
           <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-white tracking-tight leading-tight">
             Our Delivery <span className="text-[#D4E012] italic">Principles</span>
           </h2>

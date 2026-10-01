@@ -39,7 +39,7 @@ export default function PeopleFirst() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal direction="up" distance={40}>
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-5xl mx-auto mb-16">
             <AnimatedPillBadge className="mb-6">
               PEOPLE FIRST & CULTURE
             </AnimatedPillBadge>
@@ -61,8 +61,9 @@ export default function PeopleFirst() {
                 </svg>
               </span>
             </h2>
-            <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-              Our culture is built around ownership, responsibility, learning, care and the belief that great projects are built by people who feel trusted to do great work.
+            <p className="text-slate-600 font-normal text-base sm:text-lg max-w-5xl mx-auto leading-relaxed">
+              Our culture is built around ownership, responsibility, learning, care and the belief <br className="hidden sm:inline" />
+              that great projects are built by people who feel trusted to do great work.
             </p>
           </div>
         </ScrollReveal>
