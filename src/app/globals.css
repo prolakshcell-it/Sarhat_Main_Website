@@ -343,3 +343,25 @@ html, body {
   .sarhat-marker.is-selected .sarhat-marker__pulse { animation: none; }
   .leaflet-tooltip.sarhat-tooltip { animation: none; }
 }
+
+/* Metric cards: physically stable hover (transform/colour only, static shadow) */
+.metric-card {
+  contain: layout paint;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+@media (hover: hover) {
+  .metric-card:hover {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .metric-card {
+    transition: none;
+  }
+  .metric-card:hover {
+    transform: none;
+  }
+}

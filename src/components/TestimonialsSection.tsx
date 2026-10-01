@@ -173,7 +173,7 @@ export default function TestimonialsSection() {
           {testimonials.map((item) => (
             <div
               key={item.id}
-              className="snap-start w-[300px] sm:w-[420px] shrink-0 bg-white rounded-3xl p-7 border border-slate-200/90 shadow-xl shadow-slate-200/50 hover:border-[#6DAD45] hover:shadow-2xl transition-all duration-300 flex flex-col justify-between text-center relative group"
+              className="snap-start w-[300px] sm:w-[420px] shrink-0 bg-white rounded-3xl p-7 border border-slate-200/90 shadow-xl shadow-slate-200/50 hover:border-[#6DAD45] transition-colors duration-200 flex flex-col justify-between text-center relative group"
             >
               <div>
                 {/* Rating & Location Tag */}

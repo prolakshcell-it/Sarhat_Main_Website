@@ -65,7 +65,7 @@ export default function EPCCapabilities() {
                   src="/images/hero-solar.jpg"
                   alt="Sarhat Solar Farm Aerial View"
                   fill
-                  className="object-cover object-center transform hover:scale-105 transition-transform duration-700"
+                  className="object-cover object-center transform hover:scale-[1.02] transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
               </div>

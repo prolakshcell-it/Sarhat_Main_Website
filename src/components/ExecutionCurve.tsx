@@ -388,11 +388,10 @@ export default function ExecutionCurve() {
                 >
                   {/* Icon Box */}
                   <motion.div
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`w-12 h-12 lg:w-14 lg:h-14 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xl relative ${
+                    whileHover={{ y: -2 }}
+                    className={`w-12 h-12 lg:w-14 lg:h-14 rounded-2xl flex items-center justify-center transition-colors duration-300 shadow-xl relative border ${
                       isActive
-                        ? "scale-110 shadow-2xl border-2 border-white"
+                        ? "shadow-2xl border-white"
                         : "bg-slate-900/90 border border-slate-700 hover:border-slate-500"
                     }`}
                     style={{
