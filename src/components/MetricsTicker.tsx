@@ -2,16 +2,18 @@
 
 import { useEffect, useState, useRef } from "react";
 import { motion, useInView, animate } from "framer-motion";
-import { Zap, Leaf, MapPin, Layers } from "lucide-react";
+import { Zap, MapPin, Calendar, Users, Cpu, ShieldCheck } from "lucide-react";
 
 function AnimatedMetricValue({ value }: { value: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-20px" });
 
-  const isDecimal = value.includes(".");
-  const hasComma = value.includes(",");
-  const suffix = value.replace(/[\d,.]/g, "");
-  const rawNumStr = value.replace(/[^\d.]/g, "");
+  const prefix = value.startsWith("~") ? "~" : "";
+  const cleanVal = value.replace(/^~/, "");
+  const isDecimal = cleanVal.includes(".");
+  const hasComma = cleanVal.includes(",");
+  const suffix = cleanVal.replace(/[\d,.]/g, "");
+  const rawNumStr = cleanVal.replace(/[^\d.]/g, "");
   const targetNum = parseFloat(rawNumStr) || 0;
 
   const [displayNum, setDisplayNum] = useState("0");
@@ -23,7 +25,9 @@ function AnimatedMetricValue({ value }: { value: string }) {
       duration: 2.2,
       ease: [0.16, 1, 0.3, 1],
       onUpdate(latest) {
-        if (isDecimal) {
+        if (targetNum > 2000 && targetNum < 2030) {
+          setDisplayNum(Math.floor(latest).toString());
+        } else if (isDecimal) {
           setDisplayNum(latest.toFixed(2));
         } else if (hasComma) {
           setDisplayNum(Math.floor(latest).toLocaleString("en-US"));
@@ -37,9 +41,8 @@ function AnimatedMetricValue({ value }: { value: string }) {
   }, [isInView, targetNum, isDecimal, hasComma]);
 
   return (
-    <div ref={ref} className="font-serif-display text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-2 group-hover:text-[#707B00] transition-colors">
-      {displayNum}
-      {suffix}
+    <div ref={ref} className="font-serif-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight mb-1.5 group-hover:text-[#707B00] transition-colors">
+      {prefix}{displayNum}{suffix}
     </div>
   );
 }
@@ -49,14 +52,8 @@ export default function MetricsTicker() {
     {
       value: "49.77 MW",
       label: "SERVED TO BUILD",
-      subText: "Utility & C&I Renewable Solar Capacity",
+      subText: "Utility & C&I Solar Capacity",
       icon: Zap,
-    },
-    {
-      value: "65,792",
-      label: "TONNES CO2 SAVED",
-      subText: "Cumulative Environmental Impact",
-      icon: Leaf,
     },
     {
       value: "7+",
@@ -65,38 +62,62 @@ export default function MetricsTicker() {
       icon: MapPin,
     },
     {
-      value: "24",
-      label: "CURRENT PROJECT RECORDS",
-      subText: "Turnkey EPC Operational Assets",
-      icon: Layers,
+      value: "2024",
+      label: "FOUNDATION YEAR",
+      subText: "Founded by Industry Engineers",
+      icon: Calendar,
+    },
+    {
+      value: "35+",
+      label: "ENGINEERING TEAM",
+      subText: "Expert team members across India",
+      icon: Users,
+    },
+    {
+      value: "765 kV",
+      label: "SUBSTATION CAPABILITY",
+      subText: "Max. voltage class handled",
+      icon: Cpu,
+    },
+    {
+      value: "25-Yr",
+      label: "PERFORMANCE WARRANTY",
+      subText: "Long-term O&M & asset quality",
+      icon: ShieldCheck,
     },
   ];
 
   return (
-    <section className="bg-[#F8FAF8] border-b border-slate-200/80 relative z-20 overflow-hidden font-sans-ui">
-      {/* Main Metric Cards Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <section className="bg-[#FAFBF9] border-b border-slate-200/80 relative z-20 overflow-hidden font-sans-ui">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+        {/* 1-Line Card Grid Layout (Single horizontal line) */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 w-full">
           {metrics.map((item, idx) => {
             const IconComponent = item.icon;
             return (
               <motion.div
                 key={item.label}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-xl shadow-slate-200/50 relative group overflow-hidden transition-all duration-300 hover:border-[#D4E012]"
+                transition={{ duration: 0.4, delay: idx * 0.06 }}
+                className="bg-white rounded-2xl p-5 border border-slate-200/80 hover:border-[#707B00] shadow-sm hover:shadow-xl hover:shadow-[#D4E012]/15 relative group transition-all duration-300 flex flex-col justify-between"
               >
-                <div className="absolute top-0 right-0 w-24 h-24 bg-[#D4E012]/10 rounded-bl-full pointer-events-none group-hover:bg-[#D4E012]/25 transition-all"></div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-[10px] font-mono font-bold tracking-widest text-[#707B00] uppercase">
+                {/* Header Tag & Sleek Icon Badge */}
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="text-[9px] sm:text-[10px] font-mono font-bold tracking-wider text-[#707B00] uppercase truncate">
                     {item.label}
                   </span>
-                  <IconComponent className="w-5 h-5 text-slate-400 group-hover:text-[#16A34A] transition-colors" />
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#D4E012]/20 border border-[#D4E012]/40 text-[#707B00] flex items-center justify-center shrink-0 group-hover:bg-[#D4E012] group-hover:text-slate-950 transition-colors">
+                    <IconComponent className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.2]" />
+                  </div>
                 </div>
+
+                {/* Main Metric Value */}
                 <AnimatedMetricValue value={item.value} />
-                <div className="text-xs text-slate-600 font-medium">
+
+                {/* Subtitle Description */}
+                <div className="text-[11px] text-slate-500 font-normal leading-tight line-clamp-2">
                   {item.subText}
                 </div>
               </motion.div>

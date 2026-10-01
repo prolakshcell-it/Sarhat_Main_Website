@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Montserrat } from "next/font/google";
 import "./globals.css";
+import CookieConsent from "@/components/CookieConsent";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -48,6 +49,7 @@ export default function RootLayout({
     >
       <body className="bg-black text-white font-sans-ui selection:bg-[#6DAD45] selection:text-black min-h-screen overflow-x-clip">
         {children}
+        <CookieConsent />
       </body>
     </html>
   );

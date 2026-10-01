@@ -27,6 +27,8 @@ import {
   Layers,
   MapPin,
   Cpu,
+  Car,
+  BatteryCharging,
 } from "lucide-react";
 
 export default function OurStoryPage() {
@@ -75,9 +77,29 @@ export default function OurStoryPage() {
         "Established standardized site safety & quality assurance frameworks",
       ],
       badgeColor: "bg-[#6DAD45]/15 text-[#6DAD45] border-[#6DAD45]/30",
+      image: "/images/timeline-2024.jpg",
+      imageCaption: "Initial Rooftop Solar & Site Quality Standards",
     },
     {
       year: "2025",
+      headline: "Solar & EV Infrastructure",
+      tag: "EV MOBILITY & FAST CHARGING",
+      subtitle: "SOLAR + EV CHARGING HUBS",
+      description:
+        "Pioneered integrated solar-assisted EV fast-charging stations and corporate fleet charging hubs, seamlessly connecting solar power generation with electric mobility infrastructure.",
+      icon: Car,
+      metrics: ["Solar EV Hubs", "DC Fast Chargers", "Smart Fleet Power"],
+      achievements: [
+        "Deployed solar-assisted EV fast-charging stations for industrial & commercial fleets",
+        "Integrated smart load management & grid balancing for electric vehicle hubs",
+        "Established automated remote telemetry & real-time charging network O&M",
+      ],
+      badgeColor: "bg-[#D4E012]/25 text-[#707B00] border-[#D4E012]/60",
+      image: "/images/timeline-ev-charging.jpg",
+      imageCaption: "Solar-Powered EV Fast Charging Infrastructure",
+    },
+    {
+      year: "2025+",
       headline: "Our Footprint Grows",
       tag: "3 STATES DELIVERED",
       subtitle: "REGIONAL SCALE & MULTI-SITE EXECUTION",
@@ -90,7 +112,9 @@ export default function OurStoryPage() {
         "Built dedicated in-house Operations & Maintenance (O&M) service capabilities",
         "Expanded site engineering, procurement & land clearance teams",
       ],
-      badgeColor: "bg-[#D4E012]/20 text-[#707B00] border-[#D4E012]/50",
+      badgeColor: "bg-[#6DAD45]/20 text-[#6DAD45] border-[#6DAD45]/40",
+      image: "/images/timeline-2025.jpg",
+      imageCaption: "Multi-State Commercial & Industrial Solar Parks",
     },
     {
       year: "2026",
@@ -107,6 +131,8 @@ export default function OurStoryPage() {
         "Delivered site access roads, piling foundations & drainage infrastructure",
       ],
       badgeColor: "bg-[#5EE72D]/20 text-[#16A34A] border-[#5EE72D]/50",
+      image: "/images/timeline-2026.jpg",
+      imageCaption: "220kV High-Voltage Substation & BESS Storage",
     },
     {
       year: "2027+",
@@ -123,13 +149,15 @@ export default function OurStoryPage() {
         "Forging global strategic alliances for large-scale energy transition",
       ],
       badgeColor: "bg-[#707B00]/20 text-[#707B00] border-[#707B00]/40",
+      image: "/images/timeline-2027.jpg",
+      imageCaption: "Agrovoltaics & Green Hydrogen Infrastructure",
     },
   ];
 
   const filteredMoments =
     selectedYearFilter === "ALL"
       ? keyMoments
-      : keyMoments.filter((m) => m.year === selectedYearFilter);
+      : keyMoments.filter((m) => m.year.includes(selectedYearFilter));
 
   return (
     <SmoothScroll>
@@ -165,17 +193,13 @@ export default function OurStoryPage() {
             >
               <ScrollReveal direction="up" distance={30}>
                 <div className="max-w-4xl flex flex-col items-center text-center">
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#D4E012] text-xs font-mono font-bold uppercase tracking-wider mb-6">
-                    <Sparkles className="w-3.5 h-3.5 text-[#D4E012]" />
-                    <span>OUR JOURNEY & MILESTONES</span>
-                  </div>
 
                   <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 text-center leading-[1.08] drop-shadow-lg">
                     Rooted in India. <br />
                     <span className="text-[#D4E012] italic font-normal">Trusted Globally.</span>
                   </h1>
 
-                  <p className="text-base sm:text-xl text-slate-200 max-w-3xl text-center leading-relaxed font-normal drop-shadow-md">
+                  <p className="text-base sm:text-xl text-slate-200 max-w-5xl text-center leading-relaxed font-normal drop-shadow-md">
                     Sarhat is an execution-led energy and infrastructure company. Engineering discipline, hands-on delivery and continuous learning shape every project we deliver.
                   </p>
                 </div>
@@ -228,8 +252,9 @@ export default function OurStoryPage() {
           {/* KEY MOMENTS SECTION (HIGHLY ANIMATED PROFESSIONAL TIMELINE) */}
           {/* ------------------------------------------------------------- */}
           <section className="py-24 sm:py-32 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10 overflow-hidden">
-            {/* Background Ambient Glow Grids */}
-            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gradient-to-br from-[#6DAD45]/5 via-[#D4E012]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+            {/* Background Gradient Ambient Glows */}
+            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-gradient-to-br from-[#6DAD45]/10 via-[#D4E012]/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-10 right-0 w-[500px] h-[500px] bg-gradient-to-tl from-[#5EE72D]/10 to-transparent rounded-full blur-3xl pointer-events-none" />
 
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               {/* Header */}
@@ -244,7 +269,7 @@ export default function OurStoryPage() {
                     Key <span className="bg-gradient-to-r from-[#6DAD45] via-[#707B00] to-[#16A34A] bg-clip-text text-transparent italic font-serif-display">Moments</span>
                   </h2>
                   <p className="text-slate-600 text-base sm:text-lg font-normal leading-relaxed max-w-xl mx-auto">
-                    The growth trajectory of Sarhat Energy & Infrastructure — from an engineering ambition to multi-state execution.
+                    The growth trajectory of Sarhat Energy & Infrastructure — from solar EPC and clean EV mobility to multi-state execution.
                   </p>
                 </div>
               </ScrollReveal>
@@ -272,102 +297,163 @@ export default function OurStoryPage() {
               </ScrollReveal>
 
               {/* Animated Timeline Container */}
-              <div ref={timelineRef} className="relative space-y-12 sm:space-y-16">
-                {/* Central Track & Animated Beam */}
+              <div ref={timelineRef} className="relative space-y-16 sm:space-y-24">
+                {/* Central Track & Animated Gradient Beam */}
                 <div className="absolute left-6 sm:left-1/2 top-0 bottom-0 -translate-x-1/2 w-1 bg-slate-200/90 rounded-full overflow-hidden pointer-events-none">
                   <motion.div
                     style={{ height: beamHeight }}
-                    className="w-full bg-gradient-to-b from-[#6DAD45] via-[#D4E012] to-[#5EE72D] shadow-[0_0_15px_rgba(109,173,69,0.8)]"
-                  />
+                    className="w-full bg-gradient-to-b from-[#6DAD45] via-[#D4E012] to-[#5EE72D] shadow-[0_0_20px_rgba(109,173,69,0.9)] relative"
+                  >
+                    {/* Glowing Energy Particle Pulse */}
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-10 bg-white rounded-full blur-xs animate-pulse" />
+                  </motion.div>
                 </div>
 
                 {filteredMoments.map((moment, index) => {
                   const IconComp = moment.icon;
                   const isEven = index % 2 === 0;
 
-                  return (
-                    <ScrollReveal
-                      key={moment.year}
-                      direction={isEven ? "right" : "left"}
-                      distance={40}
-                      delay={index * 0.08}
+                  // Image Showcase Card component
+                  const ImageShowcaseCard = (
+                    <motion.div
+                      whileHover={{ y: -6, scale: 1.02 }}
+                      className="relative h-64 sm:h-[360px] w-full rounded-[28px] overflow-hidden border-2 border-slate-200/90 shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#6DAD45]/25 group cursor-pointer transition-all duration-500"
                     >
-                      <div
-                        className={`relative flex items-center justify-between flex-col ${
-                          isEven ? "sm:flex-row-reverse" : "sm:flex-row"
-                        }`}
-                      >
-                        {/* Empty Spacer Column for Alternating Layout */}
-                        <div className="hidden sm:block w-5/12" />
+                      <Image
+                        src={moment.image}
+                        alt={moment.headline}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover object-center group-hover:scale-108 transition-transform duration-700 ease-out"
+                      />
+                      {/* Dark Vignette Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent transition-opacity duration-300 group-hover:from-slate-950/95" />
 
-                        {/* Center Glowing Animated Year Node */}
-                        <div className="z-20 flex items-center justify-center w-14 h-14 rounded-full bg-slate-950 border-3 border-[#6DAD45] text-[#D4E012] font-mono text-xs font-extrabold shadow-[0_0_25px_rgba(109,173,69,0.4)] shrink-0 my-3 sm:my-0 group hover:scale-110 hover:shadow-[0_0_35px_rgba(109,173,69,0.7)] transition-all duration-300 cursor-pointer">
-                          <span className="group-hover:hidden">{moment.year}</span>
-                          <IconComp className="w-5 h-5 hidden group-hover:block text-[#5EE72D] transition-all" />
+                      {/* Top Badge */}
+                      <div className="absolute top-4 right-4 bg-slate-950/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 text-[#D4E012] font-mono text-[10px] font-extrabold tracking-wider uppercase flex items-center gap-1.5 shadow-md">
+                        <Sparkles className="w-3 h-3 text-[#5EE72D]" />
+                        <span>{moment.year} SHOWCASE</span>
+                      </div>
+
+                      {/* Bottom Caption Overlay */}
+                      <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-10">
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#6DAD45]/30 border border-[#6DAD45]/50 text-[#D4E012] text-[10px] font-mono font-bold uppercase tracking-wider mb-2 backdrop-blur-sm">
+                          <MapPin className="w-3 h-3 text-[#D4E012]" />
+                          <span>{moment.tag}</span>
+                        </div>
+                        <h4 className="text-lg sm:text-xl font-serif-display font-medium text-white drop-shadow-sm group-hover:text-[#D4E012] transition-colors leading-snug">
+                          {moment.imageCaption}
+                        </h4>
+                      </div>
+                    </motion.div>
+                  );
+
+                  // Content Details Card component
+                  const ContentDetailsCard = (
+                    <motion.div
+                      whileHover={{ y: -6, scale: 1.01 }}
+                      className="bg-white border-2 border-slate-200/90 hover:border-[#6DAD45] p-7 sm:p-9 rounded-[28px] shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#6DAD45]/20 transition-all duration-300 group relative overflow-hidden h-full flex flex-col justify-between"
+                    >
+                      {/* Ambient Corner Glow Flare */}
+                      <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-[#6DAD45]/10 rounded-full blur-2xl group-hover:bg-[#6DAD45]/25 transition-all duration-500 pointer-events-none" />
+
+                      <div>
+                        {/* Top Badge & Tag Header */}
+                        <div className="flex items-center justify-between gap-3 mb-5">
+                          <span
+                            className={`text-[10px] font-mono font-extrabold px-3 py-1.5 rounded-full border uppercase tracking-widest ${moment.badgeColor}`}
+                          >
+                            {moment.tag}
+                          </span>
+
+                          <div className="w-10 h-10 rounded-2xl bg-[#F8FAF8] border border-slate-200 flex items-center justify-center text-[#6DAD45] group-hover:bg-[#6DAD45] group-hover:text-white transition-colors duration-300 shadow-sm">
+                            <IconComp className="w-5 h-5" />
+                          </div>
                         </div>
 
-                        {/* Content Card Box */}
-                        <div className="w-full sm:w-5/12 pl-12 sm:pl-0">
-                          <motion.div
-                            whileHover={{ y: -6, scale: 1.01 }}
-                            className="bg-white border-2 border-slate-200/90 hover:border-[#6DAD45] p-7 sm:p-9 rounded-[28px] shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#6DAD45]/20 transition-all duration-300 group relative overflow-hidden"
-                          >
-                            {/* Ambient Corner Glow Flare */}
-                            <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-[#6DAD45]/10 rounded-full blur-2xl group-hover:bg-[#6DAD45]/25 transition-all duration-500 pointer-events-none" />
+                        {/* Year & Headline */}
+                        <div className="mb-4">
+                          <span className="text-xs font-mono font-bold text-slate-600 block mb-1">
+                            {moment.subtitle}
+                          </span>
+                          <h3 className="text-xl sm:text-2xl font-serif-display font-medium text-[#0F172A] group-hover:text-[#6DAD45] transition-colors leading-snug">
+                            {moment.year} — {moment.headline}
+                          </h3>
+                        </div>
 
-                            {/* Top Badge & Tag Header */}
-                            <div className="flex items-center justify-between gap-3 mb-5">
-                              <span
-                                className={`text-[10px] font-mono font-extrabold px-3 py-1.5 rounded-full border uppercase tracking-widest ${moment.badgeColor}`}
-                              >
-                                {moment.tag}
-                              </span>
+                        {/* Description */}
+                        <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed mb-6">
+                          {moment.description}
+                        </p>
 
-                              <div className="w-10 h-10 rounded-2xl bg-[#F8FAF8] border border-slate-200 flex items-center justify-center text-[#6DAD45] group-hover:bg-[#6DAD45] group-hover:text-white transition-colors duration-300 shadow-sm">
-                                <IconComp className="w-5 h-5" />
-                              </div>
-                            </div>
-
-                            {/* Year & Headline */}
-                            <div className="mb-4">
-                              <span className="text-xs font-mono font-bold text-slate-600 block mb-1">
-                                {moment.subtitle}
-                              </span>
-                              <h3 className="text-xl sm:text-2xl font-serif-display font-medium text-[#0F172A] group-hover:text-[#6DAD45] transition-colors leading-snug">
-                                {moment.year} — {moment.headline}
-                              </h3>
-                            </div>
-
-                            {/* Description */}
-                            <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed mb-6">
-                              {moment.description}
-                            </p>
-
-                            {/* Specs / Metrics Pills */}
-                            <div className="flex flex-wrap gap-2 mb-6">
-                              {moment.metrics.map((metric) => (
-                                <span
-                                  key={metric}
-                                  className="text-[11px] font-mono px-3 py-1 bg-[#F8FAF8] border border-slate-200 text-slate-800 rounded-lg font-semibold shadow-2xs"
-                                >
-                                  ✓ {metric}
-                                </span>
-                              ))}
-                            </div>
-
-                            {/* Achievements Bullet List */}
-                            <div className="pt-4 border-t border-slate-100 space-y-2.5">
-                              {moment.achievements.map((item, idx) => (
-                                <div key={idx} className="flex items-start gap-2 text-xs text-slate-600 leading-normal font-light">
-                                  <CheckCircle2 className="w-4 h-4 text-[#6DAD45] shrink-0 mt-0.5" />
-                                  <span>{item}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </motion.div>
+                        {/* Specs / Metrics Pills */}
+                        <div className="flex flex-wrap gap-2 mb-6">
+                          {moment.metrics.map((metric) => (
+                            <span
+                              key={metric}
+                              className="text-[11px] font-mono px-3 py-1 bg-[#F8FAF8] border border-slate-200 text-slate-800 rounded-lg font-semibold shadow-2xs"
+                            >
+                              ✓ {metric}
+                            </span>
+                          ))}
                         </div>
                       </div>
-                    </ScrollReveal>
+
+                      {/* Achievements Bullet List */}
+                      <div className="pt-4 border-t border-slate-100 space-y-2.5">
+                        {moment.achievements.map((item, idx) => (
+                          <div key={idx} className="flex items-start gap-2 text-xs text-slate-600 leading-normal font-light">
+                            <CheckCircle2 className="w-4 h-4 text-[#6DAD45] shrink-0 mt-0.5" />
+                            <span>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  );
+
+                  return (
+                    <div key={moment.year} className="relative">
+                      {/* DESKTOP LAYOUT (sm and up): Alternating Text Card & Image Showcase */}
+                      <div className="hidden sm:flex items-center justify-between flex-row gap-6">
+                        {/* Left Column */}
+                        <div className="w-5/12">
+                          <ScrollReveal direction={isEven ? "right" : "left"} distance={40} delay={0.05}>
+                            {isEven ? ContentDetailsCard : ImageShowcaseCard}
+                          </ScrollReveal>
+                        </div>
+
+                        {/* Center Glowing Animated Year Node */}
+                        <div className="z-20 flex items-center justify-center w-16 h-16 rounded-full bg-slate-950 border-4 border-[#6DAD45] text-[#D4E012] font-mono text-sm font-extrabold shadow-[0_0_30px_rgba(109,173,69,0.5)] shrink-0 group hover:scale-110 hover:shadow-[0_0_40px_rgba(109,173,69,0.8)] transition-all duration-300 cursor-pointer">
+                          <span className="group-hover:hidden">{moment.year}</span>
+                          <IconComp className="w-6 h-6 hidden group-hover:block text-[#5EE72D] transition-all" />
+                        </div>
+
+                        {/* Right Column */}
+                        <div className="w-5/12">
+                          <ScrollReveal direction={isEven ? "left" : "right"} distance={40} delay={0.05}>
+                            {isEven ? ImageShowcaseCard : ContentDetailsCard}
+                          </ScrollReveal>
+                        </div>
+                      </div>
+
+                      {/* MOBILE LAYOUT (less than sm): Vertical Stack */}
+                      <div className="flex sm:hidden flex-col space-y-5 pl-10 relative">
+                        {/* Mobile Year Node */}
+                        <div className="absolute left-0 top-0 z-20 flex items-center justify-center w-12 h-12 rounded-full bg-slate-950 border-3 border-[#6DAD45] text-[#D4E012] font-mono text-xs font-bold shadow-[0_0_20px_rgba(109,173,69,0.4)]">
+                          {moment.year}
+                        </div>
+
+                        {/* Image Showcase Card on Mobile */}
+                        <ScrollReveal direction="up" distance={25}>
+                          {ImageShowcaseCard}
+                        </ScrollReveal>
+
+                        {/* Content Details Card on Mobile */}
+                        <ScrollReveal direction="up" distance={25} delay={0.1}>
+                          {ContentDetailsCard}
+                        </ScrollReveal>
+                      </div>
+                    </div>
                   );
                 })}
               </div>

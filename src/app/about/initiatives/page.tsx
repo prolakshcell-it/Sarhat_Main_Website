@@ -140,11 +140,11 @@ export default function InitiativesPage() {
 
 
                   <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 text-center leading-[1.08] drop-shadow-lg">
-                    Pioneering <br />
-                    <span className="text-[#D4E012] italic font-normal">Sustainable Growth &amp; Social Impact</span>
+                    Pioneering Sustainable Growth <br />
+                    <span className="text-[#D4E012] italic font-normal">&amp; Social Impact</span>
                   </h1>
 
-                  <p className="text-base sm:text-xl text-slate-200 max-w-3xl text-center leading-relaxed font-normal drop-shadow-md">
+                  <p className="text-base sm:text-xl text-slate-200 max-w-5xl text-center leading-relaxed font-normal drop-shadow-md">
                     Beyond engineering execution, Sarhat actively drives transformative initiatives in industrial Net Zero transition, agricultural dual-use solar, and community skill upskilling.
                   </p>
                 </div>

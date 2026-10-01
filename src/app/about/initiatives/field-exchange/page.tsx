@@ -78,7 +78,7 @@ export default function FieldExchangePage() {
                     <span className="text-[#D4E012] italic font-normal">Technician Program</span>
                   </h1>
 
-                  <p className="text-base sm:text-xl text-slate-200 max-w-3xl text-center leading-relaxed font-normal drop-shadow-md">
+                  <p className="text-base sm:text-xl text-slate-200 max-w-5xl text-center leading-relaxed font-normal drop-shadow-md">
                     Bridging engineering academia with ground-level site execution through hands-on technical training, safety certifications, and local community hiring.
                   </p>
                 </div>
