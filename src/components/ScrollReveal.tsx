@@ -9,6 +9,8 @@ interface ScrollRevealProps {
   direction?: "up" | "down" | "left" | "right";
   distance?: number;
   className?: string;
+  /** Animate only the first time the element enters the viewport. */
+  once?: boolean;
 }
 
 export default function ScrollReveal({
@@ -17,6 +19,7 @@ export default function ScrollReveal({
   direction = "up",
   distance = 50,
   className = "",
+  once = false,
 }: ScrollRevealProps) {
   const getInitialPosition = () => {
     switch (direction) {
@@ -37,7 +40,7 @@ export default function ScrollReveal({
     <motion.div
       initial={{ opacity: 0, ...getInitialPosition() }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: false, amount: 0.15 }}
+      viewport={{ once, amount: 0.15 }}
       transition={{
         duration: 0.8,
         delay,
