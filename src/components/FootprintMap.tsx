@@ -126,13 +126,12 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
         onClick={() => selectState(slug)}
         className={`flex min-h-[44px] shrink-0 cursor-pointer items-center gap-2 rounded-full border py-1.5 pl-3.5 pr-1.5 font-mono text-xs font-bold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6DAD45] focus-visible:ring-offset-2 ${
           sel
-            ? "border-slate-900 bg-slate-900 text-white shadow-md"
-            : "border-slate-200 bg-white text-slate-800 shadow-sm hover:-translate-y-0.5 hover:border-[#6DAD45] hover:shadow-md"
+            ? "border-slate-900 bg-slate-900 text-white"
+            : "border-slate-200 bg-white text-slate-700 hover:border-[#6DAD45]/60 hover:bg-[#6DAD45]/[0.05]"
         }`}
       >
-        <span className={`h-2 w-2 rounded-full transition-colors ${sel ? "bg-[#D4E012]" : "bg-slate-300"}`} />
         <span>{label}</span>
-        <span className={`rounded-full px-2.5 py-1 text-[10px] font-extrabold transition-colors duration-200 ${sel ? "bg-[#D4E012] text-black" : "bg-slate-100 text-slate-600"}`}>
+        <span className={`rounded-full px-2.5 py-1 text-[10px] font-bold transition-colors duration-200 ${sel ? "bg-white/15 text-[#D4E012]" : "bg-slate-100 text-slate-500"}`}>
           {formatMW(mw)}
         </span>
       </button>
@@ -153,7 +152,7 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.12 }}
+        viewport={{ once: true, amount: "some" }}
         variants={group}
         className="relative z-10 mx-auto"
         style={{ width: "min(100% - 32px, 1360px)" }}
@@ -209,7 +208,7 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
             hidden: { opacity: 0, y: reduce ? 0 : 20 },
             visible: { opacity: 1, y: 0, transition: { duration: reduce ? 0.2 : 0.7, ease: "easeOut" } },
           }}
-          className="overflow-hidden rounded-[20px] border border-slate-200 bg-white shadow-[0_20px_50px_-24px_rgba(15,23,42,0.3)] sm:rounded-[24px]"
+          className="overflow-hidden rounded-[20px] border border-slate-200 bg-white shadow-[0_12px_32px_-20px_rgba(15,23,42,0.25)] sm:rounded-[24px]"
         >
           <div className="grid lg:grid-cols-[minmax(0,1.75fr)_minmax(0,1fr)]">
             <div className="min-w-0">
@@ -226,7 +225,7 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
 
             {/* State / metrics / project information */}
             <div className="relative min-w-0 border-t border-slate-200 bg-gradient-to-b from-[#F8FAF8] to-white lg:border-l lg:border-t-0">
-              <div className="flex flex-col p-4 sm:p-6 lg:absolute lg:inset-0 lg:overflow-y-auto lg:overscroll-contain">
+              <div data-lenis-prevent className="custom-scrollbar flex flex-col p-4 sm:p-6 lg:absolute lg:inset-0 lg:overflow-y-auto lg:overscroll-contain">
                 <motion.div
                   key={`head-${stateSlug}`}
                   initial={{ opacity: 0, y: reduce ? 0 : 8 }}
@@ -240,13 +239,13 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
                 </motion.div>
 
                 <div className="mt-4 grid grid-cols-2 gap-2.5 sm:gap-3">
-                  <div className="rounded-2xl bg-slate-900 p-3.5 text-white sm:p-4">
+                  <div className="rounded-xl bg-slate-900 p-3.5 text-white sm:p-4">
                     <span className={`${LABEL} block text-[10px] text-slate-400`}>Total capacity</span>
                     <span className="mt-1.5 block font-mono text-xl font-bold text-[#D4E012] sm:text-2xl">
                       <AnimatedValue value={formatMW(totalMW)} reduce={reduce} />
                     </span>
                   </div>
-                  <div className="rounded-2xl border border-slate-200 bg-white p-3.5 sm:p-4">
+                  <div className="rounded-xl border border-slate-200 bg-white p-3.5 sm:p-4">
                     <span className={`${LABEL} block text-[10px] text-slate-500`}>Projects</span>
                     <span className="mt-1.5 block font-mono text-xl font-bold text-slate-900 sm:text-2xl">
                       <AnimatedValue value={`${visible.length} ${visible.length === 1 ? "Site" : "Sites"}`} reduce={reduce} />
@@ -254,7 +253,7 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
                   </div>
                 </div>
 
-                <p className="mt-4 text-sm leading-relaxed text-slate-600">
+                <p className="mt-4 text-[13px] leading-relaxed text-slate-500">
                   {markers.length} mapped {markers.length === 1 ? "location" : "locations"} across{" "}
                   {activeState ? activeState.state : `${STATES.length} states`}. Select a location to see its project and client details.
                 </p>
@@ -274,7 +273,7 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
                   )}
                 </div>
 
-                <ul className="space-y-1.5">
+                <ul className="shrink-0 divide-y divide-slate-100 overflow-hidden rounded-xl border border-slate-200 bg-white">
                   {markers.map((m) => {
                     const sel = m.key === markerKey;
                     return (
@@ -283,12 +282,12 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
                           type="button"
                           aria-pressed={sel}
                           onClick={() => setMarkerKey(sel ? null : m.key)}
-                          className={`group flex min-h-[44px] w-full cursor-pointer items-center justify-between gap-3 rounded-xl border px-3.5 py-2 text-left transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6DAD45] ${
-                            sel ? "border-[#6DAD45] bg-[#6DAD45]/10" : "border-slate-200 bg-white hover:-translate-y-0.5 hover:border-[#6DAD45]/60 hover:bg-[#6DAD45]/[0.05]"
+                          className={`group flex min-h-[48px] w-full cursor-pointer items-center justify-between gap-3 border-l-2 px-3.5 py-2 text-left transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#6DAD45] ${
+                            sel ? "border-l-[#6DAD45] bg-[#6DAD45]/10" : "border-l-transparent hover:bg-slate-50"
                           }`}
                         >
                           <span className="min-w-0">
-                            <span className="block truncate text-sm font-bold text-slate-900">{m.district}</span>
+                            <span className="block truncate text-sm font-semibold text-slate-900">{m.district}</span>
                             <span className="block font-mono text-[10px] text-slate-500">
                               {stateSlug === ALL ? `${m.state} • ` : ""}
                               {m.projects.length} {m.projects.length === 1 ? "site" : "sites"} • {formatMW(m.capacityMW)}
@@ -311,7 +310,7 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
                   >
                     <span className={`${LABEL} text-[#707B00]`}>Selected location — {activeMarker.district}</span>
                     {activeMarker.projects.map((p) => (
-                      <div key={p.id} className="rounded-2xl border border-slate-200 bg-white p-3.5">
+                      <div key={p.id} className="rounded-xl border border-slate-200 bg-white p-3.5">
                         <div className="flex items-start justify-between gap-2">
                           <div className="min-w-0">
                             <div className="text-sm font-bold text-slate-900">{p.location}</div>

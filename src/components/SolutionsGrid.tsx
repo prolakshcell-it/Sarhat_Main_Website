@@ -77,19 +77,19 @@ export default function SolutionsGrid() {
   const [modalCapability, setModalCapability] = useState<Capability | null>(null);
 
   return (
-    <section id="solutions" className="py-24 sm:py-28 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 select-none overflow-hidden font-sans-ui">
+    <section id="solutions" className="py-14 sm:py-20 lg:py-24 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 select-none overflow-hidden font-sans-ui">
       {/* Full Viewport Width Outer Container - Touching Left & Right Edges */}
       <div className="w-full max-w-none px-0">
 
         {/* Section Header */}
         <ScrollReveal direction="up" distance={40}>
-          <div className="text-center max-w-5xl mx-auto mb-12 px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-5xl mx-auto mb-10 sm:mb-12 px-4 sm:px-6 lg:px-8">
             <AnimatedPillBadge className="mb-6">
               SOLUTIONS CAPABILITIES
             </AnimatedPillBadge>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-              <span className="inline-block whitespace-nowrap">Built on Solar. Growing into infrastructure.</span> <br />
-              <span className="text-[#6DAD45] italic relative inline-block whitespace-nowrap">
+              <span className="inline-block xl:whitespace-nowrap">Built on Solar. Growing into infrastructure.</span> <br />
+              <span className="text-[#6DAD45] italic relative inline-block xl:whitespace-nowrap">
                 One connected way to build.
                 <svg
                   className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"

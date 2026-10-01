@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import React from "react";
 
 interface ScrollRevealProps {
@@ -19,31 +19,34 @@ export default function ScrollReveal({
   direction = "up",
   distance = 50,
   className = "",
-  once = false,
+  once = true,
 }: ScrollRevealProps) {
+  const reduce = useReducedMotion();
+  // Keep reveals subtle: transform/opacity only, capped travel so nothing slides in from off-screen
+  const d = Math.min(distance, 20);
   const getInitialPosition = () => {
     switch (direction) {
       case "up":
-        return { y: distance, x: 0 };
+        return { y: d, x: 0 };
       case "down":
-        return { y: -distance, x: 0 };
+        return { y: -d, x: 0 };
       case "left":
-        return { x: distance, y: 0 };
+        return { x: d, y: 0 };
       case "right":
-        return { x: -distance, y: 0 };
+        return { x: -d, y: 0 };
       default:
-        return { y: distance, x: 0 };
+        return { y: d, x: 0 };
     }
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0, ...getInitialPosition() }}
+      initial={{ opacity: 0, ...(reduce ? {} : getInitialPosition()) }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once, amount: 0.15 }}
+      viewport={{ once, amount: 0.15, margin: "0px 0px -8% 0px" }}
       transition={{
-        duration: 0.8,
-        delay,
+        duration: reduce ? 0.2 : 0.6,
+        delay: reduce ? 0 : Math.min(delay, 0.3),
         ease: "easeOut",
       }}
       className={className}

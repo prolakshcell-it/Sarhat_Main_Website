@@ -45,9 +45,10 @@ export default function MapboxInteractiveMap({ markers, selectedKey, onSelectMar
     mapInstanceRef.current = map;
     layerRef.current = L.layerGroup().addTo(map);
 
-    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}", {
-      attribution: "&copy; OpenStreetMap &copy; Esri",
-      maxZoom: 18,
+    // Light, low-contrast basemap so the markers (not the terrain) carry the eye
+    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}", {
+      attribution: "&copy; Esri",
+      maxZoom: 16,
     }).addTo(map);
 
     const timer = setTimeout(() => map.invalidateSize(), 200);
@@ -124,10 +125,7 @@ export default function MapboxInteractiveMap({ markers, selectedKey, onSelectMar
     "flex cursor-pointer items-center justify-center border border-slate-200 bg-white/95 text-slate-800 shadow-md backdrop-blur-sm transition-all duration-150 hover:border-[#6DAD45] hover:text-[#0F172A] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6DAD45]";
 
   return (
-    <div className="relative w-full overflow-hidden bg-[#E5E9EC] font-sans-ui select-none">
-      {/* Soft top gradient so controls and label stay legible */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 z-[390] h-20 bg-gradient-to-b from-white/70 to-transparent" />
-
+    <div className="relative w-full overflow-hidden bg-[#F1F4F2] font-sans-ui select-none">
       {/* Top-left: reset */}
       <div className="absolute top-3 left-3 z-[400] flex items-center gap-2 sm:top-4 sm:left-4">
         <button
@@ -139,12 +137,6 @@ export default function MapboxInteractiveMap({ markers, selectedKey, onSelectMar
           <RotateCcw className="h-3.5 w-3.5 text-slate-600" />
           <span>Reset View</span>
         </button>
-      </div>
-
-      {/* Top-centre: operational label */}
-      <div className="pointer-events-none absolute top-4 left-1/2 z-[400] hidden -translate-x-1/2 items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3.5 py-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[#0F172A] shadow-sm md:flex">
-        <span className="h-2 w-2 rounded-full bg-[#6DAD45]" />
-        Operational footprint
       </div>
 
       {/* Top-right: zoom */}
