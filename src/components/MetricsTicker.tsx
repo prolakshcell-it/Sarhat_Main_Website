@@ -47,7 +47,7 @@ function AnimatedMetricValue({ value }: { value: string }) {
 export default function MetricsTicker() {
   const metrics = [
     {
-      value: "47.77 MW",
+      value: "49.77 MW",
       label: "SERVED TO BUILD",
       subText: "Utility & C&I Renewable Solar Capacity",
       icon: Zap,

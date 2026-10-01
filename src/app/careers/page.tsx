@@ -368,7 +368,7 @@ export default function CareersPage() {
 
                   <div className="bg-black/75 backdrop-blur-xl border border-white/20 rounded-2xl p-4 text-center shadow-2xl">
                     <div className="font-serif-display text-3xl sm:text-4xl font-bold text-white tracking-tight mb-1">
-                      47.77 MW
+                      49.77 MW
                     </div>
                     <div className="text-[10px] font-mono text-slate-300 uppercase tracking-widest">
                       SERVED TO BUILD

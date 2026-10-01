@@ -35,7 +35,7 @@ export default function WhyChooseUs() {
     {
       num: "04",
       title: "On-Time Commissioning Record",
-      badge: "47.77+ MW Installed",
+      badge: "49.77+ MW Installed",
       description:
         "Proven track record of completing complex utility solar parks, PM-KUSUM feeders, and C&I captive projects weeks ahead of statutory schedules with zero safety compromises.",
       icon: Clock,
@@ -44,7 +44,7 @@ export default function WhyChooseUs() {
 
   const summaryStats = [
     { label: "DISCOM Clearance Rate", value: "100%" },
-    { label: "Turnkey Solar & BESS", value: "47.77+ MW" },
+    { label: "Turnkey Solar & BESS", value: "49.77+ MW" },
     { label: "Pan-India Core Footprint", value: "7+ States" },
     { label: "Operational Safety Score", value: "Zero Incidents" },
   ];
