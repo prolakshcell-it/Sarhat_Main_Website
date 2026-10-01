@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
+import { animate, motion, useReducedMotion } from "framer-motion";
 import {
   MapPin,
   Building2,
@@ -10,12 +11,8 @@ import {
   CheckCircle2,
   Clock,
   AlertCircle,
-  FileText,
-  ChevronRight,
-  Filter,
 } from "lucide-react";
 import Link from "next/link";
-import ScrollReveal from "./ScrollReveal";
 import AnimatedPillBadge from "./AnimatedPillBadge";
 import { ProjectSite, projectSites, SubProject } from "./MapboxInteractiveMap";
 
@@ -23,7 +20,7 @@ import { ProjectSite, projectSites, SubProject } from "./MapboxInteractiveMap";
 const MapboxInteractiveMap = dynamic(() => import("./MapboxInteractiveMap"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-[550px] sm:h-[620px] rounded-3xl bg-slate-200/80 animate-pulse flex items-center justify-center text-slate-500 font-mono text-xs">
+    <div className="w-full h-[380px] sm:h-[460px] lg:h-[560px] bg-slate-200/80 animate-pulse flex items-center justify-center text-slate-500 font-mono text-xs">
       Loading Interactive Mapbox Map...
     </div>
   ),
@@ -50,12 +47,42 @@ const slugToSiteIdMap: Record<string, string> = {
   karnataka: "ka",
 };
 
+/** Counts up to a value like "25.03 MW" / "5 Sites" when it changes (not on every render). */
+function AnimatedValue({ value, reduce }: { value: string; reduce: boolean }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    const m = value.match(/^(-?\d+(?:\.\d+)?)(.*)$/);
+    if (!el || !m || reduce) return;
+    const decimals = (m[1].split(".")[1] || "").length;
+    const controls = animate(0, parseFloat(m[1]), {
+      duration: 0.6,
+      ease: "easeOut",
+      onUpdate: (v) => {
+        el.textContent = `${v.toFixed(decimals)}${m[2]}`;
+      },
+      onComplete: () => {
+        el.textContent = value;
+      },
+    });
+    return () => {
+      controls.stop();
+      el.textContent = value;
+    };
+  }, [value, reduce]);
+  return <span ref={ref}>{value}</span>;
+}
+
+const LABEL = "font-mono text-[11px] font-bold uppercase tracking-[0.16em]";
+
 export default function FootprintMap({ selectedStateSlug, onSelectState }: FootprintMapProps) {
   const initialSiteId = selectedStateSlug ? slugToSiteIdMap[selectedStateSlug] || "up" : "up";
   const [selectedSite, setSelectedSite] = useState<ProjectSite | null>(
     projectSites.find((s) => s.id === initialSiteId) || projectSites[0]
   );
-  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [statusFilter] = useState<string>("all");
+  const reduce = !!useReducedMotion();
+  const chipsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (selectedStateSlug) {
@@ -111,252 +138,305 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
     return sp.status.toLowerCase() === statusFilter.toLowerCase();
   });
 
+  // Keep the selected chip in view inside the (mobile) horizontal filter strip
+  useEffect(() => {
+    const strip = chipsRef.current;
+    const chip = strip?.querySelector<HTMLElement>('[aria-pressed="true"]');
+    if (!strip || !chip || strip.scrollWidth <= strip.clientWidth) return;
+    strip.scrollTo({
+      left: chip.offsetLeft - (strip.clientWidth - chip.offsetWidth) / 2,
+      behavior: reduce ? "auto" : "smooth",
+    });
+  }, [selectedSite?.id, reduce]);
+
+  const group = {
+    hidden: {},
+    visible: { transition: { staggerChildren: reduce ? 0 : 0.07, delayChildren: 0.05 } },
+  };
+  const item = {
+    hidden: { opacity: 0, y: reduce ? 0 : 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: reduce ? 0.2 : 0.6, ease: "easeOut" as const } },
+  };
+
+  const scrollToMap = () =>
+    document.getElementById("footprint-map")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+
   return (
     <section
       id="footprint"
-      className="py-20 sm:py-28 bg-[#F8FAF8] text-[#0F172A] relative z-10 border-b border-slate-200/80 select-none overflow-hidden font-sans-ui"
+      className="relative z-10 overflow-hidden border-b border-slate-200/80 bg-[#F8FAF8] py-[clamp(60px,8vw,110px)] font-sans-ui text-[#0F172A]"
     >
-      {/* Soft Ambient Porcelain Flares */}
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-b from-[#D4E012]/15 via-[#6DAD45]/10 to-transparent rounded-full blur-[130px] pointer-events-none z-0"></div>
-      <div className="absolute bottom-10 right-0 w-[500px] h-[500px] bg-gradient-to-l from-emerald-400/10 via-[#D4E012]/10 to-transparent rounded-full blur-[110px] pointer-events-none z-0"></div>
+      {/* Very soft glow behind heading / map */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{ background: "radial-gradient(circle at 50% 22%, rgba(109,173,69,0.10), transparent 55%)" }}
+      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.12 }}
+        variants={group}
+        className="relative z-10 mx-auto"
+        style={{ width: "min(100% - 32px, 1360px)" }}
+      >
         {/* Section Header */}
-        <ScrollReveal direction="up" distance={40}>
-          <div className="text-center max-w-3xl mx-auto mb-10">
-            <AnimatedPillBadge className="mb-6">
-              PAN-INDIA OPERATIONAL FOOTPRINT
-            </AnimatedPillBadge>
+        <div className="mx-auto mb-8 max-w-[920px] text-center sm:mb-10">
+          <motion.div variants={item}>
+            <AnimatedPillBadge className="mb-5">PAN-INDIA OPERATIONAL FOOTPRINT</AnimatedPillBadge>
+          </motion.div>
 
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium tracking-tight text-slate-900 leading-tight mb-6">
-              Built across India. <br />
-              <span className="text-[#6DAD45] italic relative inline-block whitespace-nowrap">
-                Core Operating Footprint.
-                <svg
-                  className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
-                  viewBox="0 0 100 20"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M0 15 Q 50 0 100 15"
-                    stroke="currentColor"
-                    strokeWidth="3.5"
-                    fill="transparent"
-                  />
-                </svg>
-              </span>
-            </h2>
+          <motion.h2
+            variants={item}
+            className="mb-5 font-serif-display text-[clamp(2.25rem,5vw,4.5rem)] font-medium leading-[1.08] tracking-tight text-slate-900"
+          >
+            Built across India. <br />
+            <span className="relative inline-block italic text-[#6DAD45]">
+              Core Operating Footprint.
+              <svg className="absolute -bottom-2 left-0 h-3 w-full text-[#6DAD45]" viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden>
+                <motion.path
+                  d="M0 15 Q 50 0 100 15"
+                  stroke="currentColor"
+                  strokeWidth="3.5"
+                  fill="transparent"
+                  vectorEffect="non-scaling-stroke"
+                  variants={{ hidden: { pathLength: reduce ? 1 : 0 }, visible: { pathLength: 1, transition: { duration: 0.6, delay: 0.5, ease: "easeOut" } } }}
+                />
+              </svg>
+            </span>
+          </motion.h2>
 
-            <p className="text-slate-600 font-normal text-base sm:text-lg leading-relaxed">
-              Explore Sarhat&apos;s active solar EPC projects, PM-KUSUM feeder installations, DISCOM substation corridors, and renewable infrastructure across operating states.
-            </p>
-          </div>
-        </ScrollReveal>
+          <motion.p variants={item} className="mx-auto max-w-[820px] text-[clamp(15px,1.3vw,18px)] leading-relaxed text-slate-600">
+            Explore Sarhat&apos;s active solar EPC projects, PM-KUSUM feeder installations, DISCOM substation corridors, and renewable infrastructure across operating states.
+          </motion.p>
+        </div>
 
-        {/* State Selection Bar */}
-        <div className="mb-6">
-          <div className="flex items-center gap-2 overflow-x-auto pb-3 pt-1 px-1 scrollbar-none snap-x">
+        {/* State filters */}
+        <motion.div variants={item} className="relative mb-5">
+          <div
+            ref={chipsRef}
+            role="group"
+            aria-label="Filter by state"
+            className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-2 pt-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0 [&::-webkit-scrollbar]:hidden"
+          >
             {projectSites.map((site) => {
               const isSelected = selectedSite?.id === site.id;
               return (
                 <button
                   key={site.id}
+                  type="button"
+                  aria-pressed={isSelected}
                   onClick={() => handleStateClick(site)}
-                  className={`snap-start shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-mono font-bold transition-all duration-300 border ${
+                  className={`flex min-h-[44px] shrink-0 cursor-pointer items-center gap-2.5 rounded-2xl border px-4 py-2.5 font-mono text-xs font-bold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6DAD45] focus-visible:ring-offset-2 ${
                     isSelected
-                      ? "bg-slate-900 text-white border-slate-900 shadow-lg scale-105"
-                      : "bg-white text-slate-700 border-slate-300/90 hover:border-slate-400 hover:bg-slate-50 shadow-sm"
+                      ? "border-slate-900 bg-slate-900 text-white shadow-lg"
+                      : "border-slate-200 bg-white text-slate-800 shadow-sm hover:-translate-y-px hover:border-[#6DAD45] hover:shadow-md"
                   }`}
                 >
-                  <span
-                    className={`w-2 h-2 rounded-full ${
-                      isSelected ? "bg-[#D4E012] animate-ping" : "bg-slate-400"
-                    }`}
-                  ></span>
+                  <span className={`h-2 w-2 rounded-full ${isSelected ? "bg-[#D4E012]" : "bg-slate-300"}`} />
                   <span>{site.state}</span>
-                  <span
-                    className={`px-2 py-0.5 rounded-full text-[10px] font-extrabold ${
-                      isSelected
-                        ? "bg-[#D4E012] text-black"
-                        : "bg-slate-100 text-slate-600"
-                    }`}
-                  >
+                  <span className={`rounded-full px-2 py-0.5 text-[10px] font-extrabold ${isSelected ? "bg-[#D4E012] text-black" : "bg-slate-100 text-slate-600"}`}>
                     {site.mwInstalled}
                   </span>
                 </button>
               );
             })}
           </div>
-        </div>
+          {/* right-edge fade hints horizontal scroll on mobile */}
+          <div aria-hidden className="pointer-events-none absolute inset-y-0 right-[-16px] w-10 bg-gradient-to-l from-[#F8FAF8] to-transparent sm:hidden" />
+        </motion.div>
 
-        {/* Interactive Mapbox Map Container */}
-        <ScrollReveal direction="up" distance={45} delay={0.15}>
-          <div className="relative w-full max-w-7xl mx-auto flex flex-col items-center">
-            {/* Sub-header status bar */}
-            <div className="w-full flex items-center justify-between mb-3 px-3">
-              <span className="text-[11px] font-mono text-[#707B00] uppercase tracking-widest font-bold flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-[#707B00]" /> PAN-INDIA OPERATIONAL LOCATIONS (INTERACTIVE MAP)
-              </span>
-              <span className="text-[10px] font-mono text-slate-500 flex items-center gap-1.5 font-semibold">
-                <span className="w-2 h-2 rounded-full bg-[#707B00] animate-ping" />
-                CLICK ANY STATE MARKER OR TAB TO FILTER
-              </span>
-            </div>
-
-            {/* Mapbox Map */}
-            <div className="w-full relative rounded-3xl overflow-hidden shadow-2xl border border-slate-300/80 mb-8">
-              <MapboxInteractiveMap
-                selectedSiteId={selectedSite?.id}
-                onSelectSite={(site) => {
-                  if (site) setSelectedSite(site);
-                }}
-              />
-            </div>
+        {/* Map + selected-location summary + facility list: one connected surface */}
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, y: reduce ? 0 : 20, scale: reduce ? 1 : 0.985 },
+            visible: { opacity: 1, y: 0, scale: 1, transition: { duration: reduce ? 0.2 : 0.7, ease: "easeOut" } },
+          }}
+          className="overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_24px_60px_-24px_rgba(15,23,42,0.35)] sm:rounded-3xl"
+        >
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b border-slate-200 bg-white px-4 py-3 sm:px-6">
+            <span className={`${LABEL} flex items-center gap-2 text-[#707B00]`}>
+              <MapPin className="h-3.5 w-3.5" /> PAN-INDIA OPERATIONAL LOCATIONS (INTERACTIVE MAP)
+            </span>
+            <span className="font-mono text-[10px] font-semibold text-slate-500">CLICK ANY STATE MARKER OR TAB TO FILTER</span>
           </div>
-        </ScrollReveal>
 
-        {/* ============================================================= */}
-        {/* STATE OPERATIONAL ROSTER DRAWER / LEDGER PANEL */}
-        {/* ============================================================= */}
-        {selectedSite && (
-          <ScrollReveal direction="up" distance={35} delay={0.2}>
-            <div id="footprint-roster-table" className="bg-white rounded-3xl border border-slate-200/90 shadow-2xl p-6 sm:p-8 relative overflow-hidden scroll-mt-24">
-              {/* Header Info */}
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 mb-6 border-b border-slate-200">
-                <div>
-                  <div className="flex items-center gap-2.5 mb-2">
-                    <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#D4E012]/20 text-slate-900 border border-[#D4E012]/50">
-                      {selectedSite.code} • {selectedSite.state.toUpperCase()}
-                    </span>
-                    <span className="text-xs font-mono text-slate-500 font-semibold">
-                      DISCOM: <strong className="text-slate-800">{selectedSite.discom}</strong>
-                    </span>
+          <div id="footprint-map" className="scroll-mt-28">
+            <MapboxInteractiveMap
+              selectedSiteId={selectedSite?.id}
+              onSelectSite={(site) => {
+                if (site) setSelectedSite(site);
+              }}
+            />
+          </div>
+
+          {selectedSite && (
+            <div id="footprint-roster-table" className="scroll-mt-28 border-t border-slate-200">
+              <motion.div
+                key={selectedSite.id}
+                initial={{ opacity: 0, y: reduce ? 0 : 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                {/* Summary */}
+                <div className="flex flex-col gap-6 bg-gradient-to-b from-[#F8FAF8] to-white p-5 sm:p-7 lg:flex-row lg:items-center lg:justify-between lg:p-8">
+                  <div className="min-w-0">
+                    <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-2">
+                      <span className="rounded-full border border-[#D4E012]/60 bg-[#D4E012]/25 px-3 py-1 font-mono text-xs font-bold text-slate-900">
+                        {selectedSite.code} • {selectedSite.state.toUpperCase()}
+                      </span>
+                      <span className="font-mono text-xs font-semibold text-slate-500">
+                        DISCOM: <strong className="text-slate-800">{selectedSite.discom}</strong>
+                      </span>
+                    </div>
+                    <h3 className="font-serif-display text-[clamp(1.6rem,3vw,2.25rem)] font-medium leading-tight tracking-tight text-slate-900">
+                      {selectedSite.name}
+                    </h3>
+                    <p className="mt-2 max-w-2xl text-sm font-light leading-relaxed text-slate-600 sm:text-base">{selectedSite.description}</p>
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-serif-display font-medium text-slate-900 tracking-tight">
-                    {selectedSite.name}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 font-light mt-1 max-w-2xl">
-                    {selectedSite.description}
-                  </p>
+
+                  <div className="grid shrink-0 grid-cols-2 gap-3 sm:min-w-[340px]">
+                    <div className="rounded-2xl border border-slate-800 bg-slate-900 p-4 text-white shadow-lg">
+                      <span className={`${LABEL} block text-slate-400`}>TOTAL CAPACITY</span>
+                      <span className="mt-2 block font-mono text-2xl font-bold text-[#D4E012] sm:text-[1.75rem]">
+                        <AnimatedValue value={selectedSite.mwInstalled} reduce={reduce} />
+                      </span>
+                    </div>
+                    <div className="rounded-2xl border border-slate-200 bg-white p-4 text-slate-900 shadow-sm">
+                      <span className={`${LABEL} block text-slate-500`}>FACILITIES</span>
+                      <span className="mt-2 block font-mono text-2xl font-bold sm:text-[1.75rem]">
+                        <AnimatedValue value={`${selectedSite.subProjects.length} Sites`} reduce={reduce} />
+                      </span>
+                    </div>
+                  </div>
                 </div>
 
-                {/* State Capacity Summary Cards */}
-                <div className="flex items-center gap-3 shrink-0">
-                  <div className="bg-slate-900 text-white p-4 rounded-2xl border border-slate-800 shadow-lg text-center min-w-[130px]">
-                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block font-bold">
-                      TOTAL CAPACITY
+                {/* Facility list */}
+                <div className="border-t border-slate-200 p-5 sm:p-7 lg:p-8">
+                  <div className="mb-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+                    <span className={`${LABEL} flex items-center gap-2 text-[#707B00]`}>
+                      <CheckCircle2 className="h-4 w-4 text-[#6DAD45]" />
+                      ALL OPERATIONAL FACILITIES & CLIENT RECORDS ({selectedSite.subProjects.length})
                     </span>
-                    <span className="text-xl sm:text-2xl font-bold font-mono text-[#D4E012]">
-                      {selectedSite.mwInstalled}
-                    </span>
-                  </div>
-
-                  <div className="bg-slate-50 text-slate-900 p-4 rounded-2xl border border-slate-200 text-center min-w-[120px]">
-                    <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest block font-bold">
-                      FACILITIES
-                    </span>
-                    <span className="text-xl sm:text-2xl font-bold font-mono text-slate-900">
-                      {selectedSite.subProjects.length} Sites
+                    <span className="font-mono text-xs font-semibold text-slate-500">
+                      Showing All {selectedSite.subProjects.length} Facilities
                     </span>
                   </div>
-                </div>
-              </div>
 
-              {/* Table Header Bar Showing All Facilities */}
-              <div className="flex items-center justify-between gap-4 mb-5 pb-3 border-b border-slate-100">
-                <span className="text-xs font-mono font-extrabold text-[#707B00] uppercase tracking-wider flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#6DAD45]" />
-                  ALL OPERATIONAL FACILITIES & CLIENT RECORDS ({selectedSite.subProjects.length})
-                </span>
-                <span className="text-xs font-mono text-slate-500 font-semibold">
-                  Showing All {selectedSite.subProjects.length} Facilities
-                </span>
-              </div>
+                  {filteredSubProjects && filteredSubProjects.length > 0 ? (
+                    <>
+                      {/* Desktop table */}
+                      <div className="hidden overflow-hidden rounded-2xl border border-slate-200 lg:block">
+                        <table className="w-full border-collapse text-left">
+                          <thead>
+                            <tr className="border-b border-slate-200 bg-slate-50 font-mono text-[11px] uppercase tracking-wider text-slate-500">
+                              <th className="px-5 py-3.5 font-bold">Location / District</th>
+                              <th className="px-4 py-3.5 font-bold">Project Scheme</th>
+                              <th className="px-4 py-3.5 font-bold">Capacity (MW)</th>
+                              <th className="px-4 py-3.5 font-bold">Status</th>
+                              <th className="px-4 py-3.5 font-bold">Client Enterprise & Registered Address</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-100 bg-white text-sm">
+                            {filteredSubProjects.map((project, idx) => (
+                              <tr key={project.id} className="group transition-colors duration-150 hover:bg-[#6DAD45]/[0.06]">
+                                <td className="relative px-5 py-4 align-top font-bold text-slate-900">
+                                  <span aria-hidden className="absolute inset-y-0 left-0 w-[3px] origin-top scale-y-0 bg-[#6DAD45] transition-transform duration-150 group-hover:scale-y-100" />
+                                  <div className="flex items-center gap-2">
+                                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-slate-100 font-mono text-[10px] font-bold text-slate-600 transition-colors group-hover:bg-[#6DAD45] group-hover:text-white">
+                                      {idx + 1}
+                                    </span>
+                                    <span>{project.location}</span>
+                                  </div>
+                                </td>
+                                <td className="px-4 py-4 align-top font-mono font-medium text-slate-700">
+                                  <span className="whitespace-nowrap rounded-lg border border-slate-200 bg-slate-100 px-2.5 py-1 text-xs text-slate-800">{project.scheme}</span>
+                                </td>
+                                <td className="whitespace-nowrap px-4 py-4 align-top font-mono text-sm font-extrabold text-slate-900">{project.capacityMW}</td>
+                                <td className="px-4 py-4 align-top">{getStatusBadge(project.status)}</td>
+                                <td className="max-w-lg px-4 py-4 align-top">
+                                  <div className="flex items-center gap-1.5 text-sm font-extrabold text-slate-900">
+                                    <Building2 className="h-4 w-4 shrink-0 text-[#707B00]" />
+                                    <span>{project.client}</span>
+                                  </div>
+                                  {project.clientAddress && (
+                                    <div className="mt-1.5 break-words rounded-xl border border-slate-200/80 bg-slate-50 p-2.5 text-[11px] font-normal leading-relaxed text-slate-600">
+                                      <span className="mb-0.5 block font-mono text-[9px] font-bold uppercase tracking-wider text-slate-400">
+                                        Registered Address / Location:
+                                      </span>
+                                      {project.clientAddress}
+                                    </div>
+                                  )}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
 
-              {/* Detailed Projects Roster Table */}
-              <div className="w-full overflow-x-auto rounded-2xl border border-slate-200 shadow-sm custom-scrollbar">
-                <table className="w-full text-left border-collapse min-w-[800px]">
-                  <thead>
-                    <tr className="bg-slate-900 text-white text-[11px] font-mono uppercase tracking-wider border-b border-slate-800">
-                      <th className="py-3.5 px-4 font-bold">Location / District</th>
-                      <th className="py-3.5 px-4 font-bold">Project Scheme</th>
-                      <th className="py-3.5 px-4 font-bold">Capacity (MW)</th>
-                      <th className="py-3.5 px-4 font-bold">Status</th>
-                      <th className="py-3.5 px-4 font-bold">Client Enterprise & Registered Address</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-200 text-xs sm:text-sm bg-white">
-                    {selectedSite.subProjects && selectedSite.subProjects.length > 0 ? (
-                      selectedSite.subProjects.map((project, idx) => (
-                        <tr
-                          key={project.id}
-                          className="hover:bg-slate-50/80 transition-colors"
-                        >
-                          <td className="py-4 px-4 font-bold text-slate-900 align-top">
-                            <div className="flex items-center gap-2">
-                              <span className="w-5 h-5 rounded-md bg-slate-100 text-slate-600 text-[10px] font-mono flex items-center justify-center font-bold shrink-0">
-                                {idx + 1}
-                              </span>
-                              <span>{project.location}</span>
-                            </div>
-                          </td>
-                          <td className="py-4 px-4 font-mono font-medium text-slate-700 align-top">
-                            <span className="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-800 border border-slate-200 text-xs whitespace-nowrap">
-                              {project.scheme}
-                            </span>
-                          </td>
-                          <td className="py-4 px-4 font-mono font-extrabold text-slate-900 text-sm align-top whitespace-nowrap">
-                            {project.capacityMW}
-                          </td>
-                          <td className="py-4 px-4 align-top">
-                            {getStatusBadge(project.status)}
-                          </td>
-                          <td className="py-4 px-4 align-top max-w-sm sm:max-w-md lg:max-w-lg">
-                            <div className="flex items-center gap-1.5 font-extrabold text-slate-900 text-xs sm:text-sm">
-                              <Building2 className="w-4 h-4 text-[#707B00] shrink-0" />
-                              <span>{project.client}</span>
-                            </div>
-                            {project.clientAddress && (
-                              <div className="mt-1.5 p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 text-[11px] text-slate-600 font-normal leading-relaxed whitespace-normal break-words shadow-2xs">
-                                <span className="text-[9px] font-mono uppercase tracking-wider font-bold text-slate-400 block mb-0.5">
-                                  Registered Address / Location:
-                                </span>
-                                {project.clientAddress}
+                      {/* Mobile / tablet cards */}
+                      <ul className="grid gap-3 sm:grid-cols-2 lg:hidden">
+                        {filteredSubProjects.map((project, idx) => (
+                          <li key={project.id} className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                            <div className="flex items-start justify-between gap-3">
+                              <div className="flex items-center gap-2 font-bold text-slate-900">
+                                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-slate-100 font-mono text-[11px] text-slate-600">{idx + 1}</span>
+                                <span>{project.location}</span>
                               </div>
-                            )}
-                          </td>
-                        </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td
-                          colSpan={5}
-                          className="py-8 text-center text-slate-500 font-mono text-xs"
-                        >
-                          No facilities found matching status filter.
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-              </div>
+                              {getStatusBadge(project.status)}
+                            </div>
+                            <span className="w-fit rounded-lg border border-slate-200 bg-slate-100 px-2.5 py-1 font-mono text-xs text-slate-800">{project.scheme}</span>
+                            <div>
+                              <div className="flex items-center gap-1.5 text-sm font-extrabold text-slate-900">
+                                <Building2 className="h-4 w-4 shrink-0 text-[#707B00]" />
+                                <span>{project.client}</span>
+                              </div>
+                              {project.clientAddress && (
+                                <p className="mt-1.5 break-words text-xs leading-relaxed text-slate-600">
+                                  <span className="mb-0.5 block font-mono text-[9px] font-bold uppercase tracking-wider text-slate-400">Registered Address / Location:</span>
+                                  {project.clientAddress}
+                                </p>
+                              )}
+                            </div>
+                            <div className="mt-auto flex items-end justify-between gap-3 border-t border-slate-100 pt-3">
+                              <div>
+                                <span className={`${LABEL} block text-slate-400`}>Capacity</span>
+                                <span className="font-mono text-lg font-extrabold text-slate-900">{project.capacityMW}</span>
+                              </div>
+                              <button
+                                type="button"
+                                onClick={scrollToMap}
+                                className="group/v inline-flex min-h-[44px] cursor-pointer items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wider text-[#707B00] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6DAD45]"
+                              >
+                                View on map
+                                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/v:translate-x-1" />
+                              </button>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  ) : (
+                    <p className="py-8 text-center font-mono text-xs text-slate-500">No facilities found matching status filter.</p>
+                  )}
+                </div>
+              </motion.div>
             </div>
-          </ScrollReveal>
-        )}
+          )}
+        </motion.div>
 
         {/* Section CTA Button */}
-        <ScrollReveal direction="up" distance={30} delay={0.25}>
-          <div className="mt-12 text-center">
-            <Link
-              href="/projects#footprint"
-              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"
-            >
-              <span>Explore Regional Hubs & Footprints</span>
-              <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </ScrollReveal>
-      </div>
+        <motion.div variants={item} className="mt-10 text-center sm:mt-12">
+          <Link
+            href="/projects#footprint"
+            className="group inline-flex min-h-[48px] items-center gap-2.5 rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] px-8 py-4 text-xs font-extrabold uppercase tracking-widest text-black shadow-xl shadow-[#D4E012]/20 transition-all duration-300 hover:-translate-y-1 hover:from-[#c2ce0d] hover:to-[#4ed423]"
+          >
+            <span>Explore Regional Hubs & Footprints</span>
+            <ArrowRight className="h-4 w-4 text-black transition-transform group-hover:translate-x-1" />
+          </Link>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

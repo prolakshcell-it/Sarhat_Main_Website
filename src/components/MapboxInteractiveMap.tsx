@@ -577,22 +577,17 @@ export default function MapboxInteractiveMap({ onSelectSite, selectedSiteId }: M
     // Add glowing Mapbox yellow solar sun markers
     projectSites.forEach((site) => {
       const markerHtml = `
-        <div class="mapbox-solar-marker group relative cursor-pointer" data-site-id="${site.id}">
-          <div class="absolute -inset-2.5 rounded-full bg-[#EAB308]/40 animate-ping opacity-75 pointer-events-none"></div>
-          <div class="relative w-8.5 h-8.5 rounded-full bg-gradient-to-tr from-[#EAB308] via-[#FACC15] to-[#FEF08A] border-2 border-white shadow-2xl flex items-center justify-center transition-transform transform group-hover:scale-130">
-            <svg class="w-4.5 h-4.5 text-slate-900 stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <circle cx="12" cy="12" r="4" fill="#000000" fill-opacity="0.15"/>
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2m10-10h-2M4 10H2m15.364-7.364l-1.414 1.414M6.05 17.95l-1.414 1.414m12.728 0l-1.414-1.414M6.05 6.05L4.636 4.636"/>
-            </svg>
-          </div>
+        <div class="sarhat-marker" data-site-id="${site.id}">
+          <span class="sarhat-marker__pulse"></span>
+          <span class="sarhat-marker__dot"><span class="sarhat-marker__core"></span></span>
         </div>
       `;
 
       const customIcon = L.divIcon({
         html: markerHtml,
         className: "custom-mapbox-marker-container",
-        iconSize: [34, 34],
-        iconAnchor: [17, 17],
+        iconSize: [30, 30],
+        iconAnchor: [15, 15],
       });
 
       const popupHtml = `
@@ -638,6 +633,13 @@ export default function MapboxInteractiveMap({ onSelectSite, selectedSiteId }: M
         closeButton: true,
       });
 
+      marker.bindTooltip(
+        `<div class="sarhat-tooltip__state">${site.state}</div>
+         <div class="sarhat-tooltip__mw">${site.mwInstalled}</div>
+         <div class="sarhat-tooltip__sites">${site.subProjects.length} Sites</div>`,
+        { direction: "top", offset: [0, -14], opacity: 1, className: "sarhat-tooltip" },
+      );
+
       marker.on("click", () => {
         handleSiteSelect(site);
       });
@@ -662,6 +664,33 @@ export default function MapboxInteractiveMap({ onSelectSite, selectedSiteId }: M
       mapInstanceRef.current = null;
     };
   }, []);
+
+  // Emphasise the selected marker (one pulse on selection) and follow selection made from the state filters.
+  const firstSyncRef = useRef(true);
+  useEffect(() => {
+    const selected = selectedSiteId ?? activeSite?.id ?? null;
+    markersRef.current.forEach((marker, id) => {
+      const el = marker.getElement()?.querySelector<HTMLElement>(".sarhat-marker");
+      if (!el) return;
+      const isSel = id === selected;
+      if (isSel && !el.classList.contains("is-selected")) {
+        el.classList.remove("is-selected");
+        void el.offsetWidth; // restart the single pulse
+      }
+      el.classList.toggle("is-selected", isSel);
+    });
+
+    if (firstSyncRef.current) {
+      firstSyncRef.current = false;
+      return;
+    }
+    const site = projectSites.find((st) => st.id === selectedSiteId);
+    const map = mapInstanceRef.current;
+    if (site && map && activeSite?.id !== site.id) {
+      map.flyTo([site.lat, site.lng], 7, { duration: 1.2 });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedSiteId, activeSite]);
 
   // Handle selecting site - fly smoothly to site location in 2D View and open point popup
   const handleSiteSelect = (site: ProjectSite) => {
@@ -704,44 +733,48 @@ export default function MapboxInteractiveMap({ onSelectSite, selectedSiteId }: M
     mapInstanceRef.current?.zoomOut();
   };
 
+  const ctrl =
+    "flex cursor-pointer items-center justify-center border border-slate-200 bg-white/95 text-slate-800 shadow-md backdrop-blur-sm transition-all duration-150 hover:border-[#6DAD45] hover:text-[#0F172A] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6DAD45]";
+
   return (
-    <div className="relative w-full rounded-3xl overflow-hidden border border-slate-200/90 bg-[#E5E9EC] shadow-2xl font-sans-ui select-none">
-      {/* Top Mapbox Controls Bar */}
-      <div className="absolute top-4 left-4 z-[400] flex items-center gap-2">
-        {/* Reset View Button matching Mapbox UI in screenshot */}
+    <div className="relative w-full overflow-hidden bg-[#E5E9EC] font-sans-ui select-none">
+      {/* Soft top gradient so controls and label stay legible */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 z-[390] h-20 bg-gradient-to-b from-white/70 to-transparent" />
+
+      {/* Top-left: reset */}
+      <div className="absolute top-3 left-3 z-[400] flex items-center gap-2 sm:top-4 sm:left-4">
         <button
+          type="button"
           onClick={handleResetView}
-          className="bg-white/95 text-slate-800 text-xs font-bold px-3.5 py-2 rounded-xl border border-slate-300 shadow-md flex items-center gap-1.5 hover:bg-white transition-all cursor-pointer backdrop-blur-md hover:scale-105 active:scale-95"
+          aria-label="Reset map view"
+          className={`${ctrl} h-10 gap-1.5 rounded-xl px-3.5 text-xs font-bold`}
         >
-          <RotateCcw className="w-3.5 h-3.5 text-slate-600" />
+          <RotateCcw className="h-3.5 w-3.5 text-slate-600" />
           <span>Reset View</span>
         </button>
       </div>
 
-      {/* Top Right Zoom Controls matching Mapbox UI in screenshot */}
-      <div className="absolute top-4 right-4 z-[400] bg-white/95 border border-slate-300 rounded-xl shadow-md flex flex-col divide-y divide-slate-200 overflow-hidden backdrop-blur-md">
-        <button
-          onClick={handleZoomIn}
-          className="w-8.5 h-8.5 flex items-center justify-center text-slate-800 font-bold hover:bg-slate-100 transition-colors cursor-pointer"
-          aria-label="Zoom In"
-        >
-          <Plus className="w-4 h-4" />
+      {/* Top-centre: operational label */}
+      <div className="pointer-events-none absolute top-4 left-1/2 z-[400] hidden -translate-x-1/2 items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3.5 py-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[#0F172A] shadow-sm md:flex">
+        <span className="h-2 w-2 rounded-full bg-[#6DAD45]" />
+        Live operational footprint
+      </div>
+
+      {/* Top-right: zoom */}
+      <div className="absolute top-3 right-3 z-[400] flex flex-col divide-y divide-slate-200 overflow-hidden rounded-xl border border-slate-200 bg-white/95 shadow-md backdrop-blur-sm sm:top-4 sm:right-4">
+        <button type="button" onClick={handleZoomIn} aria-label="Zoom in" className="flex h-10 w-10 cursor-pointer items-center justify-center text-slate-800 transition-colors hover:bg-[#6DAD45]/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#6DAD45]">
+          <Plus className="h-4 w-4" />
         </button>
-        <button
-          onClick={handleZoomOut}
-          className="w-8.5 h-8.5 flex items-center justify-center text-slate-800 font-bold hover:bg-slate-100 transition-colors cursor-pointer"
-          aria-label="Zoom Out"
-        >
-          <Minus className="w-4 h-4" />
+        <button type="button" onClick={handleZoomOut} aria-label="Zoom out" className="flex h-10 w-10 cursor-pointer items-center justify-center text-slate-800 transition-colors hover:bg-[#6DAD45]/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#6DAD45]">
+          <Minus className="h-4 w-4" />
         </button>
       </div>
 
-      {/* Main Map Canvas Window with Grab Hand Cursor */}
+      {/* Map canvas */}
       <div
         ref={mapContainerRef}
-        className="w-full h-[580px] sm:h-[680px] lg:h-[750px] z-10 cursor-grab active:cursor-grabbing"
+        className="z-10 h-[380px] w-full cursor-grab active:cursor-grabbing sm:h-[460px] lg:h-[560px]"
       />
-
       {/* Bottom Left Mapbox Brand Logo matching screenshot */}
       <div className="absolute bottom-3 left-3 z-[400] flex items-center gap-1.5 bg-white/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-300/80 shadow-sm pointer-events-none">
         <svg className="w-4 h-4 text-slate-900" viewBox="0 0 24 24" fill="currentColor">
