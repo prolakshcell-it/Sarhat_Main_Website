@@ -122,16 +122,7 @@ export default function Footer() {
               >
                 <SocialLinkedin />
               </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter / X"
-                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-black hover:bg-[#D4E012] hover:border-[#D4E012] transition-all duration-300"
-              >
-                <SocialTwitter />
-              </a>
-              <a
+                <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -139,6 +130,15 @@ export default function Footer() {
                 className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-black hover:bg-[#D4E012] hover:border-[#D4E012] transition-all duration-300"
               >
                 <SocialInstagram />
+              </a>
+                 <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-black hover:bg-[#D4E012] hover:border-[#D4E012] transition-all duration-300"
+              >
+                <SocialYoutube />
               </a>
               <a
                 href="https://facebook.com"
@@ -150,14 +150,15 @@ export default function Footer() {
                 <SocialFacebook />
               </a>
               <a
-                href="https://youtube.com"
+                href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="YouTube"
+                aria-label="Twitter / X"
                 className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-black hover:bg-[#D4E012] hover:border-[#D4E012] transition-all duration-300"
               >
-                <SocialYoutube />
+                <SocialTwitter />
               </a>
+           
             </div>
           </div>
 
