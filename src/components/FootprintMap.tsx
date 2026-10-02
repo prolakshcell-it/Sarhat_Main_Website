@@ -56,8 +56,9 @@ const LABEL = "font-mono text-[11px] font-bold uppercase tracking-[0.16em]";
 function StatusBadge({ status }: { status: string }) {
   const base = "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-2.5 py-1 font-mono text-[10px] font-bold uppercase";
   switch (status) {
+    case "Commissioned":
     case "Completed":
-      return <span className={`${base} border-emerald-300 bg-emerald-100 text-emerald-800`}><CheckCircle2 className="h-3 w-3" />Completed</span>;
+      return <span className={`${base} border-emerald-300 bg-emerald-100 text-emerald-800`}><CheckCircle2 className="h-3 w-3" />Commissioned</span>;
     case "Ongoing":
       return <span className={`${base} border-sky-300 bg-sky-100 text-sky-800`}><Clock className="h-3 w-3" />Ongoing</span>;
     case "Not Started":
@@ -359,7 +360,6 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
                       <th className="px-4 py-3.5 font-bold">Project Type / Scheme</th>
                       <th className="px-4 py-3.5 font-bold">Capacity</th>
                       <th className="px-4 py-3.5 font-bold">Status</th>
-                      <th className="px-4 py-3.5 font-bold">Client Details</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100 bg-white text-sm">
@@ -374,13 +374,6 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
                         </td>
                         <td className="whitespace-nowrap px-4 py-4 align-top font-mono text-sm font-extrabold text-slate-900">{formatMW(p.capacityMW)}</td>
                         <td className="px-4 py-4 align-top"><StatusBadge status={p.status} /></td>
-                        <td className="max-w-md px-4 py-4 align-top">
-                          <div className="flex items-center gap-1.5 text-sm font-extrabold text-slate-900">
-                            <Building2 className="h-4 w-4 shrink-0 text-[#707B00]" />
-                            <span>{p.clientName}</span>
-                          </div>
-                          {p.clientAddress && <div className="mt-1.5 break-words text-[11px] leading-relaxed text-slate-600">{p.clientAddress}</div>}
-                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -399,13 +392,6 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
                       <StatusBadge status={p.status} />
                     </div>
                     <span className="w-fit rounded-lg border border-slate-200 bg-slate-100 px-2.5 py-1 font-mono text-xs text-slate-800">{p.scheme}</span>
-                    <div>
-                      <div className="flex items-center gap-1.5 text-sm font-extrabold text-slate-900">
-                        <Building2 className="h-4 w-4 shrink-0 text-[#707B00]" />
-                        <span className="min-w-0 break-words">{p.clientName}</span>
-                      </div>
-                      {p.clientAddress && <p className="mt-1.5 break-words text-xs leading-relaxed text-slate-600">{p.clientAddress}</p>}
-                    </div>
                     <div className="mt-auto border-t border-slate-100 pt-3">
                       <span className={`${LABEL} block text-slate-400`}>Capacity</span>
                       <span className="font-mono text-lg font-extrabold text-slate-900">{formatMW(p.capacityMW)}</span>
