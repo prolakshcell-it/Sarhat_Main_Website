@@ -123,7 +123,7 @@ export const navigationConfig: MegaNavEntry[] = [
     type: "mega",
     href: "/projects",
     tag: "Projects",
-    width: 980,
+    width: 1180,
     columns: 1,
     viewAllLabel: "View all projects",
     items: [
