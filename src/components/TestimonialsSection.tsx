@@ -128,7 +128,7 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section id="testimonials" className="py-24 sm:py-28 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden select-none">
+    <section id="testimonials" className="py-14 sm:py-20 lg:py-24 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden select-none">
       {/* Background Ambient Glow */}
       <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#D4E012]/10 rounded-full blur-[130px] pointer-events-none"></div>
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#6DAD45]/10 rounded-full blur-[120px] pointer-events-none"></div>
@@ -173,7 +173,7 @@ export default function TestimonialsSection() {
           {testimonials.map((item) => (
             <div
               key={item.id}
-              className="snap-start w-[300px] sm:w-[420px] shrink-0 bg-white rounded-3xl p-7 border border-slate-200/90 shadow-xl shadow-slate-200/50 hover:border-[#6DAD45] hover:shadow-2xl transition-all duration-300 flex flex-col justify-between text-center relative group"
+              className="snap-start w-[300px] sm:w-[420px] shrink-0 bg-white rounded-3xl p-7 border border-slate-200/90 shadow-xl shadow-slate-200/50 hover:border-[#6DAD45] transition-colors duration-200 flex flex-col justify-between text-center relative group"
             >
               <div>
                 {/* Rating & Location Tag */}

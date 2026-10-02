@@ -35,11 +35,11 @@ export default function PeopleFirst() {
   ];
 
   return (
-    <section id="people" className="py-28 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden">
+    <section id="people" className="py-14 sm:py-20 lg:py-24 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal direction="up" distance={40}>
-          <div className="text-center max-w-5xl mx-auto mb-16">
+          <div className="text-center max-w-5xl mx-auto mb-10 sm:mb-14">
             <AnimatedPillBadge className="mb-6">
               PEOPLE FIRST & CULTURE
             </AnimatedPillBadge>
@@ -72,17 +72,17 @@ export default function PeopleFirst() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {values.map((val, idx) => {
             const IconComp = val.icon;
-            const xOffset = val.direction === "right" ? -80 : val.direction === "left" ? 80 : 0;
-            const yOffset = val.direction === "up" ? 50 : 0;
+            const xOffset = 0;
+            const yOffset = 16;
 
             return (
               <motion.div
                 key={val.title}
                 initial={{ opacity: 0, x: xOffset, y: yOffset }}
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
-                viewport={{ once: false, amount: 0.2 }}
-                transition={{ delay: idx * 0.15, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={{ y: -8 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ delay: idx * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -2 }}
                 className="bg-white rounded-3xl p-8 relative flex flex-col justify-between min-h-[280px] border border-slate-200/90 hover:border-[#D4E012] transition-all shadow-xl shadow-slate-200/50"
               >
                 <div>

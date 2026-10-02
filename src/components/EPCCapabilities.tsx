@@ -9,11 +9,11 @@ import AnimatedPillBadge from "./AnimatedPillBadge";
 
 export default function EPCCapabilities() {
   return (
-    <section id="about" className="py-24 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10 overflow-hidden font-sans-ui">
+    <section id="about" className="py-14 sm:py-20 lg:py-24 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10 overflow-hidden font-sans-ui">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Centered Section Header */}
         <ScrollReveal direction="up" distance={40}>
-          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
             <AnimatedPillBadge className="mb-6">
               ABOUT US
             </AnimatedPillBadge>
@@ -65,7 +65,7 @@ export default function EPCCapabilities() {
                   src="/images/hero-solar.jpg"
                   alt="Sarhat Solar Farm Aerial View"
                   fill
-                  className="object-cover object-center transform hover:scale-105 transition-transform duration-700"
+                  className="object-cover object-center transform hover:scale-[1.02] transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
               </div>

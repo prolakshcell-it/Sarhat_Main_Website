@@ -9,7 +9,7 @@ interface FinalCTAProps {
 
 export default function FinalCTA({ onOpenQuote }: FinalCTAProps) {
   return (
-    <section id="contact" className="py-24 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui">
+    <section id="contact" className="py-14 sm:py-20 lg:py-24 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-slate-900 text-white rounded-3xl p-8 sm:p-14 border border-slate-800 relative overflow-hidden shadow-2xl">
           {/* Ambient Glow */}

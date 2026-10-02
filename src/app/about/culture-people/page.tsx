@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -36,6 +36,15 @@ import {
 export default function CulturePeoplePage() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const containerRef = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion();
+
+  // Subtle scroll-reveal for the VIBES section: fade + small upward drift
+  const reveal = (delay = 0) => ({
+    initial: reduceMotion ? { opacity: 1 } : { opacity: 0, y: 16 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.2 },
+    transition: { duration: 0.6, delay: reduceMotion ? 0 : delay, ease: "easeOut" as const },
+  });
 
   // Parallax & Scroll Fade-out Tracking for Hero
   const { scrollYProgress } = useScroll({
@@ -151,82 +160,84 @@ export default function CulturePeoplePage() {
           {/* ------------------------------------------------------------- */}
           {/* SECTION 2: OUR VIBES - INCLUSIVITY PROGRAMME */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-20 sm:py-28 bg-[#FAFBF9] border-b border-slate-200/80 relative z-10 overflow-hidden">
+          <section className="py-20 sm:py-28 lg:py-32 bg-[#FAFBF9] border-b border-slate-200/80 relative z-10 overflow-hidden">
             {/* Ambient Background Glow */}
-            <div className="absolute top-1/2 right-0 -translate-y-1/2 w-96 h-96 bg-[#D4E012]/15 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#6DAD45]/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-1/3 right-0 w-72 sm:w-96 h-72 sm:h-96 bg-[#D4E012]/15 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-64 sm:w-80 h-64 sm:h-80 bg-[#6DAD45]/10 rounded-full blur-3xl pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-                
-                {/* Left Text Block */}
-                <div className="lg:col-span-7">
-                  <ScrollReveal direction="up" distance={30}>
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D4E012]/20 border border-[#707B00]/30 text-[#707B00] text-xs font-mono font-bold uppercase tracking-wider mb-4">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+
+                {/* Left Editorial Block */}
+                <div className="lg:col-span-7 min-w-0">
+                  <motion.div {...reveal(0)}>
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D4E012]/20 border border-[#707B00]/30 text-[#707B00] text-xs font-mono font-bold uppercase tracking-wider mb-6">
                       <Sparkles className="w-3.5 h-3.5 text-[#707B00]" />
                       <span>OUR VIBES PROGRAMME</span>
                     </div>
+                  </motion.div>
 
-                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
-                      Inclusivity & <span className="text-[#6DAD45] italic font-normal">Belonging</span>
-                    </h2>
+                  <motion.h2 {...reveal(0.08)} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium text-slate-900 tracking-tight leading-[1.05] mb-6 text-balance">
+                    Inclusivity & <span className="text-[#6DAD45] italic font-normal">Belonging</span>
+                  </motion.h2>
 
-                    <div className="text-xs sm:text-sm font-mono font-bold text-[#707B00] uppercase tracking-wider mb-6 bg-[#D4E012]/15 border border-[#D4E012]/40 inline-block px-4 py-2 rounded-xl">
-                      VIBES: Volunteering • Inclusivity • Belonging • Engagement • Social
-                    </div>
+                  <motion.div {...reveal(0.14)} className="text-[11px] sm:text-sm font-mono font-bold text-[#707B00] uppercase tracking-wider mb-8 bg-[#D4E012]/15 border border-[#D4E012]/40 inline-block px-4 py-2 rounded-xl max-w-full">
+                    VIBES: Volunteering • Inclusivity • Belonging • Engagement • Social
+                  </motion.div>
 
-                    <p className="text-slate-700 text-base sm:text-lg font-normal leading-relaxed mb-8">
-                      For our people and by our people, VIBES is focused on building an inclusive and supportive culture. Through the various volunteering, social and wellbeing events, we unite around shared purposes, build connections and cultivate an environment where people can make a positive impact within Sarhat and in the communities in which we work. It&apos;s how we continue to grow and succeed - it&apos;s our vibe!
-                    </p>
+                  <motion.p {...reveal(0.2)} className="text-slate-700 text-base sm:text-lg font-normal leading-relaxed mb-12 pl-5 sm:pl-6 border-l-2 border-[#6DAD45]/60 max-w-2xl">
+                    For our people and by our people, VIBES is focused on building an inclusive and supportive culture. Through the various volunteering, social and wellbeing events, we unite around shared purposes, build connections and cultivate an environment where people can make a positive impact within Sarhat and in the communities in which we work. It&apos;s how we continue to grow and succeed - it&apos;s our vibe!
+                  </motion.p>
 
-                    {/* V.I.B.E.S Pill Badges Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                      {vibesPills.map((item) => (
-                        <div
-                          key={item.title}
-                          className="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-sm hover:shadow-md hover:border-[#6DAD45]/50 transition-all flex items-start gap-3.5 group"
-                        >
-                          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#D4E012] to-[#6DAD45] text-slate-950 font-black text-sm flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform">
-                            {item.letter}
-                          </div>
-                          <div>
-                            <div className="text-xs font-bold text-slate-900 uppercase tracking-wider font-sans">{item.title}</div>
-                            <div className="text-xs text-slate-600 mt-0.5 leading-snug">{item.desc}</div>
-                          </div>
+                  {/* V.I.B.E.S Editorial List */}
+                  <ul className="border-t border-slate-300/70">
+                    {vibesPills.map((item, i) => (
+                      <motion.li
+                        key={item.title}
+                        {...reveal(0.1 + i * 0.07)}
+                        className="group border-b border-slate-300/70 py-5 sm:py-6 flex items-start gap-4 sm:gap-6 transition-all duration-300 hover:translate-x-1 hover:border-[#6DAD45]/60 motion-reduce:hover:translate-x-0"
+                      >
+                        <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-[#D4E012] to-[#6DAD45] text-slate-950 font-black text-base flex items-center justify-center shrink-0 shadow-sm ring-4 ring-[#D4E012]/10 transition-shadow duration-300 group-hover:shadow-md">
+                          {item.letter}
                         </div>
-                      ))}
-                    </div>
-                  </ScrollReveal>
+                        <div className="min-w-0 flex-1 sm:flex sm:items-baseline sm:justify-between sm:gap-8">
+                          <div className="text-sm font-bold text-slate-900 uppercase tracking-[0.14em] font-sans sm:w-40 shrink-0">{item.title}</div>
+                          <div className="text-sm sm:text-[15px] text-slate-600 mt-1 sm:mt-0 leading-relaxed sm:flex-1">{item.desc}</div>
+                        </div>
+                      </motion.li>
+                    ))}
+                  </ul>
                 </div>
 
                 {/* Right Visual Graphic Block */}
-                <div className="lg:col-span-5 flex justify-center">
-                  <ScrollReveal direction="left" distance={40}>
-                    <div className="relative w-full max-w-md bg-slate-950 border border-slate-800 rounded-3xl p-10 sm:p-14 shadow-2xl text-center overflow-hidden group">
+                <div className="lg:col-span-5 min-w-0 lg:sticky lg:top-28">
+                  <motion.div {...reveal(0.15)} className="flex justify-center lg:justify-end">
+                    <div className="relative w-full max-w-md lg:max-w-none bg-slate-950 border border-slate-800 rounded-[2rem] p-8 sm:p-12 lg:p-14 shadow-2xl text-center overflow-hidden group transition-transform duration-500 hover:-translate-y-1 motion-reduce:hover:translate-y-0">
                       {/* Subtle Glow inside Card */}
-                      <div className="absolute inset-0 bg-gradient-to-tr from-[#D4E012]/10 via-[#6DAD45]/15 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
-                      
-                      <div className="relative z-10">
-                        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-white/20 text-[#D4E012] text-[10px] font-mono font-bold uppercase tracking-[0.2em] mb-6">
+                      <div className="absolute inset-0 bg-gradient-to-tr from-[#D4E012]/10 via-[#6DAD45]/15 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
+                      <div className="absolute inset-3 sm:inset-4 rounded-[1.5rem] border border-white/10 pointer-events-none" />
+
+                      <div className="relative z-10 py-4 sm:py-6">
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-white/20 text-[#D4E012] text-[10px] font-mono font-bold uppercase tracking-[0.2em] mb-8">
                           CULTURE INITIATIVE
                         </div>
-                        
+
                         {/* Vibrant Brand Yellow-Green VIBES Typography */}
                         <h3 className="text-6xl sm:text-7xl lg:text-8xl font-black font-sans-ui tracking-tight bg-gradient-to-r from-[#D4E012] via-[#6DAD45] to-[#5EE72D] bg-clip-text text-transparent drop-shadow-[0_4px_20px_rgba(212,224,18,0.3)] select-none py-2">
                           VIBES
                         </h3>
 
-                        <p className="text-slate-300 text-xs font-normal leading-relaxed mt-4">
+                        <p className="text-slate-300 text-xs font-normal leading-relaxed mt-5">
                           Volunteering • Inclusivity • Belonging • Engagement • Social
                         </p>
 
-                        <div className="mt-8 pt-6 border-t border-white/15 flex items-center justify-center gap-2 text-xs font-mono font-bold text-[#D4E012] uppercase tracking-wider">
+                        <div className="mt-10 pt-6 border-t border-white/15 flex items-center justify-center gap-2 text-xs font-mono font-bold text-[#D4E012] uppercase tracking-wider">
                           <Smile className="w-4 h-4 text-[#D4E012]" />
                           <span>IT&apos;S OUR VIBE!</span>
                         </div>
                       </div>
                     </div>
-                  </ScrollReveal>
+                  </motion.div>
                 </div>
 
               </div>

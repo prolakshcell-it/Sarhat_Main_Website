@@ -64,14 +64,14 @@ export default function TrustedByLogos() {
   const marqueeItems = [...brands, ...brands];
 
   return (
-    <section id="trusted-by" className="py-20 sm:py-24 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden select-none">
+    <section id="trusted-by" className="py-14 sm:py-20 lg:py-24 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden select-none">
       {/* Background Soft Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-r from-[#D4E012]/10 via-[#6DAD45]/10 to-transparent rounded-full blur-[140px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <ScrollReveal direction="up" distance={40}>
-          <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
             <AnimatedPillBadge className="mb-6">
               TRUSTED BY INDUSTRY LEADERS
             </AnimatedPillBadge>
@@ -115,7 +115,7 @@ export default function TrustedByLogos() {
             return (
               <div
                 key={`${item.name}-${idx}`}
-                className="bg-white rounded-2xl px-6 py-4 border border-slate-200/90 shadow-md shadow-slate-200/50 flex items-center gap-4 shrink-0 hover:border-[#707B00] hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer group"
+                className="bg-white rounded-2xl px-6 py-4 border border-slate-200/90 shadow-md shadow-slate-200/50 flex items-center gap-4 shrink-0 hover:border-[#707B00] transition-[transform,border-color] duration-200 hover:-translate-y-0.5 cursor-pointer group"
               >
                 <div className="w-10 h-10 rounded-xl bg-[#F8FAF8] flex items-center justify-center border border-slate-200 group-hover:bg-[#D4E012] group-hover:border-[#D4E012] transition-colors">
                   <IconComponent className="w-5 h-5 text-slate-700 group-hover:text-black transition-colors" />

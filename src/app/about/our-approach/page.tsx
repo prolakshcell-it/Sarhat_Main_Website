@@ -10,6 +10,7 @@ import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import FivePrinciplesInteractive from "@/components/FivePrinciplesInteractive";
+import TurnkeyLifecycle from "@/components/TurnkeyLifecycle";
 import FinalCTA from "@/components/FinalCTA";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import {
@@ -316,25 +317,7 @@ export default function OurApproachPage() {
                 </div>
               </ScrollReveal>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {executionSteps.map((item, index) => (
-                  <ScrollReveal key={item.step} delay={index * 0.1}>
-                    <div className="bg-[#F8FAF8] border border-slate-200 p-6 rounded-2xl hover:border-[#6DAD45] hover:shadow-xl transition-all duration-300 relative group h-full flex flex-col justify-between">
-                      <div>
-                        <div className="text-3xl font-extrabold font-mono text-[#6DAD45] mb-3">
-                          {item.step}
-                        </div>
-                        <h3 className="text-lg font-bold text-[#0F172A] mb-2 group-hover:text-[#6DAD45] transition-colors">
-                          {item.title}
-                        </h3>
-                        <p className="text-xs text-slate-600 leading-relaxed font-light">
-                          {item.desc}
-                        </p>
-                      </div>
-                    </div>
-                  </ScrollReveal>
-                ))}
-              </div>
+              <TurnkeyLifecycle steps={executionSteps} />
             </div>
           </section>
 

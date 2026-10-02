@@ -72,7 +72,7 @@ export default function FAQSection() {
   };
 
   return (
-    <section id="faqs" className="py-24 sm:py-28 bg-white relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden">
+    <section id="faqs" className="py-14 sm:py-20 lg:py-24 bg-white relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal direction="up" distance={40}>
@@ -115,7 +115,7 @@ export default function FAQSection() {
           {filteredFaqs.map((faq, index) => {
             const isOpen = openId === faq.id;
             return (
-              <ScrollReveal key={faq.id} delay={index * 0.05} direction={index % 2 === 0 ? "right" : "left"}>
+              <ScrollReveal key={faq.id} delay={Math.min(index * 0.05, 0.2)} direction="up">
                 <div
                   className={`rounded-2xl border transition-all duration-300 overflow-hidden ${isOpen
                       ? "bg-[#F8FAF8] border-[#707B00]/60 shadow-xl shadow-slate-200/50"

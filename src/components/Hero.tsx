@@ -36,8 +36,8 @@ export default function Hero({ onOpenQuote }: HeroProps) {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.18,
+        staggerChildren: 0.12,
+        delayChildren: 0.1,
       },
     },
   };
@@ -45,15 +45,13 @@ export default function Hero({ onOpenQuote }: HeroProps) {
   const itemSoftVariants: Variants = {
     hidden: {
       opacity: 0,
-      y: 30,
-      filter: "blur(8px)",
+      y: 16,
     },
     visible: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
       transition: {
-        duration: 1.4,
+        duration: 0.9,
         ease: [0.22, 1, 0.36, 1],
       },
     },
@@ -86,7 +84,7 @@ export default function Hero({ onOpenQuote }: HeroProps) {
 
       {/* Main Content Container (Immediate scroll-fade + motion blur + scale float on scroll down) */}
       <motion.div
-        style={{ y: contentY, scale: contentScale, opacity: contentOpacity, filter: contentFilter }}
+        style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
         className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto pt-32 sm:pt-36 pb-4 flex flex-col items-center text-center will-change-transform"
       >
         <motion.div
@@ -135,7 +133,7 @@ export default function Hero({ onOpenQuote }: HeroProps) {
           <motion.div variants={itemSoftVariants} className="flex flex-wrap items-center justify-center gap-4">
             <a
               href="#about"
-              className="inline-flex items-center gap-2.5 bg-white hover:bg-[#D4E012] text-slate-950 font-extrabold text-xs sm:text-sm uppercase tracking-wider px-7 py-3.5 sm:px-8 sm:py-4 rounded-full transition-all duration-300 transform hover:scale-[1.04] active:scale-[0.98] shadow-2xl shadow-black/50 group cursor-pointer border border-white/20"
+              className="inline-flex items-center gap-2.5 bg-white hover:bg-[#D4E012] text-slate-950 font-extrabold text-xs sm:text-sm uppercase tracking-wider px-7 py-3.5 sm:px-8 sm:py-4 rounded-full transition-colors duration-300 hover:-translate-y-px shadow-2xl shadow-black/50 group cursor-pointer border border-white/20"
             >
               <span>Explore What We Do</span>
               <ArrowDown className="w-4 h-4 text-slate-950 group-hover:translate-y-1 transition-transform" />
