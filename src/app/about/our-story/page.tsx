@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import { MilestoneNode, MilestoneReveal, ParallaxImage, type MilestoneStatus } from "@/components/MilestoneMotion";
 import {
   Sparkles,
   Target,
@@ -37,6 +38,9 @@ export default function OurStoryPage() {
 
   const containerRef = useRef<HTMLElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
+  const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
+  // Index (within the filtered list) of the milestone currently centred in the viewport; -1 = not reached yet
+  const [activeIndex, setActiveIndex] = useState(-1);
 
   // Parallax & Scroll Fade-out Tracking for Hero
   const { scrollYProgress } = useScroll({
@@ -158,6 +162,30 @@ export default function OurStoryPage() {
     selectedYearFilter === "ALL"
       ? keyMoments
       : keyMoments.filter((m) => m.year.includes(selectedYearFilter));
+
+  // Activate the milestone that crosses the middle band of the viewport
+  useEffect(() => {
+    const rows = rowRefs.current.slice(0, filteredMoments.length);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const idx = rows.indexOf(entry.target as HTMLDivElement);
+          if (idx >= 0) setActiveIndex(idx);
+        });
+      },
+      { rootMargin: "-45% 0px -45% 0px" },
+    );
+    rows.forEach((row) => row && observer.observe(row));
+    return () => observer.disconnect();
+  }, [filteredMoments.length]);
+
+  const handleYearFilter = (year: string) => {
+    setSelectedYearFilter(year);
+    setActiveIndex(-1);
+    // Bring the (re)filtered journey into view smoothly; the observer then activates the milestone
+    requestAnimationFrame(() => timelineRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
+  };
 
   return (
     <SmoothScroll>
@@ -282,7 +310,7 @@ export default function OurStoryPage() {
                     return (
                       <button
                         key={year}
-                        onClick={() => setSelectedYearFilter(year)}
+                        onClick={() => handleYearFilter(year)}
                         className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold transition-all duration-300 shadow-sm cursor-pointer ${
                           isActive
                             ? "bg-slate-950 text-[#D4E012] border-2 border-[#6DAD45] scale-105 shadow-lg shadow-[#6DAD45]/20"
@@ -297,21 +325,23 @@ export default function OurStoryPage() {
               </ScrollReveal>
 
               {/* Animated Timeline Container */}
-              <div ref={timelineRef} className="relative space-y-16 sm:space-y-24">
+              <div ref={timelineRef} className="relative scroll-mt-28 space-y-16 sm:space-y-24">
                 {/* Central Track & Animated Gradient Beam */}
                 <div className="absolute left-6 sm:left-1/2 top-0 bottom-0 -translate-x-1/2 w-1 bg-slate-200/90 rounded-full overflow-hidden pointer-events-none">
                   <motion.div
                     style={{ height: beamHeight }}
                     className="w-full bg-gradient-to-b from-[#6DAD45] via-[#D4E012] to-[#5EE72D] shadow-[0_0_20px_rgba(109,173,69,0.9)] relative"
                   >
-                    {/* Glowing Energy Particle Pulse */}
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-10 bg-white rounded-full blur-xs animate-pulse" />
+                    {/* Static glowing head of the progress beam */}
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-10 bg-white/90 rounded-full blur-xs" />
                   </motion.div>
                 </div>
 
                 {filteredMoments.map((moment, index) => {
                   const IconComp = moment.icon;
                   const isEven = index % 2 === 0;
+                  const status: MilestoneStatus =
+                    index < activeIndex ? "completed" : index === activeIndex ? "current" : "upcoming";
 
                   // Image Showcase Card component
                   const ImageShowcaseCard = (
@@ -319,13 +349,15 @@ export default function OurStoryPage() {
                       whileHover={{ y: -6, scale: 1.02 }}
                       className="relative h-64 sm:h-[360px] w-full rounded-[28px] overflow-hidden border-2 border-slate-200/90 shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#6DAD45]/25 group cursor-pointer transition-all duration-500"
                     >
-                      <Image
-                        src={moment.image}
-                        alt={moment.headline}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover object-center group-hover:scale-108 transition-transform duration-700 ease-out"
-                      />
+                      <ParallaxImage>
+                        <Image
+                          src={moment.image}
+                          alt={moment.headline}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          className="object-cover object-center group-hover:scale-108 transition-transform duration-700 ease-out"
+                        />
+                      </ParallaxImage>
                       {/* Dark Vignette Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent transition-opacity duration-300 group-hover:from-slate-950/95" />
 
@@ -412,46 +444,50 @@ export default function OurStoryPage() {
                   );
 
                   return (
-                    <div key={moment.year} className="relative">
+                    <div
+                      key={moment.year}
+                      ref={(el) => {
+                        rowRefs.current[index] = el;
+                      }}
+                      className="relative"
+                    >
                       {/* DESKTOP LAYOUT (sm and up): Alternating Text Card & Image Showcase */}
                       <div className="hidden sm:flex items-center justify-between flex-row gap-6">
                         {/* Left Column */}
                         <div className="w-5/12">
-                          <ScrollReveal direction={isEven ? "right" : "left"} distance={40} delay={0.05}>
+                          <MilestoneReveal mask={!isEven} delay={0.05}>
                             {isEven ? ContentDetailsCard : ImageShowcaseCard}
-                          </ScrollReveal>
+                          </MilestoneReveal>
                         </div>
 
-                        {/* Center Glowing Animated Year Node */}
-                        <div className="z-20 flex items-center justify-center w-16 h-16 rounded-full bg-slate-950 border-4 border-[#6DAD45] text-[#D4E012] font-mono text-sm font-extrabold shadow-[0_0_30px_rgba(109,173,69,0.5)] shrink-0 group hover:scale-110 hover:shadow-[0_0_40px_rgba(109,173,69,0.8)] transition-all duration-300 cursor-pointer">
-                          <span className="group-hover:hidden">{moment.year}</span>
-                          <IconComp className="w-6 h-6 hidden group-hover:block text-[#5EE72D] transition-all" />
-                        </div>
+                        {/* Center Year Node: muted → expands + burst when reached → settles; check once completed */}
+                        <MilestoneNode
+                          year={moment.year}
+                          status={status}
+                          size="lg"
+                          hoverIcon={<IconComp className="w-6 h-6 text-[#5EE72D]" />}
+                        />
 
                         {/* Right Column */}
                         <div className="w-5/12">
-                          <ScrollReveal direction={isEven ? "left" : "right"} distance={40} delay={0.05}>
+                          <MilestoneReveal mask={isEven} delay={0.05}>
                             {isEven ? ImageShowcaseCard : ContentDetailsCard}
-                          </ScrollReveal>
+                          </MilestoneReveal>
                         </div>
                       </div>
 
                       {/* MOBILE LAYOUT (less than sm): Vertical Stack */}
                       <div className="flex sm:hidden flex-col space-y-5 pl-10 relative">
                         {/* Mobile Year Node */}
-                        <div className="absolute left-0 top-0 z-20 flex items-center justify-center w-12 h-12 rounded-full bg-slate-950 border-3 border-[#6DAD45] text-[#D4E012] font-mono text-xs font-bold shadow-[0_0_20px_rgba(109,173,69,0.4)]">
-                          {moment.year}
+                        <div className="absolute left-0 top-0">
+                          <MilestoneNode year={moment.year} status={status} size="sm" />
                         </div>
 
                         {/* Image Showcase Card on Mobile */}
-                        <ScrollReveal direction="up" distance={25}>
-                          {ImageShowcaseCard}
-                        </ScrollReveal>
+                        <MilestoneReveal mask>{ImageShowcaseCard}</MilestoneReveal>
 
                         {/* Content Details Card on Mobile */}
-                        <ScrollReveal direction="up" distance={25} delay={0.1}>
-                          {ContentDetailsCard}
-                        </ScrollReveal>
+                        <MilestoneReveal delay={0.1}>{ContentDetailsCard}</MilestoneReveal>
                       </div>
                     </div>
                   );
