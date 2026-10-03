@@ -224,7 +224,7 @@ export default function OurApproachPage() {
         <div className="relative z-10 bg-[#F8FAF8] border-t border-slate-200/60 shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
           
           {/* 02 / FROM CONCEPT TO COMPLETION WE DELIVER (Placed Right After Hero) */}
-          <section className="py-20 sm:py-28 bg-[#F8FAF8] text-[#0F172A] relative border-b border-slate-200/80">
+          <section className="py-10 sm:py-14 bg-[#F8FAF8] text-[#0F172A] relative border-b border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
                 {/* Left Content Column */}
@@ -290,7 +290,7 @@ export default function OurApproachPage() {
           </section>
 
           {/* 03 / 5 PRINCIPLES INTERACTIVE SECTION (Obsidian Emerald Theme matching About page values) */}
-          <section className="py-24 bg-[#09120B] border-b border-slate-800/90 relative z-10 text-white overflow-hidden select-none">
+          <section className="py-10 sm:py-14 bg-[#09120B] border-b border-slate-800/90 relative z-10 text-white overflow-hidden select-none">
             {/* Soft Radial Ambient Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[550px] bg-[#D4E012]/10 rounded-full blur-[140px] pointer-events-none" />
 
@@ -304,7 +304,7 @@ export default function OurApproachPage() {
           </section>
 
           {/* 04 / TURNKEY EXECUTION LIFECYCLE ROADMAP */}
-          <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80 text-[#0F172A]">
+          <section className="py-10 sm:py-14 bg-white border-b border-slate-200/80 text-[#0F172A]">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
                 <div className="text-center max-w-3xl mx-auto mb-16">
@@ -322,7 +322,7 @@ export default function OurApproachPage() {
           </section>
 
           {/* 05 / PROJECTS DELIVERED SECTION */}
-          <section className="py-20 sm:py-28 bg-[#F8FAF8] text-[#0F172A] border-b border-slate-200">
+          <section className="py-10 sm:py-14 bg-[#F8FAF8] text-[#0F172A] border-b border-slate-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
                 <div className="mb-14 text-center max-w-3xl mx-auto">
@@ -386,7 +386,7 @@ export default function OurApproachPage() {
           </section>
 
           {/* 06 / OWNING THE OUTCOME AT EVERY PHASE (Brand Theme matching Sarhat Design System) */}
-          <section className="py-20 sm:py-28 bg-[#F8FAF8] text-[#0F172A] relative overflow-hidden border-b border-slate-200/80">
+          <section className="py-10 sm:py-14 bg-[#F8FAF8] text-[#0F172A] relative overflow-hidden border-b border-slate-200/80">
             {/* Ambient Soft Brand Glow Flares */}
             <div className="absolute top-1/2 left-10 -translate-y-1/2 w-[500px] h-[500px] bg-[#6DAD45]/10 rounded-full blur-[140px] pointer-events-none" />
             <div className="absolute bottom-0 right-10 w-[500px] h-[500px] bg-[#D4E012]/10 rounded-full blur-[140px] pointer-events-none" />

@@ -64,7 +64,7 @@ export default function TrustedByLogos() {
   const marqueeItems = [...brands, ...brands];
 
   return (
-    <section id="trusted-by" className="py-14 sm:py-20 lg:py-24 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden select-none">
+    <section id="trusted-by" className="py-10 sm:py-12 lg:py-14 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden select-none">
       {/* Background Soft Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-r from-[#D4E012]/10 via-[#6DAD45]/10 to-transparent rounded-full blur-[140px] pointer-events-none"></div>
 

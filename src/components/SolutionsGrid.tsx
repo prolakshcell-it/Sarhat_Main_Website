@@ -77,7 +77,7 @@ export default function SolutionsGrid() {
   const [modalCapability, setModalCapability] = useState<Capability | null>(null);
 
   return (
-    <section id="solutions" className="py-14 sm:py-20 lg:py-24 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 select-none overflow-hidden font-sans-ui">
+    <section id="solutions" className="py-10 sm:py-12 lg:py-14 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 select-none overflow-hidden font-sans-ui">
       {/* Full Viewport Width Outer Container - Touching Left & Right Edges */}
       <div className="w-full max-w-none px-0">
 

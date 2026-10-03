@@ -318,7 +318,7 @@ export default function CareersPage() {
           {/* ------------------------------------------------------------- */}
           {/* SECTION 1: WHY JOIN US (REFERENCE IMAGE 1) */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-24 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10">
+          <section className="py-10 sm:py-14 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-4xl mx-auto mb-16">
@@ -424,7 +424,7 @@ export default function CareersPage() {
           {/* ------------------------------------------------------------- */}
           {/* SECTION: LIFE @ SARHAT ENERGY (REFERENCE IMAGE) */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-24 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10">
+          <section className="py-10 sm:py-14 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-4xl mx-auto mb-16">
@@ -583,7 +583,7 @@ export default function CareersPage() {
           {/* ------------------------------------------------------------- */}
           {/* SECTION 3: OPEN POSITIONS & APPLICATION FORM (REFERENCE IMAGE 3) */}
           {/* ------------------------------------------------------------- */}
-          <section id="current-openings" className="py-24 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10 scroll-mt-24">
+          <section id="current-openings" className="py-10 sm:py-14 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10 scroll-mt-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-4xl mx-auto mb-12">
@@ -872,7 +872,7 @@ export default function CareersPage() {
           {/* ------------------------------------------------------------- */}
           {/* SECTION 4: FREQUENTLY ASKED QUESTIONS (REFERENCE IMAGE 4) */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-24 bg-white border-b border-slate-200/80 relative z-10">
+          <section className="py-10 sm:py-14 bg-white border-b border-slate-200/80 relative z-10">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-3xl mx-auto mb-16">

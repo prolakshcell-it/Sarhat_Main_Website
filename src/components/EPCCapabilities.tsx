@@ -9,7 +9,7 @@ import AnimatedPillBadge from "./AnimatedPillBadge";
 
 export default function EPCCapabilities() {
   return (
-    <section id="about" className="py-14 sm:py-20 lg:py-24 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10 overflow-hidden font-sans-ui">
+    <section id="about" className="py-10 sm:py-12 lg:py-14 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10 overflow-hidden font-sans-ui">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Centered Section Header */}
         <ScrollReveal direction="up" distance={40}>

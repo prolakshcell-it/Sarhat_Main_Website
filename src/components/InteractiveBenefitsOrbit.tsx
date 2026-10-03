@@ -191,7 +191,7 @@ export default function InteractiveBenefitsOrbit() {
   };
 
   return (
-    <section className="py-24 bg-white border-b border-slate-200/80 relative z-10 overflow-hidden">
+    <section className="py-10 sm:py-12 lg:py-14 bg-white border-b border-slate-200/80 relative z-10 overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-[#D4E012]/10 via-[#5EE72D]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 

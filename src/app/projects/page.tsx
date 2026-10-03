@@ -348,7 +348,7 @@ export default function MainProjectsPage() {
           {/* =========================================================
               SECTION 1: OVERVIEW (Verified Figures)
              ========================================================= */}
-          <section id="overview" className="scroll-mt-36 py-20 bg-[#F8FAF8] border-b border-slate-200/80">
+          <section id="overview" className="scroll-mt-36 py-10 sm:py-14 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
                 initial="hidden"
@@ -443,90 +443,13 @@ export default function MainProjectsPage() {
                   </div>
                 </motion.div>
               </motion.div>
-
-              {/* Verified Breakdown Bar & State Distribution */}
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                variants={fadeInUp}
-                className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-lg"
-              >
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
-                  <div>
-                    <h3 className="font-serif-display text-xl font-bold text-slate-900">Portfolio Status Split</h3>
-                    <p className="text-xs text-slate-500 font-mono">Verified MW distribution across operating statuses</p>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-4 text-xs font-mono font-bold">
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-emerald-500" />
-                      <span>Commissioned ({formatMW(commissionedMW)})</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-sky-500" />
-                      <span>Ongoing ({formatMW(ongoingMW)})</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-slate-300" />
-                      <span>Pipeline ({formatMW(totalMW - commissionedMW - ongoingMW)})</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Progress Bar with Motion */}
-                <div className="h-4 w-full bg-slate-100 rounded-full overflow-hidden flex gap-0.5 p-0.5 border border-slate-200 mb-6">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${(commissionedMW / totalMW) * 100}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, ease: "easeOut" }}
-                    className="h-full bg-emerald-500 rounded-l-full shadow-sm"
-                    title={`Commissioned: ${formatMW(commissionedMW)}`}
-                  />
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${(ongoingMW / totalMW) * 100}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-                    className="h-full bg-sky-500 shadow-sm"
-                    title={`Ongoing: ${formatMW(ongoingMW)}`}
-                  />
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${((totalMW - commissionedMW - ongoingMW) / totalMW) * 100}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-                    className="h-full bg-slate-300 rounded-r-full"
-                    title={`Pipeline: ${formatMW(totalMW - commissionedMW - ongoingMW)}`}
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center pt-2">
-                  <div className="p-3 bg-slate-50 rounded-2xl border border-slate-100 hover:border-slate-300 transition-colors">
-                    <div className="text-slate-400 font-mono text-[10px] uppercase font-bold">Operating States</div>
-                    <div className="font-mono text-xl font-bold text-slate-900 mt-1">6 States</div>
-                  </div>
-                  <div className="p-3 bg-slate-50 rounded-2xl border border-slate-100 hover:border-slate-300 transition-colors">
-                    <div className="text-slate-400 font-mono text-[10px] uppercase font-bold">KUSUM Solar Sites</div>
-                    <div className="font-mono text-xl font-bold text-[#707B00] mt-1">20 Projects</div>
-                  </div>
-                  <div className="p-3 bg-slate-50 rounded-2xl border border-slate-100 hover:border-slate-300 transition-colors">
-                    <div className="text-slate-400 font-mono text-[10px] uppercase font-bold">Govt. Utility Sites</div>
-                    <div className="font-mono text-xl font-bold text-slate-900 mt-1">4 Projects</div>
-                  </div>
-                  <div className="p-3 bg-slate-50 rounded-2xl border border-slate-100 hover:border-slate-300 transition-colors">
-                    <div className="text-slate-400 font-mono text-[10px] uppercase font-bold">Grid Substation Sync</div>
-                    <div className="font-mono text-xl font-bold text-emerald-700 mt-1">100% Rate</div>
-                  </div>
-                </div>
-              </motion.div>
             </div>
           </section>
 
           {/* =========================================================
               SECTION 2: PROJECT HIGHLIGHTS (Featured Large Stories)
              ========================================================= */}
-          <section id="highlights" className="scroll-mt-36 py-24 bg-white border-b border-slate-200/80">
+          <section id="highlights" className="scroll-mt-36 py-10 sm:py-14 bg-white border-b border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
                 initial="hidden"
@@ -692,7 +615,7 @@ export default function MainProjectsPage() {
           {/* =========================================================
               SECTION 3: EXPLORE PROJECTS (Filterable Project Cards)
              ========================================================= */}
-          <section id="explore" className="scroll-mt-36 py-24 bg-[#F8FAF8] border-b border-slate-200/80">
+          <section id="explore" className="scroll-mt-36 py-10 sm:py-14 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
                 initial="hidden"
@@ -866,7 +789,7 @@ export default function MainProjectsPage() {
           {/* =========================================================
               SECTION 5: EXECUTION & IMPACT (Scope, Work & Outcomes)
              ========================================================= */}
-          <section id="execution-impact" className="scroll-mt-36 py-24 bg-white border-b border-slate-200/80">
+          <section id="execution-impact" className="scroll-mt-36 py-10 sm:py-14 bg-white border-b border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
                 initial="hidden"

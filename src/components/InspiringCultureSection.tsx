@@ -58,7 +58,7 @@ export default function InspiringCultureSection() {
   }, [isHovered]);
 
   return (
-    <section className="py-24 bg-[#FAFBF9] border-b border-slate-200/80 relative z-10 overflow-hidden">
+    <section className="py-10 sm:py-12 lg:py-14 bg-[#FAFBF9] border-b border-slate-200/80 relative z-10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Header Split Layout */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">

@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef } from "react";
 import { motion, useInView, animate } from "framer-motion";
-import { Zap, MapPin, Calendar, Users, Cpu, ShieldCheck } from "lucide-react";
 
 function AnimatedMetricValue({ value }: { value: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -50,40 +49,34 @@ function AnimatedMetricValue({ value }: { value: string }) {
 export default function MetricsTicker() {
   const metrics = [
     {
-      value: "49.77 MW",
-      label: "SERVED TO BUILD",
-      subText: "Utility & C&I Solar Capacity",
-      icon: Zap,
+      value: "70+",
+      label: "FY 2026",
+      subText: "Ongoing Projects",
     },
     {
-      value: "7+",
-      label: "PORTFOLIO STATES",
-      subText: "Pan-India Execution Footprint",
-      icon: MapPin,
+      value: "12+ Yrs",
+      label: "FY 2026",
+      subText: "Team Exp",
     },
     {
-      value: "2024",
-      label: "FOUNDATION YEAR",
-      subText: "Founded by Industry Engineers",
-      icon: Calendar,
+      value: "34",
+      label: "FY 2026",
+      subText: "Core Team",
     },
     {
-      value: "35+",
-      label: "ENGINEERING TEAM",
-      subText: "Expert team members across India",
-      icon: Users,
+      value: "100*",
+      label: "FY 2026",
+      subText: "Site Workers",
     },
     {
-      value: "765 kV",
-      label: "SUBSTATION CAPABILITY",
-      subText: "Max. voltage class handled",
-      icon: Cpu,
+      value: "7+ States",
+      label: "FY 2026",
+      subText: "Footprints",
     },
     {
-      value: "25-Yr",
-      label: "PERFORMANCE WARRANTY",
-      subText: "Long-term O&M & asset quality",
-      icon: ShieldCheck,
+      value: "4",
+      label: "FY 2026",
+      subText: "Business Segments",
     },
   ];
 
@@ -93,35 +86,31 @@ export default function MetricsTicker() {
         {/* 1-Line Card Grid Layout (Single horizontal line) */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 w-full">
           {metrics.map((item, idx) => {
-            const IconComponent = item.icon;
             return (
               <motion.div
-                key={item.label}
+                key={idx}
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.06 }}
                 className="min-w-0"
               >
-              <div className="metric-card h-full min-h-[132px] bg-white rounded-2xl p-5 border border-slate-200/80 hover:border-[#707B00] shadow-[0_4px_20px_rgba(15,23,42,0.06)] relative group flex flex-col justify-between">
-                {/* Header Tag & Sleek Icon Badge */}
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="text-[9px] sm:text-[10px] font-mono font-bold tracking-wider text-[#707B00] uppercase truncate">
-                    {item.label}
-                  </span>
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#D4E012]/20 border border-[#D4E012]/40 text-[#707B00] flex items-center justify-center shrink-0 group-hover:bg-[#D4E012] group-hover:text-slate-950 transition-colors duration-200">
-                    <IconComponent className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.2]" />
+                <div className="metric-card h-full min-h-[132px] bg-white rounded-2xl p-5 border border-slate-200/80 hover:border-[#707B00] shadow-[0_4px_20px_rgba(15,23,42,0.06)] relative group flex flex-col justify-between">
+                  {/* Header Tag */}
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="text-[10px] sm:text-[11px] font-mono font-bold tracking-wider text-[#707B00] uppercase truncate">
+                      {item.label}
+                    </span>
+                  </div>
+
+                  {/* Main Metric Value */}
+                  <AnimatedMetricValue value={item.value} />
+
+                  {/* Subtitle Description */}
+                  <div className="text-[12px] text-slate-600 font-medium leading-tight truncate">
+                    {item.subText}
                   </div>
                 </div>
-
-                {/* Main Metric Value */}
-                <AnimatedMetricValue value={item.value} />
-
-                {/* Subtitle Description */}
-                <div className="text-[11px] text-slate-500 font-normal leading-tight line-clamp-2">
-                  {item.subText}
-                </div>
-              </div>
               </motion.div>
             );
           })}
@@ -130,3 +119,4 @@ export default function MetricsTicker() {
     </section>
   );
 }
+
