@@ -155,7 +155,7 @@ export default function ContactPage() {
       {/* ------------------------------------------------------------- */}
       {/* MAIN SECTION: FORM & OFFICE DETAILS */}
       {/* ------------------------------------------------------------- */}
-      <section className="py-20 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80">
+      <section className="py-10 sm:py-14 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Subheadings Selector Bar */}
           <div className="flex items-center justify-center mb-14">
@@ -605,7 +605,7 @@ export default function ContactPage() {
       {/* ------------------------------------------------------------- */}
       {/* DIRECT CONNECTION CARD SECTION */}
       {/* ------------------------------------------------------------- */}
-      <section className="py-20 bg-[#F8FAF8] relative z-10">
+      <section className="py-10 sm:py-14 bg-[#F8FAF8] relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal direction="up" distance={40}>
             <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden text-white">

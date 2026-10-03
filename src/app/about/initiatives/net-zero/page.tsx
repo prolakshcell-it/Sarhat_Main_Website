@@ -91,7 +91,7 @@ export default function NetZeroPage() {
 
         {/* Overlay Content */}
         <div className="relative z-10 bg-[#F8FAF8] border-t border-slate-200/60 shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
-          <section className="py-24 bg-white border-b border-slate-200/80">
+          <section className="py-10 sm:py-14 bg-white border-b border-slate-200/80">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
                 <div className="bg-[#F8FAF8] border-2 border-slate-200/90 rounded-[32px] p-8 sm:p-14 shadow-xl">

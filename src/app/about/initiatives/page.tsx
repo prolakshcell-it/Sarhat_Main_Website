@@ -161,7 +161,7 @@ export default function InitiativesPage() {
           {/* ------------------------------------------------------------- */}
           {/* SECTION 01: INITIATIVE OVERVIEW & PILLARS */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-24 bg-white border-b border-slate-200/80 relative z-10 overflow-hidden">
+          <section className="py-10 sm:py-14 bg-white border-b border-slate-200/80 relative z-10 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-3xl mx-auto mb-16">
@@ -220,7 +220,7 @@ export default function InitiativesPage() {
           {/* ------------------------------------------------------------- */}
           {/* SECTION 02: INITIATIVE SHOWCASE CARDS */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-24 sm:py-28 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10">
+          <section className="py-10 sm:py-14 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
               {initiatives.map((item, index) => {
                 const IconComp = item.icon;
@@ -326,7 +326,7 @@ export default function InitiativesPage() {
           {/* ------------------------------------------------------------- */}
           {/* SECTION 03: IMPACT CTA BANNER */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-20 sm:py-24 bg-white border-b border-slate-200/80 relative z-10">
+          <section className="py-10 sm:py-14 bg-white border-b border-slate-200/80 relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={30}>
                 <div className="bg-[#0F172A] border border-slate-800 rounded-3xl p-10 sm:p-14 text-white relative overflow-hidden shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">

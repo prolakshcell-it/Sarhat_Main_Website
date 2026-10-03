@@ -231,7 +231,7 @@ export default function LeadershipPage() {
           {/* ------------------------------------------------------------- */}
           {/* EXECUTIVE TEAM 3D FLIP CARD GRID SECTION */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-24 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10">
+          <section className="py-10 sm:py-14 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={30}>
                 <div className="mb-14 text-left flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -357,7 +357,7 @@ export default function LeadershipPage() {
           {/* ------------------------------------------------------------- */}
           {/* SECTION: OUR CULTURE AND PEOPLE BANNER */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-20 bg-white border-b border-slate-200/80 relative z-10">
+          <section className="py-10 sm:py-14 bg-white border-b border-slate-200/80 relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={30}>
                 <div className="bg-slate-950 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-12 items-stretch">

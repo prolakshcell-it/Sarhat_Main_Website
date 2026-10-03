@@ -167,7 +167,7 @@ export default function ConnectWithUsPage() {
           {/* ------------------------------------------------------------- */}
           {/* SECTION 1: SOCIAL CHANNELS GRID */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80 relative z-10">
+          <section className="py-10 sm:py-14 bg-white border-b border-slate-200/80 relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
               <ScrollReveal direction="up" distance={30}>

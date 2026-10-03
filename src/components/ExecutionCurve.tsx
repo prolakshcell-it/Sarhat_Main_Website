@@ -169,7 +169,7 @@ export default function ExecutionCurve() {
   return (
     <section
       id="execution"
-      className="py-14 sm:py-20 lg:py-24 bg-slate-950 text-white relative z-10 border-b border-slate-800 select-none overflow-hidden font-sans-ui"
+      className="py-10 sm:py-12 lg:py-14 bg-slate-950 text-white relative z-10 border-b border-slate-800 select-none overflow-hidden font-sans-ui"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Badge & Editorial Title */}

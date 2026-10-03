@@ -241,7 +241,7 @@ export default function AboutPage() {
           {/* ------------------------------------------------------------- */}
           {/* 02 / CORPORATE OVERVIEW & VIDEO SHOWCASE SECTION */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-20 sm:py-24 bg-white border-b border-slate-200/80 relative z-10">
+          <section className="py-10 sm:py-14 bg-white border-b border-slate-200/80 relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={30}>
 
@@ -298,7 +298,7 @@ export default function AboutPage() {
           {/* ------------------------------------------------------------- */}
           {/* 03 / YOUR TRUSTED ENERGY PARTNER SECTION */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-24 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10">
+          <section className="py-10 sm:py-14 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
                 {/* Left Content Column */}
@@ -359,7 +359,7 @@ depend on.
           {/* ------------------------------------------------------------- */}
           {/* 04 / OUR MISSION & VISION SECTION */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-24 bg-white border-b border-slate-200/80 relative z-10">
+          <section className="py-10 sm:py-14 bg-white border-b border-slate-200/80 relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={30}>
 
@@ -450,7 +450,7 @@ depend on.
           {/* ------------------------------------------------------------- */}
           {/* 04.5 / OUR CORE VALUES SECTION (INTERCONNECTED CIRCLES REFERENCE DESIGN) */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-28 bg-[#070D08] border-b border-slate-800/90 relative z-10 text-white overflow-hidden select-none">
+          <section className="py-10 sm:py-14 bg-[#070D08] border-b border-slate-800/90 relative z-10 text-white overflow-hidden select-none">
             {/* Dynamic Radial Ambient Spotlight shifting with active index */}
             <div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-gradient-to-tr from-[#D4E012]/15 via-[#5EE72D]/10 to-transparent rounded-full blur-[150px] pointer-events-none transition-all duration-700"
@@ -596,7 +596,7 @@ depend on.
           {/* ------------------------------------------------------------- */}
           {/* 05 / THE ROAD AHEAD */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-24 bg-white relative z-10 border-b border-slate-200/80">
+          <section className="py-10 sm:py-14 bg-white relative z-10 border-b border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={40}>
                 <div className="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 text-white rounded-3xl p-10 sm:p-14 border border-slate-800 relative overflow-hidden shadow-2xl">
@@ -624,7 +624,7 @@ depend on.
           {/* ------------------------------------------------------------- */}
           {/* 06 / START YOUR SOLAR JOURNEY TODAY CTA BANNER (SARHAT BRAND COLORS) */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-20 sm:py-24 bg-gradient-to-b from-slate-950 via-[#0A160C] to-slate-950 text-white relative z-10 overflow-hidden border-t border-[#6DAD45]/20">
+          <section className="py-10 sm:py-14 bg-gradient-to-b from-slate-950 via-[#0A160C] to-slate-950 text-white relative z-10 overflow-hidden border-t border-[#6DAD45]/20">
             {/* Ambient Brand Glowing Flares */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-r from-[#D4E012]/15 via-[#6DAD45]/15 to-transparent rounded-full blur-[130px] pointer-events-none"></div>
 

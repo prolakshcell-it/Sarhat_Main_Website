@@ -234,7 +234,7 @@ export default function OurStoryPage() {
           {/* ------------------------------------------------------------- */}
           {/* VISION STATEMENT SECTION (CENTERED) */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-24 bg-white border-b border-slate-200/80 relative z-10 overflow-hidden">
+          <section className="py-10 sm:py-14 bg-white border-b border-slate-200/80 relative z-10 overflow-hidden">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={30}>
                 <div className="bg-[#F8FAF8] border-2 border-slate-200/90 rounded-3xl p-8 sm:p-14 shadow-2xl relative text-center overflow-hidden">
@@ -269,7 +269,7 @@ export default function OurStoryPage() {
           {/* ------------------------------------------------------------- */}
           {/* KEY MOMENTS SECTION (HIGHLY ANIMATED PROFESSIONAL TIMELINE) */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-24 sm:py-32 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10 overflow-clip">
+          <section className="py-24 sm:py-32 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10 overflow-hidden">
             {/* Background Gradient Ambient Glows */}
             <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-gradient-to-br from-[#6DAD45]/10 via-[#D4E012]/10 to-transparent rounded-full blur-3xl pointer-events-none" />
             <div className="absolute bottom-10 right-0 w-[500px] h-[500px] bg-gradient-to-tl from-[#5EE72D]/10 to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -301,11 +301,10 @@ export default function OurStoryPage() {
                       <button
                         key={year}
                         onClick={() => handleYearFilter(year)}
-                        className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold transition-all duration-300 shadow-sm cursor-pointer ${
-                          isActive
+                        className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold transition-all duration-300 shadow-sm cursor-pointer ${isActive
                             ? "bg-slate-950 text-[#D4E012] border-2 border-[#6DAD45] scale-105 shadow-lg shadow-[#6DAD45]/20"
                             : "bg-white text-slate-600 border border-slate-200 hover:border-[#6DAD45] hover:text-slate-900"
-                        }`}
+                          }`}
                       >
                         {year === "ALL" ? "All Milestones" : `Year ${year}`}
                       </button>
@@ -324,7 +323,7 @@ export default function OurStoryPage() {
           {/* ------------------------------------------------------------- */}
           {/* CORE PILLARS SECTION */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-24 bg-white border-b border-slate-200/80 relative z-10">
+          <section className="py-10 sm:py-14 bg-white border-b border-slate-200/80 relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-3xl mx-auto mb-16">

@@ -130,7 +130,7 @@ export default function CulturePeoplePage() {
           {/* ------------------------------------------------------------- */}
           {/* SECTION 1: CULTURE STATEMENT OVERVIEW */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80 relative z-10 overflow-hidden">
+          <section className="py-10 sm:py-14 bg-white border-b border-slate-200/80 relative z-10 overflow-hidden">
             {/* Subtle background quote mark watermark */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-slate-100 font-serif text-[280px] sm:text-[340px] leading-none pointer-events-none select-none opacity-40">
               &ldquo;
@@ -160,7 +160,7 @@ export default function CulturePeoplePage() {
           {/* ------------------------------------------------------------- */}
           {/* SECTION 2: OUR VIBES - INCLUSIVITY PROGRAMME */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-20 sm:py-28 lg:py-32 bg-[#FAFBF9] border-b border-slate-200/80 relative z-10 overflow-hidden">
+          <section className="py-10 sm:py-14 bg-[#FAFBF9] border-b border-slate-200/80 relative z-10 overflow-hidden">
             {/* Ambient Background Glow */}
             <div className="absolute top-1/3 right-0 w-72 sm:w-96 h-72 sm:h-96 bg-[#D4E012]/15 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-64 sm:w-80 h-64 sm:h-80 bg-[#6DAD45]/10 rounded-full blur-3xl pointer-events-none" />
@@ -247,7 +247,7 @@ export default function CulturePeoplePage() {
           {/* ------------------------------------------------------------- */}
           {/* SECTION 3: OUR CORE VALUES (5 VALUES LAYOUT) */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80 relative z-10">
+          <section className="py-10 sm:py-14 bg-white border-b border-slate-200/80 relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               
               {/* Section Header */}

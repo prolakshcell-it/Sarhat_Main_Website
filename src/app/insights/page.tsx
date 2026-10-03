@@ -278,7 +278,7 @@ export default function InsightsPage() {
       {/* ------------------------------------------------------------- */}
       {/* SECTION LATEST INSIGHTS & NEWS (Exact Image 2 Design Layout) */}
       {/* ------------------------------------------------------------- */}
-      <section className="py-16 sm:py-24 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui">
+      <section className="py-10 sm:py-14 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header matching Image 2 */}
           <ScrollReveal direction="up" distance={40}>

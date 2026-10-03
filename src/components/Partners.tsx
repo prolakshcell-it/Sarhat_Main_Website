@@ -66,7 +66,7 @@ const partnerCategories: PartnerCategory[] = [
 
 export default function Partners() {
   return (
-    <section id="partners" className="py-24 sm:py-28 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 select-none font-sans-ui overflow-hidden">
+    <section id="partners" className="py-10 sm:py-12 lg:py-14 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 select-none font-sans-ui overflow-hidden">
       {/* Background Subtle Gradient Glow */}
       <div className="absolute top-1/3 right-0 w-96 h-96 bg-[#D4E012]/10 rounded-full blur-[120px] pointer-events-none"></div>
       <div className="absolute bottom-10 left-10 w-80 h-80 bg-[#6DAD45]/10 rounded-full blur-[100px] pointer-events-none"></div>
