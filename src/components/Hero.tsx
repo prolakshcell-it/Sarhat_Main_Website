@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
-import { ArrowDown } from "lucide-react";
 import Image from "next/image";
 import ScrollIndicator from "./ScrollIndicator";
 
@@ -124,21 +123,10 @@ export default function Hero({ onOpenQuote }: HeroProps) {
           {/* Subheading */}
           <motion.p
             variants={itemSoftVariants}
-            className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-100 font-normal max-w-2xl leading-relaxed mb-9 tracking-wide [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)]"
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-100 font-normal max-w-2xl leading-relaxed tracking-wide [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)]"
           >
             Renewable energy, storage, substations and infrastructure, brought together by one execution mindset.
           </motion.p>
-
-          {/* Action CTA Buttons */}
-          <motion.div variants={itemSoftVariants} className="flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="#about"
-              className="inline-flex items-center gap-2.5 bg-white hover:bg-[#D4E012] text-slate-950 font-extrabold text-xs sm:text-sm uppercase tracking-wider px-7 py-3.5 sm:px-8 sm:py-4 rounded-full transition-colors duration-300 hover:-translate-y-px shadow-2xl shadow-black/50 group cursor-pointer border border-white/20"
-            >
-              <span>Explore What We Do</span>
-              <ArrowDown className="w-4 h-4 text-slate-950 group-hover:translate-y-1 transition-transform" />
-            </a>
-          </motion.div>
         </motion.div>
       </motion.div>
 
