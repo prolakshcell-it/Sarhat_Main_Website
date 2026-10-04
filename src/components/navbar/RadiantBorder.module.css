@@ -1,9 +1,9 @@
 /*
- * Slow lime highlight that travels around the About menu's edge.
- * A rotating conic gradient sits behind the content; an opaque inner plate
- * (inset 1px) covers all but a 1px band at the edge. Only transform and
- * opacity animate. No CSS mask is used: Chrome drops masked content while
- * an opacity animation runs on or inside it.
+ * Shimmering hairline border for the off-white dropdowns.
+ * A faint static border in the logo green, plus a rotating conic highlight in
+ * the logo yellow → green. An opaque inner plate (inset 1px) covers all but a
+ * 1px band at the edge. Only transform animates. No CSS mask is used: Chrome
+ * drops masked content while an opacity animation runs on or inside it.
  */
 .ring {
   position: absolute;
@@ -12,36 +12,34 @@
   border-radius: inherit;
   overflow: hidden;
   pointer-events: none;
-  opacity: 0;
-  /* Starts after the open animation, then fades in/out once per lap. */
-  animation: pulse 6.5s ease-in-out 0.4s infinite;
+  background: rgba(106, 177, 68, 0.28);
 }
 
 .spark {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 120%;
+  width: 150%;
   aspect-ratio: 1;
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
-    transparent 290deg,
-    rgba(212, 224, 18, 0.22) 315deg,
-    rgba(212, 224, 18, 0.75) 346deg,
-    rgba(240, 246, 170, 0.85) 354deg,
+    transparent 250deg,
+    rgba(210, 203, 10, 0.35) 290deg,
+    rgba(210, 203, 10, 0.95) 325deg,
+    rgba(106, 177, 68, 0.95) 345deg,
     transparent 360deg
   );
   transform: translate(-50%, -50%) rotate(0deg);
   will-change: transform;
-  animation: spin 6.5s linear 0.4s infinite;
+  animation: spin 4.5s linear infinite;
 }
 
 .plate {
   position: absolute;
   inset: 1px;
-  border-radius: 19px;
-  background: #070b10;
+  border-radius: calc(var(--radius, 14px) - 1px);
+  background: #faf8f2;
 }
 
 @keyframes spin {
@@ -50,21 +48,9 @@
   }
 }
 
-@keyframes pulse {
-  0% {
-    opacity: 0;
-  }
-  18%,
-  72% {
-    opacity: 0.85;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .ring {
-    display: none;
+  .spark {
+    animation: none;
+    opacity: 0.5;
   }
 }

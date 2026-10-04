@@ -6,7 +6,7 @@ import { Menu } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { isEntryActive, navigationConfig, utilityLinks } from "./navbar/config";
+import { isEntryActive, navigationConfig } from "./navbar/config";
 import NavItem from "./navbar/NavItem";
 import MegaMenu from "./navbar/MegaMenu";
 import MobileMenu from "./navbar/MobileMenu";
@@ -135,7 +135,9 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
   };
 
   const onPanelKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    const items = Array.from(panelRef.current?.querySelectorAll<HTMLElement>("[data-menu-item]") ?? []);
+    const items = Array.from(panelRef.current?.querySelectorAll<HTMLElement>("[data-menu-item]") ?? []).filter(
+      (el) => getComputedStyle(el).visibility !== "hidden", // skip closed sub-menus
+    );
     if (!items.length) return;
     const idx = items.indexOf(document.activeElement as HTMLElement);
     let next = -1;
@@ -159,13 +161,13 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
       onPointerLeave={onHeaderPointerLeave}
       onBlur={onHeaderBlur}
     >
-      {/* Light focus backdrop: page stays visible */}
+      {/* Invisible click-catcher: closes the menu without dimming or blurring the page */}
       <AnimatePresence>
         {open && (
           <motion.div
             key="backdrop"
             aria-hidden
-            className="fixed inset-0 -z-10 hidden bg-black/[0.18] backdrop-blur-[2px] lg:block"
+            className="fixed inset-0 -z-10 hidden lg:block"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -174,36 +176,6 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
           />
         )}
       </AnimatePresence>
-
-      {/* Top Sub-Bar (Solid Black Utility Header) */}
-      <div className="relative z-50 select-none bg-black py-1.5 text-slate-200">
-        <div className="mx-auto flex max-w-[1440px] items-center justify-between px-4 text-[10px] uppercase tracking-wider sm:px-8 sm:text-[11px] lg:px-12">
-          <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200 sm:text-[11px]">
-            <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-[#D4E012] shadow-[0_0_8px_#D4E012]"></span>
-            <span>अक्षय ऊर्जा • सुदृढ़ आधारभूत संरचना</span>
-          </div>
-          <nav aria-label="Utility" className="flex items-center gap-6 text-[10px] font-bold tracking-widest text-slate-200 sm:text-[11px]">
-            {utilityLinks.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                aria-current={pathname === l.href ? "page" : undefined}
-                className={`group relative py-0.5 uppercase transition-colors hover:text-[#D4E012] focus:outline-none focus-visible:text-[#D4E012] ${
-                  pathname === l.href ? "text-[#D4E012]" : ""
-                }`}
-              >
-                {l.label}
-                <span
-                  aria-hidden
-                  className={`absolute inset-x-0 -bottom-0.5 h-px origin-center bg-[#D4E012] transition-transform duration-300 ${
-                    pathname === l.href ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                  }`}
-                />
-              </Link>
-            ))}
-          </nav>
-        </div>
-      </div>
 
       {/* Main Navigation Bar */}
       <div

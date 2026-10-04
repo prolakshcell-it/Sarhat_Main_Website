@@ -46,6 +46,7 @@ const NavItem = forwardRef<HTMLButtonElement, NavItemProps>(function NavItem(
     <li className="relative" onPointerEnter={onPointerEnter} onPointerLeave={onPointerLeave}>
       <button
         ref={ref}
+        id={`nav-trigger-${entry.key}`}
         type="button"
         aria-haspopup="true"
         aria-expanded={isOpen}
