@@ -13,11 +13,9 @@ import {
   BookOpen,
   FileText,
   Lightbulb,
-  Info,
   Target,
   Award,
   Sparkles,
-  Briefcase,
   Mail,
   LayoutDashboard,
   Grid,
@@ -31,6 +29,22 @@ export interface NavItemLink {
   title: string;
   description: string;
   icon: LucideIcon;
+  href: string;
+  /** Sub-pages shown indented under this item (editorial layout only). */
+  children?: { id: string; title: string; href: string }[];
+  /** Editorial layout: copy shown on the left while this item is hovered/focused. */
+  context?: { description: string; cta: string; social?: boolean };
+}
+
+/** Two-column layout: contextual copy on the left, plain link list on the right. */
+export interface EditorialContent {
+  eyebrow: string;
+  heading: string;
+}
+
+export interface SocialLink {
+  id: "linkedin" | "instagram" | "x";
+  label: string;
   href: string;
 }
 
@@ -60,6 +74,8 @@ export interface MegaNavEntry {
   columns: 1 | 2;
   items: NavItemLink[];
   featured?: FeaturedContent;
+  /** Replaces the icon grid + featured card with the editorial layout. */
+  editorial?: EditorialContent;
   viewAllLabel?: string;
   /** Plain link to `href` with no dropdown (desktop) or accordion (mobile). */
   linkOnly?: boolean;
@@ -274,44 +290,37 @@ export const navigationConfig: MegaNavEntry[] = [
     type: "mega",
     href: "/about",
     tag: "About Sarhat",
-    width: 1180,
-    columns: 2,
+    width: 940,
+    columns: 1,
     viewAllLabel: "About Sarhat",
+    editorial: {
+      eyebrow: "About Sarhat",
+      heading: "Get to know us",
+    },
     items: [
-      {
-        id: "about",
-        title: "About Sarhat",
-        description: "Who we are and what we stand for.",
-        icon: Info,
-        href: "/about",
-      },
       {
         id: "our-story",
         title: "Our Story",
         description: "From foundation to 250+ MW delivered.",
         icon: Target,
         href: "/about/our-story",
+        context: {
+          description:
+            "Sarhat is an execution-led energy and infrastructure company rooted in India, with the ambition to earn trust globally. Engineering discipline, hands-on delivery and continuous learning shape our work. Safety, unity and ownership guide every project.",
+          cta: "Explore our story",
+        },
       },
       {
         id: "our-approach",
-        title: "Our Mission & Approach",
+        title: "Our Approach",
         description: "Discipline, delivery and learning.",
         icon: Wrench,
         href: "/about/our-approach",
-      },
-      {
-        id: "leadership",
-        title: "Leadership",
-        description: "The team steering Sarhat.",
-        icon: Award,
-        href: "/about/leadership",
-      },
-      {
-        id: "culture",
-        title: "Culture & People",
-        description: "Safety, unity and ownership.",
-        icon: Users,
-        href: "/about/culture-people",
+        context: {
+          description:
+            "From engineering to execution, we bring discipline to every stage of delivery. We learn from the field, solve practically and build with accountability.",
+          cta: "Explore our approach",
+        },
       },
       {
         id: "initiatives",
@@ -319,33 +328,75 @@ export const navigationConfig: MegaNavEntry[] = [
         description: "Net Zero, AgroVoltaics, Field Exchange.",
         icon: Sparkles,
         href: "/about/initiatives",
+        context: {
+          description:
+            "We turn what we learn on the ground into initiatives that explore cleaner, smarter and more resilient ways of building.",
+          cta: "Explore initiatives",
+        },
+        children: [
+          {
+            id: "net-zero",
+            title: "Net Zero",
+            href: "/about/initiatives/net-zero",
+          },
+          {
+            id: "agrovoltaics",
+            title: "AgroVoltaics",
+            href: "/about/initiatives/agrovoltaics",
+          },
+          {
+            id: "field-exchange",
+            title: "Field Exchange",
+            href: "/about/initiatives/field-exchange",
+          },
+        ],
       },
       {
-        id: "careers",
-        title: "Careers",
-        description: "Build India's clean-energy future.",
-        icon: Briefcase,
-        href: "/careers",
+        id: "culture",
+        title: "Culture & People",
+        description: "Safety, unity and ownership.",
+        icon: Users,
+        href: "/about/culture-people",
+        context: {
+          description:
+            "People are at the centre of how we work, united by safety, ownership and the belief that strong teams build stronger outcomes.",
+          cta: "Meet our people",
+        },
       },
       {
-        id: "contact",
-        title: "Contact",
-        description: "Talk to the Sarhat team.",
+        id: "leadership",
+        title: "Leadership",
+        description: "The team steering Sarhat.",
+        icon: Award,
+        href: "/about/leadership",
+        context: {
+          description:
+            "Leadership at Sarhat is grounded in responsibility, field experience and a hands-on commitment to delivering what we promise.",
+          cta: "Meet the leadership",
+        },
+      },
+      {
+        id: "connect",
+        title: "Connect With Us",
+        description: "Reach the Sarhat team.",
         icon: Mail,
-        href: "/contact",
+        href: "/about/connect",
+        context: {
+          description:
+            "Follow Sarhat as we share our work, ideas and progress across India’s energy and infrastructure landscape.",
+          cta: "Get in touch",
+          social: true,
+        },
       },
     ],
-    featured: {
-      eyebrow: "Join the mission",
-      title: "Powering progress. Building the future.",
-      lead: "",
-      text: "",
-      cta: "Careers",
-      href: "/careers",
-      image: "/images/about-hero-bg.jpg",
-      imageAlt: "Sarhat project team on site",
-    },
   },
+];
+
+/** Shown under "Connect With Us" in the About menu. */
+export const socialLinks: SocialLink[] = [
+  { id: "linkedin", label: "LinkedIn", href: "https://linkedin.com/company/sarhat" },
+  { id: "instagram", label: "Instagram", href: "https://instagram.com/sarhatenergy" },
+  { id: "x", label: "X", href: "https://x.com/sarhatenergy" },
 ];
 
 export const utilityLinks = [

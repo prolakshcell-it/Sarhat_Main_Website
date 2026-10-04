@@ -1,0 +1,23 @@
+/* One short packet of current travelling the conductor, then a long rest. pathLength is 1. */
+.current {
+  stroke-dasharray: 0.04 2;
+  stroke-dashoffset: 0.04;
+  animation: current 8s linear infinite;
+}
+
+@keyframes current {
+  0% {
+    stroke-dashoffset: 0.04;
+  }
+  50%,
+  100% {
+    stroke-dashoffset: -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .current {
+    animation: none;
+    display: none;
+  }
+}

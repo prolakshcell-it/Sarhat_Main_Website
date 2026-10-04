@@ -4,18 +4,94 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, ChevronRight, Minus, Plus, X } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  ChevronRight,
+  Minus,
+  Plus,
+  X,
+} from "lucide-react";
 import {
   isEntryActive,
   navigationConfig,
+  socialLinks,
   utilityLinks,
   type MegaNavEntry,
 } from "./config";
+import { SocialIcon } from "./SocialIcons";
 
 const FOCUS =
   "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4E012]";
 const ROW =
   "flex min-h-[56px] w-full items-center justify-between gap-3 border-b border-white/10 px-1 text-left text-base font-bold uppercase tracking-[0.12em] transition-colors";
+
+/** About menu on mobile: plain list, no icons, with Initiatives' sub-pages indented. */
+function EditorialAccordionList({
+  entry,
+  onNavigate,
+}: {
+  entry: MegaNavEntry;
+  onNavigate: () => void;
+}) {
+  const intro = entry.items[0]?.context?.description;
+  return (
+    <div className="px-3 pb-4 pt-2">
+      {intro && (
+        <p className="mb-4 text-[13px] leading-relaxed text-slate-400">
+          {intro}
+        </p>
+      )}
+      <ul className="space-y-1">
+        {entry.items.map((item) => (
+          <li key={item.id}>
+            <Link
+              href={item.href}
+              onClick={onNavigate}
+              className={`flex min-h-[44px] items-center text-[15px] font-semibold text-slate-100 transition-colors hover:text-[#D4E012] ${FOCUS}`}
+            >
+              {item.title}
+            </Link>
+            {item.children && (
+              <ul className="mb-1 pl-4">
+                {item.children.map((child) => (
+                  <li key={child.id}>
+                    <Link
+                      href={child.href}
+                      onClick={onNavigate}
+                      className={`flex min-h-[40px] items-center gap-2 text-sm text-slate-300 transition-colors hover:text-[#D4E012] ${FOCUS}`}
+                    >
+                      <ArrowRight
+                        aria-hidden
+                        className="h-3.5 w-3.5 text-[#D4E012]"
+                      />
+                      {child.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+      <ul className="mt-4 flex items-center gap-3">
+        {socialLinks.map((s) => (
+          <li key={s.id}>
+            <a
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Sarhat on ${s.label}`}
+              className={`flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-slate-200 transition-colors hover:border-[#D4E012] hover:text-[#D4E012] ${FOCUS}`}
+            >
+              <SocialIcon id={s.id} />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 function MobileAccordion({
   entry,
@@ -61,59 +137,63 @@ function MobileAccordion({
         {open ? (
           <Minus className="h-5 w-5" />
         ) : (
-          <Plus className="h-5 w-5 text-slate-400" />
-        )}
-      </button>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            id={panelId}
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: reduce ? 0 : 0.25, ease: "easeOut" }}
-            className="overflow-hidden"
-          >
-            <ul className="space-y-1 py-3">
-              {entry.items.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <li key={item.id}>
+            <Plus className="h-5 w-5 text-slate-400" />
+          )}
+        </button>
+        <AnimatePresence initial={false}>
+          {open && (
+            <motion.div
+              id={panelId}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: reduce ? 0 : 0.25, ease: "easeOut" }}
+              className="overflow-hidden"
+            >
+              {entry.editorial ? (
+                <EditorialAccordionList entry={entry} onNavigate={onNavigate} />
+              ) : (
+              <ul className="space-y-1 py-3">
+                {entry.items.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <li key={item.id}>
+                      <Link
+                        href={item.href}
+                        onClick={onNavigate}
+                        className={`flex min-h-[48px] items-center gap-3 rounded-xl px-3 py-2 text-slate-200 transition-colors hover:bg-white/5 hover:text-white ${FOCUS}`}
+                      >
+                        <Icon
+                          className="h-5 w-5 shrink-0 text-[#D4E012]"
+                          strokeWidth={1.75}
+                        />
+                        <span className="min-w-0 flex-1">
+                          <span className="block text-[15px] font-semibold">
+                            {item.title}
+                          </span>
+                          <span className="block text-[13px] leading-snug text-slate-400">
+                            {item.description}
+                          </span>
+                        </span>
+                        <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
+                      </Link>
+                    </li>
+                  );
+                })}
+                {entry.viewAllLabel && (
+                  <li>
                     <Link
-                      href={item.href}
+                      href={entry.href}
                       onClick={onNavigate}
-                      className={`flex min-h-[48px] items-center gap-3 rounded-xl px-3 py-2 text-slate-200 transition-colors hover:bg-white/5 hover:text-white ${FOCUS}`}
+                      className={`flex min-h-[44px] items-center gap-2 px-3 text-xs font-bold uppercase tracking-[0.14em] text-[#D4E012] ${FOCUS}`}
                     >
-                      <Icon
-                        className="h-5 w-5 shrink-0 text-[#D4E012]"
-                        strokeWidth={1.75}
-                      />
-                      <span className="min-w-0 flex-1">
-                        <span className="block text-[15px] font-semibold">
-                          {item.title}
-                        </span>
-                        <span className="block text-[13px] leading-snug text-slate-400">
-                          {item.description}
-                        </span>
-                      </span>
-                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
+                      {entry.viewAllLabel}
+                      <ArrowUpRight className="h-4 w-4" />
                     </Link>
                   </li>
-                );
-              })}
-              {entry.viewAllLabel && (
-                <li>
-                  <Link
-                    href={entry.href}
-                    onClick={onNavigate}
-                    className={`flex min-h-[44px] items-center gap-2 px-3 text-xs font-bold uppercase tracking-[0.14em] text-[#D4E012] ${FOCUS}`}
-                  >
-                    {entry.viewAllLabel}
-                    <ArrowUpRight className="h-4 w-4" />
-                  </Link>
-                </li>
-              )}
-            </ul>
+                )}
+              </ul>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

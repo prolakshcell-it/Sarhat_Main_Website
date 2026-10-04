@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import SmoothScroll from "@/components/SmoothScroll";
 import {
   ArrowUpRight,
@@ -28,7 +28,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
-import ScrollIndicator from "@/components/ScrollIndicator";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 
 export default function AboutPage() {
@@ -36,22 +35,6 @@ export default function AboutPage() {
   const [activeFlightNode, setActiveFlightNode] = useState<string>("land");
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const containerRef = useRef<HTMLElement>(null);
-
-  // Parallax & Scroll Fade-out Tracking
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const bgScale = useTransform(scrollYProgress, [0, 0.8], [1.03, 1.15]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.2]);
-  const bgDim = useTransform(scrollYProgress, [0, 0.5], [0.3, 0.85]);
-
-  const contentY = useTransform(scrollYProgress, [0, 0.3], ["0px", "-60px"]);
-  const contentScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.95]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
-  const contentFilter = useTransform(scrollYProgress, [0, 0.25], ["blur(0px)", "blur(10px)"]);
 
   const leadershipTeam = [
     {
@@ -161,82 +144,44 @@ export default function AboutPage() {
         <Navbar onOpenQuote={() => setQuoteModalOpen(true)} />
 
         {/* ------------------------------------------------------------- */}
-        {/* 01 / HERO SECTION (Sticky background & Centered Content) */}
+        {/* 01 / PAGE HEADER: short image banner, left-aligned title, bold lead paragraph below */}
         {/* ------------------------------------------------------------- */}
-        <div className="sticky top-0 z-0 w-full h-screen">
-          <section ref={containerRef} className="relative h-full w-full flex items-center justify-center overflow-hidden bg-black select-none">
-            {/* Background Image Layer (Fully Visible) */}
-            <motion.div style={{ scale: bgScale, opacity: bgOpacity }} className="absolute inset-0 z-0 h-full w-full">
-              <Image
-                src="/images/hero-solar.jpg"
-                alt="Sarhat Bright Solar & Wind Energy Infrastructure"
-                fill
-                priority
-                quality={95}
-                className="object-cover object-center opacity-85"
-              />
-              <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
-              {/* Soft Dark Vignette Scrim for High-Contrast Readability */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90 pointer-events-none"></div>
-            </motion.div>
+        <header className="relative z-10">
+          <section className="relative overflow-hidden bg-[#0B120C] pt-[104px] sm:pt-[121px]">
+            <Image
+              src="/images/hero-solar.jpg"
+              alt="Sarhat solar and wind energy infrastructure"
+              fill
+              preload
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+            {/* solid brand wash on the left, fading out by the middle of the banner */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0B120C]/90 from-0% via-[#0B120C]/55 via-45% to-transparent to-80%" />
 
-            <motion.div
-              style={{ y: contentY, scale: contentScale, opacity: contentOpacity, filter: contentFilter }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-20 flex flex-col items-center text-center will-change-transform"
-            >
-              {/* Centered Animated Content Container */}
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: {
-                    opacity: 1,
-                    transition: {
-                      staggerChildren: 0.12,
-                      delayChildren: 0.1,
-                    },
-                  },
-                }}
-                className="max-w-4xl flex flex-col items-center text-center"
+            <div className="relative mx-auto flex h-[200px] max-w-6xl items-center px-4 sm:h-[250px] sm:px-6 lg:px-8">
+              <motion.h1
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="max-w-3xl font-sans-ui text-3xl font-bold leading-tight tracking-tight text-white sm:text-[2.75rem]"
               >
-                {/* H1 Heading */}
-                <motion.h1
-                  variants={{
-                    hidden: { opacity: 0, y: 25 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
-                  }}
-                  className="text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center drop-shadow-lg"
-                >
-                  People at the centre. <br />
-                  <span className="italic font-normal text-white">
-                    Progress in{" "}
-                    <span className="text-[#D4E012]">
-                      every project.
-                    </span>
-                  </span>
-                </motion.h1>
-
-                {/* Description Paragraph */}
-                <motion.p
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
-                  }}
-                  className="text-base sm:text-lg text-slate-100 font-normal max-w-5xl text-center leading-relaxed drop-shadow-md"
-                >
-                  We bring people, engineering and execution together to turn clean–energy and infrastructure ideas into practical projects that create value for businesses, communities and India.
-                </motion.p>
-              </motion.div>
-            </motion.div>
-
-            {/* Mouse Scroll Indicator */}
-            <ScrollIndicator opacity={contentOpacity} filter={contentFilter} />
+                People at the centre. Progress in every project.
+              </motion.h1>
+            </div>
           </section>
-        </div>
 
-        {/* Main Content Sections (Slides UP over static Hero) */}
-        <div className="relative z-10 bg-[#F8FAF8] border-t border-slate-200/60 shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
+          <div className="bg-white">
+            <div className="mx-auto max-w-6xl px-4 pt-12 sm:px-6 lg:px-8">
+              <p className="font-sans-ui text-xl font-bold leading-snug tracking-tight text-[#333333] sm:text-[1.75rem] sm:leading-[1.35]">
+                We bring people, engineering and execution together to turn clean–energy and infrastructure ideas into practical projects that create value for businesses, communities and India.
+              </p>
+            </div>
+          </div>
+        </header>
+
+        {/* Main Content Sections */}
+        <div className="relative z-10 bg-[#F8FAF8]">
 
           {/* ------------------------------------------------------------- */}
           {/* 02 / CORPORATE OVERVIEW & VIDEO SHOWCASE SECTION */}

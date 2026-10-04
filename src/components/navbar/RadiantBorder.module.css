@@ -1,0 +1,70 @@
+/*
+ * Slow lime highlight that travels around the About menu's edge.
+ * A rotating conic gradient sits behind the content; an opaque inner plate
+ * (inset 1px) covers all but a 1px band at the edge. Only transform and
+ * opacity animate. No CSS mask is used: Chrome drops masked content while
+ * an opacity animation runs on or inside it.
+ */
+.ring {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  /* Starts after the open animation, then fades in/out once per lap. */
+  animation: pulse 6.5s ease-in-out 0.4s infinite;
+}
+
+.spark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  aspect-ratio: 1;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 290deg,
+    rgba(212, 224, 18, 0.22) 315deg,
+    rgba(212, 224, 18, 0.75) 346deg,
+    rgba(240, 246, 170, 0.85) 354deg,
+    transparent 360deg
+  );
+  transform: translate(-50%, -50%) rotate(0deg);
+  will-change: transform;
+  animation: spin 6.5s linear 0.4s infinite;
+}
+
+.plate {
+  position: absolute;
+  inset: 1px;
+  border-radius: 19px;
+  background: #070b10;
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  18%,
+  72% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring {
+    display: none;
+  }
+}

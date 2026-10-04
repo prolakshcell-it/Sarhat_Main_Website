@@ -2,8 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
-import { Check, CheckCircle2, MapPin, Sparkles, type LucideIcon } from "lucide-react";
+import { motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "framer-motion";
 
 export interface KeyMoment {
   year: string;
@@ -11,18 +10,18 @@ export interface KeyMoment {
   tag: string;
   subtitle: string;
   description: string;
-  icon: LucideIcon;
   metrics: string[];
   achievements: string[];
-  badgeColor: string;
   image: string;
   imageCaption: string;
+  /** Where this moment sits in the journey, e.g. "Foundation" or "What comes next". */
+  stage?: string;
 }
 
-const EASE = [0.22, 1, 0.36, 1] as const;
 /** Scroll distance (in viewport heights) spent on each chapter after the first. */
-const VH_PER_CHAPTER = 0.8;
+const VH_PER_CHAPTER = 0.75;
 const STAGE_TOP = "7.5rem"; // clears the fixed navbar
+const EASE_CSS = "ease-[cubic-bezier(0.22,1,0.36,1)]";
 
 /** Media-query hook that is `false` on the server and first client render, so hydration always matches. */
 export function useMedia(query: string) {
@@ -38,305 +37,292 @@ export function useMedia(query: string) {
 }
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
+const pad = (i: number) => String(i + 1).padStart(2, "0");
 
 /* ------------------------------------------------------------------ */
-/* Shared chapter content (existing copy, unchanged)                   */
+/* Shared pieces                                                        */
 /* ------------------------------------------------------------------ */
 
-function ChapterText({ moment, reduce }: { moment: KeyMoment; reduce: boolean }) {
-  const Icon = moment.icon;
-  // Layered but restrained: same tiny 12px rise for every layer, staggered 0 / 100 / 180 / 260ms
-  const layer = (delay: number) => ({
-    initial: { opacity: 0, y: reduce ? 0 : 12 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: reduce ? 0.2 : 0.5, delay: reduce ? 0 : delay, ease: EASE },
-  });
-
+function Metrics({ items }: { items: string[] }) {
   return (
-    <div className="flex flex-col">
-      <motion.div {...layer(0.1)} className="mb-4 flex items-center gap-3">
-        <span
-          className={`rounded-full border px-3 py-1.5 font-mono text-[10px] font-extrabold uppercase tracking-widest ${moment.badgeColor}`}
-        >
-          {moment.tag}
-        </span>
-        <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-white text-[#6DAD45] shadow-sm">
-          <Icon className="h-4 w-4" />
-        </span>
-      </motion.div>
-
-      <motion.div {...layer(0.18)} className="mb-3">
-        <span className="mb-1 block font-mono text-xs font-bold text-slate-600">{moment.subtitle}</span>
-        <h3 className="font-serif-display text-2xl font-medium leading-snug text-[#0F172A] sm:text-3xl xl:text-4xl">
-          {moment.year} — {moment.headline}
-        </h3>
-      </motion.div>
-
-      <motion.p {...layer(0.26)} className="mb-5 max-w-xl text-sm leading-relaxed text-slate-600">
-        {moment.description}
-      </motion.p>
-
-      <motion.div {...layer(0.34)} className="mb-5 flex flex-wrap gap-2">
-        {moment.metrics.map((metric) => (
-          <span
-            key={metric}
-            className="rounded-lg border border-slate-200 bg-white px-3 py-1 font-mono text-[11px] font-semibold text-slate-800 shadow-2xs"
-          >
-            ✓ {metric}
-          </span>
-        ))}
-      </motion.div>
-
-      <motion.div {...layer(0.42)} className="max-w-xl space-y-2 border-t border-slate-200 pt-4">
-        {moment.achievements.map((item) => (
-          <div key={item} className="flex items-start gap-2 text-xs leading-normal text-slate-600">
-            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#6DAD45]" />
-            <span>{item}</span>
-          </div>
-        ))}
-      </motion.div>
-    </div>
+    <ul className="flex flex-wrap gap-x-5 gap-y-2">
+      {items.map((m) => (
+        <li key={m} className="flex items-center gap-2 text-sm font-medium text-slate-800">
+          <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-[#6DAD45]" />
+          {m}
+        </li>
+      ))}
+    </ul>
   );
 }
 
-function ChapterImage({
-  moment,
-  reduce,
-  className,
-  driftY,
-}: {
-  moment: KeyMoment;
-  reduce: boolean;
-  className: string;
-  driftY?: ReturnType<typeof useTransform<number, number>>;
-}) {
+function Achievements({ items }: { items: string[] }) {
   return (
-    <div className={`relative overflow-hidden rounded-3xl border border-slate-200 shadow-xl shadow-slate-300/40 ${className}`}>
-      {/* masked wipe + settle (1.06 → 1) */}
-      <motion.div
-        className="absolute inset-0"
-        initial={
-          reduce
-            ? { opacity: 0 }
-            : { opacity: 0, scale: 1.06, clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)" }
-        }
-        animate={
-          reduce
-            ? { opacity: 1 }
-            : { opacity: 1, scale: 1, clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }
-        }
-        transition={{ duration: reduce ? 0.25 : 0.8, delay: reduce ? 0 : 0.12, ease: EASE }}
-      >
-        <motion.div className="absolute -inset-3" style={reduce || !driftY ? undefined : { y: driftY }}>
-          <Image
-            src={moment.image}
-            alt={moment.headline}
-            fill
-            sizes="(max-width: 1024px) 100vw, 55vw"
-            className="object-cover object-center"
-          />
-        </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent" />
-        <div className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full border border-white/20 bg-slate-950/80 px-3.5 py-1.5 font-mono text-[10px] font-extrabold uppercase tracking-wider text-[#D4E012] shadow-md backdrop-blur-md">
-          <Sparkles className="h-3 w-3 text-[#5EE72D]" />
-          <span>{moment.year} SHOWCASE</span>
-        </div>
-        <div className="absolute inset-x-0 bottom-0 z-10 p-5 text-white sm:p-6">
-          <div className="mb-2 inline-flex items-center gap-1.5 rounded-md border border-[#6DAD45]/50 bg-[#6DAD45]/30 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-[#D4E012] backdrop-blur-sm">
-            <MapPin className="h-3 w-3" />
-            <span>{moment.tag}</span>
-          </div>
-          <h4 className="font-serif-display text-lg font-medium leading-snug sm:text-xl">{moment.imageCaption}</h4>
-        </div>
-      </motion.div>
+    <ul className="space-y-2.5 border-t border-slate-200 pt-5">
+      {items.map((a) => (
+        <li key={a} className="grid grid-cols-[1rem_1fr] gap-3 text-sm leading-relaxed text-slate-600">
+          <span aria-hidden className="mt-[0.6rem] h-px w-full bg-[#707B00]" />
+          {a}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function Caption({ moment }: { moment: KeyMoment }) {
+  return (
+    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent p-5 pt-16 text-white sm:p-6 sm:pt-20">
+      <span className="mb-2 inline-block rounded-full border border-white/20 bg-white/10 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-[#D4E012] backdrop-blur-sm">
+        {moment.tag}
+      </span>
+      <p className="font-serif-display text-lg leading-snug sm:text-xl">{moment.imageCaption}</p>
     </div>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/* Progress tracker: 2024 ━━ 2025 ━━ 2026 ━━ 2027+                      */
+/* Desktop: pinned stage — rail · chapter text · image                  */
 /* ------------------------------------------------------------------ */
 
-function Tracker({
+function Rail({
   moments,
   index,
   progress,
-  reduce,
   onSelect,
 }: {
   moments: KeyMoment[];
   index: number;
-  progress: ReturnType<typeof useScroll>["scrollYProgress"];
-  reduce: boolean;
+  progress: MotionValue<number>;
   onSelect: (i: number) => void;
 }) {
   const n = moments.length;
-  const fill = useTransform(progress, (v) => (n < 2 ? 0 : clamp((v * n - 0.5) / (n - 1), 0, 1)));
+  // fills node-centre to node-centre, driven straight from scroll (no re-renders)
+  const fill = useTransform(progress, (v) => (n < 2 ? 1 : clamp((v * n - 0.5) / (n - 1), 0, 1)));
 
   return (
-    <nav aria-label="Key moments progress" className="mx-auto w-full max-w-3xl px-6">
-      <div className="relative h-14">
-        {/* rail + scroll-linked fill (runs node-centre to node-centre) */}
-        <div className="absolute left-3.5 right-3.5 top-[13px] h-0.5 rounded-full bg-slate-200">
-          <motion.div
-            style={{ scaleX: fill }}
-            className="h-full origin-left rounded-full bg-gradient-to-r from-[#6DAD45] to-[#D4E012]"
-          />
-        </div>
+    <nav aria-label="Key moments" className="relative">
+      <div aria-hidden className="absolute bottom-6 left-[11px] top-6 w-px bg-slate-200">
+        <motion.div style={{ scaleY: fill }} className="h-full w-full origin-top bg-gradient-to-b from-[#6DAD45] to-[#D4E012]" />
+      </div>
+      <ol className="space-y-1">
         {moments.map((m, i) => {
-          const status = i < index ? "done" : i === index ? "active" : "todo";
-          const left = n < 2 ? 50 : (i / (n - 1)) * 100;
+          const state = i < index ? "done" : i === index ? "active" : "todo";
           return (
-            <button
-              key={m.year}
-              type="button"
-              onClick={() => onSelect(i)}
-              aria-current={status === "active" ? "step" : undefined}
-              aria-label={`${m.year} — ${m.headline}`}
-              className="group absolute top-0 flex -translate-x-1/2 cursor-pointer flex-col items-center focus:outline-none"
-              style={{ left: `calc(14px + (100% - 28px) * ${left / 100})` }}
-            >
-              <span className="relative flex h-7 w-7 items-center justify-center">
-                {status === "active" && !reduce && (
-                  /* the single achievement pulse: expands once, then is gone */
-                  <motion.span
-                    key={`pulse-${m.year}`}
-                    aria-hidden
-                    className="absolute inset-0 rounded-full border-2 border-[#6DAD45]"
-                    initial={{ scale: 1, opacity: 0.7 }}
-                    animate={{ scale: 2.8, opacity: 0 }}
-                    transition={{ duration: 1, ease: EASE }}
-                  />
-                )}
+            <li key={m.year}>
+              <button
+                type="button"
+                onClick={() => onSelect(i)}
+                aria-current={state === "active" ? "step" : undefined}
+                className="group flex w-full cursor-pointer items-center gap-4 rounded-xl py-3 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6DAD45]"
+              >
                 <span
-                  className={`flex h-7 w-7 items-center justify-center rounded-full border-2 transition-colors duration-300 group-focus-visible:ring-2 group-focus-visible:ring-[#6DAD45] ${
-                    status === "done"
-                      ? "border-[#6DAD45] bg-[#6DAD45] text-white"
-                      : status === "active"
-                        ? "border-[#6DAD45] bg-slate-950"
-                        : "border-slate-300 bg-white"
+                  className={`relative z-10 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-colors duration-500 ${
+                    state === "active"
+                      ? "border-[#6DAD45] bg-slate-950"
+                      : state === "done"
+                        ? "border-[#6DAD45] bg-[#6DAD45]"
+                        : "border-slate-300 bg-[#F8FAF8] group-hover:border-[#6DAD45]"
                   }`}
                 >
-                  {status === "done" && (
-                    <motion.span
-                      key="check"
-                      initial={reduce ? false : { scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ type: "spring", stiffness: 420, damping: 22 }}
-                    >
-                      <Check className="h-3.5 w-3.5" strokeWidth={3} />
-                    </motion.span>
-                  )}
-                  {status === "active" && <span className="h-2 w-2 rounded-full bg-[#D4E012]" />}
+                  <span
+                    className={`h-2 w-2 rounded-full transition-transform duration-500 ${state === "active" ? "scale-100 bg-[#D4E012]" : "scale-0"}`}
+                  />
                 </span>
-              </span>
-              <span
-                className={`mt-2 font-mono text-[11px] font-bold tracking-wider transition-colors duration-300 ${
-                  status === "active" ? "text-slate-900" : status === "done" ? "text-slate-600" : "text-slate-400"
-                }`}
-              >
-                {m.year}
-              </span>
-            </button>
+                <span>
+                  <span
+                    className={`block font-serif-display text-2xl leading-none transition-colors duration-500 ${
+                      state === "active" ? "text-slate-900" : "text-slate-400 group-hover:text-slate-600"
+                    }`}
+                  >
+                    {m.year}
+                  </span>
+                  {m.stage && (
+                    <span
+                      className={`mt-1.5 block whitespace-nowrap font-mono text-[10px] font-bold uppercase tracking-[0.16em] transition-colors duration-500 ${
+                        state === "active" ? "text-[#707B00]" : "text-slate-400"
+                      }`}
+                    >
+                      {m.stage}
+                    </span>
+                  )}
+                </span>
+              </button>
+            </li>
           );
         })}
-      </div>
+      </ol>
     </nav>
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Main component                                                       */
-/* ------------------------------------------------------------------ */
-
-/* ---------- Desktop: pinned achievement chapters ---------- */
 function PinnedChapters({ moments, reduce }: { moments: KeyMoment[]; reduce: boolean }) {
   const n = moments.length;
   const outerRef = useRef<HTMLDivElement>(null);
-  const [rawIndex, setIndex] = useState(0);
-  const index = clamp(rawIndex, 0, n - 1);
-  const moment = moments[index];
+  const [index, setIndex] = useState(0);
 
   const { scrollYProgress } = useScroll({ target: outerRef, offset: ["start start", "end end"] });
-
-  // Re-renders only when the chapter actually changes, never per scroll frame
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    setIndex(clamp(Math.floor(v * n), 0, n - 1));
-  });
-
-  // Very light 3-layer depth: giant year drifts slower than the image
-  const yearDrift = useTransform(scrollYProgress, [0, 1], [-18, 18]);
-  const imageDrift = useTransform(scrollYProgress, [0, 1], [10, -10]);
+  // React bails out when the value is unchanged, so this only re-renders on a chapter change
+  useMotionValueEvent(scrollYProgress, "change", (v) => setIndex(clamp(Math.floor(v * n), 0, n - 1)));
 
   const goTo = (i: number) => {
     const el = outerRef.current;
     if (!el || n < 2) return;
     const top = el.getBoundingClientRect().top + window.scrollY;
     const range = el.offsetHeight - window.innerHeight;
-    window.scrollTo({ top: top + ((i + 0.5) / n) * range, behavior: "smooth" });
+    window.scrollTo({ top: top + ((i + 0.5) / n) * range, behavior: reduce ? "auto" : "smooth" });
   };
 
+  const fade = reduce ? "transition-opacity duration-200" : `transition-[opacity,transform] duration-700 ${EASE_CSS}`;
+
   return (
-    <div
-      ref={outerRef}
-      style={{ height: `calc(100vh - ${STAGE_TOP} + ${(n - 1) * VH_PER_CHAPTER * 100}vh)` }}
-      className="relative"
-    >
-      <div
-        style={{ top: STAGE_TOP, height: `calc(100vh - ${STAGE_TOP})` }}
-        className="sticky flex flex-col justify-between overflow-hidden"
-      >
-        {/* Layer 1: giant year, low opacity, cropped by the stage */}
-        <div aria-hidden className="pointer-events-none absolute inset-0 select-none">
-          <motion.div style={reduce ? undefined : { y: yearDrift }} className="absolute inset-x-0 top-[-6%] flex justify-center">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.span
-                key={moment.year}
-                initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 1.14, x: 40 }}
-                animate={{ opacity: 0.07, scale: 1, x: 0 }}
-                exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.94, x: -60 }}
-                transition={{ duration: reduce ? 0.2 : 0.6, ease: EASE }}
-                className="block whitespace-nowrap font-serif-display text-[clamp(14rem,30vw,32rem)] font-bold leading-none tracking-tight text-slate-900"
-              >
-                {moment.year}
-              </motion.span>
-            </AnimatePresence>
-          </motion.div>
-          {/* one soft light pulse when a chapter becomes active */}
-          {!reduce && (
-            <motion.div
-              key={`bloom-${moment.year}`}
-              className="absolute left-1/2 top-[38%] h-[60vh] w-[60vh] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(212,224,18,0.35),transparent_65%)]"
-              initial={{ opacity: 0, scale: 0.7 }}
-              animate={{ opacity: [0, 0.8, 0], scale: [0.7, 1.15, 1.3] }}
-              transition={{ duration: 1.3, ease: "easeOut" }}
-            />
-          )}
-        </div>
+    <div ref={outerRef} style={{ height: `calc(100vh - ${STAGE_TOP} + ${(n - 1) * VH_PER_CHAPTER * 100}vh)` }} className="relative">
+      <div style={{ top: STAGE_TOP, height: `calc(100vh - ${STAGE_TOP})` }} className="sticky flex items-center">
+        <div className="grid w-full grid-cols-12 items-center gap-10 xl:gap-14">
+          {/* Rail */}
+          <div className="col-span-2">
+            <p className="mb-6 font-mono text-[11px] font-bold tracking-[0.2em] text-slate-400">
+              <span className="text-slate-900">{pad(index)}</span> / {pad(n - 1)}
+            </p>
+            <Rail moments={moments} index={index} progress={scrollYProgress} onSelect={goTo} />
+          </div>
 
-        {/* Layers 2 + 3: image and text */}
-        <div className="relative z-10 mx-auto grid min-h-0 w-full max-w-6xl flex-1 grid-cols-12 items-center gap-8 px-6 xl:gap-12">
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={moment.year}
-              className="col-span-12 grid grid-cols-12 items-center gap-8 xl:gap-12"
-              exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.97, y: -14 }}
-              transition={{ duration: 0.3, ease: "easeIn" }}
-            >
-              <div className="col-span-5">
-                <ChapterText moment={moment} reduce={reduce} />
-              </div>
-              <div className="col-span-7">
-                <ChapterImage moment={moment} reduce={reduce} className="h-[min(52vh,460px)]" driftY={imageDrift} />
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+          {/* Chapter text: all chapters stay mounted and cross-fade (no remounts, no blank frames) */}
+          <div className="relative col-span-5 grid">
+            {moments.map((m, i) => {
+              const active = i === index;
+              const layer = (d: number) => ({
+                className: `${fade} ${active ? "translate-y-0 opacity-100" : reduce ? "opacity-0" : "translate-y-3 opacity-0"}`,
+                style: { transitionDelay: active && !reduce ? `${d}ms` : "0ms" },
+              });
+              return (
+                <article
+                  key={m.year}
+                  aria-hidden={!active}
+                  inert={!active}
+                  className={`col-start-1 row-start-1 ${active ? "" : "pointer-events-none"}`}
+                >
+                  <div {...layer(0)}>
+                    <p className="mb-3 font-mono text-[11px] font-bold uppercase tracking-[0.26em] text-[#707B00]">
+                      {m.stage ? `${m.stage} · ` : ""}
+                      {m.subtitle}
+                    </p>
+                  </div>
+                  <div {...layer(80)}>
+                    <h3 className="mb-5 font-serif-display text-3xl font-medium leading-[1.15] tracking-tight text-slate-900 xl:text-[2.6rem]">
+                      <span className="text-[#6DAD45]">{m.year}</span> — {m.headline}
+                    </h3>
+                  </div>
+                  <div {...layer(160)}>
+                    <p className="mb-6 text-base leading-relaxed text-slate-600">{m.description}</p>
+                  </div>
+                  <div {...layer(240)}>
+                    <div className="mb-6">
+                      <Metrics items={m.metrics} />
+                    </div>
+                  </div>
+                  <div {...layer(320)}>
+                    <Achievements items={m.achievements} />
+                  </div>
+                </article>
+              );
+            })}
+          </div>
 
-        <div className="relative z-10 pb-2 pt-3">
-          <Tracker moments={moments} index={index} progress={scrollYProgress} reduce={reduce} onSelect={goTo} />
+          {/* Image: the new chapter wipes up over the previous one */}
+          <div className="relative col-span-5 h-[min(62vh,540px)] overflow-hidden rounded-3xl bg-slate-200 shadow-2xl shadow-slate-400/30">
+            {moments.map((m, i) => {
+              const active = i === index;
+              return (
+                <div
+                  key={m.year}
+                  aria-hidden={!active}
+                  className={`absolute inset-0 ${
+                    reduce
+                      ? `transition-opacity duration-300 ${active ? "z-10 opacity-100" : "opacity-0"}`
+                      : `transition-[clip-path] duration-[900ms] ${EASE_CSS} ${
+                          active ? "z-10 [clip-path:inset(0_0_0_0)]" : "z-0 [clip-path:inset(100%_0_0_0)] delay-[900ms]"
+                        }`
+                  }`}
+                >
+                  <div
+                    className={`absolute inset-0 ${reduce ? "" : `transition-transform duration-[1400ms] ${EASE_CSS}`} ${
+                      active || reduce ? "scale-100" : "scale-[1.08]"
+                    }`}
+                  >
+                    <Image src={m.image} alt={m.headline} fill sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover" />
+                  </div>
+                  <Caption moment={m} />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Tablet / mobile / short screens: a vertical journey                  */
+/* ------------------------------------------------------------------ */
+
+function JourneyList({ moments, reduce }: { moments: KeyMoment[]; reduce: boolean }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 70%", "end 70%"] });
+
+  return (
+    <div ref={ref} className="relative">
+      <div aria-hidden className="absolute bottom-0 left-[11px] top-2 w-px bg-slate-200">
+        <motion.div style={reduce ? undefined : { scaleY: scrollYProgress }} className="h-full w-full origin-top bg-gradient-to-b from-[#6DAD45] to-[#D4E012]" />
+      </div>
+
+      <ol className="space-y-14 sm:space-y-20">
+        {moments.map((m) => (
+          <motion.li
+            key={m.year}
+            initial={{ opacity: 0, y: reduce ? 0 : 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: reduce ? 0.2 : 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="relative pl-10 sm:pl-14"
+          >
+            <span aria-hidden className="absolute left-0 top-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-[#6DAD45] bg-slate-950">
+              <span className="h-2 w-2 rounded-full bg-[#D4E012]" />
+            </span>
+
+            <p className="mb-1 font-serif-display text-3xl leading-none text-slate-900">{m.year}</p>
+            {m.stage && <p className="mb-5 font-mono text-[10px] font-bold uppercase tracking-[0.24em] text-[#707B00]">{m.stage}</p>}
+
+            {/* observe the unclipped frame: a fully clipped element never reports as intersecting */}
+            <motion.div
+              initial="hidden"
+              whileInView="shown"
+              viewport={{ once: true, amount: 0.2 }}
+              className="relative mb-6 h-52 overflow-hidden rounded-2xl sm:h-72 md:h-80"
+            >
+              <motion.div
+                variants={{
+                  hidden: reduce ? { opacity: 0 } : { clipPath: "inset(100% 0 0 0)" },
+                  shown: reduce ? { opacity: 1 } : { clipPath: "inset(0% 0 0 0)" },
+                }}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-0"
+              >
+                <Image src={m.image} alt={m.headline} fill sizes="100vw" className="object-cover" />
+                <Caption moment={m} />
+              </motion.div>
+            </motion.div>
+
+            <p className="mb-2 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-slate-500">{m.subtitle}</p>
+            <h3 className="mb-3 font-serif-display text-2xl font-medium leading-snug text-slate-900 sm:text-3xl">{m.headline}</h3>
+            <p className="mb-5 text-sm leading-relaxed text-slate-600 sm:text-base">{m.description}</p>
+            <div className="mb-5">
+              <Metrics items={m.metrics} />
+            </div>
+            <Achievements items={m.achievements} />
+          </motion.li>
+        ))}
+      </ol>
     </div>
   );
 }
@@ -345,31 +331,5 @@ export default function KeyMomentsChapters({ moments }: { moments: KeyMoment[] }
   const pinned = useMedia("(min-width: 1024px) and (min-height: 680px)");
   const reduce = useMedia("(prefers-reduced-motion: reduce)");
 
-  if (pinned) return <PinnedChapters moments={moments} reduce={reduce} />;
-
-  /* ---------- Tablet / mobile / short screens: simple vertical journey ---------- */
-  if (!pinned) {
-    return (
-      <div className="relative space-y-16">
-        <div aria-hidden className="absolute bottom-0 left-[15px] top-2 w-0.5 rounded-full bg-gradient-to-b from-[#6DAD45]/60 via-[#D4E012]/50 to-transparent" />
-        {moments.map((m) => (
-          <motion.article
-            key={m.year}
-            initial={{ opacity: 0, y: reduce ? 0 : 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: reduce ? 0.2 : 0.6, ease: EASE }}
-            className="relative pl-12"
-          >
-            <span className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full border-2 border-[#6DAD45] bg-slate-950">
-              <span className="h-2 w-2 rounded-full bg-[#D4E012]" />
-            </span>
-            <p className="mb-3 font-serif-display text-5xl font-medium leading-none text-slate-900/15 sm:text-6xl">{m.year}</p>
-            <ChapterImage moment={m} reduce={reduce} className="mb-6 h-56 sm:h-72 md:h-80" />
-            <ChapterText moment={m} reduce={reduce} />
-          </motion.article>
-        ))}
-      </div>
-    );
-  }
+  return pinned ? <PinnedChapters moments={moments} reduce={reduce} /> : <JourneyList moments={moments} reduce={reduce} />;
 }

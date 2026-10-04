@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import type { FeaturedContent, MegaNavEntry, NavItemLink } from "./config";
+import EditorialMenu from "./EditorialMenu";
 
 const EYEBROW =
   "font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#D4E012]";
@@ -108,6 +109,21 @@ function FeaturedMenuCard({
   );
 }
 
+const defaultMotion = (reduce: boolean) => ({
+  initial: reduce ? { opacity: 0 } : { opacity: 0, y: -8, scale: 0.98 },
+  animate: reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 },
+  exit: reduce ? { opacity: 0 } : { opacity: 0, y: -6, scale: 0.99 },
+  transition: { duration: 0.2, ease: "easeOut" as const },
+});
+
+// Opacity + translate only (no scale/blur) so text stays crisp in Safari.
+const editorialMotion = (reduce: boolean) => ({
+  initial: reduce ? { opacity: 0 } : { opacity: 0, y: -6 },
+  animate: { opacity: 1, y: 0 },
+  exit: reduce ? { opacity: 0 } : { opacity: 0, y: -4 },
+  transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] as const },
+});
+
 interface MegaMenuProps {
   menu: MegaNavEntry;
   id: string;
@@ -121,6 +137,29 @@ const MegaMenu = forwardRef<HTMLDivElement, MegaMenuProps>(function MegaMenu(
   { menu, id, reduce, onNavigate, onQuote, onKeyDown },
   ref,
 ) {
+  if (menu.editorial) {
+    return (
+      <motion.div
+        ref={ref}
+        id={id}
+        role="region"
+        aria-label={`${menu.label} menu`}
+        onKeyDown={onKeyDown}
+        {...editorialMotion(reduce)}
+        data-lenis-prevent="true"
+        data-lenis-prevent-scroll="true"
+        className="absolute inset-x-0 top-full max-h-[calc(100dvh-150px)] overflow-y-auto overscroll-contain bg-gradient-to-r from-[#0A1408] via-[#15270F] to-[#1B3212] text-white shadow-[0_24px_48px_-16px_rgba(0,0,0,0.6)]"
+      >
+        <EditorialMenu
+          editorial={menu.editorial}
+          items={menu.items}
+          reduce={reduce}
+          onNavigate={onNavigate}
+        />
+      </motion.div>
+    );
+  }
+
   return (
     <div className="pointer-events-none absolute inset-x-0 top-full flex justify-center px-4 sm:px-6">
       <motion.div
@@ -129,17 +168,14 @@ const MegaMenu = forwardRef<HTMLDivElement, MegaMenuProps>(function MegaMenu(
         role="region"
         aria-label={`${menu.label} menu`}
         onKeyDown={onKeyDown}
-        initial={reduce ? { opacity: 0 } : { opacity: 0, y: -8, scale: 0.98 }}
-        animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
-        exit={reduce ? { opacity: 0 } : { opacity: 0, y: -6, scale: 0.99 }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
+        {...defaultMotion(reduce)}
         style={{
           width: `min(${menu.width}px, calc(100vw - 48px))`,
           transformOrigin: "top center",
         }}
         data-lenis-prevent="true"
         data-lenis-prevent-scroll="true"
-        className="pointer-events-auto relative max-h-[calc(100dvh-150px)] overflow-y-auto overscroll-contain rounded-[20px] border border-[#D4E012]/15 bg-[#070B10]/[0.98] p-5 text-white shadow-[0_24px_48px_-16px_rgba(0,0,0,0.6)] before:absolute before:inset-x-0 before:-top-3 before:h-3 before:content-['']"
+        className={`pointer-events-auto relative max-h-[calc(100dvh-150px)] overflow-y-auto overscroll-contain rounded-[20px] border border-[#D4E012]/15 bg-[#070B10]/[0.98] p-5 text-white shadow-[0_24px_48px_-16px_rgba(0,0,0,0.6)] before:absolute before:inset-x-0 before:-top-3 before:h-3 before:content-['']`}
       >
         <motion.div
           key={menu.key}
@@ -147,58 +183,60 @@ const MegaMenu = forwardRef<HTMLDivElement, MegaMenuProps>(function MegaMenu(
           animate={{ opacity: 1 }}
           transition={{ duration: 0.15 }}
         >
-          <p className={`${EYEBROW} mb-4 flex items-center gap-2`}>
-            <span
-              aria-hidden
-              className="h-1.5 w-1.5 rounded-full bg-[#D4E012]"
-            />
-            {menu.tag}
-          </p>
+          <>
+            <p className={`${EYEBROW} mb-4 flex items-center gap-2`}>
+              <span
+                aria-hidden
+                className="h-1.5 w-1.5 rounded-full bg-[#D4E012]"
+              />
+              {menu.tag}
+            </p>
 
-          <div
-            className={`grid gap-4 lg:grid-cols-2 ${menu.columns === 2 ? "xl:grid-cols-[1.25fr_0.75fr]" : "xl:grid-cols-[0.9fr_1.1fr]"}`}
-          >
-            <ul
-              className={`grid content-start gap-1.5 ${menu.columns === 2 ? "sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2" : ""}`}
+            <div
+              className={`grid gap-4 lg:grid-cols-2 ${menu.columns === 2 ? "xl:grid-cols-[1.25fr_0.75fr]" : "xl:grid-cols-[0.9fr_1.1fr]"}`}
             >
-              {menu.items.map((item) => (
-                <li key={item.id}>
-                  <MegaMenuItem
-                    item={item}
-                    compact={menu.columns === 2}
-                    onNavigate={onNavigate}
-                  />
-                </li>
-              ))}
-            </ul>
-            <FeaturedMenuCard
-              featured={menu.featured!}
-              stacked={menu.columns === 2}
-              onNavigate={onNavigate}
-            />
-          </div>
+              <ul
+                className={`grid content-start gap-1.5 ${menu.columns === 2 ? "sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2" : ""}`}
+              >
+                {menu.items.map((item) => (
+                  <li key={item.id}>
+                    <MegaMenuItem
+                      item={item}
+                      compact={menu.columns === 2}
+                      onNavigate={onNavigate}
+                    />
+                  </li>
+                ))}
+              </ul>
+              <FeaturedMenuCard
+                featured={menu.featured!}
+                stacked={menu.columns === 2}
+                onNavigate={onNavigate}
+              />
+            </div>
 
-          <div className="mt-4 flex items-center justify-between gap-4 border-t border-white/10 pt-3.5">
-            <Link
-              href={menu.href}
-              onClick={onNavigate}
-              className={`group/all inline-flex min-h-[40px] items-center gap-2 rounded-sm text-xs font-bold uppercase tracking-[0.14em] text-slate-300 transition-colors hover:text-white ${FOCUS}`}
-            >
-              {menu.viewAllLabel}
-              <ArrowRight className="h-4 w-4 transition-transform duration-150 group-hover/all:translate-x-[3px]" />
-            </Link>
-            <button
-              type="button"
-              onClick={() => {
-                onNavigate();
-                onQuote();
-              }}
-              className={`inline-flex cursor-pointer items-center gap-2 rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-black shadow-md shadow-[#D4E012]/20 transition-all duration-150 hover:-translate-y-px hover:shadow-lg ${FOCUS}`}
-            >
-              Discuss a project
-              <ArrowRight className="h-3.5 w-3.5" />
-            </button>
-          </div>
+            <div className="mt-4 flex items-center justify-between gap-4 border-t border-white/10 pt-3.5">
+              <Link
+                href={menu.href}
+                onClick={onNavigate}
+                className={`group/all inline-flex min-h-[40px] items-center gap-2 rounded-sm text-xs font-bold uppercase tracking-[0.14em] text-slate-300 transition-colors hover:text-white ${FOCUS}`}
+              >
+                {menu.viewAllLabel}
+                <ArrowRight className="h-4 w-4 transition-transform duration-150 group-hover/all:translate-x-[3px]" />
+              </Link>
+              <button
+                type="button"
+                onClick={() => {
+                  onNavigate();
+                  onQuote();
+                }}
+                className={`inline-flex cursor-pointer items-center gap-2 rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-black shadow-md shadow-[#D4E012]/20 transition-all duration-150 hover:-translate-y-px hover:shadow-lg ${FOCUS}`}
+              >
+                Discuss a project
+                <ArrowRight className="h-3.5 w-3.5" />
+              </button>
+            </div>
+          </>
         </motion.div>
       </motion.div>
     </div>
