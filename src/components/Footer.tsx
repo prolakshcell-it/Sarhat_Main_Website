@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUp, ShieldCheck } from "lucide-react";
+import { ArrowUp, Mail, Phone, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import PowerChain from "@/components/footer/PowerChain";
 
 // Social Media Icons (SVG)
 const SocialLinkedin = () => (
@@ -37,258 +38,196 @@ const SocialYoutube = () => (
   </svg>
 );
 
-export default function Footer() {
-  const [wordIndex, setWordIndex] = useState(0);
-  const rotatingWords = ["SOLAR", "INFRA", "BESS", "AGRI", "LEISURE"];
+const SOCIALS = [
+  { href: "https://linkedin.com", label: "LinkedIn", Icon: SocialLinkedin },
+  { href: "https://instagram.com", label: "Instagram", Icon: SocialInstagram },
+  { href: "https://youtube.com", label: "YouTube", Icon: SocialYoutube },
+  { href: "https://facebook.com", label: "Facebook", Icon: SocialFacebook },
+  { href: "https://twitter.com", label: "Twitter / X", Icon: SocialTwitter },
+];
+
+const COLUMNS = [
+  {
+    title: "Solutions",
+    links: [
+      { href: "/solutions#renewable-energy", label: "Solar & Wind Energy" },
+      { href: "/solutions#bess-storage", label: "BESS & Storage" },
+      { href: "/solutions#energy-infrastructure", label: "Substations & Grid" },
+      { href: "/solutions#civil-infrastructure", label: "Civil Infrastructure" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { href: "/about", label: "About Sarhat" },
+      { href: "/about/our-story", label: "Our Story & Milestones" },
+      { href: "/about/initiatives", label: "Sustainability" },
+      { href: "/careers", label: "Careers & Life" },
+      { href: "/insights", label: "Insights & News" },
+    ],
+  },
+  {
+    title: "Ecosystem & Network",
+    links: [
+      { href: "/projects", label: "Projects & Footprints" },
+      { href: "/partners", label: "Partnership Programs" },
+      { href: "/supply-partners", label: "Supply Partners & OEMs" },
+      { href: "/execution-contractors", label: "Execution Contractors" },
+    ],
+  },
+];
+
+// lg: brand 4 · gap · 2 · 2 · 3
+const COLUMN_SPANS = ["lg:col-span-2 lg:col-start-6", "lg:col-span-2", "col-span-2 sm:col-span-1 lg:col-span-3"];
+
+const ROTATING_WORDS = ["SOLAR", "INFRA", "BESS", "AGRI", "LEISURE"];
+
+/** Kept in its own component so the ticking word doesn't re-render the whole footer. */
+function RotatingWord() {
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setWordIndex((prevIndex) => (prevIndex + 1) % rotatingWords.length);
-    }, 2200);
+    const interval = setInterval(() => setIndex((i) => (i + 1) % ROTATING_WORDS.length), 2200);
     return () => clearInterval(interval);
-  }, [rotatingWords.length]);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  }, []);
 
   return (
-    <footer className="bg-[#070C08] text-white border-t border-slate-800/80 pt-16 pb-10 relative z-10 font-sans-ui overflow-hidden">
-      {/* Background Image with Clean Deep Overlay */}
-      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
-        <Image
-          src="/images/footer-bg.jpg"
-          alt="Sarhat Renewable Energy Infrastructure"
-          fill
-          quality={90}
-          className="object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#070C08] via-[#070C08]/90 to-[#070C08]"></div>
+    <span className="relative ml-0.5 inline-flex h-5 min-w-[55px] translate-y-1 items-center overflow-hidden">
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={ROTATING_WORDS[index]}
+          initial={{ y: 10, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -10, opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="block text-xs font-bold uppercase tracking-wider text-[#D4E012]"
+        >
+          {ROTATING_WORDS[index]}
+        </motion.span>
+      </AnimatePresence>
+    </span>
+  );
+}
+
+export default function Footer() {
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className="relative z-10 overflow-hidden border-t border-white/5 bg-[#070C08] pt-16 pb-6 font-sans-ui text-white sm:pt-20">
+      {/* Background image + glows (radial gradients instead of large blur filters: cheaper to paint) */}
+      <div className="pointer-events-none absolute inset-0 opacity-15" aria-hidden>
+        <Image src="/images/footer-bg.jpg" alt="" fill sizes="100vw" className="object-cover object-center" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#070C08] via-[#070C08]/85 to-[#070C08]" />
       </div>
+      <div
+        className="pointer-events-none absolute inset-0"
+        aria-hidden
+        style={{
+          background:
+            "radial-gradient(600px 300px at 0% 100%, rgba(109,173,69,0.10), transparent 70%), radial-gradient(520px 260px at 100% 0%, rgba(212,224,18,0.08), transparent 70%)",
+        }}
+      />
 
-      {/* Subtle Glow Accents */}
-      <div className="absolute bottom-0 left-0 w-[500px] h-[300px] bg-[#6DAD45]/10 rounded-full blur-[140px] pointer-events-none"></div>
-      <div className="absolute top-0 right-0 w-[400px] h-[250px] bg-[#D4E012]/10 rounded-full blur-[120px] pointer-events-none"></div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Main Footer Grid - Balanced 4 Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-14 border-b border-slate-800/80">
-          {/* Brand Column (5 cols) */}
-          <div className="lg:col-span-5 space-y-5">
-            <Link href="/" className="flex items-center group shrink-0 select-none">
-              <div className="font-sans-ui text-2xl font-black tracking-tighter text-white flex items-center leading-none">
-                <Image
-                  src="/images/logo.png"
-                  alt="SARHAT"
-                  width={280}
-                  height={95}
-                  className="h-10 sm:h-12 w-auto object-contain"
-                />
-                <span className="w-2 h-2 rounded-full bg-[#6DAD45] inline-block mx-1.5 shrink-0 self-center translate-y-1 shadow-[0_0_10px_#6DAD45]"></span>
-                <div className="h-5 overflow-hidden inline-flex items-center ml-0.5 min-w-[55px] relative translate-y-1">
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={rotatingWords[wordIndex]}
-                      initial={{ y: 10, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: -10, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="text-xs font-bold uppercase tracking-wider block text-[#D4E012]"
-                    >
-                      {rotatingWords[wordIndex]}
-                    </motion.span>
-                  </AnimatePresence>
-                </div>
-              </div>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Links */}
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 pb-12 md:grid-cols-4 lg:grid-cols-12">
+          <div className="col-span-2 space-y-5 md:col-span-4 lg:col-span-4">
+            <Link href="/" aria-label="Sarhat home" className="inline-flex select-none items-center">
+              <Image src="/images/logo.png" alt="SARHAT" width={280} height={95} className="h-10 w-auto object-contain sm:h-11" />
+              <span className="mx-1.5 inline-block h-2 w-2 shrink-0 translate-y-1 rounded-full bg-[#6DAD45] shadow-[0_0_10px_#6DAD45]" />
+              <RotatingWord />
             </Link>
 
-            <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed max-w-md">
+            <p className="max-w-sm text-sm font-light leading-relaxed text-slate-300">
               Engineering high-yield solar parks, utility-scale BESS storage, high-voltage substations, and resilient civil infrastructure across India.
             </p>
 
-            <div className="flex items-center gap-2 text-xs text-[#6DAD45] font-mono font-semibold">
-              <ShieldCheck className="w-4 h-4 text-[#6DAD45]" />
-              <span>ISO 9001:2015 &amp; OHSAS 45001 CERTIFIED</span>
+            <ul className="space-y-2 text-sm text-slate-300">
+              <li>
+                <a href="mailto:info@sarhatenergy.com" className="inline-flex items-center gap-2 transition-colors hover:text-[#D4E012]">
+                  <Mail className="h-4 w-4 text-[#6DAD45]" />
+                  info@sarhatenergy.com
+                </a>
+              </li>
+              <li>
+                <a href="tel:+919266711125" className="inline-flex items-center gap-2 transition-colors hover:text-[#D4E012]">
+                  <Phone className="h-4 w-4 text-[#6DAD45]" />
+                  +91 9266 7111 25
+                </a>
+              </li>
+            </ul>
+
+            <div className="flex items-center gap-2 font-mono text-[11px] font-semibold text-[#6DAD45]">
+              <ShieldCheck className="h-4 w-4 shrink-0" />
+              <span>ISO 9001:2015 &amp; ISO 45001 CERTIFIED</span>
             </div>
 
-            {/* Social Links */}
-            <div className="pt-1 flex items-center gap-2">
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-black hover:bg-[#D4E012] hover:border-[#D4E012] transition-all duration-300"
-              >
-                <SocialLinkedin />
-              </a>
+            <div className="flex flex-wrap items-center gap-2">
+              {SOCIALS.map(({ href, label, Icon }) => (
                 <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-black hover:bg-[#D4E012] hover:border-[#D4E012] transition-all duration-300"
-              >
-                <SocialInstagram />
-              </a>
-                 <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-black hover:bg-[#D4E012] hover:border-[#D4E012] transition-all duration-300"
-              >
-                <SocialYoutube />
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-black hover:bg-[#D4E012] hover:border-[#D4E012] transition-all duration-300"
-              >
-                <SocialFacebook />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter / X"
-                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-black hover:bg-[#D4E012] hover:border-[#D4E012] transition-all duration-300"
-              >
-                <SocialTwitter />
-              </a>
-           
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-slate-400 transition-colors duration-300 hover:border-[#D4E012] hover:bg-[#D4E012] hover:text-black"
+                >
+                  <Icon />
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Column 2: Our Solutions (2 cols) */}
-          <div className="lg:col-span-2">
-            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-widest mb-4">
-              SOLUTIONS
-            </h4>
-            <ul className="space-y-2.5 text-xs text-slate-300 font-medium">
-              <li>
-                <Link href="/solutions#renewable-energy" className="hover:text-[#D4E012] transition-colors">
-                  Solar &amp; Wind Energy
-                </Link>
-              </li>
-              <li>
-                <Link href="/solutions#bess-storage" className="hover:text-[#D4E012] transition-colors">
-                  BESS &amp; Storage
-                </Link>
-              </li>
-              <li>
-                <Link href="/solutions#energy-infrastructure" className="hover:text-[#D4E012] transition-colors">
-                  Substations &amp; Grid
-                </Link>
-              </li>
-              <li>
-                <Link href="/solutions#civil-infrastructure" className="hover:text-[#D4E012] transition-colors">
-                  Civil Infrastructure
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 3: Company (2 cols) */}
-          <div className="lg:col-span-2">
-            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-widest mb-4">
-              COMPANY
-            </h4>
-            <ul className="space-y-2.5 text-xs text-slate-300 font-medium">
-              <li>
-                <Link href="/about" className="hover:text-[#D4E012] transition-colors">
-                  About Sarhat
-                </Link>
-              </li>
-              <li>
-                <Link href="/about/our-story" className="hover:text-[#D4E012] transition-colors">
-                  Our Story &amp; Milestones
-                </Link>
-              </li>
-              <li>
-                <Link href="/about/initiatives" className="hover:text-[#D4E012] transition-colors">
-                  Sustainability
-                </Link>
-              </li>
-              <li>
-                <Link href="/careers" className="hover:text-[#D4E012] transition-colors">
-                  Careers &amp; Life
-                </Link>
-              </li>
-              <li>
-                <Link href="/insights" className="hover:text-[#D4E012] transition-colors">
-                  Insights &amp; News
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 4: Ecosystem & Network (3 cols) */}
-          <div className="lg:col-span-3">
-            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-widest mb-4">
-              ECOSYSTEM &amp; NETWORK
-            </h4>
-            <ul className="space-y-2.5 text-xs text-slate-300 font-medium mb-5">
-              <li>
-                <Link href="/projects" className="hover:text-[#D4E012] transition-colors">
-                  Projects &amp; Footprints
-                </Link>
-              </li>
-              <li>
-                <Link href="/partners" className="hover:text-[#D4E012] transition-colors">
-                  Partnership Programs
-                </Link>
-              </li>
-              <li>
-                <Link href="/supply-partners" className="hover:text-[#D4E012] transition-colors">
-                  Supply Partners &amp; OEMs
-                </Link>
-              </li>
-              <li>
-                <Link href="/execution-contractors" className="hover:text-[#D4E012] transition-colors">
-                  Execution Contractors
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-mono">
-          {/* Policy Links */}
-          <div className="flex items-center gap-4 whitespace-nowrap">
-            <a href="#" className="hover:text-[#D4E012] transition-colors">
-              PRIVACY POLICY
-            </a>
-            <span className="text-slate-800">•</span>
-            <a href="#" className="hover:text-[#D4E012] transition-colors">
-              TERMS OF SERVICE
-            </a>
-            <span className="text-slate-800">•</span>
-            <a href="#" className="hover:text-[#D4E012] transition-colors">
-              COOKIE POLICY
-            </a>
-          </div>
-
-          {/* Powered by */}
-          <div className="text-[11px] tracking-widest text-slate-400 uppercase font-mono font-bold">
-            POWERED BY <span className="text-white font-extrabold">PROLAKSH</span>
-          </div>
-
-          {/* Copyright & Scroll Top */}
-          <div className="flex items-center gap-3 whitespace-nowrap">
-            <span>© {new Date().getFullYear()} SARHAT EPC PVT. LTD. ALL RIGHTS RESERVED.</span>
-            <button
-              onClick={scrollToTop}
-              aria-label="Back to Top"
-              className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-900 border border-slate-800 text-[#D4E012] hover:bg-[#D4E012] hover:text-black transition-all ml-1 shadow-md cursor-pointer"
+          {COLUMNS.map((col, i) => (
+            <nav
+              key={col.title}
+              aria-label={col.title}
+              className={COLUMN_SPANS[i]}
             >
-              <ArrowUp className="w-4 h-4" />
-            </button>
+              <h4 className="mb-4 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-white">{col.title}</h4>
+              <ul className="space-y-3 text-sm text-slate-400">
+                {col.links.map(({ href, label }) => (
+                  <li key={href}>
+                    <Link href={href} className="transition-colors hover:text-[#D4E012]">
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
+        </div>
+
+        {/* Bottom bar */}
+        <div className="flex flex-col gap-5 border-t border-white/10 pt-6 font-mono text-[11px] text-slate-400 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <a href="#" className="transition-colors hover:text-[#D4E012]">PRIVACY POLICY</a>
+            <span className="text-slate-700" aria-hidden>•</span>
+            <a href="#" className="transition-colors hover:text-[#D4E012]">TERMS OF SERVICE</a>
+            <span className="text-slate-700" aria-hidden>•</span>
+            <a href="#" className="transition-colors hover:text-[#D4E012]">COOKIE POLICY</a>
+          </div>
+
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between lg:gap-8">
+            <span>© {year} SARHAT EPC PVT. LTD. ALL RIGHTS RESERVED.</span>
+            <div className="flex items-center justify-between gap-6">
+              <span className="font-bold uppercase tracking-widest">
+                Powered by <span className="font-extrabold text-white">PROLAKSH</span>
+              </span>
+              <button
+                type="button"
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                aria-label="Back to top"
+                className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[#D4E012] transition-colors hover:bg-[#D4E012] hover:text-black"
+              >
+                <ArrowUp className="h-4 w-4" />
+              </button>
+            </div>
           </div>
         </div>
+
+        {/* Plant → substation → transmission, closing the page */}
+        <PowerChain className="-mx-4 mt-10 sm:mx-0" />
       </div>
     </footer>
   );

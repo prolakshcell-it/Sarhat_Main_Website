@@ -1,0 +1,174 @@
+/*
+  The chain draws itself once (CSS dash transition, no JS per frame), then packets of
+  current run plant → substation → lines → city. Every path uses pathLength="1".
+  Animations only run while the footer is on screen ([data-live]).
+*/
+.root {
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.draw {
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.6s var(--ease) var(--d, 0s);
+}
+
+.fade {
+  opacity: 0;
+  transition: opacity 0.9s ease var(--d, 0s);
+}
+
+.root[data-on] .draw {
+  stroke-dashoffset: 0;
+}
+
+.root[data-on] .fade {
+  opacity: 1;
+}
+
+/* One short packet travelling the route, then a rest. 7s cycle shared by every route. */
+.pulse {
+  stroke-dasharray: 0.05 2;
+  stroke-dashoffset: 0.05;
+}
+
+.root[data-on] .pulse {
+  animation: current 7s linear var(--d, 0s) infinite;
+}
+
+@keyframes current {
+  0% {
+    stroke-dashoffset: 0.05;
+  }
+  45%,
+  100% {
+    stroke-dashoffset: -1;
+  }
+}
+
+/* A short streak of sunlight from the sun's rim onto each module (~1s of the cycle) */
+.ray {
+  stroke-dasharray: 0.22 2;
+  stroke-dashoffset: 0.22;
+}
+
+.root[data-on] .ray {
+  animation: ray 7s ease-in var(--d, 0s) infinite;
+}
+
+@keyframes ray {
+  0% {
+    stroke-dashoffset: 0.22;
+  }
+  14%,
+  100% {
+    stroke-dashoffset: -1;
+  }
+}
+
+/* Modules light up as the sunlight lands */
+.glow {
+  opacity: 0;
+}
+
+.root[data-on] .glow {
+  animation: glow 7s ease-out var(--d, 0s) infinite;
+}
+
+@keyframes glow {
+  0% {
+    opacity: 0;
+  }
+  6% {
+    opacity: 0.35;
+  }
+  30%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Sun turns slowly, battery LED breathes, city windows light up when power arrives */
+.sun {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.root[data-on] .sun {
+  animation: spin 40s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.root[data-on] .blink {
+  animation: blink 2.4s ease-in-out var(--d, 0s) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+.window {
+  opacity: 0;
+  transition: opacity 0.9s ease 2.8s;
+}
+
+.root[data-on] .window {
+  opacity: 0.15;
+  animation: window 7s ease-out var(--d, 0s) infinite;
+}
+
+@keyframes window {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  12% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.55;
+  }
+}
+
+.root:not([data-live]) .pulse,
+.root:not([data-live]) .ray,
+.root:not([data-live]) .glow,
+.root:not([data-live]) .sun,
+.root:not([data-live]) .blink,
+.root:not([data-live]) .window {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .draw,
+  .fade {
+    transition: none;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  .pulse,
+  .ray,
+  .glow {
+    display: none;
+  }
+
+  .root[data-on] .sun,
+  .root[data-on] .blink,
+  .root[data-on] .window {
+    animation: none;
+  }
+
+  .window,
+  .root[data-on] .window {
+    transition: none;
+    opacity: 0.7;
+  }
+}
