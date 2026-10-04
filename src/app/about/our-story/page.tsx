@@ -14,6 +14,7 @@ import StoryValues, { type StoryValue } from "@/components/our-story/StoryValues
 import VisionMoment from "@/components/our-story/VisionMoment";
 import MithilaFoundation, { type Pillar } from "@/components/our-story/MithilaFoundation";
 import EnergyTomorrow from "@/components/our-story/EnergyTomorrow";
+import FootprintMap from "@/components/FootprintMap";
 import { Leaf, ShieldCheck, Zap } from "lucide-react";
 
 /* Values: from the About page */
@@ -189,7 +190,10 @@ export default function OurStoryPage() {
           {/* 07 — What Guides Us / Our Foundation & Pillars */}
           <MithilaFoundation pillars={pillars} />
 
-          {/* 08 — Energy today. More possibilities tomorrow. */}
+          {/* 08 — Built across India. Core Operating Footprint. */}
+          <FootprintMap />
+
+          {/* 09 — Energy today. More possibilities tomorrow. */}
           <EnergyTomorrow onOpenQuote={() => setQuoteModalOpen(true)} />
 
           <Footer />

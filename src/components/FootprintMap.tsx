@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import { animate, motion, useReducedMotion } from "framer-motion";
 import { MapPin, Building2, ArrowRight, Zap, CheckCircle2, Clock, AlertCircle, X } from "lucide-react";
@@ -8,15 +9,7 @@ import Link from "next/link";
 import AnimatedPillBadge from "./AnimatedPillBadge";
 import { PROJECTS, STATES, Project, buildMarkers, formatMW, sumMW } from "@/data/projects";
 
-// Leaflet touches `window`, so the map is client-only
-const MapboxInteractiveMap = dynamic(() => import("./MapboxInteractiveMap"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-[340px] sm:h-[440px] lg:h-[540px] bg-slate-200/80 animate-pulse flex items-center justify-center text-slate-500 font-mono text-xs">
-      Loading map...
-    </div>
-  ),
-});
+import SlnkoStyleIndiaMap from "./SlnkoStyleIndiaMap";
 
 interface FootprintMapProps {
   selectedStateSlug?: string;
@@ -25,80 +18,32 @@ interface FootprintMapProps {
 
 const ALL = "all";
 
-/** Counts up to a value like "25.03 MW" / "5 Sites" when it changes (not on every render). */
-function AnimatedValue({ value, reduce }: { value: string; reduce: boolean }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    const m = value.match(/^(-?\d+(?:\.\d+)?)(.*)$/);
-    if (!el || !m || reduce) return;
-    const decimals = (m[1].split(".")[1] || "").length;
-    const controls = animate(0, parseFloat(m[1]), {
-      duration: 0.5,
-      ease: "easeOut",
-      onUpdate: (v) => {
-        el.textContent = `${v.toFixed(decimals)}${m[2]}`;
-      },
-      onComplete: () => {
-        el.textContent = value;
-      },
-    });
-    return () => {
-      controls.stop();
-      el.textContent = value;
-    };
-  }, [value, reduce]);
-  return <span ref={ref}>{value}</span>;
-}
-
-const LABEL = "font-mono text-[11px] font-bold uppercase tracking-[0.16em]";
-
-function StatusBadge({ status }: { status: string }) {
-  const base = "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-2.5 py-1 font-mono text-[10px] font-bold uppercase";
-  switch (status) {
-    case "Commissioned":
-    case "Completed":
-      return <span className={`${base} border-emerald-300 bg-emerald-100 text-emerald-800`}><CheckCircle2 className="h-3 w-3" />Commissioned</span>;
-    case "Ongoing":
-      return <span className={`${base} border-sky-300 bg-sky-100 text-sky-800`}><Clock className="h-3 w-3" />Ongoing</span>;
-    case "Not Started":
-      return <span className={`${base} border-amber-300 bg-amber-100 text-amber-800`}><AlertCircle className="h-3 w-3" />Not Started</span>;
-    default:
-      return <span className={`${base} border-slate-300 bg-slate-100 text-slate-600`}><Zap className="h-3 w-3" />Status {status}</span>;
-  }
-}
-
 export default function FootprintMap({ selectedStateSlug, onSelectState }: FootprintMapProps) {
+  const router = useRouter();
   const [stateSlug, setStateSlug] = useState<string>(
     STATES.some((s) => s.slug === selectedStateSlug) ? (selectedStateSlug as string) : ALL
   );
-  const [markerKey, setMarkerKey] = useState<string | null>(null);
   const reduce = !!useReducedMotion();
   const chipsRef = useRef<HTMLDivElement>(null);
 
-  // Follow state chosen elsewhere on the page (projects page tabs), when it exists in the dataset
   useEffect(() => {
     if (selectedStateSlug && STATES.some((s) => s.slug === selectedStateSlug)) {
       setStateSlug(selectedStateSlug);
-      setMarkerKey(null);
     }
   }, [selectedStateSlug]);
 
   const selectState = (slug: string) => {
     setStateSlug(slug);
-    setMarkerKey(null);
     if (slug !== ALL) onSelectState?.(slug);
   };
 
-  const stateProjects: Project[] = useMemo(
-    () => (stateSlug === ALL ? PROJECTS : PROJECTS.filter((p) => STATES.find((s) => s.slug === stateSlug)?.state === p.state)),
-    [stateSlug]
-  );
-  const markers = useMemo(() => buildMarkers(stateProjects), [stateProjects]);
-  const activeMarker = markers.find((m) => m.key === markerKey) ?? null;
-  const visible = activeMarker ? activeMarker.projects : stateProjects;
-  const activeState = STATES.find((s) => s.slug === stateSlug);
-  const totalMW = sumMW(visible);
+  const handleViewDetails = (slug: string) => {
+    if (slug === ALL || !slug) {
+      router.push("/projects");
+    } else {
+      router.push(`/projects/${slug}`);
+    }
+  };
 
   // Keep the selected chip in view inside the (mobile) horizontal filter strip
   useEffect(() => {
@@ -203,215 +148,19 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
           <div aria-hidden className="pointer-events-none absolute inset-y-0 right-[-16px] w-10 bg-gradient-to-l from-[#F8FAF8] to-transparent sm:hidden" />
         </motion.div>
 
-        {/* Map + project information */}
+        {/* 3D India Map Showcase */}
         <motion.div
           variants={{
             hidden: { opacity: 0, y: reduce ? 0 : 20 },
             visible: { opacity: 1, y: 0, transition: { duration: reduce ? 0.2 : 0.7, ease: "easeOut" } },
           }}
-          className="overflow-hidden rounded-[20px] border border-slate-200 bg-white shadow-[0_12px_32px_-20px_rgba(15,23,42,0.25)] sm:rounded-[24px]"
+          className="overflow-hidden rounded-[24px] border border-slate-800 bg-[#071325] shadow-[0_30px_90px_rgba(0,0,0,0.85)]"
         >
-          <div className="grid lg:grid-cols-[minmax(0,1.75fr)_minmax(0,1fr)]">
-            <div className="min-w-0">
-              <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b border-slate-200 px-4 py-3 sm:px-6">
-                <span className={`${LABEL} flex items-center gap-2 text-[#707B00]`}>
-                  <MapPin className="h-3.5 w-3.5" /> Project locations
-                </span>
-                <span className="font-mono text-[10px] font-semibold text-slate-500">SELECT A MARKER OR STATE TO FILTER</span>
-              </div>
-              <div id="footprint-map" className="scroll-mt-28">
-                <MapboxInteractiveMap markers={markers} selectedKey={markerKey} onSelectMarker={setMarkerKey} />
-              </div>
-            </div>
-
-            {/* State / metrics / project information */}
-            <div className="relative min-w-0 border-t border-slate-200 bg-gradient-to-b from-[#F8FAF8] to-white lg:border-l lg:border-t-0">
-              <div data-lenis-prevent className="custom-scrollbar flex flex-col p-4 sm:p-6 lg:absolute lg:inset-0 lg:overflow-y-auto lg:overscroll-contain">
-                <motion.div
-                  key={`head-${stateSlug}`}
-                  initial={{ opacity: 0, y: reduce ? 0 : 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.25, ease: "easeOut" }}
-                >
-                  <span className={`${LABEL} text-[#707B00]`}>State</span>
-                  <h3 className="mt-1 font-serif-display text-[clamp(1.6rem,2.4vw,2.1rem)] font-medium leading-tight tracking-tight text-slate-900">
-                    {activeState ? activeState.state : "All Operating States"}
-                  </h3>
-                </motion.div>
-
-                <div className="mt-4 grid grid-cols-2 gap-2.5 sm:gap-3">
-                  <div className="rounded-xl bg-slate-900 p-3.5 text-white sm:p-4">
-                    <span className={`${LABEL} block text-[10px] text-slate-400`}>Total capacity</span>
-                    <span className="mt-1.5 block font-mono text-xl font-bold text-[#D4E012] sm:text-2xl">
-                      <AnimatedValue value={formatMW(totalMW)} reduce={reduce} />
-                    </span>
-                  </div>
-                  <div className="rounded-xl border border-slate-200 bg-white p-3.5 sm:p-4">
-                    <span className={`${LABEL} block text-[10px] text-slate-500`}>Projects</span>
-                    <span className="mt-1.5 block font-mono text-xl font-bold text-slate-900 sm:text-2xl">
-                      <AnimatedValue value={`${visible.length} ${visible.length === 1 ? "Site" : "Sites"}`} reduce={reduce} />
-                    </span>
-                  </div>
-                </div>
-
-                <p className="mt-4 text-[13px] leading-relaxed text-slate-500">
-                  {markers.length} mapped {markers.length === 1 ? "location" : "locations"} across{" "}
-                  {activeState ? activeState.state : `${STATES.length} states`}. Select a location to see its project and client details.
-                </p>
-
-                <div className="my-4 h-px bg-slate-200" />
-
-                <div className="mb-2 flex items-center justify-between gap-3">
-                  <span className={`${LABEL} text-[#707B00]`}>Locations</span>
-                  {activeMarker && (
-                    <button
-                      type="button"
-                      onClick={() => setMarkerKey(null)}
-                      className="inline-flex min-h-[32px] cursor-pointer items-center gap-1 font-mono text-[10px] font-bold uppercase text-slate-500 transition-colors duration-200 hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6DAD45]"
-                    >
-                      <X className="h-3 w-3" /> Clear
-                    </button>
-                  )}
-                </div>
-
-                <ul className="shrink-0 divide-y divide-slate-100 overflow-hidden rounded-xl border border-slate-200 bg-white">
-                  {markers.map((m) => {
-                    const sel = m.key === markerKey;
-                    return (
-                      <li key={m.key}>
-                        <button
-                          type="button"
-                          aria-pressed={sel}
-                          onClick={() => setMarkerKey(sel ? null : m.key)}
-                          className={`group flex min-h-[48px] w-full cursor-pointer items-center justify-between gap-3 border-l-2 px-3.5 py-2 text-left transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#6DAD45] ${
-                            sel ? "border-l-[#6DAD45] bg-[#6DAD45]/10" : "border-l-transparent hover:bg-slate-50"
-                          }`}
-                        >
-                          <span className="min-w-0">
-                            <span className="block truncate text-sm font-semibold text-slate-900">{m.district}</span>
-                            <span className="block font-mono text-[10px] text-slate-500">
-                              {stateSlug === ALL ? `${m.state} • ` : ""}
-                              {m.projects.length} {m.projects.length === 1 ? "site" : "sites"} • {formatMW(m.capacityMW)}
-                            </span>
-                          </span>
-                          <ArrowRight className={`h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-[3px] ${sel ? "text-[#6DAD45]" : "text-slate-400"}`} />
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-
-                {activeMarker && (
-                  <motion.div
-                    key={`sel-${markerKey}`}
-                    initial={{ opacity: 0, y: reduce ? 0 : 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
-                    className="mt-4 space-y-2.5 border-t border-slate-200 pt-4"
-                  >
-                    <span className={`${LABEL} text-[#707B00]`}>Selected location — {activeMarker.district}</span>
-                    {activeMarker.projects.map((p) => (
-                      <div key={p.id} className="rounded-xl border border-slate-200 bg-white p-3.5">
-                        <div className="flex items-start justify-between gap-2">
-                          <div className="min-w-0">
-                            <div className="text-sm font-bold text-slate-900">{p.location}</div>
-                            <div className="font-mono text-[10px] text-slate-500">{p.scheme}</div>
-                          </div>
-                          <StatusBadge status={p.status} />
-                        </div>
-                        <div className="mt-2 flex items-center gap-1.5 text-sm font-extrabold text-slate-900">
-                          <Building2 className="h-4 w-4 shrink-0 text-[#707B00]" />
-                          <span className="min-w-0 break-words">{p.clientName}</span>
-                        </div>
-                        {p.clientAddress && <p className="mt-1 break-words text-xs leading-relaxed text-slate-600">{p.clientAddress}</p>}
-                        <div className="mt-2 border-t border-slate-100 pt-2 font-mono text-sm font-extrabold text-slate-900">{formatMW(p.capacityMW)}</div>
-                      </div>
-                    ))}
-                  </motion.div>
-                )}
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Records */}
-        <motion.div variants={item} className="mt-6 sm:mt-8">
-          {/* Project / client records */}
-          <div id="footprint-roster-table" className="scroll-mt-28 rounded-[20px] border border-slate-200 bg-white p-4 shadow-sm sm:rounded-[24px] sm:p-6 lg:p-7">
-            <motion.div
-              key={`list-${stateSlug}-${markerKey}`}
-              initial={{ opacity: 0, y: reduce ? 0 : 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-            >
-              <div className="mb-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
-                <span className={`${LABEL} flex items-center gap-2 text-[#707B00]`}>
-                  <CheckCircle2 className="h-4 w-4 text-[#6DAD45]" />
-                  Project &amp; client records ({visible.length})
-                </span>
-              </div>
-
-              {/* Desktop table */}
-              <div className="hidden overflow-hidden rounded-2xl border border-slate-200 lg:block">
-                <table className="w-full border-collapse text-left">
-                  <thead>
-                    <tr className="border-b border-slate-200 bg-slate-50 font-mono text-[11px] uppercase tracking-wider text-slate-500">
-                      <th className="px-5 py-3.5 font-bold">State / Location</th>
-                      <th className="px-4 py-3.5 font-bold">Project Type / Scheme</th>
-                      <th className="px-4 py-3.5 font-bold">Capacity</th>
-                      <th className="px-4 py-3.5 font-bold">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100 bg-white text-sm">
-                    {visible.map((p) => (
-                      <tr key={p.id} className="group transition-colors duration-150 hover:bg-[#6DAD45]/[0.06]">
-                        <td className="px-5 py-4 align-top">
-                          <div className="font-bold text-slate-900">{p.location || "—"}</div>
-                          <div className="font-mono text-[11px] text-slate-500">{p.state}</div>
-                        </td>
-                        <td className="px-4 py-4 align-top">
-                          <span className="whitespace-nowrap rounded-lg border border-slate-200 bg-slate-100 px-2.5 py-1 font-mono text-xs text-slate-800">{p.scheme}</span>
-                        </td>
-                        <td className="whitespace-nowrap px-4 py-4 align-top font-mono text-sm font-extrabold text-slate-900">{formatMW(p.capacityMW)}</td>
-                        <td className="px-4 py-4 align-top"><StatusBadge status={p.status} /></td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-
-              {/* Mobile / tablet cards */}
-              <ul className="grid gap-3 sm:grid-cols-2 lg:hidden">
-                {visible.map((p) => (
-                  <li key={p.id} className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-[#F8FAF8] p-4 transition-transform duration-200 hover:-translate-y-0.5">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="min-w-0">
-                        <div className="font-bold text-slate-900">{p.location || "—"}</div>
-                        <div className="font-mono text-[11px] text-slate-500">{p.state}</div>
-                      </div>
-                      <StatusBadge status={p.status} />
-                    </div>
-                    <span className="w-fit rounded-lg border border-slate-200 bg-slate-100 px-2.5 py-1 font-mono text-xs text-slate-800">{p.scheme}</span>
-                    <div className="mt-auto border-t border-slate-100 pt-3">
-                      <span className={`${LABEL} block text-slate-400`}>Capacity</span>
-                      <span className="font-mono text-lg font-extrabold text-slate-900">{formatMW(p.capacityMW)}</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* Section CTA Button */}
-        <motion.div variants={item} className="mt-10 text-center sm:mt-12">
-          <Link
-            href="/projects#footprint"
-            className="group inline-flex min-h-[48px] items-center gap-2.5 rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] px-8 py-4 text-xs font-extrabold uppercase tracking-widest text-black shadow-xl shadow-[#D4E012]/20 transition-all duration-300 hover:-translate-y-1 hover:from-[#c2ce0d] hover:to-[#4ed423]"
-          >
-            <span>Explore Regional Hubs & Footprints</span>
-            <ArrowRight className="h-4 w-4 text-black transition-transform group-hover:translate-x-1" />
-          </Link>
+          <SlnkoStyleIndiaMap
+            selectedStateSlug={stateSlug}
+            onSelectState={(slug: string) => selectState(slug)}
+            onViewDetails={(slug: string) => handleViewDetails(slug)}
+          />
         </motion.div>
       </motion.div>
     </section>
