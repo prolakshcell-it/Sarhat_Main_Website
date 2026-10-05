@@ -20,7 +20,7 @@ const faqList: FAQItem[] = [
     category: "solar",
     question: "What is Sarhat's turnkey EPC scope for utility-scale solar power projects?",
     answer:
-      "Sarhat provides complete end-to-end turnkey EPC services including GIS solar irradiance mapping, civil topography engineering, land title verification, module procurement, array stringing, 33kV/132kV substation bay erection, and statutory DISCOM / CEIG commissioning approvals.",
+      "Sarhat provides complete end-to-end turnkey EPC services including GIS solar irradiance mapping, civil topography engineering, land title verification, module procurement, array stringing, 11kV/765kV substation bay erection, and statutory DISCOM / CEIG commissioning approvals.",
   },
   {
     id: "faq-2",

@@ -100,7 +100,7 @@ export default function OurApproachPage() {
     {
       step: "04",
       title: "Electrical Integration",
-      desc: "DC/AC cabling, SCADA telemetry integration, 33kV/132kV bay commissioning, and DISCOM synchronization.",
+      desc: "DC/AC cabling, SCADA telemetry integration, 11kV/765kV bay commissioning, and DISCOM synchronization.",
     },
   ];
 

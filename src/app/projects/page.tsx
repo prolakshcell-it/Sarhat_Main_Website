@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, type ComponentType, type ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useInView, useReducedMotion, animate } from "framer-motion";
 import {
   MapPin,
   ArrowUpRight,
@@ -29,6 +29,8 @@ import {
   Check,
   ExternalLink,
   SlidersHorizontal,
+  Leaf,
+  Workflow,
 } from "lucide-react";
 
 import Navbar from "@/components/Navbar";
@@ -60,6 +62,101 @@ const staggerContainer = {
     },
   },
 };
+
+// Annual CO2 avoided per MW, derived from Budhera (3.48 MW -> 5,100 MT / year)
+const CO2_TONNES_PER_MW_YEAR = 1465;
+
+// Book-cover reveal: the cover swings open on its left "spine" once the card
+// enters view. Only transform/opacity animate (GPU composited), and the cover
+// is set to visibility:hidden afterwards so it costs nothing once open.
+const bookCoverVariants = {
+  hidden: { rotateY: 0, opacity: 1, visibility: "visible" as const },
+  visible: {
+    rotateY: -110,
+    opacity: 0,
+    transition: {
+      rotateY: { duration: 0.9, delay: 0.2, ease: [0.65, 0, 0.35, 1] as const },
+      opacity: { duration: 0.3, delay: 0.75 },
+    },
+    transitionEnd: { visibility: "hidden" as const },
+  },
+};
+
+type BookCardProps = {
+  className?: string;
+  coverIndex: string;
+  coverLabel: string;
+  children: ReactNode;
+};
+
+function BookCard({ className = "", coverIndex, coverLabel, children }: BookCardProps) {
+  return (
+    <motion.div variants={fadeInUp} className={`relative ${className}`}>
+      {children}
+      <motion.div
+        aria-hidden
+        variants={bookCoverVariants}
+        style={{ transformOrigin: "left center", transformPerspective: 1400, backfaceVisibility: "hidden", willChange: "transform, opacity" }}
+        className="absolute inset-0 rounded-2xl pointer-events-none overflow-hidden bg-slate-900 text-white flex flex-col justify-between p-7 shadow-2xl motion-reduce:hidden"
+      >
+        <div className="absolute inset-y-0 left-0 w-2.5 bg-gradient-to-r from-black/40 to-transparent" />
+        <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.2em] text-slate-400">
+          <span>Sarhat · Portfolio</span>
+          <span>{coverIndex} / 05</span>
+        </div>
+        <div>
+          <div className="h-px w-10 bg-[#D4E012] mb-4" />
+          <div className="font-serif-display text-2xl sm:text-3xl font-medium leading-tight">{coverLabel}</div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+type FigureCardProps = {
+  label: string;
+  dotClass: string;
+  barClass: string;
+  value: string;
+  unit: string;
+  description: string;
+  share?: number;
+  shareLabel: string;
+  footerValue?: string;
+};
+
+function FigureCard({ label, dotClass, barClass, value, unit, description, share, shareLabel, footerValue }: FigureCardProps) {
+  return (
+    <div className="h-full bg-white border border-slate-200/80 rounded-2xl p-7 flex flex-col justify-between shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:border-[#6DAD45] hover:shadow-[0_12px_32px_-16px_rgba(109,173,69,0.35)] transition-[border-color,box-shadow] duration-300">
+      <div>
+        <div className="flex items-center justify-between mb-6">
+          <span className="inline-flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+            <span className={`w-1.5 h-1.5 rounded-full ${dotClass}`} />
+            {label}
+          </span>
+        </div>
+        <div className="flex items-baseline gap-2 mb-2">
+          <span className="font-mono text-4xl font-semibold text-slate-900 tracking-tight tabular-nums">{value}</span>
+          <span className="font-mono text-sm font-medium text-slate-400">{unit}</span>
+        </div>
+        <p className="text-sm text-slate-500 leading-relaxed">{description}</p>
+      </div>
+      <div className="mt-7">
+        <div className="flex items-center justify-between text-[11px] font-mono text-slate-500">
+          <span>{shareLabel}</span>
+          <span className="text-slate-800 font-semibold tabular-nums">
+            {footerValue ?? `${Math.round((share ?? 0) * 100)}%`}
+          </span>
+        </div>
+        {share !== undefined && (
+          <div className="h-1 mt-2 rounded-full bg-slate-100 overflow-hidden">
+            <div className={`h-full rounded-full ${barClass}`} style={{ width: `${share * 100}%` }} />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 const cardHover = {
   rest: { y: 0, scale: 1, boxShadow: "0 10px 30px -15px rgba(0,0,0,0.05)" },
@@ -169,27 +266,70 @@ const EPC_SCOPE_STEPS = [
     num: "01",
     title: "Land Acquisition & Geo-Survey",
     description: "Micro-siting analysis, soil resistivity testing, topographical mapping, and shadow modeling for maximum lifetime MW yield.",
-    icon: MapPin,
   },
   {
     num: "02",
     title: "Civil & Structural Engineering",
     description: "High-grade concrete pile casting, hot-dip galvanized steel mounting structures (MMS), and storm-water drainage corridors.",
-    icon: Building2,
   },
   {
     num: "03",
     title: "Electrical & EHV Grid Erection",
-    description: "33kV/132kV outdoor switchyards, step-up power transformers, VCB protection panels, and underground transmission cabling.",
-    icon: Zap,
+    description: "11kV/765kV outdoor switchyards, step-up power transformers, VCB protection panels, and underground transmission cabling.",
   },
   {
     num: "04",
     title: "SCADA & Statutory Grid Sync",
     description: "CEIG statutory approvals, DISCOM NOC compliance, real-time telemetry SCADA integration, and commercial grid synchronization.",
-    icon: ShieldCheck,
   },
 ];
+
+// Impact figures are derived from the verified portfolio, not hard-coded.
+// Assumptions (documented here so they are easy to revise):
+//  - CO2: CO2_TONNES_PER_MW_YEAR (from the Budhera 3.48 MW / 5,100 MT project)
+//  - Tree equivalence: ~22 kg CO2 absorbed per tree per year
+//  - Households: ~1,000 farm households per MW (Budhera: 3,500+ households on 3.48 MW)
+const KG_CO2_PER_TREE_YEAR = 22;
+const HOUSEHOLDS_PER_MW = 1000;
+
+function getImpactStats(totalMW: number) {
+  const co2 = Math.round(totalMW * CO2_TONNES_PER_MW_YEAR);
+  const trees = (co2 * 1000) / KG_CO2_PER_TREE_YEAR;
+  const households = Math.round((totalMW * HOUSEHOLDS_PER_MW) / 100) * 100;
+  return [
+    { to: co2, suffix: "", label: "MT CO2 Offset / Year", note: `Full portfolio. Equivalent to planting ${(trees / 1e6).toFixed(1)} Million trees annually.`, accent: "text-[#D4E012]" },
+    { to: 100, suffix: "%", label: "DISCOM NOC Record", note: "Zero statutory delays in CEIG and grid NOCs.", accent: "text-white" },
+    { to: households, suffix: "", label: "Farm Households Served", note: "Estimated reliable daytime solar feeder power for agriculture.", accent: "text-[#5EE72D]" },
+    { to: 0, suffix: "", label: "LTI Incidents", note: "Strict adherence to high-voltage safety standards.", accent: "text-white" },
+  ];
+}
+
+function CountUp({ to, suffix = "", className = "" }: { to: number; suffix?: string; className?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.6 });
+  const reduce = useReducedMotion();
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node || !inView || reduce) return;
+    const controls = animate(0, to, {
+      duration: 1.8,
+      ease: [0.22, 1, 0.36, 1],
+      onUpdate: (v) => {
+        node.textContent = `${Math.round(v).toLocaleString("en-IN")}${suffix}`;
+      },
+    });
+    return () => controls.stop();
+  }, [inView, reduce, to, suffix]);
+
+  // Final value is the server/initial render so no-JS and reduced-motion users see real numbers.
+  return (
+    <span ref={ref} className={`tabular-nums ${className}`}>
+      {to.toLocaleString("en-IN")}
+      {suffix}
+    </span>
+  );
+}
 
 export default function MainProjectsPage() {
   const [selectedStateSlug, setSelectedStateSlug] = useState<string>("all");
@@ -210,6 +350,11 @@ export default function MainProjectsPage() {
   const commissionedMW = sumMW(commissionedProjects);
   const ongoingMW = sumMW(ongoingProjects);
   const totalMW = sumMW(PROJECTS);
+  const pipelineMW = sumMW(pipelineProjects);
+  const impactStats = getImpactStats(totalMW);
+  const stateCount = new Set(PROJECTS.map((p) => p.state)).size;
+  const co2AvoidedTonnes = Math.round(commissionedMW * CO2_TONNES_PER_MW_YEAR);
+  const co2PortfolioTonnes = Math.round(totalMW * CO2_TONNES_PER_MW_YEAR);
 
   // Parallax & Scroll Fade-out Tracking for Hero
   const { scrollYProgress } = useScroll({
@@ -362,86 +507,104 @@ export default function MainProjectsPage() {
                   Verified <span className="text-[#6DAD45] italic font-bold">Portfolio Figures</span>
                 </h2>
                 <p className="text-slate-600 text-base leading-relaxed">
-                  Real-time breakdown of Sarhat&apos;s verified solar infrastructure projects across operating states, showing commissioned capacity and active ongoing developments separately.
+                  Real-time breakdown of Sarhat&apos;s verified solar infrastructure projects across operating states, showing commissioned, ongoing and pipeline capacity alongside estimated carbon impact.
                 </p>
               </motion.div>
 
-              {/* Verified Figures Highlight Grid */}
+              {/* Verified Figures: hero total + 2x2 breakdown */}
               <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={staggerContainer}
-                className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 gap-5 mb-12"
               >
-                {/* Total Capacity Card */}
-                <motion.div
-                  variants={fadeInUp}
-                  whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                  className="bg-slate-900 text-white rounded-3xl p-8 relative overflow-hidden shadow-xl border border-slate-800 flex flex-col justify-between group cursor-default"
-                >
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#D4E012]/25 via-[#6DAD45]/10 to-transparent rounded-bl-full pointer-events-none group-hover:scale-110 transition-transform duration-500" />
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#D4E012]">Total Tracked Portfolio</span>
-                      <div className="w-10 h-10 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center text-[#D4E012]">
-                        <BarChart3 className="w-5 h-5" />
+                {/* Total Capacity (hero) */}
+                <BookCard className="md:col-span-2 lg:col-span-1 lg:row-span-2" coverIndex="01" coverLabel="Total Tracked Portfolio">
+                  <div className="h-full bg-slate-900 text-white rounded-2xl p-8 relative overflow-hidden border border-slate-800 shadow-xl flex flex-col justify-between hover:border-[#6DAD45] hover:shadow-[0_12px_32px_-16px_rgba(109,173,69,0.35)] transition-[border-color,box-shadow] duration-300">
+                    <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#6DAD45]/15 rounded-full blur-3xl pointer-events-none" />
+                    <div className="relative">
+                      <div className="flex items-center justify-between mb-8">
+                        <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[#D4E012]">Total Tracked Portfolio</span>
+                      </div>
+                      <div className="flex items-baseline gap-2 mb-3">
+                        <span className="font-mono text-5xl sm:text-6xl font-semibold tracking-tight tabular-nums">{totalMW.toFixed(2)}</span>
+                        <span className="font-mono text-base text-slate-400">MW</span>
+                      </div>
+                      <p className="text-sm text-slate-400 leading-relaxed">
+                        Verified capacity across commissioned, ongoing and pipeline projects, delivered under single-point turnkey EPC.
+                      </p>
+                    </div>
+
+                    <div className="relative mt-10">
+                      <dl className="grid grid-cols-2 gap-6 font-mono">
+                        <div>
+                          <dt className="text-[11px] uppercase tracking-[0.18em] text-slate-500 mb-1">Locations</dt>
+                          <dd className="text-2xl font-semibold tabular-nums">{PROJECTS.length}</dd>
+                        </div>
+                        <div>
+                          <dt className="text-[11px] uppercase tracking-[0.18em] text-slate-500 mb-1">States</dt>
+                          <dd className="text-2xl font-semibold tabular-nums">{stateCount}</dd>
+                        </div>
+                      </dl>
+                      <div className="mt-6 pt-5 border-t border-white/10 flex items-center gap-2 text-xs font-mono text-[#D4E012]">
+                        <Check className="w-3.5 h-3.5" /> 100% DISCOM Compliant
                       </div>
                     </div>
-                    <div className="font-mono text-4xl sm:text-5xl font-bold text-white mb-2 tracking-tight">{formatMW(totalMW)}</div>
-                    <p className="text-xs text-slate-300 font-mono">Across {PROJECTS.length} verified project locations nationwide</p>
                   </div>
-                  <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-slate-400">
-                    <span>Single-point turnkey EPC</span>
-                    <span className="text-[#D4E012] font-bold flex items-center gap-1">
-                      <Check className="w-3.5 h-3.5" /> 100% DISCOM Compliant
-                    </span>
-                  </div>
-                </motion.div>
+                </BookCard>
 
-                {/* Commissioned Capacity Card */}
-                <motion.div
-                  variants={fadeInUp}
-                  whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                  className="bg-white border border-emerald-200/90 rounded-3xl p-8 shadow-xl shadow-emerald-500/5 relative overflow-hidden flex flex-col justify-between group cursor-default"
-                >
-                  <div className="absolute top-0 right-0 w-28 h-28 bg-emerald-500/10 rounded-bl-full pointer-events-none group-hover:scale-110 transition-transform duration-500" />
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-widest text-emerald-800 bg-emerald-100/90 px-3 py-1 rounded-full border border-emerald-300 shadow-sm">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Commissioned
-                      </span>
-                    </div>
-                    <div className="font-mono text-4xl sm:text-5xl font-bold text-slate-900 mb-2 tracking-tight">{formatMW(commissionedMW)}</div>
-                    <p className="text-xs text-slate-600 font-mono font-medium">{commissionedProjects.length} sites fully synchronized to state DISCOM grids</p>
-                  </div>
-                  <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-mono">
-                    <span className="text-slate-500">Commercial Operation (COD)</span>
-                    <span className="text-emerald-700 font-bold">Verified Operating</span>
-                  </div>
-                </motion.div>
+                <BookCard coverIndex="02" coverLabel="Commissioned">
+                  <FigureCard
+                    label="Commissioned"
+                    dotClass="bg-emerald-500"
+                    barClass="bg-emerald-500"
+                    value={commissionedMW.toFixed(2)}
+                    unit="MW"
+                    description={`${commissionedProjects.length} sites synchronised to state DISCOM grids and in commercial operation.`}
+                    share={commissionedMW / totalMW}
+                    shareLabel="Share of portfolio"
+                  />
+                </BookCard>
 
-                {/* Ongoing Capacity Card */}
-                <motion.div
-                  variants={fadeInUp}
-                  whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                  className="bg-white border border-sky-200/90 rounded-3xl p-8 shadow-xl shadow-sky-500/5 relative overflow-hidden flex flex-col justify-between group cursor-default"
-                >
-                  <div className="absolute top-0 right-0 w-28 h-28 bg-sky-500/10 rounded-bl-full pointer-events-none group-hover:scale-110 transition-transform duration-500" />
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-widest text-sky-800 bg-sky-100/90 px-3 py-1 rounded-full border border-sky-300 shadow-sm">
-                        <Clock className="w-3.5 h-3.5 text-sky-600" /> Ongoing Execution
-                      </span>
-                    </div>
-                    <div className="font-mono text-4xl sm:text-5xl font-bold text-slate-900 mb-2 tracking-tight">{formatMW(ongoingMW)}</div>
-                    <p className="text-xs text-slate-600 font-mono font-medium">{ongoingProjects.length} active sites under engineering, civil foundation, &amp; EHV erection</p>
-                  </div>
-                  <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-mono">
-                    <span className="text-slate-500">Target Synchronisation</span>
-                    <span className="text-sky-700 font-bold">Active Construction</span>
-                  </div>
-                </motion.div>
+                <BookCard coverIndex="03" coverLabel="Ongoing Execution">
+                  <FigureCard
+                    label="Ongoing Execution"
+                    dotClass="bg-sky-500"
+                    barClass="bg-sky-500"
+                    value={ongoingMW.toFixed(2)}
+                    unit="MW"
+                    description={`${ongoingProjects.length} active sites under engineering, civil foundation & EHV erection.`}
+                    share={ongoingMW / totalMW}
+                    shareLabel="Share of portfolio"
+                  />
+                </BookCard>
+
+                <BookCard coverIndex="04" coverLabel="CO₂ Avoided">
+                  <FigureCard
+                    label="CO₂ Avoided"
+                    dotClass="bg-[#6DAD45]"
+                    barClass="bg-[#6DAD45]"
+                    value={co2AvoidedTonnes.toLocaleString("en-IN")}
+                    unit="t / yr"
+                    description="Estimated annual emissions avoided by commissioned capacity."
+                    shareLabel="At full portfolio"
+                    footerValue={`${co2PortfolioTonnes.toLocaleString("en-IN")} t / yr`}
+                  />
+                </BookCard>
+
+                <BookCard coverIndex="05" coverLabel="Pipeline">
+                  <FigureCard
+                    label="Pipeline"
+                    dotClass="bg-amber-500"
+                    barClass="bg-amber-500"
+                    value={pipelineMW.toFixed(2)}
+                    unit="MW"
+                    description={`${pipelineProjects.length} sanctioned sites awaiting mobilisation & statutory approvals.`}
+                    share={pipelineMW / totalMW}
+                    shareLabel="Share of portfolio"
+                  />
+                </BookCard>
               </motion.div>
             </div>
           </section>
@@ -807,40 +970,49 @@ export default function MainProjectsPage() {
                 </p>
               </motion.div>
 
-              {/* Turnkey Scope 4-Step Cards Grid with Stagger Motion */}
+              {/* Turnkey scope: connected 4-step timeline */}
               <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={staggerContainer}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
+                className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16 lg:pt-8"
               >
-                {EPC_SCOPE_STEPS.map((step) => {
-                  const Icon = step.icon;
-                  return (
-                    <motion.div
-                      key={step.num}
-                      variants={fadeInUp}
-                      whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                      className="bg-[#F8FAF8] border border-slate-200 rounded-3xl p-7 flex flex-col justify-between hover:border-[#6DAD45] hover:shadow-xl transition-all shadow-md group cursor-default"
-                    >
-                      <div>
-                        <div className="flex items-center justify-between mb-6">
-                          <span className="font-mono text-2xl font-extrabold text-[#707B00] group-hover:scale-110 transition-transform">{step.num}</span>
-                          <div className="w-10 h-10 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-slate-800 shadow-sm group-hover:bg-[#6DAD45] group-hover:text-white group-hover:border-[#6DAD45] transition-colors">
-                            <Icon className="w-5 h-5" />
-                          </div>
-                        </div>
-                        <h3 className="font-serif-display text-lg font-bold text-slate-900 mb-2">{step.title}</h3>
-                        <p className="text-xs text-slate-600 leading-relaxed">{step.description}</p>
-                      </div>
-                      <div className="mt-6 pt-4 border-t border-slate-200/60 flex items-center gap-1 text-[11px] font-mono font-bold text-slate-400 group-hover:text-[#707B00] transition-colors">
-                        <span>Sarhat Standard</span>
-                        <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </motion.div>
-                  );
-                })}
+                {/* Progress line (desktop): draws left to right on enter */}
+                <div className="hidden lg:block absolute top-[3px] left-0 right-0 h-px bg-slate-200" aria-hidden>
+                  <motion.div
+                    variants={{
+                      hidden: { scaleX: 0 },
+                      visible: { scaleX: 1, transition: { duration: 1.4, ease: [0.65, 0, 0.35, 1], delay: 0.2 } },
+                    }}
+                    style={{ transformOrigin: "left center" }}
+                    className="h-full bg-[#6DAD45]"
+                  />
+                </div>
+
+                {EPC_SCOPE_STEPS.map((step) => (
+                  <motion.div
+                    key={step.num}
+                    variants={fadeInUp}
+                    className="relative group cursor-default"
+                  >
+                    <span
+                      aria-hidden
+                      className="hidden lg:block absolute -top-8 left-0 w-[7px] h-[7px] ml-[4px] rounded-full bg-white border-2 border-[#6DAD45] group-hover:bg-[#6DAD45] transition-colors"
+                    />
+                    <div className="h-full bg-[#F8FAF8] border border-slate-200 rounded-2xl p-6 sm:p-7 flex flex-col relative overflow-hidden transition-[border-color,box-shadow,transform] duration-300 group-hover:border-[#6DAD45] group-hover:-translate-y-1 group-hover:shadow-[0_16px_36px_-18px_rgba(109,173,69,0.4)]">
+                      <span
+                        aria-hidden
+                        className="absolute top-0 left-0 h-0.5 w-full bg-[#6DAD45] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
+                      />
+                      <span className="font-mono text-5xl font-semibold leading-none text-slate-200 group-hover:text-[#6DAD45]/40 transition-colors duration-300 tabular-nums mb-5">
+                        {step.num}
+                      </span>
+                      <h3 className="font-serif-display text-lg font-bold text-slate-900 mb-2">{step.title}</h3>
+                      <p className="text-sm text-slate-600 leading-relaxed">{step.description}</p>
+                    </div>
+                  </motion.div>
+                ))}
               </motion.div>
 
               {/* Measurable Impact Numbers Section */}
@@ -849,38 +1021,37 @@ export default function MainProjectsPage() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={fadeInUp}
-                className="bg-slate-900 text-white rounded-3xl p-8 sm:p-12 relative overflow-hidden shadow-2xl border border-slate-800"
+                className="bg-slate-900 text-white rounded-3xl p-6 sm:p-10 lg:p-12 relative overflow-hidden shadow-2xl border border-slate-800"
               >
-                <div className="absolute -top-12 -right-12 w-72 h-72 bg-[#D4E012]/15 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute -top-12 -right-12 w-72 h-72 bg-[#D4E012]/10 rounded-full blur-3xl pointer-events-none" />
 
-                <div className="max-w-3xl mb-10 relative z-10">
+                <div className="max-w-3xl mb-8 sm:mb-10 relative z-10">
                   <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#D4E012] block mb-2">ENVIRONMENTAL &amp; GRID OUTCOMES</span>
                   <h3 className="font-serif-display text-2xl sm:text-4xl font-medium text-white">
                     Delivering Clean Energy &amp; Social Impact Across Regional Grids
                   </h3>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-left border-t border-white/10 pt-8 relative z-10">
-                  <div className="group">
-                    <div className="font-mono text-3xl sm:text-4xl font-bold text-[#D4E012] group-hover:scale-105 transition-transform origin-left">78,000+</div>
-                    <div className="text-xs font-mono text-slate-300 mt-1 uppercase font-bold">MT CO2 Offset / Year</div>
-                    <p className="text-[11px] text-slate-400 mt-1 leading-snug">Equivalent to planting 3.2 Million trees annually.</p>
-                  </div>
-                  <div className="group">
-                    <div className="font-mono text-3xl sm:text-4xl font-bold text-white group-hover:scale-105 transition-transform origin-left">100%</div>
-                    <div className="text-xs font-mono text-slate-300 mt-1 uppercase font-bold">DISCOM NOC Record</div>
-                    <p className="text-[11px] text-slate-400 mt-1 leading-snug">Zero statutory delays in CEIG and grid NOCs.</p>
-                  </div>
-                  <div className="group">
-                    <div className="font-mono text-3xl sm:text-4xl font-bold text-[#5EE72D] group-hover:scale-105 transition-transform origin-left">24,000+</div>
-                    <div className="text-xs font-mono text-slate-300 mt-1 uppercase font-bold">Farmers Empowered</div>
-                    <p className="text-[11px] text-slate-400 mt-1 leading-snug">Reliable daytime solar feeder power for agriculture.</p>
-                  </div>
-                  <div className="group">
-                    <div className="font-mono text-3xl sm:text-4xl font-bold text-white group-hover:scale-105 transition-transform origin-left">0</div>
-                    <div className="text-xs font-mono text-slate-300 mt-1 uppercase font-bold">LTI Incidents</div>
-                    <p className="text-[11px] text-slate-400 mt-1 leading-snug">Strict adherence to high-voltage safety standards.</p>
-                  </div>
+                <div className="grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8 relative z-10">
+                  {impactStats.map((stat, i) => (
+                    <motion.div
+                      key={stat.label}
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.5 }}
+                      transition={{ duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                      className="group relative pt-5"
+                    >
+                      <span className="absolute top-0 left-0 right-0 h-px bg-white/10" aria-hidden />
+                      <span
+                        aria-hidden
+                        className="absolute top-0 left-0 h-px w-full bg-[#6DAD45] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
+                      />
+                      <CountUp to={stat.to} suffix={stat.suffix} className={`block font-mono text-4xl sm:text-5xl font-semibold tracking-tight ${stat.accent}`} />
+                      <div className="text-xs font-mono text-slate-300 mt-2 uppercase font-bold tracking-wide">{stat.label}</div>
+                      <p className="text-xs text-slate-400 mt-1.5 leading-snug">{stat.note}</p>
+                    </motion.div>
+                  ))}
                 </div>
               </motion.div>
             </div>

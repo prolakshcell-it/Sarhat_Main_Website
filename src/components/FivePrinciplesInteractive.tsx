@@ -39,7 +39,7 @@ export const PRINCIPLES: PrincipleStage[] = [
     keyOutcomes: [
       "Topographical & LIDAR drone mapping",
       "Geotechnical load-bearing & soil resistivity",
-      "33kV/132kV DISCOM grid evacuation clearance",
+      "11kV/765kV DISCOM grid evacuation clearance",
       "Environmental & ROW land readiness",
     ],
     icon: Compass,

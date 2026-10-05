@@ -21,7 +21,7 @@ export default function WhyChooseUs() {
       title: "Grid & DISCOM Clearance Mastery",
       badge: "Zero Bay Delays",
       description:
-        "Deep statutory expertise in 33kV/132kV/220kV substation bay allocations, EHV transmission line corridors, and GETCO/UPPCL/KPTCL grid wheeling approvals across India.",
+        "Deep statutory expertise in 11kV/765kV/220kV substation bay allocations, EHV transmission line corridors, and GETCO/UPPCL/KPTCL grid wheeling approvals across India.",
       icon: Zap,
     },
     {

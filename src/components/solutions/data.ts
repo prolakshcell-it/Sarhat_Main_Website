@@ -53,10 +53,10 @@ export const capabilities: Capability[] = [
     tag: "CORE SOLUTION 03",
     title: "Energy & Grid Infrastructure",
     headline: "Substations & DISCOM Evacuation",
-    description: "33kV/132kV/220kV Substations, Transmission Lines & SCADA",
+    description: "11kV/765kV/220kV Substations, Transmission Lines & SCADA",
     fullDetails:
       "High-voltage AIS/GIS substations, power evacuation transmission line corridors, relay protection panels, remote SCADA, and turnkey DISCOM grid connectivity.",
-    specs: ["Substations (AIS/GIS)", "33kV/132kV/220kV Bays", "Evacuation Lines", "SCADA Protection"],
+    specs: ["Substations (AIS/GIS)", "11kV/765kV/220kV Bays", "Evacuation Lines", "SCADA Protection"],
     icon: Zap,
     image: "/images/substation-project.jpg",
     accentColor: "#D4E012",

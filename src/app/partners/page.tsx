@@ -620,7 +620,7 @@ export default function PartnersPage() {
                         </h3>
 
                         <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                          Empanelled contractor network for civil earthworks, pile foundation casting, AC/DC electrical cabling, solar PV structure mounting, and 33kV/132kV EHV substation erection teams across India.
+                          Empanelled contractor network for civil earthworks, pile foundation casting, AC/DC electrical cabling, solar PV structure mounting, and 11kV/765kV EHV substation erection teams across India.
                         </p>
                       </div>
 

@@ -96,7 +96,7 @@ const keyMoments: KeyMoment[] = [
     tag: "7 STATES & MULTI-INFRASTRUCTURE",
     subtitle: "GRID SUBSTATIONS & BESS INTEGRATION",
     description:
-      "Sarhat expanded into battery storage (BESS), 33kV/132kV/220kV grid substations, and civil infrastructure, extending delivery across seven states.",
+      "Sarhat expanded into battery storage (BESS), 11kV/765kV/220kV grid substations, and civil infrastructure, extending delivery across seven states.",
     metrics: ["7 States Presence", "220kV Grid Substations", "Containerized BESS"],
     achievements: [
       "Constructed 33kV / 132kV / 220kV grid substations and SCADA systems",
