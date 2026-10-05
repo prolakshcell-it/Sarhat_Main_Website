@@ -53,7 +53,10 @@ const COLUMNS = [
       { href: "/solutions#renewable-energy", label: "Solar & Wind Energy" },
       { href: "/solutions#bess-storage", label: "BESS & Storage" },
       { href: "/solutions#energy-infrastructure", label: "Substations & Grid" },
-      { href: "/solutions#civil-infrastructure", label: "Civil Infrastructure" },
+      {
+        href: "/solutions#civil-infrastructure",
+        label: "Civil Infrastructure",
+      },
     ],
   },
   {
@@ -77,8 +80,8 @@ const COLUMNS = [
   },
 ];
 
-// lg: brand 4 · gap · 2 · 2 · 3
-const COLUMN_SPANS = ["lg:col-span-2 lg:col-start-6", "lg:col-span-2", "col-span-2 sm:col-span-1 lg:col-span-3"];
+// phone: 2 + full-width row · tablet: 3 equal · lg: brand 3 + 3·3·3 · xl: brand 4 · gap · 2 · 2 · 3
+const COLUMN_SPANS = ["lg:col-span-3 xl:col-span-2 xl:col-start-6", "lg:col-span-3 xl:col-span-2", "col-span-2 md:col-span-1 lg:col-span-3"];
 
 const ROTATING_WORDS = ["SOLAR", "INFRA", "BESS", "AGRI", "LEISURE"];
 
@@ -130,60 +133,61 @@ export default function Footer() {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Links */}
-        <div className="grid grid-cols-2 gap-x-6 gap-y-10 pb-12 md:grid-cols-4 lg:grid-cols-12">
-          <div className="col-span-2 space-y-5 md:col-span-4 lg:col-span-4">
-            <Link href="/" aria-label="Sarhat home" className="inline-flex select-none items-center">
-              <Image src="/images/logo.png" alt="SARHAT" width={280} height={95} className="h-10 w-auto object-contain sm:h-11" />
-              <span className="mx-1.5 inline-block h-2 w-2 shrink-0 translate-y-1 rounded-full bg-[#6DAD45] shadow-[0_0_10px_#6DAD45]" />
-              <RotatingWord />
-            </Link>
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 pb-10 sm:pb-12 md:grid-cols-3 lg:grid-cols-12 lg:gap-x-8">
+          {/* Brand: stacked on phones and desktop, two side-by-side blocks on tablets */}
+          <div className="col-span-2 grid gap-6 md:col-span-3 md:grid-cols-2 md:gap-x-10 lg:col-span-3 lg:grid-cols-1 xl:col-span-4">
+            <div className="space-y-5">
+              <Link href="/" aria-label="Sarhat home" className="inline-flex select-none items-center">
+                <Image src="/images/logo.png" alt="SARHAT" width={280} height={95} className="h-10 w-auto object-contain sm:h-11" />
+                <span className="mx-1.5 inline-block h-2 w-2 shrink-0 translate-y-1 rounded-full bg-[#6DAD45] shadow-[0_0_10px_#6DAD45]" />
+                <RotatingWord />
+              </Link>
 
-            <p className="max-w-sm text-sm font-light leading-relaxed text-slate-300">
-              Engineering high-yield solar parks, utility-scale BESS storage, high-voltage substations, and resilient civil infrastructure across India.
-            </p>
-
-            <ul className="space-y-2 text-sm text-slate-300">
-              <li>
-                <a href="mailto:info@sarhatenergy.com" className="inline-flex items-center gap-2 transition-colors hover:text-[#D4E012]">
-                  <Mail className="h-4 w-4 text-[#6DAD45]" />
-                  info@sarhatenergy.com
-                </a>
-              </li>
-              <li>
-                <a href="tel:+919266711125" className="inline-flex items-center gap-2 transition-colors hover:text-[#D4E012]">
-                  <Phone className="h-4 w-4 text-[#6DAD45]" />
-                  +91 9266 7111 25
-                </a>
-              </li>
-            </ul>
-
-            <div className="flex items-center gap-2 font-mono text-[11px] font-semibold text-[#6DAD45]">
-              <ShieldCheck className="h-4 w-4 shrink-0" />
-              <span>ISO 9001:2015 &amp; ISO 45001 CERTIFIED</span>
+              <p className="max-w-sm text-sm font-light leading-relaxed text-slate-300">
+                Engineering high-yield solar parks, utility-scale BESS storage, high-voltage substations, and resilient civil infrastructure across India.
+              </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2">
-              {SOCIALS.map(({ href, label, Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-slate-400 transition-colors duration-300 hover:border-[#D4E012] hover:bg-[#D4E012] hover:text-black"
-                >
-                  <Icon />
-                </a>
-              ))}
+            <div className="space-y-5 md:pt-2 lg:pt-0">
+              <ul className="space-y-2.5 text-sm text-slate-300">
+                <li>
+                  <a href="mailto:info@sarhatenergy.com" className="inline-flex items-center gap-2 transition-colors hover:text-[#D4E012]">
+                    <Mail className="h-4 w-4 text-[#6DAD45]" />
+                    info@sarhatenergy.com
+                  </a>
+                </li>
+                <li>
+                  <a href="tel:+919266711125" className="inline-flex items-center gap-2 transition-colors hover:text-[#D4E012]">
+                    <Phone className="h-4 w-4 text-[#6DAD45]" />
+                    +91 9266 7111 25
+                  </a>
+                </li>
+              </ul>
+
+              <div className="flex items-center gap-2 font-mono text-[11px] font-semibold text-[#6DAD45]">
+                <ShieldCheck className="h-4 w-4 shrink-0" />
+                <span>ISO 9001:2015 &amp; ISO 45001 CERTIFIED</span>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2">
+                {SOCIALS.map(({ href, label, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="flex h-10 w-10 items-center justify-center rounded-lg sm:h-9 sm:w-9 border border-white/10 bg-white/[0.03] text-slate-400 transition-colors duration-300 hover:border-[#D4E012] hover:bg-[#D4E012] hover:text-black"
+                  >
+                    <Icon />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
           {COLUMNS.map((col, i) => (
-            <nav
-              key={col.title}
-              aria-label={col.title}
-              className={COLUMN_SPANS[i]}
-            >
+            <nav key={col.title} aria-label={col.title} className={COLUMN_SPANS[i]}>
               <h4 className="mb-4 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-white">{col.title}</h4>
               <ul className="space-y-3 text-sm text-slate-400">
                 {col.links.map(({ href, label }) => (
@@ -199,13 +203,23 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col gap-5 border-t border-white/10 pt-6 font-mono text-[11px] text-slate-400 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex flex-col gap-4 border-t border-white/10 pt-6 font-mono text-[11px] leading-relaxed text-slate-400 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <a href="#" className="transition-colors hover:text-[#D4E012]">PRIVACY POLICY</a>
-            <span className="text-slate-700" aria-hidden>•</span>
-            <a href="#" className="transition-colors hover:text-[#D4E012]">TERMS OF SERVICE</a>
-            <span className="text-slate-700" aria-hidden>•</span>
-            <a href="#" className="transition-colors hover:text-[#D4E012]">COOKIE POLICY</a>
+            <a href="#" className="transition-colors hover:text-[#D4E012]">
+              PRIVACY POLICY
+            </a>
+            <span className="hidden text-slate-700 sm:inline" aria-hidden>
+              •
+            </span>
+            <a href="#" className="transition-colors hover:text-[#D4E012]">
+              TERMS OF SERVICE
+            </a>
+            <span className="hidden text-slate-700 sm:inline" aria-hidden>
+              •
+            </span>
+            <a href="#" className="transition-colors hover:text-[#D4E012]">
+              COOKIE POLICY
+            </a>
           </div>
 
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between lg:gap-8">
