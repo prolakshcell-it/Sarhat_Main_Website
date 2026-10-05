@@ -200,19 +200,22 @@ export default function SlnkoStyleIndiaMap({ selectedStateSlug, onSelectState, o
     });
   }, []);
 
-  // Determine active highlighted state
+  // Determine active state for highlighting state vector paths
+  const highlightedStateId = useMemo(() => {
+    if (hoveredId) return hoveredId;
+    if (selectedStateSlug && selectedStateSlug !== "all") {
+      return getSvgLocationId(selectedStateSlug);
+    }
+    return null;
+  }, [selectedStateSlug, hoveredId]);
+
+  // Determine active state for showing the card popup box (only when user hovers a state)
   const activeState = useMemo(() => {
     if (hoveredId) {
-      const match = stateItems.find((s) => s.id === hoveredId);
-      if (match) return match;
+      return stateItems.find((s) => s.id === hoveredId) || null;
     }
-    if (selectedStateSlug && selectedStateSlug !== "all") {
-      const targetId = getSvgLocationId(selectedStateSlug);
-      const match = stateItems.find((s) => s.id === targetId);
-      if (match) return match;
-    }
-    return stateItems.find((s) => s.id === "rj") || stateItems[0];
-  }, [selectedStateSlug, hoveredId, stateItems]);
+    return null;
+  }, [hoveredId, stateItems]);
 
   const handleStateClick = useCallback(
     (state: StateMeta) => {
@@ -220,6 +223,32 @@ export default function SlnkoStyleIndiaMap({ selectedStateSlug, onSelectState, o
     },
     [onSelectState]
   );
+
+  // Dynamic card position offset away from cursor / pin position
+  const cardStyle = useMemo(() => {
+    if (!activeState) return {};
+    const xPct = activeState.cardPos.x / 6.12;
+    const yPct = activeState.cardPos.y / 6.96;
+    const left = Math.min(Math.max(xPct, 26), 74);
+
+    if (activeState.cardPos.y < 160) {
+      // For top states (JK, HP), offset card below the pin
+      const top = Math.min(Math.max(yPct + 2, 12), 80);
+      return {
+        top: `${top}%`,
+        left: `${left}%`,
+        transform: "translate(-50%, 20px)",
+      };
+    } else {
+      // Position card 18px above the pin dot so cursor is completely free
+      const top = Math.min(Math.max(yPct - 2, 15), 85);
+      return {
+        top: `${top}%`,
+        left: `${left}%`,
+        transform: "translate(-50%, calc(-100% - 18px))",
+      };
+    }
+  }, [activeState]);
 
   return (
     <div
@@ -234,6 +263,7 @@ export default function SlnkoStyleIndiaMap({ selectedStateSlug, onSelectState, o
         <svg
           viewBox={indiaMap.viewBox || "0 0 612 696"}
           className="w-full max-w-[720px] h-auto select-none filter drop-shadow-[0_25px_45px_rgba(0,0,0,0.95)]"
+          onMouseLeave={() => setHoveredId(null)}
         >
           <defs>
             {/* Inactive Slate State Gradient */}
@@ -268,6 +298,14 @@ export default function SlnkoStyleIndiaMap({ selectedStateSlug, onSelectState, o
             </filter>
           </defs>
 
+          {/* SVG Background Catcher to clear hover when cursor is in empty map space */}
+          <rect
+            width="100%"
+            height="100%"
+            fill="transparent"
+            onMouseEnter={() => setHoveredId(null)}
+          />
+
           {/* 3D Extrusion Shadow Layer */}
           <g transform="translate(0, 10)" opacity="0.5" filter="url(#github3DShadow)">
             {stateItems.map((state) => (
@@ -278,7 +316,7 @@ export default function SlnkoStyleIndiaMap({ selectedStateSlug, onSelectState, o
           {/* Authentic GitHub State Vector Layers */}
           <g className="transition-all duration-300">
             {stateItems.map((state) => {
-              const isActive = activeState.id === state.id;
+              const isActive = highlightedStateId === state.id;
               const isOperating = state.isOperating;
 
               let fillUrl = "url(#slateStateGrad)";
@@ -321,7 +359,7 @@ export default function SlnkoStyleIndiaMap({ selectedStateSlug, onSelectState, o
             {stateItems
               .filter((s) => s.isOperating)
               .map((s) => {
-                const isActive = activeState.id === s.id;
+                const isActive = highlightedStateId === s.id;
                 return (
                   <g key={`pin-${s.id}`} transform={`translate(${s.cardPos.x}, ${s.cardPos.y})`}>
                     {isActive && (
@@ -334,24 +372,19 @@ export default function SlnkoStyleIndiaMap({ selectedStateSlug, onSelectState, o
           </g>
         </svg>
 
-        {/* Floating Dark Glassmorphic Card Overlay (Sarhat Brand Theme - Stable Pointer Events) */}
+        {/* Floating Dark Glassmorphic Card Overlay (Pointer-events-none on container so underlying states are never blocked) */}
         <AnimatePresence>
           {activeState && (
             <motion.div
               key={activeState.id}
-              initial={{ opacity: 0, y: 8, scale: 0.96 }}
+              initial={{ opacity: 0, y: 6, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -6, scale: 0.96 }}
-              transition={{ duration: 0.18, ease: "easeOut" }}
-              className="absolute z-30 pointer-events-auto"
-              onMouseEnter={() => setHoveredId(activeState.id)}
-              style={{
-                top: `${Math.min(Math.max(activeState.cardPos.y / 6.96, 22), 68)}%`,
-                left: `${Math.min(Math.max(activeState.cardPos.x / 6.12, 28), 68)}%`,
-                transform: "translate(-50%, -50%)",
-              }}
+              exit={{ opacity: 0, y: -4, scale: 0.96 }}
+              transition={{ duration: 0.16, ease: "easeOut" }}
+              className="absolute z-30 pointer-events-none select-none"
+              style={cardStyle}
             >
-              <div className="w-[240px] sm:w-[270px] rounded-xl bg-[#091526]/95 backdrop-blur-xl border border-[#6DAD45]/40 p-3.5 sm:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.92)] shadow-[#6DAD45]/10 text-white">
+              <div className="w-[240px] sm:w-[270px] rounded-xl bg-[#091526]/95 backdrop-blur-xl border border-[#6DAD45]/40 p-3.5 sm:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.92)] shadow-[#6DAD45]/10 text-white pointer-events-none">
                 <span className="block font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#D4E012]">
                   {activeState.name}
                 </span>
@@ -386,7 +419,7 @@ export default function SlnkoStyleIndiaMap({ selectedStateSlug, onSelectState, o
                     onSelectState?.(activeState.slug);
                     onViewDetails?.(activeState.slug);
                   }}
-                  className="mt-3 flex w-full items-center justify-between rounded-lg bg-[#6DAD45]/20 hover:bg-[#6DAD45]/35 border border-[#6DAD45]/50 px-3 py-2 text-[11px] font-bold font-sans text-[#D4E012] transition-all duration-200 group cursor-pointer"
+                  className="mt-3 flex w-full items-center justify-between rounded-lg bg-[#6DAD45]/20 hover:bg-[#6DAD45]/35 border border-[#6DAD45]/50 px-3 py-2 text-[11px] font-bold font-sans text-[#D4E012] transition-all duration-200 group cursor-pointer pointer-events-auto"
                 >
                   <span className="truncate">View {activeState.name} Projects ({activeState.commissioned + activeState.ongoing})</span>
                   <ArrowRight className="h-3.5 w-3.5 shrink-0 text-[#D4E012] transition-transform duration-200 group-hover:translate-x-1 ml-1" />
