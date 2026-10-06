@@ -20,8 +20,8 @@ import {
   Sparkles,
   Grid,
   ShieldCheck,
-  Search,
   ChevronRight,
+  ChevronLeft,
   BarChart3,
   Globe2,
   Award,
@@ -284,6 +284,15 @@ const EPC_SCOPE_STEPS = [
   },
 ];
 
+// Explore Projects: pick a site photo by scheme and vary the crop so cards don't look identical.
+const getProjectImage = (scheme: string) => {
+  const s = scheme.toLowerCase();
+  if (s.includes("component a")) return "/images/hero-solar.jpg";
+  if (s.includes("component c")) return "/images/substation-project.jpg";
+  return "/images/agrivoltaics-project.jpg";
+};
+const IMAGE_FOCUS = ["50% 50%", "20% 60%", "80% 40%", "40% 30%", "70% 70%"];
+
 // Impact figures are derived from the verified portfolio, not hard-coded.
 // Assumptions (documented here so they are easy to revise):
 //  - CO2: CO2_TONNES_PER_MW_YEAR (from the Budhera 3.48 MW / 5,100 MT project)
@@ -331,13 +340,238 @@ function CountUp({ to, suffix = "", className = "" }: { to: number; suffix?: str
   );
 }
 
+type HighlightProject = (typeof HIGHLIGHT_PROJECTS)[number];
+
+const HIGHLIGHT_AUTOPLAY_MS = 6000;
+const HIGHLIGHT_SWIPE_PX = 50;
+
+// Centered card slider. Adding a project only needs a new HIGHLIGHT_PROJECTS entry.
+//  - Only opacity/transform are animated (CSS transitions), so it stays smooth in Chrome and Safari.
+//  - Autoplay is a single setTimeout per slide, cleaned up on every change, hover/tap or unmount.
+//  - Images mount only for the active and next slide (the rest never load until needed).
+//  - The "View Description" button opens the story panel (Close/Escape dismiss it) and pauses autoplay. Swipe changes slides.
+function HighlightsSlider({ projects, onDiscuss }: { projects: HighlightProject[]; onDiscuss: () => void }) {
+  const total = projects.length;
+  const [index, setIndex] = useState(0);
+  const [revealed, setRevealed] = useState(false);
+  const [seen, setSeen] = useState<Set<number>>(() => new Set([0, 1 % total]));
+  const reduceMotion = useReducedMotion();
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+
+  const go = (dir: 1 | -1) => setIndex((i) => (i + dir + total) % total);
+  const autoplay = !revealed && !reduceMotion && total > 1;
+
+  // Mount the active slide and the next one only (derived during render, no effect needed).
+  const nextIndex = (index + 1) % total;
+  if (!seen.has(index) || !seen.has(nextIndex)) {
+    setSeen(new Set(seen).add(index).add(nextIndex));
+  }
+
+  // Clean autoplay timer: restarts on slide change, pauses while the story is open.
+  useEffect(() => {
+    if (!autoplay) return;
+    const t = window.setTimeout(() => setIndex((i) => (i + 1) % total), HIGHLIGHT_AUTOPLAY_MS);
+    return () => window.clearTimeout(t);
+  }, [index, autoplay, total]);
+
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowRight") go(1);
+    else if (e.key === "ArrowLeft") go(-1);
+    else if (e.key === "Escape") setRevealed(false);
+  };
+
+  return (
+    <div
+      className="relative w-full h-[480px] sm:h-[540px] lg:h-[600px] rounded-3xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-950 text-white select-none touch-pan-y outline-none"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Featured execution stories"
+      tabIndex={0}
+      onKeyDown={onKeyDown}
+      onTouchStart={(e) => {
+        touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }}
+      onTouchEnd={(e) => {
+        const start = touchStart.current;
+        touchStart.current = null;
+        if (!start) return;
+        const dx = e.changedTouches[0].clientX - start.x;
+        const dy = e.changedTouches[0].clientY - start.y;
+        if (Math.abs(dx) > HIGHLIGHT_SWIPE_PX && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
+      }}
+    >
+      {/* Slides: stacked, crossfade + small translate */}
+      {projects.map((hp, i) => {
+        const active = i === index;
+        return (
+          <div
+            key={hp.id}
+            aria-hidden={!active}
+            className={`absolute inset-0 transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none ${
+              active ? "opacity-100 translate-y-0 z-[1]" : "opacity-0 translate-y-3 pointer-events-none"
+            }`}
+          >
+            {seen.has(i) && (
+              <Image
+                src={hp.image}
+                alt={hp.title}
+                fill
+                priority={i === 0}
+                sizes="100vw"
+                className={`object-cover object-center transition-transform duration-[7000ms] ease-out motion-reduce:transition-none ${
+                  active ? "scale-100" : "scale-[1.06]"
+                }`}
+              />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-slate-950/50" />
+
+            {/* Caption: title, location, capacity (always visible on the image) */}
+            <div
+              className={`absolute inset-x-0 bottom-16 sm:bottom-20 transition-opacity duration-300 motion-reduce:transition-none ${
+                active && revealed ? "opacity-0 pointer-events-none" : "opacity-100"
+              }`}
+            >
+              <div className="px-5 sm:px-8 lg:px-10">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-mono font-bold text-[#D4E012] mb-3">
+                  <MapPin className="w-4 h-4 shrink-0" />
+                  <span>{hp.location}</span>
+                  <span className="text-white/40">•</span>
+                  <span className="text-white whitespace-nowrap">{hp.capacity}</span>
+                </div>
+                <h3 className="font-serif-display font-bold text-2xl sm:text-4xl lg:text-5xl leading-[1.1] max-w-3xl drop-shadow-md">
+                  {hp.title}
+                </h3>
+                <button
+                  onClick={() => setRevealed(true)}
+                  tabIndex={active && !revealed ? 0 : -1}
+                  aria-expanded={active && revealed}
+                  className="mt-5 inline-flex items-center gap-2 bg-white/10 hover:bg-[#D4E012] hover:text-slate-950 border border-white/30 hover:border-[#D4E012] text-white font-mono font-bold text-xs uppercase tracking-widest px-5 py-2.5 rounded-full transition-colors duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-[#D4E012]"
+                >
+                  View Description <ArrowUpRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Story: dark veil + description rising from the bottom to the centre */}
+            <div
+              className={`absolute inset-0 bg-slate-950/85 transition-opacity duration-500 motion-reduce:transition-none ${
+                active && revealed ? "opacity-100" : "opacity-0 pointer-events-none"
+              }`}
+            >
+              <div className="h-full overflow-y-auto px-14 sm:px-20 lg:px-28 pt-16 pb-14 flex scrollbar-none">
+                <div
+                  className={`m-auto w-full max-w-3xl transition-[opacity,transform] duration-500 ease-out motion-reduce:transition-none ${
+                    active && revealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
+                  }`}
+                >
+                  <div className="font-mono text-[11px] text-[#D4E012] font-bold uppercase tracking-[0.2em] mb-2 text-center">
+                    {hp.location} · {hp.capacity} · {hp.client}
+                  </div>
+                  <h3 className="font-serif-display text-2xl sm:text-4xl font-bold text-center mb-5">{hp.title}</h3>
+                  <p className="text-sm sm:text-base leading-relaxed text-slate-200 sm:text-justify mb-6 pb-6 border-b border-white/15">{hp.story}</p>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-7">
+                    {hp.keyMetrics.map((m) => (
+                      <div key={m.label} className="rounded-2xl bg-white/5 border border-white/10 px-4 py-3 text-center">
+                        <div className="text-[10px] font-mono text-slate-400 uppercase font-bold tracking-wider">{m.label}</div>
+                        <div className="font-mono text-sm font-bold text-white mt-1">{m.val}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-wrap justify-center gap-3">
+                    <button
+                      onClick={onDiscuss}
+                      tabIndex={active && revealed ? 0 : -1}
+                      className="inline-flex items-center gap-2 bg-[#D4E012] hover:bg-white text-slate-950 font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-full transition-colors cursor-pointer"
+                    >
+                      Discuss Similar Project Scope <ArrowUpRight className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => setRevealed(false)}
+                      tabIndex={active && revealed ? 0 : -1}
+                      className="inline-flex items-center gap-2 border border-white/30 hover:bg-white hover:text-slate-950 text-white font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-full transition-colors cursor-pointer"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+
+      {/* Top bar: status, scheme and counter stay above the story veil */}
+      <div className="absolute inset-x-0 top-0 z-10 pt-5 sm:pt-7 pointer-events-none">
+        <div className="px-5 sm:px-8 lg:px-10 flex items-start justify-between gap-3">
+          <div className="flex flex-wrap gap-2">
+            <span className="bg-slate-900/80 border border-white/20 text-[#D4E012] font-mono font-bold text-[11px] px-3 py-1 rounded-full uppercase">
+              {projects[index].scheme}
+            </span>
+            <span
+              className={`font-mono font-bold text-[11px] px-3 py-1 rounded-full uppercase ${
+                projects[index].status === "Commissioned" ? "bg-emerald-400 text-slate-950" : "bg-sky-400 text-slate-950"
+              }`}
+            >
+              {projects[index].status}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Arrows */}
+      {(
+        [
+          { dir: -1 as const, Icon: ChevronLeft, label: "Previous project", pos: "left-2 sm:left-5" },
+          { dir: 1 as const, Icon: ChevronRight, label: "Next project", pos: "right-2 sm:right-5" },
+        ]
+      ).map(({ dir, Icon, label, pos }) => (
+        <button
+          key={label}
+          onClick={() => go(dir)}
+          aria-label={label}
+          className={`absolute top-1/2 -translate-y-1/2 ${pos} z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900/60 hover:bg-[#6DAD45] border border-white/20 text-white flex items-center justify-center transition-colors duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-[#D4E012]`}
+        >
+          <Icon className="w-5 h-5" />
+        </button>
+      ))}
+
+      {/* Subtle bottom progress: the active fill restarts with each autoplay timer */}
+      <div className="absolute inset-x-0 bottom-0 z-10 pb-6 sm:pb-8">
+        <div className="px-5 sm:px-8 lg:px-10 flex gap-2">
+          {projects.map((p, i) => (
+            <button
+              key={p.id}
+              onClick={() => setIndex(i)}
+              aria-label={`Show ${p.location}`}
+              aria-current={i === index}
+              className="flex-1 py-2 cursor-pointer"
+            >
+              <span className="relative block h-[2px] rounded-full bg-white/25 overflow-hidden">
+                {i < index && <span className="absolute inset-0 bg-white/80" />}
+                {i === index && (
+                  <span
+                    key={`${index}-${autoplay}`}
+                    className={`absolute inset-0 bg-[#D4E012] ${autoplay ? "highlight-progress-fill" : "scale-x-100"}`}
+                    style={autoplay ? { animationDuration: `${HIGHLIGHT_AUTOPLAY_MS}ms` } : undefined}
+                  />
+                )}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function MainProjectsPage() {
   const [selectedStateSlug, setSelectedStateSlug] = useState<string>("all");
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [selectedScheme, setSelectedScheme] = useState<string>("All");
   const [selectedStatusFilter, setSelectedStatusFilter] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [activeHighlightIndex, setActiveHighlightIndex] = useState<number>(0);
   const [activeTab, setActiveTab] = useState<string>("overview");
 
   const containerRef = useRef<HTMLElement>(null);
@@ -619,159 +853,26 @@ export default function MainProjectsPage() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={fadeInUp}
-                className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12"
+                className="text-center max-w-3xl mx-auto mb-10"
               >
-                <div>
-                  <AnimatedPillBadge className="mb-3">FEATURED EXECUTION STORIES</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900">
-                    Project <span className="text-[#6DAD45] italic font-bold">Highlights</span>
-                  </h2>
-                </div>
-                <p className="text-slate-600 text-sm max-w-md">
-                  In-depth spotlight on 4 key utility solar installations delivered by Sarhat with site photos, technical specifications, and grid outcome stories.
-                </p>
+                <AnimatedPillBadge className="mb-3">FEATURED EXECUTION STORIES</AnimatedPillBadge>
+                <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 mb-4">
+                  Project <span className="text-[#6DAD45] italic font-bold">Highlights</span>
+                </h2>
+             <p className="text-slate-600 text-base leading-relaxed">
+  Step into the projects behind Sarhat’s journey — where ideas become engineered,
+  delivered and brought to life in the field.
+</p>
               </motion.div>
 
-              {/* Story Tab Switcher with Layout Motion */}
-              <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-8 scrollbar-none">
-                {HIGHLIGHT_PROJECTS.map((hp, idx) => {
-                  const sel = activeHighlightIndex === idx;
-                  return (
-                    <button
-                      key={hp.id}
-                      onClick={() => setActiveHighlightIndex(idx)}
-                      className={`relative px-5 py-3 rounded-2xl font-mono text-xs font-bold transition-all shrink-0 cursor-pointer ${
-                        sel ? "text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                      }`}
-                    >
-                      {sel && (
-                        <motion.div
-                          layoutId="activeHighlightPill"
-                          className="absolute inset-0 bg-slate-900 rounded-2xl shadow-md z-0"
-                          transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                        />
-                      )}
-                      <span className="relative z-10">
-                        <span className="text-[#D4E012] mr-1.5">0{idx + 1}.</span>
-                        <span>{hp.location.split(" ")[0]}</span>
-                        <span className="ml-2 text-[10px] opacity-75 font-normal">({hp.capacity})</span>
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Active Featured Project Display Card with AnimatePresence */}
-              <AnimatePresence mode="wait">
-                {(() => {
-                  const hp = HIGHLIGHT_PROJECTS[activeHighlightIndex];
-                  return (
-                    <motion.div
-                      key={hp.id}
-                      initial={{ opacity: 0, y: 16 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -16 }}
-                      transition={{ duration: 0.35, ease: "easeOut" }}
-                      className="bg-[#F8FAF8] border border-slate-200 rounded-3xl overflow-hidden shadow-2xl"
-                    >
-                      <div className="grid lg:grid-cols-12 gap-0">
-                        {/* Large Site Photo Column */}
-                        <div className="lg:col-span-7 relative min-h-[360px] sm:min-h-[460px] lg:min-h-full overflow-hidden bg-slate-950 group">
-                          <Image
-                            src={hp.image}
-                            alt={hp.title}
-                            fill
-                            priority
-                            className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent" />
-
-                          {/* Top Badges */}
-                          <div className="absolute top-4 left-4 flex flex-wrap gap-2">
-                            <span className="bg-slate-900/90 border border-white/20 text-[#D4E012] font-mono font-bold text-xs px-3 py-1 rounded-full uppercase shadow-md backdrop-blur-md">
-                              {hp.scheme}
-                            </span>
-                            <span
-                              className={`font-mono font-bold text-xs px-3 py-1 rounded-full uppercase shadow-md ${
-                                hp.status === "Commissioned"
-                                  ? "bg-emerald-500 text-slate-950"
-                                  : "bg-sky-400 text-slate-950"
-                              }`}
-                            >
-                              {hp.status}
-                            </span>
-                          </div>
-
-                          {/* Bottom Overlay Info */}
-                          <div className="absolute bottom-6 left-6 right-6 text-white">
-                            <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#D4E012] mb-1">
-                              <MapPin className="w-4 h-4 text-[#D4E012]" />
-                              <span>{hp.location}</span>
-                            </div>
-                            <h3 className="text-2xl sm:text-3xl font-serif-display font-bold text-white drop-shadow-md">
-                              {hp.title}
-                            </h3>
-                          </div>
-                        </div>
-
-                        {/* Content & Story Details Column */}
-                        <div className="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between">
-                          <div>
-                            <div className="font-mono text-xs text-[#707B00] font-bold uppercase tracking-wider mb-2">
-                              DEVELOPER / CLIENT: {hp.client}
-                            </div>
-
-                            <p className="text-slate-700 text-sm leading-relaxed mb-6">
-                              {hp.story}
-                            </p>
-
-                            {/* Technical Highlights Checklist */}
-                            <div className="mb-6 space-y-2.5 border-t border-slate-200/80 pt-5">
-                              <div className="font-mono text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
-                                Execution Benchmarks
-                              </div>
-                              {hp.highlights.map((hl, i) => (
-                                <motion.div
-                                  key={i}
-                                  initial={{ opacity: 0, x: -10 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: i * 0.1 }}
-                                  className="flex items-start gap-2.5 text-xs text-slate-800 leading-relaxed"
-                                >
-                                  <CheckCircle2 className="w-4 h-4 text-[#16A34A] shrink-0 mt-0.5" />
-                                  <span>{hl}</span>
-                                </motion.div>
-                              ))}
-                            </div>
-                          </div>
-
-                          <div>
-                            {/* Metrics Grid */}
-                            <div className="grid grid-cols-3 gap-2 p-3 bg-white rounded-2xl border border-slate-200 mb-6 text-center shadow-sm">
-                              {hp.keyMetrics.map((m, i) => (
-                                <div key={i} className="px-1">
-                                  <div className="text-[10px] font-mono text-slate-400 uppercase font-bold truncate">{m.label}</div>
-                                  <div className="font-mono text-xs sm:text-sm font-extrabold text-slate-900 mt-0.5 truncate">{m.val}</div>
-                                </div>
-                              ))}
-                            </div>
-
-                            <motion.button
-                              whileHover={{ scale: 1.02 }}
-                              whileTap={{ scale: 0.98 }}
-                              onClick={() => setQuoteModalOpen(true)}
-                              className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
-                            >
-                              <span>Discuss Similar Project Scope</span>
-                              <ArrowUpRight className="w-4 h-4" />
-                            </motion.button>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  );
-                })()}
-              </AnimatePresence>
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.15 }}
+                variants={fadeInUp}
+              >
+                <HighlightsSlider projects={HIGHLIGHT_PROJECTS} onDiscuss={() => setQuoteModalOpen(true)} />
+              </motion.div>
             </div>
           </section>
 
@@ -785,76 +886,76 @@ export default function MainProjectsPage() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={fadeInUp}
-                className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10"
+                className="text-center max-w-3xl mx-auto mb-10"
               >
-                <div>
-                  <AnimatedPillBadge className="mb-3">FILTERABLE DATABASE</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900">
-                    Explore <span className="text-[#6DAD45] italic font-bold">Projects</span>
-                  </h2>
-                </div>
-                <div className="font-mono text-xs font-bold text-slate-500 bg-white border border-slate-200 px-4 py-2 rounded-full w-fit shadow-sm">
-                  Showing {exploreFilteredProjects.length} of {PROJECTS.length} Projects
-                </div>
+                <AnimatedPillBadge className="mb-3">Our Impact</AnimatedPillBadge>
+                <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 mb-4">
+                  Explore <span className="text-[#6DAD45] italic font-bold">Projects</span>
+                </h2>
+                <p className="text-slate-600 text-base leading-relaxed">
+                  Browse Sarhat&apos;s solar sites across India, filtered by government scheme and delivery status.
+                </p>
               </motion.div>
 
-              {/* Filter Controls Bar */}
+              {/* Filter Controls: two centred segmented controls */}
               <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={fadeInUp}
-                className="bg-white border border-slate-200 rounded-3xl p-4 sm:p-6 mb-10 shadow-lg space-y-4"
+                className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-0 md:divide-x divide-slate-200 mb-10"
               >
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
-                  {/* Search Input */}
-                  <div className="md:col-span-4 relative">
-                    <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-                    <input
-                      type="text"
-                      placeholder="Search location, state, or client..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-10 pr-4 py-2.5 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#6DAD45] font-sans-ui transition-all"
-                    />
+                {[
+                  {
+                    id: "scheme",
+                    label: "Scheme",
+                    options: ["All", "Component A", "Component C", "Govt. Scheme"],
+                    value: selectedScheme,
+                    onChange: setSelectedScheme,
+                    activeBg: "bg-slate-900",
+                  },
+                  {
+                    id: "status",
+                    label: "Status",
+                    options: ["All", "Commissioned", "Ongoing"],
+                    value: selectedStatusFilter,
+                    onChange: setSelectedStatusFilter,
+                    activeBg: "bg-[#6DAD45]",
+                  },
+                ].map((group) => (
+                  <div key={group.id} className="flex flex-col items-center gap-2.5 md:px-10 max-w-full">
+                    <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">{group.label}</span>
+                    <div
+                      role="radiogroup"
+                      aria-label={`Filter by ${group.label.toLowerCase()}`}
+                      className="flex max-w-full overflow-x-auto scrollbar-none bg-white border border-slate-200 rounded-full p-1 shadow-sm"
+                    >
+                      {group.options.map((opt) => {
+                        const sel = group.value === opt;
+                        return (
+                          <button
+                            key={opt}
+                            role="radio"
+                            aria-checked={sel}
+                            onClick={() => group.onChange(opt)}
+                            className={`relative shrink-0 px-2.5 sm:px-4 py-2 rounded-full text-[11px] sm:text-xs font-mono font-bold whitespace-nowrap cursor-pointer transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-[#6DAD45] ${
+                              sel ? "text-white" : "text-slate-600 hover:text-slate-900"
+                            }`}
+                          >
+                            {sel && (
+                              <motion.span
+                                layoutId={`explore-filter-${group.id}`}
+                                className={`absolute inset-0 rounded-full ${group.activeBg}`}
+                                transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                              />
+                            )}
+                            <span className="relative z-10">{opt}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
-
-                  {/* Scheme Filters */}
-                  <div className="md:col-span-5 flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-                    {["All", "Component A", "Component C", "Govt. Scheme"].map((scheme) => {
-                      const sel = selectedScheme === scheme;
-                      return (
-                        <button
-                          key={scheme}
-                          onClick={() => setSelectedScheme(scheme)}
-                          className={`relative px-3.5 py-2 rounded-xl text-xs font-mono font-bold whitespace-nowrap cursor-pointer transition-all ${
-                            sel ? "bg-slate-900 text-white shadow-sm" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                          }`}
-                        >
-                          {scheme}
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  {/* Status Filters */}
-                  <div className="md:col-span-3 flex items-center justify-end gap-1.5">
-                    {["All", "Commissioned", "Ongoing"].map((st) => {
-                      const sel = selectedStatusFilter === st;
-                      return (
-                        <button
-                          key={st}
-                          onClick={() => setSelectedStatusFilter(st)}
-                          className={`px-3 py-2 rounded-xl text-xs font-mono font-bold whitespace-nowrap cursor-pointer transition-all ${
-                            sel ? "bg-[#6DAD45] text-white shadow-sm" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                          }`}
-                        >
-                          {st}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
+                ))}
               </motion.div>
 
               {/* Projects Cards Grid with AnimatePresence & Motion Layout */}
@@ -882,56 +983,72 @@ export default function MainProjectsPage() {
                   </motion.div>
                 ) : (
                   <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {exploreFilteredProjects.map((p) => (
-                      <motion.div
+                    {exploreFilteredProjects.map((p, i) => (
+                      <motion.article
                         layout
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        transition={{ duration: 0.3 }}
+                        initial={{ opacity: 0, y: 24 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.96 }}
+                        transition={{ duration: 0.45, delay: Math.min(i % 3, 2) * 0.06, ease: [0.22, 1, 0.36, 1] }}
                         key={p.id}
-                        whileHover={{ y: -8, scale: 1.01, transition: { duration: 0.25 } }}
-                        className="bg-white border border-slate-200/90 rounded-3xl p-6 hover:border-[#6DAD45] transition-colors duration-300 flex flex-col justify-between group cursor-pointer shadow-md hover:shadow-xl"
+                        className="group relative flex flex-col bg-white border border-slate-200/90 rounded-3xl overflow-hidden shadow-sm transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:border-[#6DAD45] hover:shadow-[0_22px_44px_-20px_rgba(109,173,69,0.45)] focus-within:border-[#6DAD45]"
                       >
-                        <div>
-                          <div className="flex items-start justify-between gap-3 mb-3">
-                            <div>
-                              <span className="font-mono text-[10px] font-bold text-slate-400 uppercase tracking-wider">{p.state}</span>
-                              <h3 className="font-serif-display text-xl font-bold text-slate-900 leading-snug">{p.location}</h3>
-                            </div>
-                            <span
-                              className={`font-mono font-bold text-[10px] uppercase px-2.5 py-1 rounded-full whitespace-nowrap border shadow-sm ${
-                                p.status === "Commissioned"
-                                  ? "bg-emerald-100 text-emerald-800 border-emerald-300"
-                                  : p.status === "Ongoing"
-                                  ? "bg-sky-100 text-sky-800 border-sky-300"
-                                  : "bg-amber-100 text-amber-800 border-amber-300"
-                              }`}
-                            >
-                              {p.status}
-                            </span>
-                          </div>
+                        {/* Site photo */}
+                        <div className="relative aspect-[16/10] overflow-hidden bg-slate-900">
+                          <Image
+                            src={getProjectImage(p.scheme)}
+                            alt={`${p.scheme} solar project at ${p.location || p.state}`}
+                            fill
+                            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                            className="object-cover transition-transform duration-700 ease-out will-change-transform group-hover:scale-[1.07]"
+                            style={{ objectPosition: IMAGE_FOCUS[i % IMAGE_FOCUS.length] }}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-slate-950/20" />
 
-                          <div className="mb-4">
-                            <span className="inline-block bg-slate-100 border border-slate-200 text-slate-700 font-mono text-xs px-2.5 py-1 rounded-lg">
-                              {p.scheme}
-                            </span>
-                          </div>
+                          <span
+                            className={`absolute top-4 left-4 font-mono font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full backdrop-blur-md ${
+                              p.status === "Commissioned"
+                                ? "bg-emerald-400 text-slate-950"
+                                : p.status === "Ongoing"
+                                ? "bg-sky-400 text-slate-950"
+                                : "bg-amber-400 text-slate-950"
+                            }`}
+                          >
+                            {p.status}
+                          </span>
 
-                          <div className="flex items-center justify-between border-t border-b border-slate-100 py-3 my-4">
-                            <span className="font-mono text-xs text-slate-500 font-bold uppercase">Solar Capacity</span>
-                            <span className="font-mono text-base font-extrabold text-[#707B00]">{formatMW(p.capacityMW)}</span>
+                          <div className="absolute bottom-4 left-5 right-5 text-white">
+                            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#D4E012]">{p.state}</span>
+                            <h3 className="font-serif-display text-xl sm:text-2xl font-bold leading-tight drop-shadow-md">{p.location || p.state}</h3>
                           </div>
                         </div>
 
-                        <button
-                          onClick={() => setQuoteModalOpen(true)}
-                          className="w-full mt-2 bg-slate-50 group-hover:bg-slate-900 group-hover:text-white text-slate-900 font-mono font-bold text-xs uppercase tracking-wider py-2.5 rounded-xl border border-slate-200 transition-all flex items-center justify-center gap-1.5 cursor-pointer group-hover:border-slate-900 shadow-sm"
-                        >
-                          <span>Discuss Project Details</span>
-                          <ArrowUpRight className="w-3.5 h-3.5" />
-                        </button>
-                      </motion.div>
+                        {/* Existing content */}
+                        <div className="relative flex flex-1 flex-col justify-between p-5 sm:p-6">
+                          <span
+                            aria-hidden
+                            className="absolute top-0 left-0 h-0.5 w-full bg-[#6DAD45] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
+                          />
+                          <div>
+                            <span className="inline-block bg-slate-100 border border-slate-200 text-slate-700 font-mono text-xs px-2.5 py-1 rounded-lg">
+                              {p.scheme}
+                            </span>
+
+                            <div className="flex items-end justify-between border-t border-slate-100 mt-4 pt-4">
+                              <span className="font-mono text-[11px] text-slate-500 font-bold uppercase tracking-wider">Solar Capacity</span>
+                              <span className="font-mono text-xl font-extrabold text-[#707B00] tabular-nums">{formatMW(p.capacityMW)}</span>
+                            </div>
+                          </div>
+
+                          <button
+                            onClick={() => setQuoteModalOpen(true)}
+                            className="mt-5 w-full flex items-center justify-between bg-slate-50 group-hover:bg-slate-900 group-hover:text-white text-slate-900 font-mono font-bold text-xs uppercase tracking-wider px-4 py-3 rounded-xl border border-slate-200 group-hover:border-slate-900 transition-colors duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-[#6DAD45]"
+                          >
+                            <span>Discuss Project Details</span>
+                            <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                          </button>
+                        </div>
+                      </motion.article>
                     ))}
                   </motion.div>
                 )}

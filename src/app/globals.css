@@ -365,3 +365,19 @@ html, body {
     transform: none;
   }
 }
+
+/* Project Highlights slider: the progress fill drives autoplay (onAnimationEnd advances the slide). */
+@keyframes highlight-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.highlight-progress-fill {
+  transform-origin: left center;
+  animation: highlight-progress 6s linear forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .highlight-progress-fill {
+    animation: none;
+    transform: scaleX(1);
+  }
+}
