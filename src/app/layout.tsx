@@ -1,3 +1,4 @@
+import { Toaster } from "sonner";
 import type { Metadata } from "next";
 import { Playfair_Display, Montserrat } from "next/font/google";
 import "./globals.css";
@@ -49,6 +50,7 @@ export default function RootLayout({
     >
       <body className="bg-black text-white font-sans-ui selection:bg-[#6DAD45] selection:text-black min-h-screen overflow-x-clip">
         {children}
+        <Toaster position="top-right" richColors />
         <CookieConsent />
       </body>
     </html>

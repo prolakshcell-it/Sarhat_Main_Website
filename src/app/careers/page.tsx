@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import SmoothScroll from "@/components/SmoothScroll";
 import {
@@ -35,6 +35,8 @@ import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import { API_BASE_URL } from "@/lib/api";
+import { toast } from "sonner";
 import EmployeeBenefits from "@/components/employee-benefits/EmployeeBenefits";
 import InspiringCultureSection from "@/components/InspiringCultureSection";
 
@@ -166,6 +168,20 @@ export default function CareersPage() {
   const [selectedLoc, setSelectedLoc] = useState<string>("All");
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
 
+  // Dynamic Jobs State from API with fallback
+  const [jobs, setJobs] = useState<JobRole[]>(jobOpenings);
+
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/api/jobs`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.jobs)) {
+          setJobs(data.jobs);
+        }
+      })
+      .catch((err) => console.warn("Using default jobs list:", err));
+  }, []);
+
   // Form State
   const [formData, setFormData] = useState({
     fullName: "",
@@ -178,6 +194,8 @@ export default function CareersPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [applicationId, setApplicationId] = useState("");
 
   const containerRef = useRef<HTMLElement>(null);
 
@@ -197,7 +215,7 @@ export default function CareersPage() {
   const contentFilter = useTransform(scrollYProgress, [0, 0.25], ["blur(0px)", "blur(10px)"]);
 
   // Filtered Jobs
-  const filteredJobs = jobOpenings.filter((job) => {
+  const filteredJobs = jobs.filter((job) => {
     const matchDept =
       selectedDept === "All" ||
       (selectedDept === "Engineering" && job.category === "ENGINEERING") ||
@@ -222,29 +240,52 @@ export default function CareersPage() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.isHuman) {
       alert("Please check the verification box to prove you are human.");
       return;
     }
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setSubmitError("");
+    try {
+      const data = new FormData();
+      data.append("fullName", formData.fullName);
+      data.append("email", formData.email);
+      data.append("phone", formData.phone);
+      data.append("role", formData.role);
+      if (formData.cvFile) {
+        data.append("cvFile", formData.cvFile);
+      }
+
+      const res = await fetch(`${API_BASE_URL}/api/apply`, {
+        method: "POST",
+        body: data,
+      });
+      const result = await res.json();
+      if (!res.ok || !result.success) {
+        throw new Error(result.error || "Failed to submit application");
+      }
+
+      setApplicationId(result.applicationId || "");
       setSubmitSuccess(true);
-      setTimeout(() => {
-        setSubmitSuccess(false);
-        setFormData({
-          fullName: "",
-          email: "",
-          phone: "",
-          role: "Solar Quality Engineer (QA/QC)",
-          cvFile: null,
-          cvFileName: "",
-          isHuman: false,
-        });
-      }, 4000);
-    }, 1200);
+      toast.success(`Application submitted! Reference: ${result.applicationId}`);
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        role: "Solar Quality Engineer (QA/QC)",
+        cvFile: null,
+        cvFileName: "",
+        isHuman: false,
+      });
+    } catch (err: any) {
+      const msg = err.message || "Failed to submit application. Please try again.";
+      setSubmitError(msg);
+      toast.error(msg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -737,6 +778,11 @@ export default function CareersPage() {
                           <CheckCircle2 className="w-7 h-7" />
                         </div>
                         <h4 className="text-lg font-serif-display font-bold text-slate-900">Application Submitted!</h4>
+                        {applicationId && (
+                          <div className="inline-block bg-slate-900 text-[#D4E012] font-mono text-xs font-bold px-3 py-1 rounded-lg border border-slate-700">
+                            Reference: {applicationId}
+                          </div>
+                        )}
                         <p className="text-xs text-slate-600 max-w-xs mx-auto">
                           Thank you for your application. Our team will review your CV and get in touch with you shortly.
                         </p>
@@ -792,7 +838,7 @@ export default function CareersPage() {
                             onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                             className="w-full bg-slate-100/80 border border-slate-300 focus:border-[#707B00] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-900 outline-none cursor-pointer transition-colors font-semibold"
                           >
-                            {jobOpenings.map((j) => (
+                            {jobs.map((j) => (
                               <option key={j.id} value={j.title}>
                                 {j.title}
                               </option>
@@ -845,6 +891,12 @@ export default function CareersPage() {
                             <span>SECURE HR</span>
                           </div>
                         </div>
+
+                        {submitError && (
+                          <p className="text-xs text-red-600 bg-red-50 p-2.5 rounded-xl border border-red-200">
+                            {submitError}
+                          </p>
+                        )}
 
                         {/* Submit Button */}
                         <button

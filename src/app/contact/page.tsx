@@ -22,6 +22,8 @@ import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import { API_BASE_URL } from "@/lib/api";
+import { toast } from "sonner";
 
 export default function ContactPage() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
@@ -53,6 +55,8 @@ export default function ContactPage() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   // Support Ticket Form State
   const [supportData, setSupportData] = useState({
@@ -66,12 +70,26 @@ export default function ContactPage() {
     description: "",
   });
   const [supportSubmitted, setSupportSubmitted] = useState(false);
+  const [isSupportSubmitting, setIsSupportSubmitting] = useState(false);
+  const [supportError, setSupportError] = useState("");
+  const [ticketId, setTicketId] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
+    setIsSubmitting(true);
+    setSubmitError("");
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "Failed to submit enquiry");
+      }
+      setSubmitted(true);
+      toast.success("Enquiry received! Our team will contact you within 24 hours.");
       setFormData({
         name: "",
         company: "",
@@ -80,14 +98,32 @@ export default function ContactPage() {
         service: "Solar EPC",
         message: "",
       });
-    }, 4000);
+    } catch (err: any) {
+      const msg = err.message || "Failed to submit enquiry. Please try again.";
+      setSubmitError(msg);
+      toast.error(msg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleSupportSubmit = (e: React.FormEvent) => {
+  const handleSupportSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSupportSubmitted(true);
-    setTimeout(() => {
-      setSupportSubmitted(false);
+    setIsSupportSubmitting(true);
+    setSupportError("");
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/support`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(supportData),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "Failed to submit support ticket");
+      }
+      setTicketId(data.ticketId || "");
+      setSupportSubmitted(true);
+      toast.success(`Support ticket ${data.ticketId} created successfully!`);
       setSupportData({
         name: "",
         company: "",
@@ -98,7 +134,13 @@ export default function ContactPage() {
         priority: "Normal / Standard SLA",
         description: "",
       });
-    }, 4000);
+    } catch (err: any) {
+      const msg = err.message || "Failed to submit support ticket. Please try again.";
+      setSupportError(msg);
+      toast.error(msg);
+    } finally {
+      setIsSupportSubmitting(false);
+    }
   };
 
   return (
@@ -298,12 +340,19 @@ export default function ContactPage() {
                             ></textarea>
                           </div>
 
+                          {submitError && (
+                            <p className="text-xs text-red-600 bg-red-50 p-2.5 rounded-xl border border-red-200">
+                              {submitError}
+                            </p>
+                          )}
+
                           {/* Submit Button */}
                           <button
                             type="submit"
-                            className="w-full bg-[#D4E012] hover:bg-[#c2ce0f] text-slate-950 font-bold text-xs uppercase tracking-wider py-4 rounded-full transition-all duration-300 flex items-center justify-center gap-2 shadow-md shadow-[#D4E012]/20 cursor-pointer mt-2"
+                            disabled={isSubmitting}
+                            className="w-full bg-[#D4E012] hover:bg-[#c2ce0f] disabled:opacity-60 text-slate-950 font-bold text-xs uppercase tracking-wider py-4 rounded-full transition-all duration-300 flex items-center justify-center gap-2 shadow-md shadow-[#D4E012]/20 cursor-pointer mt-2"
                           >
-                            <span>Send enquiry</span>
+                            <span>{isSubmitting ? "Submitting..." : "Send enquiry"}</span>
                             <ArrowUpRight className="w-4 h-4 text-slate-950" />
                           </button>
                         </form>
@@ -409,6 +458,11 @@ export default function ContactPage() {
                             <CheckCircle2 className="w-8 h-8" />
                           </div>
                           <h3 className="text-2xl font-serif-display text-[#0F172A]">Ticket Submitted</h3>
+                          {ticketId && (
+                            <div className="inline-block bg-slate-900 text-[#D4E012] font-mono text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-700">
+                              Reference: {ticketId}
+                            </div>
+                          )}
                           <p className="text-sm text-slate-600 max-w-xs mx-auto font-light">
                             Your service request has been registered. Our O&M engineer will contact you within 2 hours.
                           </p>
@@ -506,13 +560,20 @@ export default function ContactPage() {
                             ></textarea>
                           </div>
 
+                          {supportError && (
+                            <p className="text-xs text-red-600 bg-red-50 p-2.5 rounded-xl border border-red-200">
+                              {supportError}
+                            </p>
+                          )}
+
                           {/* Submit Button */}
                           <button
                             type="submit"
-                            className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider py-4 rounded-full transition-all duration-300 flex items-center justify-center gap-2 shadow-lg cursor-pointer mt-2"
+                            disabled={isSupportSubmitting}
+                            className="w-full bg-slate-900 hover:bg-slate-800 disabled:opacity-60 text-white font-bold text-xs uppercase tracking-wider py-4 rounded-full transition-all duration-300 flex items-center justify-center gap-2 shadow-lg cursor-pointer mt-2"
                           >
                             <Send className="w-4 h-4 text-[#D4E012]" />
-                            <span>Submit Service Ticket</span>
+                            <span>{isSupportSubmitting ? "Submitting Ticket..." : "Submit Service Ticket"}</span>
                           </button>
                         </form>
                       )}
