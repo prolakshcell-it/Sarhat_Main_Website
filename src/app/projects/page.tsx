@@ -382,7 +382,7 @@ function HighlightsSlider({ projects, onDiscuss }: { projects: HighlightProject[
 
   return (
     <div
-      className="relative w-full h-[480px] sm:h-[540px] lg:h-[600px] rounded-3xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-950 text-white select-none touch-pan-y outline-none"
+      className="relative w-full h-[620px] sm:h-[540px] lg:h-[600px] rounded-3xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-950 text-white select-none touch-pan-y outline-none"
       role="region"
       aria-roledescription="carousel"
       aria-label="Featured execution stories"
@@ -431,7 +431,7 @@ function HighlightsSlider({ projects, onDiscuss }: { projects: HighlightProject[
                 active && revealed ? "opacity-0 pointer-events-none" : "opacity-100"
               }`}
             >
-              <div className="px-5 sm:px-8 lg:px-10">
+              <div className="pl-5 pr-24 sm:px-8 lg:px-10">
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-mono font-bold text-[#D4E012] mb-3">
                   <MapPin className="w-4 h-4 shrink-0" />
                   <span>{hp.location}</span>
@@ -458,7 +458,7 @@ function HighlightsSlider({ projects, onDiscuss }: { projects: HighlightProject[
                 active && revealed ? "opacity-100" : "opacity-0 pointer-events-none"
               }`}
             >
-              <div className="h-full overflow-y-auto px-14 sm:px-20 lg:px-28 pt-16 pb-14 flex scrollbar-none">
+              <div className="h-full overflow-y-auto px-6 sm:px-20 lg:px-28 pt-16 pb-20 sm:pb-14 flex scrollbar-none">
                 <div
                   className={`m-auto w-full max-w-3xl transition-[opacity,transform] duration-500 ease-out motion-reduce:transition-none ${
                     active && revealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
@@ -470,11 +470,11 @@ function HighlightsSlider({ projects, onDiscuss }: { projects: HighlightProject[
                   <h3 className="font-serif-display text-2xl sm:text-4xl font-bold text-center mb-5">{hp.title}</h3>
                   <p className="text-sm sm:text-base leading-relaxed text-slate-200 sm:text-justify mb-6 pb-6 border-b border-white/15">{hp.story}</p>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-7">
+                  <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6 sm:mb-7">
                     {hp.keyMetrics.map((m) => (
-                      <div key={m.label} className="rounded-2xl bg-white/5 border border-white/10 px-4 py-3 text-center">
-                        <div className="text-[10px] font-mono text-slate-400 uppercase font-bold tracking-wider">{m.label}</div>
-                        <div className="font-mono text-sm font-bold text-white mt-1">{m.val}</div>
+                      <div key={m.label} className="rounded-2xl bg-white/5 border border-white/10 px-2 sm:px-4 py-2.5 sm:py-3 text-center">
+                        <div className="text-[9px] sm:text-[10px] font-mono text-slate-400 uppercase font-bold tracking-wider leading-tight">{m.label}</div>
+                        <div className="font-mono text-[11px] sm:text-sm font-bold text-white mt-1 leading-snug">{m.val}</div>
                       </div>
                     ))}
                   </div>
@@ -523,15 +523,17 @@ function HighlightsSlider({ projects, onDiscuss }: { projects: HighlightProject[
       {/* Arrows */}
       {(
         [
-          { dir: -1 as const, Icon: ChevronLeft, label: "Previous project", pos: "left-2 sm:left-5" },
-          { dir: 1 as const, Icon: ChevronRight, label: "Next project", pos: "right-2 sm:right-5" },
+          { dir: -1 as const, Icon: ChevronLeft, label: "Previous project", pos: "right-14 sm:right-auto sm:left-5" },
+          { dir: 1 as const, Icon: ChevronRight, label: "Next project", pos: "right-3 sm:right-5" },
         ]
       ).map(({ dir, Icon, label, pos }) => (
         <button
           key={label}
           onClick={() => go(dir)}
           aria-label={label}
-          className={`absolute top-1/2 -translate-y-1/2 ${pos} z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900/60 hover:bg-[#6DAD45] border border-white/20 text-white flex items-center justify-center transition-colors duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-[#D4E012]`}
+          className={`absolute bottom-12 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 ${pos} z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900/60 hover:bg-[#6DAD45] border border-white/20 text-white flex items-center justify-center transition-[colors,opacity] duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-[#D4E012] ${
+            revealed ? "max-sm:opacity-0 max-sm:pointer-events-none" : ""
+          }`}
         >
           <Icon className="w-5 h-5" />
         </button>
