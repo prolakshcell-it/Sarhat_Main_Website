@@ -12,6 +12,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import FinalCTA from "@/components/FinalCTA";
+import SolutionFlowGrid from "@/components/solutions/SolutionFlowGrid";
 import {
   Stethoscope,
   Activity,
@@ -160,11 +161,6 @@ export default function SolarPlantHealthCheckupPage() {
               className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-24 flex flex-col items-center text-center will-change-transform"
             >
               <div className="max-w-4xl flex flex-col items-center text-center">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#D4E012] text-xs font-mono font-bold uppercase tracking-wider mb-6">
-                  <Stethoscope className="w-3.5 h-3.5 text-[#D4E012]" />
-                  <span>SOLUTIONS • DIAGNOSTICS &amp; AUDIT</span>
-                </div>
-
                 <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 text-center leading-[1.08] drop-shadow-lg">
                   Solar Plant <br />
                   <span className="text-[#D4E012] italic font-normal">Health Check-up &amp; Diagnostics</span>
@@ -173,21 +169,6 @@ export default function SolarPlantHealthCheckupPage() {
                 <p className="text-base sm:text-xl text-slate-200 max-w-3xl text-center leading-relaxed font-normal drop-shadow-md">
                   Is your solar asset underperforming? Our forensic diagnostic audits identify invisible cell cracks, bypass diode failures, and transformer risks to recover lost revenue.
                 </p>
-
-                <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                  <button
-                    onClick={() => setQuoteModalOpen(true)}
-                    className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-wider px-7 py-3.5 rounded-full transition-all duration-200 shadow-lg shadow-[#D4E012]/20 hover:scale-105 cursor-pointer"
-                  >
-                    Schedule Plant Audit
-                  </button>
-                  <Link
-                    href="/solutions/operation-and-maintenance"
-                    className="border border-white/30 bg-white/10 hover:bg-white/20 text-white font-medium text-xs uppercase tracking-wider px-7 py-3.5 rounded-full transition-all backdrop-blur-sm"
-                  >
-                    View O&amp;M Services →
-                  </Link>
-                </div>
               </div>
             </motion.div>
 
@@ -197,27 +178,12 @@ export default function SolarPlantHealthCheckupPage() {
 
         {/* 02 / CONTENT SHEET */}
         <div className="relative z-10 border-t border-slate-200/60 bg-[#F8FAF8] shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
-          {/* Breadcrumb Bar */}
-          <div className="border-b border-slate-200/80 bg-white/90 backdrop-blur-md py-4">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs font-mono">
-              <Link
-                href="/solutions"
-                className="inline-flex items-center gap-2 text-slate-600 hover:text-[#707B00] transition-colors"
-              >
-                <ArrowLeft className="w-3.5 h-3.5" />
-                <span>Back to Solutions Overview</span>
-              </Link>
-              <div className="text-slate-400 hidden sm:block">
-                SOLUTIONS / <span className="text-[#0F172A] font-bold">SOLAR PLANT HEALTH CHECK-UP</span>
-              </div>
-            </div>
-          </div>
 
           {/* Core Diagnostics Grid */}
           <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="max-w-3xl mb-14">
+                <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
                   <AnimatedPillBadge className="mb-3">FORENSIC DIAGNOSTICS</AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
                     Pinpoint Sub-Surface Failures &amp; Yield Leaks
@@ -228,39 +194,11 @@ export default function SolarPlantHealthCheckupPage() {
                 </div>
               </ScrollReveal>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {diagnosticsPillars.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <ScrollReveal key={item.title}>
-                      <div className="group relative h-full flex flex-col justify-between rounded-3xl border border-slate-200/90 bg-[#F8FAF8] p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#6DAD45] hover:shadow-xl">
-                        <div>
-                          <div className="flex items-center justify-between mb-6">
-                            <span className="font-mono text-[11px] font-bold text-[#4f8a2e] uppercase tracking-wider bg-[#6DAD45]/10 px-2.5 py-1 rounded-md">
-                              {item.tag}
-                            </span>
-                            <div className="h-10 w-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-[#6DAD45] group-hover:bg-[#6DAD45] group-hover:text-white transition-colors">
-                              <Icon className="w-5 h-5" />
-                            </div>
-                          </div>
-
-                          <h3 className="font-serif-display text-xl sm:text-2xl font-medium text-slate-900 mb-3">
-                            {item.title}
-                          </h3>
-                          <p className="text-slate-600 font-light text-sm leading-relaxed mb-6">
-                            {item.desc}
-                          </p>
-                        </div>
-
-                        <div className="pt-4 border-t border-slate-200/80 flex items-center justify-between font-mono text-xs">
-                          <span className="text-slate-500">Benchmark Testing</span>
-                          <span className="font-bold text-[#4f8a2e]">{item.metric}</span>
-                        </div>
-                      </div>
-                    </ScrollReveal>
-                  );
-                })}
-              </div>
+              <SolutionFlowGrid
+                items={diagnosticsPillars.map((p) => ({ ...p, description: p.desc }))}
+                metricLabel="Benchmark Testing"
+                flowStageTitle="Diagnostic Audit Flow"
+              />
             </div>
           </section>
 

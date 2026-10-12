@@ -12,6 +12,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import FinalCTA from "@/components/FinalCTA";
+import SolutionFlowGrid from "@/components/solutions/SolutionFlowGrid";
 import {
   Compass,
   Layers,
@@ -46,24 +47,6 @@ export default function EngineeringPage() {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
   const contentFilter = useTransform(scrollYProgress, [0, 0.25], ["blur(0px)", "blur(10px)"]);
 
-  const subPages = [
-    {
-      title: "Innovation",
-      href: "/solutions/engineering/innovation",
-      badge: "CUTTING-EDGE",
-      desc: "Pioneering bifacial albedo modeling, dynamic tracker algorithms, agrivoltaic dual-use setups, and digital twin microgrid simulations.",
-      icon: Sparkles,
-      action: "Explore Innovation",
-    },
-    {
-      title: "System Design",
-      href: "/solutions/engineering/system-design",
-      badge: "OPTIMIZED ARCHITECTURE",
-      desc: "Turnkey Single-Line Diagrams (SLD), DC/AC ratio sizing, 33kV/132kV/220kV switchyard layout, and sub-1.2% DC cable loss topologies.",
-      icon: Settings2,
-      action: "Explore System Design",
-    },
-  ];
 
   const pillars = [
     {
@@ -162,11 +145,6 @@ export default function EngineeringPage() {
               className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-24 flex flex-col items-center text-center will-change-transform"
             >
               <div className="max-w-4xl flex flex-col items-center text-center">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#D4E012] text-xs font-mono font-bold uppercase tracking-wider mb-6">
-                  <Compass className="w-3.5 h-3.5 text-[#D4E012]" />
-                  <span>SOLUTIONS • ENGINEERING</span>
-                </div>
-
                 <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 text-center leading-[1.08] drop-shadow-lg">
                   Engineering <br />
                   <span className="text-[#D4E012] italic font-normal">Without Compromise</span>
@@ -175,21 +153,6 @@ export default function EngineeringPage() {
                 <p className="text-base sm:text-xl text-slate-200 max-w-3xl text-center leading-relaxed font-normal drop-shadow-md">
                   From geotechnical modeling and high-fidelity PVSyst simulations to high-voltage evacuation architecture, Sarhat transforms raw acreage into high-yield clean energy assets.
                 </p>
-
-                <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                  <button
-                    onClick={() => setQuoteModalOpen(true)}
-                    className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-wider px-7 py-3.5 rounded-full transition-all duration-200 shadow-lg shadow-[#D4E012]/20 hover:scale-105 cursor-pointer"
-                  >
-                    Discuss Engineering Scope
-                  </button>
-                  <Link
-                    href="#specializations"
-                    className="border border-white/30 bg-white/10 hover:bg-white/20 text-white font-medium text-xs uppercase tracking-wider px-7 py-3.5 rounded-full transition-all backdrop-blur-sm"
-                  >
-                    Explore Subheadings
-                  </Link>
-                </div>
               </div>
             </motion.div>
 
@@ -199,81 +162,12 @@ export default function EngineeringPage() {
 
         {/* 02 / CONTENT SHEET */}
         <div className="relative z-10 border-t border-slate-200/60 bg-[#F8FAF8] shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
-          {/* Breadcrumb Bar */}
-          <div className="border-b border-slate-200/80 bg-white/90 backdrop-blur-md py-4">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs font-mono">
-              <Link
-                href="/solutions"
-                className="inline-flex items-center gap-2 text-slate-600 hover:text-[#707B00] transition-colors"
-              >
-                <ArrowLeft className="w-3.5 h-3.5" />
-                <span>Back to Solutions Overview</span>
-              </Link>
-              <div className="text-slate-400 hidden sm:block">
-                SOLUTIONS / <span className="text-[#0F172A] font-bold">ENGINEERING</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Subheadings Direct Showcase */}
-          <section id="specializations" className="py-14 sm:py-20 bg-white border-b border-slate-200/80">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-12">
-                  <AnimatedPillBadge className="mb-3">Specialized Divisions</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Explore Engineering Subheadings
-                  </h2>
-                  <p className="mt-4 text-slate-600 text-base sm:text-lg">
-                    Dive into our dedicated engineering centers for deep research and turnkey design specifications.
-                  </p>
-                </div>
-              </ScrollReveal>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {subPages.map((sub) => {
-                  const Icon = sub.icon;
-                  return (
-                    <ScrollReveal key={sub.href}>
-                      <div className="group relative flex flex-col justify-between h-full rounded-3xl border-2 border-slate-200/80 bg-[#F8FAF8] p-8 sm:p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#6DAD45] hover:shadow-xl">
-                        <div>
-                          <div className="flex items-center justify-between gap-4 mb-6">
-                            <span className="rounded-full bg-[#6DAD45]/10 px-3 py-1 font-mono text-xs font-bold text-[#4f8a2e] border border-[#6DAD45]/20">
-                              {sub.badge}
-                            </span>
-                            <div className="h-12 w-12 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-[#6DAD45] group-hover:bg-[#6DAD45] group-hover:text-white transition-colors duration-300">
-                              <Icon className="w-6 h-6" />
-                            </div>
-                          </div>
-
-                          <h3 className="font-serif-display text-2xl sm:text-3xl font-medium text-slate-900 mb-3">
-                            {sub.title}
-                          </h3>
-                          <p className="text-slate-600 font-light text-sm sm:text-base leading-relaxed mb-6">
-                            {sub.desc}
-                          </p>
-                        </div>
-
-                        <Link
-                          href={sub.href}
-                          className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-[#707B00] group-hover:text-[#4f8a2e] transition-colors"
-                        >
-                          <span>{sub.action}</span>
-                          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                        </Link>
-                      </div>
-                    </ScrollReveal>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
 
           {/* Core Engineering Disciplines */}
           <section className="py-16 sm:py-24 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="max-w-3xl mb-14">
+                <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
                   <AnimatedPillBadge className="mb-3">TECHNICAL DISCIPLINES</AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
                     Bankable Engineering from Concept to Interconnection
@@ -284,29 +178,11 @@ export default function EngineeringPage() {
                 </div>
               </ScrollReveal>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {pillars.map((pil) => {
-                  const Icon = pil.icon;
-                  return (
-                    <ScrollReveal key={pil.title}>
-                      <div className="h-full flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
-                        <div>
-                          <div className="h-10 w-10 rounded-xl bg-[#6DAD45]/10 flex items-center justify-center text-[#6DAD45] mb-4">
-                            <Icon className="w-5 h-5" />
-                          </div>
-                          <h4 className="font-bold text-slate-900 text-base mb-2">{pil.title}</h4>
-                          <p className="text-slate-600 text-xs sm:text-sm font-light leading-relaxed mb-4">
-                            {pil.desc}
-                          </p>
-                        </div>
-                        <div className="pt-3 border-t border-slate-100 font-mono text-xs text-[#4f8a2e] font-semibold">
-                          {pil.metric}
-                        </div>
-                      </div>
-                    </ScrollReveal>
-                  );
-                })}
-              </div>
+              <SolutionFlowGrid
+                items={pillars.map((p) => ({ ...p, tag: "CORE DISCIPLINE", description: p.desc }))}
+                metricLabel="Engineering Spec"
+                flowStageTitle="Engineering Disciplines Flow"
+              />
             </div>
           </section>
 

@@ -68,11 +68,6 @@ export default function AgroVoltaicsPage() {
             >
               <ScrollReveal direction="up" distance={30}>
                 <div className="max-w-4xl flex flex-col items-center text-center">
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#D4E012] text-xs font-mono font-bold uppercase tracking-wider mb-6">
-                    <Sprout className="w-3.5 h-3.5 text-[#D4E012]" />
-                    <span>DUAL-USE SUSTAINABILITY</span>
-                  </div>
-
                   <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 text-center leading-[1.08] drop-shadow-lg">
                     AgroVoltaics <br />
                     <span className="text-[#D4E012] italic font-normal">(PM-KUSUM Solar)</span>
