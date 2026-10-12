@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useInView, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -12,114 +12,175 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import FinalCTA from "@/components/FinalCTA";
-import SolutionFlowGrid from "@/components/solutions/SolutionFlowGrid";
+import { STATES } from "@/data/projects";
 import {
+  CalendarClock,
+  PackageCheck,
   Truck,
+  Warehouse,
+  ClipboardCheck,
   ShieldCheck,
+  Shuffle,
+  Gauge,
+  BadgeCheck,
+  SlidersHorizontal,
+  Zap,
   CheckCircle2,
   ArrowRight,
-  ArrowLeft,
-  Layers,
-  Zap,
-  Building2,
-  PackageCheck,
-  ClipboardCheck,
-  Factory,
-  TrendingDown,
+  HardHat,
+  type LucideIcon,
 } from "lucide-react";
+
+/* ---------- Content ---------- */
+
+interface Stage {
+  icon: LucideIcon;
+  step: string;
+  tag: string;
+  title: string;
+  body: string;
+  points: string[];
+}
+
+const stages: Stage[] = [
+  {
+    icon: CalendarClock,
+    step: "01",
+    tag: "PLANNING & FORECASTING",
+    title: "Know what is needed, and when",
+    body: "We work out the materials from the design and the project schedule, then plan the order and timing for each phase. Items that take longest to arrive are flagged first, so nothing holds up the build.",
+    points: [
+      "Material needs worked out from the design",
+      "Long-lead items identified early",
+      "Deliveries timed to when the site is ready",
+    ],
+  },
+  {
+    icon: PackageCheck,
+    step: "02",
+    tag: "PROCUREMENT",
+    title: "Buy the right equipment from the right makers",
+    body: "We compare offers against the technical specification and the budget, and buy from manufacturers we are confident in. Every order is tracked, so cost stays in view from purchase to delivery.",
+    points: [
+      "Offers checked against specification and budget",
+      "Clear terms with each supplier",
+      "A tracking system for cost and order status",
+    ],
+  },
+  {
+    icon: Truck,
+    step: "03",
+    tag: "LOGISTICS & TRANSPORTATION",
+    title: "Move it safely to every site",
+    body: `Our plants are spread across ${STATES.length} states, from desert to hills, so one route does not fit all. We plan transport for each site and handle delicate items with care, so they arrive in the condition they left.`,
+    points: [
+      "Transport planned site by site",
+      "Careful handling of modules and electrical equipment",
+      "Delivery times agreed with the site team",
+    ],
+  },
+  {
+    icon: Warehouse,
+    step: "04",
+    tag: "INVENTORY MANAGEMENT",
+    title: "Keep the right material in the right place",
+    body: "Everything that arrives is logged and stored properly, then issued to the crew when the plan calls for it. That keeps shortages, damage and loss to a minimum.",
+    points: [
+      "Material logged on arrival",
+      "Storage that protects against weather and damage",
+      "Stock issued to crews as the plan needs it",
+    ],
+  },
+  {
+    icon: ClipboardCheck,
+    step: "05",
+    tag: "QUALITY CONTROL & INSPECTIONS",
+    title: "Check it before it is installed",
+    body: "We inspect equipment at the source where it matters and again when it reaches site. Anything that does not meet the specification is stopped, and replaced before it goes into the plant.",
+    points: [
+      "Inspection at source for key equipment",
+      "Checks on arrival and test records kept",
+      "Out-of-specification items rejected and replaced",
+    ],
+  },
+];
+
+const outcomes: { icon: LucideIcon; title: string; body: string }[] = [
+  { icon: ShieldCheck, title: "Resilience", body: "A plan that holds when a supplier or a route lets us down." },
+  { icon: Shuffle, title: "Flexibility", body: "Orders and deliveries that can shift when the project does." },
+  { icon: Gauge, title: "Speed", body: "Equipment ordered early and moved without waiting." },
+  { icon: BadgeCheck, title: "Reliability", body: "Material that arrives when promised and meets the spec." },
+  { icon: SlidersHorizontal, title: "Customization", body: "A supply plan built around your project, not a template." },
+  { icon: Zap, title: "Agility", body: "Quick decisions when something changes on site." },
+];
+
+/* ---------- Route stage ---------- */
+
+function RouteStage({ stage, index }: { stage: Stage; index: number }) {
+  const ref = useRef<HTMLLIElement>(null);
+  // "Reached" once the card crosses the middle band of the viewport, where the truck sits
+  const reached = useInView(ref, { margin: "0px 0px -50% 0px", once: true });
+  const Icon = stage.icon;
+  const left = index % 2 === 0;
+
+  return (
+    <li ref={ref} className="relative pl-14 lg:pl-0 lg:grid lg:grid-cols-2 lg:gap-x-24">
+      {/* stop marker on the route */}
+      <span
+        className={`absolute left-5 top-6 z-10 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full border-2 transition-colors duration-300 lg:left-1/2 ${
+          reached ? "border-slate-900 bg-slate-900 text-[#D4E012]" : "border-slate-200 bg-white text-slate-400"
+        }`}
+      >
+        <Icon className="h-4 w-4" />
+      </span>
+
+      <ScrollReveal className={left ? "lg:col-start-1 lg:text-right" : "lg:col-start-2"}>
+        <div className={`rounded-2xl border bg-white p-6 sm:p-8 shadow-sm transition-colors duration-300 ${reached ? "border-[#6DAD45]/50" : "border-slate-200"}`}>
+          <div className="font-mono text-xs font-bold tracking-widest text-[#6DAD45]">
+            STOP {stage.step} · {stage.tag}
+          </div>
+          <h3 className="mt-2 text-xl sm:text-2xl font-serif-display font-medium text-slate-900 leading-tight">
+            {stage.title}
+          </h3>
+          <p className="mt-3 text-slate-600 leading-relaxed">{stage.body}</p>
+          <ul className={`mt-5 space-y-2 ${left ? "lg:ml-auto" : ""}`}>
+            {stage.points.map((pt) => (
+              <li key={pt} className={`flex items-start gap-2.5 text-sm text-slate-700 ${left ? "lg:flex-row-reverse lg:text-right" : ""}`}>
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#6DAD45]" />
+                <span>{pt}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </ScrollReveal>
+    </li>
+  );
+}
+
+/* ---------- Page ---------- */
 
 export default function SupplyChainPage() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
-  const containerRef = useRef<HTMLElement>(null);
+  const heroRef = useRef<HTMLElement>(null);
+  const routeRef = useRef<HTMLOListElement>(null);
+  const reduce = !!useReducedMotion();
 
+  // Transform + opacity only, so scrolling stays on the compositor
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: heroRef,
     offset: ["start start", "end start"],
   });
-
-  const bgScale = useTransform(scrollYProgress, [0, 0.8], [1.03, 1.15]);
+  const bgScale = useTransform(scrollYProgress, [0, 0.8], [1.03, 1.12]);
   const bgOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.2]);
-  const bgDim = useTransform(scrollYProgress, [0, 0.5], [0.3, 0.85]);
-
-  const contentY = useTransform(scrollYProgress, [0, 0.3], ["0px", "-60px"]);
-  const contentScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.95]);
+  const contentY = useTransform(scrollYProgress, [0, 0.3], ["0px", "-48px"]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
-  const contentFilter = useTransform(scrollYProgress, [0, 0.25], ["blur(0px)", "blur(10px)"]);
 
-  const procurementPillars = [
-    {
-      icon: Factory,
-      tag: "CORE ASSET",
-      title: "Tier-1 ALMM Solar Modules",
-      desc: "Direct OEM framework agreements for N-Type TOPCon and Mono-PERC high-density bifacial modules strictly adhering to MNRE ALMM and BIS guidelines.",
-      spec: "100% ALMM / BIS Certified",
-    },
-    {
-      icon: Zap,
-      tag: "CONVERSION POWER",
-      title: "String & Central Inverters",
-      desc: "High-efficiency string inverters (250kW - 350kW) and containerized central inverters with built-in SVG night support, anti-PID, and AFCI safety.",
-      spec: "99.0%+ Euro Efficiency",
-    },
-    {
-      icon: Layers,
-      tag: "STRUCTURAL METALLURGY",
-      title: "Galvanized Steel MMS Profiles",
-      desc: "Heavy-gauge hot-dip galvanized (80+ microns) and Galvalume / POSMAC steel columns and purlins engineered for 25-year corrosive soil survival.",
-      spec: "80μm HDG & POSMAC",
-    },
-    {
-      icon: Building2,
-      tag: "SUBSTATION BOP",
-      title: "High-Voltage Power Transformers",
-      desc: "33kV / 132kV / 220kV oil-immersed inverter duty transformers, SF6 switchgear, lightning arrestors, and numerical relay panels from certified OEMs.",
-      spec: "Type Tested & CEIG Ready",
-    },
-    {
-      icon: ClipboardCheck,
-      tag: "QUALITY GOVERNANCE",
-      title: "Pre-Dispatch Factory Inspections (PDI)",
-      desc: "Witnessed flash testing, EL imaging crack checks, IV curve audits, and galvanization thickness verification before components leave the manufacturing line.",
-      spec: "Zero-Defect Dispatch",
-    },
-    {
-      icon: Truck,
-      tag: "JUST-IN-TIME DELIVERY",
-      title: "Multi-State Heavy Site Logistics",
-      desc: "Synchronized container transit, flatbed hydraulic logistics, on-site staging yards, and zero-breakage material management across rugged terrains.",
-      spec: "Pan-India Freight Network",
-    },
-  ];
-
-  const vendorProtocol = [
-    {
-      step: "01",
-      title: "OEM Qualification Audit",
-      detail: "Factory financial strength, manufacturing automation level, Tier-1 status, and raw cell wafer provenance verification.",
-    },
-    {
-      step: "02",
-      title: "Technical Compliance Matrix",
-      detail: "Alignment with Sarhat site specifications, warranty clauses (12-yr product / 30-yr performance), and degradation guarantees.",
-    },
-    {
-      step: "03",
-      title: "Witnessed Factory Testing (PDI)",
-      detail: "Independent third-party laboratory verification, electroluminescence micro-crack scans, and batch flash test verification.",
-    },
-    {
-      step: "04",
-      title: "On-Site Delivery & Ingestion",
-      detail: "Barcoded pallet check-in, visual transit inspection, weatherproof warehouse storage, and controlled delivery to string teams.",
-    },
-  ];
-
-  const stats = [
-    { label: "ALMM Compliance", val: "100%" },
-    { label: "Components Sourced", val: "150+ MW" },
-    { label: "Active Tier-1 Partners", val: "40+" },
-    { label: "Transit Breakage Rate", val: "<0.01%" },
-  ];
+  // The route line fills as you travel down it
+  const { scrollYProgress: routeProgress } = useScroll({
+    target: routeRef,
+    offset: ["start 50%", "end 50%"],
+  });
+  const lineScale = useTransform(routeProgress, [0, 1], [0, 1]);
 
   return (
     <SmoothScroll>
@@ -129,115 +190,150 @@ export default function SupplyChainPage() {
         {/* 01 / HERO */}
         <div className="sticky top-0 z-0 w-full h-screen">
           <section
-            ref={containerRef}
+            ref={heroRef}
             className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none"
           >
             <motion.div
               style={{ scale: bgScale, opacity: bgOpacity }}
-              className="absolute inset-0 z-0 h-full w-full"
+              className="absolute inset-0 z-0 h-full w-full will-change-transform"
             >
               <Image
                 src="/images/partner-hero-bg.jpg"
-                alt="Sarhat Supply Chain Management"
+                alt="Equipment supply for a Sarhat solar project"
                 fill
                 priority
-                quality={95}
+                quality={85}
+                sizes="100vw"
                 className="object-cover object-center opacity-85"
               />
-              <motion.div
-                style={{ opacity: bgDim }}
-                className="absolute inset-0 bg-black pointer-events-none"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/45 to-black/95 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/95 pointer-events-none" />
             </motion.div>
 
             <motion.div
-              style={{
-                y: contentY,
-                scale: contentScale,
-                opacity: contentOpacity,
-                filter: contentFilter,
-              }}
+              style={{ y: contentY, opacity: contentOpacity }}
               className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-24 flex flex-col items-center text-center will-change-transform"
             >
               <div className="max-w-4xl flex flex-col items-center text-center">
-                <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 text-center leading-[1.08] drop-shadow-lg">
-                  Supply Chain <br />
-                  <span className="text-[#D4E012] italic font-normal">&amp; Procurement Excellence</span>
+                <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 leading-[1.08] drop-shadow-lg">
+                  Supply chain built <br />
+                  <span className="text-[#D4E012] italic font-normal">around your project</span>
                 </h1>
-
-                <p className="text-base sm:text-xl text-slate-200 max-w-3xl text-center leading-relaxed font-normal drop-shadow-md">
-                  Leveraging strategic OEM relationships, rigorous factory pre-dispatch inspections, and seamless logistics across India to deliver tier-1 clean energy equipment on schedule.
+                <p className="text-base sm:text-xl text-slate-200 max-w-3xl leading-relaxed font-normal drop-shadow-md">
+                  From the first forecast to the last inspection, we make sure the right equipment reaches your site in the right condition, at the right time.
                 </p>
               </div>
             </motion.div>
 
-            <ScrollIndicator opacity={contentOpacity} filter={contentFilter} />
+            <ScrollIndicator opacity={contentOpacity} />
           </section>
         </div>
 
         {/* 02 / CONTENT SHEET */}
         <div className="relative z-10 border-t border-slate-200/60 bg-[#F8FAF8] shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
-
-          {/* Sourcing Capabilities Grid */}
-          <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
+          {/* Intro */}
+          <section className="py-16 sm:py-24 bg-[#F8FAF8]">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
-                  <AnimatedPillBadge className="mb-3">STRATEGIC SOURCING</AnimatedPillBadge>
+                <div className="text-center max-w-3xl mx-auto">
+                  <AnimatedPillBadge className="mb-4">SUPPLY CHAIN MANAGEMENT</AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    End-to-End Equipment Sourcing &amp; Quality Governance
+                    Equipment that arrives right, and on time
                   </h2>
-                  <p className="mt-4 text-slate-600 text-base sm:text-lg">
-                    We eliminate supply risk by enforcing uncompromising factory qualification, multi-point pre-dispatch inspections, and locked-in delivery schedules.
+                  <p className="mt-5 text-slate-600 text-base sm:text-lg leading-relaxed">
+                    We help the renewable energy industry with supply solutions led by people who understand what a solar project needs. We build the supply chain around your project and its full lifecycle, not the other way round.
+                  </p>
+                  <p className="mt-4 text-slate-600 text-base sm:text-lg leading-relaxed">
+                    Our consultative approach improves product quality and keeps the budget under control through a tracking system that follows every order. Follow one delivery from plan to site below.
                   </p>
                 </div>
               </ScrollReveal>
-
-              <SolutionFlowGrid
-                items={procurementPillars.map((p) => ({ ...p, description: p.desc }))}
-                metricLabel="Quality Spec"
-                flowStageTitle="Procurement Flow"
-              />
             </div>
           </section>
 
-          {/* Quality Protocol Pipeline */}
-          <section className="py-16 sm:py-24 bg-[#F8FAF8] border-b border-slate-200/80">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* The route: a truck stays at mid-screen while the stops pass by */}
+          <section className="pb-16 sm:pb-24 bg-[#F8FAF8] border-b border-slate-200/80">
+            <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+              <div className="relative">
+                {/* route line + fill */}
+                <div className="absolute inset-y-0 left-5 w-[3px] -translate-x-1/2 rounded-full bg-slate-200 lg:left-1/2" aria-hidden />
+                <motion.div
+                  style={{ scaleY: reduce ? 1 : lineScale }}
+                  className="absolute inset-y-0 left-5 w-[3px] -translate-x-1/2 origin-top rounded-full bg-gradient-to-b from-[#6DAD45] to-[#D4E012] will-change-transform lg:left-1/2"
+                  aria-hidden
+                />
+
+                {/* the truck: pinned to mid-screen with plain CSS sticky, no scroll handler */}
+                <div className="pointer-events-none absolute inset-y-0 left-5 z-20 -translate-x-1/2 lg:left-1/2" aria-hidden>
+                  <div className="sticky top-[50vh] flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[#D4E012] text-black shadow-lg ring-4 ring-[#F8FAF8]">
+                    <Truck className="h-5 w-5" />
+                  </div>
+                </div>
+
+                <ol ref={routeRef} className="relative space-y-10 sm:space-y-14 py-6">
+                  {stages.map((s, i) => (
+                    <RouteStage key={s.step} stage={s} index={i} />
+                  ))}
+                </ol>
+              </div>
+
+              {/* arrival */}
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-16">
-                  <AnimatedPillBadge className="mb-3">QUALITY ASSURANCE</AnimatedPillBadge>
+                <div className="mt-6 flex justify-center">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-white">
+                    <HardHat className="h-4 w-4 text-[#D4E012]" />
+                    Delivered to site, ready for the crew
+                  </span>
+                </div>
+              </ScrollReveal>
+            </div>
+          </section>
+
+          {/* Outcomes */}
+          <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
+            <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+              <ScrollReveal>
+                <div className="text-center max-w-3xl mx-auto mb-12">
+                  <AnimatedPillBadge className="mb-3">WHAT YOU GAIN</AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Our 4-Stage Vendor Governance Protocol
+                    Six things a good supply chain gives you
                   </h2>
-                  <p className="mt-4 text-slate-600 text-base sm:text-lg">
-                    Ensuring zero defective modules, out-of-spec structural steel, or sub-par transformers ever reach your site.
-                  </p>
                 </div>
               </ScrollReveal>
 
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                {vendorProtocol.map((vp) => (
-                  <ScrollReveal key={vp.step}>
-                    <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                      <div className="font-mono text-3xl font-black text-[#6DAD45]/30 mb-2">{vp.step}</div>
-                      <h4 className="font-serif-display text-lg font-medium text-slate-900 mb-2">{vp.title}</h4>
-                      <p className="text-xs sm:text-sm text-slate-600 font-light leading-relaxed">{vp.detail}</p>
-                    </div>
-                  </ScrollReveal>
-                ))}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {outcomes.map((o, i) => {
+                  const Icon = o.icon;
+                  return (
+                    <ScrollReveal key={o.title} delay={(i % 3) * 0.06}>
+                      <div className="group h-full rounded-2xl border border-slate-200 bg-[#F8FAF8] p-7 text-center transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-1 hover:border-[#6DAD45]/50 hover:shadow-lg">
+                        <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900 text-[#D4E012]">
+                          <Icon className="h-5 w-5" />
+                        </span>
+                        <h3 className="mt-5 font-serif-display text-xl font-medium text-slate-900">{o.title}</h3>
+                        <p className="mt-2 text-sm text-slate-600 leading-relaxed">{o.body}</p>
+                      </div>
+                    </ScrollReveal>
+                  );
+                })}
               </div>
 
-              {/* Stats Strip */}
-              <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-6 rounded-3xl bg-slate-900 p-8 sm:p-10 text-white">
-                {stats.map((s) => (
-                  <div key={s.label} className="text-center space-y-1">
-                    <div className="text-2xl sm:text-4xl font-mono font-bold text-[#D4E012]">{s.val}</div>
-                    <div className="text-xs text-slate-300 font-mono uppercase tracking-wider">{s.label}</div>
+              <ScrollReveal>
+                <Link
+                  href="/solutions/construction"
+                  className="group mx-auto mt-12 flex max-w-5xl flex-col items-start justify-between gap-4 rounded-3xl bg-slate-900 p-8 text-white transition-transform duration-200 hover:-translate-y-1 sm:flex-row sm:items-center sm:p-10"
+                >
+                  <div>
+                    <div className="font-mono text-xs uppercase tracking-wider text-[#D4E012]">Next</div>
+                    <h3 className="mt-2 font-serif-display text-2xl sm:text-3xl font-medium">
+                      See how the equipment gets installed
+                    </h3>
                   </div>
-                ))}
-              </div>
+                  <span className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold">
+                    Explore Construction
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </Link>
+              </ScrollReveal>
             </div>
           </section>
 
