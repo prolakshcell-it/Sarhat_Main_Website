@@ -113,16 +113,16 @@ export const navigationConfig: MegaNavEntry[] = [
       {
         id: "engineering",
         title: "Engineering",
-        href: "/solutions#engineering",
+        href: "/solutions/engineering",
         children: [
-          { id: "innovation", title: "Innovation", href: "/solutions#engineering" },
-          { id: "system-design", title: "System Design", href: "/solutions#engineering" },
+          { id: "innovation", title: "Innovation", href: "/solutions/engineering/innovation" },
+          { id: "system-design", title: "System Design", href: "/solutions/engineering/system-design" },
         ],
       },
-      { id: "supply-chain", title: "Supply Chain Management", href: "/solutions#procurement" },
-      { id: "construction", title: "Construction", href: "/solutions#construction" },
-      { id: "oandm", title: "Operation & Maintenance", href: "/solutions#oandm" },
-      { id: "health-check", title: "Solar Plant Health Check-up", href: "/solutions#oandm" },
+      { id: "supply-chain", title: "Supply Chain Management", href: "/solutions/supply-chain-management" },
+      { id: "construction", title: "Construction", href: "/solutions/construction" },
+      { id: "oandm", title: "Operation & Maintenance", href: "/solutions/operation-and-maintenance" },
+      { id: "health-check", title: "Solar Plant Health Check-up", href: "/solutions/solar-plant-health-checkup" },
     ],
   },
   {
