@@ -45,7 +45,7 @@ const regionList = Object.keys(regionFocus).map((name) => ({
 
 const portfolio = [
   { value: String(PROJECTS.length), label: "Projects in our portfolio" },
-  { value: `${sumMW(PROJECTS).toFixed(0)} MW`, label: "Total planned capacity" },
+  { value: `${sumMW(PROJECTS).toFixed(0)}+ MW`, label: "Total planned capacity" },
   { value: String(regionList.length), label: "States we engineer for" },
   {
     value: String(PROJECTS.filter((p) => p.status === "Commissioned").length),
