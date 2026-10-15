@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { motion, useInView, animate } from "framer-motion";
+import { motion, useInView, animate, useScroll, useTransform } from "framer-motion";
 
 function AnimatedMetricValue({ value }: { value: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -50,6 +50,13 @@ function AnimatedMetricValue({ value }: { value: string }) {
 }
 
 export default function MetricsTicker() {
+  const { scrollY } = useScroll();
+
+  // Smooth scroll-driven emergence from behind/underneath the background
+  const sectionOpacity = useTransform(scrollY, [20, 240], [0.35, 1]);
+  const sectionY = useTransform(scrollY, [20, 260], [35, 0]);
+  const sectionScale = useTransform(scrollY, [20, 260], [0.97, 1]);
+
   const metrics = [
     {
       value: "70+",
@@ -84,10 +91,17 @@ export default function MetricsTicker() {
   ];
 
   return (
-    <section className="bg-[#FAFBF9] border-b border-slate-200/80 relative z-20 overflow-hidden font-sans-ui select-none">
+    <section className="bg-transparent border-b border-slate-200/80 relative z-20 overflow-hidden font-sans-ui select-none">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-        {/* 1-Line Card Grid Layout (Single horizontal line) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 w-full">
+        {/* 1-Line Card Grid Layout (Single horizontal line with emergence transform) */}
+        <motion.div
+          style={{
+            opacity: sectionOpacity,
+            y: sectionY,
+            scale: sectionScale,
+          }}
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 w-full will-change-transform"
+        >
           {metrics.map((item, idx) => (
             <motion.div
               key={idx}
@@ -117,7 +131,7 @@ export default function MetricsTicker() {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
