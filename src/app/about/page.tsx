@@ -193,11 +193,26 @@ export default function AboutPage() {
 
                 {/* Who We Are Section (Matching Image 1 in Website Theme) */}
                 <div className="text-center max-w-4xl mx-auto mb-16">
-                  <AnimatedPillBadge className="mb-4">
+                  <AnimatedPillBadge className="mb-6">
                     WHO WE ARE
                   </AnimatedPillBadge>
-                  <h2 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium text-[#0F172A] tracking-tight leading-tight mb-6">
-                    Who We Are
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Pioneering Clean Energy.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Who We Are
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 font-light text-base sm:text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto">
                     Sarhat is India&apos;s leading decarbonisation and renewable infrastructure solutions provider on a mission to build a fossil-free future through innovative and sustainable solutions.
@@ -252,23 +267,37 @@ export default function AboutPage() {
 
 
                     {/* Main Headline */}
-                    <h2 className="text-3xl sm:text-5xl lg:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-none mb-6">
-                      YOUR TRUSTED <br />
-                      <span className="text-[#6DAD45]">ENERGY PARTNER</span>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                      <span className="inline-block">Your Trusted</span> <br />
+                      <span className="text-[#6DAD45] italic relative inline-block">
+                        Energy Partner
+                        <svg
+                          className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                          viewBox="0 0 100 20"
+                          preserveAspectRatio="none"
+                        >
+                          <path
+                            d="M0 15 Q 50 0 100 15"
+                            stroke="currentColor"
+                            strokeWidth="3.5"
+                            fill="transparent"
+                          />
+                        </svg>
+                      </span>
                     </h2>
 
                     {/* Long Editorial Paragraph */}
                     <p className="text-slate-600 font-normal text-base sm:text-lg leading-relaxed text-justify">
                       Sarhat Energy is India’s emerging clean-energy EPCM partner, combining
-breakthrough solar technologies with disciplined project execution for
-residential, commercial, industrial, institutional and solar-park clients. From
-detailed engineering to installation, commissioning and long-term
-maintenance, we stay with every project - turning rooftops and open land into
-reliable, revenue-generating energy assets.
-Our Transmission & Sub-Station Division extends that expertise to the grid
-itself, delivering high-voltage lines and sub-stations up to 400 kV, while our
-infrastructure arm builds the roads, bridges and buildings that projects
-depend on.
+                      breakthrough solar technologies with disciplined project execution for
+                      residential, commercial, industrial, institutional and solar-park clients. From
+                      detailed engineering to installation, commissioning and long-term
+                      maintenance, we stay with every project - turning rooftops and open land into
+                      reliable, revenue-generating energy assets.
+                      Our Transmission & Sub-Station Division extends that expertise to the grid
+                      itself, delivering high-voltage lines and sub-stations up to 400 kV, while our
+                      infrastructure arm builds the roads, bridges and buildings that projects
+                      depend on.
                     </p>
                   </ScrollReveal>
                 </div>
@@ -310,9 +339,29 @@ depend on.
 
 
                 {/* Headline */}
-                <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-14">
-                  Our <span className="text-[#6DAD45] font-bold">Mission</span> &amp; <span className="text-[#D97706] font-bold">Vision</span>
-                </h2>
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12">
+                  <AnimatedPillBadge className="mb-6">
+                    PURPOSE &amp; GOALS
+                  </AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
+                    <span className="inline-block">Building with Purpose.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Our Mission &amp; Vision
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
+                  </h2>
+                </div>
               </ScrollReveal>
 
               {/* 2 Feature Image Header Cards Side-by-Side */}
@@ -411,9 +460,23 @@ depend on.
                 </div>
 
                 {/* Main Headline (2 lines website style) */}
-                <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-bold text-white tracking-tight text-center max-w-4xl mx-auto leading-tight mb-4 drop-shadow-lg">
-                  Engineering Excellence for the <br />
-                  <span className="text-[#D4E012] italic font-normal">Net-Zero Era</span>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-bold text-white tracking-tight text-center max-w-4xl mx-auto leading-tight mb-6 drop-shadow-lg">
+                  <span className="inline-block">Engineering Excellence for the</span> <br />
+                  <span className="text-[#D4E012] italic font-normal relative inline-block">
+                    Net-Zero Era
+                    <svg
+                      className="absolute -bottom-2 left-0 w-full h-3 text-[#D4E012]"
+                      viewBox="0 0 100 20"
+                      preserveAspectRatio="none"
+                    >
+                      <path
+                        d="M0 15 Q 50 0 100 15"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        fill="transparent"
+                      />
+                    </svg>
+                  </span>
                 </h2>
 
                 <p className="text-base sm:text-lg text-slate-300 font-normal max-w-3xl text-center leading-relaxed mx-auto mb-14 drop-shadow-md">
@@ -435,13 +498,11 @@ depend on.
                         onMouseEnter={() => setActiveValueIndex(index)}
                         whileHover={{ scale: 1.07 }}
                         transition={{ duration: 0.35, ease: "easeOut" }}
-                        className={`relative w-[300px] h-[300px] sm:w-[340px] sm:h-[340px] lg:w-[385px] lg:h-[385px] rounded-full p-7 sm:p-10 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-500 backdrop-blur-2xl ${
-                          index > 0 ? "md:-ml-10 lg:-ml-14" : ""
-                        } ${
-                          isActive
+                        className={`relative w-[300px] h-[300px] sm:w-[340px] sm:h-[340px] lg:w-[385px] lg:h-[385px] rounded-full p-7 sm:p-10 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-500 backdrop-blur-2xl ${index > 0 ? "md:-ml-10 lg:-ml-14" : ""
+                          } ${isActive
                             ? "bg-slate-950/95 border-2 border-[#D4E012] shadow-[0_0_60px_rgba(212,224,18,0.45)] z-30 scale-105"
                             : "bg-slate-950/65 border border-white/20 hover:border-[#D4E012]/70 hover:bg-slate-950/85 z-10 opacity-85 hover:opacity-100"
-                        }`}
+                          }`}
                       >
                         {/* Double Spinning Arc Rings on Active Circle */}
                         {isActive && (
@@ -483,22 +544,20 @@ depend on.
 
                         {/* Top Number Tag */}
                         <span
-                          className={`absolute top-6 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border transition-all ${
-                            isActive
+                          className={`absolute top-6 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border transition-all ${isActive
                               ? "bg-[#D4E012] text-slate-950 border-[#D4E012] shadow-sm"
                               : "bg-slate-900/80 text-slate-400 border-white/10"
-                          }`}
+                            }`}
                         >
                           VALUE {item.num}
                         </span>
 
                         {/* Top Icon Badge */}
                         <div
-                          className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mt-4 mb-4 shadow-lg transition-all duration-300 ${
-                            isActive
+                          className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mt-4 mb-4 shadow-lg transition-all duration-300 ${isActive
                               ? "bg-[#D4E012] text-slate-950 shadow-[0_0_25px_rgba(212,224,18,0.6)] scale-110"
                               : "bg-[#D4E012]/20 border border-[#D4E012]/50 text-[#D4E012]"
-                          }`}
+                            }`}
                         >
                           <IconComp className="w-7 h-7 text-slate-950 stroke-[2.2]" />
                         </div>
@@ -523,11 +582,10 @@ depend on.
                     <button
                       key={v.id}
                       onClick={() => setActiveValueIndex(i)}
-                      className={`h-2.5 rounded-full transition-all duration-500 ${
-                        activeValueIndex === i
+                      className={`h-2.5 rounded-full transition-all duration-500 ${activeValueIndex === i
                           ? "w-8 bg-[#D4E012] shadow-[0_0_12px_#D4E012]"
                           : "w-2.5 bg-slate-700 hover:bg-slate-500"
-                      }`}
+                        }`}
                       title={`Jump to ${v.title}`}
                     />
                   ))}

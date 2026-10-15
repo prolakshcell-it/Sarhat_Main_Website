@@ -40,7 +40,10 @@ function AnimatedMetricValue({ value }: { value: string }) {
   }, [isInView, targetNum, isDecimal, hasComma]);
 
   return (
-    <div ref={ref} className="font-serif-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight mb-1.5 tabular-nums group-hover:text-[#707B00] transition-colors duration-200">
+    <div
+      ref={ref}
+      className="font-serif-display text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight mb-1.5 tabular-nums text-slate-900 transition-colors duration-200"
+    >
       {prefix}{displayNum}{suffix}
     </div>
   );
@@ -81,42 +84,41 @@ export default function MetricsTicker() {
   ];
 
   return (
-    <section className="bg-[#FAFBF9] border-b border-slate-200/80 relative z-20 overflow-hidden font-sans-ui">
+    <section className="bg-[#FAFBF9] border-b border-slate-200/80 relative z-20 overflow-hidden font-sans-ui select-none">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
         {/* 1-Line Card Grid Layout (Single horizontal line) */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 w-full">
-          {metrics.map((item, idx) => {
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.06 }}
-                className="min-w-0"
+          {metrics.map((item, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.06 }}
+              className="min-w-0"
+            >
+              <div
+                className="metric-card h-full min-h-[132px] rounded-2xl p-5 relative flex flex-col justify-between bg-white border-2 border-slate-200/80 shadow-[0_4px_20px_rgba(15,23,42,0.04)] hover:border-[#6DAD45] hover:shadow-[0_12px_28px_rgba(109,173,69,0.18)] hover:-translate-y-1 hover:scale-[1.01] transition-all duration-300 ease-out cursor-default"
               >
-                <div className="metric-card h-full min-h-[132px] bg-white rounded-2xl p-5 border border-slate-200/80 hover:border-[#707B00] shadow-[0_4px_20px_rgba(15,23,42,0.06)] relative group flex flex-col justify-between">
-                  {/* Header Tag */}
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-[10px] sm:text-[11px] font-mono font-bold tracking-wider text-[#707B00] uppercase truncate">
-                      {item.label}
-                    </span>
-                  </div>
-
-                  {/* Main Metric Value */}
-                  <AnimatedMetricValue value={item.value} />
-
-                  {/* Subtitle Description */}
-                  <div className="text-[12px] text-slate-600 font-medium leading-tight truncate">
-                    {item.subText}
-                  </div>
+                {/* Header Tag */}
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="text-[10px] sm:text-[11px] font-mono font-bold tracking-wider uppercase truncate text-[#6B7A40]">
+                    {item.label}
+                  </span>
                 </div>
-              </motion.div>
-            );
-          })}
+
+                {/* Main Metric Value (stays dark/black, only border changes) */}
+                <AnimatedMetricValue value={item.value} />
+
+                {/* Subtitle Description */}
+                <div className="text-[12px] font-medium leading-tight truncate text-slate-600">
+                  {item.subText}
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
-

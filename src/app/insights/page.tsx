@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 
 interface Article {
   id: string;
@@ -282,11 +283,29 @@ export default function InsightsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header matching Image 2 */}
           <ScrollReveal direction="up" distance={40}>
-            <div className="text-center max-w-2xl mx-auto mb-14">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-sans-ui font-extrabold text-slate-900 tracking-tight mb-4">
-                Latest Insights &amp; News
+            <div className="text-center max-w-4xl mx-auto mb-14">
+              <AnimatedPillBadge className="mb-6">
+                INDUSTRY INTELLIGENCE
+              </AnimatedPillBadge>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                <span className="inline-block">Thought Leadership.</span> <br />
+                <span className="text-[#6DAD45] italic relative inline-block">
+                  Latest Insights &amp; News
+                  <svg
+                    className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                    viewBox="0 0 100 20"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M0 15 Q 50 0 100 15"
+                      stroke="currentColor"
+                      strokeWidth="3.5"
+                      fill="transparent"
+                    />
+                  </svg>
+                </span>
               </h2>
-              <p className="text-slate-600 font-normal text-xs sm:text-sm leading-relaxed">
+              <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
                 Stay informed with our latest articles, case studies, and updates on solar energy trends and innovations.
               </p>
             </div>

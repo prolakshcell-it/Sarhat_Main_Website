@@ -211,12 +211,27 @@ export default function SystemDesignPage() {
           <section className="py-16 sm:py-24 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
-                  <AnimatedPillBadge className="mb-4">SYSTEM DESIGN</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Follow the power, from panel to grid
+                <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">SYSTEM DESIGN</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Follow the power,</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      from panel to grid
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
-                  <p className="mt-5 text-slate-600 text-base sm:text-lg leading-relaxed">
+                  <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
                     A solar plant is a chain. Each link has to suit the ones on either side, so we design them together. Select a link to see what we design and what you get.
                   </p>
                 </div>
@@ -344,12 +359,27 @@ export default function SystemDesignPage() {
           <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
-                  <AnimatedPillBadge className="mb-3">WHAT YOU RECEIVE</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    A drawing set you can hand straight to site
+                <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">WHAT YOU RECEIVE</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">A drawing set</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      you can hand straight to site
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
-                  <p className="mt-4 text-slate-600 text-base sm:text-lg">
+                  <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
                     A typical set for one plant. The exact sheets depend on the scheme and the site.
                   </p>
                 </div>
@@ -377,10 +407,25 @@ export default function SystemDesignPage() {
           <section className="py-16 sm:py-24 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-12">
-                  <AnimatedPillBadge className="mb-3">OUR RULES</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Three rules every design follows
+                <div className="text-center max-w-4xl mx-auto mb-12">
+                  <AnimatedPillBadge className="mb-6">OUR RULES</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Engineering Principles.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Three rules every design follows
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                 </div>
               </ScrollReveal>
