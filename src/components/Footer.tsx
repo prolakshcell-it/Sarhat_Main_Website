@@ -65,6 +65,7 @@ const COLUMNS = [
       { href: "/about", label: "About Sarhat" },
       { href: "/about/our-story", label: "Our Story & Milestones" },
       { href: "/about/initiatives", label: "Sustainability" },
+      { href: "/contact#inquiry", label: "Project Enquiry" },
       { href: "/careers", label: "Careers & Life" },
       { href: "/insights", label: "Insights & News" },
     ],

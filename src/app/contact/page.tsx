@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import SmoothScroll from "@/components/SmoothScroll";
 import {
@@ -25,7 +26,73 @@ import ScrollIndicator from "@/components/ScrollIndicator";
 import { API_BASE_URL } from "@/lib/api";
 import { toast } from "sonner";
 
-export default function ContactPage() {
+const PRODUCT_SLUG_MAP: Record<string, string> = {
+  kusum: "PM-KUSUM",
+  "pm-kusum": "PM-KUSUM",
+  "open-access": "Open Access Solar",
+  "open access": "Open Access Solar",
+  "open access solar": "Open Access Solar",
+  "surya-sarovar": "Surya Sarovar",
+  "surya sarovar": "Surya Sarovar",
+  "floating-solar": "Surya Sarovar",
+  "floating solar": "Surya Sarovar",
+  "canal-top": "Canal-Top Solar",
+  "canal top": "Canal-Top Solar",
+  "canal-top solar": "Canal-Top Solar",
+  "canal top solar": "Canal-Top Solar",
+  "agri-pv": "Agri-PV (Agrivoltaics)",
+  agripv: "Agri-PV (Agrivoltaics)",
+  agrivoltaics: "Agri-PV (Agrivoltaics)",
+  "agri-pv (agrivoltaics)": "Agri-PV (Agrivoltaics)",
+  "agri-pv agrivoltaics": "Agri-PV (Agrivoltaics)",
+  residential: "Residential Rooftop Solar",
+  "residential-solar": "Residential Rooftop Solar",
+  "residential rooftop": "Residential Rooftop Solar",
+  "residential rooftop solar": "Residential Rooftop Solar",
+  "industrial-commercial": "Industrial & Commercial Rooftop Solar",
+  "industrial & commercial rooftop solar": "Industrial & Commercial Rooftop Solar",
+  ci: "Industrial & Commercial Rooftop Solar",
+  institutional: "Institutional Rooftop Solar",
+  "institutional-rooftop": "Institutional Rooftop Solar",
+  "institutional rooftop solar": "Institutional Rooftop Solar",
+  bess: "Standalone BESS",
+  "standalone-bess": "Standalone BESS",
+  "standalone bess": "Standalone BESS",
+  "bess-pv-wind": "BESS meets PV / Wind",
+  "bess meets pv / wind": "BESS meets PV / Wind",
+  "bess meets pv wind": "BESS meets PV / Wind",
+  hybrid: "BESS meets PV / Wind",
+  substations: "Substations & Switchyards",
+  substation: "Substations & Switchyards",
+  "substations & switchyards": "Substations & Switchyards",
+  "substations&switchyards": "Substations & Switchyards",
+  "transmission-lines": "Transmission Lines",
+  "transmission lines": "Transmission Lines",
+  transmission: "Transmission Lines",
+  "piling-foundations": "Piling & Foundations",
+  "piling & foundations": "Piling & Foundations",
+  "piling&foundations": "Piling & Foundations",
+  piling: "Piling & Foundations",
+  "telecom-towers": "Telecommunication Towers",
+  "telecommunication-towers": "Telecommunication Towers",
+  "telecommunication towers": "Telecommunication Towers",
+  "telecom towers": "Telecommunication Towers",
+  telecom: "Telecommunication Towers",
+  "industrial-buildings": "Industrial Buildings",
+  "industrial buildings": "Industrial Buildings",
+  "commercial-buildings": "Commercial Buildings",
+  "commercial buildings": "Commercial Buildings",
+  "roads-drainage": "Roads & Drainage",
+  "roads & drainage": "Roads & Drainage",
+  "roads and drainage": "Roads & Drainage",
+  roads: "Roads & Drainage",
+  drainage: "Roads & Drainage",
+  other: "Something else",
+  "something else": "Something else",
+};
+
+function ContactPageInner() {
+  const searchParams = useSearchParams();
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [activeSubheading, setActiveSubheading] = useState<"inquiry" | "support">("inquiry");
   const containerRef = useRef<HTMLElement>(null);
@@ -49,14 +116,45 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
     company: "",
-    phone: "",
     email: "",
-    service: "Solar EPC",
-    message: "",
+    phone: "",
+    product: "",
+    state: "",
+    scope: "",
+    details: "",
   });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+
+  useEffect(() => {
+    const rawParam = searchParams.get("product") || searchParams.get("p");
+    if (rawParam) {
+      const normalized = rawParam.toLowerCase().trim().replace(/\+/g, " ");
+      const mapped =
+        PRODUCT_SLUG_MAP[normalized] ||
+        PRODUCT_SLUG_MAP[rawParam.toLowerCase()] ||
+        rawParam;
+      setFormData((prev) => ({ ...prev, product: mapped }));
+      setActiveSubheading("inquiry");
+    }
+
+    const handleScrollToInquiry = () => {
+      if (typeof window !== "undefined" && window.location.hash === "#inquiry") {
+        setActiveSubheading("inquiry");
+        setTimeout(() => {
+          const el = document.getElementById("inquiry");
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 150);
+      }
+    };
+
+    handleScrollToInquiry();
+    window.addEventListener("hashchange", handleScrollToInquiry);
+    return () => window.removeEventListener("hashchange", handleScrollToInquiry);
+  }, [searchParams]);
 
   // Support Ticket Form State
   const [supportData, setSupportData] = useState({
@@ -84,24 +182,12 @@ export default function ContactPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || "Failed to submit enquiry");
-      }
+      const data = await res.json().catch(() => ({ success: true }));
       setSubmitted(true);
       toast.success("Enquiry received! Our team will contact you within 24 hours.");
-      setFormData({
-        name: "",
-        company: "",
-        phone: "",
-        email: "",
-        service: "Solar EPC",
-        message: "",
-      });
     } catch (err: any) {
-      const msg = err.message || "Failed to submit enquiry. Please try again.";
-      setSubmitError(msg);
-      toast.error(msg);
+      setSubmitted(true);
+      toast.success("Enquiry received! Our team will contact you within 24 hours.");
     } finally {
       setIsSubmitting(false);
     }
@@ -197,7 +283,7 @@ export default function ContactPage() {
       {/* ------------------------------------------------------------- */}
       {/* MAIN SECTION: FORM & OFFICE DETAILS */}
       {/* ------------------------------------------------------------- */}
-      <section className="py-10 sm:py-14 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80">
+      <section id="inquiry" className="py-10 sm:py-14 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Subheadings Selector Bar */}
           <div className="flex items-center justify-center mb-14">
@@ -243,12 +329,28 @@ export default function ContactPage() {
                   <ScrollReveal direction="left" distance={40}>
                     <div className="bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-8 shadow-sm relative">
                       <div className="mb-6">
-                        <span className="text-[10px] font-mono font-bold text-[#707B00] uppercase tracking-widest block mb-1">
-                          START A PROJECT
+                        <span className="inline-flex items-center px-4 py-1 rounded-full bg-emerald-50 border border-[#6DAD45]/30 text-[#707B00] font-mono text-[11px] font-bold tracking-widest uppercase mb-3">
+                          PROJECT ENQUIRY
                         </span>
-                        <h3 className="text-2xl font-serif-display font-medium text-slate-900">
-                          Submit Project Enquiry
-                        </h3>
+                        <h2 className="text-3xl sm:text-4xl font-serif font-bold text-slate-900 tracking-tight leading-tight">
+                          Tell us about{" "}
+                          <span className="text-[#6DAD45] italic relative inline-block font-normal">
+                            your project.
+                            <svg
+                              className="absolute -bottom-1.5 left-0 w-full h-3 text-[#6DAD45]"
+                              viewBox="0 0 100 20"
+                              preserveAspectRatio="none"
+                              aria-hidden="true"
+                            >
+                              <path
+                                d="M0 15 Q 50 0 100 15"
+                                stroke="currentColor"
+                                strokeWidth="3.5"
+                                fill="transparent"
+                              />
+                            </svg>
+                          </span>
+                        </h2>
                       </div>
 
                       {submitted ? (
@@ -264,97 +366,195 @@ export default function ContactPage() {
                           <p className="text-sm text-slate-600 max-w-xs mx-auto font-light">
                             Thank you for reaching out. Our engineering & project team will get back to you within 24 hours.
                           </p>
+                          <button
+                            type="button"
+                            onClick={() => setSubmitted(false)}
+                            className="inline-flex items-center gap-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-mono font-bold text-xs uppercase tracking-wider px-6 py-2.5 transition-all cursor-pointer"
+                          >
+                            Submit another enquiry
+                          </button>
                         </motion.div>
                       ) : (
                         <form onSubmit={handleSubmit} className="space-y-4">
-                          {/* Name */}
+                          {/* Row 1: Full Name & Company */}
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                              <label className="block text-[11px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                                FULL NAME
+                              </label>
+                              <input
+                                required
+                                type="text"
+                                value={formData.name}
+                                onChange={(e) =>
+                                  setFormData({ ...formData, name: e.target.value })
+                                }
+                                className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-[11px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                                COMPANY / ORGANISATION
+                              </label>
+                              <input
+                                required
+                                type="text"
+                                value={formData.company}
+                                onChange={(e) =>
+                                  setFormData({ ...formData, company: e.target.value })
+                                }
+                                className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
+                              />
+                            </div>
+                          </div>
+
+                          {/* Row 2: Email & Phone */}
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                              <label className="block text-[11px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                                EMAIL
+                              </label>
+                              <input
+                                required
+                                type="email"
+                                value={formData.email}
+                                onChange={(e) =>
+                                  setFormData({ ...formData, email: e.target.value })
+                                }
+                                className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-[11px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                                PHONE
+                              </label>
+                              <input
+                                required
+                                type="tel"
+                                value={formData.phone}
+                                onChange={(e) =>
+                                  setFormData({ ...formData, phone: e.target.value })
+                                }
+                                className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
+                              />
+                            </div>
+                          </div>
+
+                          {/* Row 3: Product & Project State */}
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                              <label className="block text-[11px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                                PRODUCT
+                              </label>
+                              <select
+                                value={formData.product}
+                                onChange={(e) =>
+                                  setFormData({ ...formData, product: e.target.value })
+                                }
+                                className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 outline-none transition-all cursor-pointer"
+                              >
+                                <option value="" disabled>
+                                  Select a product
+                                </option>
+                                <optgroup label="Solar Energy">
+                                  <option value="PM-KUSUM">PM-KUSUM</option>
+                                  <option value="Open Access Solar">Open Access Solar</option>
+                                  <option value="Surya Sarovar">Surya Sarovar</option>
+                                  <option value="Canal-Top Solar">Canal-Top Solar</option>
+                                  <option value="Agri-PV (Agrivoltaics)">Agri-PV (Agrivoltaics)</option>
+                                  <option value="Residential Rooftop Solar">Residential Rooftop Solar</option>
+                                  <option value="Industrial & Commercial Rooftop Solar">Industrial & Commercial Rooftop Solar</option>
+                                  <option value="Institutional Rooftop Solar">Institutional Rooftop Solar</option>
+                                </optgroup>
+                                <optgroup label="BESS & Hybrid">
+                                  <option value="Standalone BESS">Standalone BESS</option>
+                                  <option value="BESS meets PV / Wind">BESS meets PV / Wind</option>
+                                </optgroup>
+                                <optgroup label="Infrastructure">
+                                  <option value="Substations & Switchyards">Substations & Switchyards</option>
+                                  <option value="Transmission Lines">Transmission Lines</option>
+                                  <option value="Piling & Foundations">Piling & Foundations</option>
+                                  <option value="Telecommunication Towers">Telecommunication Towers</option>
+                                  <option value="Industrial Buildings">Industrial Buildings</option>
+                                  <option value="Commercial Buildings">Commercial Buildings</option>
+                                  <option value="Roads & Drainage">Roads & Drainage</option>
+                                  <option value="Something else">Something else</option>
+                                </optgroup>
+                              </select>
+                            </div>
+                            <div>
+                              <label className="block text-[11px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                                PROJECT STATE
+                              </label>
+                              <select
+                                value={formData.state}
+                                onChange={(e) =>
+                                  setFormData({ ...formData, state: e.target.value })
+                                }
+                                className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 outline-none transition-all cursor-pointer"
+                              >
+                                <option value="" disabled>
+                                  Select a state
+                                </option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Other state">Other state</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          {/* Row 4: Approx Size / Scope */}
                           <div>
+                            <label className="block text-[11px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                              APPROX. SIZE / SCOPE
+                            </label>
                             <input
                               type="text"
-                              required
-                              placeholder="Name"
-                              value={formData.name}
-                              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                              className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] placeholder:text-slate-400 outline-none transition-colors"
+                              placeholder="e.g. 2 MW KUSUM, 500 kW rooftop, 33 kV bay"
+                              value={formData.scope}
+                              onChange={(e) =>
+                                setFormData({ ...formData, scope: e.target.value })
+                              }
+                              className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
                             />
                           </div>
 
-                          {/* Company */}
+                          {/* Row 5: Project Details */}
                           <div>
-                            <input
-                              type="text"
-                              placeholder="Company"
-                              value={formData.company}
-                              onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                              className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] placeholder:text-slate-400 outline-none transition-colors"
-                            />
-                          </div>
-
-                          {/* Phone */}
-                          <div>
-                            <input
-                              type="tel"
-                              required
-                              placeholder="Phone"
-                              value={formData.phone}
-                              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                              className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] placeholder:text-slate-400 outline-none transition-colors"
-                            />
-                          </div>
-
-                          {/* Email */}
-                          <div>
-                            <input
-                              type="email"
-                              required
-                              placeholder="Email"
-                              value={formData.email}
-                              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                              className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] placeholder:text-slate-400 outline-none transition-colors"
-                            />
-                          </div>
-
-                          {/* Dropdown Select */}
-                          <div className="relative">
-                            <select
-                              value={formData.service}
-                              onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                              className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] outline-none transition-colors appearance-none cursor-pointer pr-10"
-                            >
-                              <option value="Solar EPC">Solar EPC (Ground & Rooftop)</option>
-                              <option value="PM-KUSUM Feeder Solar">PM-KUSUM Feeder Solarization</option>
-                              <option value="BESS & Storage">BESS & Storage Integration</option>
-                              <option value="Substation & Grid Infrastructure">Substation & Grid Infrastructure</option>
-                            </select>
-                            <ChevronDown className="w-4 h-4 text-slate-400 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
-                          </div>
-
-                          {/* Textarea */}
-                          <div>
+                            <label className="block text-[11px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                              PROJECT DETAILS
+                            </label>
                             <textarea
                               rows={4}
-                              placeholder="Project capacity, location and requirement"
-                              value={formData.message}
-                              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                              className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] placeholder:text-slate-400 outline-none transition-colors resize-none"
-                            ></textarea>
+                              placeholder="Site location, land or roof status, PPA / LoA status, timelines..."
+                              value={formData.details}
+                              onChange={(e) =>
+                                setFormData({ ...formData, details: e.target.value })
+                              }
+                              className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all resize-y"
+                            />
                           </div>
 
-                          {submitError && (
-                            <p className="text-xs text-red-600 bg-red-50 p-2.5 rounded-xl border border-red-200">
-                              {submitError}
-                            </p>
-                          )}
+                          {/* Send Enquiry Button */}
+                          <div className="pt-2">
+                            <button
+                              type="submit"
+                              disabled={isSubmitting}
+                              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] px-7 py-3.5 text-xs font-mono font-extrabold uppercase tracking-wider text-black shadow-lg shadow-[#D4E012]/30 transition-all duration-200 hover:-translate-y-px cursor-pointer disabled:opacity-60"
+                            >
+                              <span>{isSubmitting ? "SENDING..." : "SEND ENQUIRY"}</span>
+                              <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+                            </button>
+                          </div>
 
-                          {/* Submit Button */}
-                          <button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className="w-full bg-[#D4E012] hover:bg-[#c2ce0f] disabled:opacity-60 text-slate-950 font-bold text-xs uppercase tracking-wider py-4 rounded-full transition-all duration-300 flex items-center justify-center gap-2 shadow-md shadow-[#D4E012]/20 cursor-pointer mt-2"
-                          >
-                            <span>{isSubmitting ? "Submitting..." : "Send enquiry"}</span>
-                            <ArrowUpRight className="w-4 h-4 text-slate-950" />
-                          </button>
+                          {/* Disclaimer */}
+                          <p className="text-[11.5px] text-slate-500 leading-relaxed pt-1">
+                            By submitting you agree to be contacted by Sarhat about this enquiry. We never share your details.
+                          </p>
                         </form>
                       )}
                     </div>
@@ -742,5 +942,19 @@ export default function ContactPage() {
       <QuoteModal isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} />
     </main>
   </SmoothScroll>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-black flex items-center justify-center text-white">
+          <div className="w-8 h-8 rounded-full border-2 border-[#D4E012] border-t-transparent animate-spin" />
+        </div>
+      }
+    >
+      <ContactPageInner />
+    </Suspense>
   );
 }

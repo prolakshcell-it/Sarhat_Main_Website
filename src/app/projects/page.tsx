@@ -36,6 +36,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
+import FinalCTA from "@/components/FinalCTA";
 import FootprintMap from "@/components/FootprintMap";
 import SmoothScroll from "@/components/SmoothScroll";
 import ScrollIndicator from "@/components/ScrollIndicator";
@@ -1236,6 +1237,13 @@ export default function MainProjectsPage() {
             </div>
           </section>
         </div>
+
+        <FinalCTA
+          onOpenQuote={() => setQuoteModalOpen(true)}
+          headline="Have a project"
+          accent="worth building?"
+          description="Solar. BESS Storage. Substations. Agrivoltaics. Roads. Bridges. Buildings. Tell us where you want to build and let's map the execution path together."
+        />
 
         <Footer />
         <QuoteModal isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} />

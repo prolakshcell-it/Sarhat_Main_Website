@@ -12,6 +12,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import FinalCTA from "@/components/FinalCTA";
+import RelatedSolutionsSection from "@/components/solutions/RelatedSolutionsSection";
 import { STATES } from "@/data/projects";
 import {
   CalendarClock,
@@ -347,25 +348,11 @@ export default function SupplyChainPage() {
                 })}
               </div>
 
-              <ScrollReveal>
-                <Link
-                  href="/solutions/construction"
-                  className="group mx-auto mt-12 flex max-w-5xl flex-col items-start justify-between gap-4 rounded-3xl bg-slate-900 p-8 text-white transition-transform duration-200 hover:-translate-y-1 sm:flex-row sm:items-center sm:p-10"
-                >
-                  <div>
-                    <div className="font-mono text-xs uppercase tracking-wider text-[#D4E012]">Next</div>
-                    <h3 className="mt-2 font-serif-display text-2xl sm:text-3xl font-medium">
-                      See how the equipment gets installed
-                    </h3>
-                  </div>
-                  <span className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold">
-                    Explore Construction
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </Link>
-              </ScrollReveal>
             </div>
           </section>
+
+          {/* Related Solutions */}
+          <RelatedSolutionsSection currentHref="/solutions/supply-chain-management" />
 
           {/* Final CTA */}
           <FinalCTA onOpenQuote={() => setQuoteModalOpen(true)} />

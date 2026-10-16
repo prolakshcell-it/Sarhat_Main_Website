@@ -12,6 +12,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import FinalCTA from "@/components/FinalCTA";
+import RelatedSolutionsSection from "@/components/solutions/RelatedSolutionsSection";
 import ConstructionScene from "@/components/solutions/ConstructionScene";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 
@@ -236,26 +237,8 @@ export default function ConstructionPage() {
             </div>
           </section>
 
-          {/* Next */}
-          <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
-            <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-              <ScrollReveal>
-                <Link
-                  href="/solutions/operation-and-maintenance"
-                  className="group flex flex-col items-start justify-between gap-4 rounded-3xl bg-slate-900 p-8 text-white transition-transform duration-200 hover:-translate-y-1 sm:flex-row sm:items-center sm:p-10"
-                >
-                  <div>
-                    <div className="font-mono text-xs uppercase tracking-wider text-[#D4E012]">After handover</div>
-                    <h3 className="mt-2 font-serif-display text-2xl sm:text-3xl font-medium">Keep the plant performing for years</h3>
-                  </div>
-                  <span className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold">
-                    Explore Operation &amp; Maintenance
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </Link>
-              </ScrollReveal>
-            </div>
-          </section>
+          {/* RELATED SOLUTIONS */}
+          <RelatedSolutionsSection currentHref="/solutions/construction" />
 
           {/* Final CTA */}
           <FinalCTA onOpenQuote={() => setQuoteModalOpen(true)} />

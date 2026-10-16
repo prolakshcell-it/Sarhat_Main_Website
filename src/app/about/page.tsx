@@ -27,6 +27,7 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
+import FinalCTA from "@/components/FinalCTA";
 import ScrollReveal from "@/components/ScrollReveal";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 
@@ -627,51 +628,12 @@ export default function AboutPage() {
           {/* ------------------------------------------------------------- */}
           {/* 06 / START YOUR SOLAR JOURNEY TODAY CTA BANNER (SARHAT BRAND COLORS) */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-10 sm:py-14 bg-gradient-to-b from-slate-950 via-[#0A160C] to-slate-950 text-white relative z-10 overflow-hidden border-t border-[#6DAD45]/20">
-            {/* Ambient Brand Glowing Flares */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-r from-[#D4E012]/15 via-[#6DAD45]/15 to-transparent rounded-full blur-[130px] pointer-events-none"></div>
-
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 flex flex-col items-center">
-              <ScrollReveal direction="up" distance={30}>
-                {/* Top Sun Icon Badge in Sarhat Chartreuse */}
-                <div className="w-14 h-14 rounded-2xl bg-[#D4E012] flex items-center justify-center text-slate-950 mx-auto mb-8 shadow-[0_0_25px_rgba(212,224,18,0.35)] transform hover:rotate-6 transition-transform">
-                  <Sun className="w-8 h-8 text-slate-950 fill-slate-950/20" />
-                </div>
-
-                {/* Headline with Brand Accent */}
-                <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-5">
-                  Start Your{" "}
-                  <span className="text-[#D4E012] drop-shadow-[0_2px_10px_rgba(212,224,18,0.3)]">
-                    Solar Journey
-                  </span>{" "}
-                  Today
-                </h2>
-
-                {/* Subtitle */}
-                <p className="text-slate-300 text-base sm:text-lg font-normal max-w-2xl leading-relaxed mb-10 mx-auto">
-                  Join 80+ clients who trust Sarhat to deliver clean energy at scale. Let&apos;s build your solar future together.
-                </p>
-
-                {/* CTA Buttons in Sarhat Palette */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-                  <button
-                    onClick={() => setQuoteModalOpen(true)}
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-[#D4E012] text-slate-950 font-bold text-base hover:bg-[#6DAD45] hover:text-white hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl shadow-[#D4E012]/20 flex items-center justify-center gap-2 group"
-                  >
-                    <span>Contact Us</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
-
-                  <a
-                    href="tel:+919876543210"
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-full border border-white/20 text-white font-semibold text-base hover:bg-white/10 hover:border-[#D4E012] hover:scale-105 active:scale-95 transition-all duration-300 shadow-md flex items-center justify-center"
-                  >
-                    Call Us Now
-                  </a>
-                </div>
-              </ScrollReveal>
-            </div>
-          </section>
+          <FinalCTA
+            onOpenQuote={() => setQuoteModalOpen(true)}
+            headline="Start Your"
+            accent="Solar Journey Today."
+            description="Join 80+ clients who trust Sarhat to deliver clean energy at scale. Let's build your energy infrastructure together."
+          />
         </div>
 
         {/* Footer */}
