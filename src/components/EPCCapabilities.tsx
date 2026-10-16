@@ -18,9 +18,23 @@ export default function EPCCapabilities() {
               ABOUT US
             </AnimatedPillBadge>
 
-            <h2 className="text-3xl sm:text-5xl lg:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-none">
-              YOUR TRUSTED <br />
-              <span className="text-[#6DAD45]">ENERGY PARTNER</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+              <span className="inline-block">Your Trusted</span> <br />
+              <span className="text-[#6DAD45] italic relative inline-block">
+                Energy Partner
+                <svg
+                  className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                  viewBox="0 0 100 20"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M0 15 Q 50 0 100 15"
+                    stroke="currentColor"
+                    strokeWidth="3.5"
+                    fill="transparent"
+                  />
+                </svg>
+              </span>
             </h2>
           </div>
         </ScrollReveal>

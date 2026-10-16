@@ -12,6 +12,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import FinalCTA from "@/components/FinalCTA";
+import RelatedSolutionsSection from "@/components/solutions/RelatedSolutionsSection";
 import { CheckCircle2, ArrowRight, FileText } from "lucide-react";
 
 /* ---------- Content ---------- */
@@ -319,10 +320,25 @@ export default function OperationMaintenancePage() {
           <section className="pt-16 sm:pt-24 pb-4 bg-[#F8FAF8]">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto">
-                  <AnimatedPillBadge className="mb-4">FEASIBILITY &amp; MAINTENANCE</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    From the first study to the long run
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12">
+                  <AnimatedPillBadge className="mb-6">FEASIBILITY &amp; MAINTENANCE</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">From the first study</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      to the long run
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="mt-5 text-slate-600 text-base sm:text-lg leading-relaxed">
                     At Sarhat Energy, we offer end-to-end feasibility study and maintenance services for solar projects, for better planning, smoother execution and long-term performance. Our Detailed Project Report (DPR) gives you a complete roadmap for the project to succeed.
@@ -336,10 +352,25 @@ export default function OperationMaintenancePage() {
           <section className="py-16 sm:py-20 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-                  <div className="font-mono text-xs font-bold tracking-widest text-[#6DAD45]">PART 1 · FEASIBILITY STUDY</div>
-                  <h2 className="mt-2 text-3xl sm:text-4xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Five questions, one report
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12">
+                  <AnimatedPillBadge className="mb-6">PART 1 · FEASIBILITY STUDY</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Five core dimensions.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      One complete DPR
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="mt-3 text-slate-600">Select a triangle to see what we look at. Together they form your DPR.</p>
                 </div>
@@ -365,10 +396,25 @@ export default function OperationMaintenancePage() {
           <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-                  <div className="font-mono text-xs font-bold tracking-widest text-[#6DAD45]">PART 2 · MAINTENANCE</div>
-                  <h2 className="mt-2 text-3xl sm:text-4xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Three rings of care around your plant
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12">
+                  <AnimatedPillBadge className="mb-6">PART 2 · MAINTENANCE</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Three rings of care</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      around your plant
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="mt-3 text-slate-600">Select a ring to see what happens at each rhythm.</p>
                 </div>
@@ -395,6 +441,9 @@ export default function OperationMaintenancePage() {
               </div>
             </div>
           </section>
+
+          {/* RELATED SOLUTIONS */}
+          <RelatedSolutionsSection currentHref="/solutions/operation-and-maintenance" />
 
           {/* Final CTA */}
           <FinalCTA onOpenQuote={() => setQuoteModalOpen(true)} />

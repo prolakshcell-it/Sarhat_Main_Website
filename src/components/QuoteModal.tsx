@@ -1,25 +1,58 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, CheckCircle2, ShieldCheck, ArrowRight } from "lucide-react";
+import { X, CheckCircle2, ArrowUpRight } from "lucide-react";
 
 interface QuoteModalProps {
   isOpen: boolean;
   onClose: () => void;
+  defaultProduct?: string;
 }
 
-export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
+const INDIAN_STATES = [
+  "Rajasthan",
+  "Uttar Pradesh",
+  "Haryana",
+  "Madhya Pradesh",
+  "Bihar",
+  "Arunachal Pradesh",
+  "Other state",
+];
+
+export default function QuoteModal({
+  isOpen,
+  onClose,
+  defaultProduct,
+}: QuoteModalProps) {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
     name: "",
     company: "",
     email: "",
     phone: "",
-    vertical: "Solar EPC",
-    scale: "5 - 20 MW",
+    product: defaultProduct || "PM-KUSUM",
+    state: "",
+    scope: "",
     details: "",
   });
+
+  useEffect(() => {
+    if (defaultProduct) {
+      setForm((prev) => ({ ...prev, product: defaultProduct }));
+    }
+  }, [defaultProduct]);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,181 +72,286 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 bg-black/90 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
+        className="fixed inset-0 z-50 bg-[#05080c]/70 backdrop-blur-[6px] flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
         onClick={onClose}
       >
         <motion.div
-          initial={{ scale: 0.9, opacity: 0, y: 20 }}
+          initial={{ scale: 0.94, opacity: 0, y: 16 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.9, opacity: 0, y: 20 }}
+          exit={{ scale: 0.94, opacity: 0, y: 16 }}
+          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
           onClick={(e) => e.stopPropagation()}
-          className="bg-slate-950 border border-slate-700/80 rounded-3xl p-8 sm:p-10 max-w-xl w-full relative shadow-2xl overflow-hidden my-8"
+          className="bg-white text-slate-900 rounded-[28px] p-6 sm:p-10 max-w-[680px] w-full relative shadow-2xl border border-slate-200/90 my-8 overflow-hidden"
         >
-          {/* Ambient Glow */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#D4E012]/15 rounded-full blur-3xl pointer-events-none"></div>
-
-          {/* Close button */}
+          {/* Close button matching prototype */}
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 text-slate-400 hover:text-white p-2 rounded-full bg-slate-900 border border-slate-700"
+            aria-label="Close modal"
+            className="absolute top-5 right-5 sm:top-6 sm:right-6 w-9 h-9 rounded-full bg-white border border-slate-200 hover:border-slate-300 flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors shadow-sm cursor-pointer"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4 stroke-[2]" />
           </button>
 
           {!submitted ? (
             <div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#D4E012] animate-ping shadow-[0_0_8px_#D4E012]"></span>
-                <span className="text-xs font-mono text-[#D4E012] uppercase tracking-widest font-bold">
-                  SARHAT EPC PROJECT DISCUSSION
+              {/* Header Badge */}
+              <div className="text-center mb-3">
+                <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-white border border-[#6DAD45]/40 text-[#707B00] font-mono text-[10.5px] font-bold tracking-[0.2em] uppercase shadow-sm">
+                  DISCUSS A PROJECT
                 </span>
               </div>
-              <h3 className="text-3xl font-serif-display font-medium text-white mb-2">
-                Discuss Your Project
-              </h3>
-              <p className="text-xs text-slate-300 font-light mb-6">
-                Tell us about your upcoming project requirements. Our engineering team will review your site parameters and schedule a direct technical discussion.
+
+              {/* Title & Signature Accent Underline */}
+              <h2 className="text-3xl sm:text-[36px] font-serif font-bold text-slate-900 text-center tracking-tight leading-[1.15] mb-2">
+                Let&apos;s map your{" "}
+                <span className="text-[#6DAD45] italic font-serif relative inline-block font-normal">
+                  execution path.
+                  <svg
+                    className="absolute -bottom-1.5 left-0 w-full h-3 text-[#6DAD45]"
+                    viewBox="0 0 100 20"
+                    preserveAspectRatio="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M0 15 Q 50 0 100 15"
+                      stroke="currentColor"
+                      strokeWidth="3.5"
+                      fill="transparent"
+                    />
+                  </svg>
+                </span>
+              </h2>
+
+              <p className="text-[13px] sm:text-sm text-slate-600 text-center font-normal mb-6">
+                Share a few details and a project lead will call you back.
               </p>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Form */}
+              <form onSubmit={handleSubmit} className="space-y-3.5">
+                {/* Row 1: Full Name & Company */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div>
-                    <label className="block text-[11px] font-mono text-slate-300 uppercase tracking-wider mb-1">
-                      Full Name *
+                    <label className="block text-[10.5px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                      FULL NAME
                     </label>
                     <input
                       required
                       type="text"
-                      placeholder="e.g. Vikram Sharma"
                       value={form.name}
-                      onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4E012]"
+                      onChange={(e) =>
+                        setForm({ ...form, name: e.target.value })
+                      }
+                      className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-mono text-slate-300 uppercase tracking-wider mb-1">
-                      Organization / Company *
+                    <label className="block text-[10.5px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                      COMPANY / ORGANISATION
                     </label>
                     <input
                       required
                       type="text"
-                      placeholder="e.g. Acme Renewables Pvt Ltd"
                       value={form.company}
-                      onChange={(e) => setForm({ ...form, company: e.target.value })}
-                      className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4E012]"
+                      onChange={(e) =>
+                        setForm({ ...form, company: e.target.value })
+                      }
+                      className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Row 2: Email & Phone */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div>
-                    <label className="block text-[11px] font-mono text-slate-300 uppercase tracking-wider mb-1">
-                      Email Address *
+                    <label className="block text-[10.5px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                      EMAIL
                     </label>
                     <input
                       required
                       type="email"
-                      placeholder="vikram@acme.com"
                       value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4E012]"
+                      onChange={(e) =>
+                        setForm({ ...form, email: e.target.value })
+                      }
+                      className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-mono text-slate-300 uppercase tracking-wider mb-1">
-                      Phone Number *
+                    <label className="block text-[10.5px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                      PHONE
                     </label>
                     <input
                       required
                       type="tel"
-                      placeholder="+91 98765 43210"
                       value={form.phone}
-                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4E012]"
+                      onChange={(e) =>
+                        setForm({ ...form, phone: e.target.value })
+                      }
+                      className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Row 3: Product & Project State */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div>
-                    <label className="block text-[11px] font-mono text-slate-300 uppercase tracking-wider mb-1">
-                      Primary Vertical
+                    <label className="block text-[10.5px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                      PRODUCT
                     </label>
                     <select
-                      value={form.vertical}
-                      onChange={(e) => setForm({ ...form, vertical: e.target.value })}
-                      className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4E012]"
+                      value={form.product}
+                      onChange={(e) =>
+                        setForm({ ...form, product: e.target.value })
+                      }
+                      className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 outline-none transition-all cursor-pointer"
                     >
-                      <option value="Renewable Energy">Renewable Energy (Solar, Wind, O&M)</option>
-                      <option value="BESS & Storage">BESS & Storage Systems</option>
-                      <option value="Energy Infrastructure">Energy Infrastructure (Substations, Grid)</option>
-                      <option value="Civil Infrastructure">Civil Infrastructure (Roads, Buildings, Works)</option>
+                      <option value="" disabled>
+                        Select a product
+                      </option>
+                      <optgroup label="Solar Energy">
+                        <option value="PM-KUSUM">PM-KUSUM</option>
+                        <option value="Open Access Solar">
+                          Open Access Solar
+                        </option>
+                        <option value="Surya Sarovar">Surya Sarovar</option>
+                        <option value="Canal-Top Solar">Canal-Top Solar</option>
+                        <option value="Agri-PV (Agrivoltaics)">
+                          Agri-PV (Agrivoltaics)
+                        </option>
+                        <option value="Residential Rooftop Solar">
+                          Residential Rooftop Solar
+                        </option>
+                        <option value="Industrial & Commercial Rooftop Solar">
+                          Industrial & Commercial Rooftop Solar
+                        </option>
+                        <option value="Institutional Rooftop Solar">
+                          Institutional Rooftop Solar
+                        </option>
+                      </optgroup>
+                      <optgroup label="BESS & Hybrid">
+                        <option value="Standalone BESS">Standalone BESS</option>
+                        <option value="BESS meets PV / Wind">
+                          BESS meets PV / Wind
+                        </option>
+                      </optgroup>
+                      <optgroup label="Infrastructure">
+                        <option value="Substations & Switchyards">
+                          Substations & Switchyards
+                        </option>
+                        <option value="Transmission Lines">
+                          Transmission Lines
+                        </option>
+                        <option value="Piling & Foundations">
+                          Piling & Foundations
+                        </option>
+                        <option value="Telecommunication Towers">
+                          Telecommunication Towers
+                        </option>
+                        <option value="Industrial Buildings">
+                          Industrial Buildings
+                        </option>
+                        <option value="Commercial Buildings">
+                          Commercial Buildings
+                        </option>
+                        <option value="Roads & Drainage">
+                          Roads & Drainage
+                        </option>
+                      </optgroup>
+                      <option value="Something else">Something else</option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-[11px] font-mono text-slate-300 uppercase tracking-wider mb-1">
-                      Target Capacity / Scale
+                    <label className="block text-[10.5px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                      PROJECT STATE
                     </label>
                     <select
-                      value={form.scale}
-                      onChange={(e) => setForm({ ...form, scale: e.target.value })}
-                      className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4E012]"
+                      value={form.state}
+                      onChange={(e) =>
+                        setForm({ ...form, state: e.target.value })
+                      }
+                      className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 outline-none transition-all cursor-pointer"
                     >
-                      <option value="Under 5 MW">Under 5 MW</option>
-                      <option value="5 - 20 MW">5 - 20 MW</option>
-                      <option value="20 - 50 MW">20 - 50 MW</option>
-                      <option value="50+ MW Utility">50+ MW Utility</option>
+                      <option value="" disabled>
+                        Select a state
+                      </option>
+                      {INDIAN_STATES.map((state) => (
+                        <option key={state} value={state}>
+                          {state}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
 
+                {/* Row 4: Approx Size / Scope */}
                 <div>
-                  <label className="block text-[11px] font-mono text-slate-300 uppercase tracking-wider mb-1">
-                    Project Discussion & Site Scope
+                  <label className="block text-[10.5px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                    APPROX. SIZE / SCOPE
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. 2 MW KUSUM, 500 kW rooftop, 33 kV bay"
+                    value={form.scope}
+                    onChange={(e) =>
+                      setForm({ ...form, scope: e.target.value })
+                    }
+                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
+                  />
+                </div>
+
+                {/* Row 5: Project Details */}
+                <div>
+                  <label className="block text-[10.5px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                    PROJECT DETAILS
                   </label>
                   <textarea
                     rows={3}
-                    placeholder="Provide land availability, district location, grid connectivity goals, or technical queries..."
+                    placeholder="Site location, land or roof status, PPA / LoA status, timelines..."
                     value={form.details}
-                    onChange={(e) => setForm({ ...form, details: e.target.value })}
-                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#D4E012]"
-                  ></textarea>
+                    onChange={(e) =>
+                      setForm({ ...form, details: e.target.value })
+                    }
+                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all resize-y"
+                  />
                 </div>
 
+                {/* Submit button */}
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-[#D4E012]/20"
+                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] px-7 py-3.5 text-xs font-mono font-extrabold uppercase tracking-wider text-black shadow-lg shadow-[#D4E012]/30 transition-all duration-200 hover:-translate-y-px cursor-pointer"
                   >
-                    <span>Submit Discussion Request</span>
-                    <ArrowRight className="w-4 h-4 text-black" />
+                    <span>SEND ENQUIRY</span>
+                    <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
                   </button>
                 </div>
 
-                <div className="flex items-center justify-center gap-2 text-[10px] text-slate-400 pt-2 font-mono">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#D4E012]" />
-                  <span>ISO 9001:2015 Confidential Engineering Data Safeguard</span>
-                </div>
+                {/* Footer Disclaimer */}
+                <p className="text-[11.5px] text-slate-500 leading-relaxed pt-1">
+                  By submitting you agree to be contacted by Sarhat about this enquiry. We never share your details.
+                </p>
               </form>
             </div>
           ) : (
             <div className="text-center py-8 space-y-4">
-              <div className="w-16 h-16 rounded-full bg-[#D4E012]/20 border border-[#D4E012] flex items-center justify-center mx-auto">
-                <CheckCircle2 className="w-8 h-8 text-[#D4E012]" />
+              <div className="w-14 h-14 rounded-full bg-emerald-100 border border-emerald-300 flex items-center justify-center mx-auto text-[#6DAD45]">
+                <CheckCircle2 className="w-7 h-7" />
               </div>
-              <h3 className="text-3xl font-serif-display font-medium text-white">
-                Project Discussion Request Received
+              <h3 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900">
+                Enquiry Sent Successfully
               </h3>
-              <p className="text-xs text-slate-300 font-light max-w-md mx-auto leading-relaxed">
-                Thank you, <span className="text-white font-semibold">{form.name}</span>. Our lead EPC engineer for <span className="text-[#D4E012] font-mono">{form.vertical}</span> has been notified and will reach out to {form.email} to discuss your project.
+              <p className="text-xs sm:text-sm text-slate-600 max-w-sm mx-auto leading-relaxed">
+                Thank you, <span className="font-semibold text-slate-900">{form.name}</span>. A project lead for <span className="font-semibold text-[#6DAD45]">{form.product}</span> will review your enquiry and get back to you shortly at {form.email}.
               </p>
 
-              <button
-                onClick={handleReset}
-                className="bg-slate-800 hover:bg-slate-700 text-white text-xs uppercase tracking-widest px-6 py-2.5 rounded-full transition-colors font-mono"
-              >
-                Close Window
-              </button>
+              <div className="pt-4">
+                <button
+                  onClick={handleReset}
+                  className="bg-slate-900 hover:bg-slate-800 text-white font-mono text-xs uppercase tracking-wider px-6 py-2.5 rounded-full transition-all cursor-pointer"
+                >
+                  Close Window
+                </button>
+              </div>
             </div>
           )}
         </motion.div>

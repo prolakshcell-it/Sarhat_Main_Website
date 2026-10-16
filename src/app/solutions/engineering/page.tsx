@@ -12,6 +12,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import FinalCTA from "@/components/FinalCTA";
+import RelatedSolutionsSection from "@/components/solutions/RelatedSolutionsSection";
 import { stageScenes } from "@/components/solutions/EngineeringStageScenes";
 import { PROJECTS, STATES, sumMW } from "@/data/projects";
 import {
@@ -169,10 +170,25 @@ export default function EngineeringPage() {
           <section className="py-16 sm:py-24 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto">
-                  <AnimatedPillBadge className="mb-4">OUR ENGINEERING</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Practical design for plants that get built
+                <div className="text-center max-w-4xl mx-auto">
+                  <AnimatedPillBadge className="mb-6">OUR ENGINEERING</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Practical design</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      for plants that get built
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="mt-5 text-slate-600 text-base sm:text-lg leading-relaxed">
                     Our work is mostly KUSUM-scheme and utility-connected solar plants of a few megawatts each. Every one sits on different ground and connects to a different substation, so we do not reuse a template. We engineer each plant for its own site.
@@ -203,12 +219,27 @@ export default function EngineeringPage() {
           <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
-                  <AnimatedPillBadge className="mb-3">HOW WE WORK</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    From first site visit to energisation
+                <div className="text-center max-w-4xl mx-auto mb-14 sm:mb-16">
+                  <AnimatedPillBadge className="mb-6">HOW WE WORK</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">From first site visit</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      to energisation
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
-                  <p className="mt-4 text-slate-600 text-base sm:text-lg">
+                  <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
                     Four stages, one team, and no point where responsibility quietly changes hands.
                   </p>
                 </div>
@@ -260,10 +291,25 @@ export default function EngineeringPage() {
           <section className="py-16 sm:py-24 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
-                  <AnimatedPillBadge className="mb-3">ACROSS INDIA</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Every state asks something different of the design
+                <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">ACROSS INDIA</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Every state asks</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      something different of the design
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="mt-4 text-slate-600 text-base sm:text-lg">
                     Soil, weather, land shape and access change from one region to the next. This is what we plan for in each place we work.
@@ -303,17 +349,32 @@ export default function EngineeringPage() {
           <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-12">
-                  <AnimatedPillBadge className="mb-3">GO DEEPER</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Two ways to look inside our engineering
+                <div className="text-center max-w-4xl mx-auto mb-12">
+                  <AnimatedPillBadge className="mb-6">GO DEEPER</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Two ways to look</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      inside our engineering
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                 </div>
               </ScrollReveal>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
-                   {
+                  {
                     href: "/solutions/engineering/innovation",
                     icon: Sparkles,
                     tag: "Innovation",
@@ -352,6 +413,9 @@ export default function EngineeringPage() {
               </div>
             </div>
           </section>
+
+          {/* RELATED SOLUTIONS */}
+          <RelatedSolutionsSection currentHref="/solutions/engineering" />
 
           {/* Final CTA */}
           <FinalCTA onOpenQuote={() => setQuoteModalOpen(true)} />

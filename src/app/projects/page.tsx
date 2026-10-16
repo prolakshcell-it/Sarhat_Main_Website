@@ -36,6 +36,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
+import FinalCTA from "@/components/FinalCTA";
 import FootprintMap from "@/components/FootprintMap";
 import SmoothScroll from "@/components/SmoothScroll";
 import ScrollIndicator from "@/components/ScrollIndicator";
@@ -738,9 +739,24 @@ export default function MainProjectsPage() {
                 variants={fadeInUp}
                 className="text-center max-w-3xl mx-auto mb-14"
               >
-                <AnimatedPillBadge className="mb-3">PORTFOLIO OVERVIEW</AnimatedPillBadge>
-                <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 mb-4">
-                  Verified <span className="text-[#6DAD45] italic font-bold">Portfolio Figures</span>
+                <AnimatedPillBadge className="mb-6">PORTFOLIO OVERVIEW</AnimatedPillBadge>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                  <span className="inline-block">Verified Data.</span> <br />
+                  <span className="text-[#6DAD45] italic relative inline-block">
+                    Portfolio Figures
+                    <svg
+                      className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                      viewBox="0 0 100 20"
+                      preserveAspectRatio="none"
+                    >
+                      <path
+                        d="M0 15 Q 50 0 100 15"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        fill="transparent"
+                      />
+                    </svg>
+                  </span>
                 </h2>
                 <p className="text-slate-600 text-base leading-relaxed">
                   Real-time breakdown of Sarhat&apos;s verified solar infrastructure projects across operating states, showing commissioned, ongoing and pipeline capacity alongside estimated carbon impact.
@@ -857,9 +873,24 @@ export default function MainProjectsPage() {
                 variants={fadeInUp}
                 className="text-center max-w-3xl mx-auto mb-10"
               >
-                <AnimatedPillBadge className="mb-3">FEATURED EXECUTION STORIES</AnimatedPillBadge>
-                <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 mb-4">
-                  Project <span className="text-[#6DAD45] italic font-bold">Highlights</span>
+                <AnimatedPillBadge className="mb-6">FEATURED EXECUTION STORIES</AnimatedPillBadge>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                  <span className="inline-block">Execution Stories.</span> <br />
+                  <span className="text-[#6DAD45] italic relative inline-block">
+                    Project Highlights
+                    <svg
+                      className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                      viewBox="0 0 100 20"
+                      preserveAspectRatio="none"
+                    >
+                      <path
+                        d="M0 15 Q 50 0 100 15"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        fill="transparent"
+                      />
+                    </svg>
+                  </span>
                 </h2>
              <p className="text-slate-600 text-base leading-relaxed">
   Step into the projects behind Sarhat’s journey — where ideas become engineered,
@@ -890,9 +921,24 @@ export default function MainProjectsPage() {
                 variants={fadeInUp}
                 className="text-center max-w-3xl mx-auto mb-10"
               >
-                <AnimatedPillBadge className="mb-3">Our Impact</AnimatedPillBadge>
-                <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 mb-4">
-                  Explore <span className="text-[#6DAD45] italic font-bold">Projects</span>
+                <AnimatedPillBadge className="mb-6">OUR FOOTPRINT</AnimatedPillBadge>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                  <span className="inline-block">Pan-India Sites.</span> <br />
+                  <span className="text-[#6DAD45] italic relative inline-block">
+                    Explore Projects
+                    <svg
+                      className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                      viewBox="0 0 100 20"
+                      preserveAspectRatio="none"
+                    >
+                      <path
+                        d="M0 15 Q 50 0 100 15"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        fill="transparent"
+                      />
+                    </svg>
+                  </span>
                 </h2>
                 <p className="text-slate-600 text-base leading-relaxed">
                   Browse Sarhat&apos;s solar sites across India, filtered by government scheme and delivery status.
@@ -1080,9 +1126,24 @@ export default function MainProjectsPage() {
                 variants={fadeInUp}
                 className="text-center max-w-3xl mx-auto mb-16"
               >
-                <AnimatedPillBadge className="mb-3">TURNKEY SCOPE &amp; OUTCOMES</AnimatedPillBadge>
-                <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 mb-4">
-                  Execution &amp; <span className="text-[#6DAD45] italic font-bold">Impact</span>
+                <AnimatedPillBadge className="mb-6">TURNKEY SCOPE &amp; OUTCOMES</AnimatedPillBadge>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                  <span className="inline-block">Disciplined Delivery.</span> <br />
+                  <span className="text-[#6DAD45] italic relative inline-block">
+                    Execution &amp; Impact
+                    <svg
+                      className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                      viewBox="0 0 100 20"
+                      preserveAspectRatio="none"
+                    >
+                      <path
+                        d="M0 15 Q 50 0 100 15"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        fill="transparent"
+                      />
+                    </svg>
+                  </span>
                 </h2>
                 <p className="text-slate-600 text-base leading-relaxed">
                   Sarhat provides single-point turnkey accountability across civil engineering, electrical substation construction, SCADA integration, and environmental impact.
@@ -1176,6 +1237,13 @@ export default function MainProjectsPage() {
             </div>
           </section>
         </div>
+
+        <FinalCTA
+          onOpenQuote={() => setQuoteModalOpen(true)}
+          headline="Have a project"
+          accent="worth building?"
+          description="Solar. BESS Storage. Substations. Agrivoltaics. Roads. Bridges. Buildings. Tell us where you want to build and let's map the execution path together."
+        />
 
         <Footer />
         <QuoteModal isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} />

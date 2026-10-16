@@ -273,11 +273,26 @@ export default function SupplyPartnersPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <ScrollReveal direction="up" distance={40}>
                 <div className="text-center max-w-4xl mx-auto mb-10">
-                  <AnimatedPillBadge className="mb-3">
+                  <AnimatedPillBadge className="mb-6">
                     Why Register
                   </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-4">
-                    Supply to India&apos;s Growing <span className="text-[#6DAD45] italic">Solar EPC Pipeline.</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Supply to India&apos;s Growing</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Solar EPC Pipeline
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 font-normal text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
                     Sarhat Energy executes solar EPC projects continuously across Uttar Pradesh, Rajasthan, Gujarat, Maharashtra, and Madhya Pradesh. We source Tier-1 equipment and services from a panel of pre-qualified vendors — prioritising quality, compliance, and delivery reliability above all else.
@@ -325,11 +340,26 @@ export default function SupplyPartnersPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={40}>
                 <div className="text-center max-w-3xl mx-auto mb-8">
-                  <AnimatedPillBadge className="mb-3">
+                  <AnimatedPillBadge className="mb-6">
                     Procurement Categories
                   </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-3">
-                    Vendor <span className="text-[#6DAD45] italic">Supply Portfolios.</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Procurement Buckets.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Vendor Supply Portfolios
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
                     We regularly empanel manufacturers and distributors across four primary procurement buckets.
@@ -387,11 +417,26 @@ export default function SupplyPartnersPage() {
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <ScrollReveal direction="up" distance={40}>
                 <div className="text-center max-w-2xl mx-auto mb-8">
-                  <AnimatedPillBadge className="mb-3">
+                  <AnimatedPillBadge className="mb-6">
                     Submit Details
                   </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-2">
-                    Vendor <span className="text-[#6DAD45] italic">Application.</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Submit Credentials.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Vendor Application
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 text-sm sm:text-base">
                     Tell us about your company and what you supply.
@@ -620,11 +665,26 @@ export default function SupplyPartnersPage() {
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={40}>
                 <div className="text-center max-w-2xl mx-auto mb-8">
-                  <AnimatedPillBadge className="mb-3">
+                  <AnimatedPillBadge className="mb-6">
                     Got Questions?
                   </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-2">
-                    Frequently Asked <span className="text-[#6DAD45] italic">Questions.</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Common Questions.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Frequently Asked Questions
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 text-sm sm:text-base">
                     Everything you need to know about Sarhat&apos;s vendor empanelment process and commercial terms.

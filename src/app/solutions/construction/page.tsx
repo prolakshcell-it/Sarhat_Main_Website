@@ -12,6 +12,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import FinalCTA from "@/components/FinalCTA";
+import RelatedSolutionsSection from "@/components/solutions/RelatedSolutionsSection";
 import ConstructionScene from "@/components/solutions/ConstructionScene";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 
@@ -174,10 +175,25 @@ export default function ConstructionPage() {
           <section className="pt-16 sm:pt-24 pb-6 bg-[#F8FAF8]">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto">
-                  <AnimatedPillBadge className="mb-4">SITE CONSTRUCTION &amp; ERECTION</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Watch a plant take shape
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12">
+                  <AnimatedPillBadge className="mb-6">SITE CONSTRUCTION &amp; ERECTION</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Watch a plant</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      take shape
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="mt-5 text-slate-600 text-base sm:text-lg leading-relaxed">
                     At Sarhat Energy, we provide complete site construction and erection services for renewable energy projects, with careful execution, structural stability and on-time completion. Our work covers utility-scale, commercial and rooftop solar, always with quality, safety and efficiency in focus.
@@ -221,26 +237,8 @@ export default function ConstructionPage() {
             </div>
           </section>
 
-          {/* Next */}
-          <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
-            <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-              <ScrollReveal>
-                <Link
-                  href="/solutions/operation-and-maintenance"
-                  className="group flex flex-col items-start justify-between gap-4 rounded-3xl bg-slate-900 p-8 text-white transition-transform duration-200 hover:-translate-y-1 sm:flex-row sm:items-center sm:p-10"
-                >
-                  <div>
-                    <div className="font-mono text-xs uppercase tracking-wider text-[#D4E012]">After handover</div>
-                    <h3 className="mt-2 font-serif-display text-2xl sm:text-3xl font-medium">Keep the plant performing for years</h3>
-                  </div>
-                  <span className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold">
-                    Explore Operation &amp; Maintenance
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </Link>
-              </ScrollReveal>
-            </div>
-          </section>
+          {/* RELATED SOLUTIONS */}
+          <RelatedSolutionsSection currentHref="/solutions/construction" />
 
           {/* Final CTA */}
           <FinalCTA onOpenQuote={() => setQuoteModalOpen(true)} />

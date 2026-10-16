@@ -1,13 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import dynamic from "next/dynamic";
-import { animate, motion, useReducedMotion } from "framer-motion";
-import { MapPin, Building2, ArrowRight, Zap, CheckCircle2, Clock, AlertCircle, X } from "lucide-react";
-import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 import AnimatedPillBadge from "./AnimatedPillBadge";
-import { PROJECTS, STATES, Project, buildMarkers, formatMW, sumMW } from "@/data/projects";
+import { PROJECTS, STATES, formatMW, sumMW } from "@/data/projects";
 
 import SlnkoStyleIndiaMap from "./SlnkoStyleIndiaMap";
 
@@ -20,20 +17,15 @@ const ALL = "all";
 
 export default function FootprintMap({ selectedStateSlug, onSelectState }: FootprintMapProps) {
   const router = useRouter();
-  const [stateSlug, setStateSlug] = useState<string>(
-    STATES.some((s) => s.slug === selectedStateSlug) ? (selectedStateSlug as string) : ALL
-  );
+  const [internalStateSlug, setInternalStateSlug] = useState<string | null>(null);
+  const stateSlug =
+    internalStateSlug ??
+    (selectedStateSlug && STATES.some((s) => s.slug === selectedStateSlug) ? selectedStateSlug : ALL);
   const reduce = !!useReducedMotion();
   const chipsRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (selectedStateSlug && STATES.some((s) => s.slug === selectedStateSlug)) {
-      setStateSlug(selectedStateSlug);
-    }
-  }, [selectedStateSlug]);
-
   const selectState = (slug: string) => {
-    setStateSlug(slug);
+    setInternalStateSlug(slug);
     if (slug !== ALL) onSelectState?.(slug);
   };
 
@@ -154,7 +146,7 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
             hidden: { opacity: 0, y: reduce ? 0 : 20 },
             visible: { opacity: 1, y: 0, transition: { duration: reduce ? 0.2 : 0.7, ease: "easeOut" } },
           }}
-          className="overflow-hidden rounded-[24px] border border-slate-800 bg-[#071325] shadow-[0_30px_90px_rgba(0,0,0,0.85)]"
+          className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] border border-slate-800/80 bg-gradient-to-b from-[#0B1728] via-[#071325] to-[#040B17] shadow-[0_30px_90px_rgba(0,0,0,0.85)] p-4 sm:p-7 md:p-9"
         >
           <SlnkoStyleIndiaMap
             selectedStateSlug={stateSlug}

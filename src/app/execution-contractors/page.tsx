@@ -411,11 +411,26 @@ export default function ExecutionContractorsPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <ScrollReveal direction="up" distance={40}>
                 <div className="text-center max-w-4xl mx-auto mb-10">
-                  <AnimatedPillBadge className="mb-3">
+                  <AnimatedPillBadge className="mb-6">
                     Why Empanel
                   </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-4">
-                    Execute with India&apos;s Premier <span className="text-[#6DAD45] italic">Solar &amp; Infra EPC.</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Execute with India&apos;s Premier</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Solar &amp; Infra EPC
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 font-normal text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
                     Sarhat Energy executes mega-watt solar parks, EHV substations, BESS storage, and industrial civil infrastructure across Uttar Pradesh, Rajasthan, Gujarat, Maharashtra, and Madhya Pradesh. We empanel qualified execution contractors with guaranteed commercial terms and HSE backing.
@@ -490,11 +505,26 @@ export default function ExecutionContractorsPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={40}>
                 <div className="text-center max-w-3xl mx-auto mb-8">
-                  <AnimatedPillBadge className="mb-3">
+                  <AnimatedPillBadge className="mb-6">
                     Specialty Categories
                   </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-3">
-                    Contractor <span className="text-[#6DAD45] italic">Disciplines.</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Core Trades.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Contractor Disciplines
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
                     We empanel specialized execution teams across five primary renewable energy &amp; civil infrastructure disciplines.
@@ -574,11 +604,26 @@ export default function ExecutionContractorsPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={40}>
                 <div className="text-center max-w-3xl mx-auto mb-8">
-                  <AnimatedPillBadge className="mb-3">
+                  <AnimatedPillBadge className="mb-6">
                     Empanelment Process
                   </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-3">
-                    How to Become an <span className="text-[#6DAD45] italic">Empanelled Contractor.</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">How to Become an</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Empanelled Contractor
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
                     Follow these 5 simple steps to get enlisted into Sarhat&apos;s active project bidding network.
@@ -668,11 +713,26 @@ export default function ExecutionContractorsPage() {
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <ScrollReveal direction="up" distance={40}>
                 <div className="text-center max-w-2xl mx-auto mb-8">
-                  <AnimatedPillBadge className="mb-3">
+                  <AnimatedPillBadge className="mb-6">
                     Register Now
                   </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-2">
-                    Contractor <span className="text-[#6DAD45] italic">Registration.</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Join Active Projects.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Contractor Registration
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 text-sm sm:text-base">
                     Register your firm into Sarhat&apos;s active execution database.
@@ -978,11 +1038,26 @@ export default function ExecutionContractorsPage() {
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={40}>
                 <div className="text-center max-w-2xl mx-auto mb-8">
-                  <AnimatedPillBadge className="mb-3">
+                  <AnimatedPillBadge className="mb-6">
                     Got Questions?
                   </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-2">
-                    Frequently Asked <span className="text-[#6DAD45] italic">Questions.</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Common Inquiries.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Frequently Asked Questions
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 text-sm sm:text-base">
                     Everything you need to know about Sarhat&apos;s contractor empanelment process and commercial terms.

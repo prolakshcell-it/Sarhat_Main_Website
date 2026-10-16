@@ -279,8 +279,8 @@ export default function CareersPage() {
         cvFileName: "",
         isHuman: false,
       });
-    } catch (err: any) {
-      const msg = err.message || "Failed to submit application. Please try again.";
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Failed to submit application. Please try again.";
       setSubmitError(msg);
       toast.error(msg);
     } finally {
@@ -368,10 +368,24 @@ export default function CareersPage() {
                     Why Join Us
                   </AnimatedPillBadge>
 
-                  {/* Main Headline with Yellow Highlight */}
-                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-bold text-slate-900 tracking-tight leading-tight mb-6">
-                    More Than a Job —{" "}
-                    <span className="text-[#707B00]">A Career With Purpose</span>
+                  {/* Main Headline with Green Highlight */}
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">More Than a Job.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      A Career With Purpose
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
 
                   {/* Subtitle */}
@@ -396,7 +410,7 @@ export default function CareersPage() {
                       Fast-Track Growth
                     </h3>
                     <p className="text-xs text-slate-600 font-normal leading-relaxed max-w-[220px]">
-                      High-performers move quickly at Sarhat. We're a growing company that promotes based on results, not tenure.
+                      High-performers move quickly at Sarhat. We&apos;re a growing company that promotes based on results, not tenure.
                     </p>
                   </motion.div>
 
@@ -412,7 +426,7 @@ export default function CareersPage() {
                       Meaningful Work
                     </h3>
                     <p className="text-xs text-slate-600 font-normal leading-relaxed max-w-[220px]">
-                      Every project you touch contributes to India's clean energy transition. The panels you install will generate clean power for 25+ years.
+                      Every project you touch contributes to India&apos;s clean energy transition. The panels you install will generate clean power for 25+ years.
                     </p>
                   </motion.div>
 
@@ -444,7 +458,7 @@ export default function CareersPage() {
                       Booming Industry
                     </h3>
                     <p className="text-xs text-slate-600 font-normal leading-relaxed max-w-[220px]">
-                      Solar is India's fastest-growing energy sector. The skills you build here will be in high demand for decades.
+                      Solar is India&apos;s fastest-growing energy sector. The skills you build here will be in high demand for decades.
                     </p>
                   </motion.div>
                 </div>
@@ -475,8 +489,23 @@ export default function CareersPage() {
                   </AnimatedPillBadge>
 
                   {/* Main Headline */}
-                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-bold text-slate-900 tracking-tight leading-tight mb-6">
-                    Life @ <span className="text-[#707B00]">Sarhat Energy</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Culture &amp; Team.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Life @ Sarhat Energy
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
 
                   {/* Subtitle */}
@@ -634,13 +663,28 @@ export default function CareersPage() {
                   </AnimatedPillBadge>
 
                   {/* Main Headline */}
-                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-bold text-slate-900 tracking-tight leading-tight mb-6">
-                    Current Openings at <span className="text-[#707B00]">Sarhat Energy</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Join Our Mission.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Current Openings at Sarhat
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
 
                   {/* Subtitle */}
                   <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-3xl mx-auto">
-                    We're looking for driven, capable people to join our growing team across engineering, sales, and field operations.
+                    We&apos;re looking for driven, capable people to join our growing team across engineering, sales, and field operations.
                   </p>
                 </div>
               </ScrollReveal>
@@ -909,7 +953,7 @@ export default function CareersPage() {
                           ) : (
                             <>
                               <Send className="w-4 h-4" />
-                              <span>Submit — We'll Reach Out</span>
+                              <span>Submit — We&apos;ll Reach Out</span>
                             </>
                           )}
                         </button>
@@ -934,8 +978,23 @@ export default function CareersPage() {
                   </AnimatedPillBadge>
 
                   {/* Main Headline */}
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-bold text-slate-900 tracking-tight leading-tight mb-6">
-                    Frequently Asked <span className="text-[#707B00]">Questions</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Common Inquiries.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Frequently Asked Questions
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
 
                   {/* Subtitle */}
@@ -1005,7 +1064,7 @@ export default function CareersPage() {
                         CONTACT HR
                       </div>
                       <h3 className="text-2xl sm:text-4xl font-serif-display font-bold text-white tracking-tight">
-                        Have a question? We'd love to hear from you.
+                        Have a question? We&apos;d love to hear from you.
                       </h3>
                     </div>
 

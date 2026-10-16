@@ -12,6 +12,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import FinalCTA from "@/components/FinalCTA";
+import RelatedSolutionsSection from "@/components/solutions/RelatedSolutionsSection";
 import InnovationLenses, { type LensBlock } from "@/components/solutions/InnovationLenses";
 import {
   ArrowRight,
@@ -160,12 +161,27 @@ export default function EngineeringInnovationPage() {
           <section className="pt-16 sm:pt-24 pb-4 bg-[#F8FAF8]">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto">
-                  <AnimatedPillBadge className="mb-4">INNOVATION</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Technology that makes the site easier to understand
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12">
+                  <AnimatedPillBadge className="mb-6">INNOVATION</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Technology that makes the site</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      easier to understand
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
-                  <p className="mt-5 text-slate-600 text-base sm:text-lg leading-relaxed">
+                  <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
                     We use new tools for one reason: to remove guesswork between the land, the drawing and the finished plant. Here is how it works, from the first flight to the first year of operation.
                   </p>
                 </div>
@@ -184,10 +200,25 @@ export default function EngineeringInnovationPage() {
           <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-12">
-                  <AnimatedPillBadge className="mb-3">WHY IT MATTERS</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    What this changes for you
+                <div className="text-center max-w-4xl mx-auto mb-12">
+                  <AnimatedPillBadge className="mb-6">WHY IT MATTERS</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Value Delivered.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      What this changes for you
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                 </div>
               </ScrollReveal>
@@ -254,6 +285,9 @@ export default function EngineeringInnovationPage() {
               </div>
             </div>
           </section>
+
+          {/* RELATED SOLUTIONS */}
+          <RelatedSolutionsSection currentHref="/solutions/engineering/innovation" />
 
           {/* Final CTA */}
           <FinalCTA onOpenQuote={() => setQuoteModalOpen(true)} />
