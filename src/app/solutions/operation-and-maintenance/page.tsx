@@ -10,8 +10,10 @@ import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import { useHeroScroll } from "@/hooks/useHeroScroll";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import FinalCTA from "@/components/FinalCTA";
+import RelatedSolutionsSection from "@/components/solutions/RelatedSolutionsSection";
 import { CheckCircle2, ArrowRight, FileText } from "lucide-react";
 
 /* ---------- Content ---------- */
@@ -264,14 +266,15 @@ export default function OperationMaintenancePage() {
   const heroRef = useRef<HTMLElement>(null);
 
   // Transform + opacity only, so scrolling stays on the compositor
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const bgScale = useTransform(scrollYProgress, [0, 0.8], [1.03, 1.12]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.2]);
-  const contentY = useTransform(scrollYProgress, [0, 0.3], ["0px", "-48px"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+    const {
+    isPastHero,
+    bgScale,
+    bgDim,
+    contentY,
+    contentScale,
+    contentOpacity,
+    indicatorOpacity,
+  } = useHeroScroll();
 
   return (
     <SmoothScroll>
@@ -279,9 +282,14 @@ export default function OperationMaintenancePage() {
         <Navbar onOpenQuote={() => setQuoteModalOpen(true)} />
 
         {/* 01 / HERO */}
-        <div className="sticky top-0 z-0 w-full h-screen">
+        <div
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
+            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+          }`}
+          aria-hidden={isPastHero}
+        >
           <section ref={heroRef} className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none">
-            <motion.div style={{ scale: bgScale, opacity: bgOpacity }} className="absolute inset-0 z-0 h-full w-full will-change-transform">
+            <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full will-change-transform">
               <Image
                 src="/images/hero-solar.jpg"
                 alt="Aerial view of a solar plant at sunset"
@@ -291,11 +299,11 @@ export default function OperationMaintenancePage() {
                 sizes="100vw"
                 className="object-cover object-center opacity-85"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/95 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
             </motion.div>
 
             <motion.div
-              style={{ y: contentY, opacity: contentOpacity }}
+              style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
               className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-24 flex flex-col items-center text-center will-change-transform"
             >
               <div className="max-w-4xl flex flex-col items-center text-center">
@@ -309,9 +317,13 @@ export default function OperationMaintenancePage() {
               </div>
             </motion.div>
 
-            <ScrollIndicator opacity={contentOpacity} />
+            <ScrollIndicator opacity={indicatorOpacity} />
           </section>
         </div>
+
+        {/* Scroll Spacer (Matches Hero height to establish scroll track) */}
+        <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
+
 
         {/* 02 / CONTENT SHEET */}
         <div className="relative z-10 border-t border-slate-200/60 bg-[#F8FAF8] shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
@@ -319,10 +331,25 @@ export default function OperationMaintenancePage() {
           <section className="pt-16 sm:pt-24 pb-4 bg-[#F8FAF8]">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto">
-                  <AnimatedPillBadge className="mb-4">FEASIBILITY &amp; MAINTENANCE</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    From the first study to the long run
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12">
+                  <AnimatedPillBadge className="mb-6">FEASIBILITY &amp; MAINTENANCE</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">From the first study</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      to the long run
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="mt-5 text-slate-600 text-base sm:text-lg leading-relaxed">
                     At Sarhat Energy, we offer end-to-end feasibility study and maintenance services for solar projects, for better planning, smoother execution and long-term performance. Our Detailed Project Report (DPR) gives you a complete roadmap for the project to succeed.
@@ -336,10 +363,25 @@ export default function OperationMaintenancePage() {
           <section className="py-16 sm:py-20 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-                  <div className="font-mono text-xs font-bold tracking-widest text-[#6DAD45]">PART 1 · FEASIBILITY STUDY</div>
-                  <h2 className="mt-2 text-3xl sm:text-4xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Five questions, one report
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12">
+                  <AnimatedPillBadge className="mb-6">PART 1 · FEASIBILITY STUDY</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Five core dimensions.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      One complete DPR
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="mt-3 text-slate-600">Select a triangle to see what we look at. Together they form your DPR.</p>
                 </div>
@@ -365,10 +407,25 @@ export default function OperationMaintenancePage() {
           <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-                  <div className="font-mono text-xs font-bold tracking-widest text-[#6DAD45]">PART 2 · MAINTENANCE</div>
-                  <h2 className="mt-2 text-3xl sm:text-4xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Three rings of care around your plant
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12">
+                  <AnimatedPillBadge className="mb-6">PART 2 · MAINTENANCE</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Three rings of care</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      around your plant
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="mt-3 text-slate-600">Select a ring to see what happens at each rhythm.</p>
                 </div>
@@ -395,6 +452,9 @@ export default function OperationMaintenancePage() {
               </div>
             </div>
           </section>
+
+          {/* RELATED SOLUTIONS */}
+          <RelatedSolutionsSection currentHref="/solutions/operation-and-maintenance" />
 
           {/* Final CTA */}
           <FinalCTA onOpenQuote={() => setQuoteModalOpen(true)} />

@@ -3,7 +3,8 @@
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
+import { useHeroScroll } from "@/hooks/useHeroScroll";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import { Draw, EASE, SUN, borderBand, useDrawOnView } from "./motifs";
 
@@ -16,25 +17,30 @@ const band = borderBand(BAND_W);
  */
 export default function StoryHero() {
   const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-
-  // Opacity + translate only: the panel below slides over this sticky hero
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0.3]);
-  const contentY = useTransform(scrollYProgress, [0, 0.3], [0, -48]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+  const {
+    isPastHero,
+    bgScale,
+    bgDim,
+    contentY,
+    contentScale,
+    contentOpacity,
+    indicatorOpacity,
+  } = useHeroScroll();
 
   const draw = useDrawOnView(ref, { duration: 2.2, delay: 0.3, amount: 0.1 });
 
   return (
-    <div className="sticky top-0 z-0 h-screen w-full">
+    <div
+      className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-[#140E09] select-none will-change-transform ${
+        isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+      }`}
+      aria-hidden={isPastHero}
+    >
       <section
         ref={ref}
         className="relative flex h-full w-full select-none flex-col items-center justify-center overflow-hidden bg-[#140E09] text-white"
       >
-        <motion.div style={{ opacity: bgOpacity }} className="absolute inset-0">
+        <motion.div style={{ scale: bgScale }} className="absolute inset-0">
           <Image
             src="/images/about-hero-bg-bright.jpg"
             alt="Our Story — Sarhat Energy"
@@ -45,12 +51,13 @@ export default function StoryHero() {
           />
           {/* warm earth grade: the land first, the technology second */}
           <div className="absolute inset-0 bg-[#2A1A0E]/55 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#140E09]/85 via-[#140E09]/45 to-[#140E09]/95" />
+          <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#140E09]/80 via-[#140E09]/25 via-45% to-[#140E09]/40" />
         </motion.div>
 
         <motion.div
-          style={{ y: contentY, opacity: contentOpacity }}
-          className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center px-4 pt-16 text-center sm:px-6"
+          style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
+          className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center px-4 pt-16 text-center sm:px-6 will-change-transform"
         >
           {/* Mithila sun: the first mark on the page */}
           <svg
@@ -146,7 +153,7 @@ export default function StoryHero() {
           </svg>
         </motion.div> */}
 
-        <ScrollIndicator opacity={contentOpacity} />
+        <ScrollIndicator opacity={indicatorOpacity} />
       </section>
     </div>
   );

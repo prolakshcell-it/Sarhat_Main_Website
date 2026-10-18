@@ -50,6 +50,7 @@
 .ray {
   stroke-dasharray: 0.22 2;
   stroke-dashoffset: 0.22;
+  filter: drop-shadow(0 0 5px #F97316);
 }
 
 .root[data-on] .ray {
@@ -66,7 +67,7 @@
   }
 }
 
-/* Modules light up as the sunlight lands */
+/* Modules light up with blue light as the sunlight lands */
 .glow {
   opacity: 0;
 }
@@ -79,10 +80,11 @@
   0% {
     opacity: 0;
   }
-  6% {
-    opacity: 0.35;
+  8% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 10px #00D2FF);
   }
-  30%,
+  32%,
   100% {
     opacity: 0;
   }

@@ -36,6 +36,7 @@ import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import { useHeroScroll } from "@/hooks/useHeroScroll";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 
 export default function ExecutionContractorsPage() {
@@ -47,19 +48,15 @@ export default function ExecutionContractorsPage() {
   const containerRef = useRef<HTMLElement>(null);
 
   // Parallax & Scroll Fade-out Tracking
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const bgScale = useTransform(scrollYProgress, [0, 0.8], [1.03, 1.15]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.2]);
-  const bgDim = useTransform(scrollYProgress, [0, 0.5], [0.3, 0.85]);
-
-  const contentY = useTransform(scrollYProgress, [0, 0.3], ["0px", "-60px"]);
-  const contentScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.95]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
-  const contentFilter = useTransform(scrollYProgress, [0, 0.25], ["blur(0px)", "blur(10px)"]);
+    const {
+    isPastHero,
+    bgScale,
+    bgDim,
+    contentY,
+    contentScale,
+    contentOpacity,
+    indicatorOpacity,
+  } = useHeroScroll();
 
   // Form submission state
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -358,10 +355,15 @@ export default function ExecutionContractorsPage() {
         <QuoteModal isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} />
 
         {/* Sticky Hero Container (100vh Fullscreen Hero) */}
-        <div className="sticky top-0 z-0 w-full h-screen">
+        <div
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
+            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+          }`}
+          aria-hidden={isPastHero}
+        >
           <section ref={containerRef} className="relative h-full w-full flex flex-col justify-center items-center bg-slate-950 text-white overflow-hidden select-none">
             {/* Cinematic High-Res Fullscreen Background Image Layer */}
-            <motion.div style={{ scale: bgScale, opacity: bgOpacity }} className="absolute inset-0 z-0 h-full w-full">
+            <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
               <Image
                 src="/images/hero-solar.jpg"
                 alt="Execution Contractors Sarhat Energy"
@@ -371,11 +373,11 @@ export default function ExecutionContractorsPage() {
                 className="object-cover object-center opacity-90 transform scale-105"
               />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90 pointer-events-none"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
             </motion.div>
 
             <motion.div
-              style={{ y: contentY, scale: contentScale, opacity: contentOpacity, filter: contentFilter }}
+              style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
               className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 w-full relative z-10 pt-16 flex flex-col items-center text-center will-change-transform"
             >
               <ScrollReveal direction="up" distance={40}>
@@ -398,9 +400,13 @@ export default function ExecutionContractorsPage() {
             </motion.div>
 
             {/* Mouse Scroll Indicator */}
-            <ScrollIndicator opacity={contentOpacity} filter={contentFilter} />
+            <ScrollIndicator opacity={indicatorOpacity} />
           </section>
         </div>
+
+        {/* Scroll Spacer (Matches Hero height to establish scroll track) */}
+        <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
+
 
         {/* Main Content Sections */}
         <div className="relative z-10 bg-[#F8FAF8] border-t border-slate-200/60 shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
@@ -411,11 +417,26 @@ export default function ExecutionContractorsPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <ScrollReveal direction="up" distance={40}>
                 <div className="text-center max-w-4xl mx-auto mb-10">
-                  <AnimatedPillBadge className="mb-3">
+                  <AnimatedPillBadge className="mb-6">
                     Why Empanel
                   </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-4">
-                    Execute with India&apos;s Premier <span className="text-[#6DAD45] italic">Solar &amp; Infra EPC.</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Execute with India&apos;s Premier</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Solar &amp; Infra EPC
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 font-normal text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
                     Sarhat Energy executes mega-watt solar parks, EHV substations, BESS storage, and industrial civil infrastructure across Uttar Pradesh, Rajasthan, Gujarat, Maharashtra, and Madhya Pradesh. We empanel qualified execution contractors with guaranteed commercial terms and HSE backing.
@@ -490,11 +511,26 @@ export default function ExecutionContractorsPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={40}>
                 <div className="text-center max-w-3xl mx-auto mb-8">
-                  <AnimatedPillBadge className="mb-3">
+                  <AnimatedPillBadge className="mb-6">
                     Specialty Categories
                   </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-3">
-                    Contractor <span className="text-[#6DAD45] italic">Disciplines.</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Core Trades.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Contractor Disciplines
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
                     We empanel specialized execution teams across five primary renewable energy &amp; civil infrastructure disciplines.
@@ -574,11 +610,26 @@ export default function ExecutionContractorsPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={40}>
                 <div className="text-center max-w-3xl mx-auto mb-8">
-                  <AnimatedPillBadge className="mb-3">
+                  <AnimatedPillBadge className="mb-6">
                     Empanelment Process
                   </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-3">
-                    How to Become an <span className="text-[#6DAD45] italic">Empanelled Contractor.</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">How to Become an</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Empanelled Contractor
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
                     Follow these 5 simple steps to get enlisted into Sarhat&apos;s active project bidding network.
@@ -668,11 +719,26 @@ export default function ExecutionContractorsPage() {
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <ScrollReveal direction="up" distance={40}>
                 <div className="text-center max-w-2xl mx-auto mb-8">
-                  <AnimatedPillBadge className="mb-3">
+                  <AnimatedPillBadge className="mb-6">
                     Register Now
                   </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-2">
-                    Contractor <span className="text-[#6DAD45] italic">Registration.</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Join Active Projects.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Contractor Registration
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 text-sm sm:text-base">
                     Register your firm into Sarhat&apos;s active execution database.
@@ -978,11 +1044,26 @@ export default function ExecutionContractorsPage() {
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={40}>
                 <div className="text-center max-w-2xl mx-auto mb-8">
-                  <AnimatedPillBadge className="mb-3">
+                  <AnimatedPillBadge className="mb-6">
                     Got Questions?
                   </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-2">
-                    Frequently Asked <span className="text-[#6DAD45] italic">Questions.</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Common Inquiries.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Frequently Asked Questions
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 text-sm sm:text-base">
                     Everything you need to know about Sarhat&apos;s contractor empanelment process and commercial terms.

@@ -10,8 +10,10 @@ import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import { useHeroScroll } from "@/hooks/useHeroScroll";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import FinalCTA from "@/components/FinalCTA";
+import RelatedSolutionsSection from "@/components/solutions/RelatedSolutionsSection";
 import {
   Sun,
   Cable,
@@ -146,14 +148,15 @@ export default function SystemDesignPage() {
   const reduce = !!useReducedMotion();
 
   // Transform + opacity only, so scrolling stays on the compositor
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const bgScale = useTransform(scrollYProgress, [0, 0.8], [1.03, 1.12]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.2]);
-  const contentY = useTransform(scrollYProgress, [0, 0.3], ["0px", "-48px"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+    const {
+    isPastHero,
+    bgScale,
+    bgDim,
+    contentY,
+    contentScale,
+    contentOpacity,
+    indicatorOpacity,
+  } = useHeroScroll();
 
   const node = chain[active];
   const NodeIcon = node.icon;
@@ -165,13 +168,17 @@ export default function SystemDesignPage() {
         <Navbar onOpenQuote={() => setQuoteModalOpen(true)} />
 
         {/* 01 / HERO */}
-        <div className="sticky top-0 z-0 w-full h-screen">
+        <div
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
+            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+          }`}
+          aria-hidden={isPastHero}
+        >
           <section
             ref={heroRef}
             className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none"
           >
-            <motion.div
-              style={{ scale: bgScale, opacity: bgOpacity }}
+            <motion.div style={{ scale: bgScale }}
               className="absolute inset-0 z-0 h-full w-full will-change-transform"
             >
               <Image
@@ -183,11 +190,11 @@ export default function SystemDesignPage() {
                 sizes="100vw"
                 className="object-cover object-center opacity-85"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/95 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
             </motion.div>
 
             <motion.div
-              style={{ y: contentY, opacity: contentOpacity }}
+              style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
               className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-24 flex flex-col items-center text-center will-change-transform"
             >
               <div className="max-w-4xl flex flex-col items-center text-center">
@@ -201,9 +208,13 @@ export default function SystemDesignPage() {
               </div>
             </motion.div>
 
-            <ScrollIndicator opacity={contentOpacity} />
+            <ScrollIndicator opacity={indicatorOpacity} />
           </section>
         </div>
+
+        {/* Scroll Spacer (Matches Hero height to establish scroll track) */}
+        <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
+
 
         {/* 02 / CONTENT SHEET */}
         <div className="relative z-10 border-t border-slate-200/60 bg-[#F8FAF8] shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
@@ -211,12 +222,27 @@ export default function SystemDesignPage() {
           <section className="py-16 sm:py-24 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
-                  <AnimatedPillBadge className="mb-4">SYSTEM DESIGN</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Follow the power, from panel to grid
+                <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">SYSTEM DESIGN</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Follow the power,</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      from panel to grid
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
-                  <p className="mt-5 text-slate-600 text-base sm:text-lg leading-relaxed">
+                  <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
                     A solar plant is a chain. Each link has to suit the ones on either side, so we design them together. Select a link to see what we design and what you get.
                   </p>
                 </div>
@@ -344,12 +370,27 @@ export default function SystemDesignPage() {
           <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
-                  <AnimatedPillBadge className="mb-3">WHAT YOU RECEIVE</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    A drawing set you can hand straight to site
+                <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">WHAT YOU RECEIVE</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">A drawing set</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      you can hand straight to site
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
-                  <p className="mt-4 text-slate-600 text-base sm:text-lg">
+                  <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
                     A typical set for one plant. The exact sheets depend on the scheme and the site.
                   </p>
                 </div>
@@ -377,10 +418,25 @@ export default function SystemDesignPage() {
           <section className="py-16 sm:py-24 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-12">
-                  <AnimatedPillBadge className="mb-3">OUR RULES</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Three rules every design follows
+                <div className="text-center max-w-4xl mx-auto mb-12">
+                  <AnimatedPillBadge className="mb-6">OUR RULES</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Engineering Principles.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Three rules every design follows
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                 </div>
               </ScrollReveal>
@@ -422,6 +478,9 @@ export default function SystemDesignPage() {
               </ScrollReveal>
             </div>
           </section>
+
+          {/* RELATED SOLUTIONS */}
+          <RelatedSolutionsSection currentHref="/solutions/engineering/system-design" />
 
           {/* Final CTA */}
           <FinalCTA onOpenQuote={() => setQuoteModalOpen(true)} />

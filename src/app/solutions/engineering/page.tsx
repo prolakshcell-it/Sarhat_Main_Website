@@ -10,8 +10,10 @@ import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import { useHeroScroll } from "@/hooks/useHeroScroll";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import FinalCTA from "@/components/FinalCTA";
+import RelatedSolutionsSection from "@/components/solutions/RelatedSolutionsSection";
 import { stageScenes } from "@/components/solutions/EngineeringStageScenes";
 import { PROJECTS, STATES, sumMW } from "@/data/projects";
 import {
@@ -101,14 +103,15 @@ export default function EngineeringPage() {
   const timelineRef = useRef<HTMLDivElement>(null);
 
   // Hero: transform + opacity only, so scrolling stays on the compositor
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const bgScale = useTransform(scrollYProgress, [0, 0.8], [1.03, 1.12]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.2]);
-  const contentY = useTransform(scrollYProgress, [0, 0.3], ["0px", "-48px"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+    const {
+    isPastHero,
+    bgScale,
+    bgDim,
+    contentY,
+    contentScale,
+    contentOpacity,
+    indicatorOpacity,
+  } = useHeroScroll();
 
   // Timeline: one scroll-linked line, no per-card listeners
   const { scrollYProgress: lineProgress } = useScroll({
@@ -123,13 +126,17 @@ export default function EngineeringPage() {
         <Navbar onOpenQuote={() => setQuoteModalOpen(true)} />
 
         {/* 01 / HERO */}
-        <div className="sticky top-0 z-0 w-full h-screen">
+        <div
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
+            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+          }`}
+          aria-hidden={isPastHero}
+        >
           <section
             ref={heroRef}
             className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none"
           >
-            <motion.div
-              style={{ scale: bgScale, opacity: bgOpacity }}
+            <motion.div style={{ scale: bgScale }}
               className="absolute inset-0 z-0 h-full w-full will-change-transform"
             >
               <Image
@@ -141,11 +148,11 @@ export default function EngineeringPage() {
                 sizes="100vw"
                 className="object-cover object-center opacity-85"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/95 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
             </motion.div>
 
             <motion.div
-              style={{ y: contentY, opacity: contentOpacity }}
+              style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
               className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-24 flex flex-col items-center text-center will-change-transform"
             >
               <div className="max-w-4xl flex flex-col items-center text-center">
@@ -159,9 +166,13 @@ export default function EngineeringPage() {
               </div>
             </motion.div>
 
-            <ScrollIndicator opacity={contentOpacity} />
+            <ScrollIndicator opacity={indicatorOpacity} />
           </section>
         </div>
+
+        {/* Scroll Spacer (Matches Hero height to establish scroll track) */}
+        <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
+
 
         {/* 02 / CONTENT SHEET */}
         <div className="relative z-10 border-t border-slate-200/60 bg-[#F8FAF8] shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
@@ -169,10 +180,25 @@ export default function EngineeringPage() {
           <section className="py-16 sm:py-24 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto">
-                  <AnimatedPillBadge className="mb-4">OUR ENGINEERING</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Practical design for plants that get built
+                <div className="text-center max-w-4xl mx-auto">
+                  <AnimatedPillBadge className="mb-6">OUR ENGINEERING</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Practical design</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      for plants that get built
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="mt-5 text-slate-600 text-base sm:text-lg leading-relaxed">
                     Our work is mostly KUSUM-scheme and utility-connected solar plants of a few megawatts each. Every one sits on different ground and connects to a different substation, so we do not reuse a template. We engineer each plant for its own site.
@@ -203,12 +229,27 @@ export default function EngineeringPage() {
           <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
-                  <AnimatedPillBadge className="mb-3">HOW WE WORK</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    From first site visit to energisation
+                <div className="text-center max-w-4xl mx-auto mb-14 sm:mb-16">
+                  <AnimatedPillBadge className="mb-6">HOW WE WORK</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">From first site visit</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      to energisation
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
-                  <p className="mt-4 text-slate-600 text-base sm:text-lg">
+                  <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
                     Four stages, one team, and no point where responsibility quietly changes hands.
                   </p>
                 </div>
@@ -260,10 +301,25 @@ export default function EngineeringPage() {
           <section className="py-16 sm:py-24 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
-                  <AnimatedPillBadge className="mb-3">ACROSS INDIA</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Every state asks something different of the design
+                <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">ACROSS INDIA</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Every state asks</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      something different of the design
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="mt-4 text-slate-600 text-base sm:text-lg">
                     Soil, weather, land shape and access change from one region to the next. This is what we plan for in each place we work.
@@ -303,17 +359,32 @@ export default function EngineeringPage() {
           <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-12">
-                  <AnimatedPillBadge className="mb-3">GO DEEPER</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Two ways to look inside our engineering
+                <div className="text-center max-w-4xl mx-auto mb-12">
+                  <AnimatedPillBadge className="mb-6">GO DEEPER</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Two ways to look</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      inside our engineering
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                 </div>
               </ScrollReveal>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
-                   {
+                  {
                     href: "/solutions/engineering/innovation",
                     icon: Sparkles,
                     tag: "Innovation",
@@ -352,6 +423,9 @@ export default function EngineeringPage() {
               </div>
             </div>
           </section>
+
+          {/* RELATED SOLUTIONS */}
+          <RelatedSolutionsSection currentHref="/solutions/engineering" />
 
           {/* Final CTA */}
           <FinalCTA onOpenQuote={() => setQuoteModalOpen(true)} />

@@ -179,10 +179,12 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
 
       {/* Main Navigation Bar */}
       <div
-        className={`relative z-50 w-full border-b transition-[background-color,border-color,backdrop-filter] duration-300 ${
+        className={`relative z-50 w-full border-b transition-all duration-300 ${
           scrolled
-            ? "border-white/10 bg-[rgba(5,8,12,0.92)] backdrop-blur-[14px]"
-            : "border-white/5 bg-black/40 backdrop-blur-md"
+            ? "border-white/10 bg-[rgba(5,8,12,0.45)] backdrop-blur-xl shadow-lg shadow-black/10"
+            : open
+            ? "border-white/10 bg-[rgba(5,8,12,0.65)] backdrop-blur-xl"
+            : "border-transparent bg-transparent backdrop-blur-none"
         }`}
       >
         <div

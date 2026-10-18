@@ -27,10 +27,23 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
+import FinalCTA from "@/components/FinalCTA";
 import ScrollReveal from "@/components/ScrollReveal";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
+import ScrollIndicator from "@/components/ScrollIndicator";
+import { useHeroScroll } from "@/hooks/useHeroScroll";
 
 export default function AboutPage() {
+  const {
+    isPastHero,
+    bgScale,
+    bgDim,
+    contentY,
+    contentScale,
+    contentOpacity,
+    indicatorOpacity,
+  } = useHeroScroll();
+
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [activeFlightNode, setActiveFlightNode] = useState<string>("land");
   const [isPlaying, setIsPlaying] = useState(false);
@@ -146,42 +159,75 @@ export default function AboutPage() {
         {/* ------------------------------------------------------------- */}
         {/* 01 / PAGE HEADER: short image banner, left-aligned title, bold lead paragraph below */}
         {/* ------------------------------------------------------------- */}
-        <header className="relative z-10">
-          <section className="relative overflow-hidden bg-[#0B120C] pt-[104px] sm:pt-[121px]">
-            <Image
-              src="/images/hero-solar.jpg"
-              alt="Sarhat solar and wind energy infrastructure"
-              fill
-              preload
-              sizes="100vw"
-              className="object-cover object-center"
-            />
-            {/* solid brand wash on the left, fading out by the middle of the banner */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0B120C]/90 from-0% via-[#0B120C]/55 via-45% to-transparent to-80%" />
+        {/* Fixed Hero Section (Pinned background layer while scrolling) */}
+        <div
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
+            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+          }`}
+          aria-hidden={isPastHero}
+        >
+          <section className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none">
+            {/* Cinematic Background Image Layer with Dynamic Zoom & Scrim */}
+            <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
+              <Image
+                src="/images/hero-solar.jpg"
+                alt="Sarhat solar and wind energy infrastructure"
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover object-center opacity-85"
+              />
+              <motion.div
+                style={{ opacity: bgDim }}
+                className="absolute inset-0 bg-black pointer-events-none"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
+            </motion.div>
 
-            <div className="relative mx-auto flex h-[200px] max-w-6xl items-center px-4 sm:h-[250px] sm:px-6 lg:px-8">
-              <motion.h1
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                className="max-w-3xl font-sans-ui text-3xl font-bold leading-tight tracking-tight text-white sm:text-[2.75rem]"
-              >
-                People at the centre. Progress in every project.
-              </motion.h1>
-            </div>
-          </section>
+            {/* Main Centered Content */}
+            <motion.div
+              style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
+              className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-28 flex flex-col items-center text-center will-change-transform"
+            >
+              <div className="mb-6">
+                <AnimatedPillBadge>ABOUT SARHAT</AnimatedPillBadge>
+              </div>
 
-          <div className="bg-white">
-            <div className="mx-auto max-w-6xl px-4 pt-12 sm:px-6 lg:px-8">
-              <p className="font-sans-ui text-xl font-bold leading-snug tracking-tight text-[#333333] sm:text-[1.75rem] sm:leading-[1.35]">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center max-w-4xl drop-shadow-lg">
+                People at the centre. <br />
+                <span className="text-[#D4E012] italic font-normal">Progress in every project.</span>
+              </h1>
+
+              <p className="text-base sm:text-lg md:text-xl text-slate-200 font-normal max-w-3xl text-center leading-relaxed drop-shadow-md mb-8">
                 We bring people, engineering and execution together to turn clean–energy and infrastructure ideas into practical projects that create value for businesses, communities and India.
               </p>
-            </div>
-          </div>
-        </header>
 
-        {/* Main Content Sections */}
-        <div className="relative z-10 bg-[#F8FAF8]">
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <button
+                  onClick={() => setQuoteModalOpen(true)}
+                  className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-3.5 rounded-full transition-all shadow-xl shadow-[#D4E012]/30 hover:scale-105 active:scale-95 cursor-pointer"
+                >
+                  Discuss a Project
+                </button>
+                <a
+                  href="/about/our-story"
+                  className="border border-white/30 bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-widest px-7 py-3.5 rounded-full transition-all backdrop-blur-md hover:scale-105 active:scale-95 cursor-pointer"
+                >
+                  Explore Our Story
+                </a>
+              </div>
+            </motion.div>
+
+            {/* Mouse Scroll Indicator */}
+            <ScrollIndicator opacity={indicatorOpacity} />
+          </section>
+        </div>
+
+        {/* Scroll Spacer (Matches Hero height to establish scroll track) */}
+        <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
+
+        {/* Main Content Sections (Slides UP over the fixed Hero layer) */}
+        <div className="relative z-10 bg-[#F8FAF8] border-t border-slate-200/60 shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
 
           {/* ------------------------------------------------------------- */}
           {/* 02 / CORPORATE OVERVIEW & VIDEO SHOWCASE SECTION */}
@@ -193,11 +239,26 @@ export default function AboutPage() {
 
                 {/* Who We Are Section (Matching Image 1 in Website Theme) */}
                 <div className="text-center max-w-4xl mx-auto mb-16">
-                  <AnimatedPillBadge className="mb-4">
+                  <AnimatedPillBadge className="mb-6">
                     WHO WE ARE
                   </AnimatedPillBadge>
-                  <h2 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium text-[#0F172A] tracking-tight leading-tight mb-6">
-                    Who We Are
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                    <span className="inline-block">Pioneering Clean Energy.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Who We Are
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 font-light text-base sm:text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto">
                     Sarhat is India&apos;s leading decarbonisation and renewable infrastructure solutions provider on a mission to build a fossil-free future through innovative and sustainable solutions.
@@ -252,23 +313,37 @@ export default function AboutPage() {
 
 
                     {/* Main Headline */}
-                    <h2 className="text-3xl sm:text-5xl lg:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-none mb-6">
-                      YOUR TRUSTED <br />
-                      <span className="text-[#6DAD45]">ENERGY PARTNER</span>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                      <span className="inline-block">Your Trusted</span> <br />
+                      <span className="text-[#6DAD45] italic relative inline-block">
+                        Energy Partner
+                        <svg
+                          className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                          viewBox="0 0 100 20"
+                          preserveAspectRatio="none"
+                        >
+                          <path
+                            d="M0 15 Q 50 0 100 15"
+                            stroke="currentColor"
+                            strokeWidth="3.5"
+                            fill="transparent"
+                          />
+                        </svg>
+                      </span>
                     </h2>
 
                     {/* Long Editorial Paragraph */}
                     <p className="text-slate-600 font-normal text-base sm:text-lg leading-relaxed text-justify">
                       Sarhat Energy is India’s emerging clean-energy EPCM partner, combining
-breakthrough solar technologies with disciplined project execution for
-residential, commercial, industrial, institutional and solar-park clients. From
-detailed engineering to installation, commissioning and long-term
-maintenance, we stay with every project - turning rooftops and open land into
-reliable, revenue-generating energy assets.
-Our Transmission & Sub-Station Division extends that expertise to the grid
-itself, delivering high-voltage lines and sub-stations up to 400 kV, while our
-infrastructure arm builds the roads, bridges and buildings that projects
-depend on.
+                      breakthrough solar technologies with disciplined project execution for
+                      residential, commercial, industrial, institutional and solar-park clients. From
+                      detailed engineering to installation, commissioning and long-term
+                      maintenance, we stay with every project - turning rooftops and open land into
+                      reliable, revenue-generating energy assets.
+                      Our Transmission & Sub-Station Division extends that expertise to the grid
+                      itself, delivering high-voltage lines and sub-stations up to 400 kV, while our
+                      infrastructure arm builds the roads, bridges and buildings that projects
+                      depend on.
                     </p>
                   </ScrollReveal>
                 </div>
@@ -310,9 +385,29 @@ depend on.
 
 
                 {/* Headline */}
-                <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-14">
-                  Our <span className="text-[#6DAD45] font-bold">Mission</span> &amp; <span className="text-[#D97706] font-bold">Vision</span>
-                </h2>
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12">
+                  <AnimatedPillBadge className="mb-6">
+                    PURPOSE &amp; GOALS
+                  </AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
+                    <span className="inline-block">Building with Purpose.</span> <br />
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Our Mission &amp; Vision
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
+                  </h2>
+                </div>
               </ScrollReveal>
 
               {/* 2 Feature Image Header Cards Side-by-Side */}
@@ -411,9 +506,23 @@ depend on.
                 </div>
 
                 {/* Main Headline (2 lines website style) */}
-                <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-bold text-white tracking-tight text-center max-w-4xl mx-auto leading-tight mb-4 drop-shadow-lg">
-                  Engineering Excellence for the <br />
-                  <span className="text-[#D4E012] italic font-normal">Net-Zero Era</span>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-bold text-white tracking-tight text-center max-w-4xl mx-auto leading-tight mb-6 drop-shadow-lg">
+                  <span className="inline-block">Engineering Excellence for the</span> <br />
+                  <span className="text-[#D4E012] italic font-normal relative inline-block">
+                    Net-Zero Era
+                    <svg
+                      className="absolute -bottom-2 left-0 w-full h-3 text-[#D4E012]"
+                      viewBox="0 0 100 20"
+                      preserveAspectRatio="none"
+                    >
+                      <path
+                        d="M0 15 Q 50 0 100 15"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        fill="transparent"
+                      />
+                    </svg>
+                  </span>
                 </h2>
 
                 <p className="text-base sm:text-lg text-slate-300 font-normal max-w-3xl text-center leading-relaxed mx-auto mb-14 drop-shadow-md">
@@ -435,13 +544,11 @@ depend on.
                         onMouseEnter={() => setActiveValueIndex(index)}
                         whileHover={{ scale: 1.07 }}
                         transition={{ duration: 0.35, ease: "easeOut" }}
-                        className={`relative w-[300px] h-[300px] sm:w-[340px] sm:h-[340px] lg:w-[385px] lg:h-[385px] rounded-full p-7 sm:p-10 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-500 backdrop-blur-2xl ${
-                          index > 0 ? "md:-ml-10 lg:-ml-14" : ""
-                        } ${
-                          isActive
+                        className={`relative w-[300px] h-[300px] sm:w-[340px] sm:h-[340px] lg:w-[385px] lg:h-[385px] rounded-full p-7 sm:p-10 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-500 backdrop-blur-2xl ${index > 0 ? "md:-ml-10 lg:-ml-14" : ""
+                          } ${isActive
                             ? "bg-slate-950/95 border-2 border-[#D4E012] shadow-[0_0_60px_rgba(212,224,18,0.45)] z-30 scale-105"
                             : "bg-slate-950/65 border border-white/20 hover:border-[#D4E012]/70 hover:bg-slate-950/85 z-10 opacity-85 hover:opacity-100"
-                        }`}
+                          }`}
                       >
                         {/* Double Spinning Arc Rings on Active Circle */}
                         {isActive && (
@@ -483,22 +590,20 @@ depend on.
 
                         {/* Top Number Tag */}
                         <span
-                          className={`absolute top-6 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border transition-all ${
-                            isActive
+                          className={`absolute top-6 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border transition-all ${isActive
                               ? "bg-[#D4E012] text-slate-950 border-[#D4E012] shadow-sm"
                               : "bg-slate-900/80 text-slate-400 border-white/10"
-                          }`}
+                            }`}
                         >
                           VALUE {item.num}
                         </span>
 
                         {/* Top Icon Badge */}
                         <div
-                          className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mt-4 mb-4 shadow-lg transition-all duration-300 ${
-                            isActive
+                          className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mt-4 mb-4 shadow-lg transition-all duration-300 ${isActive
                               ? "bg-[#D4E012] text-slate-950 shadow-[0_0_25px_rgba(212,224,18,0.6)] scale-110"
                               : "bg-[#D4E012]/20 border border-[#D4E012]/50 text-[#D4E012]"
-                          }`}
+                            }`}
                         >
                           <IconComp className="w-7 h-7 text-slate-950 stroke-[2.2]" />
                         </div>
@@ -523,11 +628,10 @@ depend on.
                     <button
                       key={v.id}
                       onClick={() => setActiveValueIndex(i)}
-                      className={`h-2.5 rounded-full transition-all duration-500 ${
-                        activeValueIndex === i
+                      className={`h-2.5 rounded-full transition-all duration-500 ${activeValueIndex === i
                           ? "w-8 bg-[#D4E012] shadow-[0_0_12px_#D4E012]"
                           : "w-2.5 bg-slate-700 hover:bg-slate-500"
-                      }`}
+                        }`}
                       title={`Jump to ${v.title}`}
                     />
                   ))}
@@ -569,51 +673,12 @@ depend on.
           {/* ------------------------------------------------------------- */}
           {/* 06 / START YOUR SOLAR JOURNEY TODAY CTA BANNER (SARHAT BRAND COLORS) */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-10 sm:py-14 bg-gradient-to-b from-slate-950 via-[#0A160C] to-slate-950 text-white relative z-10 overflow-hidden border-t border-[#6DAD45]/20">
-            {/* Ambient Brand Glowing Flares */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-r from-[#D4E012]/15 via-[#6DAD45]/15 to-transparent rounded-full blur-[130px] pointer-events-none"></div>
-
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 flex flex-col items-center">
-              <ScrollReveal direction="up" distance={30}>
-                {/* Top Sun Icon Badge in Sarhat Chartreuse */}
-                <div className="w-14 h-14 rounded-2xl bg-[#D4E012] flex items-center justify-center text-slate-950 mx-auto mb-8 shadow-[0_0_25px_rgba(212,224,18,0.35)] transform hover:rotate-6 transition-transform">
-                  <Sun className="w-8 h-8 text-slate-950 fill-slate-950/20" />
-                </div>
-
-                {/* Headline with Brand Accent */}
-                <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-5">
-                  Start Your{" "}
-                  <span className="text-[#D4E012] drop-shadow-[0_2px_10px_rgba(212,224,18,0.3)]">
-                    Solar Journey
-                  </span>{" "}
-                  Today
-                </h2>
-
-                {/* Subtitle */}
-                <p className="text-slate-300 text-base sm:text-lg font-normal max-w-2xl leading-relaxed mb-10 mx-auto">
-                  Join 80+ clients who trust Sarhat to deliver clean energy at scale. Let&apos;s build your solar future together.
-                </p>
-
-                {/* CTA Buttons in Sarhat Palette */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-                  <button
-                    onClick={() => setQuoteModalOpen(true)}
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-[#D4E012] text-slate-950 font-bold text-base hover:bg-[#6DAD45] hover:text-white hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl shadow-[#D4E012]/20 flex items-center justify-center gap-2 group"
-                  >
-                    <span>Contact Us</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
-
-                  <a
-                    href="tel:+919876543210"
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-full border border-white/20 text-white font-semibold text-base hover:bg-white/10 hover:border-[#D4E012] hover:scale-105 active:scale-95 transition-all duration-300 shadow-md flex items-center justify-center"
-                  >
-                    Call Us Now
-                  </a>
-                </div>
-              </ScrollReveal>
-            </div>
-          </section>
+          <FinalCTA
+            onOpenQuote={() => setQuoteModalOpen(true)}
+            headline="Start Your"
+            accent="Solar Journey Today."
+            description="Join 80+ clients who trust Sarhat to deliver clean energy at scale. Let's build your energy infrastructure together."
+          />
         </div>
 
         {/* Footer */}

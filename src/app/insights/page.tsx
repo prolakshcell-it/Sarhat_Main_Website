@@ -10,6 +10,8 @@ import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import AnimatedPillBadge from "@/components/AnimatedPillBadge";
+import { useHeroScroll } from "@/hooks/useHeroScroll";
 
 interface Article {
   id: string;
@@ -179,22 +181,16 @@ const articles: Article[] = [
 export default function InsightsPage() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
-  const containerRef = useRef<HTMLElement>(null);
 
-  // Parallax & Scroll Fade-out Tracking
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const bgScale = useTransform(scrollYProgress, [0, 0.8], [1.03, 1.15]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.2]);
-  const bgDim = useTransform(scrollYProgress, [0, 0.5], [0.3, 0.85]);
-
-  const contentY = useTransform(scrollYProgress, [0, 0.3], ["0px", "-60px"]);
-  const contentScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.95]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
-  const contentFilter = useTransform(scrollYProgress, [0, 0.25], ["blur(0px)", "blur(10px)"]);
+  const {
+    isPastHero,
+    bgScale,
+    bgDim,
+    contentY,
+    contentScale,
+    contentOpacity,
+    indicatorOpacity,
+  } = useHeroScroll();
 
   return (
     <SmoothScroll>
@@ -203,12 +199,17 @@ export default function InsightsPage() {
         <Navbar onOpenQuote={() => setQuoteModalOpen(true)} />
 
         {/* ------------------------------------------------------------- */}
-        {/* HERO SECTION (Sticky background & Centered Content) */}
+        {/* HERO SECTION (Fixed background & Centered Content) */}
         {/* ------------------------------------------------------------- */}
-        <div className="sticky top-0 z-0 w-full h-screen">
-          <section ref={containerRef} className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none">
+        <div
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
+            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+          }`}
+          aria-hidden={isPastHero}
+        >
+          <section className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none">
             {/* Background Image Layer */}
-            <motion.div style={{ scale: bgScale, opacity: bgOpacity }} className="absolute inset-0 z-0 h-full w-full">
+            <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
               <Image
                 src="/images/hero-solar.jpg"
                 alt="Sarhat Energy Insights Background"
@@ -217,12 +218,12 @@ export default function InsightsPage() {
                 className="object-cover object-center opacity-85"
               />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
-              {/* Dark Scrim */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90 pointer-events-none"></div>
+              {/* Soft Dark Scrim */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
             </motion.div>
 
             <motion.div
-              style={{ y: contentY, scale: contentScale, opacity: contentOpacity, filter: contentFilter }}
+              style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
               className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-28 flex flex-col items-center text-center will-change-transform"
             >
               <motion.div
@@ -268,12 +269,15 @@ export default function InsightsPage() {
             </motion.div>
 
             {/* Bottom Mouse Scroll Indicator */}
-            <ScrollIndicator opacity={contentOpacity} filter={contentFilter} />
+            <ScrollIndicator opacity={indicatorOpacity} />
           </section>
         </div>
 
-      {/* Main Content Sections (Slides UP over static Hero) */}
-      <div className="relative z-10 bg-[#F8FAF8] border-t border-slate-200/60 shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
+        {/* Scroll Spacer (Matches Hero height to establish scroll track) */}
+        <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
+
+        {/* Main Content Sections (Slides UP over fixed Hero) */}
+        <div className="relative z-10 bg-[#F8FAF8] border-t border-slate-200/60 shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
 
       {/* ------------------------------------------------------------- */}
       {/* SECTION LATEST INSIGHTS & NEWS (Exact Image 2 Design Layout) */}
@@ -282,11 +286,29 @@ export default function InsightsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header matching Image 2 */}
           <ScrollReveal direction="up" distance={40}>
-            <div className="text-center max-w-2xl mx-auto mb-14">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-sans-ui font-extrabold text-slate-900 tracking-tight mb-4">
-                Latest Insights &amp; News
+            <div className="text-center max-w-4xl mx-auto mb-14">
+              <AnimatedPillBadge className="mb-6">
+                INDUSTRY INTELLIGENCE
+              </AnimatedPillBadge>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                <span className="inline-block">Thought Leadership.</span> <br />
+                <span className="text-[#6DAD45] italic relative inline-block">
+                  Latest Insights &amp; News
+                  <svg
+                    className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                    viewBox="0 0 100 20"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M0 15 Q 50 0 100 15"
+                      stroke="currentColor"
+                      strokeWidth="3.5"
+                      fill="transparent"
+                    />
+                  </svg>
+                </span>
               </h2>
-              <p className="text-slate-600 font-normal text-xs sm:text-sm leading-relaxed">
+              <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
                 Stay informed with our latest articles, case studies, and updates on solar energy trends and innovations.
               </p>
             </div>

@@ -128,11 +128,10 @@ export default function SolutionsGrid() {
                   key={item.id}
                   onMouseEnter={() => setActiveIndex(index)}
                   onClick={() => setActiveIndex(index)}
-                  className={`relative overflow-hidden cursor-pointer transition-all duration-700 ease-[0.22,1,0.36,1] border-2 border-white shadow-2xl ${
-                    isActive
+                  className={`relative overflow-hidden cursor-pointer transition-all duration-700 ease-[0.22,1,0.36,1] border-2 border-white shadow-2xl ${isActive
                       ? "lg:flex-[3.8] h-[460px] lg:h-full rounded-2xl z-20 shadow-slate-950/70"
                       : "lg:flex-[0.9] h-[110px] lg:h-full rounded-2xl border-white/90 hover:border-[#D4E012] bg-slate-950 z-10"
-                  } lg:-skew-x-[6deg] group`}
+                    } lg:-skew-x-[6deg] group`}
                 >
                   {/* Un-skew Inner Wrapper so text and photos remain 100% straight */}
                   <div className="relative h-full w-full lg:skew-x-[6deg] lg:scale-110">
@@ -143,18 +142,16 @@ export default function SolutionsGrid() {
                       fill
                       priority={index === 0}
                       sizes="(max-width: 768px) 100vw, 50vw"
-                      className={`object-cover object-center transition-all duration-700 ease-out brightness-105 contrast-105 ${
-                        isActive ? "scale-100 opacity-100" : "scale-100 opacity-90 hover:opacity-100"
-                      }`}
+                      className={`object-cover object-center transition-all duration-700 ease-out brightness-105 contrast-105 ${isActive ? "scale-100 opacity-100" : "scale-100 opacity-90 hover:opacity-100"
+                        }`}
                     />
 
                     {/* Soft Gradient Overlay at Bottom only (leaving top/middle image 100% clear & bright) */}
                     <div
-                      className={`absolute inset-0 transition-opacity duration-700 ${
-                        isActive
+                      className={`absolute inset-0 transition-opacity duration-700 ${isActive
                           ? "bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"
                           : "bg-slate-950/40 hover:bg-slate-950/20"
-                      }`}
+                        }`}
                     />
 
                     {/* ACTIVE EXPANDED CARD CONTENT */}

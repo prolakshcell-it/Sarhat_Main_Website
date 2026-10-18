@@ -197,14 +197,14 @@ function Chain({ layout: L, className }: { layout: Layout; className: string }) 
 
         {/* sun + solar field */}
         <g transform={`translate(${SUN_C.x} ${SUN_C.y})`} strokeWidth={sw(1.4)}>
-          <path pathLength={1} className={styles.draw} style={delay(0)} d={SUN.rings[0]} stroke="#E9C46A" strokeWidth={sw(1.8)} />
-          <path pathLength={1} className={styles.draw} style={delay(0.1)} d={SUN.rings[1]} stroke="#E9C46A" strokeWidth={sw(1.1)} />
-          <path className={`${styles.fade} ${styles.sun}`} style={delay(0.4)} d={SUN.rays} stroke="#E07A4F" />
+          <path pathLength={1} className={styles.draw} style={delay(0)} d={SUN.rings[0]} stroke="#F97316" strokeWidth={sw(1.8)} />
+          <path pathLength={1} className={styles.draw} style={delay(0.1)} d={SUN.rings[1]} stroke="#FB923C" strokeWidth={sw(1.1)} />
+          <path className={`${styles.fade} ${styles.sun}`} style={delay(0.4)} d={SUN.rays} stroke="#EA580C" />
         </g>
         <g stroke="#6DAD45" strokeOpacity={0.75} strokeWidth={sw(1.1)}>
           {panels.map(({ x, y, s }, i) => (
             <g key={`${x}-${y}`} transform={`translate(${x} ${y}) scale(${s})`}>
-              <path d={PANEL_FACE} fill="#D4E012" stroke="none" className={styles.glow} style={delay(PANEL_GLOW + (i % 4) * 0.06)} />
+              <path d={PANEL_FACE} fill="#00D2FF" stroke="none" className={styles.glow} style={delay(PANEL_GLOW + (i % 4) * 0.06)} />
               <path pathLength={1} className={styles.draw} style={delay(0.1 + i * 0.06)} d={PANEL} />
             </g>
           ))}
@@ -221,10 +221,30 @@ function Chain({ layout: L, className }: { layout: Layout; className: string }) 
           strokeDasharray="4 5"
         />
 
-        {/* battery storage */}
+        {/* battery storage with - and + polarity signs */}
         <g transform={`translate(${L.bess} 0)`}>
           <path d={BESS} pathLength={1} className={styles.draw} style={delay(0.7)} stroke="#6DAD45" strokeOpacity={0.75} strokeWidth={sw(1.1)} />
           <circle cx={526} cy={182} r={sw(2.2)} fill="#D4E012" className={`${styles.fade} ${styles.blink}`} style={delay(1.4)} />
+
+          {/* Roof Battery Terminals: Negative (-) on Left, Positive (+) on Right */}
+          <g className={styles.fade} style={delay(0.8)}>
+            {/* Terminal post left */}
+            <path d="M460 172 V163" stroke="#6DAD45" strokeWidth={sw(1)} />
+            <circle cx={460} cy={163} r={sw(5)} fill="#071325" stroke="#38BDF8" strokeWidth={sw(1.2)} />
+            <path d="M457.5 163 H462.5" stroke="#38BDF8" strokeWidth={sw(1.3)} strokeLinecap="round" />
+
+            {/* Terminal post right */}
+            <path d="M516 172 V163" stroke="#6DAD45" strokeWidth={sw(1)} />
+            <circle cx={516} cy={163} r={sw(5)} fill="#071325" stroke="#F97316" strokeWidth={sw(1.2)} />
+            <path d="M513.5 163 H518.5 M516 160.5 V165.5" stroke="#F97316" strokeWidth={sw(1.3)} strokeLinecap="round" />
+
+            {/* Front cabinet door badges: - and + */}
+            <circle cx={454} cy={183} r={sw(3.5)} fill="#071325" stroke="#38BDF8" strokeWidth={sw(0.9)} />
+            <path d="M452 183 H456" stroke="#38BDF8" strokeWidth={sw(1)} strokeLinecap="round" />
+
+            <circle cx={522} cy={183} r={sw(3.5)} fill="#071325" stroke="#F97316" strokeWidth={sw(0.9)} />
+            <path d="M520 183 H524 M522 181 V185" stroke="#F97316" strokeWidth={sw(1)} strokeLinecap="round" />
+          </g>
         </g>
 
         {/* substation */}
@@ -255,8 +275,8 @@ function Chain({ layout: L, className }: { layout: Layout; className: string }) 
         </g>
       </g>
 
-      {/* sunlight onto the modules */}
-      <g fill="none" stroke="#D4E012" strokeWidth={sw(1.4)} strokeLinecap="round">
+      {/* sunlight onto the modules - Glowing Orange Sunlight */}
+      <g fill="none" stroke="#FF7A00" strokeWidth={sw(1.8)} strokeLinecap="round">
         {beams.map((d, i) => (
           <path key={d} d={d} pathLength={1} className={styles.ray} style={delay(PULSE_START + (i % 4) * 0.08)} />
         ))}
