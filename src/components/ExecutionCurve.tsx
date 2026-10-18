@@ -1,7 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef, useMemo } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useInView,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+  useMotionValueEvent,
+} from "framer-motion";
 import {
   Compass,
   Cpu,
@@ -33,6 +42,10 @@ interface Phase {
   image: string;
   caption: string;
 }
+
+const VB_W = 1000;
+const VB_H = 300;
+const AUTOPLAY_MS = 6500;
 
 export default function ExecutionCurve() {
   const phases: Phase[] = [
@@ -155,21 +168,87 @@ export default function ExecutionCurve() {
   // Active step index
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Auto-play rotation effect (continuous)
+  const sectionRef = useRef<HTMLElement>(null);
+  const inView = useInView(sectionRef, { amount: 0.3 });
+  const reduceMotion = useReducedMotion();
+  const [paused, setPaused] = useState(false);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
+  // Desktop is scroll-driven; autoplay is only for the mobile card view
+  const autoPlay = inView && !paused && !reduceMotion && !isDesktop;
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % phases.length);
-    }, 3200);
-    return () => clearInterval(interval);
-  }, [phases.length]);
+    const mq = window.matchMedia("(min-width: 768px)");
+    const update = () => setIsDesktop(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: trackRef,
+    offset: ["start 15%", "end end"],
+  });
+  const lineTarget = useTransform(scrollYProgress, [0, (phases.length - 1) / phases.length], [0, 1], { clamp: true });
+  const lineProgress = useSpring(lineTarget, { stiffness: 90, damping: 26, mass: 0.6 });
+
+  useMotionValueEvent(scrollYProgress, "change", (p) => {
+    if (!isDesktop) return;
+    const idx = Math.min(phases.length - 1, Math.max(0, Math.floor(p * phases.length)));
+    setActiveIndex((prev) => (prev === idx ? prev : idx));
+  });
+
+  const goTo = (idx: number) => {
+    const i = (idx + phases.length) % phases.length;
+    if (isDesktop && trackRef.current) {
+      const rect = trackRef.current.getBoundingClientRect();
+      const start = window.scrollY + rect.top - window.innerHeight * 0.15;
+      const scrollable = rect.height - window.innerHeight * 0.85;
+      window.scrollTo({
+        top: start + ((i + 0.5) / phases.length) * scrollable,
+        behavior: reduceMotion ? "auto" : "smooth",
+      });
+    } else {
+      setActiveIndex(i);
+    }
+  };
+
+  // S-curve geometry: nodes alternate high/low, joined by smooth cubic segments
+  const { points, curvePath } = useMemo(() => {
+    const n = phases.length;
+    const pts = phases.map((_, i) => ({
+      x: 70 + (i * (VB_W - 140)) / (n - 1),
+      y: i % 2 === 0 ? 90 : VB_H - 90,
+    }));
+    let d = `M ${pts[0].x} ${pts[0].y}`;
+    for (let i = 1; i < n; i++) {
+      const mx = (pts[i - 1].x + pts[i].x) / 2;
+      d += ` C ${mx} ${pts[i - 1].y}, ${mx} ${pts[i].y}, ${pts[i].x} ${pts[i].y}`;
+    }
+    return { points: pts, curvePath: d };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Auto-play only while visible, not hovered, and motion is allowed
+  useEffect(() => {
+    if (!autoPlay) return;
+    const t = setTimeout(
+      () => setActiveIndex((prev) => (prev + 1) % phases.length),
+      AUTOPLAY_MS
+    );
+    return () => clearTimeout(t);
+  }, [autoPlay, activeIndex, phases.length]);
 
   const activePhase = phases[activeIndex];
   const ActiveIcon = activePhase.icon;
 
   return (
     <section
+      ref={sectionRef}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
       id="execution"
-      className="py-10 sm:py-12 lg:py-14 bg-slate-950 text-white relative z-10 border-b border-slate-800 select-none overflow-hidden font-sans-ui"
+      className="py-10 sm:py-12 lg:py-14 bg-[#18221B] text-white relative z-10 border-b border-white/10 select-none overflow-clip font-sans-ui"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Badge & Editorial Title */}
@@ -207,7 +286,7 @@ export default function ExecutionCurve() {
         {/* ============================================================= */}
         <div className="block md:hidden max-w-xl mx-auto">
           {/* Mobile Horizontal Step Selector Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-3 pt-1 px-1 scrollbar-none snap-x mb-6 border-b border-slate-800/80">
+          <div className="flex items-center gap-2 overflow-x-auto pb-3 pt-1 px-1 scrollbar-none snap-x mb-6 border-b border-white/10">
             {phases.map((phase, idx) => {
               const isActive = idx === activeIndex;
               return (
@@ -216,8 +295,8 @@ export default function ExecutionCurve() {
                   onClick={() => setActiveIndex(idx)}
                   className={`snap-start shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-mono uppercase tracking-wider font-semibold transition-all duration-300 border ${
                     isActive
-                      ? "bg-slate-900 text-white border-2 shadow-lg"
-                      : "bg-slate-900/50 text-slate-400 border-slate-800 hover:border-slate-700 hover:text-slate-200"
+                      ? "bg-[#202C24] text-white border-2 shadow-lg"
+                      : "bg-[#202C24]/50 text-slate-400 border-white/10 hover:border-white/30 hover:text-slate-200"
                   }`}
                   style={{
                     borderColor: isActive ? phase.color : undefined,
@@ -247,7 +326,7 @@ export default function ExecutionCurve() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -12, scale: 0.98 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="relative rounded-3xl bg-slate-900/90 border-2 p-5 sm:p-7 backdrop-blur-xl shadow-2xl overflow-hidden"
+              className="relative rounded-3xl bg-[#202C24]/90 border-2 p-5 sm:p-7 backdrop-blur-xl shadow-2xl overflow-hidden"
               style={{ borderColor: activePhase.color }}
             >
               {/* Background ambient glow */}
@@ -280,15 +359,15 @@ export default function ExecutionCurve() {
               </div>
 
               {/* Phase Image Preview */}
-              <div className="relative w-full h-44 sm:h-52 rounded-2xl overflow-hidden mb-4 border border-slate-700/80 shadow-md">
+              <div className="relative w-full h-44 sm:h-52 rounded-2xl overflow-hidden mb-4 border border-white/10 shadow-md">
                 <Image
                   src={activePhase.image}
                   alt={activePhase.title}
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent"></div>
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] text-slate-200 font-medium bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-800">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#18221B] via-[#18221B]/30 to-transparent"></div>
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] text-slate-200 font-medium bg-[#18221B]/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10">
                   <span className="truncate">{activePhase.caption}</span>
                   <span
                     className="w-2 h-2 rounded-full shrink-0 animate-pulse ml-2"
@@ -315,7 +394,7 @@ export default function ExecutionCurve() {
                 {activePhase.checklist.map((item) => (
                   <div
                     key={item}
-                    className="flex items-center gap-2.5 text-xs text-slate-200 font-medium bg-slate-950/50 p-2 rounded-xl border border-slate-800/60"
+                    className="flex items-center gap-2.5 text-xs text-slate-200 font-medium bg-black/20 p-2 rounded-xl border border-white/10"
                   >
                     <CheckCircle2
                       className="w-4 h-4 shrink-0"
@@ -347,165 +426,158 @@ export default function ExecutionCurve() {
         </div>
 
         {/* ============================================================= */}
-        {/* DESKTOP / TABLET RADIAL CANVAS (md:block) - Spacious & Non-Overlapping */}
+        {/* DESKTOP / TABLET CURVE (md:block) - S-curve roadmap + detail card */}
         {/* ============================================================= */}
-        <ScrollReveal direction="up" distance={45} delay={0.15} className="hidden md:block">
-          <div className="relative w-full max-w-5xl mx-auto aspect-square max-h-[640px] lg:max-h-[700px] min-h-[580px] flex items-center justify-center mt-12 lg:mt-16 mb-8">
-            {/* Background Radial Glow */}
-            <div
-              className="absolute inset-0 rounded-full transition-all duration-700 pointer-events-none opacity-40 blur-3xl"
-              style={{ background: activePhase.bgGlow }}
-            ></div>
+        <div ref={trackRef} className="hidden md:block mt-10 md:h-[460vh]">
+         <div className="sticky top-24">
+          {/* Curve canvas */}
+          <div className="relative w-full max-w-5xl mx-auto" style={{ aspectRatio: `${VB_W} / ${VB_H}` }}>
+            <svg
+              viewBox={`0 0 ${VB_W} ${VB_H}`}
+              className="absolute inset-0 w-full h-full overflow-visible pointer-events-none"
+              fill="none"
+              aria-hidden="true"
+            >
+              <defs>
+                <linearGradient id="curve-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={VB_W} y2="0">
+                  {phases.map((p, i) => (
+                    <stop key={p.id} offset={`${(points[i].x / VB_W) * 100}%`} stopColor={p.color} />
+                  ))}
+                </linearGradient>
+              </defs>
+              {/* Base track */}
+              <path d={curvePath} stroke="rgba(255,255,255,0.12)" strokeWidth="2" strokeDasharray="4 8" strokeLinecap="round" />
+              {/* Progress */}
+              <motion.path
+                d={curvePath}
+                stroke="url(#curve-grad)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                                style={{ pathLength: reduceMotion ? lineTarget : lineProgress }}
+                              />
+            </svg>
 
-            {/* Dashed Circular Orbit Line */}
-            <div className="absolute inset-12 lg:inset-16 rounded-full border-2 border-dashed border-white/20 animate-[spin_120s_linear_infinite] pointer-events-none"></div>
-
-            {/* Inner Pulsing Ring */}
-            <div className="absolute inset-32 lg:inset-36 rounded-full border border-white/10 pointer-events-none"></div>
-
-            {/* --------------------------------------------------------- */}
-            {/* 6 RADIAL NODES PLACED ON THE CIRCLE */}
-            {/* --------------------------------------------------------- */}
+            {/* Nodes */}
             {phases.map((phase, idx) => {
               const isActive = idx === activeIndex;
-              // Compute node offset percentages on radius R = 37% for safe padding
-              const radiusPercent = 37;
-              const rad = (phase.angle * Math.PI) / 180;
-              const leftPercent = 50 + radiusPercent * Math.cos(rad);
-              const topPercent = 50 + radiusPercent * Math.sin(rad);
-
+              const isDone = idx < activeIndex;
               const Icon = phase.icon;
-
+              const high = points[idx].y < VB_H / 2;
               return (
-                <div
+                <button
                   key={phase.id}
+                  type="button"
+                  onClick={() => goTo(idx)}
+                  aria-label={`${phase.phaseNumber} ${phase.title}`}
+                  aria-current={isActive ? "step" : undefined}
+                  className="absolute -translate-x-1/2 -translate-y-1/2 z-10 group focus:outline-none"
                   style={{
-                    left: `${leftPercent}%`,
-                    top: `${topPercent}%`,
+                    left: `${(points[idx].x / VB_W) * 100}%`,
+                    top: `${(points[idx].y / VB_H) * 100}%`,
                   }}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 z-30 flex flex-col items-center group cursor-pointer"
-                  onClick={() => setActiveIndex(idx)}
                 >
-                  {/* Icon Box */}
-                  <motion.div
-                    whileHover={{ y: -2 }}
-                    className={`w-12 h-12 lg:w-14 lg:h-14 rounded-2xl flex items-center justify-center transition-colors duration-300 shadow-xl relative border ${
-                      isActive
-                        ? "shadow-2xl border-white"
-                        : "bg-slate-900/90 border border-slate-700 hover:border-slate-500"
+                  <span
+                    className={`relative flex w-12 h-12 lg:w-14 lg:h-14 rounded-2xl items-center justify-center border transition-[transform,background-color,box-shadow] duration-700 ${
+                      isActive ? "scale-105 border-white/70" : "bg-[#202C24] border-white/15 group-hover:border-white/40 group-focus-visible:border-white"
                     }`}
                     style={{
                       backgroundColor: isActive ? phase.color : undefined,
-                      color: isActive ? "#000000" : phase.color,
-                      boxShadow: isActive ? `0 0 25px ${phase.color}` : undefined,
+                      color: isActive ? "#000" : phase.color,
+                      boxShadow: isActive ? `0 8px 24px -8px ${phase.color}80` : undefined,
+                      borderColor: isDone ? `${phase.color}99` : undefined,
                     }}
                   >
                     <Icon className="w-6 h-6 stroke-[2.2]" />
-                  </motion.div>
-
-                  {/* Phase Title Card Pill */}
-                  <div
-                    className={`mt-2 py-1 px-3 rounded-xl border text-[10px] lg:text-[11px] font-mono uppercase tracking-wider font-bold transition-all duration-300 whitespace-nowrap backdrop-blur-md shadow-lg ${
+                  </span>
+                  <span
+                    className={`absolute left-1/2 -translate-x-1/2 whitespace-nowrap py-1 px-3 rounded-xl border text-[10px] lg:text-[11px] font-mono uppercase tracking-wider font-bold transition-colors duration-500 ${
+                      high ? "bottom-full mb-3" : "top-full mt-3"
+                    } ${
                       isActive
-                        ? "bg-white text-slate-900 border-white scale-105 shadow-2xl"
-                        : "bg-slate-900/90 text-slate-300 border-slate-700 group-hover:border-slate-500 group-hover:text-white"
+                        ? "bg-white text-slate-900 border-white"
+                        : "bg-[#202C24]/90 text-slate-300 border-white/10 group-hover:text-white"
                     }`}
                   >
-                    <span className="opacity-60 mr-1.5">{phase.phaseNumber}</span>
-                    <span>{phase.title}</span>
-                  </div>
-                </div>
+                    <span className="opacity-60 mr-1.5">{phase.phaseNumber.replace("PHASE ", "")}</span>
+                    {phase.title}
+                  </span>
+                </button>
               );
             })}
+          </div>
 
-            {/* --------------------------------------------------------- */}
-            {/* CENTER ACTIVE SPOTLIGHT CIRCLE CARD */}
-            {/* --------------------------------------------------------- */}
-            <div className="relative z-20 w-[310px] h-[310px] lg:w-[390px] lg:h-[390px] rounded-full bg-slate-900/95 border-2 border-slate-700 backdrop-blur-2xl shadow-[0_0_60px_rgba(0,0,0,0.95)] flex flex-col items-center justify-center text-center p-5 lg:p-7 overflow-hidden">
-              {/* Dynamic Color Accent Ring */}
-              <div
-                className="absolute inset-0 rounded-full border-2 opacity-60 transition-colors duration-500 pointer-events-none"
-                style={{ borderColor: activePhase.color }}
-              ></div>
-
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activePhase.id}
-                  initial={{ opacity: 0, scale: 0.9, y: 8 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9, y: -8 }}
-                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  className="flex flex-col items-center justify-center h-full w-full"
-                >
-                  {/* Top Preview Image Thumbnail */}
-                  <div className="relative w-28 h-14 lg:w-36 lg:h-20 rounded-xl overflow-hidden mb-2 border border-slate-700/80 shadow-md shrink-0">
-                    <Image
-                      src={activePhase.image}
-                      alt={activePhase.title}
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
-                    <span
-                      className="absolute top-1 left-1.5 text-[8px] lg:text-[9px] font-mono font-bold px-1.5 py-0.5 rounded text-black uppercase shadow"
-                      style={{ backgroundColor: activePhase.color }}
-                    >
-                      {activePhase.phaseNumber}
-                    </span>
-                  </div>
-
-                  {/* Phase Badge */}
+          {/* Active phase detail */}
+          <div className="relative max-w-4xl mx-auto mt-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activePhase.id}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{ duration: 0.6, ease: [0.45, 0, 0.2, 1] }}
+                className="relative grid grid-cols-5 gap-6 rounded-3xl bg-[#202C24]/80 border p-5 lg:p-6 overflow-hidden"
+                style={{ borderColor: `${activePhase.color}80` }}
+              >
+                <div
+                  className="absolute inset-0 opacity-[0.12] pointer-events-none"
+                  style={{ background: `radial-gradient(60% 80% at 0% 0%, ${activePhase.color}, transparent)` }}
+                />
+                <div className="relative col-span-2 h-48 lg:h-56 rounded-2xl overflow-hidden border border-white/10">
+                  <Image src={activePhase.image} alt={activePhase.title} fill sizes="400px" className="object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#18221B]/70 via-transparent to-transparent" />
                   <span
-                    className="text-[9px] lg:text-[10px] font-mono font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full mb-1.5 border shadow-sm"
-                    style={{
-                      color: activePhase.color,
-                      borderColor: `${activePhase.color}50`,
-                      backgroundColor: activePhase.bgGlow,
-                    }}
+                    className="absolute top-3 left-3 text-[10px] font-mono font-bold px-2 py-1 rounded text-black uppercase"
+                    style={{ backgroundColor: activePhase.color }}
                   >
-                    {activePhase.title} • {activePhase.phaseNumber} OF 06
+                    {activePhase.phaseNumber}
                   </span>
-
-                  {/* Headline Title */}
-                  <h3 className="text-xs lg:text-base font-serif-display font-medium text-white mb-1 leading-tight px-2 max-w-[250px] lg:max-w-[290px]">
+                  <span className="absolute bottom-3 left-3 right-3 text-[11px] text-slate-200 bg-[#18221B]/80 px-3 py-1.5 rounded-xl border border-white/10 truncate">
+                    {activePhase.caption}
+                  </span>
+                </div>
+                <div className="relative col-span-3 flex flex-col justify-center">
+                  <h3 className="text-2xl lg:text-3xl font-serif-display font-medium text-white leading-tight mb-2">
                     {activePhase.headline}
                   </h3>
-
-                  {/* Description */}
-                  <p className="text-[9px] lg:text-[10px] text-slate-300 font-light leading-relaxed mb-2 max-w-[220px] lg:max-w-[260px] line-clamp-2">
-                    {activePhase.description}
-                  </p>
-
-                  {/* Deliverables Checklist */}
-                  <div className="space-y-1 text-left w-full max-w-[200px] lg:max-w-[240px]">
+                  <p className="text-sm text-slate-300 font-light leading-relaxed mb-4">{activePhase.description}</p>
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
                     {activePhase.checklist.map((item) => (
                       <div
                         key={item}
-                        className="flex items-center gap-1.5 text-[9px] lg:text-[10px] text-slate-200 font-medium"
+                        className="flex items-center gap-2 text-xs text-slate-200 font-medium bg-black/20 p-2 rounded-xl border border-white/10"
                       >
-                        <CheckCircle2
-                          className="w-3 h-3 shrink-0"
-                          style={{ color: activePhase.color }}
-                        />
-                        <span className="truncate">{item}</span>
+                        <CheckCircle2 className="w-4 h-4 shrink-0" style={{ color: activePhase.color }} />
+                        <span>{item}</span>
                       </div>
                     ))}
                   </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+                </div>
+                {/* Auto-advance timer bar (transform-only) */}
+                {autoPlay && (
+                  <motion.div
+                    key={`bar-${activeIndex}`}
+                    className="absolute left-0 bottom-0 h-[3px] w-full origin-left"
+                    style={{ backgroundColor: activePhase.color }}
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: AUTOPLAY_MS / 1000, ease: "linear" }}
+                  />
+                )}
+              </motion.div>
+            </AnimatePresence>
           </div>
-        </ScrollReveal>
+         </div>
+        </div>
 
         {/* ------------------------------------------------------------- */}
         {/* INTERACTIVE CONTROLS BAR (Step Navigation) */}
         {/* ------------------------------------------------------------- */}
-        <div className="flex items-center justify-center gap-3 sm:gap-4 mt-6 sm:mt-8">
+        <div className="flex md:hidden items-center justify-center gap-3 sm:gap-4 mt-6 sm:mt-8">
           <button
             onClick={() =>
               setActiveIndex((prev) => (prev === 0 ? phases.length - 1 : prev - 1))
             }
-            className="p-2.5 sm:p-3 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:border-[#D4E012] transition-colors"
+            className="p-2.5 sm:p-3 rounded-full bg-[#202C24] border border-white/15 text-slate-300 hover:text-white hover:border-[#D4E012] transition-colors"
             aria-label="Previous Phase"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -513,7 +585,7 @@ export default function ExecutionCurve() {
 
           <button
             onClick={() => setActiveIndex((prev) => (prev + 1) % phases.length)}
-            className="p-2.5 sm:p-3 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:border-[#D4E012] transition-colors"
+            className="p-2.5 sm:p-3 rounded-full bg-[#202C24] border border-white/15 text-slate-300 hover:text-white hover:border-[#D4E012] transition-colors"
             aria-label="Next Phase"
           >
             <ChevronRight className="w-5 h-5" />
