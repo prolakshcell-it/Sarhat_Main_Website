@@ -33,6 +33,7 @@ import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
+import { useHeroScroll } from "@/hooks/useHeroScroll";
 
 export default function PartnersPage() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
@@ -40,22 +41,15 @@ export default function PartnersPage() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const [selectedPartnerType, setSelectedPartnerType] = useState<string>("Solar Project Partner");
   const [activeOrbitNode, setActiveOrbitNode] = useState<number | null>(0);
-  const containerRef = useRef<HTMLElement>(null);
-
-  // Parallax & Scroll Fade-out Tracking
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const bgScale = useTransform(scrollYProgress, [0, 0.8], [1.03, 1.15]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.2]);
-  const bgDim = useTransform(scrollYProgress, [0, 0.5], [0.3, 0.85]);
-
-  const contentY = useTransform(scrollYProgress, [0, 0.3], ["0px", "-60px"]);
-  const contentScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.95]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
-  const contentFilter = useTransform(scrollYProgress, [0, 0.25], ["blur(0px)", "blur(10px)"]);
+  const {
+    isPastHero,
+    bgScale,
+    bgDim,
+    contentY,
+    contentScale,
+    contentOpacity,
+    indicatorOpacity,
+  } = useHeroScroll();
 
   // Form submission state
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -265,12 +259,17 @@ export default function PartnersPage() {
         <QuoteModal isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} />
 
         {/* ==========================================
-            1. HERO SECTION (Sticky background & Centered Content)
+            1. HERO SECTION (Fixed background & Centered Content)
             ========================================== */}
-        <div className="sticky top-0 z-0 w-full h-screen">
-          <section ref={containerRef} className="relative h-full w-full flex flex-col justify-center items-center bg-black text-white overflow-hidden select-none">
+        <div
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
+            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+          }`}
+          aria-hidden={isPastHero}
+        >
+          <section className="relative h-full w-full flex flex-col justify-center items-center bg-black text-white overflow-hidden select-none">
             {/* Cinematic High-Res Fullscreen Background Image Layer */}
-            <motion.div style={{ scale: bgScale, opacity: bgOpacity }} className="absolute inset-0 z-0 h-full w-full">
+            <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
               <Image
                 src="/images/partner-hero-bg.jpg"
                 alt="Sarhat Solar Energy Business Partnership"
@@ -281,11 +280,11 @@ export default function PartnersPage() {
               />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
               {/* High-Contrast Readability Gradient Overlay Scrims */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90 pointer-events-none"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
             </motion.div>
 
             <motion.div
-              style={{ y: contentY, scale: contentScale, opacity: contentOpacity, filter: contentFilter }}
+              style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
               className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 w-full relative z-10 pt-16 flex flex-col items-center text-center will-change-transform"
             >
               <ScrollReveal direction="up" distance={40}>
@@ -310,11 +309,14 @@ export default function PartnersPage() {
             </motion.div>
 
             {/* Mouse Scroll Indicator */}
-            <ScrollIndicator opacity={contentOpacity} filter={contentFilter} />
+            <ScrollIndicator opacity={indicatorOpacity} />
           </section>
         </div>
 
-        {/* Main Content Sections (Slides UP over static Hero) */}
+        {/* Scroll Spacer (Matches Hero height to establish scroll track) */}
+        <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
+
+        {/* Main Content Sections (Slides UP over fixed Hero layer) */}
         <div className="relative z-10 bg-[#F8FAF8] border-t border-slate-200/60 shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
 
           {/* ==========================================

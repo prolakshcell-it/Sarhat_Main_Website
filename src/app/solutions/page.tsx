@@ -16,26 +16,22 @@ import SolutionNavigator from "@/components/solutions/SolutionNavigator";
 import SolutionTabsBar from "@/components/solutions/SolutionTabsBar";
 import { detailedSolutions, serviceStages } from "@/components/solutions/data";
 
+import { useHeroScroll } from "@/hooks/useHeroScroll";
+
 const CTA_CLASS =
   "group/cta inline-flex min-h-[48px] cursor-pointer items-center gap-2 rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] px-7 py-3.5 text-xs font-extrabold uppercase tracking-wider text-black shadow-lg shadow-[#D4E012]/25 transition-all duration-200 hover:-translate-y-px hover:from-[#c2ce0d] hover:to-[#4ed423] hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4E012] focus-visible:ring-offset-2";
 
 export default function SolutionsPage() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
-  const containerRef = useRef<HTMLElement>(null);
-
-  // Hero fades as the content sheet slides over it
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-  const bgScale = useTransform(scrollYProgress, [0, 0.8], [1.03, 1.15]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.2]);
-  const bgDim = useTransform(scrollYProgress, [0, 0.5], [0.3, 0.85]);
-
-  const contentY = useTransform(scrollYProgress, [0, 0.3], ["0px", "-60px"]);
-  const contentScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.95]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
-  const contentFilter = useTransform(scrollYProgress, [0, 0.25], ["blur(0px)", "blur(10px)"]);
+  const {
+    isPastHero,
+    bgScale,
+    bgDim,
+    contentY,
+    contentScale,
+    contentOpacity,
+    indicatorOpacity,
+  } = useHeroScroll();
 
   const [activeStageIndex, setActiveStageIndex] = useState<number>(0);
   const activeStage = serviceStages[activeStageIndex];
@@ -49,16 +45,16 @@ export default function SolutionsPage() {
         {/* ------------------------------------------------------------- */}
         {/* 01 / FULL-SCREEN HERO SECTION (Matching Insights & About page layout) */}
         {/* ------------------------------------------------------------- */}
-        <div className="sticky top-0 z-0 w-full h-screen">
-          <section
-            ref={containerRef}
-            className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none"
-          >
+        {/* Fixed Hero Section (Pinned background layer while scrolling) */}
+        <div
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
+            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+          }`}
+          aria-hidden={isPastHero}
+        >
+          <section className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none">
             {/* Background Image Layer */}
-            <motion.div
-              style={{ scale: bgScale, opacity: bgOpacity }}
-              className="absolute inset-0 z-0 h-full w-full"
-            >
+            <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
               <Image
                 src="/images/hero-solar.jpg"
                 alt="Sarhat Solutions Hero"
@@ -71,8 +67,8 @@ export default function SolutionsPage() {
                 style={{ opacity: bgDim }}
                 className="absolute inset-0 bg-black pointer-events-none"
               />
-              {/* Dark Scrim Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90 pointer-events-none" />
+              {/* Soft Dark Scrim Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
             </motion.div>
 
             {/* Main Centered Content */}
@@ -81,7 +77,6 @@ export default function SolutionsPage() {
                 y: contentY,
                 scale: contentScale,
                 opacity: contentOpacity,
-                filter: contentFilter,
               }}
               className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-28 flex flex-col items-center text-center will-change-transform"
             >
@@ -136,12 +131,15 @@ export default function SolutionsPage() {
             </motion.div>
 
             {/* Mouse Scroll Indicator */}
-            <ScrollIndicator opacity={contentOpacity} filter={contentFilter} />
+            <ScrollIndicator opacity={indicatorOpacity} />
           </section>
         </div>
 
+        {/* Scroll Spacer (Matches Hero height to establish scroll track) */}
+        <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
+
         {/* ------------------------------------------------------------- */}
-        {/* CONTENT SHEET */}
+        {/* CONTENT SHEET (Slides UP over the fixed Hero layer) */}
         {/* ------------------------------------------------------------- */}
         <div className="relative z-10 border-t border-slate-200/60 bg-[#F8FAF8] shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
           {/* 02 / SERVICES & CAPABILITIES NAVIGATOR */}

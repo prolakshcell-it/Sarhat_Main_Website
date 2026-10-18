@@ -11,6 +11,7 @@ import QuoteModal from "@/components/QuoteModal";
 import FinalCTA from "@/components/FinalCTA";
 import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import { useHeroScroll } from "@/hooks/useHeroScroll";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import { PROJECT_ROWS } from "@/data/projects";
 import {
@@ -229,19 +230,15 @@ export default function OpenAccessPage() {
   const [selectedState, setSelectedState] = useState<string | null>(null);
 
   const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  const bgScale = useTransform(scrollYProgress, [0, 0.8], [1.02, 1.15]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.25]);
-  const bgDim = useTransform(scrollYProgress, [0, 0.5], [0.35, 0.85]);
-
-  const contentY = useTransform(scrollYProgress, [0, 0.3], ["0px", "-60px"]);
-  const contentScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.96]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
-  const contentFilter = useTransform(scrollYProgress, [0, 0.25], ["blur(0px)", "blur(10px)"]);
+    const {
+    isPastHero,
+    bgScale,
+    bgDim,
+    contentY,
+    contentScale,
+    contentOpacity,
+    indicatorOpacity,
+  } = useHeroScroll();
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex((prev) => (prev === index ? null : index));
@@ -259,14 +256,18 @@ export default function OpenAccessPage() {
         <Navbar onOpenQuote={() => setQuoteModalOpen(true)} />
 
         {/* 01 / HERO SECTION (STICKY PARALLAX) */}
-        <div className="sticky top-0 z-0 w-full h-screen">
+        <div
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
+            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+          }`}
+          aria-hidden={isPastHero}
+        >
           <section
             ref={heroRef}
             className="relative h-full w-full flex flex-col items-center justify-center overflow-hidden bg-black text-white select-none"
           >
             {/* Background Image */}
-            <motion.div
-              style={{ scale: bgScale, opacity: bgOpacity }}
+            <motion.div style={{ scale: bgScale }}
               className="absolute inset-0 z-0 h-full w-full"
             >
               <Image
@@ -282,7 +283,7 @@ export default function OpenAccessPage() {
                 style={{ opacity: bgDim }}
                 className="absolute inset-0 bg-black/60 pointer-events-none"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/80 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
             </motion.div>
 
             {/* Hero Main Content */}
@@ -291,7 +292,6 @@ export default function OpenAccessPage() {
                 y: contentY,
                 scale: contentScale,
                 opacity: contentOpacity,
-                filter: contentFilter,
               }}
               className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-20 sm:pt-24 flex flex-col items-center text-center"
             >
@@ -310,9 +310,13 @@ export default function OpenAccessPage() {
             </motion.div>
 
             {/* Scroll Indicator */}
-            <ScrollIndicator opacity={contentOpacity} filter={contentFilter} />
+            <ScrollIndicator opacity={indicatorOpacity} />
           </section>
         </div>
+
+        {/* Scroll Spacer (Matches Hero height to establish scroll track) */}
+        <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
+
 
         {/* 02 / CONTENT OVERLAY SHEET */}
         <div className="relative z-10 border-t border-slate-200/60 bg-[#F8FAF8] shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">

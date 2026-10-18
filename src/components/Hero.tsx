@@ -10,24 +10,20 @@ interface HeroProps {
 }
 
 export default function Hero({ onOpenQuote }: HeroProps) {
-  const containerRef = useRef<HTMLElement>(null);
+  // Window scroll tracking for the fixed Hero
+  const { scrollY } = useScroll();
 
-  // Parallax & Scroll Fade-out Tracking
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
+  // Background slow cinematic zoom & subtle darkening scrim as user scrolls down
+  const bgScale = useTransform(scrollY, [0, 900], [1.02, 1.08]);
+  const bgDim = useTransform(scrollY, [0, 800], [0.15, 0.55]);
 
-  // Background slow cinematic zoom, dynamic opacity fade & darkening scrim as user scrolls down
-  const bgScale = useTransform(scrollYProgress, [0, 0.8], [1.03, 1.15]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.2]);
-  const bgDim = useTransform(scrollYProgress, [0, 0.5], [0.3, 0.85]);
+  // Subtle upward parallax float for Hero Content while keeping it crisp and visible
+  const contentY = useTransform(scrollY, [0, 800], [0, -50]);
+  const contentScale = useTransform(scrollY, [0, 800], [1, 0.96]);
+  const contentOpacity = useTransform(scrollY, [0, 650], [1, 0.65]);
 
-  // Immediate scroll fade & smooth upward float for Hero Content
-  const contentY = useTransform(scrollYProgress, [0, 0.3], ["0px", "-60px"]);
-  const contentScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.95]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
-  const contentFilter = useTransform(scrollYProgress, [0, 0.25], ["blur(0px)", "blur(10px)"]);
+  // Scroll indicator fades out early as soon as the user starts scrolling down
+  const indicatorOpacity = useTransform(scrollY, [0, 140], [1, 0]);
 
   // Ultra-Smooth & Soft Staggered Animation Variants
   const containerVariants: Variants = {
@@ -58,11 +54,10 @@ export default function Hero({ onOpenQuote }: HeroProps) {
 
   return (
     <section
-      ref={containerRef}
-      className="relative h-screen min-h-[560px] sm:min-h-[680px] max-h-[1080px] w-full flex flex-col justify-between items-center overflow-hidden bg-slate-950 select-none"
+      className="relative h-full min-h-[560px] sm:min-h-[680px] w-full flex flex-col justify-between items-center overflow-hidden bg-slate-950 select-none"
     >
-      {/* Cinematic Background Image Layer with Dynamic Zoom & Dynamic Opacity Fade */}
-      <motion.div style={{ scale: bgScale, opacity: bgOpacity }} className="absolute inset-0 z-0 h-full w-full">
+      {/* Cinematic Background Image Layer with Dynamic Zoom & Scrim */}
+      <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
         <Image
           src="/images/hero-solar.jpg"
           alt="SARHAT EPC Solar Power Plant"
@@ -77,8 +72,8 @@ export default function Hero({ onOpenQuote }: HeroProps) {
           className="absolute inset-0 bg-black pointer-events-none"
         />
 
-        {/* High-Contrast Readability Gradient Scrim */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/30 via-50% to-black/90 pointer-events-none"></div>
+        {/* High-Contrast Readability Gradient Scrim with Soft Lower Third */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
       </motion.div>
 
       {/* Main Content Container (Immediate scroll-fade + motion blur + scale float on scroll down) */}
@@ -131,7 +126,7 @@ export default function Hero({ onOpenQuote }: HeroProps) {
       </motion.div>
 
       {/* Bottom Floating Info Bar (Fades out seamlessly on scroll) */}
-      <ScrollIndicator targetId="about" opacity={contentOpacity} filter={contentFilter} />
+      <ScrollIndicator targetId="content" opacity={indicatorOpacity} />
     </section>
   );
 }

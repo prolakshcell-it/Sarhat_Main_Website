@@ -30,8 +30,20 @@ import QuoteModal from "@/components/QuoteModal";
 import FinalCTA from "@/components/FinalCTA";
 import ScrollReveal from "@/components/ScrollReveal";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
+import ScrollIndicator from "@/components/ScrollIndicator";
+import { useHeroScroll } from "@/hooks/useHeroScroll";
 
 export default function AboutPage() {
+  const {
+    isPastHero,
+    bgScale,
+    bgDim,
+    contentY,
+    contentScale,
+    contentOpacity,
+    indicatorOpacity,
+  } = useHeroScroll();
+
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [activeFlightNode, setActiveFlightNode] = useState<string>("land");
   const [isPlaying, setIsPlaying] = useState(false);
@@ -147,42 +159,75 @@ export default function AboutPage() {
         {/* ------------------------------------------------------------- */}
         {/* 01 / PAGE HEADER: short image banner, left-aligned title, bold lead paragraph below */}
         {/* ------------------------------------------------------------- */}
-        <header className="relative z-10">
-          <section className="relative overflow-hidden bg-[#0B120C] pt-[104px] sm:pt-[121px]">
-            <Image
-              src="/images/hero-solar.jpg"
-              alt="Sarhat solar and wind energy infrastructure"
-              fill
-              preload
-              sizes="100vw"
-              className="object-cover object-center"
-            />
-            {/* solid brand wash on the left, fading out by the middle of the banner */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0B120C]/90 from-0% via-[#0B120C]/55 via-45% to-transparent to-80%" />
+        {/* Fixed Hero Section (Pinned background layer while scrolling) */}
+        <div
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
+            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+          }`}
+          aria-hidden={isPastHero}
+        >
+          <section className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none">
+            {/* Cinematic Background Image Layer with Dynamic Zoom & Scrim */}
+            <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
+              <Image
+                src="/images/hero-solar.jpg"
+                alt="Sarhat solar and wind energy infrastructure"
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover object-center opacity-85"
+              />
+              <motion.div
+                style={{ opacity: bgDim }}
+                className="absolute inset-0 bg-black pointer-events-none"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
+            </motion.div>
 
-            <div className="relative mx-auto flex h-[200px] max-w-6xl items-center px-4 sm:h-[250px] sm:px-6 lg:px-8">
-              <motion.h1
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                className="max-w-3xl font-sans-ui text-3xl font-bold leading-tight tracking-tight text-white sm:text-[2.75rem]"
-              >
-                People at the centre. Progress in every project.
-              </motion.h1>
-            </div>
-          </section>
+            {/* Main Centered Content */}
+            <motion.div
+              style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
+              className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-28 flex flex-col items-center text-center will-change-transform"
+            >
+              <div className="mb-6">
+                <AnimatedPillBadge>ABOUT SARHAT</AnimatedPillBadge>
+              </div>
 
-          <div className="bg-white">
-            <div className="mx-auto max-w-6xl px-4 pt-12 sm:px-6 lg:px-8">
-              <p className="font-sans-ui text-xl font-bold leading-snug tracking-tight text-[#333333] sm:text-[1.75rem] sm:leading-[1.35]">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center max-w-4xl drop-shadow-lg">
+                People at the centre. <br />
+                <span className="text-[#D4E012] italic font-normal">Progress in every project.</span>
+              </h1>
+
+              <p className="text-base sm:text-lg md:text-xl text-slate-200 font-normal max-w-3xl text-center leading-relaxed drop-shadow-md mb-8">
                 We bring people, engineering and execution together to turn clean–energy and infrastructure ideas into practical projects that create value for businesses, communities and India.
               </p>
-            </div>
-          </div>
-        </header>
 
-        {/* Main Content Sections */}
-        <div className="relative z-10 bg-[#F8FAF8]">
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <button
+                  onClick={() => setQuoteModalOpen(true)}
+                  className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-3.5 rounded-full transition-all shadow-xl shadow-[#D4E012]/30 hover:scale-105 active:scale-95 cursor-pointer"
+                >
+                  Discuss a Project
+                </button>
+                <a
+                  href="/about/our-story"
+                  className="border border-white/30 bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-widest px-7 py-3.5 rounded-full transition-all backdrop-blur-md hover:scale-105 active:scale-95 cursor-pointer"
+                >
+                  Explore Our Story
+                </a>
+              </div>
+            </motion.div>
+
+            {/* Mouse Scroll Indicator */}
+            <ScrollIndicator opacity={indicatorOpacity} />
+          </section>
+        </div>
+
+        {/* Scroll Spacer (Matches Hero height to establish scroll track) */}
+        <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
+
+        {/* Main Content Sections (Slides UP over the fixed Hero layer) */}
+        <div className="relative z-10 bg-[#F8FAF8] border-t border-slate-200/60 shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
 
           {/* ------------------------------------------------------------- */}
           {/* 02 / CORPORATE OVERVIEW & VIDEO SHOWCASE SECTION */}

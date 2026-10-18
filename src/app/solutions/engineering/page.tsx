@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import { useHeroScroll } from "@/hooks/useHeroScroll";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import FinalCTA from "@/components/FinalCTA";
 import RelatedSolutionsSection from "@/components/solutions/RelatedSolutionsSection";
@@ -102,14 +103,15 @@ export default function EngineeringPage() {
   const timelineRef = useRef<HTMLDivElement>(null);
 
   // Hero: transform + opacity only, so scrolling stays on the compositor
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const bgScale = useTransform(scrollYProgress, [0, 0.8], [1.03, 1.12]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.2]);
-  const contentY = useTransform(scrollYProgress, [0, 0.3], ["0px", "-48px"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+    const {
+    isPastHero,
+    bgScale,
+    bgDim,
+    contentY,
+    contentScale,
+    contentOpacity,
+    indicatorOpacity,
+  } = useHeroScroll();
 
   // Timeline: one scroll-linked line, no per-card listeners
   const { scrollYProgress: lineProgress } = useScroll({
@@ -124,13 +126,17 @@ export default function EngineeringPage() {
         <Navbar onOpenQuote={() => setQuoteModalOpen(true)} />
 
         {/* 01 / HERO */}
-        <div className="sticky top-0 z-0 w-full h-screen">
+        <div
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
+            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+          }`}
+          aria-hidden={isPastHero}
+        >
           <section
             ref={heroRef}
             className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none"
           >
-            <motion.div
-              style={{ scale: bgScale, opacity: bgOpacity }}
+            <motion.div style={{ scale: bgScale }}
               className="absolute inset-0 z-0 h-full w-full will-change-transform"
             >
               <Image
@@ -142,11 +148,11 @@ export default function EngineeringPage() {
                 sizes="100vw"
                 className="object-cover object-center opacity-85"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/95 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
             </motion.div>
 
             <motion.div
-              style={{ y: contentY, opacity: contentOpacity }}
+              style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
               className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-24 flex flex-col items-center text-center will-change-transform"
             >
               <div className="max-w-4xl flex flex-col items-center text-center">
@@ -160,9 +166,13 @@ export default function EngineeringPage() {
               </div>
             </motion.div>
 
-            <ScrollIndicator opacity={contentOpacity} />
+            <ScrollIndicator opacity={indicatorOpacity} />
           </section>
         </div>
+
+        {/* Scroll Spacer (Matches Hero height to establish scroll track) */}
+        <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
+
 
         {/* 02 / CONTENT SHEET */}
         <div className="relative z-10 border-t border-slate-200/60 bg-[#F8FAF8] shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">

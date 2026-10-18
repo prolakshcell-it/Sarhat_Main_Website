@@ -155,10 +155,13 @@ export default function OurStoryPage() {
       <main className="relative min-h-screen overflow-x-clip bg-[#F8FAF8] font-sans-ui text-[#0F172A] selection:bg-[#D4E012] selection:text-black">
         <Navbar onOpenQuote={() => setQuoteModalOpen(true)} />
 
-        {/* 01 — Rooted in India (sticky; the story slides up over it) */}
+        {/* 01 — Rooted in India (fixed; the story slides up over it) */}
         <StoryHero />
 
-        <div className="relative z-10 shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
+        {/* Scroll Spacer (Matches Hero height to establish scroll track) */}
+        <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
+
+        <div className="relative z-10 bg-[#F8FAF8] border-t border-slate-200/60 shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
           {/* 02 + 03 — Who We Are, and the film */}
           <WhoWeAre />
 
