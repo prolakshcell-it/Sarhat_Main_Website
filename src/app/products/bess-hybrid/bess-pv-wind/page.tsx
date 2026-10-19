@@ -280,15 +280,15 @@ export default function BessMeetsPvWindPage() {
           <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#070D1E]/80 via-transparent to-transparent" />
 
           {/* Hero Content */}
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div className="max-w-4xl">
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center flex flex-col items-center">
+            <div className="max-w-4xl flex flex-col items-center text-center">
               {/* Animated Pill Badge */}
-              <AnimatedPillBadge className="mb-4">
+              <AnimatedPillBadge darkBg className="mb-6">
                 HYBRID SOLAR • WIND • STORAGE EPC
               </AnimatedPillBadge>
 
               {/* Breadcrumbs */}
-              <nav aria-label="Breadcrumb" className="flex items-center gap-2 font-mono text-xs text-slate-300 mb-6">
+              <nav aria-label="Breadcrumb" className="flex items-center justify-center gap-2 font-mono text-xs text-slate-300 mb-6">
                 <Link href="/" className="hover:text-[#D4E012] transition-colors">
                   Home
                 </Link>
@@ -324,12 +324,12 @@ export default function BessMeetsPvWindPage() {
               </h1>
 
               {/* Sub-headline */}
-              <p className="text-lg sm:text-xl lg:text-2xl text-slate-200 font-light leading-relaxed mb-8 max-w-2xl">
+              <p className="text-lg sm:text-xl lg:text-2xl text-slate-200 font-light leading-relaxed mb-8 max-w-2xl mx-auto text-center">
                 Turn intermittent renewable generation into dispatchable, firm power. Complete turnkey EPC for solar-wind-storage hybrids, RTC/FDRE contracts and storage retrofits.
               </p>
 
               {/* CTA Row */}
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="flex flex-wrap items-center justify-center gap-4">
                 <button
                   onClick={() => setQuoteModalOpen(true)}
                   className="inline-flex items-center gap-2 bg-[#D4E012] hover:bg-[#c2ce0d] text-slate-950 font-mono font-bold text-xs uppercase tracking-wider px-7 py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all cursor-pointer"
@@ -355,14 +355,27 @@ export default function BessMeetsPvWindPage() {
           <section className="py-20 sm:py-28 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="max-w-3xl mb-14">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D4E012]/15 text-[#6DAD45] font-mono text-xs font-bold tracking-widest uppercase mb-3">
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">
                     EPC SCOPE
-                  </div>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 tracking-tight">
+                  </AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
                     What Sarhat{" "}
                     <span className="text-[#6DAD45] italic relative inline-block">
                       delivers.
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
                     </span>
                   </h2>
                 </div>

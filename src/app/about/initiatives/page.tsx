@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import { useHeroScroll } from "@/hooks/useHeroScroll";
 import {
   Leaf,
@@ -170,15 +171,30 @@ export default function InitiativesPage() {
           <section className="py-10 sm:py-14 bg-white border-b border-slate-200/80 relative z-10 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={30}>
-                <div className="text-center max-w-3xl mx-auto mb-16">
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#6DAD45]/15 border border-[#6DAD45]/30 text-[#6DAD45] text-xs font-mono font-bold uppercase tracking-wider mb-4">
-                    <Compass className="w-3.5 h-3.5 text-[#6DAD45]" />
-                    <span>OUR THREE INITIATIVES</span>
-                  </div>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
-                    Three Pillars of <span className="bg-gradient-to-r from-[#6DAD45] via-[#707B00] to-[#16A34A] bg-clip-text text-transparent italic font-serif-display">Sustainable Value</span>
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">
+                    OUR THREE INITIATIVES
+                  </AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
+                    Three Pillars of{" "}
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Sustainable Value.
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
-                  <p className="text-slate-600 text-base sm:text-lg font-normal leading-relaxed">
+                  <p className="text-slate-600 text-base sm:text-lg font-normal max-w-2xl mx-auto leading-relaxed">
                     Combining environmental stewardship, agricultural dual-use solar, and workforce technical upskilling.
                   </p>
                 </div>
@@ -335,21 +351,19 @@ export default function InitiativesPage() {
           <section className="py-10 sm:py-14 bg-white border-b border-slate-200/80 relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={30}>
-                <div className="bg-[#0F172A] border border-slate-800 rounded-3xl p-10 sm:p-14 text-white relative overflow-hidden shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
+                <div className="bg-[#0F172A] border border-slate-800 rounded-3xl p-10 sm:p-14 text-white relative overflow-hidden shadow-2xl text-center flex flex-col items-center">
                   <div className="absolute top-0 right-0 w-80 h-80 bg-[#6DAD45]/15 rounded-full blur-3xl pointer-events-none" />
 
-                  <div className="space-y-4 max-w-2xl">
-                    <span className="text-xs font-mono text-[#D4E012] font-bold uppercase tracking-widest block">
-                      BUILDING LASTING VALUE
-                    </span>
-                    <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-white tracking-tight leading-tight">
-                      Ready to build clean energy <br />
-                      <span className="text-[#D4E012]">with social &amp; environmental impact?</span>
-                    </h2>
-                    <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
-                      Whether you are looking to decarbonize corporate operations, deploy PM-KUSUM AgroVoltaic solar, or launch technician training in your region, Sarhat is your trusted partner.
-                    </p>
-                  </div>
+                  <span className="text-xs font-mono text-[#D4E012] font-bold uppercase tracking-widest block mb-4 mx-auto">
+                    BUILDING LASTING VALUE
+                  </span>
+                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-white tracking-tight leading-tight mb-4 max-w-2xl text-center">
+                    Ready to build clean energy <br />
+                    <span className="text-[#D4E012]">with social &amp; environmental impact?</span>
+                  </h2>
+                  <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal max-w-xl mx-auto mb-8 text-center">
+                    Whether you are looking to decarbonize corporate operations, deploy PM-KUSUM AgroVoltaic solar, or launch technician training in your region, Sarhat is your trusted partner.
+                  </p>
 
                   <button
                     onClick={() => setQuoteModalOpen(true)}

@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import { useHeroScroll } from "@/hooks/useHeroScroll";
 import { Award, Sparkles, X, ArrowRight, ArrowUpRight, ShieldCheck, UserCheck } from "lucide-react";
 
@@ -239,18 +240,30 @@ export default function LeadershipPage() {
           <section className="py-10 sm:py-14 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={30}>
-                <div className="mb-14 text-left flex flex-col md:flex-row md:items-end justify-between gap-4">
-                  <div>
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#6DAD45]/15 border border-[#6DAD45]/30 text-[#6DAD45] text-xs font-mono font-bold uppercase tracking-wider mb-4">
-                      <Sparkles className="w-3.5 h-3.5 text-[#6DAD45]" />
-                      <span>SARHAT DIRECTORS & EXECUTIVES</span>
-                    </div>
-                    <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 tracking-tight">
-                      Executive team
-                    </h2>
-                  </div>
-
-                  <p className="text-xs font-mono text-slate-500 flex items-center gap-2">
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">
+                    SARHAT DIRECTORS &amp; EXECUTIVES
+                  </AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
+                    Executive{" "}
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      team.
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
+                  </h2>
+                  <p className="text-xs font-mono text-slate-500 flex items-center justify-center gap-2 mt-4">
                     <span className="w-2 h-2 rounded-full bg-[#6DAD45] animate-ping" />
                     <span>Hover or tap card to flip &amp; view profile</span>
                   </p>

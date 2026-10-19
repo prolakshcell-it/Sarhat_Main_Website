@@ -12,6 +12,7 @@ import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import SmoothScroll from "@/components/SmoothScroll";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import { useHeroScroll } from "@/hooks/useHeroScroll";
 import { stateProjectsData, StateProjectData } from "@/data/stateProjects";
 
@@ -157,12 +158,31 @@ export default function StatePortfolioPage({ params }: PageProps) {
         {/* State Projects Grid */}
         <section className="py-20 bg-black relative z-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-12">
-              <h2 className="text-2xl sm:text-3xl font-serif-display font-medium text-white mb-2">
-                Delivered & Active <span className="text-[#5EE72D] italic">Projects</span> in {stateData.name}
+            <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+              <AnimatedPillBadge darkBg className="mb-6">
+                STATE PORTFOLIO
+              </AnimatedPillBadge>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-4">
+                Delivered &amp; Active{" "}
+                <span className="text-[#5EE72D] italic relative inline-block">
+                  Projects in {stateData.name}.
+                  <svg
+                    className="absolute -bottom-2 left-0 w-full h-3 text-[#5EE72D]"
+                    viewBox="0 0 100 20"
+                    preserveAspectRatio="none"
+                    aria-hidden
+                  >
+                    <path
+                      d="M0 15 Q 50 0 100 15"
+                      stroke="currentColor"
+                      strokeWidth="3.5"
+                      fill="transparent"
+                    />
+                  </svg>
+                </span>
               </h2>
-              <p className="text-xs sm:text-sm text-zinc-400 font-light">
-                Turnkey engineering, procurement, substation evacuation, and long-term O&M management.
+              <p className="text-zinc-400 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+                Turnkey engineering, procurement, substation evacuation, and long-term O&amp;M management across {stateData.name}.
               </p>
             </div>
 

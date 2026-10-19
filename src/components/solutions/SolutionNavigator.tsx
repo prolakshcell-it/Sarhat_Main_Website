@@ -146,33 +146,32 @@ export default function SolutionNavigator() {
 
       <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
         <ScrollReveal once distance={24}>
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-4 lg:mb-14">
-            <div>
-              <AnimatedPillBadge className="mb-4">
-                Services &amp; Capabilities
-              </AnimatedPillBadge>
-            </div>
-            <div className="flex items-center gap-3 font-mono text-sm text-slate-500" aria-hidden>
-              <span className="relative inline-flex h-5 w-6 overflow-hidden font-bold text-[#707B00]">
-                <AnimatePresence mode="popLayout" initial={false}>
-                  <motion.span
-                    key={active}
-                    initial={reduce ? { opacity: 0 } : { y: 14, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={reduce ? { opacity: 0 } : { y: -14, opacity: 0 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
-                  >
-                    {pad(active)}
-                  </motion.span>
-                </AnimatePresence>
+          <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+            <AnimatedPillBadge className="mb-6">
+              Services &amp; Capabilities
+            </AnimatedPillBadge>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
+              Integrated Clean Energy{" "}
+              <span className="text-[#6DAD45] italic relative inline-block">
+                Solutions.
+                <svg
+                  className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                  viewBox="0 0 100 20"
+                  preserveAspectRatio="none"
+                  aria-hidden
+                >
+                  <path
+                    d="M0 15 Q 50 0 100 15"
+                    stroke="currentColor"
+                    strokeWidth="3.5"
+                    fill="transparent"
+                  />
+                </svg>
               </span>
-              <span className="flex gap-1">
-                {capabilities.map((c, i) => (
-                  <span key={c.id} className={`h-1 rounded-full transition-all duration-300 ${i === active ? "w-8 bg-[#6DAD45]" : "w-3 bg-slate-300"}`} />
-                ))}
-              </span>
-              <span>{pad(capabilities.length - 1)}</span>
-            </div>
+            </h2>
+            <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+              Explore our turnkey capabilities across utility-scale solar, energy storage, substations, and site infrastructure.
+            </p>
           </div>
         </ScrollReveal>
 

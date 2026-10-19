@@ -325,9 +325,9 @@ export default function GroundMountedPVPage() {
           <section id="what-is-kusum" className="pt-20 sm:pt-28 pb-16 sm:pb-24 bg-[#F8FAF8]">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="mb-4">
-                  <AnimatedPillBadge className="mb-4">IN SIMPLE TERMS</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">IN SIMPLE TERMS</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
                     What is{" "}
                     <span className="text-[#6DAD45] italic relative inline-block">
                       PM-KUSUM?
@@ -448,9 +448,9 @@ export default function GroundMountedPVPage() {
           <section id="what-we-deliver" className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="mb-4">
-                  <AnimatedPillBadge className="mb-4">WHAT WE DELIVER</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">WHAT WE DELIVER</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
                     KUSUM,{" "}
                     <span className="text-[#6DAD45] italic relative inline-block">
                       end to end.
@@ -511,11 +511,11 @@ export default function GroundMountedPVPage() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <ScrollReveal>
-                <div className="mb-4">
-                  <AnimatedPillBadge darkBg className="mb-4">
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge darkBg className="mb-6">
                     SOLUTIONS
                   </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-4">
                     Want to develop a project under KUSUM? <br className="hidden sm:inline" />
                     <span className="text-[#D4E012] italic relative inline-block">
                       Look at our solutions.
@@ -639,9 +639,9 @@ export default function GroundMountedPVPage() {
           <section className="py-20 sm:py-28 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="mb-4">
-                  <AnimatedPillBadge className="mb-4">PROJECTS BY STATE</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">PROJECTS BY STATE</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
                     Want to explore KUSUM{" "}
                     <span className="text-[#6DAD45] italic relative inline-block">
                       projects in your state?
@@ -831,9 +831,9 @@ export default function GroundMountedPVPage() {
           <section id="faqs" className="py-20 sm:py-28 bg-white border-b border-slate-200/80">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="mb-12">
-                  <AnimatedPillBadge className="mb-4">FAQS</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
+                <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">FAQS</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
                     KUSUM{" "}
                     <span className="text-[#6DAD45] italic relative inline-block">
                       questions, answered.
@@ -900,9 +900,9 @@ export default function GroundMountedPVPage() {
           <section className="py-20 sm:py-28 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="mb-12">
-                  <AnimatedPillBadge className="mb-4">RELATED PRODUCTS</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">RELATED PRODUCTS</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
                     Explore more in{" "}
                     <span className="text-[#6DAD45] italic relative inline-block">
                       Solar Energy.

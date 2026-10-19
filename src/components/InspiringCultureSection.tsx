@@ -60,24 +60,33 @@ export default function InspiringCultureSection() {
   return (
     <section className="py-10 sm:py-12 lg:py-14 bg-[#FAFBF9] border-b border-slate-200/80 relative z-10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top Header Split Layout */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
-          <div className="max-w-2xl">
-            <AnimatedPillBadge className="mb-4">
-              Our Culture & Values
-            </AnimatedPillBadge>
-
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-[#112217] tracking-tight leading-[1.1]">
-              A Culture That Inspires. <br />
-              <span className="text-[#707B00] italic font-normal">A Team That Empowers.</span>
-            </h2>
-          </div>
-
-          <div className="max-w-md lg:pb-2">
-            <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-              A workplace where sustainability is not just a business model, it&apos;s a responsibility we live every day!
-            </p>
-          </div>
+        {/* Top Header Centered Layout */}
+        <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+          <AnimatedPillBadge className="mb-6">
+            Our Culture &amp; Values
+          </AnimatedPillBadge>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-[#112217] tracking-tight leading-tight mb-4">
+            A Culture That Inspires.{" "}
+            <span className="text-[#6DAD45] italic relative inline-block">
+              A Team That Empowers.
+              <svg
+                className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                viewBox="0 0 100 20"
+                preserveAspectRatio="none"
+                aria-hidden
+              >
+                <path
+                  d="M0 15 Q 50 0 100 15"
+                  stroke="currentColor"
+                  strokeWidth="3.5"
+                  fill="transparent"
+                />
+              </svg>
+            </span>
+          </h2>
+          <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
+            A workplace where sustainability is not just a business model, it&apos;s a responsibility we live every day!
+          </p>
         </div>
 
         {/* 3 Interactive Cards Grid */}

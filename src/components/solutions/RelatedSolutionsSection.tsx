@@ -70,9 +70,9 @@ export default function RelatedSolutionsSection({
     <section className="py-20 sm:py-28 bg-[#F8FAF8] border-b border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
-          <div className="mb-12">
-            <AnimatedPillBadge className="mb-4">RELATED SOLUTIONS</AnimatedPillBadge>
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
+          <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+            <AnimatedPillBadge className="mb-6">RELATED SOLUTIONS</AnimatedPillBadge>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
               Explore more in{" "}
               <span className="text-[#6DAD45] italic relative inline-block">
                 Our Solutions.

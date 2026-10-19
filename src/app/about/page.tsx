@@ -648,19 +648,19 @@ export default function AboutPage() {
           <section className="py-10 sm:py-14 bg-white relative z-10 border-b border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={40}>
-                <div className="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 text-white rounded-3xl p-10 sm:p-14 border border-slate-800 relative overflow-hidden shadow-2xl">
+                <div className="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 text-white rounded-3xl p-10 sm:p-14 border border-slate-800 relative overflow-hidden shadow-2xl text-center flex flex-col items-center">
                   <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-[#D4E012]/20 via-[#5EE72D]/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
 
-                  <span className="text-xs font-mono text-[#D4E012] font-extrabold uppercase tracking-widest block mb-4">
+                  <span className="text-xs font-mono text-[#D4E012] font-extrabold uppercase tracking-widest block mb-4 mx-auto">
                     THE ROAD AHEAD
                   </span>
 
-                  <h2 className="text-4xl sm:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-6 max-w-3xl">
+                  <h2 className="text-4xl sm:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-6 max-w-3xl text-center">
                     Energy today. <br />
                     <span className="text-[#D4E012]">More possibilities tomorrow.</span>
                   </h2>
 
-                  <p className="text-slate-300 font-normal text-base sm:text-lg max-w-xl leading-relaxed">
+                  <p className="text-slate-300 font-normal text-base sm:text-lg max-w-xl leading-relaxed text-center mx-auto">
                     Hospitality is planned as a future vertical and will be developed separately under its own brand and website.
                   </p>
                 </div>

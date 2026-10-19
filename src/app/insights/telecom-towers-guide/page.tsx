@@ -418,9 +418,9 @@ export default function TelecomTowersGuidePage() {
         <section className="py-20 sm:py-28 bg-[#F8FAF8] border-b border-slate-200/80">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
-              <div className="mb-12">
-                <AnimatedPillBadge className="mb-4">KEEP READING</AnimatedPillBadge>
-                <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 tracking-tight">
+              <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                <AnimatedPillBadge className="mb-6">KEEP READING</AnimatedPillBadge>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
                   More{" "}
                   <span className="text-[#6DAD45] italic relative inline-block">
                     guides.
