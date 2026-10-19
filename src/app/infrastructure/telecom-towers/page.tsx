@@ -334,14 +334,12 @@ export default function TelecomTowersPage() {
           {/* SECTION 1: IN SIMPLE TERMS */}
           <section id="what-is-telecom" className="py-24 sm:py-32 relative">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-                {/* Left Column: Descriptive Content */}
-                <div className="lg:col-span-7">
-                  <ScrollReveal>
-                    <AnimatedPillBadge className="mb-4">
-                      01 / IN SIMPLE TERMS
-                    </AnimatedPillBadge>
-                    <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-8">
+              <ScrollReveal>
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">
+                    01 / IN SIMPLE TERMS
+                  </AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
                       What is{" "}
                       <span className="text-[#6DAD45] italic relative inline-block">
                         Telecommunication Towers?
@@ -360,6 +358,13 @@ export default function TelecomTowersPage() {
                         </svg>
                       </span>
                     </h2>
+                </div>
+              </ScrollReveal>
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+                {/* Left Column: Descriptive Content */}
+                <div className="lg:col-span-7">
+                  <ScrollReveal>
 
                     <div className="space-y-6 text-slate-700 text-base sm:text-lg leading-relaxed font-normal">
                       <p>
@@ -447,8 +452,8 @@ export default function TelecomTowersPage() {
           <section id="what-we-deliver" className="py-24 sm:py-32 bg-slate-50/70 border-t border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="max-w-3xl mb-16">
-                  <AnimatedPillBadge className="mb-4">
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">
                     02 / WHAT WE DELIVER
                   </AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
@@ -470,7 +475,7 @@ export default function TelecomTowersPage() {
                       </svg>
                     </span>
                   </h2>
-                  <p className="text-slate-600 text-base sm:text-xl font-normal leading-relaxed">
+                  <p className="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
                     One contract, one accountable team, from the first site visit to the last year of operation.
                   </p>
                 </div>
@@ -511,8 +516,8 @@ export default function TelecomTowersPage() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <ScrollReveal>
-                <div className="max-w-3xl mb-16">
-                  <AnimatedPillBadge className="mb-4">
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">
                     03 / SOLUTIONS
                   </AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-4">
@@ -534,7 +539,7 @@ export default function TelecomTowersPage() {
                       </svg>
                     </span>
                   </h2>
-                  <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
                     Each stage of your Telecommunication Towers project is handled by a dedicated Sarhat solution team, and they all work from one project plan.
                   </p>
                 </div>
@@ -562,7 +567,7 @@ export default function TelecomTowersPage() {
                             {sol.title}
                           </h3>
 
-                          <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
                             {sol.body}
                           </p>
                         </div>
@@ -583,8 +588,8 @@ export default function TelecomTowersPage() {
           <section className="py-24 sm:py-32 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="max-w-3xl mb-12">
-                  <AnimatedPillBadge className="mb-4">
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">
                     04 / PROJECTS BY STATE
                   </AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
@@ -606,7 +611,7 @@ export default function TelecomTowersPage() {
                       </svg>
                     </span>
                   </h2>
-                  <p className="text-slate-600 text-base sm:text-lg">
+                  <p className="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
                     See what Sarhat has built and is building, state by state, with capacities, schemes and status.
                   </p>
                 </div>
@@ -770,8 +775,8 @@ export default function TelecomTowersPage() {
           <section id="faqs" className="py-24 sm:py-32 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-16">
-                  <AnimatedPillBadge className="mb-4">
+                <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">
                     05 / FAQS
                   </AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
@@ -856,8 +861,10 @@ export default function TelecomTowersPage() {
           <section className="py-24 sm:py-32 bg-slate-50/70 border-b border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="mb-12">
-                  <AnimatedPillBadge className="mb-4">RELATED PRODUCTS</AnimatedPillBadge>
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">
+                    RELATED PRODUCTS
+                  </AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
                     Explore more in{" "}
                     <span className="text-[#6DAD45] italic relative inline-block">

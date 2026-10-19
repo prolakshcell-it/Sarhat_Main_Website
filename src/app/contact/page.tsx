@@ -23,6 +23,7 @@ import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import { useHeroScroll } from "@/hooks/useHeroScroll";
 import { API_BASE_URL } from "@/lib/api";
 import { toast } from "sonner";
@@ -288,6 +289,37 @@ function ContactPageInner() {
       {/* ------------------------------------------------------------- */}
       <section id="inquiry" className="py-10 sm:py-14 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Main Centered Section Header */}
+          <ScrollReveal direction="up" distance={30}>
+            <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+              <AnimatedPillBadge className="mb-6">
+                GET IN TOUCH
+              </AnimatedPillBadge>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
+                Let&apos;s build something{" "}
+                <span className="text-[#6DAD45] italic relative inline-block">
+                  great together.
+                  <svg
+                    className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                    viewBox="0 0 100 20"
+                    preserveAspectRatio="none"
+                    aria-hidden
+                  >
+                    <path
+                      d="M0 15 Q 50 0 100 15"
+                      stroke="currentColor"
+                      strokeWidth="3.5"
+                      fill="transparent"
+                    />
+                  </svg>
+                </span>
+              </h2>
+              <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+                Connect with our team of solar EPC engineers, project developers, and technical support specialists.
+              </p>
+            </div>
+          </ScrollReveal>
+
           {/* Subheadings Selector Bar */}
           <div className="flex items-center justify-center mb-14">
             <div className="bg-slate-200/90 p-1.5 rounded-full border border-slate-300 shadow-inner flex items-center gap-2 max-w-md w-full">
@@ -331,11 +363,11 @@ function ContactPageInner() {
                 <div className="lg:col-span-6">
                   <ScrollReveal direction="left" distance={40}>
                     <div className="bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-8 shadow-sm relative">
-                      <div className="mb-6">
-                        <span className="inline-flex items-center px-4 py-1 rounded-full bg-emerald-50 border border-[#6DAD45]/30 text-[#707B00] font-mono text-[11px] font-bold tracking-widest uppercase mb-3">
+                      <div className="mb-6 text-center">
+                        <span className="inline-flex items-center px-4 py-1 rounded-full bg-emerald-50 border border-[#6DAD45]/30 text-[#707B00] font-mono text-[11px] font-bold tracking-widest uppercase mb-3 mx-auto">
                           PROJECT ENQUIRY
                         </span>
-                        <h2 className="text-3xl sm:text-4xl font-serif font-bold text-slate-900 tracking-tight leading-tight">
+                        <h2 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900 tracking-tight leading-tight">
                           Tell us about{" "}
                           <span className="text-[#6DAD45] italic relative inline-block font-normal">
                             your project.
@@ -639,14 +671,14 @@ function ContactPageInner() {
                 <div className="lg:col-span-6">
                   <ScrollReveal direction="left" distance={40}>
                     <div className="bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-8 shadow-sm relative">
-                      <div className="mb-6">
-                        <span className="text-[10px] font-mono font-bold text-[#707B00] uppercase tracking-widest block mb-1">
+                      <div className="mb-6 text-center">
+                        <span className="inline-flex items-center px-4 py-1 rounded-full bg-emerald-50 border border-[#6DAD45]/30 text-[#707B00] font-mono text-[11px] font-bold tracking-widest uppercase mb-3 mx-auto">
                           TECHNICAL SUPPORT PORTAL
                         </span>
                         <h3 className="text-2xl font-serif-display font-medium text-slate-900">
                           Raise a Support & Service Ticket
                         </h3>
-                        <p className="text-xs text-slate-500 font-light mt-1">
+                        <p className="text-xs text-slate-500 font-light mt-1 max-w-sm mx-auto">
                           For active plant maintenance, SCADA issues, inverter tripping, or O&M service requests.
                         </p>
                       </div>

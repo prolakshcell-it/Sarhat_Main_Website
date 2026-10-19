@@ -324,9 +324,9 @@ export default function OpenAccessPage() {
           <section id="what-is-open-access" className="pt-20 sm:pt-28 pb-16 sm:pb-24 bg-[#F8FAF8]">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="mb-4">
-                  <AnimatedPillBadge className="mb-4">IN SIMPLE TERMS</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">IN SIMPLE TERMS</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
                     What is{" "}
                     <span className="text-[#6DAD45] italic relative inline-block">
                       Open Access Solar?
@@ -442,9 +442,9 @@ export default function OpenAccessPage() {
           <section id="what-we-deliver" className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="mb-4">
-                  <AnimatedPillBadge className="mb-4">WHAT WE DELIVER</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">WHAT WE DELIVER</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
                     Open Access,{" "}
                     <span className="text-[#6DAD45] italic relative inline-block">
                       end to end.
@@ -506,11 +506,9 @@ export default function OpenAccessPage() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <ScrollReveal>
-                <div className="mb-4">
-                  <AnimatedPillBadge darkBg className="mb-4">
-                    SOLUTIONS
-                  </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight">
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge darkBg className="mb-6">SOLUTIONS</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-4">
                     Want to develop a project under Open Access? <br className="hidden sm:inline" />
                     <span className="text-[#D4E012] italic relative inline-block">
                       Look at our solutions.
@@ -529,7 +527,7 @@ export default function OpenAccessPage() {
                       </svg>
                     </span>
                   </h2>
-                  <p className="mt-4 text-slate-300 text-base sm:text-lg max-w-3xl">
+                  <p className="mt-4 text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
                     Each stage of your Open Access project is handled by a dedicated Sarhat solution
                     team, and they all work from one project plan.
                   </p>
@@ -634,9 +632,9 @@ export default function OpenAccessPage() {
           <section className="py-20 sm:py-28 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="mb-4">
-                  <AnimatedPillBadge className="mb-4">PROJECTS BY STATE</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">PROJECTS BY STATE</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
                     Want to explore Open Access{" "}
                     <span className="text-[#6DAD45] italic relative inline-block">
                       projects in your state?
@@ -826,9 +824,9 @@ export default function OpenAccessPage() {
           <section id="faqs" className="py-20 sm:py-28 bg-white border-b border-slate-200/80">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="mb-12">
-                  <AnimatedPillBadge className="mb-4">FAQS</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
+                <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">FAQS</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
                     Open Access{" "}
                     <span className="text-[#6DAD45] italic relative inline-block">
                       questions, answered.
@@ -908,9 +906,9 @@ export default function OpenAccessPage() {
           <section className="py-20 sm:py-28 bg-[#F8FAF8] border-b border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="mb-12">
-                  <AnimatedPillBadge className="mb-4">RELATED PRODUCTS</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight">
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">RELATED PRODUCTS</AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
                     Explore more in{" "}
                     <span className="text-[#6DAD45] italic relative inline-block">
                       Solar Energy.

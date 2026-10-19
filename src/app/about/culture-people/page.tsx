@@ -172,21 +172,40 @@ export default function CulturePeoplePage() {
             <div className="absolute bottom-0 left-0 w-64 sm:w-80 h-64 sm:h-80 bg-[#6DAD45]/10 rounded-full blur-3xl pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+              <ScrollReveal direction="up" distance={30}>
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">
+                    OUR VIBES PROGRAMME
+                  </AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
+                    Inclusivity &amp;{" "}
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Belonging.
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
+                  </h2>
+                  <p className="text-slate-600 text-base sm:text-lg font-normal max-w-2xl mx-auto leading-relaxed">
+                    For our people and by our people, VIBES is focused on building an inclusive, empowering, and supportive culture across Sarhat Energy.
+                  </p>
+                </div>
+              </ScrollReveal>
+
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
 
                 {/* Left Editorial Block */}
                 <div className="lg:col-span-7 min-w-0">
-                  <motion.div {...reveal(0)}>
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D4E012]/20 border border-[#707B00]/30 text-[#707B00] text-xs font-mono font-bold uppercase tracking-wider mb-6">
-                      <Sparkles className="w-3.5 h-3.5 text-[#707B00]" />
-                      <span>OUR VIBES PROGRAMME</span>
-                    </div>
-                  </motion.div>
-
-                  <motion.h2 {...reveal(0.08)} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium text-slate-900 tracking-tight leading-[1.05] mb-6 text-balance">
-                    Inclusivity & <span className="text-[#6DAD45] italic font-normal">Belonging</span>
-                  </motion.h2>
-
                   <motion.div {...reveal(0.14)} className="text-[11px] sm:text-sm font-mono font-bold text-[#707B00] uppercase tracking-wider mb-8 bg-[#D4E012]/15 border border-[#D4E012]/40 inline-block px-4 py-2 rounded-xl max-w-full">
                     VIBES: Volunteering • Inclusivity • Belonging • Engagement • Social
                   </motion.div>
@@ -258,12 +277,28 @@ export default function CulturePeoplePage() {
               
               {/* Section Header */}
               <ScrollReveal direction="up" distance={30}>
-                <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-                  <AnimatedPillBadge className="mb-4">
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">
                     OUR GUIDING PRINCIPLES
                   </AnimatedPillBadge>
-                  <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight mb-4">
-                    Our core <span className="text-[#6DAD45] italic font-normal">values</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
+                    Our core{" "}
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      values.
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
                     From our corporate social responsibility to our passion for renewable energy, Sarhat works to five core values that shape everything we do.

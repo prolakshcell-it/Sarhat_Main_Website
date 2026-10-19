@@ -21,6 +21,7 @@ import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import ScrollReveal from "@/components/ScrollReveal";
 import QuoteModal from "@/components/QuoteModal";
+import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 
 const INDIAN_STATES = [
   "Rajasthan",
@@ -121,9 +122,9 @@ function DiscussProjectContent() {
             <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#D4E012]/15 rounded-full blur-[120px] pointer-events-none" />
           </div>
 
-          <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
             {/* Breadcrumb Navigation */}
-            <nav aria-label="Breadcrumb" className="mb-6">
+            <nav aria-label="Breadcrumb" className="mb-6 flex justify-center">
               <ol className="flex items-center gap-2 text-xs font-mono text-slate-400">
                 <li>
                   <Link href="/" className="hover:text-white transition-colors">
@@ -136,14 +137,14 @@ function DiscussProjectContent() {
             </nav>
 
             {/* Pill Badge */}
-            <div className="mb-5">
-              <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-[#D4E012] font-mono text-xs font-bold tracking-widest uppercase backdrop-blur-sm shadow-sm">
+            <div className="mb-6 flex justify-center">
+              <AnimatedPillBadge darkBg>
                 Discuss a project
-              </span>
+              </AnimatedPillBadge>
             </div>
 
             {/* H1 Heading */}
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium text-white tracking-tight leading-[1.12] mb-6">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium text-white tracking-tight leading-[1.12] mb-6 max-w-4xl">
               Have a project{" "}
               <span className="text-[#D4E012] italic relative inline-block font-normal">
                 worth building?
@@ -164,12 +165,12 @@ function DiscussProjectContent() {
             </h1>
 
             {/* Subtitle / Lead Paragraph */}
-            <p className="text-slate-300 text-base sm:text-xl font-normal max-w-3xl leading-relaxed mb-10">
+            <p className="text-slate-300 text-base sm:text-xl font-normal max-w-2xl mx-auto leading-relaxed mb-10 text-center">
               Solar. BESS Storage. Substations. Agrivoltaics. Roads. Bridges. Buildings. Tell us where you want to build and let&apos;s map the execution path together.
             </p>
 
             {/* Hero Actions (Matching Screenshot 1) */}
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center justify-center gap-4">
               <a
                 href="#form"
                 className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-mono font-bold text-xs sm:text-sm uppercase tracking-wider px-8 py-4 shadow-xl shadow-[#D4E012]/20 hover:scale-105 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
@@ -198,14 +199,14 @@ function DiscussProjectContent() {
               <ScrollReveal>
                 <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xl relative overflow-hidden">
                   {/* Badge */}
-                  <div className="mb-3">
-                    <span className="inline-flex items-center px-4 py-1 rounded-full bg-emerald-50 border border-[#6DAD45]/30 text-[#707B00] font-mono text-[11px] font-bold tracking-widest uppercase">
+                  <div className="mb-4 text-center">
+                    <span className="inline-flex items-center px-4 py-1 rounded-full bg-emerald-50 border border-[#6DAD45]/30 text-[#707B00] font-mono text-[11px] font-bold tracking-widest uppercase mx-auto">
                       PROJECT ENQUIRY
                     </span>
                   </div>
 
                   {/* Heading */}
-                  <h2 className="text-3xl sm:text-4xl font-serif font-bold text-slate-900 tracking-tight leading-tight mb-6">
+                  <h2 className="text-3xl sm:text-4xl font-serif font-bold text-slate-900 tracking-tight leading-tight mb-6 text-center">
                     Tell us about{" "}
                     <span className="text-[#6DAD45] italic relative inline-block font-normal">
                       your project.

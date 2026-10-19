@@ -152,12 +152,12 @@ export default function SolutionsPage() {
               {detailedSolutions.map((sol, index) => (
                 <ScrollReveal key={sol.id} once distance={24}>
                   <div id={sol.id} className="scroll-mt-44 space-y-8 lg:space-y-10">
-                    <div className="max-w-4xl space-y-4">
-                      <AnimatedPillBadge className="mb-1">{sol.badge}</AnimatedPillBadge>
-                      <h3 className="font-serif-display text-[clamp(1.6rem,3.2vw,2.75rem)] font-medium leading-tight text-[#0F172A]">
+                    <div className="text-center max-w-4xl mx-auto space-y-4 mb-8">
+                      <AnimatedPillBadge className="mb-2">{sol.badge}</AnimatedPillBadge>
+                      <h3 className="font-serif-display text-[clamp(1.8rem,3.2vw,2.75rem)] font-medium leading-tight text-[#0F172A]">
                         {sol.headline}
                       </h3>
-                      <p className="text-[clamp(15px,1.3vw,18px)] font-light leading-relaxed text-slate-600">{sol.description}</p>
+                      <p className="text-[clamp(15px,1.3vw,18px)] font-normal leading-relaxed text-slate-600 max-w-2xl mx-auto">{sol.description}</p>
                     </div>
 
                     <div className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-12 lg:gap-12">
@@ -225,17 +225,30 @@ export default function SolutionsPage() {
 
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <ScrollReveal once>
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-                  <div>
-                    <AnimatedPillBadge darkBg className="mb-3">
-                      THE SERVICE ROADMAP
-                    </AnimatedPillBadge>
-                    <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-white tracking-tight leading-tight">
-                      The same road. <br />
-                      <span className="text-[#D4E012] italic">A smarter project.</span>
-                    </h2>
-                  </div>
-                  <p className="text-slate-300 font-light text-base max-w-md leading-relaxed">
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge darkBg className="mb-6">
+                    THE SERVICE ROADMAP
+                  </AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-4">
+                    The same road.{" "}
+                    <span className="text-[#D4E012] italic relative inline-block">
+                      A smarter project.
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#D4E012]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
+                  </h2>
+                  <p className="text-slate-300 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
                     From site feasibility to 24/7 O&M, every phase connects seamlessly into the next stage gate. Click or tap any stage to inspect the execution pipeline.
                   </p>
                 </div>

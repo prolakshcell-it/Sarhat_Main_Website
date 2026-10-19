@@ -122,18 +122,32 @@ export default function FivePrinciplesInteractive({
   return (
     <div className="w-full max-w-7xl mx-auto my-4 font-sans-ui">
       {/* Section Sub-Header / Title bar */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 px-2 gap-4">
-        <div>
-          <AnimatedPillBadge darkBg className="mb-3">
-            THE 5 DELIVERY PRINCIPLES IN PRACTICE
-          </AnimatedPillBadge>
-          <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-white tracking-tight leading-tight">
-            Our Delivery <span className="text-[#D4E012] italic">Principles</span>
-          </h2>
-        </div>
-        <div className="flex items-center gap-2 text-xs font-mono text-[#D4E012] bg-[#D4E012]/10 border border-[#D4E012]/30 px-4 py-2 rounded-full w-fit backdrop-blur-md shadow-lg shadow-[#D4E012]/5">
+      <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+        <AnimatedPillBadge darkBg className="mb-6">
+          THE 5 DELIVERY PRINCIPLES IN PRACTICE
+        </AnimatedPillBadge>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-4">
+          Our Delivery{" "}
+          <span className="text-[#D4E012] italic relative inline-block">
+            Principles.
+            <svg
+              className="absolute -bottom-2 left-0 w-full h-3 text-[#D4E012]"
+              viewBox="0 0 100 20"
+              preserveAspectRatio="none"
+              aria-hidden
+            >
+              <path
+                d="M0 15 Q 50 0 100 15"
+                stroke="currentColor"
+                strokeWidth="3.5"
+                fill="transparent"
+              />
+            </svg>
+          </span>
+        </h2>
+        <div className="flex items-center justify-center gap-2 text-xs font-mono text-[#D4E012] bg-[#D4E012]/10 border border-[#D4E012]/30 px-4 py-2 rounded-full w-fit mx-auto mt-4 backdrop-blur-md shadow-lg shadow-[#D4E012]/5">
           <MousePointerClick className="w-4 h-4 animate-bounce text-[#D4E012]" />
-          <span>Click any stage below to learn more.</span>
+          <span>Click any stage below to explore outcomes.</span>
         </div>
       </div>
 

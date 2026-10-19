@@ -14,7 +14,7 @@ export default function AnimatedPillBadge({
   darkBg = false,
 }: AnimatedPillBadgeProps) {
   return (
-    <div className={`relative inline-flex items-center justify-center p-[1.5px] overflow-hidden rounded-full shadow-sm group ${className}`}>
+    <div className={`relative inline-flex items-center justify-center mx-auto p-[1.5px] overflow-hidden rounded-full shadow-sm group ${className}`}>
       {/* Rotating Traveling Gradient Light Beam along boundary border (Sarhat Lime & Green Colors) */}
       <span className="absolute inset-[-200%] animate-border-spin bg-[conic-gradient(from_0deg_at_50%_50%,transparent_0deg,transparent_270deg,#D4E012_315deg,#5EE72D_360deg)] pointer-events-none" />
 

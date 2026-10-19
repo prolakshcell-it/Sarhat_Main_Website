@@ -230,18 +230,37 @@ export default function OurApproachPage() {
           {/* 02 / FROM CONCEPT TO COMPLETION WE DELIVER (Placed Right After Hero) */}
           <section className="py-10 sm:py-14 bg-[#F8FAF8] text-[#0F172A] relative border-b border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <ScrollReveal>
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">
+                    END-TO-END CAPABILITY
+                  </AnimatedPillBadge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-[#0F172A] tracking-tight leading-tight mb-4">
+                    From concept to completion,{" "}
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      we deliver.
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
+                  </h2>
+                </div>
+              </ScrollReveal>
+
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
                 {/* Left Content Column */}
                 <div className="lg:col-span-7 space-y-6">
                   <ScrollReveal>
-                    <AnimatedPillBadge className="mb-2">
-                      END-TO-END CAPABILITY
-                    </AnimatedPillBadge>
-
-                    <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-[#0F172A] tracking-tight leading-tight">
-                      From concept to completion, <br />
-                      <span className="text-[#6DAD45]">we deliver</span>
-                    </h2>
 
                     <div className="space-y-4 text-slate-600 text-base sm:text-lg leading-relaxed pt-2 font-normal">
                       <p>
@@ -311,12 +330,28 @@ export default function OurApproachPage() {
           <section className="py-10 sm:py-14 bg-white border-b border-slate-200/80 text-[#0F172A]">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-16">
-                  <AnimatedPillBadge className="mb-3">
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">
                     STEP-BY-STEP WORKFLOW
                   </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-[#0F172A] tracking-tight">
-                    Turnkey Execution Lifecycle
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-[#0F172A] tracking-tight leading-tight mb-4">
+                    Turnkey Execution{" "}
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Lifecycle.
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
                 </div>
               </ScrollReveal>
@@ -329,14 +364,30 @@ export default function OurApproachPage() {
           <section className="py-10 sm:py-14 bg-[#F8FAF8] text-[#0F172A] border-b border-slate-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <div className="mb-14 text-center max-w-3xl mx-auto">
-                  <AnimatedPillBadge className="mb-3">
+                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                  <AnimatedPillBadge className="mb-6">
                     TRACK RECORD
                   </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-[#0F172A] tracking-tight mb-3">
-                    Projects delivered
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-[#0F172A] tracking-tight leading-tight mb-4">
+                    Projects{" "}
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      delivered.
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden
+                      >
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent"
+                        />
+                      </svg>
+                    </span>
                   </h2>
-                  <p className="text-slate-600 text-base sm:text-lg font-light">
+                  <p className="text-slate-600 text-base sm:text-lg font-normal max-w-2xl mx-auto leading-relaxed">
                     See how we&apos;re delivering in the real world across utility solar, wind, and storage.
                   </p>
                 </div>
