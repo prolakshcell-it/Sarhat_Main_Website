@@ -14,6 +14,7 @@ interface PartnerBrand {
   sector: "UTILITIES" | "SUPPLIERS" | "PV MODULES" | "SWITCHGEARS";
   badgeColor: string;
   logo: React.ReactNode;
+  logoSrc?: string;
 }
 
 export default function TrustedByLogos() {
@@ -36,6 +37,7 @@ export default function TrustedByLogos() {
     },
     {
       id: "nbpdcl",
+      logoSrc: "/images/partners/nbpdcl.jpg",
       name: "NBPDCL",
       category: "North Bihar Power Distribution",
       sector: "UTILITIES",
@@ -50,6 +52,7 @@ export default function TrustedByLogos() {
     },
     {
       id: "sbpdcl",
+      logoSrc: "/images/partners/sbpdcl.jpg",
       name: "SBPDCL",
       category: "South Bihar Power Distribution",
       sector: "UTILITIES",
@@ -90,6 +93,7 @@ export default function TrustedByLogos() {
     },
     {
       id: "upneda",
+      logoSrc: "/images/partners/upneda.png",
       name: "UPNEDA",
       category: "UP New & Renewable Energy Agency",
       sector: "UTILITIES",
@@ -116,6 +120,7 @@ export default function TrustedByLogos() {
     },
     {
       id: "updiscoms",
+      logoSrc: "/images/partners/updiscoms.png",
       name: "UP DISCOMs",
       category: "PVVNL • DVVNL • MVVNL • PuVVNL",
       sector: "UTILITIES",
@@ -129,6 +134,7 @@ export default function TrustedByLogos() {
     },
     {
       id: "haryanadiscoms",
+      logoSrc: "/images/partners/haryanadiscoms.png",
       name: "Haryana DISCOMs",
       category: "DHBVN • UHBVN Power Utilities",
       sector: "UTILITIES",
@@ -156,6 +162,7 @@ export default function TrustedByLogos() {
     },
     {
       id: "schneider",
+      logoSrc: "/images/partners/schneider.png",
       name: "Schneider Electric",
       category: "SCADA & Relay Protection",
       sector: "SWITCHGEARS",
@@ -169,6 +176,7 @@ export default function TrustedByLogos() {
     },
     {
       id: "abb",
+      logoSrc: "/images/partners/abb.png",
       name: "ABB India",
       category: "GIS Switchgear & Substation",
       sector: "SWITCHGEARS",
@@ -185,6 +193,7 @@ export default function TrustedByLogos() {
   const row2Brands: PartnerBrand[] = [
     {
       id: "sungrow",
+      logoSrc: "/images/partners/sungrow.png",
       name: "Sungrow",
       category: "Inverters & BESS Containers",
       sector: "SUPPLIERS",
@@ -198,6 +207,7 @@ export default function TrustedByLogos() {
     },
     {
       id: "wattpower",
+      logoSrc: "/images/partners/wattpower.png",
       name: "WattPower",
       category: "Utility String Inverters",
       sector: "SUPPLIERS",
@@ -211,6 +221,7 @@ export default function TrustedByLogos() {
     },
     {
       id: "hitachi",
+      logoSrc: "/images/partners/hitachi.png",
       name: "Hitachi Energy",
       category: "Grid Automation & Power Systems",
       sector: "SUPPLIERS",
@@ -225,6 +236,7 @@ export default function TrustedByLogos() {
     },
     {
       id: "solplanet",
+      logoSrc: "/images/partners/solplanet.png",
       name: "Solplanet",
       category: "Smart Commercial Inverters",
       sector: "SUPPLIERS",
@@ -239,6 +251,7 @@ export default function TrustedByLogos() {
     },
     {
       id: "rayzon",
+      logoSrc: "/images/partners/rayzon.png",
       name: "Rayzon Solar",
       category: "Tier-1 PV Modules",
       sector: "PV MODULES",
@@ -252,6 +265,7 @@ export default function TrustedByLogos() {
     },
     {
       id: "vikram",
+      logoSrc: "/images/partners/vikram.png",
       name: "Vikram Solar",
       category: "High-Efficiency Solar Modules",
       sector: "PV MODULES",
@@ -279,6 +293,7 @@ export default function TrustedByLogos() {
     },
     {
       id: "adani",
+      logoSrc: "/images/partners/adani.png",
       name: "Adani Solar",
       category: "Bifacial PV & N-Type Cells",
       sector: "PV MODULES",
@@ -305,6 +320,7 @@ export default function TrustedByLogos() {
     },
     {
       id: "renew",
+      logoSrc: "/images/partners/renew.svg",
       name: "ReNew",
       category: "Renewable Power IPP",
       sector: "PV MODULES",
@@ -331,6 +347,7 @@ export default function TrustedByLogos() {
     },
     {
       id: "gautam",
+      logoSrc: "/images/partners/gautam.png",
       name: "Gautam Solar",
       category: "High-Yield Solar PV",
       sector: "PV MODULES",
@@ -432,12 +449,22 @@ export default function TrustedByLogos() {
                 }`}
               >
                 {/* Brand Logo Container */}
-                <div
-                  className="w-11 h-11 rounded-xl bg-[#F8FAF8] flex items-center justify-center border border-slate-200 group-hover:bg-white group-hover:shadow-md transition-all shrink-0"
-                  style={{ borderColor: `${item.badgeColor}30` }}
-                >
-                  {item.logo}
-                </div>
+                {item.logoSrc ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={item.logoSrc}
+                    alt={`${item.name} logo`}
+                    className="h-11 w-auto max-w-[130px] object-contain shrink-0"
+                    draggable={false}
+                  />
+                ) : (
+                  <div
+                    className="w-11 h-11 rounded-xl bg-[#F8FAF8] flex items-center justify-center border border-slate-200 group-hover:bg-white group-hover:shadow-md transition-all shrink-0"
+                    style={{ borderColor: `${item.badgeColor}30` }}
+                  >
+                    {item.logo}
+                  </div>
+                )}
 
                 {/* Brand Information */}
                 <div className="flex flex-col text-left">
@@ -478,12 +505,22 @@ export default function TrustedByLogos() {
                 }`}
               >
                 {/* Brand Logo Container */}
-                <div
-                  className="w-11 h-11 rounded-xl bg-[#F8FAF8] flex items-center justify-center border border-slate-200 group-hover:bg-white group-hover:shadow-md transition-all shrink-0"
-                  style={{ borderColor: `${item.badgeColor}30` }}
-                >
-                  {item.logo}
-                </div>
+                {item.logoSrc ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={item.logoSrc}
+                    alt={`${item.name} logo`}
+                    className="h-11 w-auto max-w-[130px] object-contain shrink-0"
+                    draggable={false}
+                  />
+                ) : (
+                  <div
+                    className="w-11 h-11 rounded-xl bg-[#F8FAF8] flex items-center justify-center border border-slate-200 group-hover:bg-white group-hover:shadow-md transition-all shrink-0"
+                    style={{ borderColor: `${item.badgeColor}30` }}
+                  >
+                    {item.logo}
+                  </div>
+                )}
 
                 {/* Brand Information */}
                 <div className="flex flex-col text-left">
