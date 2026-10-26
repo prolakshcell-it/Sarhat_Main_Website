@@ -89,7 +89,8 @@ export default function MetricsTicker() {
     },
     {
       value: "34",
-      label: "FIELD TEAMS",
+      numSuffix: "+",
+      label: "CORE TEAMS",
     },
     {
       value: "100",

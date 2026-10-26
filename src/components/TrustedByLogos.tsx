@@ -1,85 +1,378 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Building2, Cpu, Zap, Landmark, ShieldCheck, CheckCircle2, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
 import AnimatedPillBadge from "./AnimatedPillBadge";
 
+interface PartnerBrand {
+  id: string;
+  name: string;
+  category: string;
+  sector: "UTILITIES" | "SUPPLIERS" | "PV MODULES" | "SWITCHGEARS";
+  badgeColor: string;
+  logo: React.ReactNode;
+}
+
 export default function TrustedByLogos() {
-  const brands = [
+  const [activeFilter, setActiveFilter] = useState<string>("ALL");
+
+  // Row 1: Utilities (9) + Switchgears (3) = 12 Brands
+  const row1Brands: PartnerBrand[] = [
     {
-      name: "LONGi Solar",
-      category: "Bifacial PV Modules",
-      icon: Cpu,
+      id: "bspgcl",
+      name: "BSPGCL",
+      category: "Bihar State Power Generation",
+      sector: "UTILITIES",
+      badgeColor: "#B45309",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <polygon points="16,3 28,10 28,22 16,29 4,22 4,10" stroke="#B45309" strokeWidth="2.5" fill="none" />
+          <path d="M17 7l-5 9h5l-2 9 8-11h-5l3-7z" fill="#F59E0B" />
+        </svg>
+      ),
     },
     {
-      name: "Sungrow Power",
-      category: "Inverters & BESS Containers",
-      icon: Zap,
+      id: "nbpdcl",
+      name: "NBPDCL",
+      category: "North Bihar Power Distribution",
+      sector: "UTILITIES",
+      badgeColor: "#0369A1",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <circle cx="16" cy="16" r="11" stroke="#0369A1" strokeWidth="2.5" fill="none" />
+          <path d="M16 6v20M6 16h20" stroke="#0284C7" strokeWidth="1.5" strokeDasharray="2 2" />
+          <path d="M14 9l-4 7h6l-2 7 7-9h-5l3-5z" fill="#0284C7" />
+        </svg>
+      ),
     },
     {
-      name: "ABB / Hitachi",
-      category: "GIS Switchgear & Automation",
-      icon: Building2,
+      id: "sbpdcl",
+      name: "SBPDCL",
+      category: "South Bihar Power Distribution",
+      sector: "UTILITIES",
+      badgeColor: "#047857",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <path d="M6 26h20M16 6v20M11 12l5-6 5 6M9 18l7-6 7 6" stroke="#047857" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+          <circle cx="16" cy="6" r="2" fill="#10B981" />
+        </svg>
+      ),
     },
     {
-      name: "Siemens Energy",
-      category: "EHV Transformers & Breakers",
-      icon: Cpu,
+      id: "jvvnl",
+      name: "JVVNL",
+      category: "Jaipur Vidyut Vitran Nigam",
+      sector: "UTILITIES",
+      badgeColor: "#1D4ED8",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <rect x="4" y="4" width="24" height="24" rx="12" stroke="#1D4ED8" strokeWidth="2.5" fill="none" />
+          <path d="M17 7l-5 9h5l-2 9 8-11h-5l3-7z" fill="#1D4ED8" />
+        </svg>
+      ),
     },
     {
-      name: "Trina Solar",
-      category: "N-Type High Efficiency PV",
-      icon: Zap,
+      id: "jdvvnl",
+      name: "JDVVNL",
+      category: "Jodhpur Vidyut Vitran Nigam",
+      sector: "UTILITIES",
+      badgeColor: "#D97706",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <circle cx="16" cy="16" r="11" stroke="#D97706" strokeWidth="2.5" fill="none" />
+          <path d="M16 7a9 9 0 019 9" stroke="#F59E0B" strokeWidth="3" strokeLinecap="round" fill="none" />
+          <path d="M15 10l-3 6h4l-2 6 6-7h-4l3-5z" fill="#D97706" />
+        </svg>
+      ),
     },
     {
+      id: "upneda",
+      name: "UPNEDA",
+      category: "UP New & Renewable Energy Agency",
+      sector: "UTILITIES",
+      badgeColor: "#15803D",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <circle cx="16" cy="13" r="5" fill="#EAB308" />
+          <path d="M7 23c4-4 14-4 18 0M10 26c3-2 9-2 12 0" stroke="#15803D" strokeWidth="2.5" strokeLinecap="round" />
+        </svg>
+      ),
+    },
+    {
+      id: "mpurja",
+      name: "MP Urja",
+      category: "M.P. Urja Vikas Nigam Ltd",
+      sector: "UTILITIES",
+      badgeColor: "#16A34A",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <circle cx="16" cy="16" r="11" stroke="#16A34A" strokeWidth="2.5" fill="none" />
+          <path d="M16 6a10 10 0 010 20c-5 0-8-5-8-10 0-4 4-10 8-10z" fill="#22C55E" opacity="0.8" />
+        </svg>
+      ),
+    },
+    {
+      id: "updiscoms",
+      name: "UP DISCOMs",
+      category: "PVVNL • DVVNL • MVVNL • PuVVNL",
+      sector: "UTILITIES",
+      badgeColor: "#0F766E",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <path d="M8 25l8-18 8 18M11 19h10M16 7v18" stroke="#0F766E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+          <path d="M5 25h22" stroke="#0F766E" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      ),
+    },
+    {
+      id: "haryanadiscoms",
+      name: "Haryana DISCOMs",
+      category: "DHBVN • UHBVN Power Utilities",
+      sector: "UTILITIES",
+      badgeColor: "#4D7C0F",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <circle cx="16" cy="16" r="10" stroke="#4D7C0F" strokeWidth="2.5" strokeDasharray="6 3" fill="none" />
+          <path d="M17 8l-5 8h5l-2 8 8-10h-5l3-6z" fill="#84CC16" />
+        </svg>
+      ),
+    },
+    {
+      id: "lauritz",
+      name: "Lauritz Knudsen",
+      category: "EHV Switchgear & Protection",
+      sector: "SWITCHGEARS",
+      badgeColor: "#003366",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <rect x="4" y="4" width="24" height="24" rx="6" stroke="#003366" strokeWidth="2.5" fill="none" />
+          <text x="8" y="21" fill="#003366" fontFamily="Arial Black, Impact, sans-serif" fontWeight="900" fontSize="13">LK</text>
+          <circle cx="22" cy="10" r="2.5" fill="#D4E012" />
+        </svg>
+      ),
+    },
+    {
+      id: "schneider",
       name: "Schneider Electric",
       category: "SCADA & Relay Protection",
-      icon: Building2,
+      sector: "SWITCHGEARS",
+      badgeColor: "#3DCD58",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <circle cx="16" cy="16" r="12" stroke="#3DCD58" strokeWidth="2.5" fill="none" />
+          <path d="M13 10v12l8-6-8-6z" fill="#3DCD58" />
+        </svg>
+      ),
     },
     {
-      name: "UPPCL / KPTCL",
-      category: "Substation Bay Evacuation",
-      icon: Landmark,
-    },
-    {
-      name: "GETCO / MSEDCL",
-      category: "State Transmission Wheeling",
-      icon: ShieldCheck,
-    },
-    {
-      name: "SECI / NTPC",
-      category: "Utility Scale Solar & ISTS",
-      icon: CheckCircle2,
-    },
-    {
-      name: "IREDA / PFC",
-      category: "Clean Energy Infrastructure Debt",
-      icon: Landmark,
+      id: "abb",
+      name: "ABB India",
+      category: "GIS Switchgear & Substation",
+      sector: "SWITCHGEARS",
+      badgeColor: "#FF000F",
+      logo: (
+        <svg viewBox="0 0 38 24" className="w-7 h-5">
+          <text x="0" y="19" fill="#FF000F" fontFamily="Arial Black, Impact, sans-serif" fontWeight="900" fontSize="21" letterSpacing="0.5">ABB</text>
+        </svg>
+      ),
     },
   ];
 
-  // Duplicate array for seamless infinite marquee loop
-  const marqueeItems = [...brands, ...brands];
+  // Row 2: Suppliers/Inverters (4) + PV Modules (8) = 12 Brands
+  const row2Brands: PartnerBrand[] = [
+    {
+      id: "sungrow",
+      name: "Sungrow",
+      category: "Inverters & BESS Containers",
+      sector: "SUPPLIERS",
+      badgeColor: "#F39800",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <circle cx="16" cy="16" r="6" fill="#F39800" />
+          <path d="M16 3v4M16 25v4M3 16h4M25 16h4M6.8 6.8l2.8 2.8M22.4 22.4l2.8 2.8M6.8 25.2l2.8-2.8M22.4 9.6l2.8-2.8" stroke="#F39800" strokeWidth="2.5" strokeLinecap="round" />
+        </svg>
+      ),
+    },
+    {
+      id: "wattpower",
+      name: "WattPower",
+      category: "Utility String Inverters",
+      sector: "SUPPLIERS",
+      badgeColor: "#0066CC",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <path d="M4 9l4 14 4-10 4 10 4-14" stroke="#0066CC" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+          <path d="M22 6l5 10-3 1 4 9" stroke="#00C2DE" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        </svg>
+      ),
+    },
+    {
+      id: "hitachi",
+      name: "Hitachi Energy",
+      category: "Grid Automation & Power Systems",
+      sector: "SUPPLIERS",
+      badgeColor: "#E60012",
+      logo: (
+        <svg viewBox="0 0 36 22" className="w-7 h-5">
+          <rect x="1" y="3" width="6" height="16" fill="#E60012" rx="1" />
+          <rect x="10" y="3" width="6" height="16" fill="#E60012" rx="1" />
+          <path d="M19 3h6l-4 8 4 8h-6l-4-8 4-8z" fill="#E60012" />
+        </svg>
+      ),
+    },
+    {
+      id: "solplanet",
+      name: "Solplanet",
+      category: "Smart Commercial Inverters",
+      sector: "SUPPLIERS",
+      badgeColor: "#00A0E9",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <circle cx="16" cy="16" r="11" stroke="#00A0E9" strokeWidth="2.5" fill="none" />
+          <circle cx="16" cy="16" r="6" fill="#F97316" />
+          <ellipse cx="16" cy="16" rx="14" ry="4" stroke="#00A0E9" strokeWidth="1.5" fill="none" transform="rotate(-25 16 16)" />
+        </svg>
+      ),
+    },
+    {
+      id: "rayzon",
+      name: "Rayzon Solar",
+      category: "Tier-1 PV Modules",
+      sector: "PV MODULES",
+      badgeColor: "#0284C7",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <circle cx="16" cy="16" r="7" fill="#F59E0B" />
+          <path d="M16 2v5M16 25v5M2 16h5M25 16h5M6 6l4 4M22 22l4 4M6 26l4-4M22 10l4-4" stroke="#0284C7" strokeWidth="2.5" strokeLinecap="round" />
+        </svg>
+      ),
+    },
+    {
+      id: "vikram",
+      name: "Vikram Solar",
+      category: "High-Efficiency Solar Modules",
+      sector: "PV MODULES",
+      badgeColor: "#EA580C",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <polygon points="16,3 19,12 28,12 21,18 24,27 16,21 8,27 11,18 4,12 13,12" fill="#EA580C" />
+          <circle cx="16" cy="16" r="4" fill="#FBBF24" />
+        </svg>
+      ),
+    },
+    {
+      id: "waaree",
+      name: "Waaree Energies",
+      category: "Tier-1 Solar PV Modules",
+      sector: "PV MODULES",
+      badgeColor: "#E05A10",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <path d="M4 22h24" stroke="#E05A10" strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M8 20a8 8 0 0116 0" fill="#E05A10" opacity="0.85" />
+          <path d="M16 6v4M7 9l3 3M25 9l-3 3" stroke="#E05A10" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      ),
+    },
+    {
+      id: "adani",
+      name: "Adani Solar",
+      category: "Bifacial PV & N-Type Cells",
+      sector: "PV MODULES",
+      badgeColor: "#1E3A8A",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <path d="M6 24V8l10 8 10-8v16" stroke="#1E3A8A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+          <circle cx="16" cy="16" r="3" fill="#0284C7" />
+        </svg>
+      ),
+    },
+    {
+      id: "avaada",
+      name: "Avaada Energy",
+      category: "Utility Clean Energy",
+      sector: "PV MODULES",
+      badgeColor: "#10B981",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <circle cx="16" cy="16" r="10" stroke="#10B981" strokeWidth="3" strokeDasharray="18 4" fill="none" />
+          <path d="M11 20l5-10 5 10M13 16h6" stroke="#06B6D4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        </svg>
+      ),
+    },
+    {
+      id: "renew",
+      name: "ReNew",
+      category: "Renewable Power IPP",
+      sector: "PV MODULES",
+      badgeColor: "#84CC16",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <path d="M16 4c-5 0-9 4-9 9 0 7 9 15 9 15s9-8 9-15c0-5-4-9-9-9z" fill="#84CC16" />
+          <circle cx="16" cy="13" r="4" fill="#F97316" />
+        </svg>
+      ),
+    },
+    {
+      id: "renewsys",
+      name: "RenewSys",
+      category: "Encapsulants & PV Modules",
+      sector: "PV MODULES",
+      badgeColor: "#059669",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <polygon points="16,3 27,9 27,23 16,29 5,23 5,9" stroke="#059669" strokeWidth="2.5" fill="none" />
+          <circle cx="16" cy="16" r="5" fill="#10B981" />
+        </svg>
+      ),
+    },
+    {
+      id: "gautam",
+      name: "Gautam Solar",
+      category: "High-Yield Solar PV",
+      sector: "PV MODULES",
+      badgeColor: "#DC2626",
+      logo: (
+        <svg viewBox="0 0 32 32" className="w-6 h-6">
+          <circle cx="16" cy="16" r="6" fill="#DC2626" />
+          <path d="M16 4v3M16 25v3M4 16h3M25 16h3M7.5 7.5l2.2 2.2M22.3 22.3l2.2 2.2M7.5 24.5l2.2-2.2M22.3 9.7l2.2-2.2" stroke="#DC2626" strokeWidth="2.5" strokeLinecap="round" />
+        </svg>
+      ),
+    },
+  ];
+
+  // Infinite Marquee Doubled Arrays
+  const row1Items = [...row1Brands, ...row1Brands];
+  const row2Items = [...row2Brands, ...row2Brands];
+
+  const filterTabs = [
+    { label: "ALL ECOSYSTEM (24)", key: "ALL" },
+    { label: "UTILITIES & DISCOMS (9)", key: "UTILITIES" },
+    { label: "INVERTERS & SUPPLIERS (4)", key: "SUPPLIERS" },
+    { label: "PV MODULES (8)", key: "PV MODULES" },
+    { label: "SWITCHGEARS (3)", key: "SWITCHGEARS" },
+  ];
 
   return (
-    <section id="trusted-by" className="py-10 sm:py-12 lg:py-14 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden select-none">
+    <section id="trusted-by" className="py-10 sm:py-12 lg:py-16 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden select-none">
       {/* Background Soft Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-r from-[#D4E012]/10 via-[#6DAD45]/10 to-transparent rounded-full blur-[140px] pointer-events-none"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-r from-[#D4E012]/10 via-[#6DAD45]/10 to-transparent rounded-full blur-[140px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <ScrollReveal direction="up" distance={40}>
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
             <AnimatedPillBadge className="mb-6">
               TRUSTED BY INDUSTRY LEADERS
             </AnimatedPillBadge>
 
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-4">
-              Empowering India&apos;s Top Utilities & Enterprises. <br />
+              Strong relationships coordinated delivery<br />
               <span className="text-[#6DAD45] italic relative inline-block">
-                Backed by Leading Brands & DISCOMs.
+                Working with Leading Brands & Utilities.
                 <svg
                   className="absolute -bottom-2 left-0 w-full h-2.5 text-[#6DAD45]"
                   viewBox="0 0 100 20"
@@ -96,35 +389,119 @@ export default function TrustedByLogos() {
             </h2>
 
             <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-              Trusted by state transmission utilities, renewable power producers, C&I manufacturing leaders, and global clean energy OEMs across India.
+              A trusted supplier network, reliable technology & coordinated expertise-supporting your project at every stage.
             </p>
           </div>
         </ScrollReveal>
+
+        {/* Sector Filter Chips */}
+        <div className="flex items-center justify-center flex-wrap gap-2 mb-8">
+          {filterTabs.map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setActiveFilter(tab.key)}
+              className={`text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full transition-all cursor-pointer ${
+                activeFilter === tab.key
+                  ? "bg-slate-900 text-[#D4E012] shadow-md border border-slate-900"
+                  : "bg-white text-slate-600 border border-slate-200/90 hover:border-[#6DAD45] hover:text-slate-900"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Marquee Container with Left & Right Gradient Fade Masks */}
-      <div className="relative w-full overflow-hidden mt-2">
+      <div className="relative w-full overflow-hidden space-y-4">
         {/* Gradient Side Masks */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-40 bg-gradient-to-r from-[#F8FAF8] via-[#F8FAF8]/90 to-transparent z-20 pointer-events-none"></div>
-        <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-40 bg-gradient-to-l from-[#F8FAF8] via-[#F8FAF8]/90 to-transparent z-20 pointer-events-none"></div>
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-36 bg-gradient-to-r from-[#F8FAF8] via-[#F8FAF8]/90 to-transparent z-20 pointer-events-none"></div>
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-36 bg-gradient-to-l from-[#F8FAF8] via-[#F8FAF8]/90 to-transparent z-20 pointer-events-none"></div>
 
-        {/* Moving Marquee Track (Right to Left) */}
-        <div className="flex whitespace-nowrap animate-marquee gap-6 py-4">
-          {marqueeItems.map((item, idx) => {
-            const IconComponent = item.icon;
+        {/* ROW 1: Utilities & Switchgears (Scrolls Left) */}
+        <div className="flex whitespace-nowrap animate-marquee gap-4 sm:gap-5 py-1">
+          {row1Items.map((item, idx) => {
+            const isMatch = activeFilter === "ALL" || activeFilter === item.sector;
             return (
               <div
-                key={`${item.name}-${idx}`}
-                className="bg-white rounded-2xl px-6 py-4 border border-slate-200/90 shadow-md shadow-slate-200/50 flex items-center gap-4 shrink-0 hover:border-[#707B00] transition-[transform,border-color] duration-200 hover:-translate-y-0.5 cursor-pointer group"
+                key={`r1-${item.id}-${idx}`}
+                className={`bg-white rounded-2xl px-5 py-3.5 border transition-all duration-300 flex items-center gap-3.5 shrink-0 shadow-md shadow-slate-200/50 hover:border-[#707B00] hover:-translate-y-1 cursor-pointer group ${
+                  isMatch
+                    ? "opacity-100 border-slate-200/90 scale-100"
+                    : "opacity-35 grayscale border-slate-100 scale-95"
+                }`}
               >
-                <div className="w-10 h-10 rounded-xl bg-[#F8FAF8] flex items-center justify-center border border-slate-200 group-hover:bg-[#D4E012] group-hover:border-[#D4E012] transition-colors">
-                  <IconComponent className="w-5 h-5 text-slate-700 group-hover:text-black transition-colors" />
+                {/* Brand Logo Container */}
+                <div
+                  className="w-11 h-11 rounded-xl bg-[#F8FAF8] flex items-center justify-center border border-slate-200 group-hover:bg-white group-hover:shadow-md transition-all shrink-0"
+                  style={{ borderColor: `${item.badgeColor}30` }}
+                >
+                  {item.logo}
                 </div>
+
+                {/* Brand Information */}
                 <div className="flex flex-col text-left">
-                  <span className="font-serif-display font-extrabold text-slate-900 text-base sm:text-lg group-hover:text-[#707B00] transition-colors">
-                    {item.name}
+                  <div className="flex items-center gap-2">
+                    <span className="font-serif-display font-extrabold text-slate-900 text-sm sm:text-base group-hover:text-[#707B00] transition-colors">
+                      {item.name}
+                    </span>
+                    <span
+                      className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded uppercase"
+                      style={{
+                        backgroundColor: `${item.badgeColor}15`,
+                        color: item.badgeColor,
+                      }}
+                    >
+                      {item.sector}
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-mono font-bold text-slate-600 uppercase tracking-wider truncate max-w-[200px]">
+                    {item.category}
                   </span>
-                  <span className="text-[10px] font-mono font-bold text-slate-700 uppercase tracking-wider">
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* ROW 2: Suppliers & PV Modules (Scrolls Right) */}
+        <div className="flex whitespace-nowrap animate-marquee-reverse gap-4 sm:gap-5 py-1">
+          {row2Items.map((item, idx) => {
+            const isMatch = activeFilter === "ALL" || activeFilter === item.sector;
+            return (
+              <div
+                key={`r2-${item.id}-${idx}`}
+                className={`bg-white rounded-2xl px-5 py-3.5 border transition-all duration-300 flex items-center gap-3.5 shrink-0 shadow-md shadow-slate-200/50 hover:border-[#707B00] hover:-translate-y-1 cursor-pointer group ${
+                  isMatch
+                    ? "opacity-100 border-slate-200/90 scale-100"
+                    : "opacity-35 grayscale border-slate-100 scale-95"
+                }`}
+              >
+                {/* Brand Logo Container */}
+                <div
+                  className="w-11 h-11 rounded-xl bg-[#F8FAF8] flex items-center justify-center border border-slate-200 group-hover:bg-white group-hover:shadow-md transition-all shrink-0"
+                  style={{ borderColor: `${item.badgeColor}30` }}
+                >
+                  {item.logo}
+                </div>
+
+                {/* Brand Information */}
+                <div className="flex flex-col text-left">
+                  <div className="flex items-center gap-2">
+                    <span className="font-serif-display font-extrabold text-slate-900 text-sm sm:text-base group-hover:text-[#707B00] transition-colors">
+                      {item.name}
+                    </span>
+                    <span
+                      className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded uppercase"
+                      style={{
+                        backgroundColor: `${item.badgeColor}15`,
+                        color: item.badgeColor,
+                      }}
+                    >
+                      {item.sector}
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-mono font-bold text-slate-600 uppercase tracking-wider truncate max-w-[200px]">
                     {item.category}
                   </span>
                 </div>
@@ -136,12 +513,12 @@ export default function TrustedByLogos() {
 
       {/* Section CTA Button */}
       <ScrollReveal direction="up" distance={30} delay={0.2}>
-        <div className="mt-12 text-center relative z-20">
+        <div className="mt-10 sm:mt-12 text-center relative z-20">
           <Link
             href="/about"
             className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"
           >
-            <span>View Our Ecosystem & Partners</span>
+            <span>Become a Partner</span>
             <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>

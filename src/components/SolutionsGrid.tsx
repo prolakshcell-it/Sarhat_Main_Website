@@ -23,51 +23,39 @@ export interface Capability {
 
 export const capabilities: Capability[] = [
   {
-    id: "renewable-energy",
-    tag: "RENEWABLE ENERGY",
-    title: "Renewable Energy",
-    headline: "Solar Parks, Rooftop & Wind",
-    description: "Solar Parks, Rooftop, C&I, Wind Farms & O&M",
-    fullDetails: "Complete execution and engineering for solar parks, commercial & industrial rooftop installations, utility-scale wind farms, and long-term O&M management.",
-    specs: ["Solar Parks", "Rooftop & C&I", "Comprehensive O&M", "Wind Farms"],
+    id: "solar-energy",
+    tag: "SOLAR ENERGY",
+    title: "Solar Energy",
+    headline: "Utility Solar Parks, Rooftop & C&I",
+    description: "Utility Solar Parks, Commercial & Industrial Rooftops, and Long-Term O&M.",
+    fullDetails: "Complete execution and engineering for ground-mount solar parks, commercial & industrial rooftop installations, institutional projects, and life-cycle O&M management.",
+    specs: ["Utility Solar Parks", "Rooftops & C&I", "Comprehensive O&M", "Bifacial PV & Trackers"],
     icon: Sun,
     image: "/images/hero-solar.jpg",
     accentColor: "#5EE72D",
   },
   {
-    id: "bess-storage",
-    tag: "BESS & STORAGE",
-    title: "BESS & Storage",
-    headline: "Energy Storage Solutions",
-    description: "Containerized BESS, Solar + Storage, Backup and Peak-load solutions.",
-    fullDetails: "Utility-scale containerized Battery Energy Storage Systems (BESS), solar + storage integration, emergency backup power, and peak-load shaving.",
-    specs: ["Containerized BESS", "Solar + Storage Hybrids", "Backup Power", "Peak-Load Shaving"],
+    id: "bess-hybrid",
+    tag: "BESS & HYBRID",
+    title: "BESS & Hybrid",
+    headline: "Energy Storage & Hybrid Systems",
+    description: "Containerized BESS, Solar + Storage Hybrids, Backup Power and Peak Shaving.",
+    fullDetails: "Utility-scale containerized Battery Energy Storage Systems (BESS), solar + storage integration, emergency backup power, and automated peak-load shaving for grid stability.",
+    specs: ["Containerized BESS", "Solar + Storage Hybrids", "Grid Stability", "Peak-Load Shaving"],
     icon: Battery,
     image: "/images/bess-substation.jpg",
     accentColor: "#5EE72D",
   },
   {
-    id: "energy-infrastructure",
-    tag: "ENERGY INFRASTRUCTURE",
-    title: "Energy Infrastructure",
-    headline: "Substations & Grid Connectivity",
-    description: "HT/LT systems, Substations, Evacuation lines, Grid connectivity.",
-    fullDetails: "High-voltage and low-voltage electrical systems, AIS/GIS substations, power evacuation line corridors, relay protection, and seamless DISCOM grid connectivity.",
-    specs: ["HT/LT Systems", "Substations (GIS/AIS)", "Evacuation Lines", "Protection & SCADA", "Grid Connectivity"],
+    id: "infrastructure",
+    tag: "INFRASTRUCTURE",
+    title: "Infrastructure",
+    headline: "Substations, Grid & Civil Infrastructure",
+    description: "HT/LT Substations, Evacuation Lines, Grid Connectivity, and Site Civil Works.",
+    fullDetails: "Turnkey electrical and civil infrastructure including AIS/GIS substations, power evacuation line corridors, DISCOM grid connectivity, control rooms, and heavy site civil works.",
+    specs: ["AIS/GIS Substations", "Evacuation Lines", "Grid Connectivity", "Civil & Foundation Works"],
     icon: Zap,
     image: "/images/substation-project.jpg",
-    accentColor: "#5EE72D",
-  },
-  {
-    id: "civil-infrastructure",
-    tag: "CIVIL INFRASTRUCTURE",
-    title: "Civil Infrastructure",
-    headline: "Industrial Civil & Works",
-    description: "Roads, Buildings, Foundations, Industrial civil works, Project Infrastructure.",
-    fullDetails: "Heavy-payload access roads, control room buildings, structural equipment foundations, industrial civil works, and comprehensive project site infrastructure.",
-    specs: ["Access Roads", "Buildings & Control Rooms", "Equipment Foundations", "Industrial Civil Works", "Project Infrastructure"],
-    icon: Building2,
-    image: "/images/agrivoltaics-project.jpg",
     accentColor: "#5EE72D",
   },
 ];
@@ -129,8 +117,8 @@ export default function SolutionsGrid() {
                   onMouseEnter={() => setActiveIndex(index)}
                   onClick={() => setActiveIndex(index)}
                   className={`relative overflow-hidden cursor-pointer transition-all duration-700 ease-[0.22,1,0.36,1] border-2 border-white shadow-2xl ${isActive
-                      ? "lg:flex-[3.8] h-[460px] lg:h-full rounded-2xl z-20 shadow-slate-950/70"
-                      : "lg:flex-[0.9] h-[110px] lg:h-full rounded-2xl border-white/90 hover:border-[#D4E012] bg-slate-950 z-10"
+                      ? "lg:flex-[3.5] h-[460px] lg:h-full rounded-2xl z-20 shadow-slate-950/70"
+                      : "lg:flex-[1.1] h-[110px] lg:h-full rounded-2xl border-white/90 hover:border-[#D4E012] bg-slate-950 z-10"
                     } lg:-skew-x-[6deg] group`}
                 >
                   {/* Un-skew Inner Wrapper so text and photos remain 100% straight */}

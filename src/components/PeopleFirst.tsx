@@ -9,26 +9,26 @@ import AnimatedPillBadge from "./AnimatedPillBadge";
 export default function PeopleFirst() {
   const values = [
     {
-      tag: "IN THE RIGHT WAY",
+      tag: "INTEGRITY",
       title: "Integrity before convenience.",
       description:
-        "We choose transparent, clear, honest communication and responsible execution especially when the easier answer is not the right one.",
+        "We communicate honestly, take responsibility and do what is right—even when it is the harder choice.",
       icon: ShieldCheck,
       direction: "right", // Slide in from left (-x)
     },
     {
-      tag: "A BETTER STATE",
-      title: "People are part of the project.",
+      tag: "CARE & SAFETY",
+      title: "People at the heart of every project.",
       description:
-        "Employees, site partners, vendors, communities and clients deserve respect, clarity, safety and reliable safety protocols.",
+        "From our offices to our sites, we put respect, wellbeing and safe working practices at the centre of how we work.",
       icon: Heart,
       direction: "up", // Slide up from bottom
     },
     {
-      tag: "ALWAYS MOVING AHEAD",
-      title: "Better every time.",
+      tag: "CONTINUOUS LEARNING",
+      title: "Every project makes us better.",
       description:
-        "We encourage ideas from the people closest to the work, and turn lessons from the field into better engineering systems.",
+        "We listen to the people closest to the work and turn lessons from each project into better ways of designing, building and working together.",
       icon: TrendingUp,
       direction: "left", // Slide in from right (+x)
     },
@@ -41,7 +41,7 @@ export default function PeopleFirst() {
         <ScrollReveal direction="up" distance={40}>
           <div className="text-center max-w-5xl mx-auto mb-10 sm:mb-14">
             <AnimatedPillBadge className="mb-6">
-              PEOPLE FIRST & CULTURE
+              PEOPLE & CULTURE
             </AnimatedPillBadge>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
               When people rise, <br />
@@ -62,8 +62,8 @@ export default function PeopleFirst() {
               </span>
             </h2>
             <p className="text-slate-600 font-normal text-base sm:text-lg max-w-5xl mx-auto leading-relaxed">
-              Our culture is built around ownership, responsibility, learning, care and the belief <br className="hidden sm:inline" />
-              that great projects are built by people who feel trusted to do great work.
+              We build a culture of trust, ownership and continuous learning—where people feel respected, supported and empowered to do meaningful work.
+
             </p>
           </div>
         </ScrollReveal>

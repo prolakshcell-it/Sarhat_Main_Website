@@ -10,34 +10,34 @@ export default function WhyChooseUs() {
   const reasons = [
     {
       num: "01",
-      title: "Single-Source EPC Execution",
-      badge: "100% Integrated",
+      title: "One Accountable Team",
+      badge: "Turnkey Ownership",
       description:
-        "We connect site topography, civil engineering, electrical SLDs, procurement, and 24/7 telemetry under one single project view — eliminating handoff delays and vendor blame games.",
+        "From engineering and procurement to commissioning, we coordinate every stage with clear responsibilities, consistent communication and hands-on project oversight.",
       icon: Layers,
     },
     {
       num: "02",
-      title: "Grid & DISCOM Clearance Mastery",
-      badge: "Zero Bay Delays",
+      title: "Grid & Approval Coordination",
+      badge: "Statutory Approvals",
       description:
-        "Deep statutory expertise in 11kV/765kV/220kV substation bay allocations, EHV transmission line corridors, and GETCO/UPPCL/KPTCL grid wheeling approvals across India.",
+        "We manage technical documentation and coordinate with utilities and relevant authorities to address connection requirements and keep approval processes moving.",
       icon: Zap,
     },
     {
       num: "03",
-      title: "Bankable Tier-1 OEM Alliances",
-      badge: "Tier-1 Quality",
+      title: "Technology That Fits",
+      badge: "Quality & Compatibility",
       description:
-        "Direct procurement partnerships with LONGi, Sungrow, ABB, Siemens, and Huawei. Zero-compromise quality for bifacial PV modules, N-type cells, and containerized BESS storage.",
+        "We select equipment around your site, performance goals and budget—with attention to quality, compatibility, warranties and long-term service support.",
       icon: Award,
     },
     {
       num: "04",
-      title: "On-Time Commissioning Record",
-      badge: "49.77+ MW Installed",
+      title: "Disciplined Site Delivery",
+      badge: "Safety & Execution",
       description:
-        "Proven track record of completing complex utility solar parks, PM-KUSUM feeders, and C&I captive projects weeks ahead of statutory schedules with zero safety compromises.",
+        "We align people, materials and milestones through practical planning, progress tracking and quality checks—with safety embedded in daily execution.",
       icon: Clock,
     },
   ];
@@ -58,15 +58,15 @@ export default function WhyChooseUs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <ScrollReveal direction="up" distance={40}>
-          <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
-            <AnimatedPillBadge className="mb-6">
+          <div className="text-center max-w-4xl mx-auto mb-6 sm:mb-8">
+            <AnimatedPillBadge className="mb-4">
               WHY CHOOSE US
             </AnimatedPillBadge>
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-              The Sarhat Advantage <br />
-              <span className="text-[#6DAD45] italic relative inline-block xl:whitespace-nowrap">
-                Built for Performance & Trust.
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-3">
+              The Sarhat Advantage
+              <span className="block mt-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif-display font-normal text-[#6DAD45] italic relative mx-auto w-fit">
+                Built for Performance. Accountable at Every Step.
                 <svg
                   className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                   viewBox="0 0 100 20"
@@ -82,14 +82,14 @@ export default function WhyChooseUs() {
               </span>
             </h2>
 
-            <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-              Why DISCOMs, IPPs, C&I enterprises, and clean energy developers across India trust Sarhat for turnkey renewable energy & infrastructure execution.
+            <p className="text-slate-600 font-normal text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
+              Engineering discipline, coordinated delivery and lasting support—focused on your project’s success.
             </p>
           </div>
         </ScrollReveal>
 
         {/* 4 Core Differentiators Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-4.5 mb-12">
           {reasons.map((item, idx) => {
             const IconComp = item.icon;
             return (
@@ -97,29 +97,29 @@ export default function WhyChooseUs() {
                 <motion.div
                   whileHover={{ y: -2 }}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  className="bg-white rounded-3xl p-7 border border-slate-200/90 shadow-xl shadow-slate-200/40 relative overflow-hidden group h-full flex flex-col justify-between hover:border-[#707B00] transition-colors"
+                  className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-xl shadow-slate-200/40 relative overflow-hidden group h-full flex flex-col justify-between hover:border-[#707B00] transition-colors"
                 >
                   {/* Decorative Corner Glow */}
                   <div className="absolute top-0 right-0 w-24 h-24 bg-[#D4E012]/10 rounded-bl-full pointer-events-none group-hover:bg-[#D4E012]/25 transition-all"></div>
 
                   <div>
                     {/* Top Row: Number & Icon */}
-                    <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center justify-between mb-5">
                       <span className="text-xs font-mono font-black text-[#707B00] uppercase tracking-widest px-3 py-1 bg-[#F8FAF8] rounded-full border border-[#707B00]/20">
                         {item.num}
                       </span>
-                      <div className="w-11 h-11 rounded-2xl bg-[#F8FAF8] flex items-center justify-center border border-slate-200/80 group-hover:bg-[#D4E012] group-hover:border-[#D4E012] transition-colors shadow-sm">
+                      <div className="w-10 h-10 rounded-2xl bg-[#F8FAF8] flex items-center justify-center border border-slate-200/80 group-hover:bg-[#D4E012] group-hover:border-[#D4E012] transition-colors shadow-sm">
                         <IconComp className="w-5 h-5 text-slate-700 group-hover:text-black transition-colors" />
                       </div>
                     </div>
 
-                    {/* Title & Badge */}
+                    {/* Title */}
                     <h3 className="text-xl font-serif-display font-bold text-slate-900 tracking-tight leading-snug mb-3 group-hover:text-[#707B00] transition-colors">
                       {item.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed mb-6">
+                    <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed mb-5">
                       {item.description}
                     </p>
                   </div>

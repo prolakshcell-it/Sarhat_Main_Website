@@ -62,11 +62,10 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
         type="button"
         aria-pressed={sel}
         onClick={() => selectState(slug)}
-        className={`flex min-h-[44px] shrink-0 cursor-pointer items-center gap-2 rounded-full border py-1.5 pl-3.5 pr-1.5 font-mono text-xs font-bold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6DAD45] focus-visible:ring-offset-2 ${
-          sel
-            ? "border-slate-900 bg-slate-900 text-white"
-            : "border-slate-200 bg-white text-slate-700 hover:border-[#6DAD45]/60 hover:bg-[#6DAD45]/[0.05]"
-        }`}
+        className={`flex min-h-[44px] shrink-0 cursor-pointer items-center gap-2 rounded-full border py-1.5 pl-3.5 pr-1.5 font-mono text-xs font-bold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6DAD45] focus-visible:ring-offset-2 ${sel
+          ? "border-slate-900 bg-slate-900 text-white"
+          : "border-slate-200 bg-white text-slate-700 hover:border-[#6DAD45]/60 hover:bg-[#6DAD45]/[0.05]"
+          }`}
       >
         <span>{label}</span>
         <span className={`rounded-full px-2.5 py-1 text-[10px] font-bold transition-colors duration-200 ${sel ? "bg-white/15 text-[#D4E012]" : "bg-slate-100 text-slate-500"}`}>
@@ -105,9 +104,9 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
             variants={item}
             className="mb-4 font-serif-display text-[clamp(2rem,4.2vw,3.75rem)] font-medium leading-[1.08] text-balance tracking-tight text-slate-900"
           >
-            Built across India. <br />
+            Our Growing Footprint <br />
             <span className="relative inline-block italic text-[#6DAD45]">
-              Core Operating Footprint.
+              Building Progress Across States
               <svg className="absolute -bottom-2 left-0 h-3 w-full text-[#6DAD45]" viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden>
                 <motion.path
                   d="M0 15 Q 50 0 100 15"
@@ -122,8 +121,7 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
           </motion.h2>
 
           <motion.p variants={item} className="mx-auto max-w-[720px] text-[clamp(14px,1.2vw,17px)] leading-relaxed text-slate-600">
-            Explore Sarhat&apos;s active solar EPC projects, PM-KUSUM feeder installations, DISCOM substation corridors, and renewable infrastructure across operating states.
-          </motion.p>
+            <span>Explore the projects, places & teams shaping Sarhat's growing energy & infrastructure presence.</span>          </motion.p>
         </div>
 
         {/* State filters (generated from the dataset) */}
