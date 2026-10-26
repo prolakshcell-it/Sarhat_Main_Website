@@ -92,9 +92,11 @@ export default function Hero({ onOpenQuote }: HeroProps) {
             variants={itemSoftVariants}
             className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.1] mb-6 [text-shadow:_0_4px_24px_rgba(0,0,0,0.95)]"
           >
-            We build the{" "}
+            From the ground we build.
+            <br />
+            To the nation we{" "}
             <span className="italic font-normal text-[#D4E012] relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
-              systems
+              power
               <motion.svg
                 initial={{ pathLength: 0, opacity: 0 }}
                 animate={{ pathLength: 1, opacity: 1 }}
@@ -111,8 +113,7 @@ export default function Hero({ onOpenQuote }: HeroProps) {
                 />
               </motion.svg>
             </span>
-            <br />
-            that move India forward.
+            .
           </motion.h1>
 
           {/* Subheading */}

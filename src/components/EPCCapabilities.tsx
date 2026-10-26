@@ -46,16 +46,7 @@ export default function EPCCapabilities() {
 
               {/* Long Editorial Paragraph */}
               <p className="text-slate-600 font-normal text-base sm:text-lg leading-relaxed text-justify mb-8">
-                Sarhat Energy is India’s emerging clean-energy EPCM partner, combining
-                breakthrough solar technologies with disciplined project execution for
-                residential, commercial, industrial, institutional and solar-park clients. From
-                detailed engineering to installation, commissioning and long-term
-                maintenance, we stay with every project - turning rooftops and open land into
-                reliable, revenue-generating energy assets.
-                Our Transmission & Sub-Station Division extends that expertise to the grid
-                itself, delivering high-voltage lines and sub-stations up to 400 kV, while our
-                infrastructure arm builds the roads, bridges and buildings that projects
-                depend on.
+                Sarhat Energy is an execution-led energy and infrastructure company rooted in India, driven to earn trust globally. We combine engineering precision with hands-on delivery to build dependable assets that power businesses and connect communities. From rooftops to solar parks, our clean-energy expertise spans engineering through commissioning and long-term maintenance. Our capabilities extend to transmission lines, substations, roads, bridges and buildings. Safety, unity and ownership guide every project as we turn ambition into infrastructure that creates lasting value for clients, communities and India’s future.
               </p>
 
               {/* CTA Action Button */}

@@ -89,12 +89,12 @@ export default function MetricsTicker() {
     },
     {
       value: "34",
-      label: "Core Team",
+      label: "FIELD TEAMS",
     },
     {
       value: "100",
       numSuffix: "*",
-      label: "Site Workers",
+      label: "FIELD TEAMS",
     },
     {
       value: "7",

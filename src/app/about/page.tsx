@@ -161,9 +161,8 @@ export default function AboutPage() {
         {/* ------------------------------------------------------------- */}
         {/* Fixed Hero Section (Pinned background layer while scrolling) */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
           aria-hidden={isPastHero}
         >
           <section className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none">
@@ -334,16 +333,7 @@ export default function AboutPage() {
 
                     {/* Long Editorial Paragraph */}
                     <p className="text-slate-600 font-normal text-base sm:text-lg leading-relaxed text-justify">
-                      Sarhat Energy is India’s emerging clean-energy EPCM partner, combining
-                      breakthrough solar technologies with disciplined project execution for
-                      residential, commercial, industrial, institutional and solar-park clients. From
-                      detailed engineering to installation, commissioning and long-term
-                      maintenance, we stay with every project - turning rooftops and open land into
-                      reliable, revenue-generating energy assets.
-                      Our Transmission & Sub-Station Division extends that expertise to the grid
-                      itself, delivering high-voltage lines and sub-stations up to 400 kV, while our
-                      infrastructure arm builds the roads, bridges and buildings that projects
-                      depend on.
+                      Sarhat Energy is an execution-led energy and infrastructure company rooted in India, driven to earn trust globally. We combine engineering precision with hands-on delivery to build dependable assets that power businesses and connect communities. From rooftops to solar parks, our clean-energy expertise spans engineering through commissioning and long-term maintenance. Our capabilities extend to transmission lines, substations, roads, bridges and buildings. Safety, unity and ownership guide every project as we turn ambition into infrastructure that creates lasting value for clients, communities and India’s future.
                     </p>
                   </ScrollReveal>
                 </div>
@@ -591,8 +581,8 @@ export default function AboutPage() {
                         {/* Top Number Tag */}
                         <span
                           className={`absolute top-6 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border transition-all ${isActive
-                              ? "bg-[#D4E012] text-slate-950 border-[#D4E012] shadow-sm"
-                              : "bg-slate-900/80 text-slate-400 border-white/10"
+                            ? "bg-[#D4E012] text-slate-950 border-[#D4E012] shadow-sm"
+                            : "bg-slate-900/80 text-slate-400 border-white/10"
                             }`}
                         >
                           VALUE {item.num}
@@ -601,8 +591,8 @@ export default function AboutPage() {
                         {/* Top Icon Badge */}
                         <div
                           className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mt-4 mb-4 shadow-lg transition-all duration-300 ${isActive
-                              ? "bg-[#D4E012] text-slate-950 shadow-[0_0_25px_rgba(212,224,18,0.6)] scale-110"
-                              : "bg-[#D4E012]/20 border border-[#D4E012]/50 text-[#D4E012]"
+                            ? "bg-[#D4E012] text-slate-950 shadow-[0_0_25px_rgba(212,224,18,0.6)] scale-110"
+                            : "bg-[#D4E012]/20 border border-[#D4E012]/50 text-[#D4E012]"
                             }`}
                         >
                           <IconComp className="w-7 h-7 text-slate-950 stroke-[2.2]" />
@@ -629,8 +619,8 @@ export default function AboutPage() {
                       key={v.id}
                       onClick={() => setActiveValueIndex(i)}
                       className={`h-2.5 rounded-full transition-all duration-500 ${activeValueIndex === i
-                          ? "w-8 bg-[#D4E012] shadow-[0_0_12px_#D4E012]"
-                          : "w-2.5 bg-slate-700 hover:bg-slate-500"
+                        ? "w-8 bg-[#D4E012] shadow-[0_0_12px_#D4E012]"
+                        : "w-2.5 bg-slate-700 hover:bg-slate-500"
                         }`}
                       title={`Jump to ${v.title}`}
                     />
