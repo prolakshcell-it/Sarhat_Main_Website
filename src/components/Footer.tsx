@@ -227,7 +227,15 @@ export default function Footer() {
             <span>© {year} SARHAT EPC PVT. LTD. ALL RIGHTS RESERVED.</span>
             <div className="flex items-center justify-between gap-6">
               <span className="font-bold uppercase tracking-widest">
-                Powered by <span className="font-extrabold text-white">PROLAKSH</span>
+                Powered by{" "}
+                <a
+                  href="https://www.prolaksh.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-extrabold text-white transition-colors hover:text-orange-500 focus:outline-none focus-visible:text-orange-500"
+                >
+                  ProLaksh Technologies
+                </a>
               </span>
               <button
                 type="button"
