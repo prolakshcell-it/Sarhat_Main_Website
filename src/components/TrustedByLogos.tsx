@@ -533,7 +533,7 @@ export default function TrustedByLogos() {
       <ScrollReveal direction="up" distance={30} delay={0.2}>
         <div className="mt-10 sm:mt-12 text-center relative z-20">
           <Link
-            href="/about"
+            href="/partners"
             className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"
           >
             <span>Become a Partner</span>
