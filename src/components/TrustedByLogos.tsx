@@ -15,6 +15,61 @@ interface PartnerBrand {
   badgeColor: string;
   logo: React.ReactNode;
   logoSrc?: string;
+  darkTile?: boolean;
+}
+
+function BrandCard({ item, isMatch }: { item: PartnerBrand; isMatch: boolean }) {
+  return (
+    <div
+      tabIndex={0}
+      title={item.name}
+      aria-label={`${item.name} - ${item.sector}`}
+      style={{ "--brand": item.badgeColor } as React.CSSProperties}
+      className={`group relative overflow-hidden bg-white rounded-2xl p-3 border flex flex-col items-center gap-2.5 shrink-0 w-[190px] cursor-pointer outline-none transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-[var(--brand)]/25 hover:border-[var(--brand)] focus-visible:border-[var(--brand)] focus-visible:ring-2 focus-visible:ring-[var(--brand)]/40 ${
+        isMatch
+          ? "opacity-100 border-slate-200/90 scale-100 shadow-md shadow-slate-200/60"
+          : "opacity-25 grayscale border-slate-100 scale-90 blur-[1px]"
+      }`}
+    >
+      {/* Shine sweep on hover */}
+      <span className="pointer-events-none absolute inset-y-0 -left-full w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-white/80 to-transparent transition-all duration-700 group-hover:left-[150%] z-10" />
+      {/* Brand colour glow on hover */}
+      <span className="pointer-events-none absolute inset-x-0 bottom-0 h-1 bg-[var(--brand)] origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100" />
+
+      {/* Brand Logo Tile */}
+      <div
+        className={`h-20 w-full rounded-xl flex items-center justify-center px-4 border transition-transform duration-500 group-hover:scale-105 ${
+          item.darkTile ? "bg-slate-800 border-slate-700" : "bg-[#F8FAF8] border-slate-100"
+        }`}
+      >
+        {item.logoSrc ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={item.logoSrc}
+            alt={`${item.name} logo`}
+            className="max-h-14 max-w-full w-auto object-contain transition-transform duration-500 group-hover:scale-110"
+            draggable={false}
+            loading="lazy"
+          />
+        ) : (
+          <div className="flex items-center gap-2">
+            {item.logo}
+            <span className="text-xs font-extrabold leading-tight text-slate-700 whitespace-normal max-w-[90px]">
+              {item.name}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Sector label only */}
+      <span
+        className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full uppercase tracking-wider transition-colors duration-300"
+        style={{ backgroundColor: `${item.badgeColor}15`, color: item.badgeColor }}
+      >
+        {item.sector}
+      </span>
+    </div>
+  );
 }
 
 export default function TrustedByLogos() {
@@ -148,6 +203,7 @@ export default function TrustedByLogos() {
     },
     {
       id: "lauritz",
+      logoSrc: "/images/partners/lauritz.png",
       name: "Lauritz Knudsen",
       category: "EHV Switchgear & Protection",
       sector: "SWITCHGEARS",
@@ -307,6 +363,8 @@ export default function TrustedByLogos() {
     },
     {
       id: "avaada",
+      logoSrc: "/images/partners/avaada.png",
+      darkTile: true,
       name: "Avaada Energy",
       category: "Utility Clean Energy",
       sector: "PV MODULES",
@@ -366,11 +424,11 @@ export default function TrustedByLogos() {
   const row2Items = [...row2Brands, ...row2Brands];
 
   const filterTabs = [
-    { label: "ALL ECOSYSTEM (24)", key: "ALL" },
-    { label: "UTILITIES & DISCOMS (9)", key: "UTILITIES" },
-    { label: "INVERTERS & SUPPLIERS (4)", key: "SUPPLIERS" },
-    { label: "PV MODULES (8)", key: "PV MODULES" },
-    { label: "SWITCHGEARS (3)", key: "SWITCHGEARS" },
+    { label: "ALL", key: "ALL" },
+    { label: "UTILITIES", key: "UTILITIES" },
+    { label: "SUPPLIERS", key: "SUPPLIERS" },
+    { label: "PV MODULES", key: "PV MODULES" },
+    { label: "SWITCHGEARS", key: "SWITCHGEARS" },
   ];
 
   return (
@@ -413,18 +471,31 @@ export default function TrustedByLogos() {
 
         {/* Sector Filter Chips */}
         <div className="flex items-center justify-center flex-wrap gap-2 mb-8">
-          {filterTabs.map((tab) => (
-            <button
+          {filterTabs.map((tab, i) => (
+            <motion.button
               key={tab.key}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.07, duration: 0.4 }}
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setActiveFilter(tab.key)}
-              className={`text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full transition-all cursor-pointer ${
+              className={`relative text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider px-4 py-2 rounded-full cursor-pointer border transition-colors ${
                 activeFilter === tab.key
-                  ? "bg-slate-900 text-[#D4E012] shadow-md border border-slate-900"
-                  : "bg-white text-slate-600 border border-slate-200/90 hover:border-[#6DAD45] hover:text-slate-900"
+                  ? "text-[#D4E012] border-slate-900"
+                  : "bg-white text-slate-600 border-slate-200/90 hover:border-[#6DAD45] hover:text-slate-900"
               }`}
             >
-              {tab.label}
-            </button>
+              {activeFilter === tab.key && (
+                <motion.span
+                  layoutId="trusted-active-chip"
+                  className="absolute inset-0 rounded-full bg-slate-900 shadow-lg shadow-slate-900/20"
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                />
+              )}
+              <span className="relative z-10">{tab.label}</span>
+            </motion.button>
           ))}
         </div>
       </div>
@@ -436,115 +507,25 @@ export default function TrustedByLogos() {
         <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-36 bg-gradient-to-l from-[#F8FAF8] via-[#F8FAF8]/90 to-transparent z-20 pointer-events-none"></div>
 
         {/* ROW 1: Utilities & Switchgears (Scrolls Left) */}
-        <div className="flex whitespace-nowrap animate-marquee gap-4 sm:gap-5 py-1">
-          {row1Items.map((item, idx) => {
-            const isMatch = activeFilter === "ALL" || activeFilter === item.sector;
-            return (
-              <div
-                key={`r1-${item.id}-${idx}`}
-                className={`bg-white rounded-2xl px-5 py-3.5 border transition-all duration-300 flex items-center gap-3.5 shrink-0 shadow-md shadow-slate-200/50 hover:border-[#707B00] hover:-translate-y-1 cursor-pointer group ${
-                  isMatch
-                    ? "opacity-100 border-slate-200/90 scale-100"
-                    : "opacity-35 grayscale border-slate-100 scale-95"
-                }`}
-              >
-                {/* Brand Logo Container */}
-                {item.logoSrc ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={item.logoSrc}
-                    alt={`${item.name} logo`}
-                    className="h-11 w-auto max-w-[130px] object-contain shrink-0"
-                    draggable={false}
-                  />
-                ) : (
-                  <div
-                    className="w-11 h-11 rounded-xl bg-[#F8FAF8] flex items-center justify-center border border-slate-200 group-hover:bg-white group-hover:shadow-md transition-all shrink-0"
-                    style={{ borderColor: `${item.badgeColor}30` }}
-                  >
-                    {item.logo}
-                  </div>
-                )}
-
-                {/* Brand Information */}
-                <div className="flex flex-col text-left">
-                  <div className="flex items-center gap-2">
-                    <span className="font-serif-display font-extrabold text-slate-900 text-sm sm:text-base group-hover:text-[#707B00] transition-colors">
-                      {item.name}
-                    </span>
-                    <span
-                      className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded uppercase"
-                      style={{
-                        backgroundColor: `${item.badgeColor}15`,
-                        color: item.badgeColor,
-                      }}
-                    >
-                      {item.sector}
-                    </span>
-                  </div>
-                  <span className="text-[10px] font-mono font-bold text-slate-600 uppercase tracking-wider truncate max-w-[200px]">
-                    {item.category}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
+        <div className="flex whitespace-nowrap animate-marquee gap-4 sm:gap-5 py-3 motion-reduce:animate-none">
+          {row1Items.map((item, idx) => (
+            <BrandCard
+              key={`r1-${item.id}-${idx}`}
+              item={item}
+              isMatch={activeFilter === "ALL" || activeFilter === item.sector}
+            />
+          ))}
         </div>
 
         {/* ROW 2: Suppliers & PV Modules (Scrolls Right) */}
-        <div className="flex whitespace-nowrap animate-marquee-reverse gap-4 sm:gap-5 py-1">
-          {row2Items.map((item, idx) => {
-            const isMatch = activeFilter === "ALL" || activeFilter === item.sector;
-            return (
-              <div
-                key={`r2-${item.id}-${idx}`}
-                className={`bg-white rounded-2xl px-5 py-3.5 border transition-all duration-300 flex items-center gap-3.5 shrink-0 shadow-md shadow-slate-200/50 hover:border-[#707B00] hover:-translate-y-1 cursor-pointer group ${
-                  isMatch
-                    ? "opacity-100 border-slate-200/90 scale-100"
-                    : "opacity-35 grayscale border-slate-100 scale-95"
-                }`}
-              >
-                {/* Brand Logo Container */}
-                {item.logoSrc ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={item.logoSrc}
-                    alt={`${item.name} logo`}
-                    className="h-11 w-auto max-w-[130px] object-contain shrink-0"
-                    draggable={false}
-                  />
-                ) : (
-                  <div
-                    className="w-11 h-11 rounded-xl bg-[#F8FAF8] flex items-center justify-center border border-slate-200 group-hover:bg-white group-hover:shadow-md transition-all shrink-0"
-                    style={{ borderColor: `${item.badgeColor}30` }}
-                  >
-                    {item.logo}
-                  </div>
-                )}
-
-                {/* Brand Information */}
-                <div className="flex flex-col text-left">
-                  <div className="flex items-center gap-2">
-                    <span className="font-serif-display font-extrabold text-slate-900 text-sm sm:text-base group-hover:text-[#707B00] transition-colors">
-                      {item.name}
-                    </span>
-                    <span
-                      className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded uppercase"
-                      style={{
-                        backgroundColor: `${item.badgeColor}15`,
-                        color: item.badgeColor,
-                      }}
-                    >
-                      {item.sector}
-                    </span>
-                  </div>
-                  <span className="text-[10px] font-mono font-bold text-slate-600 uppercase tracking-wider truncate max-w-[200px]">
-                    {item.category}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
+        <div className="flex whitespace-nowrap animate-marquee-reverse gap-4 sm:gap-5 py-3 motion-reduce:animate-none">
+          {row2Items.map((item, idx) => (
+            <BrandCard
+              key={`r2-${item.id}-${idx}`}
+              item={item}
+              isMatch={activeFilter === "ALL" || activeFilter === item.sector}
+            />
+          ))}
         </div>
       </div>
 
