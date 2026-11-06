@@ -229,7 +229,13 @@ export default function Footer() {
               </span>
               <button
                 type="button"
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                onClick={() => {
+                  if (typeof window !== "undefined" && (window as any).__lenis) {
+                    (window as any).__lenis.scrollTo(0, { duration: 1.2 });
+                  } else {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                }}
                 aria-label="Back to top"
                 className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[#D4E012] transition-colors hover:bg-[#D4E012] hover:text-black">
                 <ArrowUp className="h-4 w-4" />

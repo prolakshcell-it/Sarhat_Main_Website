@@ -3,7 +3,7 @@
 import { forwardRef, useImperativeHandle, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import { isExternal, socialLinks, type MegaNavEntry, type NavItemLink } from "./config";
 import { SocialIcon } from "./SocialIcons";
 import styles from "./RadiantBorder.module.css";
@@ -159,9 +159,14 @@ const MegaMenu = forwardRef<HTMLDivElement, MegaMenuProps>(function MegaMenu(
       style={{ left: pos?.left ?? 0, visibility: pos ? undefined : "hidden" }}
       className={`absolute top-[calc(100%+10px)] min-w-[250px] ${PANEL} before:absolute before:inset-x-0 before:-top-3 before:h-3 before:content-['']`}>
       <ShimmerBorder />
-      <p className="px-4 pb-2 pt-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#8A8F12]">
-        {menu.tag}
-      </p>
+      <Link
+        href={menu.href}
+        data-menu-item
+        onClick={onNavigate}
+        className="group/tag flex items-center justify-between px-4 pb-2 pt-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#8A8F12] hover:text-[#3C7322] transition-colors rounded-sm focus:outline-none focus-visible:text-[#3C7322]">
+        <span>{menu.tag} Overview</span>
+        <ArrowUpRight className="h-3 w-3 opacity-60 group-hover/tag:opacity-100 group-hover/tag:translate-x-0.5 group-hover/tag:-translate-y-0.5 transition-all" />
+      </Link>
       <div aria-hidden className="mx-4 mb-1.5 h-px bg-gradient-to-r from-[#D2CB0A]/60 via-[#6AB144]/40 to-transparent" />
       <MenuItems items={menu.items} level={0} flip={pos?.flip ?? false} onNavigate={onNavigate} />
       {menu.social && (

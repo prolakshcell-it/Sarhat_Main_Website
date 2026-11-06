@@ -138,6 +138,15 @@ function MobileAccordion({
               transition={{ duration: reduce ? 0 : 0.25, ease: "easeOut" }}
               className="overflow-hidden">
               <ul className="px-3 pb-3 pt-1">
+                <li className="mb-2 pb-1.5 border-b border-white/10">
+                  <Link
+                    href={entry.href}
+                    onClick={onNavigate}
+                    className={`flex items-center justify-between py-2 text-xs font-mono font-bold uppercase tracking-wider text-[#D4E012] hover:text-white transition-colors ${FOCUS}`}>
+                    <span>{entry.label} Overview</span>
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </Link>
+                </li>
                 {entry.items.map((item) => (
                   <MobileItem key={item.id} item={item} depth={0} reduce={reduce} onNavigate={onNavigate} />
                 ))}
