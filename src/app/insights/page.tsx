@@ -471,107 +471,94 @@ export default function InsightsPage() {
         {/* Consultation Modal */}
         <QuoteModal isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} />
 
-        {/* 100% Full-Screen Article Detail Reader */}
+        {/* Professional Article Detail Modal */}
         <AnimatePresence>
           {selectedArticle && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-[100] w-full h-full min-h-screen bg-[#070D1E] overflow-y-auto text-white flex flex-col selection:bg-[#D4E012] selection:text-black">
-              {/* Sticky Top Reader Bar (100% Width) */}
-              <div className="sticky top-0 z-40 w-full bg-[#070D1E]/95 backdrop-blur-xl border-b border-white/10 px-4 sm:px-8 py-3.5 flex items-center justify-between">
-                {/* Left: Branding & Category */}
-                <div className="flex items-center gap-3">
-                  <span className="text-[#D4E012] font-mono font-bold text-xs tracking-wider uppercase">
-                    SARHAT INSIGHTS
-                  </span>
-                  <span className="text-white/30 hidden sm:inline">•</span>
-                  <span className="hidden sm:inline-block px-2.5 py-0.5 rounded-full bg-white/10 text-slate-300 text-[11px] font-mono uppercase tracking-wider">
-                    {selectedArticle.category}
-                  </span>
-                </div>
-
-                {/* Center: Truncated Article Title */}
-                <div className="hidden lg:block max-w-md xl:max-w-xl truncate text-xs text-slate-400 font-medium text-center">
-                  {selectedArticle.title}
-                </div>
-
-                {/* Right: Close Reader Button */}
-                <button
-                  onClick={() => setSelectedArticle(null)}
-                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-[#D4E012] hover:text-slate-950 text-white border border-white/20 px-4 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase transition-all duration-200 cursor-pointer shadow-sm">
-                  <span>Close Article</span>
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              </div>
-
-              {/* Cinematic Full-Width Hero Section */}
-              <section className="relative w-full bg-gradient-to-b from-[#0B142B] via-[#070D1E] to-[#070D1E] border-b border-white/10 py-12 sm:py-16 lg:py-20 overflow-hidden">
-                {/* Background Ambient Glow */}
-                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-[#D4E012]/10 rounded-full blur-[140px] pointer-events-none" />
-
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                  {/* Left Column: Metadata, Title & Excerpt */}
-                  <div className="lg:col-span-7 space-y-5">
-                    {/* Meta Pills */}
-                    <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono">
-                      <span className="bg-[#16A34A] text-white font-extrabold text-[10px] tracking-wider uppercase px-3 py-1 rounded-full shadow-sm">
-                        {selectedArticle.badge}
-                      </span>
-                      <span className="flex items-center gap-1.5 text-slate-300 bg-white/5 border border-white/10 px-3 py-1 rounded-full">
-                        <Calendar className="w-3.5 h-3.5 text-[#D4E012]" />
-                        {selectedArticle.date}
-                      </span>
-                      <span className="flex items-center gap-1.5 text-slate-300 bg-white/5 border border-white/10 px-3 py-1 rounded-full">
-                        <Clock className="w-3.5 h-3.5 text-[#D4E012]" />
-                        {selectedArticle.readTime}
-                      </span>
-                      <span className="text-slate-400">By {selectedArticle.author}</span>
-                    </div>
-
-                    {/* Headline */}
-                    <h1 className="text-2xl sm:text-4xl md:text-5xl font-serif-display font-medium text-white leading-[1.16] tracking-tight [text-shadow:_0_2px_14px_rgba(0,0,0,0.9)]">
-                      {selectedArticle.title}
-                    </h1>
-
-                    {/* Excerpt Lead */}
-                    <p className="text-slate-200 text-sm sm:text-base md:text-lg font-light leading-relaxed border-l-2 border-[#D4E012] pl-4 sm:pl-5">
-                      {selectedArticle.excerpt}
-                    </p>
+            <div
+              onClick={() => setSelectedArticle(null)}
+              className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 md:p-8 bg-slate-950/80 backdrop-blur-md overflow-y-auto">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative w-full max-w-4xl max-h-[90vh] bg-[#0A1022] border border-white/15 rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.9)] flex flex-col overflow-hidden text-white my-auto selection:bg-[#D4E012] selection:text-black">
+                {/* Modal Top Sticky Header */}
+                <div className="sticky top-0 z-30 w-full bg-[#0A1022]/95 backdrop-blur-xl border-b border-white/10 px-6 sm:px-8 py-4 flex items-center justify-between">
+                  {/* Left: Category Badge & Brand */}
+                  <div className="flex items-center gap-3">
+                    <span className="px-3 py-1 rounded-full bg-[#16A34A] text-white text-[10px] font-mono font-bold tracking-widest uppercase shadow-sm">
+                      {selectedArticle.badge.toUpperCase()}
+                    </span>
+                    <span className="text-white/30">•</span>
+                    <span className="text-[#D4E012] font-mono font-bold text-xs tracking-wider uppercase">
+                      SARHAT INSIGHTS
+                    </span>
+                    <span className="hidden sm:inline-block px-2.5 py-0.5 rounded-full bg-white/10 text-slate-300 text-[11px] font-mono uppercase tracking-wider">
+                      {selectedArticle.category}
+                    </span>
                   </div>
 
-                  {/* Right Column: High-Res Cover Image */}
-                  <div className="lg:col-span-5">
-                    <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-slate-900">
-                      <Image
-                        src={selectedArticle.image}
-                        alt={selectedArticle.title}
-                        fill
-                        className="object-cover"
-                        priority
-                        unoptimized />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#070D1E]/40 via-transparent to-transparent pointer-events-none" />
-                    </div>
-                  </div>
+                  {/* Right: Close Button */}
+                  <button
+                    onClick={() => setSelectedArticle(null)}
+                    aria-label="Close modal"
+                    className="p-2 rounded-full bg-white/10 hover:bg-[#D4E012] hover:text-slate-950 text-slate-300 transition-all duration-200 cursor-pointer shadow-sm">
+                    <X className="w-4 h-4" />
+                  </button>
                 </div>
-              </section>
 
-              {/* Main Article Reading Area (100% Screen Width with optimal typography container) */}
-              <main className="flex-1 w-full bg-[#070D1E] py-12 sm:py-16">
-                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+                {/* Modal Scrollable Content */}
+                <div className="overflow-y-auto flex-1 p-6 sm:p-10 space-y-7">
+                  {/* Metadata Row */}
+                  <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs font-mono text-slate-300 border-b border-white/10 pb-4">
+                    <span className="flex items-center gap-1.5">
+                      <Calendar className="w-3.5 h-3.5 text-[#D4E012]" />
+                      {selectedArticle.date}
+                    </span>
+                    <span>•</span>
+                    <span>By {selectedArticle.author}</span>
+                    <span>•</span>
+                    <span className="flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-[#D4E012]" />
+                      {selectedArticle.readTime}
+                    </span>
+                  </div>
+
+                  {/* Article Title */}
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif-display font-medium text-white leading-tight tracking-tight [text-shadow:_0_2px_14px_rgba(0,0,0,0.8)]">
+                    {selectedArticle.title}
+                  </h2>
+
+                  {/* Cover Image Banner */}
+                  <div className="relative w-full h-56 sm:h-72 md:h-80 rounded-2xl overflow-hidden shadow-2xl border border-white/15 bg-slate-900">
+                    <Image
+                      src={selectedArticle.image}
+                      alt={selectedArticle.title}
+                      fill
+                      className="object-cover"
+                      priority
+                      unoptimized />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A1022]/60 via-transparent to-transparent pointer-events-none" />
+                  </div>
+
+                  {/* Excerpt Lead */}
+                  <p className="text-slate-200 text-base sm:text-lg font-light leading-relaxed border-l-2 border-[#D4E012] pl-4 sm:pl-5">
+                    {selectedArticle.excerpt}
+                  </p>
+
                   {/* Executive Summary / Key Takeaways Box */}
                   {selectedArticle.keyTakeaways && selectedArticle.keyTakeaways.length > 0 && (
-                    <div className="bg-gradient-to-br from-[#D4E012]/10 via-[#16A34A]/5 to-white/[0.02] border border-[#D4E012]/30 rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
-                      <div className="flex items-center gap-2.5 text-[#D4E012] text-xs font-mono font-bold uppercase tracking-wider mb-5">
+                    <div className="bg-gradient-to-br from-[#D4E012]/10 via-[#16A34A]/5 to-white/[0.02] border border-[#D4E012]/30 rounded-2xl p-6 sm:p-7 shadow-lg relative overflow-hidden">
+                      <div className="flex items-center gap-2 text-[#D4E012] text-xs font-mono font-bold uppercase tracking-wider mb-4">
                         <BookOpen className="w-4 h-4" />
                         <span>Key Takeaways &amp; Executive Summary</span>
                       </div>
-                      <ul className="space-y-3.5">
+                      <ul className="space-y-3">
                         {selectedArticle.keyTakeaways.map((takeaway, idx) => (
-                          <li key={idx} className="flex items-start gap-3 text-sm sm:text-base text-slate-100 font-normal leading-relaxed">
-                            <CheckCircle2 className="w-5 h-5 text-[#D4E012] shrink-0 mt-0.5" />
+                          <li key={idx} className="flex items-start gap-2.5 text-sm sm:text-base text-slate-100 font-normal leading-relaxed">
+                            <CheckCircle2 className="w-4 h-4 text-[#D4E012] shrink-0 mt-1" />
                             <span>{takeaway}</span>
                           </li>
                         ))}
@@ -579,52 +566,45 @@ export default function InsightsPage() {
                     </div>
                   )}
 
-                  {/* Full Article Content */}
-                  <div className="space-y-6 text-base sm:text-lg md:text-xl text-slate-100 font-normal leading-[1.85] tracking-wide">
+                  {/* Article Body Paragraphs */}
+                  <div className="space-y-5 text-base sm:text-lg text-slate-200 font-normal leading-[1.8] tracking-normal pt-2">
                     {selectedArticle.content.map((paragraph, index) => (
                       <p
                         key={index}
-                        className={index === 0 ? "text-lg sm:text-xl md:text-2xl text-white font-normal leading-relaxed border-b border-white/10 pb-6 mb-6" : ""}>
+                        className={index === 0 ? "text-lg sm:text-xl text-white font-normal leading-relaxed border-b border-white/10 pb-5 mb-5" : ""}>
                         {paragraph}
                       </p>
                     ))}
                   </div>
+                </div>
 
-                  {/* Bottom Action Footer Box */}
-                  <div className="border-t border-white/10 pt-10 mt-14 bg-gradient-to-r from-white/[0.04] to-transparent rounded-2xl p-6 sm:p-8 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
-                    <div>
-                      <div className="text-xs font-mono text-[#D4E012] uppercase tracking-wider font-bold mb-1">
-                        Turnkey Solar &amp; Storage EPC
-                      </div>
-                      <h4 className="text-lg font-serif-display font-medium text-white">
-                        Have a project in mind or need feasibility analysis?
-                      </h4>
-                      <p className="text-xs sm:text-sm text-slate-300 font-light mt-1">
-                        Connect with Sarhat&apos;s utility and C&amp;I engineering specialists.
-                      </p>
-                    </div>
+                {/* Modal Bottom Sticky Footer Bar */}
+                <div className="sticky bottom-0 z-30 w-full bg-[#080D1C]/95 backdrop-blur-xl border-t border-white/10 px-6 sm:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="text-xs font-mono text-[#D4E012] flex items-center gap-2">
+                    <BookOpen className="w-4 h-4" />
+                    <span>SARHAT INSIGHTS LIBRARY</span>
+                  </div>
 
-                    <div className="flex items-center gap-3 w-full sm:w-auto">
-                      <button
-                        onClick={() => {
-                          setSelectedArticle(null);
-                          setQuoteModalOpen(true);
-                        }}
-                        className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-[#D4E012] hover:bg-[#c2ce0f] text-slate-950 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-full transition-all cursor-pointer shadow-lg whitespace-nowrap">
-                        <span>Discuss a Project</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </button>
+                  <div className="flex items-center gap-3 w-full sm:w-auto">
+                    <button
+                      onClick={() => {
+                        setSelectedArticle(null);
+                        setQuoteModalOpen(true);
+                      }}
+                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-[#D4E012] hover:bg-[#c2ce0f] text-slate-950 font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-full transition-all cursor-pointer shadow-md whitespace-nowrap">
+                      <span>Discuss a Project</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
 
-                      <button
-                        onClick={() => setSelectedArticle(null)}
-                        className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-mono text-xs uppercase tracking-wider px-5 py-3 rounded-full border border-white/15 transition-all cursor-pointer whitespace-nowrap">
-                        <span>Back to Insights</span>
-                      </button>
-                    </div>
+                    <button
+                      onClick={() => setSelectedArticle(null)}
+                      className="inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-white font-mono text-xs uppercase tracking-wider px-5 py-2.5 rounded-full border border-white/15 transition-all cursor-pointer whitespace-nowrap">
+                      <span>Close</span>
+                    </button>
                   </div>
                 </div>
-              </main>
-            </motion.div>
+              </motion.div>
+            </div>
           )}
         </AnimatePresence>
       </main>
