@@ -146,14 +146,14 @@ export default function ArticlesPage() {
                   </span>
                 </h1>
 
-                <p className="text-xs sm:text-sm md:text-base lg:text-lg text-slate-100 font-normal max-w-3xl mx-auto text-center leading-relaxed tracking-wide [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)]">
-                  <span className="block sm:whitespace-nowrap">
-                    Technical whitepapers and engineering perspectives
-                  </span>
-                  <span className="block sm:whitespace-nowrap mt-1 sm:mt-1.5">
-                    on utility BESS, substations, and grid integration.
-                  </span>
-                </p>
+                  <p className="text-xs sm:text-sm md:text-base lg:text-lg text-slate-100 font-normal max-w-3xl mx-auto text-center leading-relaxed tracking-wide [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)]">
+                    <span className="block sm:whitespace-nowrap">
+                      Technical whitepapers and engineering perspectives
+                    </span>
+                    <span className="block sm:whitespace-nowrap mt-1 sm:mt-1.5">
+                      on utility BESS, substations, and grid integration.
+                    </span>
+                  </p>
               </div>
             </motion.div>
 
@@ -172,84 +172,84 @@ export default function ArticlesPage() {
           {/* Featured Article Showcase */}
           {featuredArticle && !searchQuery && selectedCategory === "All" && (
             <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-16">
-                <div
-                  onClick={() => setSelectedArticle(featuredArticle)}
-                  className="relative rounded-3xl bg-white border border-slate-200/90 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 group cursor-pointer">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
-                    {/* Image side */}
-                    <div className="relative lg:col-span-7 h-72 sm:h-96 lg:h-auto min-h-[340px] overflow-hidden">
-                      <Image
-                        src={featuredArticle.image}
-                        alt={featuredArticle.title}
-                        fill
-                        priority
-                        className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                        sizes="(max-width: 1024px) 100vw, 60vw" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent lg:hidden" />
-                      <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#0F172A]/85 backdrop-blur-md text-[#D4E012] font-mono text-xs font-semibold uppercase tracking-wider">
-                        <Sparkles className="w-3.5 h-3.5" /> Featured Whitepaper
+              <div
+                onClick={() => setSelectedArticle(featuredArticle)}
+                className="relative rounded-3xl bg-white border border-slate-200/90 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 group cursor-pointer">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
+                  {/* Image side */}
+                  <div className="relative lg:col-span-7 h-72 sm:h-96 lg:h-auto min-h-[340px] overflow-hidden">
+                    <Image
+                      src={featuredArticle.image}
+                      alt={featuredArticle.title}
+                      fill
+                      priority
+                      className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                      sizes="(max-width: 1024px) 100vw, 60vw" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent lg:hidden" />
+                    <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#0F172A]/85 backdrop-blur-md text-[#D4E012] font-mono text-xs font-semibold uppercase tracking-wider">
+                      <Sparkles className="w-3.5 h-3.5" /> Featured Whitepaper
+                    </div>
+                  </div>
+
+                  {/* Content side */}
+                  <div className="lg:col-span-5 p-6 sm:p-10 lg:p-12 flex flex-col justify-between bg-gradient-to-br from-white via-white to-slate-50/50">
+                    <div className="space-y-4">
+                      <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 font-mono">
+                        <span className="px-2.5 py-1 rounded-md bg-[#6DAD45]/10 text-[#427124] font-semibold">
+                          {featuredArticle.category}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                          {featuredArticle.date}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-3.5 h-3.5 text-slate-400" />
+                          {featuredArticle.readTime}
+                        </span>
+                      </div>
+
+                      <h2 className="text-2xl sm:text-3xl font-serif-display font-medium text-slate-900 group-hover:text-[#4f832e] transition-colors leading-snug">
+                        {featuredArticle.title}
+                      </h2>
+
+                      <p className="text-slate-600 text-sm sm:text-base leading-relaxed line-clamp-3">
+                        {featuredArticle.excerpt}
+                      </p>
+
+                      {/* Author Info */}
+                      <div className="pt-2 flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-full bg-slate-900 text-[#D4E012] flex items-center justify-center font-mono font-bold text-xs shrink-0">
+                          {featuredArticle.author.name
+                            .split(" ")
+                            .map((n) => n[0])
+                            .slice(0, 2)
+                            .join("")}
+                        </div>
+                        <div>
+                          <div className="text-xs font-semibold text-slate-900">
+                            {featuredArticle.author.name}
+                          </div>
+                          <div className="text-[11px] text-slate-500 font-mono">
+                            {featuredArticle.author.role}
+                          </div>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Content side */}
-                    <div className="lg:col-span-5 p-6 sm:p-10 lg:p-12 flex flex-col justify-between bg-gradient-to-br from-white via-white to-slate-50/50">
-                      <div className="space-y-4">
-                        <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 font-mono">
-                          <span className="px-2.5 py-1 rounded-md bg-[#6DAD45]/10 text-[#427124] font-semibold">
-                            {featuredArticle.category}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Calendar className="w-3.5 h-3.5 text-slate-400" />
-                            {featuredArticle.date}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Clock className="w-3.5 h-3.5 text-slate-400" />
-                            {featuredArticle.readTime}
-                          </span>
-                        </div>
+                    <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+                      <span className="text-xs font-mono text-slate-400">
+                        {featuredArticle.sections.length} Detailed Sections
+                      </span>
 
-                        <h2 className="text-2xl sm:text-3xl font-serif-display font-medium text-slate-900 group-hover:text-[#4f832e] transition-colors leading-snug">
-                          {featuredArticle.title}
-                        </h2>
-
-                        <p className="text-slate-600 text-sm sm:text-base leading-relaxed line-clamp-3">
-                          {featuredArticle.excerpt}
-                        </p>
-
-                        {/* Author Info */}
-                        <div className="pt-2 flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-full bg-slate-900 text-[#D4E012] flex items-center justify-center font-mono font-bold text-xs shrink-0">
-                            {featuredArticle.author.name
-                              .split(" ")
-                              .map((n) => n[0])
-                              .slice(0, 2)
-                              .join("")}
-                          </div>
-                          <div>
-                            <div className="text-xs font-semibold text-slate-900">
-                              {featuredArticle.author.name}
-                            </div>
-                            <div className="text-[11px] text-slate-500 font-mono">
-                              {featuredArticle.author.role}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
-                        <span className="text-xs font-mono text-slate-400">
-                          {featuredArticle.sections.length} Detailed Sections
-                        </span>
-
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setSelectedArticle(featuredArticle);
-                            }}
-                            className="inline-flex items-center gap-2 text-sm font-semibold text-[#0F172A] group-hover:text-[#4f832e] transition-colors cursor-pointer">
-                            <span>Read Full Whitepaper</span>
-                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedArticle(featuredArticle);
+                        }}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-[#0F172A] group-hover:text-[#4f832e] transition-colors cursor-pointer">
+                        <span>Read Full Whitepaper</span>
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </button>
                     </div>
                   </div>
@@ -308,45 +308,45 @@ export default function ArticlesPage() {
                       className="group bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl hover:border-slate-300 transition-all duration-300 flex flex-col justify-between cursor-pointer">
                       <div>
                         {/* Thumbnail */}
-                          <div className="relative block h-52 sm:h-56 w-full overflow-hidden bg-slate-100">
-                            <Image
-                              src={article.image}
-                              alt={article.title}
-                              fill
-                              className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
-                            <div className="absolute top-3.5 left-3.5">
-                              <span className="px-2.5 py-1 rounded-md bg-[#0F172A]/85 backdrop-blur-md text-white text-[11px] font-mono font-medium">
-                                {article.category}
-                              </span>
-                            </div>
-                            <div className="absolute bottom-3.5 right-3.5 flex items-center gap-1 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md text-white text-[11px] font-mono">
-                              <Clock className="w-3 h-3 text-[#D4E012]" />
-                              <span>{article.readTime}</span>
-                            </div>
-                      </div>
-
-                      {/* Text Content */}
-                      <div className="p-6 sm:p-7 space-y-3">
-                        <div className="flex items-center gap-3 text-xs text-slate-400 font-mono">
-                          <span className="flex items-center gap-1">
-                            <Calendar className="w-3.5 h-3.5" />
-                            {article.date}
-                          </span>
+                        <div className="relative block h-52 sm:h-56 w-full overflow-hidden bg-slate-100">
+                          <Image
+                            src={article.image}
+                            alt={article.title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+                          <div className="absolute top-3.5 left-3.5">
+                            <span className="px-2.5 py-1 rounded-md bg-[#0F172A]/85 backdrop-blur-md text-white text-[11px] font-mono font-medium">
+                              {article.category}
+                            </span>
+                          </div>
+                          <div className="absolute bottom-3.5 right-3.5 flex items-center gap-1 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md text-white text-[11px] font-mono">
+                            <Clock className="w-3 h-3 text-[#D4E012]" />
+                            <span>{article.readTime}</span>
+                          </div>
                         </div>
 
-                        <h3 className="text-lg sm:text-xl font-serif-display font-medium text-slate-900 group-hover:text-[#4f832e] transition-colors leading-snug line-clamp-2">
-                          {article.title}
-                        </h3>
+                        {/* Text Content */}
+                        <div className="p-6 sm:p-7 space-y-3">
+                          <div className="flex items-center gap-3 text-xs text-slate-400 font-mono">
+                            <span className="flex items-center gap-1">
+                              <Calendar className="w-3.5 h-3.5" />
+                              {article.date}
+                            </span>
+                          </div>
 
-                        <p className="text-slate-600 text-sm leading-relaxed line-clamp-3">
-                          {article.excerpt}
-                        </p>
+                          <h3 className="text-lg sm:text-xl font-serif-display font-medium text-slate-900 group-hover:text-[#4f832e] transition-colors leading-snug line-clamp-2">
+                            {article.title}
+                          </h3>
+
+                          <p className="text-slate-600 text-sm leading-relaxed line-clamp-3">
+                            {article.excerpt}
+                          </p>
+                        </div>
                       </div>
-                    </div>
 
-                      {/* Card Footer with Author */ }
-                    < div className = "p-6 sm:p-7 pt-0 border-t border-slate-100/80 mt-4 flex items-center justify-between" >
+                      {/* Card Footer with Author */}
+                      < div className="p-6 sm:p-7 pt-0 border-t border-slate-100/80 mt-4 flex items-center justify-between" >
                         <div className="flex items-center gap-2.5">
                           <div className="w-7 h-7 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-mono font-bold text-[10px]">
                             {article.author.name
@@ -370,229 +370,229 @@ export default function ArticlesPage() {
                           <span>Read</span>
                           <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                         </button>
-              </div>
+                      </div>
                     </motion.article>
                   ))}
-        </AnimatePresence>
-      </div>
+                </AnimatePresence>
+              </div>
             )}
 
-      {/* Load More Button */}
-      {hasMore && (
-        <div className="mt-12 text-center">
-          <button
-            onClick={handleLoadMore}
-            className="inline-flex items-center gap-2 px-8 py-3.5 bg-white border border-slate-300 rounded-2xl text-slate-900 hover:bg-slate-50 hover:border-slate-400 font-medium text-sm transition-all shadow-sm active:scale-95">
-            <span>Load More Articles</span>
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
-      )}
-    </section>
+            {/* Load More Button */}
+            {hasMore && (
+              <div className="mt-12 text-center">
+                <button
+                  onClick={handleLoadMore}
+                  className="inline-flex items-center gap-2 px-8 py-3.5 bg-white border border-slate-300 rounded-2xl text-slate-900 hover:bg-slate-50 hover:border-slate-400 font-medium text-sm transition-all shadow-sm active:scale-95">
+                  <span>Load More Articles</span>
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            )}
+          </section>
 
-          {/* Final CTA */ }
-  <FinalCTA
-    onOpenQuote={() => setIsQuoteOpen(true)}
-    headline="Turn technical theory into"
-    accent="grid-connected reality."
-    description="Our EPC engineers and regulatory specialists collaborate with renewable developers across every project lifecycle stage." />
+          {/* Final CTA */}
+          <FinalCTA
+            onOpenQuote={() => setIsQuoteOpen(true)}
+            headline="Turn technical theory into"
+            accent="grid-connected reality."
+            description="Our EPC engineers and regulatory specialists collaborate with renewable developers across every project lifecycle stage." />
         </div >
 
-    {/* Full Whitepaper Article Modal Dialog */ }
-    <AnimatePresence>
-  {
-    selectedArticle && (
-      <div
-        data-lenis-prevent="true"
-        onClick={() => setSelectedArticle(null)}
-        className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 md:p-8 bg-slate-950/85 backdrop-blur-md overflow-hidden">
-        <motion.div
-          data-lenis-prevent="true"
-          initial={{ opacity: 0, scale: 0.95, y: 15 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 15 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
-          onClick={(e) => e.stopPropagation()}
-          className="relative w-full max-w-4xl h-[88vh] max-h-[88vh] bg-[#0A1022] border border-white/20 rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.9)] flex flex-col overflow-hidden text-white my-auto selection:bg-[#D4E012] selection:text-black">
-          {/* Modal Top Sticky Header */}
-          <div className="shrink-0 w-full bg-[#0A1022]/95 backdrop-blur-xl border-b border-white/10 px-6 sm:px-8 py-4 flex items-center justify-between z-20">
-            {/* Left: Category Badge & Brand */}
-            <div className="flex items-center gap-3">
-              <span className="px-3 py-1 rounded-full bg-[#16A34A] text-white text-[10px] font-mono font-bold tracking-widest uppercase shadow-sm">
-                {selectedArticle.category}
-              </span>
-              <span className="text-white/30">•</span>
-              <span className="text-[#D4E012] font-mono font-bold text-xs tracking-wider uppercase">
-                SARHAT WHITEPAPER
-              </span>
-            </div>
-
-            {/* Right: Close Button */}
-            <button
-              onClick={() => setSelectedArticle(null)}
-              aria-label="Close modal"
-              className="p-2 rounded-full bg-white/10 hover:bg-[#D4E012] hover:text-slate-950 text-slate-300 transition-all duration-200 cursor-pointer shadow-sm">
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-
-          {/* Modal Scrollable Content */}
-          <div
-            data-lenis-prevent="true"
-            tabIndex={0}
-            className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-6 sm:p-10 space-y-8 custom-scrollbar focus:outline-none">
-            {/* Metadata Row */}
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs font-mono text-slate-300 border-b border-white/10 pb-4">
-              <span className="flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5 text-[#D4E012]" />
-                {selectedArticle.date}
-              </span>
-              <span>•</span>
-              <span className="flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-[#D4E012]" />
-                {selectedArticle.readTime}
-              </span>
-              <span>•</span>
-              <span className="text-slate-400">{selectedArticle.sections.length} Technical Sections</span>
-            </div>
-
-            {/* Article Title */}
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif-display font-medium text-white leading-tight tracking-tight [text-shadow:_0_2px_14px_rgba(0,0,0,0.8)]">
-              {selectedArticle.title}
-            </h2>
-
-            {/* Author Card */}
-            <div className="flex items-center gap-4 bg-white/[0.03] border border-white/10 rounded-2xl p-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#D4E012] to-[#16A34A] text-slate-950 flex items-center justify-center font-mono font-bold text-sm shadow-md shrink-0">
-                {selectedArticle.author.name
-                  .split(" ")
-                  .map((n) => n[0])
-                  .slice(0, 2)
-                  .join("")}
-              </div>
-              <div>
-                <div className="text-sm font-semibold text-white">
-                  {selectedArticle.author.name}
-                </div>
-                <div className="text-xs text-slate-400 font-mono">
-                  {selectedArticle.author.role}
-                </div>
-              </div>
-            </div>
-
-            {/* Cover Image Banner */}
-            <div className="relative w-full h-56 sm:h-72 md:h-80 rounded-2xl overflow-hidden shadow-2xl border border-white/15 bg-slate-900 shrink-0">
-              <Image
-                src={selectedArticle.image}
-                alt={selectedArticle.title}
-                fill
-                className="object-cover"
-                priority
-                unoptimized />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A1022]/70 via-transparent to-transparent pointer-events-none" />
-            </div>
-
-            {/* Excerpt Lead */}
-            <p className="text-slate-200 text-base sm:text-lg font-light leading-relaxed border-l-2 border-[#D4E012] pl-4 sm:pl-5">
-              {selectedArticle.excerpt}
-            </p>
-
-            {/* Sections Outline Bar */}
-            {selectedArticle.tableOfContents && selectedArticle.tableOfContents.length > 0 && (
-              <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-5">
-                <div className="flex items-center gap-2 text-[#D4E012] text-xs font-mono font-bold uppercase tracking-wider mb-3">
-                  <BookOpen className="w-4 h-4" />
-                  <span>Whitepaper Topics Covered</span>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {selectedArticle.tableOfContents.map((toc, tIdx) => (
-                    <div key={tIdx} className="flex items-center gap-2 text-xs font-mono text-slate-300">
-                      <span className="text-[#D4E012] font-bold">0{tIdx + 1}.</span>
-                      <span className="truncate">{toc.title}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Detailed Technical Sections */}
-            <div className="space-y-8 pt-2">
-              {selectedArticle.sections.map((sec, sIdx) => (
-                <section key={sec.id || sIdx} className="space-y-4 pt-4 border-t border-white/10 first:border-t-0">
-                  <div className="flex items-center gap-3">
-                    <span className="text-xs font-mono text-[#D4E012] font-bold">SECTION 0{sIdx + 1}</span>
-                    <span className="h-px bg-white/15 flex-1" />
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-serif-display font-medium text-white leading-snug">
-                    {sec.heading}
-                  </h3>
-
-                  <div className="space-y-4 text-base sm:text-lg text-slate-200 font-normal leading-[1.8]">
-                    {sec.content.map((p, pIdx) => (
-                      <p key={pIdx}>{p}</p>
-                    ))}
-                  </div>
-
-                  {/* Callout Box */}
-                  {sec.callout && (
-                    <div className="my-5 p-5 sm:p-6 bg-gradient-to-r from-[#D4E012]/10 to-transparent border-l-4 border-[#D4E012] rounded-r-2xl relative">
-                      <Quote className="w-7 h-7 text-[#D4E012]/30 absolute top-4 right-4 pointer-events-none" />
-                      <p className="text-base sm:text-lg italic text-white font-serif-display leading-relaxed">
-                        &ldquo;{sec.callout.quote}&rdquo;
-                      </p>
-                      {sec.callout.author && (
-                        <p className="text-xs font-mono text-[#D4E012] mt-3 uppercase tracking-wider font-semibold">
-                          — {sec.callout.author}
-                        </p>
-                      )}
-                    </div>
-                  )}
-
-                  {/* Bullet List */}
-                  {sec.bulletList && sec.bulletList.length > 0 && (
-                    <ul className="space-y-2.5 pt-2 bg-black/40 border border-white/10 rounded-2xl p-5">
-                      {sec.bulletList.map((item, bIdx) => (
-                        <li key={bIdx} className="flex items-start gap-2.5 text-sm sm:text-base text-slate-100">
-                          <CheckCircle2 className="w-4 h-4 text-[#D4E012] shrink-0 mt-1" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </section>
-              ))}
-            </div>
-          </div>
-
-          {/* Modal Bottom Sticky Footer Bar */}
-          <div className="shrink-0 w-full bg-[#080D1C]/95 backdrop-blur-xl border-t border-white/10 px-6 sm:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-4 z-20">
-            <div className="text-xs font-mono text-[#D4E012] flex items-center gap-2">
-              <BookOpen className="w-4 h-4" />
-              <span>SARHAT TECHNICAL ARCHIVES</span>
-            </div>
-
-            <div className="flex items-center gap-3 w-full sm:w-auto">
-              <button
-                onClick={() => {
-                  setSelectedArticle(null);
-                  setIsQuoteOpen(true);
-                }}
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-[#D4E012] hover:bg-[#c2ce0f] text-slate-950 font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-full transition-all cursor-pointer shadow-md whitespace-nowrap">
-                <span>Discuss a Project</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-
-              <button
+        {/* Full Whitepaper Article Modal Dialog */}
+        <AnimatePresence>
+          {
+            selectedArticle && (
+              <div
+                data-lenis-prevent="true"
                 onClick={() => setSelectedArticle(null)}
-                className="inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-white font-mono text-xs uppercase tracking-wider px-5 py-2.5 rounded-full border border-white/15 transition-all cursor-pointer whitespace-nowrap">
-                <span>Close</span>
-              </button>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-    )
-  }
+                className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 md:p-8 bg-slate-950/85 backdrop-blur-md overflow-hidden">
+                <motion.div
+                  data-lenis-prevent="true"
+                  initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: 15 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="relative w-full max-w-4xl h-[88vh] max-h-[88vh] bg-[#0A1022] border border-white/20 rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.9)] flex flex-col overflow-hidden text-white my-auto selection:bg-[#D4E012] selection:text-black">
+                  {/* Modal Top Sticky Header */}
+                  <div className="shrink-0 w-full bg-[#0A1022]/95 backdrop-blur-xl border-b border-white/10 px-6 sm:px-8 py-4 flex items-center justify-between z-20">
+                    {/* Left: Category Badge & Brand */}
+                    <div className="flex items-center gap-3">
+                      <span className="px-3 py-1 rounded-full bg-[#16A34A] text-white text-[10px] font-mono font-bold tracking-widest uppercase shadow-sm">
+                        {selectedArticle.category}
+                      </span>
+                      <span className="text-white/30">•</span>
+                      <span className="text-[#D4E012] font-mono font-bold text-xs tracking-wider uppercase">
+                        SARHAT WHITEPAPER
+                      </span>
+                    </div>
+
+                    {/* Right: Close Button */}
+                    <button
+                      onClick={() => setSelectedArticle(null)}
+                      aria-label="Close modal"
+                      className="p-2 rounded-full bg-white/10 hover:bg-[#D4E012] hover:text-slate-950 text-slate-300 transition-all duration-200 cursor-pointer shadow-sm">
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                  {/* Modal Scrollable Content */}
+                  <div
+                    data-lenis-prevent="true"
+                    tabIndex={0}
+                    className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-6 sm:p-10 space-y-8 custom-scrollbar focus:outline-none">
+                    {/* Metadata Row */}
+                    <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs font-mono text-slate-300 border-b border-white/10 pb-4">
+                      <span className="flex items-center gap-1.5">
+                        <Calendar className="w-3.5 h-3.5 text-[#D4E012]" />
+                        {selectedArticle.date}
+                      </span>
+                      <span>•</span>
+                      <span className="flex items-center gap-1.5">
+                        <Clock className="w-3.5 h-3.5 text-[#D4E012]" />
+                        {selectedArticle.readTime}
+                      </span>
+                      <span>•</span>
+                      <span className="text-slate-400">{selectedArticle.sections.length} Technical Sections</span>
+                    </div>
+
+                    {/* Article Title */}
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif-display font-medium text-white leading-tight tracking-tight [text-shadow:_0_2px_14px_rgba(0,0,0,0.8)]">
+                      {selectedArticle.title}
+                    </h2>
+
+                    {/* Author Card */}
+                    <div className="flex items-center gap-4 bg-white/[0.03] border border-white/10 rounded-2xl p-4">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#D4E012] to-[#16A34A] text-slate-950 flex items-center justify-center font-mono font-bold text-sm shadow-md shrink-0">
+                        {selectedArticle.author.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .slice(0, 2)
+                          .join("")}
+                      </div>
+                      <div>
+                        <div className="text-sm font-semibold text-white">
+                          {selectedArticle.author.name}
+                        </div>
+                        <div className="text-xs text-slate-400 font-mono">
+                          {selectedArticle.author.role}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Cover Image Banner */}
+                    <div className="relative w-full h-56 sm:h-72 md:h-80 rounded-2xl overflow-hidden shadow-2xl border border-white/15 bg-slate-900 shrink-0">
+                      <Image
+                        src={selectedArticle.image}
+                        alt={selectedArticle.title}
+                        fill
+                        className="object-cover"
+                        priority
+                        unoptimized />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A1022]/70 via-transparent to-transparent pointer-events-none" />
+                    </div>
+
+                    {/* Excerpt Lead */}
+                    <p className="text-slate-200 text-base sm:text-lg font-light leading-relaxed border-l-2 border-[#D4E012] pl-4 sm:pl-5">
+                      {selectedArticle.excerpt}
+                    </p>
+
+                    {/* Sections Outline Bar */}
+                    {selectedArticle.tableOfContents && selectedArticle.tableOfContents.length > 0 && (
+                      <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-5">
+                        <div className="flex items-center gap-2 text-[#D4E012] text-xs font-mono font-bold uppercase tracking-wider mb-3">
+                          <BookOpen className="w-4 h-4" />
+                          <span>Whitepaper Topics Covered</span>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          {selectedArticle.tableOfContents.map((toc, tIdx) => (
+                            <div key={tIdx} className="flex items-center gap-2 text-xs font-mono text-slate-300">
+                              <span className="text-[#D4E012] font-bold">0{tIdx + 1}.</span>
+                              <span className="truncate">{toc.title}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Detailed Technical Sections */}
+                    <div className="space-y-8 pt-2">
+                      {selectedArticle.sections.map((sec, sIdx) => (
+                        <section key={sec.id || sIdx} className="space-y-4 pt-4 border-t border-white/10 first:border-t-0">
+                          <div className="flex items-center gap-3">
+                            <span className="text-xs font-mono text-[#D4E012] font-bold">SECTION 0{sIdx + 1}</span>
+                            <span className="h-px bg-white/15 flex-1" />
+                          </div>
+                          <h3 className="text-xl sm:text-2xl font-serif-display font-medium text-white leading-snug">
+                            {sec.heading}
+                          </h3>
+
+                          <div className="space-y-4 text-base sm:text-lg text-slate-200 font-normal leading-[1.8]">
+                            {sec.content.map((p, pIdx) => (
+                              <p key={pIdx}>{p}</p>
+                            ))}
+                          </div>
+
+                          {/* Callout Box */}
+                          {sec.callout && (
+                            <div className="my-5 p-5 sm:p-6 bg-gradient-to-r from-[#D4E012]/10 to-transparent border-l-4 border-[#D4E012] rounded-r-2xl relative">
+                              <Quote className="w-7 h-7 text-[#D4E012]/30 absolute top-4 right-4 pointer-events-none" />
+                              <p className="text-base sm:text-lg italic text-white font-serif-display leading-relaxed">
+                                &ldquo;{sec.callout.quote}&rdquo;
+                              </p>
+                              {sec.callout.author && (
+                                <p className="text-xs font-mono text-[#D4E012] mt-3 uppercase tracking-wider font-semibold">
+                                  — {sec.callout.author}
+                                </p>
+                              )}
+                            </div>
+                          )}
+
+                          {/* Bullet List */}
+                          {sec.bulletList && sec.bulletList.length > 0 && (
+                            <ul className="space-y-2.5 pt-2 bg-black/40 border border-white/10 rounded-2xl p-5">
+                              {sec.bulletList.map((item, bIdx) => (
+                                <li key={bIdx} className="flex items-start gap-2.5 text-sm sm:text-base text-slate-100">
+                                  <CheckCircle2 className="w-4 h-4 text-[#D4E012] shrink-0 mt-1" />
+                                  <span>{item}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </section>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Modal Bottom Sticky Footer Bar */}
+                  <div className="shrink-0 w-full bg-[#080D1C]/95 backdrop-blur-xl border-t border-white/10 px-6 sm:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-4 z-20">
+                    <div className="text-xs font-mono text-[#D4E012] flex items-center gap-2">
+                      <BookOpen className="w-4 h-4" />
+                      <span>SARHAT TECHNICAL ARCHIVES</span>
+                    </div>
+
+                    <div className="flex items-center gap-3 w-full sm:w-auto">
+                      <button
+                        onClick={() => {
+                          setSelectedArticle(null);
+                          setIsQuoteOpen(true);
+                        }}
+                        className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-[#D4E012] hover:bg-[#c2ce0f] text-slate-950 font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-full transition-all cursor-pointer shadow-md whitespace-nowrap">
+                        <span>Discuss a Project</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+
+                      <button
+                        onClick={() => setSelectedArticle(null)}
+                        className="inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-white font-mono text-xs uppercase tracking-wider px-5 py-2.5 rounded-full border border-white/15 transition-all cursor-pointer whitespace-nowrap">
+                        <span>Close</span>
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            )
+          }
         </AnimatePresence >
 
         <Footer />
