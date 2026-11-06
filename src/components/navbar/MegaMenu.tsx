@@ -102,9 +102,8 @@ function MenuItems({
             </Link>
             {item.children && (
               <div
-                className={`invisible absolute top-[-8px] opacity-0 transition-opacity duration-200 ${lv.show} ${
-                  flip ? "right-full pr-3" : "left-full pl-3"
-                }`}>
+                className={`invisible absolute top-[-8px] opacity-0 transition-opacity duration-200 ${lv.show} ${flip ? "right-full pr-3" : "left-full pl-3"
+                  }`}>
                 <div className={`relative min-w-[210px] ${PANEL}`}>
                   <ShimmerBorder />
                   <MenuItems items={item.children} level={level + 1} flip={flip} onNavigate={onNavigate} />
@@ -137,7 +136,7 @@ const MegaMenu = forwardRef<HTMLDivElement, MegaMenuProps>(function MegaMenu(
       // Line the item text up with the trigger label (panel 8px + item 16px padding).
       const left = t.left - parent.getBoundingClientRect().left - 24;
       // Open flyouts leftwards when they would run off the right edge.
-      const flip = t.left - 24 + PANEL_W + depth * FLYOUT_W> window.innerWidth - 16;
+      const flip = t.left - 24 + PANEL_W + depth * FLYOUT_W > window.innerWidth - 16;
       setPos({ left, flip });
     };
     measure();
