@@ -297,13 +297,10 @@ export default function OurApproachPage() {
             </div>
           </section>
 
-          {/* 03 / 5 PRINCIPLES INTERACTIVE SECTION (Obsidian Emerald Theme matching About page values) */}
+          {/* 03 / 5 DELIVERY PRINCIPLES SECTION (Light theme matching website design) */}
           <section
             id="delivery-principles"
-            className="py-12 sm:py-16 md:py-20 bg-[#09120B] border-b border-slate-800/90 relative z-10 text-white overflow-hidden">
-            {/* Soft Radial Ambient Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[550px] bg-[#D4E012]/10 rounded-full blur-[140px] pointer-events-none" />
-
+            className="py-16 sm:py-20 md:py-24 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10 text-[#0F172A] overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <ScrollReveal>
                 <FivePrinciplesInteractive
