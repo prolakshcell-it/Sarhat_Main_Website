@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Calendar,
@@ -11,6 +10,10 @@ import {
   ChevronRight,
   Sparkles,
   FileText,
+  X,
+  BookOpen,
+  CheckCircle2,
+  Quote,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -20,12 +23,13 @@ import SmoothScroll from "@/components/SmoothScroll";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import { useHeroScroll } from "@/hooks/useHeroScroll";
 import FilterSearchBar from "@/components/content/FilterSearchBar";
-import { editorialArticles, ARTICLE_CATEGORIES } from "@/data/articlesData";
+import { editorialArticles, ARTICLE_CATEGORIES, ArticleItem } from "@/data/articlesData";
 
 const ITEMS_PER_PAGE = 6;
 
 export default function ArticlesPage() {
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+  const [selectedArticle, setSelectedArticle] = useState<ArticleItem | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [visibleCount, setVisibleCount] = useState<number>(ITEMS_PER_PAGE);
@@ -70,6 +74,25 @@ export default function ArticlesPage() {
     setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
   };
 
+  // Lock body scroll when modal is open and handle escape key
+  useEffect(() => {
+    if (selectedArticle) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setSelectedArticle(null);
+        }
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [selectedArticle]);
+
   return (
     <SmoothScroll>
       <main className="min-h-screen bg-[#F8FAF8] text-[#0F172A] selection:bg-[#D4E012] selection:text-black relative overflow-x-clip font-sans-ui">
@@ -80,8 +103,9 @@ export default function ArticlesPage() {
         {/* 01 / HERO SECTION (Fixed background & Centered Content)      */}
         {/* ------------------------------------------------------------- */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-            }`}
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
+            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+          }`}
           aria-hidden={isPastHero}>
           <section className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none">
             {/* Cinematic Background Image Layer with Dynamic Zoom & Scrim */}
@@ -149,7 +173,9 @@ export default function ArticlesPage() {
           {/* Featured Article Showcase */}
           {featuredArticle && !searchQuery && selectedCategory === "All" && (
             <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-16">
-              <div className="relative rounded-3xl bg-white border border-slate-200/90 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 group">
+              <div
+                onClick={() => setSelectedArticle(featuredArticle)}
+                className="relative rounded-3xl bg-white border border-slate-200/90 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 group cursor-pointer">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
                   {/* Image side */}
                   <div className="relative lg:col-span-7 h-72 sm:h-96 lg:h-auto min-h-[340px] overflow-hidden">
@@ -184,9 +210,7 @@ export default function ArticlesPage() {
                       </div>
 
                       <h2 className="text-2xl sm:text-3xl font-serif-display font-medium text-slate-900 group-hover:text-[#4f832e] transition-colors leading-snug">
-                        <Link href={`/insights/articles/${featuredArticle.slug}`}>
-                          {featuredArticle.title}
-                        </Link>
+                        {featuredArticle.title}
                       </h2>
 
                       <p className="text-slate-600 text-sm sm:text-base leading-relaxed line-clamp-3">
@@ -218,12 +242,16 @@ export default function ArticlesPage() {
                         {featuredArticle.sections.length} Detailed Sections
                       </span>
 
-                      <Link
-                        href={`/insights/articles/${featuredArticle.slug}`}
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-[#0F172A] group-hover:text-[#4f832e] transition-colors">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedArticle(featuredArticle);
+                        }}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-[#0F172A] group-hover:text-[#4f832e] transition-colors cursor-pointer">
                         <span>Read Full Whitepaper</span>
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </Link>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -277,12 +305,11 @@ export default function ArticlesPage() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95 }}
                       transition={{ duration: 0.35, delay: idx * 0.05 }}
-                      className="group bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl hover:border-slate-300 transition-all duration-300 flex flex-col justify-between">
+                      onClick={() => setSelectedArticle(article)}
+                      className="group bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl hover:border-slate-300 transition-all duration-300 flex flex-col justify-between cursor-pointer">
                       <div>
                         {/* Thumbnail */}
-                        <Link
-                          href={`/insights/articles/${article.slug}`}
-                          className="relative block h-52 sm:h-56 w-full overflow-hidden bg-slate-100">
+                        <div className="relative block h-52 sm:h-56 w-full overflow-hidden bg-slate-100">
                           <Image
                             src={article.image}
                             alt={article.title}
@@ -298,7 +325,7 @@ export default function ArticlesPage() {
                             <Clock className="w-3 h-3 text-[#D4E012]" />
                             <span>{article.readTime}</span>
                           </div>
-                        </Link>
+                        </div>
 
                         {/* Text Content */}
                         <div className="p-6 sm:p-7 space-y-3">
@@ -310,9 +337,7 @@ export default function ArticlesPage() {
                           </div>
 
                           <h3 className="text-lg sm:text-xl font-serif-display font-medium text-slate-900 group-hover:text-[#4f832e] transition-colors leading-snug line-clamp-2">
-                            <Link href={`/insights/articles/${article.slug}`}>
-                              {article.title}
-                            </Link>
+                            {article.title}
                           </h3>
 
                           <p className="text-slate-600 text-sm leading-relaxed line-clamp-3">
@@ -336,12 +361,16 @@ export default function ArticlesPage() {
                           </div>
                         </div>
 
-                        <Link
-                          href={`/insights/articles/${article.slug}`}
-                          className="inline-flex items-center gap-1 text-xs font-bold font-mono uppercase tracking-wider text-[#0F172A] group-hover:text-[#4f832e] transition-colors shrink-0">
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedArticle(article);
+                          }}
+                          className="inline-flex items-center gap-1 text-xs font-bold font-mono uppercase tracking-wider text-[#0F172A] group-hover:text-[#4f832e] transition-colors shrink-0 cursor-pointer">
                           <span>Read</span>
                           <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                        </Link>
+                        </button>
                       </div>
                     </motion.article>
                   ))}
@@ -370,9 +399,204 @@ export default function ArticlesPage() {
             description="Our EPC engineers and regulatory specialists collaborate with renewable developers across every project lifecycle stage." />
         </div>
 
+        {/* Full Whitepaper Article Modal Dialog */}
+        <AnimatePresence>
+          {selectedArticle && (
+            <div
+              data-lenis-prevent="true"
+              onClick={() => setSelectedArticle(null)}
+              className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 md:p-8 bg-slate-950/85 backdrop-blur-md overflow-hidden">
+              <motion.div
+                data-lenis-prevent="true"
+                initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 15 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative w-full max-w-4xl h-[88vh] max-h-[88vh] bg-[#0A1022] border border-white/20 rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.9)] flex flex-col overflow-hidden text-white my-auto selection:bg-[#D4E012] selection:text-black">
+                {/* Modal Top Sticky Header */}
+                <div className="shrink-0 w-full bg-[#0A1022]/95 backdrop-blur-xl border-b border-white/10 px-6 sm:px-8 py-4 flex items-center justify-between z-20">
+                  {/* Left: Category Badge & Brand */}
+                  <div className="flex items-center gap-3">
+                    <span className="px-3 py-1 rounded-full bg-[#16A34A] text-white text-[10px] font-mono font-bold tracking-widest uppercase shadow-sm">
+                      {selectedArticle.category}
+                    </span>
+                    <span className="text-white/30">•</span>
+                    <span className="text-[#D4E012] font-mono font-bold text-xs tracking-wider uppercase">
+                      SARHAT WHITEPAPER
+                    </span>
+                  </div>
+
+                  {/* Right: Close Button */}
+                  <button
+                    onClick={() => setSelectedArticle(null)}
+                    aria-label="Close modal"
+                    className="p-2 rounded-full bg-white/10 hover:bg-[#D4E012] hover:text-slate-950 text-slate-300 transition-all duration-200 cursor-pointer shadow-sm">
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+
+                {/* Modal Scrollable Content */}
+                <div
+                  data-lenis-prevent="true"
+                  tabIndex={0}
+                  className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-6 sm:p-10 space-y-8 custom-scrollbar focus:outline-none">
+                  {/* Metadata Row */}
+                  <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs font-mono text-slate-300 border-b border-white/10 pb-4">
+                    <span className="flex items-center gap-1.5">
+                      <Calendar className="w-3.5 h-3.5 text-[#D4E012]" />
+                      {selectedArticle.date}
+                    </span>
+                    <span>•</span>
+                    <span className="flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-[#D4E012]" />
+                      {selectedArticle.readTime}
+                    </span>
+                    <span>•</span>
+                    <span className="text-slate-400">{selectedArticle.sections.length} Technical Sections</span>
+                  </div>
+
+                  {/* Article Title */}
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif-display font-medium text-white leading-tight tracking-tight [text-shadow:_0_2px_14px_rgba(0,0,0,0.8)]">
+                    {selectedArticle.title}
+                  </h2>
+
+                  {/* Author Card */}
+                  <div className="flex items-center gap-4 bg-white/[0.03] border border-white/10 rounded-2xl p-4">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#D4E012] to-[#16A34A] text-slate-950 flex items-center justify-center font-mono font-bold text-sm shadow-md shrink-0">
+                      {selectedArticle.author.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .slice(0, 2)
+                        .join("")}
+                    </div>
+                    <div>
+                      <div className="text-sm font-semibold text-white">
+                        {selectedArticle.author.name}
+                      </div>
+                      <div className="text-xs text-slate-400 font-mono">
+                        {selectedArticle.author.role}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Cover Image Banner */}
+                  <div className="relative w-full h-56 sm:h-72 md:h-80 rounded-2xl overflow-hidden shadow-2xl border border-white/15 bg-slate-900 shrink-0">
+                    <Image
+                      src={selectedArticle.image}
+                      alt={selectedArticle.title}
+                      fill
+                      className="object-cover"
+                      priority
+                      unoptimized />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A1022]/70 via-transparent to-transparent pointer-events-none" />
+                  </div>
+
+                  {/* Excerpt Lead */}
+                  <p className="text-slate-200 text-base sm:text-lg font-light leading-relaxed border-l-2 border-[#D4E012] pl-4 sm:pl-5">
+                    {selectedArticle.excerpt}
+                  </p>
+
+                  {/* Sections Outline Bar */}
+                  {selectedArticle.tableOfContents && selectedArticle.tableOfContents.length > 0 && (
+                    <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-5">
+                      <div className="flex items-center gap-2 text-[#D4E012] text-xs font-mono font-bold uppercase tracking-wider mb-3">
+                        <BookOpen className="w-4 h-4" />
+                        <span>Whitepaper Topics Covered</span>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {selectedArticle.tableOfContents.map((toc, tIdx) => (
+                          <div key={tIdx} className="flex items-center gap-2 text-xs font-mono text-slate-300">
+                            <span className="text-[#D4E012] font-bold">0{tIdx + 1}.</span>
+                            <span className="truncate">{toc.title}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Detailed Technical Sections */}
+                  <div className="space-y-8 pt-2">
+                    {selectedArticle.sections.map((sec, sIdx) => (
+                      <section key={sec.id || sIdx} className="space-y-4 pt-4 border-t border-white/10 first:border-t-0">
+                        <div className="flex items-center gap-3">
+                          <span className="text-xs font-mono text-[#D4E012] font-bold">SECTION 0{sIdx + 1}</span>
+                          <span className="h-px bg-white/15 flex-1" />
+                        </div>
+                        <h3 className="text-xl sm:text-2xl font-serif-display font-medium text-white leading-snug">
+                          {sec.heading}
+                        </h3>
+
+                        <div className="space-y-4 text-base sm:text-lg text-slate-200 font-normal leading-[1.8]">
+                          {sec.content.map((p, pIdx) => (
+                            <p key={pIdx}>{p}</p>
+                          ))}
+                        </div>
+
+                        {/* Callout Box */}
+                        {sec.callout && (
+                          <div className="my-5 p-5 sm:p-6 bg-gradient-to-r from-[#D4E012]/10 to-transparent border-l-4 border-[#D4E012] rounded-r-2xl relative">
+                            <Quote className="w-7 h-7 text-[#D4E012]/30 absolute top-4 right-4 pointer-events-none" />
+                            <p className="text-base sm:text-lg italic text-white font-serif-display leading-relaxed">
+                              &ldquo;{sec.callout.quote}&rdquo;
+                            </p>
+                            {sec.callout.author && (
+                              <p className="text-xs font-mono text-[#D4E012] mt-3 uppercase tracking-wider font-semibold">
+                                — {sec.callout.author}
+                              </p>
+                            )}
+                          </div>
+                        )}
+
+                        {/* Bullet List */}
+                        {sec.bulletList && sec.bulletList.length > 0 && (
+                          <ul className="space-y-2.5 pt-2 bg-black/40 border border-white/10 rounded-2xl p-5">
+                            {sec.bulletList.map((item, bIdx) => (
+                              <li key={bIdx} className="flex items-start gap-2.5 text-sm sm:text-base text-slate-100">
+                                <CheckCircle2 className="w-4 h-4 text-[#D4E012] shrink-0 mt-1" />
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </section>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Modal Bottom Sticky Footer Bar */}
+                <div className="shrink-0 w-full bg-[#080D1C]/95 backdrop-blur-xl border-t border-white/10 px-6 sm:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-4 z-20">
+                  <div className="text-xs font-mono text-[#D4E012] flex items-center gap-2">
+                    <BookOpen className="w-4 h-4" />
+                    <span>SARHAT TECHNICAL ARCHIVES</span>
+                  </div>
+
+                  <div className="flex items-center gap-3 w-full sm:w-auto">
+                    <button
+                      onClick={() => {
+                        setSelectedArticle(null);
+                        setIsQuoteOpen(true);
+                      }}
+                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-[#D4E012] hover:bg-[#c2ce0f] text-slate-950 font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-full transition-all cursor-pointer shadow-md whitespace-nowrap">
+                      <span>Discuss a Project</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+
+                    <button
+                      onClick={() => setSelectedArticle(null)}
+                      className="inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-white font-mono text-xs uppercase tracking-wider px-5 py-2.5 rounded-full border border-white/15 transition-all cursor-pointer whitespace-nowrap">
+                      <span>Close</span>
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+
         <Footer />
         <QuoteModal isOpen={isQuoteOpen} onClose={() => setIsQuoteOpen(false)} />
-      </main >
-    </SmoothScroll >
+      </main>
+    </SmoothScroll>
   );
 }
