@@ -84,14 +84,12 @@ export default function Partners() {
                 <svg
                   className="absolute -bottom-2 left-0 w-full h-2.5 text-[#6DAD45]"
                   viewBox="0 0 100 20"
-                  preserveAspectRatio="none"
-                >
+                  preserveAspectRatio="none">
                   <path
                     d="M0 15 Q 50 0 100 15"
                     stroke="currentColor"
                     strokeWidth="3.5"
-                    fill="transparent"
-                  />
+                    fill="transparent" />
                 </svg>
               </span>
             </h2>
@@ -129,8 +127,7 @@ export default function Partners() {
                     {category.partners.map((partner) => (
                       <div
                         key={partner.name}
-                        className="bg-slate-50 border border-slate-200/80 rounded-xl p-3 hover:border-[#707B00]/40 transition-colors"
-                      >
+                        className="bg-slate-50 border border-slate-200/80 rounded-xl p-3 hover:border-[#707B00]/40 transition-colors">
                         <div className="flex items-center justify-between gap-2 mb-1">
                           <span className="text-xs font-bold text-slate-900 font-serif-display">
                             {partner.name}
@@ -156,8 +153,7 @@ export default function Partners() {
           <div className="mt-12 text-center">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"
-            >
+              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group">
               <span>Partner With Us</span>
               <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
             </Link>

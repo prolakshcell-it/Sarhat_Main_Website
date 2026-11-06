@@ -101,8 +101,7 @@ export default function FAQSection() {
                   className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${isActive
                       ? "bg-slate-900 text-white shadow-lg shadow-slate-900/20 scale-105"
                       : "bg-[#F8FAF8] text-slate-700 border border-slate-200/90 hover:border-[#707B00] hover:text-slate-900"
-                    }`}
-                >
+                    }`}>
                   {tab.label}
                 </button>
               );
@@ -120,12 +119,10 @@ export default function FAQSection() {
                   className={`rounded-2xl border transition-all duration-300 overflow-hidden ${isOpen
                       ? "bg-[#F8FAF8] border-[#707B00]/60 shadow-xl shadow-slate-200/50"
                       : "bg-white border-slate-200/90 hover:border-slate-300 shadow-sm"
-                    }`}
-                >
+                    }`}>
                   <button
                     onClick={() => toggleAccordion(faq.id)}
-                    className="w-full text-left p-6 sm:p-7 flex items-center justify-between gap-4 cursor-pointer"
-                  >
+                    className="w-full text-left p-6 sm:p-7 flex items-center justify-between gap-4 cursor-pointer">
                     <div className="flex items-center gap-4">
                       <span className="text-xs font-mono font-bold text-[#707B00]">
                         0{index + 1}
@@ -137,8 +134,7 @@ export default function FAQSection() {
 
                     <div
                       className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ${isOpen ? "bg-[#D4E012] text-slate-900 rotate-180" : "bg-slate-100 text-slate-500"
-                        }`}
-                    >
+                        }`}>
                       <ChevronDown className="w-5 h-5" />
                     </div>
                   </button>
@@ -150,8 +146,7 @@ export default function FAQSection() {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                        className="overflow-hidden"
-                      >
+                        className="overflow-hidden">
                         <div className="px-6 pb-7 sm:px-7 pt-0 text-slate-600 font-normal text-sm leading-relaxed border-t border-slate-200/60 mt-2">
                           <p className="pt-4">{faq.answer}</p>
                         </div>
@@ -169,8 +164,7 @@ export default function FAQSection() {
           <div className="mt-14 text-center">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"
-            >
+              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group">
               <span>Have More Questions? Contact Us</span>
               <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
             </Link>

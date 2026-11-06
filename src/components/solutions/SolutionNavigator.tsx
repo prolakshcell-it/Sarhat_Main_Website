@@ -22,8 +22,7 @@ function SpecPills({ specs }: { specs: string[] }) {
       {specs.map((spec) => (
         <li
           key={spec}
-          className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 font-mono text-xs text-slate-700 transition-colors duration-200 hover:border-[#6DAD45] hover:bg-[#6DAD45]/10"
-        >
+          className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 font-mono text-xs text-slate-700 transition-colors duration-200 hover:border-[#6DAD45] hover:bg-[#6DAD45]/10">
           <Check className="h-3.5 w-3.5 text-[#6DAD45]" strokeWidth={2.5} />
           {spec}
         </li>
@@ -40,8 +39,7 @@ function ExploreLink({ id, reduce }: { id: string; reduce: boolean }) {
         e.preventDefault();
         goToSection(id, reduce);
       }}
-      className={`group/link inline-flex min-h-[44px] items-center gap-2 rounded-sm font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#707B00] transition-colors hover:text-[#0F172A] ${FOCUS}`}
-    >
+      className={`group/link inline-flex min-h-[44px] items-center gap-2 rounded-sm font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#707B00] transition-colors hover:text-[#0F172A] ${FOCUS}`}>
       <span className="relative">
         Explore this section
         <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-current transition-all duration-300 group-hover/link:w-full" />
@@ -63,8 +61,7 @@ function PanelContent({ cap, reduce, showImage = true }: { cap: Capability; redu
             alt={cap.title}
             fill
             sizes="(min-width: 1024px) 760px, 100vw"
-            className="object-cover transition-transform duration-500 ease-out group-hover/img:scale-[1.03]"
-          />
+            className="object-cover transition-transform duration-500 ease-out group-hover/img:scale-[1.03]" />
           <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-[#6DAD45]/10" />
           <span className="absolute bottom-4 left-4 rounded-full border border-white/20 bg-black/60 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[#D4E012]">
             {cap.tag}
@@ -93,25 +90,25 @@ export default function SolutionNavigator() {
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const indexFromHash = useCallback(() => {
-    let id = window.location.hash.replace("#", "");
-    if (id === "renewable-energy") id = "solar-energy";
-    if (id === "bess-storage") id = "bess-hybrid";
-    if (id === "energy-infrastructure" || id === "civil-infrastructure") id = "infrastructure";
-    return capabilities.findIndex((c) => c.id === id);
+    let id=window.location.hash.replace("#", "");
+    if (id=== "renewable-energy") id="solar-energy";
+    if (id=== "bess-storage") id="bess-hybrid";
+    if (id=== "energy-infrastructure" || id=== "civil-infrastructure") id="infrastructure";
+    return capabilities.findIndex((c) => c.id=== id);
   }, []);
 
   // Honour existing #anchor links (e.g. /solutions#bess-storage) and keep in sync with hash changes.
   useEffect(() => {
     const sync = () => {
       const i = indexFromHash();
-      if (i >= 0) {
+      if (i>= 0) {
         setActive(i);
         setOpenMobile(i);
       }
     };
     sync();
     // Smooth-scroll/Lenis can reset the browser's own hash jump, so land on the section explicitly.
-    const id = window.location.hash.replace("#", "");
+    const id=window.location.hash.replace("#", "");
     const t = id ? setTimeout(() => document.getElementById(id)?.scrollIntoView({ block: "start" }), 400) : undefined;
     window.addEventListener("hashchange", sync);
     return () => {
@@ -127,10 +124,10 @@ export default function SolutionNavigator() {
 
   const onTabKeyDown = (e: React.KeyboardEvent, i: number) => {
     let next = i;
-    if (e.key === "ArrowDown" || e.key === "ArrowRight") next = (i + 1) % capabilities.length;
-    else if (e.key === "ArrowUp" || e.key === "ArrowLeft") next = (i - 1 + capabilities.length) % capabilities.length;
-    else if (e.key === "Home") next = 0;
-    else if (e.key === "End") next = capabilities.length - 1;
+    if (e.key=== "ArrowDown" || e.key=== "ArrowRight") next = (i + 1) % capabilities.length;
+    else if (e.key=== "ArrowUp" || e.key=== "ArrowLeft") next = (i - 1 + capabilities.length) % capabilities.length;
+    else if (e.key=== "Home") next = 0;
+    else if (e.key=== "End") next = capabilities.length - 1;
     else return;
     e.preventDefault();
     select(next, true);
@@ -143,8 +140,7 @@ export default function SolutionNavigator() {
   return (
     <section
       id="solution-navigator"
-      className="relative overflow-hidden border-b border-slate-200/80 bg-white py-[clamp(60px,9vw,120px)] text-[#0F172A]"
-    >
+      className="relative overflow-hidden border-b border-slate-200/80 bg-white py-[clamp(60px,9vw,120px)] text-[#0F172A]">
       <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-[#D4E012]/15 blur-[120px]" />
 
       <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
@@ -161,20 +157,20 @@ export default function SolutionNavigator() {
                   className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                   viewBox="0 0 100 20"
                   preserveAspectRatio="none"
-                  aria-hidden
-                >
+                  aria-hidden>
                   <path
                     d="M0 15 Q 50 0 100 15"
                     stroke="currentColor"
                     strokeWidth="3.5"
-                    fill="transparent"
-                  />
+                    fill="transparent" />
                 </svg>
               </span>
             </h2>
-            <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-              Explore our turnkey capabilities across utility-scale solar, energy storage, substations, and site infrastructure.
-            </p>
+              <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed [text-wrap:balance]">
+                Explore our turnkey capabilities across utility-scale solar,
+                <br className="hidden sm:inline" />
+                {" "}energy storage, substations, and site infrastructure.
+              </p>
           </div>
         </ScrollReveal>
 
@@ -185,8 +181,7 @@ export default function SolutionNavigator() {
               role="tablist"
               aria-label="Solutions"
               aria-orientation="vertical"
-              className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0 lg:pb-0"
-            >
+              className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0 lg:pb-0">
               {capabilities.map((c, i) => {
                 const Icon = c.icon;
                 const isActive = i === active;
@@ -208,13 +203,11 @@ export default function SolutionNavigator() {
                     className={`group relative flex shrink-0 cursor-pointer items-center gap-4 rounded-2xl border px-4 py-3.5 text-left transition-colors duration-200 lg:px-5 lg:py-4 ${FOCUS} ${isActive
                       ? "border-[#6DAD45] bg-[#6DAD45]/[0.08] shadow-sm"
                       : "border-slate-200 bg-[#F8FAF8] hover:border-slate-300 hover:bg-white"
-                      }`}
-                  >
-                    <span className={`font-mono text-xs font-bold ${isActive ? "text-[#707B00]" : "text-slate-400"}`}>{pad(i)}</span>
+                      }`}>
+                    <span className={`font-sans-inter tabular-nums text-xs font-bold ${isActive ? "text-[#707B00]" : "text-slate-400"}`}>{pad(i)}</span>
                     <span
                       className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition-all duration-200 group-hover:scale-[1.03] ${isActive ? "border-[#D4E012] bg-[#D4E012] text-black" : "border-slate-200 bg-white text-slate-500"
-                        }`}
-                    >
+                        }`}>
                       <Icon className="h-5 w-5" strokeWidth={1.75} />
                     </span>
                     <span className="min-w-0 flex-1">
@@ -232,8 +225,7 @@ export default function SolutionNavigator() {
                               className="absolute inset-0 rounded-full bg-[#6DAD45]"
                               initial={{ scale: 1, opacity: 0.6 }}
                               animate={{ scale: 2.6, opacity: 0 }}
-                              transition={{ duration: 0.8, ease: "easeOut" }}
-                            />
+                              transition={{ duration: 0.8, ease: "easeOut" }} />
                           )}
                         </>
                       )}
@@ -248,8 +240,7 @@ export default function SolutionNavigator() {
               id="sol-panel"
               role="tabpanel"
               aria-labelledby={`sol-tab-${activeCap.id}`}
-              className="rounded-[26px] border border-slate-200 bg-[#F8FAF8] p-5 sm:p-7 lg:p-8"
-            >
+              className="rounded-[26px] border border-slate-200 bg-[#F8FAF8] p-5 sm:p-7 lg:p-8">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div key={activeCap.id} {...swap} transition={{ duration: 0.3, ease: "easeOut" }}>
                   <PanelContent cap={activeCap} reduce={reduce} />
@@ -275,9 +266,8 @@ export default function SolutionNavigator() {
                       setOpenMobile(isOpen ? null : i);
                       if (!isOpen) select(i, true);
                     }}
-                    className={`flex min-h-[64px] w-full cursor-pointer items-center gap-4 py-3 text-left ${FOCUS}`}
-                  >
-                    <span className={`font-mono text-xs font-bold ${isOpen ? "text-[#707B00]" : "text-slate-400"}`}>{pad(i)}</span>
+                    className={`flex min-h-[64px] w-full cursor-pointer items-center gap-4 py-3 text-left ${FOCUS}`}>
+                    <span className={`font-sans-inter tabular-nums text-xs font-bold ${isOpen ? "text-[#707B00]" : "text-slate-400"}`}>{pad(i)}</span>
                     <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border ${isOpen ? "border-[#D4E012] bg-[#D4E012] text-black" : "border-slate-200 bg-white text-slate-500"}`}>
                       <Icon className="h-5 w-5" strokeWidth={1.75} />
                     </span>
@@ -292,8 +282,7 @@ export default function SolutionNavigator() {
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: reduce ? 0 : 0.28, ease: "easeOut" }}
-                        className="overflow-hidden"
-                      >
+                        className="overflow-hidden">
                         <div className="pb-6 pt-1">
                           <PanelContent cap={c} reduce={reduce} showImage={false} />
                         </div>

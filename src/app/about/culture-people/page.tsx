@@ -81,12 +81,10 @@ export default function CulturePeoplePage() {
           className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
             isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
           }`}
-          aria-hidden={isPastHero}
-        >
+          aria-hidden={isPastHero}>
           <section
             ref={containerRef}
-            className="relative h-full w-full flex flex-col justify-between items-center bg-black text-white overflow-hidden select-none"
-          >
+            className="relative h-full w-full flex flex-col justify-between items-center bg-black text-white overflow-hidden select-none">
             {/* Background Image Layer with Parallax Zoom */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
               <Image
@@ -94,8 +92,7 @@ export default function CulturePeoplePage() {
                 alt="Sarhat Culture & People"
                 fill
                 priority
-                className="object-cover object-center opacity-85"
-              />
+                className="object-cover object-center opacity-85" />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
               {/* Dark Gradient Overlay Scrim */}
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
@@ -103,8 +100,7 @@ export default function CulturePeoplePage() {
 
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-28 sm:pt-32 pb-4 my-auto flex flex-col items-center text-center will-change-transform"
-            >
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-28 sm:pt-32 pb-4 my-auto flex flex-col items-center text-center will-change-transform">
               <ScrollReveal direction="up" distance={30}>
                 <div className="max-w-4xl flex flex-col items-center text-center">
                   <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center drop-shadow-lg">
@@ -185,14 +181,12 @@ export default function CulturePeoplePage() {
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden
-                      >
+                        aria-hidden>
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -220,8 +214,7 @@ export default function CulturePeoplePage() {
                       <motion.li
                         key={item.title}
                         {...reveal(0.1 + i * 0.07)}
-                        className="group border-b border-slate-300/70 py-5 sm:py-6 flex items-start gap-4 sm:gap-6 transition-all duration-300 hover:translate-x-1 hover:border-[#6DAD45]/60 motion-reduce:hover:translate-x-0"
-                      >
+                        className="group border-b border-slate-300/70 py-5 sm:py-6 flex items-start gap-4 sm:gap-6 transition-all duration-300 hover:translate-x-1 hover:border-[#6DAD45]/60 motion-reduce:hover:translate-x-0">
                         <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-[#D4E012] to-[#6DAD45] text-slate-950 font-black text-base flex items-center justify-center shrink-0 shadow-sm ring-4 ring-[#D4E012]/10 transition-shadow duration-300 group-hover:shadow-md">
                           {item.letter}
                         </div>
@@ -289,14 +282,12 @@ export default function CulturePeoplePage() {
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden
-                      >
+                        aria-hidden>
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>

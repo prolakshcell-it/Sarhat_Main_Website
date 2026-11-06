@@ -57,7 +57,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     // Handle anchor link clicks smoothly
     const handleAnchorClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
+      const target=e.target as HTMLElement;
       const anchor = target.closest("a");
       if (anchor && anchor.hash && anchor.hash.startsWith("#")) {
           const url = new URL(anchor.href, window.location.href);

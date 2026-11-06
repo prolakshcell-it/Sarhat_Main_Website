@@ -82,14 +82,12 @@ export default function SolutionsGrid() {
                 <svg
                   className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                   viewBox="0 0 100 20"
-                  preserveAspectRatio="none"
-                >
+                  preserveAspectRatio="none">
                   <path
                     d="M0 15 Q 50 0 100 15"
                     stroke="currentColor"
                     strokeWidth="3.5"
-                    fill="transparent"
-                  />
+                    fill="transparent" />
                 </svg>
               </span>
             </h2>
@@ -119,8 +117,7 @@ export default function SolutionsGrid() {
                   className={`relative overflow-hidden cursor-pointer transition-all duration-700 ease-[0.22,1,0.36,1] border-2 border-white shadow-2xl ${isActive
                       ? "lg:flex-[3.5] h-[460px] lg:h-full rounded-2xl z-20 shadow-slate-950/70"
                       : "lg:flex-[1.1] h-[110px] lg:h-full rounded-2xl border-white/90 hover:border-[#D4E012] bg-slate-950 z-10"
-                    } lg:-skew-x-[6deg] group`}
-                >
+                    } lg:-skew-x-[6deg] group`}>
                   {/* Un-skew Inner Wrapper so text and photos remain 100% straight */}
                   <div className="relative h-full w-full lg:skew-x-[6deg] lg:scale-110">
                     {/* Cover Background Image — 100% Bright, Crisp & Clear (Zero Grayscale/Fade) */}
@@ -131,16 +128,14 @@ export default function SolutionsGrid() {
                       priority={index === 0}
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className={`object-cover object-center transition-all duration-700 ease-out brightness-105 contrast-105 ${isActive ? "scale-100 opacity-100" : "scale-100 opacity-90 hover:opacity-100"
-                        }`}
-                    />
+                        }`} />
 
                     {/* Soft Gradient Overlay at Bottom only (leaving top/middle image 100% clear & bright) */}
                     <div
                       className={`absolute inset-0 transition-opacity duration-700 ${isActive
                           ? "bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"
                           : "bg-slate-950/40 hover:bg-slate-950/20"
-                        }`}
-                    />
+                        }`} />
 
                     {/* ACTIVE EXPANDED CARD CONTENT */}
                     {isActive ? (
@@ -148,8 +143,7 @@ export default function SolutionsGrid() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
-                        className="absolute inset-0 p-6 sm:p-10 flex flex-col justify-end z-20"
-                      >
+                        className="absolute inset-0 p-6 sm:p-10 flex flex-col justify-end z-20">
                         <div className="flex items-start gap-4">
                           {/* Vertical Sarhat Volt Accent Bar */}
                           <div className="w-1.5 h-24 bg-gradient-to-b from-[#D4E012] via-[#6DAD45] to-[#5EE72D] rounded-full shrink-0 mt-1 shadow-[0_0_15px_#D4E012]" />
@@ -177,8 +171,7 @@ export default function SolutionsGrid() {
                                 e.stopPropagation();
                                 setModalCapability(item);
                               }}
-                              className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-[11px] uppercase tracking-wider px-6 py-3 rounded-full transition-all shadow-xl shadow-[#D4E012]/30 flex items-center gap-2 group cursor-pointer"
-                            >
+                              className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-[11px] uppercase tracking-wider px-6 py-3 rounded-full transition-all shadow-xl shadow-[#D4E012]/30 flex items-center gap-2 group cursor-pointer">
                               <span>DISCOVER MORE</span>
                               <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
                             </button>
@@ -206,8 +199,7 @@ export default function SolutionsGrid() {
           <div className="mt-14 text-center px-4">
             <Link
               href="/solutions"
-              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"
-            >
+              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group">
               <span>Explore All Solutions</span>
               <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
             </Link>
@@ -224,22 +216,19 @@ export default function SolutionsGrid() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-6"
-            onClick={() => setModalCapability(null)}
-          >
+            onClick={() => setModalCapability(null)}>
             <motion.div
               initial={{ scale: 0.9, opacity: 0, y: 30 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 30 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-slate-900 border border-slate-700/80 rounded-3xl p-8 sm:p-10 max-w-2xl w-full relative shadow-2xl overflow-hidden"
-            >
+              className="bg-slate-900 border border-slate-700/80 rounded-3xl p-8 sm:p-10 max-w-2xl w-full relative shadow-2xl overflow-hidden">
               <div className="absolute top-0 right-0 w-48 h-48 bg-[#D4E012]/15 rounded-full blur-3xl pointer-events-none"></div>
 
               <button
                 onClick={() => setModalCapability(null)}
                 className="absolute top-6 right-6 text-slate-400 hover:text-white p-2 rounded-full bg-slate-800 border border-slate-700"
-                aria-label="Close modal"
-              >
+                aria-label="Close modal">
                 <X className="w-5 h-5" />
               </button>
 
@@ -261,8 +250,7 @@ export default function SolutionsGrid() {
                   {modalCapability.specs.map((spec) => (
                     <span
                       key={spec}
-                      className="px-3.5 py-1.5 bg-slate-800 border border-slate-700 text-white text-xs font-mono rounded-lg flex items-center gap-1.5"
-                    >
+                      className="px-3.5 py-1.5 bg-slate-800 border border-slate-700 text-white text-xs font-mono rounded-lg flex items-center gap-1.5">
                       <span className="text-[#D4E012]">✓</span> {spec}
                     </span>
                   ))}
@@ -272,8 +260,7 @@ export default function SolutionsGrid() {
               <div className="mt-8 pt-6 border-t border-slate-700/80 flex justify-end">
                 <button
                   onClick={() => setModalCapability(null)}
-                  className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] text-black font-extrabold text-xs uppercase tracking-widest px-6 py-3 rounded-full hover:brightness-110 transition-all flex items-center gap-2 shadow-lg shadow-[#D4E012]/20"
-                >
+                  className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] text-black font-extrabold text-xs uppercase tracking-widest px-6 py-3 rounded-full hover:brightness-110 transition-all flex items-center gap-2 shadow-lg shadow-[#D4E012]/20">
                   REQUEST {modalCapability.title.toUpperCase()} PROPOSAL
                   <ArrowUpRight className="w-4 h-4" />
                 </button>

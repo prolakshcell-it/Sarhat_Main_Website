@@ -54,8 +54,7 @@ export default function Hero({ onOpenQuote }: HeroProps) {
 
   return (
     <section
-      className="relative h-full min-h-[560px] sm:min-h-[680px] w-full flex flex-col justify-between items-center overflow-hidden bg-slate-950 select-none"
-    >
+      className="relative h-full min-h-[560px] sm:min-h-[680px] w-full flex flex-col justify-between items-center overflow-hidden bg-slate-950 select-none">
       {/* Cinematic Background Image Layer with Dynamic Zoom & Scrim */}
       <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
         <Image
@@ -63,14 +62,12 @@ export default function Hero({ onOpenQuote }: HeroProps) {
           alt="SARHAT EPC Solar Power Plant"
           fill
           priority
-          className="object-cover object-center opacity-90"
-        />
+          className="object-cover object-center opacity-90" />
 
         {/* Dynamic Darkening Scrim on Scroll */}
         <motion.div
           style={{ opacity: bgDim }}
-          className="absolute inset-0 bg-black pointer-events-none"
-        />
+          className="absolute inset-0 bg-black pointer-events-none" />
 
         {/* High-Contrast Readability Gradient Scrim with Soft Lower Third */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
@@ -79,49 +76,47 @@ export default function Hero({ onOpenQuote }: HeroProps) {
       {/* Main Content Container (Immediate scroll-fade + motion blur + scale float on scroll down) */}
       <motion.div
         style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto pt-32 sm:pt-36 pb-4 flex flex-col items-center text-center will-change-transform"
-      >
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto pt-32 sm:pt-36 pb-4 flex flex-col items-center text-center will-change-transform">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-4xl flex flex-col items-center text-center"
-        >
+          className="max-w-4xl flex flex-col items-center text-center">
           {/* Hero Headline */}
           <motion.h1
             variants={itemSoftVariants}
-            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.1] mb-6 [text-shadow:_0_4px_24px_rgba(0,0,0,0.95)]"
-          >
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.1] mb-6 [text-shadow:_0_4px_24px_rgba(0,0,0,0.95)] [text-wrap:balance]">
             From the ground we build.
             <br />
             To the nation we{" "}
             <span className="italic font-normal text-[#D4E012] relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
-              power
+              power.
               <motion.svg
                 initial={{ pathLength: 0, opacity: 0 }}
                 animate={{ pathLength: 1, opacity: 1 }}
                 transition={{ duration: 1.6, delay: 0.8 }}
                 className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
                 viewBox="0 0 100 20"
-                preserveAspectRatio="none"
-              >
+                preserveAspectRatio="none">
                 <path
                   d="M0 15 Q 50 0 100 15"
                   stroke="currentColor"
                   strokeWidth="3.5"
-                  fill="transparent"
-                />
+                  fill="transparent" />
               </motion.svg>
             </span>
-            .
           </motion.h1>
 
           {/* Subheading */}
           <motion.p
             variants={itemSoftVariants}
-            className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-100 font-normal max-w-2xl leading-relaxed tracking-wide [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)]"
-          >
-            Renewable energy, storage, substations and infrastructure, brought together by one execution mindset.
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-100 font-normal max-w-4xl mx-auto text-center leading-relaxed tracking-wide [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)]">
+            <span className="sm:block">
+              Renewable energy, storage, substations and infrastructure,
+            </span>
+            <span className="sm:block mt-1 sm:mt-0">
+              brought together by one execution mindset.
+            </span>
           </motion.p>
         </motion.div>
       </motion.div>

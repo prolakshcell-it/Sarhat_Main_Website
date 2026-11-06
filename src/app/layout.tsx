@@ -50,8 +50,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${montserrat.variable} ${inter.variable} dark scroll-smooth antialiased`}
-    >
+      className={`${playfair.variable} ${montserrat.variable} ${inter.variable} dark scroll-smooth antialiased`}>
       <body className="bg-black text-white font-sans-ui selection:bg-[#6DAD45] selection:text-black min-h-screen overflow-x-clip">
         {children}
         <Toaster position="top-right" richColors />

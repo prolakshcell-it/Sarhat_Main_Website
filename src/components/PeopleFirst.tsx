@@ -50,14 +50,12 @@ export default function PeopleFirst() {
                 <svg
                   className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                   viewBox="0 0 100 20"
-                  preserveAspectRatio="none"
-                >
+                  preserveAspectRatio="none">
                   <path
                     d="M0 15 Q 50 0 100 15"
                     stroke="currentColor"
                     strokeWidth="3.5"
-                    fill="transparent"
-                  />
+                    fill="transparent" />
                 </svg>
               </span>
             </h2>
@@ -83,8 +81,7 @@ export default function PeopleFirst() {
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ delay: idx * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 whileHover={{ y: -2 }}
-                className="bg-white rounded-3xl p-8 relative flex flex-col justify-between min-h-[280px] border border-slate-200/90 hover:border-[#D4E012] transition-all shadow-xl shadow-slate-200/50"
-              >
+                className="bg-white rounded-3xl p-8 relative flex flex-col justify-between min-h-[280px] border border-slate-200/90 hover:border-[#D4E012] transition-all shadow-xl shadow-slate-200/50">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-[10px] font-mono font-bold tracking-widest text-[#707B00] uppercase">
@@ -109,8 +106,7 @@ export default function PeopleFirst() {
           <div className="mt-14 text-center">
             <Link
               href="/careers"
-              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"
-            >
+              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group">
               <span>Explore Career Opportunities</span>
               <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
             </Link>

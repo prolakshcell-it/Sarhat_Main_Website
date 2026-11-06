@@ -29,8 +29,7 @@ function BrandCard({ item, isMatch }: { item: PartnerBrand; isMatch: boolean }) 
         isMatch
           ? "opacity-100 border-slate-200/90 scale-100 shadow-md shadow-slate-200/60"
           : "opacity-25 grayscale border-slate-100 scale-90 blur-[1px]"
-      }`}
-    >
+      }`}>
       {/* Shine sweep on hover */}
       <span className="pointer-events-none absolute inset-y-0 -left-full w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-white/80 to-transparent transition-all duration-700 group-hover:left-[150%] z-10" />
       {/* Brand colour glow on hover */}
@@ -40,8 +39,7 @@ function BrandCard({ item, isMatch }: { item: PartnerBrand; isMatch: boolean }) 
       <div
         className={`h-20 w-full rounded-xl flex items-center justify-center px-4 border transition-transform duration-500 group-hover:scale-105 ${
           item.darkTile ? "bg-slate-800 border-slate-700" : "bg-[#F8FAF8] border-slate-100"
-        }`}
-      >
+        }`}>
         {item.logoSrc ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -49,8 +47,7 @@ function BrandCard({ item, isMatch }: { item: PartnerBrand; isMatch: boolean }) 
             alt={`${item.name} logo`}
             className="max-h-14 max-w-full w-auto object-contain transition-transform duration-500 group-hover:scale-110"
             draggable={false}
-            loading="lazy"
-          />
+            loading="lazy" />
         ) : (
           <div className="flex items-center gap-2">
             {item.logo}
@@ -64,8 +61,7 @@ function BrandCard({ item, isMatch }: { item: PartnerBrand; isMatch: boolean }) 
       {/* Sector label only */}
       <span
         className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full uppercase tracking-wider transition-colors duration-300"
-        style={{ backgroundColor: `${item.badgeColor}15`, color: item.badgeColor }}
-      >
+        style={{ backgroundColor: `${item.badgeColor}15`, color: item.badgeColor }}>
         {item.sector}
       </span>
     </div>
@@ -451,14 +447,12 @@ export default function TrustedByLogos() {
                 <svg
                   className="absolute -bottom-2 left-0 w-full h-2.5 text-[#6DAD45]"
                   viewBox="0 0 100 20"
-                  preserveAspectRatio="none"
-                >
+                  preserveAspectRatio="none">
                   <path
                     d="M0 15 Q 50 0 100 15"
                     stroke="currentColor"
                     strokeWidth="3.5"
-                    fill="transparent"
-                  />
+                    fill="transparent" />
                 </svg>
               </span>
             </h2>
@@ -485,14 +479,12 @@ export default function TrustedByLogos() {
                 activeFilter === tab.key
                   ? "text-[#D4E012] border-slate-900"
                   : "bg-white text-slate-600 border-slate-200/90 hover:border-[#6DAD45] hover:text-slate-900"
-              }`}
-            >
+              }`}>
               {activeFilter === tab.key && (
                 <motion.span
                   layoutId="trusted-active-chip"
                   className="absolute inset-0 rounded-full bg-slate-900 shadow-lg shadow-slate-900/20"
-                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                />
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }} />
               )}
               <span className="relative z-10">{tab.label}</span>
             </motion.button>
@@ -512,8 +504,7 @@ export default function TrustedByLogos() {
             <BrandCard
               key={`r1-${item.id}-${idx}`}
               item={item}
-              isMatch={activeFilter === "ALL" || activeFilter === item.sector}
-            />
+              isMatch={activeFilter === "ALL" || activeFilter === item.sector} />
           ))}
         </div>
 
@@ -523,8 +514,7 @@ export default function TrustedByLogos() {
             <BrandCard
               key={`r2-${item.id}-${idx}`}
               item={item}
-              isMatch={activeFilter === "ALL" || activeFilter === item.sector}
-            />
+              isMatch={activeFilter === "ALL" || activeFilter === item.sector} />
           ))}
         </div>
       </div>
@@ -534,8 +524,7 @@ export default function TrustedByLogos() {
         <div className="mt-10 sm:mt-12 text-center relative z-20">
           <Link
             href="/partners"
-            className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"
-          >
+            className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group">
             <span>Become a Partner</span>
             <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
           </Link>

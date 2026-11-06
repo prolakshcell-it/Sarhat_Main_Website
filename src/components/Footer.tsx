@@ -70,6 +70,7 @@ const COLUMNS = [
     links: [
       { href: "/projects", label: "Projects & Footprints" },
       { href: "/supply-partners", label: "Supply Partners & OEMs" },
+      { href: "/execution-contractors", label: "Execution Contractors" },
     ],
   },
 ];
@@ -97,8 +98,7 @@ function RotatingWord() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -10, opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="block text-xs font-bold uppercase tracking-wider text-[#D4E012]"
-        >
+          className="block text-xs font-bold uppercase tracking-wider text-[#D4E012]">
           {ROTATING_WORDS[index]}
         </motion.span>
       </AnimatePresence>
@@ -122,8 +122,7 @@ export default function Footer() {
         style={{
           background:
             "radial-gradient(600px 300px at 0% 100%, rgba(109,173,69,0.10), transparent 70%), radial-gradient(520px 260px at 100% 0%, rgba(212,224,18,0.08), transparent 70%)",
-        }}
-      />
+        }} />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Links */}
@@ -171,8 +170,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="flex h-10 w-10 items-center justify-center rounded-lg sm:h-9 sm:w-9 border border-white/10 bg-white/[0.03] text-slate-400 transition-colors duration-300 hover:border-[#D4E012] hover:bg-[#D4E012] hover:text-black"
-                  >
+                    className="flex h-10 w-10 items-center justify-center rounded-lg sm:h-9 sm:w-9 border border-white/10 bg-white/[0.03] text-slate-400 transition-colors duration-300 hover:border-[#D4E012] hover:bg-[#D4E012] hover:text-black">
                     <Icon />
                   </a>
                 ))}
@@ -225,8 +223,7 @@ export default function Footer() {
                   href="https://www.prolaksh.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-extrabold text-white transition-colors hover:text-orange-500 focus:outline-none focus-visible:text-orange-500"
-                >
+                  className="font-extrabold text-white transition-colors hover:text-orange-500 focus:outline-none focus-visible:text-orange-500">
                   ProLaksh Technologies
                 </a>
               </span>
@@ -234,8 +231,7 @@ export default function Footer() {
                 type="button"
                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                 aria-label="Back to top"
-                className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[#D4E012] transition-colors hover:bg-[#D4E012] hover:text-black"
-              >
+                className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[#D4E012] transition-colors hover:bg-[#D4E012] hover:text-black">
                 <ArrowUp className="h-4 w-4" />
               </button>
             </div>

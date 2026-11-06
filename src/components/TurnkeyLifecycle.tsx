@@ -47,7 +47,7 @@ export default function TurnkeyLifecycle({ steps }: { steps: LifecycleStep[] }) 
       const io = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) setActive(i);
-          else if (i === 0 && entry.boundingClientRect.top > window.innerHeight * 0.6)
+          else if (i === 0 && entry.boundingClientRect.top> window.innerHeight * 0.6)
             setActive(-1);
         },
         { rootMargin: "-58% 0px -38% 0px", threshold: 0 }
@@ -126,28 +126,25 @@ export default function TurnkeyLifecycle({ steps }: { steps: LifecycleStep[] }) 
               strokeLinecap="round"
               strokeDasharray={RING_C}
               strokeDashoffset={RING_C * (1 - ringPct)}
-              style={{ transition: reduced ? "none" : "stroke-dashoffset 400ms ease-out" }}
-            />
+              style={{ transition: reduced ? "none" : "stroke-dashoffset 400ms ease-out" }} />
           </svg>
           <div className="absolute inset-0 flex items-center justify-center">
             <Sun
               className={`w-7 h-7 ${t}`}
-              style={{ color: ringPct > 0 ? GREEN : "#94A3B8", opacity: ringPct > 0 ? 1 : 0.7 }}
-              strokeWidth={1.5}
-            />
+              style={{ color: ringPct> 0 ? GREEN : "#94A3B8", opacity: ringPct> 0 ? 1 : 0.7 }}
+              strokeWidth={1.5} />
           </div>
         </div>
       </div>
 
       <div ref={journeyRef} className="relative max-w-5xl mx-auto">
         {/* Desktop / tablet curved path */}
-        {width > 0 && (
+        {width> 0 && (
           <svg
             className="hidden md:block absolute inset-0 pointer-events-none overflow-visible"
             width={width}
             height={n * ROW}
-            aria-hidden="true"
-          >
+            aria-hidden="true">
             <path d={d} fill="none" stroke="#E2E8F0" strokeWidth="2" strokeLinecap="round" />
             <motion.path
               ref={pathRef}
@@ -158,8 +155,7 @@ export default function TurnkeyLifecycle({ steps }: { steps: LifecycleStep[] }) 
               strokeLinecap="round"
               pathLength={1}
               strokeDasharray={1}
-              style={{ strokeDashoffset: reduced ? 1 - ringPct : dashOffset }}
-            />
+              style={{ strokeDashoffset: reduced ? 1 - ringPct : dashOffset }} />
             <circle ref={pulseRef} r="4" fill={LIME} opacity="0" />
           </svg>
         )}
@@ -176,43 +172,37 @@ export default function TurnkeyLifecycle({ steps }: { steps: LifecycleStep[] }) 
                   rowRefs.current[i] = el as HTMLDivElement | null;
                 }}
                 className="relative py-6 md:py-0 md:h-[240px] md:flex md:items-center pl-12 md:pl-0"
-                aria-current={isActive ? "step" : undefined}
-              >
+                aria-current={isActive ? "step" : undefined}>
                 {/* Mobile vertical segment to next step */}
                 {i < n - 1 && (
                   <>
                     <span className="md:hidden absolute left-[14px] top-[39px] h-full w-0.5 bg-slate-200" />
                     <span
-                      className={`md:hidden absolute left-[14px] top-[39px] h-full w-0.5 origin-top ${
-                        reduced ? "" : "transition-transform duration-[400ms] ease-out"
-                      }`}
-                      style={{ background: GREEN, transform: `scaleY(${done ? 1 : 0})` }}
-                    />
+                      className={`md:hidden absolute left-[14px] top-[39px] h-full w-0.5 origin-top ${reduced ? "" : "transition-transform duration-[400ms] ease-out"
+                        }`}
+                      style={{ background: GREEN, transform: `scaleY(${done ? 1 : 0})` }} />
                   </>
                 )}
 
                 {/* Node */}
                 <span
-                  className={`absolute z-10 w-[30px] h-[30px] rounded-full flex items-center justify-center border-2 left-0 top-6 md:top-1/2 md:-mt-[15px] ${
-                    i % 2 === 0
+                  className={`absolute z-10 w-[30px] h-[30px] rounded-full flex items-center justify-center border-2 left-0 top-6 md:top-1/2 md:-mt-[15px] ${i % 2 === 0
                       ? "md:left-[calc(50%-39px)]"
                       : "md:left-[calc(50%+9px)]"
-                  } ${t}`}
+                    } ${t}`}
                   style={{
                     background: done ? GREEN : isActive ? LIME : "#fff",
                     borderColor: done || isActive ? GREEN : "#CBD5E1",
                     boxShadow: isActive ? `0 0 0 6px ${LIME}33, 0 0 18px ${LIME}88` : "none",
                     transform: isActive ? "scale(1.12)" : "scale(1)",
                   }}
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
                   {done ? (
                     <Check className="w-4 h-4 text-white" strokeWidth={3} />
                   ) : (
                     <span
                       className="w-2 h-2 rounded-full"
-                      style={{ background: isActive ? "#0F172A" : "#CBD5E1" }}
-                    />
+                      style={{ background: isActive ? "#0F172A" : "#CBD5E1" }} />
                   )}
                 </span>
 
@@ -225,21 +215,18 @@ export default function TurnkeyLifecycle({ steps }: { steps: LifecycleStep[] }) 
                     boxShadow: isActive ? "0 10px 30px -12px rgba(15,23,42,0.18)" : "none",
                     transform: isActive && !reduced ? "scale(1.03)" : "scale(1)",
                     opacity: isActive || done ? 1 : 0.6,
-                  }}
-                >
+                  }}>
                   <div
-                    className={`font-mono font-extrabold text-2xl mb-1 origin-left ${t}`}
+                    className={`font-sans-inter tabular-nums font-extrabold text-2xl mb-1 origin-left ${t}`}
                     style={{
                       color: isActive || done ? GREEN : "#94A3B8",
                       transform: isActive && !reduced ? "scale(1.1)" : "scale(1)",
-                    }}
-                  >
+                    }}>
                     {item.step}
                   </div>
                   <h3
                     className={`text-lg sm:text-xl font-bold mb-2 ${t}`}
-                    style={{ color: isActive ? "#0F172A" : done ? "#334155" : "#64748B" }}
-                  >
+                    style={{ color: isActive ? "#0F172A" : done ? "#334155" : "#64748B" }}>
                     {item.title}
                   </h3>
                   <p
@@ -247,8 +234,7 @@ export default function TurnkeyLifecycle({ steps }: { steps: LifecycleStep[] }) 
                     style={{
                       color: "#475569",
                       opacity: isActive ? 1 : 0.7,
-                    }}
-                  >
+                    }}>
                     {item.desc}
                   </p>
                   <span
@@ -257,8 +243,7 @@ export default function TurnkeyLifecycle({ steps }: { steps: LifecycleStep[] }) 
                       background: GREEN,
                       transform: `scaleX(${isActive || done ? 1 : 0.15})`,
                       opacity: isActive ? 1 : 0.5,
-                    }}
-                  />
+                    }} />
                 </div>
               </li>
             );

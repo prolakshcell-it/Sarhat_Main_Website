@@ -25,14 +25,12 @@ export default function EPCCapabilities() {
                 <svg
                   className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                   viewBox="0 0 100 20"
-                  preserveAspectRatio="none"
-                >
+                  preserveAspectRatio="none">
                   <path
                     d="M0 15 Q 50 0 100 15"
                     stroke="currentColor"
                     strokeWidth="3.5"
-                    fill="transparent"
-                  />
+                    fill="transparent" />
                 </svg>
               </span>
             </h2>
@@ -45,20 +43,19 @@ export default function EPCCapabilities() {
             <ScrollReveal direction="left" distance={40}>
 
               {/* Long Editorial Paragraph */}
-              <p className="text-slate-600 font-normal text-base sm:text-lg leading-relaxed text-justify mb-8">
-                Sarhat Energy is an execution-led energy and infrastructure company rooted in India, driven to earn trust globally. We combine engineering precision with hands-on delivery to build dependable assets that power businesses and connect communities. From rooftops to solar parks, our clean-energy expertise spans engineering through commissioning and long-term maintenance. Our capabilities extend to transmission lines, substations, roads, bridges and buildings. Safety, unity and ownership guide every project as we turn ambition into infrastructure that creates lasting value for clients, communities and India’s future.
-              </p>
+                <p className="text-slate-600 font-normal text-base sm:text-lg leading-relaxed mb-8">
+                  Sarhat Energy is an execution-led energy and infrastructure company rooted in India, driven to earn trust globally. We combine engineering precision with hands-on delivery to build dependable assets that power businesses and connect communities. From rooftops to solar parks, our clean-energy expertise spans engineering through commissioning and long-term maintenance. Our capabilities extend to transmission lines, substations, roads, bridges and buildings. Safety, unity and ownership guide every project as we turn ambition into infrastructure that creates lasting value for clients, communities and India’s future.
+                </p>
 
-              {/* CTA Action Button */}
-              <div>
-                <Link
-                  href="/about"
-                  className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"
-                >
-                  <span>Learn More About Us</span>
-                  <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
+                {/* CTA Action Button */}
+                <div>
+                  <Link
+                    href="/about"
+                    className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group">
+                    <span>Learn More About Us</span>
+                    <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
             </ScrollReveal>
           </div>
 
@@ -70,8 +67,7 @@ export default function EPCCapabilities() {
                   src="/images/hero-solar.jpg"
                   alt="Sarhat Solar Farm Aerial View"
                   fill
-                  className="object-cover object-center transform hover:scale-[1.02] transition-transform duration-700"
-                />
+                  className="object-cover object-center transform hover:scale-[1.02] transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
               </div>
 
@@ -81,8 +77,7 @@ export default function EPCCapabilities() {
                   src="/images/bess-substation.jpg"
                   alt="Sarhat Substation & BESS Infrastructure"
                   fill
-                  className="object-cover object-center"
-                />
+                  className="object-cover object-center" />
               </div>
             </ScrollReveal>
           </div>

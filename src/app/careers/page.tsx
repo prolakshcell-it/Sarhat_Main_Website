@@ -33,6 +33,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
+import ProductFAQ from "@/components/ProductFAQ";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import { useHeroScroll } from "@/hooks/useHeroScroll";
@@ -293,14 +294,11 @@ export default function CareersPage() {
         {/* ------------------------------------------------------------- */}
         {/* Fixed Hero Section (Pinned background layer while scrolling) */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
-          aria-hidden={isPastHero}
-        >
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
+          aria-hidden={isPastHero}>
           <section
-            className="relative h-full w-full flex flex-col items-center justify-center overflow-hidden bg-black text-white select-none"
-          >
+            className="relative h-full w-full flex flex-col items-center justify-center overflow-hidden bg-black text-white select-none">
             {/* Background Image Layer */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
               <Image
@@ -308,8 +306,7 @@ export default function CareersPage() {
                 alt="Careers at Sarhat Energy"
                 fill
                 priority
-                className="object-cover object-center opacity-85"
-              />
+                className="object-cover object-center opacity-85" />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
               {/* Soft Dark Vignette Scrim */}
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
@@ -317,17 +314,18 @@ export default function CareersPage() {
 
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 flex flex-col items-center text-center will-change-transform"
-            >
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 flex flex-col items-center text-center will-change-transform">
               <ScrollReveal direction="up" distance={30}>
                 <div className="max-w-4xl flex flex-col items-center text-center">
-                  <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center drop-shadow-lg">
+                  <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center drop-shadow-lg [text-wrap:balance]">
                     Build the people <br />
                     <span className="text-[#D4E012] italic font-normal">who build India.</span>
                   </h1>
 
-                  <p className="text-base sm:text-lg text-slate-200 font-normal max-w-3xl text-center leading-relaxed mb-8 drop-shadow-md">
-                    Join Sarhat as we expand from solar EPC into renewable energy, storage, grid infrastructure and civil execution. We value ownership, learning, safety, and people who want to build things that last.
+                  <p className="text-base sm:text-lg text-slate-200 font-normal max-w-2xl text-center leading-relaxed mb-8 drop-shadow-md [text-wrap:balance]">
+                    Join Sarhat as we expand across renewable energy, storage and infrastructure.
+                    <br className="hidden sm:inline" />
+                    {" "}We value ownership, learning, safety, and people who want to build things that last.
                   </p>
 
                   {/* Current Openings Pill Outline Button */}
@@ -338,8 +336,7 @@ export default function CareersPage() {
                         el.scrollIntoView({ behavior: "smooth" });
                       }
                     }}
-                    className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full border border-white text-white font-sans-ui text-sm sm:text-base font-medium tracking-wide hover:bg-white hover:text-slate-950 transition-all duration-300 shadow-xl hover:scale-105 active:scale-95 group cursor-pointer"
-                  >
+                    className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full border border-white text-white font-sans-ui text-sm sm:text-base font-medium tracking-wide hover:bg-white hover:text-slate-950 transition-all duration-300 shadow-xl hover:scale-105 active:scale-95 group cursor-pointer">
                     <span>Current Openings</span>
                     <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </button>
@@ -378,14 +375,12 @@ export default function CareersPage() {
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
+                        preserveAspectRatio="none">
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -403,8 +398,7 @@ export default function CareersPage() {
                   {/* Circle 1 */}
                   <motion.div
                     whileHover={{ y: -8, scale: 1.02 }}
-                    className="bg-white border-2 border-[#D4E012]/40 hover:border-[#D4E012] rounded-full p-8 sm:p-10 flex flex-col items-center justify-center text-center aspect-square shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/30 transition-all duration-300 relative overflow-hidden group"
-                  >
+                    className="bg-white border-2 border-[#D4E012]/40 hover:border-[#D4E012] rounded-full p-8 sm:p-10 flex flex-col items-center justify-center text-center aspect-square shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/30 transition-all duration-300 relative overflow-hidden group">
                     <div className="w-14 h-14 rounded-full bg-[#D4E012]/20 border border-[#D4E012]/50 flex items-center justify-center mb-4 text-[#707B00] group-hover:scale-110 group-hover:bg-[#D4E012] group-hover:text-slate-950 transition-all duration-300">
                       <Rocket className="w-6 h-6" />
                     </div>
@@ -419,8 +413,7 @@ export default function CareersPage() {
                   {/* Circle 2 */}
                   <motion.div
                     whileHover={{ y: -8, scale: 1.02 }}
-                    className="bg-white border-2 border-[#D4E012]/40 hover:border-[#D4E012] rounded-full p-8 sm:p-10 flex flex-col items-center justify-center text-center aspect-square shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/30 transition-all duration-300 relative overflow-hidden group"
-                  >
+                    className="bg-white border-2 border-[#D4E012]/40 hover:border-[#D4E012] rounded-full p-8 sm:p-10 flex flex-col items-center justify-center text-center aspect-square shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/30 transition-all duration-300 relative overflow-hidden group">
                     <div className="w-14 h-14 rounded-full bg-[#D4E012]/20 border border-[#D4E012]/50 flex items-center justify-center mb-4 text-[#707B00] group-hover:scale-110 group-hover:bg-[#D4E012] group-hover:text-slate-950 transition-all duration-300">
                       <Sun className="w-6 h-6" />
                     </div>
@@ -435,8 +428,7 @@ export default function CareersPage() {
                   {/* Circle 3 */}
                   <motion.div
                     whileHover={{ y: -8, scale: 1.02 }}
-                    className="bg-white border-2 border-[#D4E012]/40 hover:border-[#D4E012] rounded-full p-8 sm:p-10 flex flex-col items-center justify-center text-center aspect-square shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/30 transition-all duration-300 relative overflow-hidden group"
-                  >
+                    className="bg-white border-2 border-[#D4E012]/40 hover:border-[#D4E012] rounded-full p-8 sm:p-10 flex flex-col items-center justify-center text-center aspect-square shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/30 transition-all duration-300 relative overflow-hidden group">
                     <div className="w-14 h-14 rounded-full bg-[#D4E012]/20 border border-[#D4E012]/50 flex items-center justify-center mb-4 text-[#707B00] group-hover:scale-110 group-hover:bg-[#D4E012] group-hover:text-slate-950 transition-all duration-300">
                       <Users className="w-6 h-6" />
                     </div>
@@ -451,8 +443,7 @@ export default function CareersPage() {
                   {/* Circle 4 */}
                   <motion.div
                     whileHover={{ y: -8, scale: 1.02 }}
-                    className="bg-white border-2 border-[#D4E012]/40 hover:border-[#D4E012] rounded-full p-8 sm:p-10 flex flex-col items-center justify-center text-center aspect-square shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/30 transition-all duration-300 relative overflow-hidden group"
-                  >
+                    className="bg-white border-2 border-[#D4E012]/40 hover:border-[#D4E012] rounded-full p-8 sm:p-10 flex flex-col items-center justify-center text-center aspect-square shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/30 transition-all duration-300 relative overflow-hidden group">
                     <div className="w-14 h-14 rounded-full bg-[#D4E012]/20 border border-[#D4E012]/50 flex items-center justify-center mb-4 text-[#707B00] group-hover:scale-110 group-hover:bg-[#D4E012] group-hover:text-slate-950 transition-all duration-300">
                       <TrendingUp className="w-6 h-6" />
                     </div>
@@ -498,14 +489,12 @@ export default function CareersPage() {
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
+                        preserveAspectRatio="none">
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -523,8 +512,7 @@ export default function CareersPage() {
                   {/* Card 1: Work-Life Balance */}
                   <motion.div
                     whileHover={{ y: -6 }}
-                    className="bg-white border border-slate-200/90 hover:border-[#D4E012] rounded-3xl overflow-hidden shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/20 transition-all duration-300 group flex flex-col justify-between"
-                  >
+                    className="bg-white border border-slate-200/90 hover:border-[#D4E012] rounded-3xl overflow-hidden shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/20 transition-all duration-300 group flex flex-col justify-between">
                     <div>
                       {/* Image Banner */}
                       <div className="relative w-full h-56 sm:h-64 overflow-hidden bg-slate-900">
@@ -532,8 +520,7 @@ export default function CareersPage() {
                           src="/images/about-hero-bg-bright.jpg"
                           alt="Work-Life Balance at Sarhat"
                           fill
-                          className="object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-90"
-                        />
+                          className="object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-90" />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
                         <span className="absolute bottom-4 left-6 px-3 py-1 rounded-full bg-[#D4E012] text-slate-950 text-[10px] font-mono font-bold uppercase tracking-wider shadow-md">
                           HOLISTIC CULTURE
@@ -555,8 +542,7 @@ export default function CareersPage() {
                   {/* Card 2: Workplace Engagement */}
                   <motion.div
                     whileHover={{ y: -6 }}
-                    className="bg-white border border-slate-200/90 hover:border-[#D4E012] rounded-3xl overflow-hidden shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/20 transition-all duration-300 group flex flex-col justify-between"
-                  >
+                    className="bg-white border border-slate-200/90 hover:border-[#D4E012] rounded-3xl overflow-hidden shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/20 transition-all duration-300 group flex flex-col justify-between">
                     <div>
                       {/* Image Banner */}
                       <div className="relative w-full h-56 sm:h-64 overflow-hidden bg-slate-900">
@@ -564,8 +550,7 @@ export default function CareersPage() {
                           src="/images/partner-hero-bg.jpg"
                           alt="Workplace Engagement at Sarhat"
                           fill
-                          className="object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-90"
-                        />
+                          className="object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-90" />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
                         <span className="absolute bottom-4 left-6 px-3 py-1 rounded-full bg-[#D4E012] text-slate-950 text-[10px] font-mono font-bold uppercase tracking-wider shadow-md">
                           TEAM UNITY
@@ -587,8 +572,7 @@ export default function CareersPage() {
                   {/* Card 3: Career Growth */}
                   <motion.div
                     whileHover={{ y: -6 }}
-                    className="bg-white border border-slate-200/90 hover:border-[#D4E012] rounded-3xl overflow-hidden shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/20 transition-all duration-300 group flex flex-col justify-between"
-                  >
+                    className="bg-white border border-slate-200/90 hover:border-[#D4E012] rounded-3xl overflow-hidden shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/20 transition-all duration-300 group flex flex-col justify-between">
                     <div>
                       {/* Image Banner */}
                       <div className="relative w-full h-56 sm:h-64 overflow-hidden bg-slate-900">
@@ -596,8 +580,7 @@ export default function CareersPage() {
                           src="/images/substation-project.jpg"
                           alt="Career Growth at Sarhat"
                           fill
-                          className="object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-90"
-                        />
+                          className="object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-90" />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
                         <span className="absolute bottom-4 left-6 px-3 py-1 rounded-full bg-[#D4E012] text-slate-950 text-[10px] font-mono font-bold uppercase tracking-wider shadow-md">
                           SKILL ELEVATION
@@ -619,8 +602,7 @@ export default function CareersPage() {
                   {/* Card 4: Diversity at the Workplace */}
                   <motion.div
                     whileHover={{ y: -6 }}
-                    className="bg-white border border-slate-200/90 hover:border-[#D4E012] rounded-3xl overflow-hidden shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/20 transition-all duration-300 group flex flex-col justify-between"
-                  >
+                    className="bg-white border border-slate-200/90 hover:border-[#D4E012] rounded-3xl overflow-hidden shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/20 transition-all duration-300 group flex flex-col justify-between">
                     <div>
                       {/* Image Banner */}
                       <div className="relative w-full h-56 sm:h-64 overflow-hidden bg-slate-900">
@@ -628,8 +610,7 @@ export default function CareersPage() {
                           src="/images/agrivoltaics-project.jpg"
                           alt="Diversity at the Workplace at Sarhat"
                           fill
-                          className="object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-90"
-                        />
+                          className="object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-90" />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
                         <span className="absolute bottom-4 left-6 px-3 py-1 rounded-full bg-[#D4E012] text-slate-950 text-[10px] font-mono font-bold uppercase tracking-wider shadow-md">
                           INCLUSIVE MINDSET
@@ -672,14 +653,12 @@ export default function CareersPage() {
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
+                        preserveAspectRatio="none">
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -700,8 +679,7 @@ export default function CareersPage() {
                     <select
                       value={selectedDept}
                       onChange={(e) => setSelectedDept(e.target.value)}
-                      className="bg-slate-100 border border-slate-300 text-slate-900 text-xs font-bold rounded-xl px-3.5 py-2 focus:outline-none focus:border-[#707B00] cursor-pointer"
-                    >
+                      className="bg-slate-100 border border-slate-300 text-slate-900 text-xs font-bold rounded-xl px-3.5 py-2 focus:outline-none focus:border-[#707B00] cursor-pointer">
                       <option value="All">All Departments</option>
                       <option value="Engineering">Engineering</option>
                       <option value="Maintenance">Maintenance / O&M</option>
@@ -716,8 +694,7 @@ export default function CareersPage() {
                     <select
                       value={selectedLoc}
                       onChange={(e) => setSelectedLoc(e.target.value)}
-                      className="bg-slate-100 border border-slate-300 text-slate-900 text-xs font-bold rounded-xl px-3.5 py-2 focus:outline-none focus:border-[#707B00] cursor-pointer"
-                    >
+                      className="bg-slate-100 border border-slate-300 text-slate-900 text-xs font-bold rounded-xl px-3.5 py-2 focus:outline-none focus:border-[#707B00] cursor-pointer">
                       <option value="All">All Locations</option>
                       <option value="Ghaziabad">Ghaziabad, U.P.</option>
                       <option value="Gujarat">Gujarat</option>
@@ -743,8 +720,7 @@ export default function CareersPage() {
                           setSelectedDept("All");
                           setSelectedLoc("All");
                         }}
-                        className="mt-3 text-xs font-mono text-[#707B00] underline font-bold"
-                      >
+                        className="mt-3 text-xs font-mono text-[#707B00] underline font-bold">
                         Reset filters
                       </button>
                     </div>
@@ -753,8 +729,7 @@ export default function CareersPage() {
                       <motion.div
                         key={job.id}
                         whileHover={{ y: -4 }}
-                        className="bg-white border border-slate-200/90 hover:border-[#D4E012] rounded-3xl p-6 sm:p-7 shadow-lg shadow-slate-200/50 hover:shadow-xl hover:shadow-[#D4E012]/15 transition-all duration-300 relative overflow-hidden group"
-                      >
+                        className="bg-white border border-slate-200/90 hover:border-[#D4E012] rounded-3xl p-6 sm:p-7 shadow-lg shadow-slate-200/50 hover:shadow-xl hover:shadow-[#D4E012]/15 transition-all duration-300 relative overflow-hidden group">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
                           <div className="flex items-center gap-2.5">
                             <h3 className="text-lg sm:text-xl font-serif-display font-bold text-slate-900 group-hover:text-[#707B00] transition-colors">
@@ -768,8 +743,7 @@ export default function CareersPage() {
                           <button
                             onClick={() => handleApplySelectRole(job.title)}
                             className="w-9 h-9 rounded-full bg-slate-100 hover:bg-[#D4E012] border border-slate-300 hover:border-[#D4E012] flex items-center justify-center text-slate-600 hover:text-slate-950 transition-all shrink-0 cursor-pointer"
-                            title="Apply for this role"
-                          >
+                            title="Apply for this role">
                             <ArrowUpRight className="w-4 h-4" />
                           </button>
                         </div>
@@ -845,8 +819,7 @@ export default function CareersPage() {
                             placeholder="Your name"
                             value={formData.fullName}
                             onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                            className="w-full bg-slate-100/80 border border-slate-300 focus:border-[#707B00] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-900 outline-none transition-colors"
-                          />
+                            className="w-full bg-slate-100/80 border border-slate-300 focus:border-[#707B00] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-900 outline-none transition-colors" />
                         </div>
 
                         <div>
@@ -859,8 +832,7 @@ export default function CareersPage() {
                             placeholder="you@example.com"
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            className="w-full bg-slate-100/80 border border-slate-300 focus:border-[#707B00] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-900 outline-none transition-colors"
-                          />
+                            className="w-full bg-slate-100/80 border border-slate-300 focus:border-[#707B00] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-900 outline-none transition-colors" />
                         </div>
 
                         <div>
@@ -873,8 +845,7 @@ export default function CareersPage() {
                             placeholder="10-digit mobile number"
                             value={formData.phone}
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                            className="w-full bg-slate-100/80 border border-slate-300 focus:border-[#707B00] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-900 outline-none transition-colors"
-                          />
+                            className="w-full bg-slate-100/80 border border-slate-300 focus:border-[#707B00] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-900 outline-none transition-colors" />
                         </div>
 
                         <div>
@@ -882,8 +853,7 @@ export default function CareersPage() {
                           <select
                             value={formData.role}
                             onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                            className="w-full bg-slate-100/80 border border-slate-300 focus:border-[#707B00] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-900 outline-none cursor-pointer transition-colors font-semibold"
-                          >
+                            className="w-full bg-slate-100/80 border border-slate-300 focus:border-[#707B00] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-900 outline-none cursor-pointer transition-colors font-semibold">
                             {jobs.map((j) => (
                               <option key={j.id} value={j.title}>
                                 {j.title}
@@ -916,8 +886,7 @@ export default function CareersPage() {
                                   }));
                                 }
                               }}
-                              className="hidden"
-                            />
+                              className="hidden" />
                           </label>
                         </div>
 
@@ -928,8 +897,7 @@ export default function CareersPage() {
                               type="checkbox"
                               checked={formData.isHuman}
                               onChange={(e) => setFormData({ ...formData, isHuman: e.target.checked })}
-                              className="w-4 h-4 rounded text-[#D4E012] focus:ring-0 cursor-pointer accent-[#D4E012]"
-                            />
+                              className="w-4 h-4 rounded text-[#D4E012] focus:ring-0 cursor-pointer accent-[#D4E012]" />
                             <span className="text-xs font-medium text-slate-200">Verify you are human</span>
                           </label>
                           <div className="text-[9px] font-mono text-slate-400 flex items-center gap-1">
@@ -948,8 +916,7 @@ export default function CareersPage() {
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="w-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0f] hover:to-[#4ed423] text-slate-950 font-extrabold text-xs uppercase tracking-wider py-3.5 rounded-full transition-all shadow-lg shadow-[#D4E012]/30 flex items-center justify-center gap-2 cursor-pointer"
-                        >
+                          className="w-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0f] hover:to-[#4ed423] text-slate-950 font-extrabold text-xs uppercase tracking-wider py-3.5 rounded-full transition-all shadow-lg shadow-[#D4E012]/30 flex items-center justify-center gap-2 cursor-pointer">
                           {isSubmitting ? (
                             <span>Submitting...</span>
                           ) : (
@@ -987,14 +954,12 @@ export default function CareersPage() {
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
+                        preserveAspectRatio="none">
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -1007,47 +972,10 @@ export default function CareersPage() {
               </ScrollReveal>
 
               {/* Accordions Container */}
-              <ScrollReveal direction="up" distance={30} delay={0.15}>
-                <div className="bg-[#F8FAF8] border border-slate-200/90 rounded-3xl p-6 sm:p-8 shadow-xl space-y-4">
-                  {faqs.map((faq, index) => {
-                    const isOpen = activeFaq === index;
-                    return (
-                      <div
-                        key={index}
-                        className="bg-white border border-slate-200/80 rounded-2xl overflow-hidden transition-all duration-200"
-                      >
-                        <button
-                          onClick={() => setActiveFaq(isOpen ? null : index)}
-                          className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 font-bold text-slate-900 hover:text-[#707B00] transition-colors cursor-pointer"
-                        >
-                          <span className="text-sm sm:text-base font-serif-display leading-snug">
-                            {faq.question}
-                          </span>
-                          <ChevronDown
-                            className={`w-5 h-5 text-slate-400 shrink-0 transition-transform duration-300 ${
-                              isOpen ? "rotate-180 text-[#707B00]" : ""
-                            }`}
-                          />
-                        </button>
-
-                        <AnimatePresence>
-                          {isOpen && (
-                            <motion.div
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: "auto" }}
-                              exit={{ opacity: 0, height: 0 }}
-                              transition={{ duration: 0.25 }}
-                              className="px-5 pb-6 pt-1 text-xs sm:text-sm text-slate-600 font-normal leading-relaxed border-t border-slate-100"
-                            >
-                              {faq.answer}
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    );
-                  })}
-                </div>
-              </ScrollReveal>
+              <ProductFAQ
+                faqs={faqs}
+                openIndex={activeFaq}
+                onToggle={(idx) => setActiveFaq(activeFaq === idx ? null : idx)} />
             </div>
           </section>
 
@@ -1072,8 +1000,7 @@ export default function CareersPage() {
 
                     <a
                       href="mailto:hr@sarhat.in"
-                      className="inline-flex items-center gap-2 bg-[#D4E012] hover:bg-[#c2ce0f] text-slate-950 font-extrabold text-xs uppercase tracking-wider px-7 py-4 rounded-xl transition-all shadow-lg shadow-[#D4E012]/20 shrink-0 self-start sm:self-auto cursor-pointer"
-                    >
+                      className="inline-flex items-center gap-2 bg-[#D4E012] hover:bg-[#c2ce0f] text-slate-950 font-extrabold text-xs uppercase tracking-wider px-7 py-4 rounded-xl transition-all shadow-lg shadow-[#D4E012]/20 shrink-0 self-start sm:self-auto cursor-pointer">
                       <Mail className="w-4 h-4 text-slate-950" />
                       <span>hr@sarhat.in</span>
                     </a>

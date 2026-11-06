@@ -139,8 +139,7 @@ function JourneyArt({ layout, progress, className }: { layout: Layout; progress:
           x1={S.x}
           y1={S.y}
           x2={vertical ? S.x : G.x}
-          y2={vertical ? G.y : S.y}
-        >
+          y2={vertical ? G.y : S.y}>
           <stop offset="0" stopColor={OLIVE} />
           <stop offset="1" stopColor={GREEN} />
         </linearGradient>
@@ -194,8 +193,7 @@ function JourneyArt({ layout, progress, className }: { layout: Layout; progress:
           d={`M${G.x} ${G.y} L${p.x} ${p.y}`}
           stroke={GREEN}
           strokeWidth={1.2}
-          strokeLinecap="round"
-        />
+          strokeLinecap="round" />
       ))}
       {mesh.map(([a, b], i) => (
         <Draw
@@ -205,8 +203,7 @@ function JourneyArt({ layout, progress, className }: { layout: Layout; progress:
           d={`M${reach[a].x} ${reach[a].y} L${reach[b].x} ${reach[b].y}`}
           stroke={GREEN}
           strokeOpacity={0.5}
-          strokeWidth={1}
-        />
+          strokeWidth={1} />
       ))}
       {reach.map((p, i) => (
         <Fade key={`n${i}`} progress={progress} range={[R.network[0] + 0.1 + i * 0.02, R.network[0] + 0.16 + i * 0.02]}>
@@ -216,7 +213,7 @@ function JourneyArt({ layout, progress, className }: { layout: Layout; progress:
 
       {/* Journey nodes + labels */}
       {nodes.map((n, i) => {
-        const modernNode = i >= 1;
+        const modernNode = i>= 1;
         return (
           <Fade key={n.label} progress={progress} range={[NODE_AT[i] - 0.04, NODE_AT[i]]}>
             <circle cx={n.x} cy={n.y} r={i === 3 ? 10 : 8} fill={modernNode ? "#0F172A" : "#F5EFE3"} stroke={modernNode ? GREEN : INK} strokeWidth={2} />
@@ -244,7 +241,7 @@ const wideBand = borderBand(1600);
 
 function Pillars({ pillars }: { pillars: Pillar[] }) {
   const reduce = useReducedMotion();
-  const ref = useRef<HTMLDivElement>(null);
+  const ref=useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.25 });
   const draw = {
     initial: { pathLength: reduce ? 1 : 0, opacity: 0 },
@@ -261,8 +258,7 @@ function Pillars({ pillars }: { pillars: Pillar[] }) {
             initial={reduce ? { opacity: 0 } : { opacity: 0, clipPath: "inset(100% 0 0 0)" }}
             animate={inView ? (reduce ? { opacity: 1 } : { opacity: 1, clipPath: "inset(0% 0 0 0)" }) : undefined}
             transition={{ duration: 0.9, delay: reduce ? 0 : 0.7 + i * 0.22, ease: EASE }}
-            className="relative flex flex-col rounded-2xl border border-[#2B2118]/10 bg-white/85 p-7 shadow-[0_20px_40px_-24px_rgba(43,33,24,0.35)] backdrop-blur-sm sm:p-8"
-          >
+            className="relative flex flex-col rounded-2xl border border-[#2B2118]/10 bg-white/85 p-7 shadow-[0_20px_40px_-24px_rgba(43,33,24,0.35)] backdrop-blur-sm sm:p-8">
             <span aria-hidden className="absolute inset-x-7 top-0 h-0.5 bg-gradient-to-r from-[#D4E012] to-[#6DAD45] sm:inset-x-8" />
             <span className="mb-10 font-mono text-xs font-bold text-[#707B00]">{String(i + 1).padStart(2, "0")}</span>
             <h3 className="mb-3 font-serif-display text-2xl font-medium text-[#1E1812] sm:text-3xl">{p.title}</h3>
@@ -321,11 +317,24 @@ export default function MithilaFoundation({ pillars }: { pillars: Pillar[] }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.7, ease: EASE }}
-          className="mx-auto max-w-3xl text-center"
-        >
+          className="mx-auto max-w-3xl text-center">
           <AnimatedPillBadge className="mb-6">What Guides Us</AnimatedPillBadge>
           <h2 className="mb-6 font-serif-display text-3xl font-medium leading-tight tracking-tight text-[#1E1812] sm:text-5xl">
-            Our Foundation &amp; <span className="italic text-[#707B00]">Pillars</span>
+            Our Foundation &amp;{" "}
+            <span className="italic text-[#707B00] relative inline-block">
+              Pillars.
+              <svg
+                className="absolute -bottom-2 left-0 w-full h-2.5 text-[#707B00]"
+                viewBox="0 0 100 20"
+                preserveAspectRatio="none"
+                aria-hidden="true">
+                <path
+                  d="M0 15 Q 50 0 100 15"
+                  stroke="currentColor"
+                  strokeWidth="3.5"
+                  fill="transparent" />
+              </svg>
+            </span>
           </h2>
           <p className="text-base leading-relaxed text-[#5B5146] sm:text-lg">
             Our foundation began in the Mithila region. These are our roots &mdash; and from these roots, we are building toward the world.

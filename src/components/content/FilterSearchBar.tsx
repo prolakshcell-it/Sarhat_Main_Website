@@ -24,7 +24,7 @@ export default function FilterSearchBar({
   totalCount,
   resultCount,
 }: FilterSearchBarProps) {
-  const isFiltered = searchQuery.trim().length > 0 || selectedCategory !== "All";
+  const isFiltered = searchQuery.trim().length> 0 || selectedCategory !== "All";
 
   const handleReset = () => {
     onSearchChange("");
@@ -43,14 +43,12 @@ export default function FilterSearchBar({
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder={placeholder}
-          className="w-full pl-12 pr-12 py-3.5 sm:py-4 bg-white rounded-2xl border border-slate-200/80 text-slate-900 placeholder:text-slate-400 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#6DAD45]/40 focus:border-[#6DAD45] transition-all shadow-sm"
-        />
+          className="w-full pl-12 pr-12 py-3.5 sm:py-4 bg-white rounded-2xl border border-slate-200/80 text-slate-900 placeholder:text-slate-400 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#6DAD45]/40 focus:border-[#6DAD45] transition-all shadow-sm" />
         {searchQuery && (
           <button
             onClick={() => onSearchChange("")}
             className="absolute right-4 p-1 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
-            aria-label="Clear search"
-          >
+            aria-label="Clear search">
             <X className="w-4 h-4" />
           </button>
         )}
@@ -71,8 +69,7 @@ export default function FilterSearchBar({
                   isActive
                     ? "bg-[#0F172A] text-white border-[#0F172A] shadow-md shadow-slate-900/10"
                     : "bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
-                }`}
-              >
+                }`}>
                 {cat}
               </button>
             );
@@ -87,8 +84,7 @@ export default function FilterSearchBar({
           {isFiltered && (
             <button
               onClick={handleReset}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs text-[#528732] hover:text-[#3d6824] bg-[#6DAD45]/10 hover:bg-[#6DAD45]/20 rounded-lg transition-colors font-sans font-medium"
-            >
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs text-[#528732] hover:text-[#3d6824] bg-[#6DAD45]/10 hover:bg-[#6DAD45]/20 rounded-lg transition-colors font-sans font-medium">
               <RotateCcw className="w-3 h-3" />
               Reset filters
             </button>

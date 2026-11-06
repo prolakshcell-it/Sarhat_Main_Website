@@ -13,7 +13,7 @@ const PATHS: Record<SocialLink["id"], string> = {
 
 export function SocialIcon({
   id,
-  className = "h-4 w-4",
+  className="h-4 w-4",
 }: {
   id: SocialLink["id"];
   className?: string;

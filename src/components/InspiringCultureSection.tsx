@@ -49,7 +49,7 @@ export default function InspiringCultureSection() {
     if (isHovered) return;
     const interval = setInterval(() => {
       setActiveCardId((prev) => {
-        const currentIndex = cultureCards.findIndex((c) => c.id === prev);
+        const currentIndex = cultureCards.findIndex((c) => c.id=== prev);
         const nextIndex = (currentIndex + 1) % cultureCards.length;
         return cultureCards[nextIndex].id;
       });
@@ -73,14 +73,12 @@ export default function InspiringCultureSection() {
                 className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                 viewBox="0 0 100 20"
                 preserveAspectRatio="none"
-                aria-hidden
-              >
+                aria-hidden>
                 <path
                   d="M0 15 Q 50 0 100 15"
                   stroke="currentColor"
                   strokeWidth="3.5"
-                  fill="transparent"
-                />
+                  fill="transparent" />
               </svg>
             </span>
           </h2>
@@ -93,8 +91,7 @@ export default function InspiringCultureSection() {
         <div
           className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 min-h-[480px]"
           onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
+          onMouseLeave={() => setIsHovered(false)}>
           {cultureCards.map((card) => {
             const isActive = activeCardId === card.id;
 
@@ -109,8 +106,7 @@ export default function InspiringCultureSection() {
                   isActive
                     ? "bg-[#102016] text-white border-2 border-[#D4E012] shadow-2xl shadow-[#102016]/40 scale-[1.02] z-20"
                     : "bg-slate-900 border border-slate-200/60 hover:border-[#D4E012]/60 z-10"
-                }`}
-              >
+                }`}>
                 {isActive ? (
                   /* Active Expanded Dark Green Content Card */
                   <div className="p-8 sm:p-10 flex flex-col justify-between h-full relative z-10">
@@ -133,7 +129,7 @@ export default function InspiringCultureSection() {
 
                     <div className="pt-6 border-t border-white/10 flex items-center justify-between text-xs text-[#D4E012] font-mono font-medium">
                       <span>SARHAT CULTURE</span>
-                      <span>0{cultureCards.findIndex((c) => c.id === card.id) + 1} / 03</span>
+                      <span>0{cultureCards.findIndex((c) => c.id=== card.id) + 1} / 03</span>
                     </div>
                   </div>
                 ) : (
@@ -143,8 +139,7 @@ export default function InspiringCultureSection() {
                       src={card.image}
                       alt={card.title}
                       fill
-                      className="object-cover object-center filter brightness-90 contrast-105 transition-transform duration-700 hover:scale-105"
-                    />
+                      className="object-cover object-center filter brightness-90 contrast-105 transition-transform duration-700 hover:scale-105" />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent pointer-events-none" />
 
                     <div className="relative z-10 p-6 sm:p-8 mt-auto">

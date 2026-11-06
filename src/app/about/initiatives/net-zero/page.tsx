@@ -17,7 +17,7 @@ export default function NetZeroPage() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const containerRef = useRef<HTMLElement>(null);
 
-    const {
+  const {
     isPastHero,
     bgScale,
     bgDim,
@@ -43,31 +43,26 @@ export default function NetZeroPage() {
 
         {/* Hero Section */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
-          aria-hidden={isPastHero}
-        >
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
+          aria-hidden={isPastHero}>
           <section
             ref={containerRef}
-            className="relative h-full w-full flex flex-col items-center justify-center overflow-hidden bg-black text-white select-none"
-          >
+            className="relative h-full w-full flex flex-col items-center justify-center overflow-hidden bg-black text-white select-none">
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
               <Image
                 src="/images/substation-project.jpg"
                 alt="Net Zero Infrastructure — Sarhat"
                 fill
                 priority
-                className="object-cover object-center opacity-85"
-              />
+                className="object-cover object-center opacity-85" />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
             </motion.div>
 
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 flex flex-col items-center text-center"
-            >
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 flex flex-col items-center text-center">
               <ScrollReveal direction="up" distance={30}>
                 <div className="max-w-4xl flex flex-col items-center text-center">
                   <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 text-center leading-[1.08] drop-shadow-lg">
@@ -100,14 +95,27 @@ export default function NetZeroPage() {
                     <div className="lg:col-span-8 space-y-6">
                       <Link
                         href="/about/initiatives"
-                        className="inline-flex items-center gap-2 text-xs font-mono font-bold text-[#6DAD45] hover:underline mb-2"
-                      >
+                        className="inline-flex items-center gap-2 text-xs font-mono font-bold text-[#6DAD45] hover:underline mb-2">
                         <ArrowLeft className="w-4 h-4" />
                         <span>Back to Initiatives Overview</span>
                       </Link>
 
                       <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                        Decarbonizing Industrial Ecosystems
+                        Decarbonizing Industrial <br />
+                        <span className="text-[#6DAD45] italic relative inline-block">
+                          Ecosystems.
+                          <svg
+                            className="absolute -bottom-2 left-0 w-full h-2.5 text-[#6DAD45]"
+                            viewBox="0 0 100 20"
+                            preserveAspectRatio="none"
+                            aria-hidden="true">
+                            <path
+                              d="M0 15 Q 50 0 100 15"
+                              stroke="currentColor"
+                              strokeWidth="3.5"
+                              fill="transparent" />
+                          </svg>
+                        </span>
                       </h2>
                       <p className="text-slate-600 font-normal text-base sm:text-lg leading-relaxed">
                         Sarhat&apos;s Net Zero framework equips enterprises with turnkey solar power purchase agreements (PPAs), high-voltage grid evacuation infrastructure, and battery storage. We enable a seamless transition away from fossil-fueled grid dependence.
@@ -124,7 +132,7 @@ export default function NetZeroPage() {
                     </div>
 
                     <div className="lg:col-span-4 bg-white border border-slate-200/90 p-8 rounded-2xl text-center space-y-4 shadow-lg">
-                      <div className="text-3xl sm:text-4xl font-mono font-extrabold text-[#6DAD45]">
+                      <div className="text-3xl sm:text-4xl font-sans-inter tabular-nums font-extrabold text-[#6DAD45]">
                         500,000+ Tons
                       </div>
                       <div className="text-xs text-slate-500 uppercase tracking-widest font-mono">
@@ -132,8 +140,7 @@ export default function NetZeroPage() {
                       </div>
                       <button
                         onClick={() => setQuoteModalOpen(true)}
-                        className="w-full bg-gradient-to-r from-[#6DAD45] to-[#5EE72D] hover:from-[#5cb338] hover:to-[#4ed423] text-slate-950 font-extrabold text-xs uppercase tracking-wider py-3.5 rounded-full transition-all shadow-md shadow-[#6DAD45]/20 hover:scale-105 cursor-pointer"
-                      >
+                        className="w-full bg-gradient-to-r from-[#6DAD45] to-[#5EE72D] hover:from-[#5cb338] hover:to-[#4ed423] text-slate-950 font-extrabold text-xs uppercase tracking-wider py-3.5 rounded-full transition-all shadow-md shadow-[#6DAD45]/20 hover:scale-105 cursor-pointer">
                         Partner for Net Zero
                       </button>
                     </div>

@@ -18,7 +18,7 @@ export default function ScrollReveal({
   delay = 0,
   direction = "up",
   distance = 50,
-  className = "",
+  className="",
   once = true,
 }: ScrollRevealProps) {
   const reduce = useReducedMotion();
@@ -49,8 +49,7 @@ export default function ScrollReveal({
         delay: reduce ? 0 : Math.min(delay, 0.3),
         ease: "easeOut",
       }}
-      className={className}
-    >
+      className={className}>
       {children}
     </motion.div>
   );

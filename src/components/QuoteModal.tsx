@@ -73,22 +73,19 @@ export default function QuoteModal({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="fixed inset-0 z-50 bg-[#05080c]/70 backdrop-blur-[6px] flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
-        onClick={onClose}
-      >
+        onClick={onClose}>
         <motion.div
           initial={{ scale: 0.94, opacity: 0, y: 16 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.94, opacity: 0, y: 16 }}
           transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
           onClick={(e) => e.stopPropagation()}
-          className="bg-white text-slate-900 rounded-[28px] p-6 sm:p-10 max-w-[680px] w-full relative shadow-2xl border border-slate-200/90 my-8 overflow-hidden"
-        >
+          className="bg-white text-slate-900 rounded-[28px] p-6 sm:p-10 max-w-[680px] w-full relative shadow-2xl border border-slate-200/90 my-8 overflow-hidden">
           {/* Close button matching prototype */}
           <button
             onClick={onClose}
             aria-label="Close modal"
-            className="absolute top-5 right-5 sm:top-6 sm:right-6 w-9 h-9 rounded-full bg-white border border-slate-200 hover:border-slate-300 flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors shadow-sm cursor-pointer"
-          >
+            className="absolute top-5 right-5 sm:top-6 sm:right-6 w-9 h-9 rounded-full bg-white border border-slate-200 hover:border-slate-300 flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors shadow-sm cursor-pointer">
             <X className="w-4 h-4 stroke-[2]" />
           </button>
 
@@ -110,14 +107,12 @@ export default function QuoteModal({
                     className="absolute -bottom-1.5 left-0 w-full h-3 text-[#6DAD45]"
                     viewBox="0 0 100 20"
                     preserveAspectRatio="none"
-                    aria-hidden="true"
-                  >
+                    aria-hidden="true">
                     <path
                       d="M0 15 Q 50 0 100 15"
                       stroke="currentColor"
                       strokeWidth="3.5"
-                      fill="transparent"
-                    />
+                      fill="transparent" />
                   </svg>
                 </span>
               </h2>
@@ -141,8 +136,7 @@ export default function QuoteModal({
                       onChange={(e) =>
                         setForm({ ...form, name: e.target.value })
                       }
-                      className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
-                    />
+                      className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all" />
                   </div>
                   <div>
                     <label className="block text-[10.5px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
@@ -155,8 +149,7 @@ export default function QuoteModal({
                       onChange={(e) =>
                         setForm({ ...form, company: e.target.value })
                       }
-                      className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
-                    />
+                      className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all" />
                   </div>
                 </div>
 
@@ -173,8 +166,7 @@ export default function QuoteModal({
                       onChange={(e) =>
                         setForm({ ...form, email: e.target.value })
                       }
-                      className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
-                    />
+                      className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all" />
                   </div>
                   <div>
                     <label className="block text-[10.5px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
@@ -187,8 +179,7 @@ export default function QuoteModal({
                       onChange={(e) =>
                         setForm({ ...form, phone: e.target.value })
                       }
-                      className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
-                    />
+                      className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all" />
                   </div>
                 </div>
 
@@ -203,8 +194,7 @@ export default function QuoteModal({
                       onChange={(e) =>
                         setForm({ ...form, product: e.target.value })
                       }
-                      className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 outline-none transition-all cursor-pointer"
-                    >
+                      className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 outline-none transition-all cursor-pointer">
                       <option value="" disabled>
                         Select a product
                       </option>
@@ -269,8 +259,7 @@ export default function QuoteModal({
                       onChange={(e) =>
                         setForm({ ...form, state: e.target.value })
                       }
-                      className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 outline-none transition-all cursor-pointer"
-                    >
+                      className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 outline-none transition-all cursor-pointer">
                       <option value="" disabled>
                         Select a state
                       </option>
@@ -295,8 +284,7 @@ export default function QuoteModal({
                     onChange={(e) =>
                       setForm({ ...form, scope: e.target.value })
                     }
-                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
-                  />
+                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all" />
                 </div>
 
                 {/* Row 5: Project Details */}
@@ -311,16 +299,14 @@ export default function QuoteModal({
                     onChange={(e) =>
                       setForm({ ...form, details: e.target.value })
                     }
-                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all resize-y"
-                  />
+                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all resize-y" />
                 </div>
 
                 {/* Submit button */}
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] px-7 py-3.5 text-xs font-mono font-extrabold uppercase tracking-wider text-black shadow-lg shadow-[#D4E012]/30 transition-all duration-200 hover:-translate-y-px cursor-pointer"
-                  >
+                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] px-7 py-3.5 text-xs font-mono font-extrabold uppercase tracking-wider text-black shadow-lg shadow-[#D4E012]/30 transition-all duration-200 hover:-translate-y-px cursor-pointer">
                     <span>SEND ENQUIRY</span>
                     <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
                   </button>
@@ -347,8 +333,7 @@ export default function QuoteModal({
               <div className="pt-4">
                 <button
                   onClick={handleReset}
-                  className="bg-slate-900 hover:bg-slate-800 text-white font-mono text-xs uppercase tracking-wider px-6 py-2.5 rounded-full transition-all cursor-pointer"
-                >
+                  className="bg-slate-900 hover:bg-slate-800 text-white font-mono text-xs uppercase tracking-wider px-6 py-2.5 rounded-full transition-all cursor-pointer">
                   Close Window
                 </button>
               </div>

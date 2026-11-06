@@ -91,7 +91,7 @@ type BookCardProps = {
   children: ReactNode;
 };
 
-function BookCard({ className = "", coverIndex, coverLabel, children }: BookCardProps) {
+function BookCard({ className="", coverIndex, coverLabel, children }: BookCardProps) {
   return (
     <motion.div variants={fadeInUp} className={`relative ${className}`}>
       {children}
@@ -99,8 +99,7 @@ function BookCard({ className = "", coverIndex, coverLabel, children }: BookCard
         aria-hidden
         variants={bookCoverVariants}
         style={{ transformOrigin: "left center", transformPerspective: 1400, backfaceVisibility: "hidden", willChange: "transform, opacity" }}
-        className="absolute inset-0 rounded-2xl pointer-events-none overflow-hidden bg-slate-900 text-white flex flex-col justify-between p-7 shadow-2xl motion-reduce:hidden"
-      >
+        className="absolute inset-0 rounded-2xl pointer-events-none overflow-hidden bg-slate-900 text-white flex flex-col justify-between p-7 shadow-2xl motion-reduce:hidden">
         <div className="absolute inset-y-0 left-0 w-2.5 bg-gradient-to-r from-black/40 to-transparent" />
         <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.2em] text-slate-400">
           <span>Sarhat · Portfolio</span>
@@ -138,8 +137,8 @@ function FigureCard({ label, dotClass, barClass, value, unit, description, share
           </span>
         </div>
         <div className="flex items-baseline gap-2 mb-2">
-          <span className="font-mono text-4xl font-semibold text-slate-900 tracking-tight tabular-nums">{value}</span>
-          <span className="font-mono text-sm font-medium text-slate-400">{unit}</span>
+          <span className="font-sans-inter text-4xl font-bold text-slate-900 tracking-tight tabular-nums">{value}</span>
+          <span className="font-sans-inter text-sm font-semibold text-slate-400">{unit}</span>
         </div>
         <p className="text-sm text-slate-500 leading-relaxed">{description}</p>
       </div>
@@ -315,8 +314,8 @@ function getImpactStats(totalMW: number) {
   ];
 }
 
-function CountUp({ to, suffix = "", className = "" }: { to: number; suffix?: string; className?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
+function CountUp({ to, suffix = "", className="" }: { to: number; suffix?: string; className?: string }) {
+  const ref=useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.6 });
   const reduce = useReducedMotion();
 
@@ -361,7 +360,7 @@ function HighlightsSlider({ projects, onDiscuss }: { projects: HighlightProject[
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
   const go = (dir: 1 | -1) => setIndex((i) => (i + dir + total) % total);
-  const autoplay = !revealed && !reduceMotion && total > 1;
+  const autoplay = !revealed && !reduceMotion && total> 1;
 
   // Mount the active slide and the next one only (derived during render, no effect needed).
   const nextIndex = (index + 1) % total;
@@ -377,9 +376,9 @@ function HighlightsSlider({ projects, onDiscuss }: { projects: HighlightProject[
   }, [index, autoplay, total]);
 
   const onKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "ArrowRight") go(1);
-    else if (e.key === "ArrowLeft") go(-1);
-    else if (e.key === "Escape") setRevealed(false);
+    if (e.key=== "ArrowRight") go(1);
+    else if (e.key=== "ArrowLeft") go(-1);
+    else if (e.key=== "Escape") setRevealed(false);
   };
 
   return (
@@ -399,9 +398,8 @@ function HighlightsSlider({ projects, onDiscuss }: { projects: HighlightProject[
         if (!start) return;
         const dx = e.changedTouches[0].clientX - start.x;
         const dy = e.changedTouches[0].clientY - start.y;
-        if (Math.abs(dx) > HIGHLIGHT_SWIPE_PX && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
-      }}
-    >
+        if (Math.abs(dx)> HIGHLIGHT_SWIPE_PX && Math.abs(dx)> Math.abs(dy)) go(dx < 0 ? 1 : -1);
+      }}>
       {/* Slides: stacked, crossfade + small translate */}
       {projects.map((hp, i) => {
         const active = i === index;
@@ -409,10 +407,8 @@ function HighlightsSlider({ projects, onDiscuss }: { projects: HighlightProject[
           <div
             key={hp.id}
             aria-hidden={!active}
-            className={`absolute inset-0 transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none ${
-              active ? "opacity-100 translate-y-0 z-[1]" : "opacity-0 translate-y-3 pointer-events-none"
-            }`}
-          >
+            className={`absolute inset-0 transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none ${active ? "opacity-100 translate-y-0 z-[1]" : "opacity-0 translate-y-3 pointer-events-none"
+              }`}>
             {seen.has(i) && (
               <Image
                 src={hp.image}
@@ -420,19 +416,15 @@ function HighlightsSlider({ projects, onDiscuss }: { projects: HighlightProject[
                 fill
                 priority={i === 0}
                 sizes="100vw"
-                className={`object-cover object-center transition-transform duration-[7000ms] ease-out motion-reduce:transition-none ${
-                  active ? "scale-100" : "scale-[1.06]"
-                }`}
-              />
+                className={`object-cover object-center transition-transform duration-[7000ms] ease-out motion-reduce:transition-none ${active ? "scale-100" : "scale-[1.06]"
+                  }`} />
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-slate-950/50" />
 
             {/* Caption: title, location, capacity (always visible on the image) */}
             <div
-              className={`absolute inset-x-0 bottom-16 sm:bottom-20 transition-opacity duration-300 motion-reduce:transition-none ${
-                active && revealed ? "opacity-0 pointer-events-none" : "opacity-100"
-              }`}
-            >
+              className={`absolute inset-x-0 bottom-16 sm:bottom-20 transition-opacity duration-300 motion-reduce:transition-none ${active && revealed ? "opacity-0 pointer-events-none" : "opacity-100"
+                }`}>
               <div className="pl-5 pr-24 sm:px-8 lg:px-10">
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-mono font-bold text-[#D4E012] mb-3">
                   <MapPin className="w-4 h-4 shrink-0" />
@@ -447,8 +439,7 @@ function HighlightsSlider({ projects, onDiscuss }: { projects: HighlightProject[
                   onClick={() => setRevealed(true)}
                   tabIndex={active && !revealed ? 0 : -1}
                   aria-expanded={active && revealed}
-                  className="mt-5 inline-flex items-center gap-2 bg-white/10 hover:bg-[#D4E012] hover:text-slate-950 border border-white/30 hover:border-[#D4E012] text-white font-mono font-bold text-xs uppercase tracking-widest px-5 py-2.5 rounded-full transition-colors duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-[#D4E012]"
-                >
+                  className="mt-5 inline-flex items-center gap-2 bg-white/10 hover:bg-[#D4E012] hover:text-slate-950 border border-white/30 hover:border-[#D4E012] text-white font-mono font-bold text-xs uppercase tracking-widest px-5 py-2.5 rounded-full transition-colors duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-[#D4E012]">
                   View Description <ArrowUpRight className="w-4 h-4" />
                 </button>
               </div>
@@ -456,21 +447,17 @@ function HighlightsSlider({ projects, onDiscuss }: { projects: HighlightProject[
 
             {/* Story: dark veil + description rising from the bottom to the centre */}
             <div
-              className={`absolute inset-0 bg-slate-950/85 transition-opacity duration-500 motion-reduce:transition-none ${
-                active && revealed ? "opacity-100" : "opacity-0 pointer-events-none"
-              }`}
-            >
+              className={`absolute inset-0 bg-slate-950/85 transition-opacity duration-500 motion-reduce:transition-none ${active && revealed ? "opacity-100" : "opacity-0 pointer-events-none"
+                }`}>
               <div className="h-full overflow-y-auto px-6 sm:px-20 lg:px-28 pt-16 pb-20 sm:pb-14 flex scrollbar-none">
                 <div
-                  className={`m-auto w-full max-w-3xl transition-[opacity,transform] duration-500 ease-out motion-reduce:transition-none ${
-                    active && revealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
-                  }`}
-                >
+                  className={`m-auto w-full max-w-3xl transition-[opacity,transform] duration-500 ease-out motion-reduce:transition-none ${active && revealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
+                    }`}>
                   <div className="font-mono text-[11px] text-[#D4E012] font-bold uppercase tracking-[0.2em] mb-2 text-center">
                     {hp.location} · {hp.capacity} · {hp.client}
                   </div>
                   <h3 className="font-serif-display text-2xl sm:text-4xl font-bold text-center mb-5">{hp.title}</h3>
-                  <p className="text-sm sm:text-base leading-relaxed text-slate-200 sm:text-justify mb-6 pb-6 border-b border-white/15">{hp.story}</p>
+                  <p className="text-sm sm:text-base leading-relaxed text-slate-200 mb-6 pb-6 border-b border-white/15">{hp.story}</p>
 
                   <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6 sm:mb-7">
                     {hp.keyMetrics.map((m) => (
@@ -485,15 +472,13 @@ function HighlightsSlider({ projects, onDiscuss }: { projects: HighlightProject[
                     <button
                       onClick={onDiscuss}
                       tabIndex={active && revealed ? 0 : -1}
-                      className="inline-flex items-center gap-2 bg-[#D4E012] hover:bg-white text-slate-950 font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-full transition-colors cursor-pointer"
-                    >
+                      className="inline-flex items-center gap-2 bg-[#D4E012] hover:bg-white text-slate-950 font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-full transition-colors cursor-pointer">
                       Discuss Similar Project Scope <ArrowUpRight className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => setRevealed(false)}
                       tabIndex={active && revealed ? 0 : -1}
-                      className="inline-flex items-center gap-2 border border-white/30 hover:bg-white hover:text-slate-950 text-white font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-full transition-colors cursor-pointer"
-                    >
+                      className="inline-flex items-center gap-2 border border-white/30 hover:bg-white hover:text-slate-950 text-white font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-full transition-colors cursor-pointer">
                       Close
                     </button>
                   </div>
@@ -512,10 +497,8 @@ function HighlightsSlider({ projects, onDiscuss }: { projects: HighlightProject[
               {projects[index].scheme}
             </span>
             <span
-              className={`font-mono font-bold text-[11px] px-3 py-1 rounded-full uppercase ${
-                projects[index].status === "Commissioned" ? "bg-emerald-400 text-slate-950" : "bg-sky-400 text-slate-950"
-              }`}
-            >
+              className={`font-mono font-bold text-[11px] px-3 py-1 rounded-full uppercase ${projects[index].status === "Commissioned" ? "bg-emerald-400 text-slate-950" : "bg-sky-400 text-slate-950"
+                }`}>
               {projects[index].status}
             </span>
           </div>
@@ -533,10 +516,8 @@ function HighlightsSlider({ projects, onDiscuss }: { projects: HighlightProject[
           key={label}
           onClick={() => go(dir)}
           aria-label={label}
-          className={`absolute bottom-12 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 ${pos} z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900/60 hover:bg-[#6DAD45] border border-white/20 text-white flex items-center justify-center transition-[colors,opacity] duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-[#D4E012] ${
-            revealed ? "max-sm:opacity-0 max-sm:pointer-events-none" : ""
-          }`}
-        >
+          className={`absolute bottom-12 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 ${pos} z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900/60 hover:bg-[#6DAD45] border border-white/20 text-white flex items-center justify-center transition-[colors,opacity] duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-[#D4E012] ${revealed ? "max-sm:opacity-0 max-sm:pointer-events-none" : ""
+            }`}>
           <Icon className="w-5 h-5" />
         </button>
       ))}
@@ -550,16 +531,14 @@ function HighlightsSlider({ projects, onDiscuss }: { projects: HighlightProject[
               onClick={() => setIndex(i)}
               aria-label={`Show ${p.location}`}
               aria-current={i === index}
-              className="flex-1 py-2 cursor-pointer"
-            >
+              className="flex-1 py-2 cursor-pointer">
               <span className="relative block h-[2px] rounded-full bg-white/25 overflow-hidden">
                 {i < index && <span className="absolute inset-0 bg-white/80" />}
                 {i === index && (
                   <span
                     key={`${index}-${autoplay}`}
                     className={`absolute inset-0 bg-[#D4E012] ${autoplay ? "highlight-progress-fill" : "scale-x-100"}`}
-                    style={autoplay ? { animationDuration: `${HIGHLIGHT_AUTOPLAY_MS}ms` } : undefined}
-                  />
+                    style={autoplay ? { animationDuration: `${HIGHLIGHT_AUTOPLAY_MS}ms` } : undefined} />
                 )}
               </span>
             </button>
@@ -628,7 +607,7 @@ export default function MainProjectsPage() {
         if (el) {
           const top = el.offsetTop;
           const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
+          if (scrollPos>= top && scrollPos < top + height) {
             setActiveTab(sectionId);
             break;
           }
@@ -667,11 +646,9 @@ export default function MainProjectsPage() {
 
         {/* Fixed Hero Section (Pinned background layer while scrolling) */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
-          aria-hidden={isPastHero}
-        >
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
+          aria-hidden={isPastHero}>
           <section className="relative h-full w-full flex flex-col items-center justify-center overflow-hidden bg-black select-none">
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
               <Image
@@ -679,22 +656,19 @@ export default function MainProjectsPage() {
                 alt="Sarhat Solar EPC Execution Infrastructure"
                 fill
                 priority
-                className="object-cover object-center opacity-85"
-              />
+                className="object-cover object-center opacity-85" />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
             </motion.div>
 
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 flex flex-col items-center text-center will-change-transform"
-            >
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 flex flex-col items-center text-center will-change-transform">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="max-w-4xl flex flex-col items-center text-center mb-8"
-              >
+                className="max-w-4xl flex flex-col items-center text-center mb-8">
                 <h1 className="text-4xl sm:text-6xl font-serif-display font-medium text-white tracking-tight drop-shadow-lg text-center mb-4">
                   Our Execution <span className="text-[#D4E012] italic font-normal">Portfolio</span>
                 </h1>
@@ -707,16 +681,14 @@ export default function MainProjectsPage() {
                     whileHover={{ scale: 1.04 }}
                     whileTap={{ scale: 0.96 }}
                     onClick={() => setQuoteModalOpen(true)}
-                    className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-3.5 rounded-full transition-all shadow-xl shadow-[#D4E012]/30 cursor-pointer"
-                  >
+                    className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-3.5 rounded-full transition-all shadow-xl shadow-[#D4E012]/30 cursor-pointer">
                     Discuss a Project
                   </motion.button>
                   <motion.button
                     whileHover={{ scale: 1.04 }}
                     whileTap={{ scale: 0.96 }}
                     onClick={() => scrollToSection("overview")}
-                    className="border border-white/30 bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-widest px-7 py-3.5 rounded-full transition-all backdrop-blur-md cursor-pointer"
-                  >
+                    className="border border-white/30 bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-widest px-7 py-3.5 rounded-full transition-all backdrop-blur-md cursor-pointer">
                     Explore Figures &amp; Portfolio
                   </motion.button>
                 </div>
@@ -742,8 +714,7 @@ export default function MainProjectsPage() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={fadeInUp}
-                className="text-center max-w-3xl mx-auto mb-14"
-              >
+                className="text-center max-w-3xl mx-auto mb-14">
                 <AnimatedPillBadge className="mb-6">PORTFOLIO OVERVIEW</AnimatedPillBadge>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
                   <span className="inline-block">Verified Data.</span> <br />
@@ -752,14 +723,12 @@ export default function MainProjectsPage() {
                     <svg
                       className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                       viewBox="0 0 100 20"
-                      preserveAspectRatio="none"
-                    >
+                      preserveAspectRatio="none">
                       <path
                         d="M0 15 Q 50 0 100 15"
                         stroke="currentColor"
                         strokeWidth="3.5"
-                        fill="transparent"
-                      />
+                        fill="transparent" />
                     </svg>
                   </span>
                 </h2>
@@ -774,8 +743,7 @@ export default function MainProjectsPage() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={staggerContainer}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 gap-5 mb-12"
-              >
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 gap-5 mb-12">
                 {/* Total Capacity (hero) */}
                 <BookCard className="md:col-span-2 lg:col-span-1 lg:row-span-2" coverIndex="01" coverLabel="Total Tracked Portfolio">
                   <div className="h-full bg-slate-900 text-white rounded-2xl p-8 relative overflow-hidden border border-slate-800 shadow-xl flex flex-col justify-between hover:border-[#6DAD45] hover:shadow-[0_12px_32px_-16px_rgba(109,173,69,0.35)] transition-[border-color,box-shadow] duration-300">
@@ -785,8 +753,8 @@ export default function MainProjectsPage() {
                         <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[#D4E012]">Total Tracked Portfolio</span>
                       </div>
                       <div className="flex items-baseline gap-2 mb-3">
-                        <span className="font-mono text-5xl sm:text-6xl font-semibold tracking-tight tabular-nums">{totalMW.toFixed(2)}</span>
-                        <span className="font-mono text-base text-slate-400">MW</span>
+                        <span className="font-sans-inter text-5xl sm:text-6xl font-bold tracking-tight tabular-nums text-white">{totalMW.toFixed(2)}</span>
+                        <span className="font-sans-inter text-base font-extrabold text-[#D4E012]">MW</span>
                       </div>
                       <p className="text-sm text-slate-400 leading-relaxed">
                         Verified capacity across commissioned, ongoing and pipeline projects, delivered under single-point turnkey EPC.
@@ -794,14 +762,14 @@ export default function MainProjectsPage() {
                     </div>
 
                     <div className="relative mt-10">
-                      <dl className="grid grid-cols-2 gap-6 font-mono">
+                      <dl className="grid grid-cols-2 gap-6">
                         <div>
-                          <dt className="text-[11px] uppercase tracking-[0.18em] text-slate-500 mb-1">Locations</dt>
-                          <dd className="text-2xl font-semibold tabular-nums">{PROJECTS.length}</dd>
+                          <dt className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500 mb-1">Locations</dt>
+                          <dd className="text-2xl font-sans-inter font-bold tabular-nums text-white">{PROJECTS.length}</dd>
                         </div>
                         <div>
-                          <dt className="text-[11px] uppercase tracking-[0.18em] text-slate-500 mb-1">States</dt>
-                          <dd className="text-2xl font-semibold tabular-nums">{stateCount}</dd>
+                          <dt className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500 mb-1">States</dt>
+                          <dd className="text-2xl font-sans-inter font-bold tabular-nums text-white">{stateCount}</dd>
                         </div>
                       </dl>
                       <div className="mt-6 pt-5 border-t border-white/10 flex items-center gap-2 text-xs font-mono text-[#D4E012]">
@@ -820,8 +788,7 @@ export default function MainProjectsPage() {
                     unit="MW"
                     description={`${commissionedProjects.length} sites synchronised to state DISCOM grids and in commercial operation.`}
                     share={commissionedMW / totalMW}
-                    shareLabel="Share of portfolio"
-                  />
+                    shareLabel="Share of portfolio" />
                 </BookCard>
 
                 <BookCard coverIndex="03" coverLabel="Ongoing Execution">
@@ -833,8 +800,7 @@ export default function MainProjectsPage() {
                     unit="MW"
                     description={`${ongoingProjects.length} active sites under engineering, civil foundation & EHV erection.`}
                     share={ongoingMW / totalMW}
-                    shareLabel="Share of portfolio"
-                  />
+                    shareLabel="Share of portfolio" />
                 </BookCard>
 
                 <BookCard coverIndex="04" coverLabel="CO₂ Avoided">
@@ -846,8 +812,7 @@ export default function MainProjectsPage() {
                     unit="t / yr"
                     description="Estimated annual emissions avoided by commissioned capacity."
                     shareLabel="At full portfolio"
-                    footerValue={`${co2PortfolioTonnes.toLocaleString("en-IN")} t / yr`}
-                  />
+                    footerValue={`${co2PortfolioTonnes.toLocaleString("en-IN")} t / yr`} />
                 </BookCard>
 
                 <BookCard coverIndex="05" coverLabel="Pipeline">
@@ -859,8 +824,7 @@ export default function MainProjectsPage() {
                     unit="MW"
                     description={`${pipelineProjects.length} sanctioned sites awaiting mobilisation & statutory approvals.`}
                     share={pipelineMW / totalMW}
-                    shareLabel="Share of portfolio"
-                  />
+                    shareLabel="Share of portfolio" />
                 </BookCard>
               </motion.div>
             </div>
@@ -876,8 +840,7 @@ export default function MainProjectsPage() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={fadeInUp}
-                className="text-center max-w-3xl mx-auto mb-10"
-              >
+                className="text-center max-w-3xl mx-auto mb-10">
                 <AnimatedPillBadge className="mb-6">FEATURED EXECUTION STORIES</AnimatedPillBadge>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
                   <span className="inline-block">Execution Stories.</span> <br />
@@ -886,29 +849,26 @@ export default function MainProjectsPage() {
                     <svg
                       className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                       viewBox="0 0 100 20"
-                      preserveAspectRatio="none"
-                    >
+                      preserveAspectRatio="none">
                       <path
                         d="M0 15 Q 50 0 100 15"
                         stroke="currentColor"
                         strokeWidth="3.5"
-                        fill="transparent"
-                      />
+                        fill="transparent" />
                     </svg>
                   </span>
                 </h2>
-             <p className="text-slate-600 text-base leading-relaxed">
-  Step into the projects behind Sarhat’s journey — where ideas become engineered,
-  delivered and brought to life in the field.
-</p>
+                <p className="text-slate-600 text-base leading-relaxed">
+                  Step into the projects behind Sarhat’s journey — where ideas become engineered,
+                  delivered and brought to life in the field.
+                </p>
               </motion.div>
 
               <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.15 }}
-                variants={fadeInUp}
-              >
+                variants={fadeInUp}>
                 <HighlightsSlider projects={HIGHLIGHT_PROJECTS} onDiscuss={() => setQuoteModalOpen(true)} />
               </motion.div>
             </div>
@@ -924,8 +884,7 @@ export default function MainProjectsPage() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={fadeInUp}
-                className="text-center max-w-3xl mx-auto mb-10"
-              >
+                className="text-center max-w-3xl mx-auto mb-10">
                 <AnimatedPillBadge className="mb-6">OUR FOOTPRINT</AnimatedPillBadge>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
                   <span className="inline-block">Pan-India Sites.</span> <br />
@@ -934,14 +893,12 @@ export default function MainProjectsPage() {
                     <svg
                       className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                       viewBox="0 0 100 20"
-                      preserveAspectRatio="none"
-                    >
+                      preserveAspectRatio="none">
                       <path
                         d="M0 15 Q 50 0 100 15"
                         stroke="currentColor"
                         strokeWidth="3.5"
-                        fill="transparent"
-                      />
+                        fill="transparent" />
                     </svg>
                   </span>
                 </h2>
@@ -956,8 +913,7 @@ export default function MainProjectsPage() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={fadeInUp}
-                className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-0 md:divide-x divide-slate-200 mb-10"
-              >
+                className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-0 md:divide-x divide-slate-200 mb-10">
                 {[
                   {
                     id: "scheme",
@@ -981,26 +937,22 @@ export default function MainProjectsPage() {
                     <div
                       role="radiogroup"
                       aria-label={`Filter by ${group.label.toLowerCase()}`}
-                      className="flex max-w-full overflow-x-auto scrollbar-none bg-white border border-slate-200 rounded-full p-1 shadow-sm"
-                    >
+                      className="flex max-w-full overflow-x-auto scrollbar-none bg-white border border-slate-200 rounded-full p-1 shadow-sm">
                       {group.options.map((opt) => {
-                        const sel = group.value === opt;
+                        const sel = group.value=== opt;
                         return (
                           <button
                             key={opt}
                             role="radio"
                             aria-checked={sel}
                             onClick={() => group.onChange(opt)}
-                            className={`relative shrink-0 px-2.5 sm:px-4 py-2 rounded-full text-[11px] sm:text-xs font-mono font-bold whitespace-nowrap cursor-pointer transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-[#6DAD45] ${
-                              sel ? "text-white" : "text-slate-600 hover:text-slate-900"
-                            }`}
-                          >
+                            className={`relative shrink-0 px-2.5 sm:px-4 py-2 rounded-full text-[11px] sm:text-xs font-mono font-bold whitespace-nowrap cursor-pointer transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-[#6DAD45] ${sel ? "text-white" : "text-slate-600 hover:text-slate-900"
+                              }`}>
                             {sel && (
                               <motion.span
                                 layoutId={`explore-filter-${group.id}`}
                                 className={`absolute inset-0 rounded-full ${group.activeBg}`}
-                                transition={{ type: "spring", stiffness: 420, damping: 34 }}
-                              />
+                                transition={{ type: "spring", stiffness: 420, damping: 34 }} />
                             )}
                             <span className="relative z-10">{opt}</span>
                           </button>
@@ -1018,8 +970,7 @@ export default function MainProjectsPage() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
-                    className="bg-white rounded-3xl border border-slate-200 p-12 text-center shadow-md"
-                  >
+                    className="bg-white rounded-3xl border border-slate-200 p-12 text-center shadow-md">
                     <AlertCircle className="w-8 h-8 text-slate-400 mx-auto mb-3" />
                     <div className="font-serif-display text-lg font-bold text-slate-900">No projects match your current filters</div>
                     <p className="text-xs text-slate-500 mt-1">Try resetting search terms or status filters.</p>
@@ -1029,8 +980,7 @@ export default function MainProjectsPage() {
                         setSelectedStatusFilter("All");
                         setSearchQuery("");
                       }}
-                      className="mt-4 px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-mono font-bold cursor-pointer"
-                    >
+                      className="mt-4 px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-mono font-bold cursor-pointer">
                       Reset Filters
                     </button>
                   </motion.div>
@@ -1044,8 +994,7 @@ export default function MainProjectsPage() {
                         exit={{ opacity: 0, scale: 0.96 }}
                         transition={{ duration: 0.45, delay: Math.min(i % 3, 2) * 0.06, ease: [0.22, 1, 0.36, 1] }}
                         key={p.id}
-                        className="group relative flex flex-col bg-white border border-slate-200/90 rounded-3xl overflow-hidden shadow-sm transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:border-[#6DAD45] hover:shadow-[0_22px_44px_-20px_rgba(109,173,69,0.45)] focus-within:border-[#6DAD45]"
-                      >
+                        className="group relative flex flex-col bg-white border border-slate-200/90 rounded-3xl overflow-hidden shadow-sm transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:border-[#6DAD45] hover:shadow-[0_22px_44px_-20px_rgba(109,173,69,0.45)] focus-within:border-[#6DAD45]">
                         {/* Site photo */}
                         <div className="relative aspect-[16/10] overflow-hidden bg-slate-900">
                           <Image
@@ -1054,19 +1003,16 @@ export default function MainProjectsPage() {
                             fill
                             sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                             className="object-cover transition-transform duration-700 ease-out will-change-transform group-hover:scale-[1.07]"
-                            style={{ objectPosition: IMAGE_FOCUS[i % IMAGE_FOCUS.length] }}
-                          />
+                            style={{ objectPosition: IMAGE_FOCUS[i % IMAGE_FOCUS.length] }} />
                           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-slate-950/20" />
 
                           <span
-                            className={`absolute top-4 left-4 font-mono font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full backdrop-blur-md ${
-                              p.status === "Commissioned"
-                                ? "bg-emerald-400 text-slate-950"
-                                : p.status === "Ongoing"
+                            className={`absolute top-4 left-4 font-mono font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full backdrop-blur-md ${p.status === "Commissioned"
+                              ? "bg-emerald-400 text-slate-950"
+                              : p.status === "Ongoing"
                                 ? "bg-sky-400 text-slate-950"
                                 : "bg-amber-400 text-slate-950"
-                            }`}
-                          >
+                              }`}>
                             {p.status}
                           </span>
 
@@ -1080,8 +1026,7 @@ export default function MainProjectsPage() {
                         <div className="relative flex flex-1 flex-col justify-between p-5 sm:p-6">
                           <span
                             aria-hidden
-                            className="absolute top-0 left-0 h-0.5 w-full bg-[#6DAD45] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
-                          />
+                            className="absolute top-0 left-0 h-0.5 w-full bg-[#6DAD45] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
                           <div>
                             <span className="inline-block bg-slate-100 border border-slate-200 text-slate-700 font-mono text-xs px-2.5 py-1 rounded-lg">
                               {p.scheme}
@@ -1089,14 +1034,13 @@ export default function MainProjectsPage() {
 
                             <div className="flex items-end justify-between border-t border-slate-100 mt-4 pt-4">
                               <span className="font-mono text-[11px] text-slate-500 font-bold uppercase tracking-wider">Solar Capacity</span>
-                              <span className="font-mono text-xl font-extrabold text-[#707B00] tabular-nums">{formatMW(p.capacityMW)}</span>
+                              <span className="font-sans-inter text-xl font-extrabold text-[#707B00] tabular-nums">{formatMW(p.capacityMW)}</span>
                             </div>
                           </div>
 
                           <button
                             onClick={() => setQuoteModalOpen(true)}
-                            className="mt-5 w-full flex items-center justify-between bg-slate-50 group-hover:bg-slate-900 group-hover:text-white text-slate-900 font-mono font-bold text-xs uppercase tracking-wider px-4 py-3 rounded-xl border border-slate-200 group-hover:border-slate-900 transition-colors duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-[#6DAD45]"
-                          >
+                            className="mt-5 w-full flex items-center justify-between bg-slate-50 group-hover:bg-slate-900 group-hover:text-white text-slate-900 font-mono font-bold text-xs uppercase tracking-wider px-4 py-3 rounded-xl border border-slate-200 group-hover:border-slate-900 transition-colors duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-[#6DAD45]">
                             <span>Discuss Project Details</span>
                             <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                           </button>
@@ -1115,8 +1059,7 @@ export default function MainProjectsPage() {
           <div id="footprint" className="scroll-mt-24">
             <FootprintMap
               selectedStateSlug={selectedStateSlug}
-              onSelectState={(slug) => setSelectedStateSlug(slug)}
-            />
+              onSelectState={(slug) => setSelectedStateSlug(slug)} />
           </div>
 
           {/* =========================================================
@@ -1129,8 +1072,7 @@ export default function MainProjectsPage() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={fadeInUp}
-                className="text-center max-w-3xl mx-auto mb-16"
-              >
+                className="text-center max-w-3xl mx-auto mb-16">
                 <AnimatedPillBadge className="mb-6">TURNKEY SCOPE &amp; OUTCOMES</AnimatedPillBadge>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
                   <span className="inline-block">Disciplined Delivery.</span> <br />
@@ -1139,14 +1081,12 @@ export default function MainProjectsPage() {
                     <svg
                       className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                       viewBox="0 0 100 20"
-                      preserveAspectRatio="none"
-                    >
+                      preserveAspectRatio="none">
                       <path
                         d="M0 15 Q 50 0 100 15"
                         stroke="currentColor"
                         strokeWidth="3.5"
-                        fill="transparent"
-                      />
+                        fill="transparent" />
                     </svg>
                   </span>
                 </h2>
@@ -1161,8 +1101,7 @@ export default function MainProjectsPage() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={staggerContainer}
-                className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16 lg:pt-8"
-              >
+                className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16 lg:pt-8">
                 {/* Progress line (desktop): draws left to right on enter */}
                 <div className="hidden lg:block absolute top-[3px] left-0 right-0 h-px bg-slate-200" aria-hidden>
                   <motion.div
@@ -1171,26 +1110,22 @@ export default function MainProjectsPage() {
                       visible: { scaleX: 1, transition: { duration: 1.4, ease: [0.65, 0, 0.35, 1], delay: 0.2 } },
                     }}
                     style={{ transformOrigin: "left center" }}
-                    className="h-full bg-[#6DAD45]"
-                  />
+                    className="h-full bg-[#6DAD45]" />
                 </div>
 
                 {EPC_SCOPE_STEPS.map((step) => (
                   <motion.div
                     key={step.num}
                     variants={fadeInUp}
-                    className="relative group cursor-default"
-                  >
+                    className="relative group cursor-default">
                     <span
                       aria-hidden
-                      className="hidden lg:block absolute -top-8 left-0 w-[7px] h-[7px] ml-[4px] rounded-full bg-white border-2 border-[#6DAD45] group-hover:bg-[#6DAD45] transition-colors"
-                    />
+                      className="hidden lg:block absolute -top-8 left-0 w-[7px] h-[7px] ml-[4px] rounded-full bg-white border-2 border-[#6DAD45] group-hover:bg-[#6DAD45] transition-colors" />
                     <div className="h-full bg-[#F8FAF8] border border-slate-200 rounded-2xl p-6 sm:p-7 flex flex-col relative overflow-hidden transition-[border-color,box-shadow,transform] duration-300 group-hover:border-[#6DAD45] group-hover:-translate-y-1 group-hover:shadow-[0_16px_36px_-18px_rgba(109,173,69,0.4)]">
                       <span
                         aria-hidden
-                        className="absolute top-0 left-0 h-0.5 w-full bg-[#6DAD45] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
-                      />
-                      <span className="font-mono text-5xl font-semibold leading-none text-slate-200 group-hover:text-[#6DAD45]/40 transition-colors duration-300 tabular-nums mb-5">
+                        className="absolute top-0 left-0 h-0.5 w-full bg-[#6DAD45] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+                      <span className="font-sans-inter text-5xl font-bold leading-none text-slate-200 group-hover:text-[#6DAD45]/40 transition-colors duration-300 tabular-nums mb-5">
                         {step.num}
                       </span>
                       <h3 className="font-serif-display text-lg font-bold text-slate-900 mb-2">{step.title}</h3>
@@ -1206,8 +1141,7 @@ export default function MainProjectsPage() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={fadeInUp}
-                className="bg-slate-900 text-white rounded-3xl p-6 sm:p-10 lg:p-12 relative overflow-hidden shadow-2xl border border-slate-800"
-              >
+                className="bg-slate-900 text-white rounded-3xl p-6 sm:p-10 lg:p-12 relative overflow-hidden shadow-2xl border border-slate-800">
                 <div className="absolute -top-12 -right-12 w-72 h-72 bg-[#D4E012]/10 rounded-full blur-3xl pointer-events-none" />
 
                 <div className="max-w-3xl mb-8 sm:mb-10 relative z-10">
@@ -1225,14 +1159,12 @@ export default function MainProjectsPage() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, amount: 0.5 }}
                       transition={{ duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                      className="group relative pt-5"
-                    >
+                      className="group relative pt-5">
                       <span className="absolute top-0 left-0 right-0 h-px bg-white/10" aria-hidden />
                       <span
                         aria-hidden
-                        className="absolute top-0 left-0 h-px w-full bg-[#6DAD45] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
-                      />
-                      <CountUp to={stat.to} suffix={stat.suffix} className={`block font-mono text-4xl sm:text-5xl font-semibold tracking-tight ${stat.accent}`} />
+                        className="absolute top-0 left-0 h-px w-full bg-[#6DAD45] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+                      <CountUp to={stat.to} suffix={stat.suffix} className={`block font-sans-inter text-4xl sm:text-5xl font-bold tracking-tight tabular-nums ${stat.accent}`} />
                       <div className="text-xs font-mono text-slate-300 mt-2 uppercase font-bold tracking-wide">{stat.label}</div>
                       <p className="text-xs text-slate-400 mt-1.5 leading-snug">{stat.note}</p>
                     </motion.div>
@@ -1247,8 +1179,7 @@ export default function MainProjectsPage() {
           onOpenQuote={() => setQuoteModalOpen(true)}
           headline="Have a project"
           accent="worth building?"
-          description="Solar. BESS Storage. Substations. Agrivoltaics. Roads. Bridges. Buildings. Tell us where you want to build and let's map the execution path together."
-        />
+          description="Solar. BESS Storage. Substations. Agrivoltaics. Roads. Bridges. Buildings. Tell us where you want to build and let's map the execution path together." />
 
         <Footer />
         <QuoteModal isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} />

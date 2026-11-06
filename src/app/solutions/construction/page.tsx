@@ -15,7 +15,7 @@ import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import FinalCTA from "@/components/FinalCTA";
 import RelatedSolutionsSection from "@/components/solutions/RelatedSolutionsSection";
 import ConstructionScene from "@/components/solutions/ConstructionScene";
-import { CheckCircle2, ArrowRight } from "lucide-react";
+import { CheckCircle2, ArrowRight, ArrowUpRight } from "lucide-react";
 
 /* ---------- Content ---------- */
 
@@ -85,7 +85,7 @@ const stages = [
 /* ---------- Stage text block ---------- */
 
 function StageText({ stage, index, onActive }: { stage: (typeof stages)[number]; index: number; onActive: (i: number) => void }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref=useRef<HTMLDivElement>(null);
   // Active when the block crosses the middle band of the viewport
   const inView = useInView(ref, { margin: "-45% 0px -45% 0px" });
   useEffect(() => {
@@ -121,7 +121,7 @@ export default function ConstructionPage() {
   const heroRef = useRef<HTMLElement>(null);
 
   // Transform + opacity only, so scrolling stays on the compositor
-    const {
+  const {
     isPastHero,
     bgScale,
     bgDim,
@@ -138,11 +138,9 @@ export default function ConstructionPage() {
 
         {/* 01 / HERO */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
-          aria-hidden={isPastHero}
-        >
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
+          aria-hidden={isPastHero}>
           <section ref={heroRef} className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none">
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full will-change-transform">
               <Image
@@ -152,112 +150,129 @@ export default function ConstructionPage() {
                 priority
                 quality={85}
                 sizes="100vw"
-                className="object-cover object-center opacity-85"
-              />
+                className="object-cover object-center opacity-85" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
             </motion.div>
 
+            {/* Luminous Glow Behind Subject */}
+            <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#D4E012]/15 rounded-full blur-3xl pointer-events-none" />
+
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-24 flex flex-col items-center text-center will-change-transform"
-            >
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-32 sm:pt-36 pb-4 flex flex-col items-center text-center will-change-transform">
               <div className="max-w-4xl flex flex-col items-center text-center">
-                <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 leading-[1.08] drop-shadow-lg">
-                  Where the plan <br />
-                  <span className="text-[#D4E012] italic font-normal">becomes a plant</span>
+                {/* Hero Headline */}
+                <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.1] mb-6 [text-shadow:_0_4px_24px_rgba(0,0,0,0.95)] [text-wrap:balance]">
+                  Where the plan
+                  <br />
+                  <span className="italic font-normal text-[#D4E012] relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
+                    becomes a plant.
+                    <svg
+                      className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
+                      viewBox="0 0 100 20"
+                      preserveAspectRatio="none"
+                      aria-hidden>
+                      <path
+                        d="M0 15 Q 50 0 100 15"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        fill="transparent" />
+                    </svg>
+                  </span>
                 </h1>
-                <p className="text-base sm:text-xl text-slate-200 max-w-3xl leading-relaxed font-normal drop-shadow-md">
-                  Safe, careful site construction and erection, from the first stake in the ground to the day the plant is switched on.
+
+                {/* Sub-headline */}
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-100 font-normal max-w-2xl leading-relaxed tracking-wide [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)] [text-wrap:balance]">
+                  Safe, careful site construction and erection,
+                  <br className="hidden sm:inline" />
+                  {" "}from the first stake in the ground to the day the plant is switched on.
                 </p>
               </div>
             </motion.div>
 
-            <ScrollIndicator opacity={indicatorOpacity} />
-          </section>
-        </div>
+        <ScrollIndicator opacity={indicatorOpacity} />
+      </section>
+    </div>
 
-        {/* Scroll Spacer (Matches Hero height to establish scroll track) */}
-        <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
+    {/* Scroll Spacer (Matches Hero height to establish scroll track) */ }
+    <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
 
-
-        {/* 02 / CONTENT SHEET */}
-        <div className="relative z-10 border-t border-slate-200/60 bg-[#F8FAF8] shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
-          {/* Intro */}
-          <section className="pt-16 sm:pt-24 pb-6 bg-[#F8FAF8]">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <ScrollReveal>
-                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12">
-                  <AnimatedPillBadge className="mb-6">SITE CONSTRUCTION &amp; ERECTION</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-                    <span className="inline-block">Watch a plant</span> <br />
-                    <span className="text-[#6DAD45] italic relative inline-block">
-                      take shape
-                      <svg
-                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
-                        viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
-                        <path
-                          d="M0 15 Q 50 0 100 15"
-                          stroke="currentColor"
-                          strokeWidth="3.5"
-                          fill="transparent"
-                        />
-                      </svg>
-                    </span>
-                  </h2>
-                  <p className="mt-5 text-slate-600 text-base sm:text-lg leading-relaxed">
-                    At Sarhat Energy, we provide complete site construction and erection services for renewable energy projects, with careful execution, structural stability and on-time completion. Our work covers utility-scale, commercial and rooftop solar, always with quality, safety and efficiency in focus.
-                  </p>
-                  <p className="mt-4 text-slate-600 text-base sm:text-lg leading-relaxed">
-                    Scroll through the six stages and watch the plant build up as we go.
-                  </p>
-                </div>
-              </ScrollReveal>
-            </div>
-          </section>
-
-          {/* Build-up: pinned scene assembles as stages scroll past */}
-          <section className="pb-16 sm:pb-24 bg-[#F8FAF8] border-b border-slate-200/80">
-            <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-14">
-                <div className="contents lg:block">
-                  <div className="sticky top-[72px] z-20 max-lg:h-[30vh] lg:top-24">
-                    <div className="relative h-full overflow-hidden rounded-3xl bg-slate-950 shadow-xl ring-1 ring-slate-200 lg:aspect-[8/5] lg:h-auto">
-                      <ConstructionScene stage={active} />
-                      <div className="absolute left-4 top-4 rounded-full bg-black/55 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-widest text-[#D4E012] backdrop-blur-sm">
-                        Stage {String(active + 1).padStart(2, "0")} / {String(stages.length).padStart(2, "0")}
-                      </div>
-                      <div className="absolute inset-x-0 bottom-0 h-1 bg-white/10">
-                        <div
-                          className="h-full origin-left bg-gradient-to-r from-[#6DAD45] to-[#D4E012] transition-transform duration-500 motion-reduce:transition-none"
-                          style={{ transform: `scaleX(${(active + 1) / stages.length})` }}
-                        />
-                      </div>
-                    </div>
-                    <p className="mt-3 hidden text-center text-xs text-slate-500 lg:block">{stages[active].tag}</p>
+          {/* 02 / CONTENT SHEET */ }
+          <div className="relative z-10 border-t border-slate-200/60 bg-[#F8FAF8] shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
+            {/* Intro */ }
+            <section id="build-stages" className="pt-16 sm:pt-24 pb-6 bg-[#F8FAF8]">
+              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <ScrollReveal>
+                  <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12">
+                    <AnimatedPillBadge className="mb-6">SITE CONSTRUCTION &amp; ERECTION</AnimatedPillBadge>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                      <span className="inline-block">Watch a plant</span> <br />
+                      <span className="text-[#6DAD45] italic relative inline-block">
+                        take shape
+                        <svg
+                          className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                          viewBox="0 0 100 20"
+                          preserveAspectRatio="none">
+                          <path
+                            d="M0 15 Q 50 0 100 15"
+                            stroke="currentColor"
+                            strokeWidth="3.5"
+                            fill="transparent" />
+                        </svg>
+                      </span>
+                    </h2>
+                    <p className="mt-5 text-slate-600 text-base sm:text-lg max-w-3xl mx-auto text-center leading-relaxed">
+                      At Sarhat Energy, we provide complete site construction and erection services for renewable energy projects, with careful execution, structural stability and on-time completion. Our work covers utility-scale, commercial and rooftop solar, always with quality, safety and efficiency in focus.
+                    </p>
+                    <p className="mt-4 text-slate-600 text-base sm:text-lg max-w-3xl mx-auto text-center leading-relaxed">
+                      Scroll through the six stages and watch the plant build up as we go.
+                    </p>
                   </div>
-                </div>
+                </ScrollReveal>
+              </div>
+                </section>
 
-                <div>
-                  {stages.map((s, i) => (
-                    <StageText key={s.tag} stage={s} index={i} onActive={setActive} />
-                  ))}
+    {/* Build-up: pinned scene assembles as stages scroll past */ }
+    <section className="pb-16 sm:pb-24 bg-[#F8FAF8] border-b border-slate-200/80">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-14">
+          <div className="contents lg:block">
+            <div className="sticky top-[72px] z-20 max-lg:h-[30vh] lg:top-24">
+              <div className="relative h-full overflow-hidden rounded-3xl bg-slate-950 shadow-xl ring-1 ring-slate-200 lg:aspect-[8/5] lg:h-auto">
+                <ConstructionScene stage={active} />
+                <div className="absolute left-4 top-4 rounded-full bg-black/55 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-widest text-[#D4E012] backdrop-blur-sm">
+                  Stage {String(active + 1).padStart(2, "0")} / {String(stages.length).padStart(2, "0")}
+                </div>
+                <div className="absolute inset-x-0 bottom-0 h-1 bg-white/10">
+                  <div
+                    className="h-full origin-left bg-gradient-to-r from-[#6DAD45] to-[#D4E012] transition-transform duration-500 motion-reduce:transition-none"
+                    style={{ transform: `scaleX(${(active + 1) / stages.length})` }} />
                 </div>
               </div>
+              <p className="mt-3 hidden text-center text-xs text-slate-500 lg:block">{stages[active].tag}</p>
             </div>
-          </section>
+          </div>
 
-          {/* RELATED SOLUTIONS */}
-          <RelatedSolutionsSection currentHref="/solutions/construction" />
-
-          {/* Final CTA */}
-          <FinalCTA onOpenQuote={() => setQuoteModalOpen(true)} />
-          <Footer />
+          <div>
+            {stages.map((s, i) => (
+              <StageText key={s.tag} stage={s} index={i} onActive={setActive} />
+            ))}
+          </div>
         </div>
+      </div>
+    </section>
 
-        <QuoteModal isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} />
-      </main>
-    </SmoothScroll>
-  );
+    {/* RELATED SOLUTIONS */ }
+    <RelatedSolutionsSection currentHref = "/solutions/construction" />
+
+      {/* Final CTA */ }
+      <FinalCTA onOpenQuote = {() => setQuoteModalOpen(true)
+} />
+  <Footer />
+  </div>
+
+  <QuoteModal isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} />
+</main>
+</SmoothScroll>
+);
 }

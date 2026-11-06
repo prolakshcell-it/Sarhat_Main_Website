@@ -17,7 +17,7 @@ export default function SolutionTabsBar() {
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting) setActive(capabilities.findIndex((c) => c.id === e.target.id));
+          if (e.isIntersecting) setActive(capabilities.findIndex((c) => c.id=== e.target.id));
         });
       },
       { rootMargin: "-35% 0px -55% 0px" },
@@ -35,7 +35,7 @@ export default function SolutionTabsBar() {
   }, [active, reduce]);
 
   const jump = (i: number) => {
-    const id = capabilities[i].id;
+    const id=capabilities[i].id;
     document.getElementById(id)?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
     window.history.replaceState(null, "", `#${id}`);
   };
@@ -53,23 +53,19 @@ export default function SolutionTabsBar() {
               type="button"
               onClick={() => jump(i)}
               aria-current={i === active ? "true" : undefined}
-              className={`relative min-h-[48px] shrink-0 cursor-pointer whitespace-nowrap px-3 text-xs font-bold uppercase tracking-[0.12em] transition-colors focus:outline-none focus-visible:text-[#707B00] sm:px-4 ${
-                i === active ? "text-[#0F172A]" : "text-slate-500 hover:text-[#0F172A]"
-              }`}
-            >
+              className={`relative min-h-[48px] shrink-0 cursor-pointer whitespace-nowrap px-3 text-xs font-bold uppercase tracking-[0.12em] transition-colors focus:outline-none focus-visible:text-[#707B00] sm:px-4 ${i === active ? "text-[#0F172A]" : "text-slate-500 hover:text-[#0F172A]"
+                }`}>
               {c.title}
               <span
                 aria-hidden
-                className={`absolute inset-x-3 bottom-0 h-[2px] origin-left rounded-full bg-[#6DAD45] transition-transform duration-300 sm:inset-x-4 ${
-                  i === active ? "scale-x-100" : "scale-x-0"
-                }`}
-              />
+                className={`absolute inset-x-3 bottom-0 h-[2px] origin-left rounded-full bg-[#6DAD45] transition-transform duration-300 sm:inset-x-4 ${i === active ? "scale-x-100" : "scale-x-0"
+                  }`} />
             </button>
           ))}
         </nav>
-        <span className="hidden shrink-0 font-mono text-xs text-slate-500 sm:block" aria-hidden>
-          <span className="font-bold text-[#707B00]">{pad(active)}</span> / {pad(capabilities.length - 1)}
-        </span>
+          <span className="hidden shrink-0 font-sans-inter tabular-nums text-xs text-slate-500 sm:block" aria-hidden>
+            <span className="font-bold text-[#707B00]">{pad(active)}</span> / {pad(capabilities.length - 1)}
+          </span>
       </div>
     </div>
   );

@@ -237,8 +237,7 @@ function ContactPageInner() {
         <div
           className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
             }`}
-          aria-hidden={isPastHero}
-        >
+          aria-hidden={isPastHero}>
           <section className="relative h-full w-full flex flex-col items-center justify-center overflow-hidden bg-black text-white select-none">
             {/* Background Image Layer */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
@@ -247,8 +246,7 @@ function ContactPageInner() {
                 alt="Contact Sarhat Energy"
                 fill
                 priority
-                className="object-cover object-center opacity-85"
-              />
+                className="object-cover object-center opacity-85" />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
               {/* Soft Dark Vignette Scrim */}
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
@@ -256,8 +254,7 @@ function ContactPageInner() {
 
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 flex flex-col items-center text-center will-change-transform"
-            >
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 flex flex-col items-center text-center will-change-transform">
               <ScrollReveal direction="up" distance={30}>
                 <div className="max-w-4xl flex flex-col items-center text-center">
                   <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center max-w-4xl drop-shadow-lg">
@@ -302,14 +299,12 @@ function ContactPageInner() {
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden
-                      >
+                        aria-hidden>
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -325,10 +320,9 @@ function ContactPageInner() {
                   <button
                     onClick={() => setActiveSubheading("inquiry")}
                     className={`flex-1 py-3 px-5 rounded-full text-xs font-mono uppercase tracking-widest font-extrabold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 ${activeSubheading === "inquiry"
-                        ? "bg-slate-950 text-white shadow-xl scale-105"
-                        : "text-slate-600 hover:text-slate-950 hover:bg-slate-300/50"
-                      }`}
-                  >
+                      ? "bg-slate-950 text-white shadow-xl scale-105"
+                      : "text-slate-600 hover:text-slate-950 hover:bg-slate-300/50"
+                      }`}>
                     <FileText className="w-4 h-4 text-[#D4E012]" />
                     <span>INQUIRY</span>
                   </button>
@@ -336,10 +330,9 @@ function ContactPageInner() {
                   <button
                     onClick={() => setActiveSubheading("support")}
                     className={`flex-1 py-3 px-5 rounded-full text-xs font-mono uppercase tracking-widest font-extrabold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 ${activeSubheading === "support"
-                        ? "bg-slate-950 text-white shadow-xl scale-105"
-                        : "text-slate-600 hover:text-slate-950 hover:bg-slate-300/50"
-                      }`}
-                  >
+                      ? "bg-slate-950 text-white shadow-xl scale-105"
+                      : "text-slate-600 hover:text-slate-950 hover:bg-slate-300/50"
+                      }`}>
                     <Headphones className="w-4 h-4 text-[#D4E012]" />
                     <span>CUSTOMER SUPPORT</span>
                   </button>
@@ -354,8 +347,7 @@ function ContactPageInner() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -15 }}
                     transition={{ duration: 0.3 }}
-                    className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start"
-                  >
+                    className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                     {/* Left Column: Inquiry Form Card */}
                     <div className="lg:col-span-6">
                       <ScrollReveal direction="left" distance={40}>
@@ -372,14 +364,12 @@ function ContactPageInner() {
                                   className="absolute -bottom-1.5 left-0 w-full h-3 text-[#6DAD45]"
                                   viewBox="0 0 100 20"
                                   preserveAspectRatio="none"
-                                  aria-hidden="true"
-                                >
+                                  aria-hidden="true">
                                   <path
                                     d="M0 15 Q 50 0 100 15"
                                     stroke="currentColor"
                                     strokeWidth="3.5"
-                                    fill="transparent"
-                                  />
+                                    fill="transparent" />
                                 </svg>
                               </span>
                             </h2>
@@ -389,8 +379,7 @@ function ContactPageInner() {
                             <motion.div
                               initial={{ opacity: 0, scale: 0.95 }}
                               animate={{ opacity: 1, scale: 1 }}
-                              className="py-16 text-center space-y-4"
-                            >
+                              className="py-16 text-center space-y-4">
                               <div className="w-16 h-16 bg-[#707B00]/10 text-[#707B00] rounded-full flex items-center justify-center mx-auto border border-[#707B00]/30">
                                 <CheckCircle2 className="w-8 h-8" />
                               </div>
@@ -401,8 +390,7 @@ function ContactPageInner() {
                               <button
                                 type="button"
                                 onClick={() => setSubmitted(false)}
-                                className="inline-flex items-center gap-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-mono font-bold text-xs uppercase tracking-wider px-6 py-2.5 transition-all cursor-pointer"
-                              >
+                                className="inline-flex items-center gap-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-mono font-bold text-xs uppercase tracking-wider px-6 py-2.5 transition-all cursor-pointer">
                                 Submit another enquiry
                               </button>
                             </motion.div>
@@ -421,8 +409,7 @@ function ContactPageInner() {
                                     onChange={(e) =>
                                       setFormData({ ...formData, name: e.target.value })
                                     }
-                                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
-                                  />
+                                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all" />
                                 </div>
                                 <div>
                                   <label className="block text-[11px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
@@ -435,8 +422,7 @@ function ContactPageInner() {
                                     onChange={(e) =>
                                       setFormData({ ...formData, company: e.target.value })
                                     }
-                                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
-                                  />
+                                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all" />
                                 </div>
                               </div>
 
@@ -453,8 +439,7 @@ function ContactPageInner() {
                                     onChange={(e) =>
                                       setFormData({ ...formData, email: e.target.value })
                                     }
-                                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
-                                  />
+                                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all" />
                                 </div>
                                 <div>
                                   <label className="block text-[11px] font-mono font-bold text-slate-600 uppercase tracking-wider mb-1.5">
@@ -467,8 +452,7 @@ function ContactPageInner() {
                                     onChange={(e) =>
                                       setFormData({ ...formData, phone: e.target.value })
                                     }
-                                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
-                                  />
+                                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all" />
                                 </div>
                               </div>
 
@@ -483,8 +467,7 @@ function ContactPageInner() {
                                     onChange={(e) =>
                                       setFormData({ ...formData, product: e.target.value })
                                     }
-                                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 outline-none transition-all cursor-pointer"
-                                  >
+                                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 outline-none transition-all cursor-pointer">
                                     <option value="" disabled>
                                       Select a product
                                     </option>
@@ -523,8 +506,7 @@ function ContactPageInner() {
                                     onChange={(e) =>
                                       setFormData({ ...formData, state: e.target.value })
                                     }
-                                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 outline-none transition-all cursor-pointer"
-                                  >
+                                    className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 outline-none transition-all cursor-pointer">
                                     <option value="" disabled>
                                       Select a state
                                     </option>
@@ -551,8 +533,7 @@ function ContactPageInner() {
                                   onChange={(e) =>
                                     setFormData({ ...formData, scope: e.target.value })
                                   }
-                                  className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all"
-                                />
+                                  className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all" />
                               </div>
 
                               {/* Row 5: Project Details */}
@@ -567,8 +548,7 @@ function ContactPageInner() {
                                   onChange={(e) =>
                                     setFormData({ ...formData, details: e.target.value })
                                   }
-                                  className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all resize-y"
-                                />
+                                  className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all resize-y" />
                               </div>
 
                               {/* Send Enquiry Button */}
@@ -576,8 +556,7 @@ function ContactPageInner() {
                                 <button
                                   type="submit"
                                   disabled={isSubmitting}
-                                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] px-7 py-3.5 text-xs font-mono font-extrabold uppercase tracking-wider text-black shadow-lg shadow-[#D4E012]/30 transition-all duration-200 hover:-translate-y-px cursor-pointer disabled:opacity-60"
-                                >
+                                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] px-7 py-3.5 text-xs font-mono font-extrabold uppercase tracking-wider text-black shadow-lg shadow-[#D4E012]/30 transition-all duration-200 hover:-translate-y-px cursor-pointer disabled:opacity-60">
                                   <span>{isSubmitting ? "SENDING..." : "SEND ENQUIRY"}</span>
                                   <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
                                 </button>
@@ -636,16 +615,14 @@ function ContactPageInner() {
                               allowFullScreen={false}
                               loading="lazy"
                               referrerPolicy="no-referrer-when-downgrade"
-                              className="w-full h-full grayscale hover:grayscale-0 transition-all duration-500"
-                            ></iframe>
+                              className="w-full h-full grayscale hover:grayscale-0 transition-all duration-500"></iframe>
 
                             {/* Floating Google Maps Overlay Button */}
                             <a
                               href="https://maps.google.com/?q=Aditya+High+Street+Lal+Kuan+Ghaziabad"
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="absolute bottom-3 right-3 bg-white/95 text-slate-900 text-xs font-bold px-4 py-2 rounded-full border border-slate-300 shadow-md flex items-center gap-1.5 hover:bg-slate-950 hover:text-white transition-all backdrop-blur-md"
-                            >
+                              className="absolute bottom-3 right-3 bg-white/95 text-slate-900 text-xs font-bold px-4 py-2 rounded-full border border-slate-300 shadow-md flex items-center gap-1.5 hover:bg-slate-950 hover:text-white transition-all backdrop-blur-md">
                               <span>Open in Google Maps</span>
                               <ArrowUpRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-white" />
                             </a>
@@ -662,8 +639,7 @@ function ContactPageInner() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -15 }}
                     transition={{ duration: 0.3 }}
-                    className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start"
-                  >
+                    className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                     {/* Left Column: Support Ticket Form */}
                     <div className="lg:col-span-6">
                       <ScrollReveal direction="left" distance={40}>
@@ -684,8 +660,7 @@ function ContactPageInner() {
                             <motion.div
                               initial={{ opacity: 0, scale: 0.95 }}
                               animate={{ opacity: 1, scale: 1 }}
-                              className="py-16 text-center space-y-4"
-                            >
+                              className="py-16 text-center space-y-4">
                               <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto border border-emerald-300">
                                 <CheckCircle2 className="w-8 h-8" />
                               </div>
@@ -709,15 +684,13 @@ function ContactPageInner() {
                                   placeholder="Name"
                                   value={supportData.name}
                                   onChange={(e) => setSupportData({ ...supportData, name: e.target.value })}
-                                  className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] outline-none transition-colors"
-                                />
+                                  className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] outline-none transition-colors" />
                                 <input
                                   type="text"
                                   placeholder="Plant / Company Name"
                                   value={supportData.company}
                                   onChange={(e) => setSupportData({ ...supportData, company: e.target.value })}
-                                  className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] outline-none transition-colors"
-                                />
+                                  className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] outline-none transition-colors" />
                               </div>
 
                               {/* Phone & Email */}
@@ -728,16 +701,14 @@ function ContactPageInner() {
                                   placeholder="Phone"
                                   value={supportData.phone}
                                   onChange={(e) => setSupportData({ ...supportData, phone: e.target.value })}
-                                  className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] outline-none transition-colors"
-                                />
+                                  className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] outline-none transition-colors" />
                                 <input
                                   type="email"
                                   required
                                   placeholder="Email"
                                   value={supportData.email}
                                   onChange={(e) => setSupportData({ ...supportData, email: e.target.value })}
-                                  className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] outline-none transition-colors"
-                                />
+                                  className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] outline-none transition-colors" />
                               </div>
 
                               {/* Project ID & Issue Category */}
@@ -747,15 +718,13 @@ function ContactPageInner() {
                                   placeholder="Project ID / Plant Code (Optional)"
                                   value={supportData.projectId}
                                   onChange={(e) => setSupportData({ ...supportData, projectId: e.target.value })}
-                                  className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] outline-none transition-colors font-mono"
-                                />
+                                  className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] outline-none transition-colors font-mono" />
 
                                 <div className="relative">
                                   <select
                                     value={supportData.issueCategory}
                                     onChange={(e) => setSupportData({ ...supportData, issueCategory: e.target.value })}
-                                    className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-xs sm:text-sm text-[#0F172A] outline-none transition-colors appearance-none cursor-pointer pr-10"
-                                  >
+                                    className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-xs sm:text-sm text-[#0F172A] outline-none transition-colors appearance-none cursor-pointer pr-10">
                                     <option value="Inverter & SCADA Telemetry">Inverter & SCADA Telemetry</option>
                                     <option value="Grid Synchronization Outage">Grid Synchronization Outage</option>
                                     <option value="Substation Transformer Bay">Substation Transformer Bay</option>
@@ -771,8 +740,7 @@ function ContactPageInner() {
                                 <select
                                   value={supportData.priority}
                                   onChange={(e) => setSupportData({ ...supportData, priority: e.target.value })}
-                                  className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] outline-none transition-colors appearance-none cursor-pointer pr-10"
-                                >
+                                  className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] outline-none transition-colors appearance-none cursor-pointer pr-10">
                                   <option value="Normal / Standard SLA">Priority: Normal (24-Hr SLA)</option>
                                   <option value="Urgent">Priority: High / Urgent (6-Hr SLA)</option>
                                   <option value="Critical Outage">Priority: Critical Plant Outage (2-Hr SLA)</option>
@@ -788,8 +756,7 @@ function ContactPageInner() {
                                   placeholder="Describe the issue, alarm codes, or maintenance requirement"
                                   value={supportData.description}
                                   onChange={(e) => setSupportData({ ...supportData, description: e.target.value })}
-                                  className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] placeholder:text-slate-400 outline-none transition-colors resize-none"
-                                ></textarea>
+                                  className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] placeholder:text-slate-400 outline-none transition-colors resize-none"></textarea>
                               </div>
 
                               {supportError && (
@@ -802,8 +769,7 @@ function ContactPageInner() {
                               <button
                                 type="submit"
                                 disabled={isSupportSubmitting}
-                                className="w-full bg-slate-900 hover:bg-slate-800 disabled:opacity-60 text-white font-bold text-xs uppercase tracking-wider py-4 rounded-full transition-all duration-300 flex items-center justify-center gap-2 shadow-lg cursor-pointer mt-2"
-                              >
+                                className="w-full bg-slate-900 hover:bg-slate-800 disabled:opacity-60 text-white font-bold text-xs uppercase tracking-wider py-4 rounded-full transition-all duration-300 flex items-center justify-center gap-2 shadow-lg cursor-pointer mt-2">
                                 <Send className="w-4 h-4 text-[#D4E012]" />
                                 <span>{isSupportSubmitting ? "Submitting Ticket..." : "Submit Service Ticket"}</span>
                               </button>
@@ -822,7 +788,21 @@ function ContactPageInner() {
                               <Headphones className="w-4 h-4 text-emerald-600" /> 24/7 SUPPORT & O&M HELPLINE
                             </span>
                             <h2 className="text-3xl sm:text-4xl font-serif-display font-medium text-[#0F172A] tracking-tight leading-tight">
-                              Dedicated Plant Operations Assistance
+                              Dedicated Plant <br />
+                              <span className="text-[#6DAD45] italic relative inline-block">
+                                Operations Assistance.
+                                <svg
+                                  className="absolute -bottom-2 left-0 w-full h-2.5 text-[#6DAD45]"
+                                  viewBox="0 0 100 20"
+                                  preserveAspectRatio="none"
+                                  aria-hidden="true">
+                                  <path
+                                    d="M0 15 Q 50 0 100 15"
+                                    stroke="currentColor"
+                                    strokeWidth="3.5"
+                                    fill="transparent" />
+                                </svg>
+                              </span>
                             </h2>
                           </div>
 
@@ -834,8 +814,7 @@ function ContactPageInner() {
                             <div className="space-y-3">
                               <a
                                 href="tel:+919266711125"
-                                className="flex items-center gap-3 p-3 rounded-2xl bg-slate-950 border border-slate-800 hover:border-[#D4E012] transition-all group"
-                              >
+                                className="flex items-center gap-3 p-3 rounded-2xl bg-slate-950 border border-slate-800 hover:border-[#D4E012] transition-all group">
                                 <div className="w-10 h-10 rounded-xl bg-[#D4E012] text-black flex items-center justify-center shrink-0">
                                   <Phone className="w-5 h-5" />
                                 </div>
@@ -849,8 +828,7 @@ function ContactPageInner() {
 
                               <a
                                 href="mailto:info@sarhatenergy.com"
-                                className="flex items-center gap-3 p-3 rounded-2xl bg-slate-950 border border-slate-800 hover:border-[#D4E012] transition-all group"
-                              >
+                                className="flex items-center gap-3 p-3 rounded-2xl bg-slate-950 border border-slate-800 hover:border-[#D4E012] transition-all group">
                                 <div className="w-10 h-10 rounded-xl bg-[#D4E012] text-black flex items-center justify-center shrink-0">
                                   <Mail className="w-5 h-5" />
                                 </div>
@@ -922,8 +900,7 @@ function ContactPageInner() {
                       {/* Phone */}
                       <a
                         href="tel:+919266711125"
-                        className="block bg-slate-950/80 border border-slate-800 hover:border-[#D4E012]/60 rounded-2xl p-5 transition-all group"
-                      >
+                        className="block bg-slate-950/80 border border-slate-800 hover:border-[#D4E012]/60 rounded-2xl p-5 transition-all group">
                         <div className="text-[10px] font-mono text-[#D4E012] uppercase tracking-widest mb-1">
                           PHONE
                         </div>
@@ -935,8 +912,7 @@ function ContactPageInner() {
                       {/* Email */}
                       <a
                         href="mailto:info@sarhatenergy.com"
-                        className="block bg-slate-950/80 border border-slate-800 hover:border-[#D4E012]/60 rounded-2xl p-5 transition-all group"
-                      >
+                        className="block bg-slate-950/80 border border-slate-800 hover:border-[#D4E012]/60 rounded-2xl p-5 transition-all group">
                         <div className="text-[10px] font-mono text-[#D4E012] uppercase tracking-widest mb-1">
                           EMAIL
                         </div>
@@ -950,8 +926,7 @@ function ContactPageInner() {
                         href="https://www.linkedin.com/company/sarhatenergy/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block bg-slate-950/80 border border-slate-800 hover:border-[#D4E012]/60 rounded-2xl p-5 transition-all group"
-                      >
+                        className="block bg-slate-950/80 border border-slate-800 hover:border-[#D4E012]/60 rounded-2xl p-5 transition-all group">
                         <div className="text-[10px] font-mono text-[#D4E012] uppercase tracking-widest mb-1">
                           LINKEDIN
                         </div>
@@ -984,8 +959,7 @@ export default function ContactPage() {
         <div className="min-h-screen bg-black flex items-center justify-center text-white">
           <div className="w-8 h-8 rounded-full border-2 border-[#D4E012] border-t-transparent animate-spin" />
         </div>
-      }
-    >
+      }>
       <ContactPageInner />
     </Suspense>
   );

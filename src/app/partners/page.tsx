@@ -33,6 +33,7 @@ import QuoteModal from "@/components/QuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
+import ProductFAQ from "@/components/ProductFAQ";
 import { useHeroScroll } from "@/hooks/useHeroScroll";
 
 export default function PartnersPage() {
@@ -262,11 +263,9 @@ export default function PartnersPage() {
             1. HERO SECTION (Fixed background & Centered Content)
             ========================================== */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
-          aria-hidden={isPastHero}
-        >
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
+          aria-hidden={isPastHero}>
           <section className="relative h-full w-full flex flex-col justify-center items-center bg-black text-white overflow-hidden select-none">
             {/* Cinematic High-Res Fullscreen Background Image Layer */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
@@ -276,8 +275,7 @@ export default function PartnersPage() {
                 fill
                 priority
                 quality={100}
-                className="object-cover object-center opacity-90 transform scale-105"
-              />
+                className="object-cover object-center opacity-90 transform scale-105" />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
               {/* High-Contrast Readability Gradient Overlay Scrims */}
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
@@ -285,26 +283,27 @@ export default function PartnersPage() {
 
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 w-full relative z-10 pt-16 flex flex-col items-center text-center will-change-transform"
-            >
+              className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 w-full relative z-10 pt-16 flex flex-col items-center text-center will-change-transform">
               <ScrollReveal direction="up" distance={40}>
-                <div className="max-w-4xl flex flex-col items-center text-center">
-                  {/* Main Headline */}
-                  <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.12] mb-6 text-center drop-shadow-lg">
-                    Become a Sarhat <br />
-                    <span className="text-[#D4E012] italic relative inline-block">
-                      Solar Partner.
-                    </span>
-                  </h1>
+                  <div className="max-w-5xl flex flex-col items-center text-center w-full">
+                    {/* Main Headline */}
+                    <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.12] mb-6 text-center drop-shadow-lg">
+                      Become a Sarhat <br />
+                      <span className="text-[#D4E012] italic relative inline-block">
+                        Solar Partner.
+                      </span>
+                    </h1>
 
-                  {/* Subtitle Paragraph */}
-                  <p className="text-sm sm:text-base md:text-lg text-slate-200 font-normal max-w-5xl text-center leading-relaxed mb-6 tracking-wide drop-shadow-md">
-                    Join India&apos;s growing solar economy. Earn commissions on lead referrals or co-execute projects as a Solar Project Partner — with Sarhat&apos;s full technical, marketing, and lead support behind you.
-                  </p>
-
-                  {/* Accent Yellow Underline */}
-                  <div className="w-20 h-1.5 bg-[#D4E012] rounded-full shadow-[0_0_12px_#D4E012] mx-auto"></div>
-                </div>
+                    {/* Subtitle Paragraph */}
+                    <p className="text-xs sm:text-sm md:text-base lg:text-lg text-slate-100 font-normal max-w-5xl mx-auto text-center leading-relaxed tracking-wide [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)]">
+                      <span className="block sm:whitespace-nowrap">
+                        Join India&apos;s growing solar economy. Earn commissions on lead referrals or co-execute projects
+                      </span>
+                      <span className="block sm:whitespace-nowrap mt-1 sm:mt-1.5">
+                        as a Solar Project Partner — with Sarhat&apos;s full technical, marketing, and lead support behind you.
+                      </span>
+                    </p>
+                  </div>
               </ScrollReveal>
             </motion.div>
 
@@ -340,14 +339,12 @@ export default function PartnersPage() {
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-2.5 text-[#6DAD45]"
                         viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
+                        preserveAspectRatio="none">
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -399,8 +396,7 @@ export default function PartnersPage() {
                           className={`absolute pointer-events-auto cursor-pointer transition-all duration-300 flex items-center gap-2.5 bg-white border ${isActive
                             ? "border-[#D4E012] ring-4 ring-[#D4E012]/30 shadow-xl scale-110 z-30"
                             : "border-slate-200 shadow-md hover:border-[#6DAD45] hover:scale-105"
-                            } rounded-full px-3.5 py-2 sm:px-4 sm:py-2.5 max-w-[160px] sm:max-w-[200px]`}
-                        >
+                            } rounded-full px-3.5 py-2 sm:px-4 sm:py-2.5 max-w-[160px] sm:max-w-[200px]`}>
                           <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#D4E012]/20 border border-[#D4E012]/40 flex items-center justify-center shrink-0">
                             <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#707B00]" />
                           </div>
@@ -446,7 +442,21 @@ export default function PartnersPage() {
                     Partner Types
                   </AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-4">
-                    Choose Your <span className="text-[#6DAD45] italic">Partnership.</span>
+                    Choose Your{" "}
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Partnership.
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-2.5 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden="true">
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent" />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
                     We offer flexible partnership models tailored to your strengths, technical expertise, and business goals.
@@ -515,8 +525,7 @@ export default function PartnersPage() {
 
                         <button
                           onClick={() => selectPartnerTypeCard("Solar Project Partner")}
-                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-7 py-3.5 rounded-full transition-all shadow-lg shadow-[#D4E012]/20 group/btn"
-                        >
+                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-7 py-3.5 rounded-full transition-all shadow-lg shadow-[#D4E012]/20 group/btn">
                           <span>Apply as Project Partner</span>
                           <ArrowUpRight className="w-4 h-4 text-black group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                         </button>
@@ -580,8 +589,7 @@ export default function PartnersPage() {
 
                         <Link
                           href="/supply-partners"
-                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-7 py-3.5 rounded-full transition-all shadow-lg shadow-[#D4E012]/20 group/btn"
-                        >
+                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-7 py-3.5 rounded-full transition-all shadow-lg shadow-[#D4E012]/20 group/btn">
                           <span>Explore Supply Partners</span>
                           <ArrowUpRight className="w-4 h-4 text-black group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                         </Link>
@@ -645,8 +653,7 @@ export default function PartnersPage() {
 
                         <Link
                           href="/execution-contractors"
-                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-7 py-3.5 rounded-full transition-all shadow-lg shadow-[#D4E012]/20 group/btn"
-                        >
+                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-7 py-3.5 rounded-full transition-all shadow-lg shadow-[#D4E012]/20 group/btn">
                           <span>Explore Execution Contractors</span>
                           <ArrowUpRight className="w-4 h-4 text-black group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                         </Link>
@@ -669,7 +676,21 @@ export default function PartnersPage() {
                     How It Works
                   </AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-3">
-                    How to Become a <span className="text-[#6DAD45] italic">Solar Partner.</span>
+                    How to Become a{" "}
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Solar Partner.
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-2.5 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden="true">
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent" />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
                     Follow these simple steps to start your partnership with Sarhat.
@@ -684,15 +705,13 @@ export default function PartnersPage() {
                   className="absolute top-1/2 left-0 w-full h-32 -translate-y-1/2 pointer-events-none z-0"
                   viewBox="0 0 1200 120"
                   fill="none"
-                  preserveAspectRatio="none"
-                >
+                  preserveAspectRatio="none">
                   <path
                     d="M 50 60 Q 200 120, 350 60 T 650 60 T 950 60 T 1150 60"
                     stroke="#6DAD45"
                     strokeWidth="2.5"
                     strokeDasharray="6 6"
-                    fill="none"
-                  />
+                    fill="none" />
                 </svg>
 
                 {/* 5 Step Cards Alternating Top and Bottom */}
@@ -763,7 +782,21 @@ export default function PartnersPage() {
                     Apply Now
                   </AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-3">
-                    Partner <span className="text-[#6DAD45] italic">Application.</span>
+                    Partner{" "}
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Application.
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-2.5 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden="true">
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent" />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 text-sm sm:text-base">
                     Fill in your details and we&apos;ll get back to you shortly.
@@ -799,8 +832,7 @@ export default function PartnersPage() {
                             message: "",
                           });
                         }}
-                        className="inline-flex items-center gap-2 bg-slate-900 text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-full hover:bg-[#D4E012] hover:text-black transition-colors"
-                      >
+                        className="inline-flex items-center gap-2 bg-slate-900 text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-full hover:bg-[#D4E012] hover:text-black transition-colors">
                         Submit Another Application
                       </button>
                     </div>
@@ -816,8 +848,7 @@ export default function PartnersPage() {
                             placeholder="Full Name *"
                             value={formData.fullName}
                             onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"
-                          />
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all" />
                         </div>
 
                         {/* Email */}
@@ -829,8 +860,7 @@ export default function PartnersPage() {
                             placeholder="Email *"
                             value={formData.email}
                             onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"
-                          />
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all" />
                         </div>
 
                         {/* Phone */}
@@ -842,8 +872,7 @@ export default function PartnersPage() {
                             placeholder="Phone *"
                             value={formData.phone}
                             onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"
-                          />
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all" />
                         </div>
 
                         {/* City / Region */}
@@ -855,8 +884,7 @@ export default function PartnersPage() {
                             placeholder="City / Region *"
                             value={formData.city}
                             onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"
-                          />
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all" />
                         </div>
 
                         {/* Profession */}
@@ -866,8 +894,7 @@ export default function PartnersPage() {
                             required
                             value={formData.profession}
                             onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-700 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer"
-                          >
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-700 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer">
                             <option value="" disabled>
                               Profession *
                             </option>
@@ -888,8 +915,7 @@ export default function PartnersPage() {
                             required
                             value={formData.state}
                             onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-700 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer"
-                          >
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-700 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer">
                             <option value="" disabled>
                               State *
                             </option>
@@ -916,8 +942,7 @@ export default function PartnersPage() {
                             required
                             value={formData.partnerType}
                             onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-[#0F172A] focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer"
-                          >
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-[#0F172A] focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer">
                             <option value="" disabled>
                               Partner Type *
                             </option>
@@ -934,8 +959,7 @@ export default function PartnersPage() {
                             required
                             value={formData.experience}
                             onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-700 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer"
-                          >
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-700 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer">
                             <option value="" disabled>
                               Experience in Solar Industry *
                             </option>
@@ -959,8 +983,7 @@ export default function PartnersPage() {
                           placeholder="Tell us about your business and why you'd like to partner with Sarhat..."
                           value={formData.message}
                           onChange={handleInputChange}
-                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"
-                        ></textarea>
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"></textarea>
                       </div>
 
                       {/* Turnstile Security Box (Matching Image 4) */}
@@ -970,14 +993,12 @@ export default function PartnersPage() {
                           className={`inline-flex items-center gap-4 border rounded-lg px-4 py-3 cursor-pointer select-none transition-all ${isVerified
                             ? "bg-slate-900 border-slate-800 text-white"
                             : "bg-slate-900/90 border-slate-800 text-slate-200 hover:bg-slate-900"
-                            }`}
-                        >
+                            }`}>
                           <div
                             className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${isVerified
                               ? "bg-[#D4E012] border-[#D4E012] text-black"
                               : "border-slate-500 bg-slate-800"
-                              }`}
-                          >
+                              }`}>
                             {isVerified && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                           </div>
                           <span className="text-xs font-medium">Verify you are human</span>
@@ -992,8 +1013,7 @@ export default function PartnersPage() {
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-10 py-4 rounded-xl transition-all shadow-xl shadow-[#D4E012]/20 disabled:opacity-50"
-                        >
+                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-10 py-4 rounded-xl transition-all shadow-xl shadow-[#D4E012]/20 disabled:opacity-50">
                           {isSubmitting ? (
                             <span>Submitting Application...</span>
                           ) : (
@@ -1022,7 +1042,21 @@ export default function PartnersPage() {
                     Partner FAQs
                   </AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-3">
-                    Frequently Asked <span className="text-[#6DAD45] italic">Questions.</span>
+                    Frequently Asked{" "}
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Questions.
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-2.5 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden="true">
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent" />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-slate-600 text-sm sm:text-base">
                     Quick answers about the Sarhat partner program, joining process, support, payments, and lead tracking.
@@ -1030,11 +1064,11 @@ export default function PartnersPage() {
                 </div>
               </ScrollReveal>
 
-              {/* Category Tabs & Accordion Container (Exact layout from Image 5) */}
+              {/* Category Tabs & Accordion Container */}
               <ScrollReveal direction="up" distance={40}>
-                <div className="bg-white rounded-3xl border border-slate-200 shadow-xl p-6 sm:p-8">
+                <div>
                   {/* Category Filter Pills */}
-                  <div className="flex flex-wrap items-center gap-2 mb-8 pb-6 border-b border-slate-100">
+                  <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
                     {(["Partnership", "Joining", "Responsibilities"] as const).map((tab) => (
                       <button
                         key={tab}
@@ -1045,49 +1079,17 @@ export default function PartnersPage() {
                         className={`px-6 py-2.5 rounded-full text-xs font-extrabold tracking-wider transition-all ${activeFaqTab === tab
                           ? "bg-gradient-to-r from-[#D4E012] to-[#5EE72D] text-black shadow-md shadow-[#D4E012]/20"
                           : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                          }`}
-                      >
+                          }`}>
                         {tab}
                       </button>
                     ))}
                   </div>
 
                   {/* Accordion Questions */}
-                  <div className="divide-y divide-slate-100">
-                    {faqData[activeFaqTab].map((faq, idx) => {
-                      const isOpen = openFaqIndex === idx;
-                      return (
-                        <div key={idx} className="py-4 first:pt-0 last:pb-0">
-                          <button
-                            onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                            className="w-full flex items-center justify-between gap-4 text-left py-2 font-bold text-slate-900 hover:text-[#707B00] transition-colors"
-                          >
-                            <span className="text-sm sm:text-base font-serif-display font-medium">{faq.question}</span>
-                            <ChevronDown
-                              className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180 text-[#707B00]" : ""
-                                }`}
-                            />
-                          </button>
-
-                          <AnimatePresence>
-                            {isOpen && (
-                              <motion.div
-                                initial={{ opacity: 0, height: 0 }}
-                                animate={{ opacity: 1, height: "auto" }}
-                                exit={{ opacity: 0, height: 0 }}
-                                transition={{ duration: 0.2 }}
-                                className="overflow-hidden"
-                              >
-                                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pt-2 pb-3 pr-6 font-sans-ui">
-                                  {faq.answer}
-                                </p>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                        </div>
-                      );
-                    })}
-                  </div>
+                  <ProductFAQ
+                    faqs={faqData[activeFaqTab]}
+                    openIndex={openFaqIndex}
+                    onToggle={(idx) => setOpenFaqIndex(openFaqIndex === idx ? null : idx)} />
                 </div>
               </ScrollReveal>
             </div>

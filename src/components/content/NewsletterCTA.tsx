@@ -64,13 +64,11 @@ export default function NewsletterCTA({
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your corporate email"
                   required
-                  className="w-full pl-11 pr-4 py-3.5 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#D4E012] focus:border-transparent transition-all backdrop-blur-sm"
-                />
+                  className="w-full pl-11 pr-4 py-3.5 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#D4E012] focus:border-transparent transition-all backdrop-blur-sm" />
               </div>
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#6DAD45] hover:bg-[#5da037] text-white font-medium text-sm rounded-xl transition-all shadow-md hover:shadow-lg active:scale-95 shrink-0"
-              >
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#6DAD45] hover:bg-[#5da037] text-white font-medium text-sm rounded-xl transition-all shadow-md hover:shadow-lg active:scale-95 shrink-0">
                 <span>Subscribe</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
@@ -83,8 +81,7 @@ export default function NewsletterCTA({
               <button
                 type="button"
                 onClick={onOpenQuote}
-                className="text-[#D4E012] hover:underline font-mono font-medium flex items-center gap-1"
-              >
+                className="text-[#D4E012] hover:underline font-mono font-medium flex items-center gap-1">
                 Consult Our Engineers &rarr;
               </button>
             </div>

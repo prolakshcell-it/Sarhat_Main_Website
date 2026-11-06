@@ -29,7 +29,7 @@ export default function StatePortfolioPage({ params }: PageProps) {
   const containerRef = useRef<HTMLElement>(null);
 
   // Parallax & Scroll Fade-out Tracking
-    const {
+  const {
     isPastHero,
     bgScale,
     bgDim,
@@ -58,11 +58,9 @@ export default function StatePortfolioPage({ params }: PageProps) {
 
         {/* State Hero Banner (Sticky background & Centered Content) */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
-          aria-hidden={isPastHero}
-        >
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
+          aria-hidden={isPastHero}>
           <section ref={containerRef} className="relative h-full w-full flex flex-col items-center justify-center overflow-hidden bg-black select-none">
             {/* Background Image Layer */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
@@ -71,8 +69,7 @@ export default function StatePortfolioPage({ params }: PageProps) {
                 alt={`${stateData.name} Energy Hub`}
                 fill
                 priority
-                className="object-cover object-center opacity-80"
-              />
+                className="object-cover object-center opacity-80" />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
             </motion.div>
@@ -82,13 +79,11 @@ export default function StatePortfolioPage({ params }: PageProps) {
 
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 flex flex-col items-center text-center will-change-transform"
-            >
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 flex flex-col items-center text-center will-change-transform">
               {/* Breadcrumb / Back Link */}
               <Link
                 href="/projects"
-                className="inline-flex items-center justify-center gap-2 text-xs font-mono text-zinc-300 hover:text-[#5EE72D] transition-colors mb-6 uppercase tracking-wider bg-black/60 px-4 py-1.5 rounded-full border border-white/15 backdrop-blur-md"
-              >
+                className="inline-flex items-center justify-center gap-2 text-xs font-mono text-zinc-300 hover:text-[#5EE72D] transition-colors mb-6 uppercase tracking-wider bg-black/60 px-4 py-1.5 rounded-full border border-white/15 backdrop-blur-md">
                 <ArrowLeft className="w-4 h-4" />
                 <span>Back to National Footprint Map</span>
               </Link>
@@ -105,7 +100,7 @@ export default function StatePortfolioPage({ params }: PageProps) {
               {/* State Overview Metric Badges */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 w-full max-w-2xl mb-6">
                 <div className="bg-[#0A0E0A]/80 border border-white/20 rounded-2xl p-4 text-center backdrop-blur-xl shadow-xl">
-                  <div className="text-2xl font-mono font-extrabold text-[#5EE72D]">
+                  <div className="text-2xl font-sans-inter tabular-nums font-extrabold text-[#5EE72D]">
                     {stateData.mwInstalled}
                   </div>
                   <div className="text-[10px] font-mono text-zinc-300 uppercase mt-1">
@@ -114,7 +109,7 @@ export default function StatePortfolioPage({ params }: PageProps) {
                 </div>
 
                 <div className="bg-[#0A0E0A]/80 border border-white/20 rounded-2xl p-4 text-center backdrop-blur-xl shadow-xl">
-                  <div className="text-2xl font-mono font-extrabold text-white">
+                  <div className="text-2xl font-sans-inter tabular-nums font-extrabold text-white">
                     {stateData.projects.length}
                   </div>
                   <div className="text-[10px] font-mono text-zinc-300 uppercase mt-1">
@@ -155,131 +150,139 @@ export default function StatePortfolioPage({ params }: PageProps) {
         {/* Main Content Sections (Slides UP over static Hero) */}
         <div className="relative z-10 bg-black border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.5)]">
 
-        {/* State Projects Grid */}
-        <section className="py-20 bg-black relative z-10">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
-              <AnimatedPillBadge darkBg className="mb-6">
-                STATE PORTFOLIO
-              </AnimatedPillBadge>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-4">
-                Delivered &amp; Active{" "}
+          {/* State Projects Grid */}
+          <section className="py-20 bg-black relative z-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                <AnimatedPillBadge darkBg className="mb-6">
+                  STATE PORTFOLIO
+                </AnimatedPillBadge>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-4">
+                  Delivered &amp; Active{" "}
+                  <span className="text-[#5EE72D] italic relative inline-block">
+                    Projects in {stateData.name}.
+                    <svg
+                      className="absolute -bottom-2 left-0 w-full h-3 text-[#5EE72D]"
+                      viewBox="0 0 100 20"
+                      preserveAspectRatio="none"
+                      aria-hidden>
+                      <path
+                        d="M0 15 Q 50 0 100 15"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        fill="transparent" />
+                    </svg>
+                  </span>
+                </h2>
+                <p className="text-zinc-400 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+                  Turnkey engineering, procurement, substation evacuation, and long-term O&amp;M management across {stateData.name}.
+                </p>
+              </div>
+
+              {/* Projects Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {stateData.projects.map((proj) => (
+                  <div
+                    key={proj.id}
+                    className="bg-[#0A0E0A] border border-white/15 rounded-3xl overflow-hidden hover:border-[#5EE72D]/50 transition-all duration-300 group flex flex-col justify-between shadow-xl">
+                    <div>
+                      {/* Project Visual */}
+                      <div className="relative h-56 w-full overflow-hidden border-b border-white/10">
+                        <Image
+                          src={proj.image}
+                          alt={proj.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0E0A] via-transparent to-black/30"></div>
+
+                        <div className="absolute top-3 left-3 flex gap-2">
+                          <span className="bg-black/80 border border-white/20 text-[#5EE72D] font-mono font-bold text-[10px] px-2.5 py-1 rounded-full uppercase">
+                            {proj.vertical}
+                          </span>
+                          <span className="bg-[#5EE72D] text-black font-extrabold font-mono text-[10px] px-2.5 py-1 rounded-full uppercase">
+                            {proj.status}
+                          </span>
+                        </div>
+
+                        <div className="absolute bottom-3 right-3 bg-black/80 text-zinc-300 font-mono text-[10px] px-2.5 py-1 rounded-full border border-white/10">
+                          {proj.capacity}
+                        </div>
+                      </div>
+
+                      {/* Content */}
+                      <div className="p-6">
+                        <div className="flex items-center gap-1.5 text-xs text-[#5EE72D] font-mono mb-1">
+                          <MapPin className="w-3.5 h-3.5" />
+                          <span>{proj.location}</span>
+                        </div>
+                        <h3 className="text-xl font-serif-display font-medium text-white mb-3">
+                          {proj.title}
+                        </h3>
+                        <p className="text-xs text-zinc-400 font-light leading-relaxed mb-6">
+                          {proj.summary}
+                        </p>
+
+                        {/* Key Highlights */}
+                        <div className="space-y-2 border-t border-white/10 pt-4">
+                          <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider block">
+                            Execution Deliverables:
+                          </span>
+                          {proj.keyHighlights.map((hl) => (
+                            <div key={hl} className="flex items-start gap-2 text-xs text-zinc-300">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-[#5EE72D] shrink-0 mt-0.5" />
+                              <span>{hl}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Card Footer CTA */}
+                    <div className="p-6 pt-0">
+                      <button
+                        onClick={() => setQuoteModalOpen(true)}
+                        className="w-full bg-white/10 hover:bg-[#5EE72D] hover:text-black text-white font-bold text-xs uppercase tracking-widest py-3 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 border border-white/15">
+                        <span>Discuss Similar Project</span>
+                        <ArrowUpRight className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* State Page CTA */}
+          <section className="py-16 bg-gradient-to-r from-[#0B1209] via-black to-[#0B1209] border-t border-white/10">
+            <div className="max-w-4xl mx-auto px-4 text-center">
+              <h2 className="text-3xl font-serif-display text-white mb-4">
+                Planning a Project in{" "}
                 <span className="text-[#5EE72D] italic relative inline-block">
-                  Projects in {stateData.name}.
+                  {stateData.name}?
                   <svg
-                    className="absolute -bottom-2 left-0 w-full h-3 text-[#5EE72D]"
+                    className="absolute -bottom-2 left-0 w-full h-2.5 text-[#5EE72D]"
                     viewBox="0 0 100 20"
                     preserveAspectRatio="none"
-                    aria-hidden
-                  >
+                    aria-hidden="true">
                     <path
                       d="M0 15 Q 50 0 100 15"
                       stroke="currentColor"
                       strokeWidth="3.5"
-                      fill="transparent"
-                    />
+                      fill="transparent" />
                   </svg>
                 </span>
               </h2>
-              <p className="text-zinc-400 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-                Turnkey engineering, procurement, substation evacuation, and long-term O&amp;M management across {stateData.name}.
+              <p className="text-xs sm:text-sm text-zinc-400 font-light max-w-xl mx-auto mb-8">
+                Connect with our dedicated regional execution lead for DISCOM bay allocation, solar PPA feasibility, or substation grid connectivity in {stateData.name}.
               </p>
+              <button
+                onClick={() => setQuoteModalOpen(true)}
+                className="bg-[#5EE72D] hover:bg-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all shadow-xl shadow-[#5EE72D]/20 inline-flex items-center gap-2">
+                <span>Discuss {stateData.name} Project</span>
+                <ArrowUpRight className="w-4 h-4 text-black" />
+              </button>
             </div>
-
-            {/* Projects Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {stateData.projects.map((proj) => (
-                <div
-                  key={proj.id}
-                  className="bg-[#0A0E0A] border border-white/15 rounded-3xl overflow-hidden hover:border-[#5EE72D]/50 transition-all duration-300 group flex flex-col justify-between shadow-xl"
-                >
-                  <div>
-                    {/* Project Visual */}
-                    <div className="relative h-56 w-full overflow-hidden border-b border-white/10">
-                      <Image
-                        src={proj.image}
-                        alt={proj.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0E0A] via-transparent to-black/30"></div>
-
-                      <div className="absolute top-3 left-3 flex gap-2">
-                        <span className="bg-black/80 border border-white/20 text-[#5EE72D] font-mono font-bold text-[10px] px-2.5 py-1 rounded-full uppercase">
-                          {proj.vertical}
-                        </span>
-                        <span className="bg-[#5EE72D] text-black font-extrabold font-mono text-[10px] px-2.5 py-1 rounded-full uppercase">
-                          {proj.status}
-                        </span>
-                      </div>
-
-                      <div className="absolute bottom-3 right-3 bg-black/80 text-zinc-300 font-mono text-[10px] px-2.5 py-1 rounded-full border border-white/10">
-                        {proj.capacity}
-                      </div>
-                    </div>
-
-                    {/* Content */}
-                    <div className="p-6">
-                      <div className="flex items-center gap-1.5 text-xs text-[#5EE72D] font-mono mb-1">
-                        <MapPin className="w-3.5 h-3.5" />
-                        <span>{proj.location}</span>
-                      </div>
-                      <h3 className="text-xl font-serif-display font-medium text-white mb-3">
-                        {proj.title}
-                      </h3>
-                      <p className="text-xs text-zinc-400 font-light leading-relaxed mb-6">
-                        {proj.summary}
-                      </p>
-
-                      {/* Key Highlights */}
-                      <div className="space-y-2 border-t border-white/10 pt-4">
-                        <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider block">
-                          Execution Deliverables:
-                        </span>
-                        {proj.keyHighlights.map((hl) => (
-                          <div key={hl} className="flex items-start gap-2 text-xs text-zinc-300">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-[#5EE72D] shrink-0 mt-0.5" />
-                            <span>{hl}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Card Footer CTA */}
-                  <div className="p-6 pt-0">
-                    <button
-                      onClick={() => setQuoteModalOpen(true)}
-                      className="w-full bg-white/10 hover:bg-[#5EE72D] hover:text-black text-white font-bold text-xs uppercase tracking-widest py-3 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 border border-white/15"
-                    >
-                      <span>Discuss Similar Project</span>
-                      <ArrowUpRight className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* State Page CTA */}
-        <section className="py-16 bg-gradient-to-r from-[#0B1209] via-black to-[#0B1209] border-t border-white/10">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-3xl font-serif-display text-white mb-4">
-              Planning a Project in <span className="text-[#5EE72D] italic">{stateData.name}?</span>
-            </h2>
-            <p className="text-xs sm:text-sm text-zinc-400 font-light max-w-xl mx-auto mb-8">
-              Connect with our dedicated regional execution lead for DISCOM bay allocation, solar PPA feasibility, or substation grid connectivity in {stateData.name}.
-            </p>
-            <button
-              onClick={() => setQuoteModalOpen(true)}
-              className="bg-[#5EE72D] hover:bg-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all shadow-xl shadow-[#5EE72D]/20 inline-flex items-center gap-2"
-            >
-              <span>Discuss {stateData.name} Project</span>
-              <ArrowUpRight className="w-4 h-4 text-black" />
-            </button>
-          </div>
-        </section>
+          </section>
         </div>
 
         <Footer />

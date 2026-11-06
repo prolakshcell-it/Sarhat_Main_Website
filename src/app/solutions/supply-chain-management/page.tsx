@@ -29,6 +29,7 @@ import {
   Zap,
   CheckCircle2,
   ArrowRight,
+  ArrowUpRight,
   HardHat,
   type LucideIcon,
 } from "lucide-react";
@@ -119,7 +120,7 @@ const outcomes: { icon: LucideIcon; title: string; body: string }[] = [
 /* ---------- Route stage ---------- */
 
 function RouteStage({ stage, index }: { stage: Stage; index: number }) {
-  const ref = useRef<HTMLLIElement>(null);
+  const ref=useRef<HTMLLIElement>(null);
   // "Reached" once the card crosses the middle band of the viewport, where the truck sits
   const reached = useInView(ref, { margin: "0px 0px -50% 0px", once: true });
   const Icon = stage.icon;
@@ -129,10 +130,8 @@ function RouteStage({ stage, index }: { stage: Stage; index: number }) {
     <li ref={ref} className="relative pl-14 lg:pl-0 lg:grid lg:grid-cols-2 lg:gap-x-24">
       {/* stop marker on the route */}
       <span
-        className={`absolute left-5 top-6 z-10 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full border-2 transition-colors duration-300 lg:left-1/2 ${
-          reached ? "border-slate-900 bg-slate-900 text-[#D4E012]" : "border-slate-200 bg-white text-slate-400"
-        }`}
-      >
+        className={`absolute left-5 top-6 z-10 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full border-2 transition-colors duration-300 lg:left-1/2 ${reached ? "border-slate-900 bg-slate-900 text-[#D4E012]" : "border-slate-200 bg-white text-slate-400"
+          }`}>
         <Icon className="h-4 w-4" />
       </span>
 
@@ -168,7 +167,7 @@ export default function SupplyChainPage() {
   const reduce = !!useReducedMotion();
 
   // Transform + opacity only, so scrolling stays on the compositor
-    const {
+  const {
     isPastHero,
     bgScale,
     bgDim,
@@ -192,18 +191,14 @@ export default function SupplyChainPage() {
 
         {/* 01 / HERO */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
-          aria-hidden={isPastHero}
-        >
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
+          aria-hidden={isPastHero}>
           <section
             ref={heroRef}
-            className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none"
-          >
+            className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none">
             <motion.div style={{ scale: bgScale }}
-              className="absolute inset-0 z-0 h-full w-full will-change-transform"
-            >
+              className="absolute inset-0 z-0 h-full w-full will-change-transform">
               <Image
                 src="/images/partner-hero-bg.jpg"
                 alt="Equipment supply for a Sarhat solar project"
@@ -211,165 +206,179 @@ export default function SupplyChainPage() {
                 priority
                 quality={85}
                 sizes="100vw"
-                className="object-cover object-center opacity-85"
-              />
+                className="object-cover object-center opacity-85" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
             </motion.div>
 
+            {/* Luminous Glow Behind Subject */}
+            <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#D4E012]/15 rounded-full blur-3xl pointer-events-none" />
+
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-24 flex flex-col items-center text-center will-change-transform"
-            >
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-32 sm:pt-36 pb-4 flex flex-col items-center text-center will-change-transform">
               <div className="max-w-4xl flex flex-col items-center text-center">
-                <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 leading-[1.08] drop-shadow-lg">
-                  Supply chain built <br />
-                  <span className="text-[#D4E012] italic font-normal">around your project</span>
+                {/* Hero Headline */}
+                <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.1] mb-6 [text-shadow:_0_4px_24px_rgba(0,0,0,0.95)] [text-wrap:balance]">
+                  Supply chain built
+                  <br />
+                  <span className="italic font-normal text-[#D4E012] relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
+                    around your project.
+                    <svg
+                      className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
+                      viewBox="0 0 100 20"
+                      preserveAspectRatio="none"
+                      aria-hidden>
+                      <path
+                        d="M0 15 Q 50 0 100 15"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        fill="transparent" />
+                    </svg>
+                  </span>
                 </h1>
-                <p className="text-base sm:text-xl text-slate-200 max-w-3xl leading-relaxed font-normal drop-shadow-md">
-                  From the first forecast to the last inspection, we make sure the right equipment reaches your site in the right condition, at the right time.
+
+                {/* Sub-headline */}
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-100 font-normal max-w-2xl leading-relaxed tracking-wide [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)] [text-wrap:balance]">
+                  From the first forecast to the last inspection,
+                  <br className="hidden sm:inline" />
+                  {" "}we make sure the right equipment reaches your site in the right condition.
                 </p>
               </div>
             </motion.div>
 
-            <ScrollIndicator opacity={indicatorOpacity} />
-          </section>
-        </div>
+        <ScrollIndicator opacity={indicatorOpacity} />
+      </section>
+    </div>
 
-        {/* Scroll Spacer (Matches Hero height to establish scroll track) */}
-        <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
+    {/* Scroll Spacer (Matches Hero height to establish scroll track) */ }
+    <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
 
-
-        {/* 02 / CONTENT SHEET */}
-        <div className="relative z-10 border-t border-slate-200/60 bg-[#F8FAF8] shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
-          {/* Intro */}
-          <section className="py-16 sm:py-24 bg-[#F8FAF8]">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <ScrollReveal>
-                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12">
-                  <AnimatedPillBadge className="mb-6">SUPPLY CHAIN MANAGEMENT</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-                    <span className="inline-block">Equipment that arrives</span> <br />
-                    <span className="text-[#6DAD45] italic relative inline-block">
-                      right, and on time
-                      <svg
-                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
-                        viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
-                        <path
-                          d="M0 15 Q 50 0 100 15"
-                          stroke="currentColor"
-                          strokeWidth="3.5"
-                          fill="transparent"
-                        />
-                      </svg>
-                    </span>
-                  </h2>
-                  <p className="mt-5 text-slate-600 text-base sm:text-lg leading-relaxed">
-                    We help the renewable energy industry with supply solutions led by people who understand what a solar project needs. We build the supply chain around your project and its full lifecycle, not the other way round.
-                  </p>
-                  <p className="mt-4 text-slate-600 text-base sm:text-lg leading-relaxed">
-                    Our consultative approach improves product quality and keeps the budget under control through a tracking system that follows every order. Follow one delivery from plan to site below.
-                  </p>
-                </div>
-              </ScrollReveal>
-            </div>
-          </section>
-
-          {/* The route: a truck stays at mid-screen while the stops pass by */}
-          <section className="pb-16 sm:pb-24 bg-[#F8FAF8] border-b border-slate-200/80">
-            <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-              <div className="relative">
-                {/* route line + fill */}
-                <div className="absolute inset-y-0 left-5 w-[3px] -translate-x-1/2 rounded-full bg-slate-200 lg:left-1/2" aria-hidden />
-                <motion.div
-                  style={{ scaleY: reduce ? 1 : lineScale }}
-                  className="absolute inset-y-0 left-5 w-[3px] -translate-x-1/2 origin-top rounded-full bg-gradient-to-b from-[#6DAD45] to-[#D4E012] will-change-transform lg:left-1/2"
-                  aria-hidden
-                />
-
-                {/* the truck: pinned to mid-screen with plain CSS sticky, no scroll handler */}
-                <div className="pointer-events-none absolute inset-y-0 left-5 z-20 -translate-x-1/2 lg:left-1/2" aria-hidden>
-                  <div className="sticky top-[50vh] flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[#D4E012] text-black shadow-lg ring-4 ring-[#F8FAF8]">
-                    <Truck className="h-5 w-5" />
+          {/* 02 / CONTENT SHEET */ }
+          <div className="relative z-10 border-t border-slate-200/60 bg-[#F8FAF8] shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
+            {/* Intro */ }
+            <section id="process" className="py-16 sm:py-24 bg-[#F8FAF8]">
+              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <ScrollReveal>
+                  <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12">
+                    <AnimatedPillBadge className="mb-6">SUPPLY CHAIN MANAGEMENT</AnimatedPillBadge>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                      <span className="inline-block">Equipment that arrives</span> <br />
+                      <span className="text-[#6DAD45] italic relative inline-block">
+                        right, and on time.
+                        <svg
+                          className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                          viewBox="0 0 100 20"
+                          preserveAspectRatio="none">
+                          <path
+                            d="M0 15 Q 50 0 100 15"
+                            stroke="currentColor"
+                            strokeWidth="3.5"
+                            fill="transparent" />
+                        </svg>
+                      </span>
+                    </h2>
+                    <p className="mt-5 text-slate-600 text-base sm:text-lg max-w-3xl mx-auto text-center leading-relaxed">
+                      We help the renewable energy industry with supply solutions led by people who understand what a solar project needs. We build the supply chain around your project and its full lifecycle, not the other way round.
+                    </p>
+                    <p className="mt-4 text-slate-600 text-base sm:text-lg max-w-3xl mx-auto text-center leading-relaxed">
+                      Our consultative approach improves product quality and keeps the budget under control through a tracking system that follows every order. Follow one delivery from plan to site below.
+                    </p>
                   </div>
-                </div>
-
-                <ol ref={routeRef} className="relative space-y-10 sm:space-y-14 py-6">
-                  {stages.map((s, i) => (
-                    <RouteStage key={s.step} stage={s} index={i} />
-                  ))}
-                </ol>
+                </ScrollReveal>
               </div>
+                </section>
 
-              {/* arrival */}
-              <ScrollReveal>
-                <div className="mt-6 flex justify-center">
-                  <span className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-white">
-                    <HardHat className="h-4 w-4 text-[#D4E012]" />
-                    Delivered to site, ready for the crew
-                  </span>
-                </div>
-              </ScrollReveal>
+    {/* The route: a truck stays at mid-screen while the stops pass by */ }
+    <section className="pb-16 sm:pb-24 bg-[#F8FAF8] border-b border-slate-200/80">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="relative">
+          {/* route line + fill */}
+          <div className="absolute inset-y-0 left-5 w-[3px] -translate-x-1/2 rounded-full bg-slate-200 lg:left-1/2" aria-hidden />
+          <motion.div
+            style={{ scaleY: reduce ? 1 : lineScale }}
+            className="absolute inset-y-0 left-5 w-[3px] -translate-x-1/2 origin-top rounded-full bg-gradient-to-b from-[#6DAD45] to-[#D4E012] will-change-transform lg:left-1/2"
+            aria-hidden />
+
+          {/* the truck: pinned to mid-screen with plain CSS sticky, no scroll handler */}
+          <div className="pointer-events-none absolute inset-y-0 left-5 z-20 -translate-x-1/2 lg:left-1/2" aria-hidden>
+            <div className="sticky top-[50vh] flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[#D4E012] text-black shadow-lg ring-4 ring-[#F8FAF8]">
+              <Truck className="h-5 w-5" />
             </div>
-          </section>
+          </div>
 
-          {/* Outcomes */}
-          <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
-            <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-              <ScrollReveal>
-                <div className="text-center max-w-4xl mx-auto mb-12">
-                  <AnimatedPillBadge className="mb-6">WHAT YOU GAIN</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-                    <span className="inline-block">Six key advantages</span> <br />
-                    <span className="text-[#6DAD45] italic relative inline-block">
-                      a good supply chain gives you
-                      <svg
-                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
-                        viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
-                        <path
-                          d="M0 15 Q 50 0 100 15"
-                          stroke="currentColor"
-                          strokeWidth="3.5"
-                          fill="transparent"
-                        />
-                      </svg>
-                    </span>
-                  </h2>
-                </div>
-              </ScrollReveal>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {outcomes.map((o, i) => {
-                  const Icon = o.icon;
-                  return (
-                    <ScrollReveal key={o.title} delay={(i % 3) * 0.06}>
-                      <div className="group h-full rounded-2xl border border-slate-200 bg-[#F8FAF8] p-7 text-center transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-1 hover:border-[#6DAD45]/50 hover:shadow-lg">
-                        <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900 text-[#D4E012]">
-                          <Icon className="h-5 w-5" />
-                        </span>
-                        <h3 className="mt-5 font-serif-display text-xl font-medium text-slate-900">{o.title}</h3>
-                        <p className="mt-2 text-sm text-slate-600 leading-relaxed">{o.body}</p>
-                      </div>
-                    </ScrollReveal>
-                  );
-                })}
-              </div>
-
-            </div>
-          </section>
-
-          {/* Related Solutions */}
-          <RelatedSolutionsSection currentHref="/solutions/supply-chain-management" />
-
-          {/* Final CTA */}
-          <FinalCTA onOpenQuote={() => setQuoteModalOpen(true)} />
-          <Footer />
+          <ol ref={routeRef} className="relative space-y-10 sm:space-y-14 py-6">
+            {stages.map((s, i) => (
+              <RouteStage key={s.step} stage={s} index={i} />
+            ))}
+          </ol>
         </div>
 
-        <QuoteModal isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} />
+        {/* arrival */}
+        <ScrollReveal>
+          <div className="mt-6 flex justify-center">
+            <span className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-white">
+              <HardHat className="h-4 w-4 text-[#D4E012]" />
+              Delivered to site, ready for the crew
+            </span>
+          </div>
+        </ScrollReveal>
+      </div>
+                </section>
+
+    {/* Outcomes */ }
+    <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <ScrollReveal>
+          <div className="text-center max-w-4xl mx-auto mb-12">
+            <AnimatedPillBadge className="mb-6">WHAT YOU GAIN</AnimatedPillBadge>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+              <span className="inline-block">Six key advantages</span> <br />
+              <span className="text-[#6DAD45] italic relative inline-block">
+                a good supply chain gives you
+                <svg
+                  className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                  viewBox="0 0 100 20"
+                  preserveAspectRatio="none">
+                  <path
+                    d="M0 15 Q 50 0 100 15"
+                    stroke="currentColor"
+                    strokeWidth="3.5"
+                    fill="transparent" />
+                </svg>
+              </span>
+            </h2>
+          </div>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {outcomes.map((o, i) => {
+            const Icon = o.icon;
+            return (
+              <ScrollReveal key={o.title} delay={(i % 3) * 0.06}>
+                <div className="group h-full rounded-2xl border border-slate-200 bg-[#F8FAF8] p-7 text-center transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-1 hover:border-[#6DAD45]/50 hover:shadow-lg">
+                  <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900 text-[#D4E012]">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <h3 className="mt-5 font-serif-display text-xl font-medium text-slate-900">{o.title}</h3>
+                  <p className="mt-2 text-sm text-slate-600 leading-relaxed">{o.body}</p>
+                </div>
+              </ScrollReveal>
+            );
+          })}
+        </div>
+      </div>
+          </section>
+
+    {/* Related Solutions */ }
+    <RelatedSolutionsSection currentHref = "/solutions/supply-chain-management" />
+
+      {/* Final CTA */ }
+      <FinalCTA onOpenQuote = {() => setQuoteModalOpen(true)
+} />
+  <Footer />
+        </div>
+
+  <QuoteModal isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} />
       </main>
     </SmoothScroll>
   );

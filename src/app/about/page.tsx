@@ -163,8 +163,7 @@ export default function AboutPage() {
         <div
           className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
             }`}
-          aria-hidden={isPastHero}
-        >
+          aria-hidden={isPastHero}>
           <section className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none">
             {/* Cinematic Background Image Layer with Dynamic Zoom & Scrim */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
@@ -174,44 +173,41 @@ export default function AboutPage() {
                 fill
                 priority
                 sizes="100vw"
-                className="object-cover object-center opacity-85"
-              />
+                className="object-cover object-center opacity-85" />
               <motion.div
                 style={{ opacity: bgDim }}
-                className="absolute inset-0 bg-black pointer-events-none"
-              />
+                className="absolute inset-0 bg-black pointer-events-none" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
             </motion.div>
 
             {/* Main Centered Content */}
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-28 flex flex-col items-center text-center will-change-transform"
-            >
+              className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-28 flex flex-col items-center text-center will-change-transform">
               <div className="mb-6">
                 <AnimatedPillBadge>ABOUT SARHAT</AnimatedPillBadge>
               </div>
 
-              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center max-w-4xl drop-shadow-lg">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center max-w-4xl drop-shadow-lg [text-wrap:balance]">
                 People at the centre. <br />
                 <span className="text-[#D4E012] italic font-normal">Progress in every project.</span>
               </h1>
 
-              <p className="text-base sm:text-lg md:text-xl text-slate-200 font-normal max-w-3xl text-center leading-relaxed drop-shadow-md mb-8">
-                We bring people, engineering and execution together to turn clean–energy and infrastructure ideas into practical projects that create value for businesses, communities and India.
+              <p className="text-base sm:text-lg md:text-xl text-slate-200 font-normal max-w-2xl text-center leading-relaxed drop-shadow-md mb-8 [text-wrap:balance]">
+                We bring people, engineering and execution together,
+                <br className="hidden sm:inline" />
+                {" "}turning clean energy ideas into practical projects that create lasting value.
               </p>
 
               <div className="flex flex-wrap items-center justify-center gap-4">
                 <button
                   onClick={() => setQuoteModalOpen(true)}
-                  className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-3.5 rounded-full transition-all shadow-xl shadow-[#D4E012]/30 hover:scale-105 active:scale-95 cursor-pointer"
-                >
+                  className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-3.5 rounded-full transition-all shadow-xl shadow-[#D4E012]/30 hover:scale-105 active:scale-95 cursor-pointer">
                   Discuss a Project
                 </button>
                 <a
                   href="/about/our-story"
-                  className="border border-white/30 bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-widest px-7 py-3.5 rounded-full transition-all backdrop-blur-md hover:scale-105 active:scale-95 cursor-pointer"
-                >
+                  className="border border-white/30 bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-widest px-7 py-3.5 rounded-full transition-all backdrop-blur-md hover:scale-105 active:scale-95 cursor-pointer">
                   Explore Our Story
                 </a>
               </div>
@@ -248,14 +244,12 @@ export default function AboutPage() {
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
+                        preserveAspectRatio="none">
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -278,15 +272,13 @@ export default function AboutPage() {
                     className="w-full h-[340px] sm:h-[480px] md:h-[600px] object-cover rounded-3xl"
                     onPlay={() => setIsPlaying(true)}
                     onPause={() => setIsPlaying(false)}
-                    onEnded={() => setIsPlaying(false)}
-                  />
+                    onEnded={() => setIsPlaying(false)} />
 
                   {/* Custom Play Button Overlay when video is paused/stopped */}
                   {!isPlaying && (
                     <div
                       onClick={handlePlayClick}
-                      className="absolute inset-0 bg-slate-950/35 hover:bg-slate-950/20 transition-all duration-300 flex flex-col items-center justify-center cursor-pointer group/btn"
-                    >
+                      className="absolute inset-0 bg-slate-950/35 hover:bg-slate-950/20 transition-all duration-300 flex flex-col items-center justify-center cursor-pointer group/btn">
                       <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white text-slate-900 shadow-2xl flex items-center justify-center transform group-hover/btn:scale-110 transition-transform duration-300 pl-1">
                         <Play className="w-9 h-9 text-slate-900 fill-slate-900" />
                       </div>
@@ -319,22 +311,20 @@ export default function AboutPage() {
                         <svg
                           className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                           viewBox="0 0 100 20"
-                          preserveAspectRatio="none"
-                        >
+                          preserveAspectRatio="none">
                           <path
                             d="M0 15 Q 50 0 100 15"
                             stroke="currentColor"
                             strokeWidth="3.5"
-                            fill="transparent"
-                          />
+                            fill="transparent" />
                         </svg>
                       </span>
                     </h2>
 
                     {/* Long Editorial Paragraph */}
-                    <p className="text-slate-600 font-normal text-base sm:text-lg leading-relaxed text-justify">
-                      Sarhat Energy is an execution-led energy and infrastructure company rooted in India, driven to earn trust globally. We combine engineering precision with hands-on delivery to build dependable assets that power businesses and connect communities. From rooftops to solar parks, our clean-energy expertise spans engineering through commissioning and long-term maintenance. Our capabilities extend to transmission lines, substations, roads, bridges and buildings. Safety, unity and ownership guide every project as we turn ambition into infrastructure that creates lasting value for clients, communities and India’s future.
-                    </p>
+                      <p className="text-slate-600 font-normal text-base sm:text-lg leading-relaxed">
+                        Sarhat Energy is an execution-led energy and infrastructure company rooted in India, driven to earn trust globally. We combine engineering precision with hands-on delivery to build dependable assets that power businesses and connect communities. From rooftops to solar parks, our clean-energy expertise spans engineering through commissioning and long-term maintenance. Our capabilities extend to transmission lines, substations, roads, bridges and buildings. Safety, unity and ownership guide every project as we turn ambition into infrastructure that creates lasting value for clients, communities and India’s future.
+                      </p>
                   </ScrollReveal>
                 </div>
 
@@ -346,8 +336,7 @@ export default function AboutPage() {
                         src="/images/hero-solar.jpg"
                         alt="Sarhat Solar Farm Aerial View"
                         fill
-                        className="object-cover object-center transform hover:scale-105 transition-transform duration-700"
-                      />
+                        className="object-cover object-center transform hover:scale-105 transition-transform duration-700" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
                     </div>
 
@@ -357,8 +346,7 @@ export default function AboutPage() {
                         src="/images/bess-substation.jpg"
                         alt="Sarhat Substation & BESS Infrastructure"
                         fill
-                        className="object-cover object-center"
-                      />
+                        className="object-cover object-center" />
                     </div>
                   </ScrollReveal>
                 </div>
@@ -386,14 +374,12 @@ export default function AboutPage() {
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
+                        preserveAspectRatio="none">
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -411,8 +397,7 @@ export default function AboutPage() {
                         src="/images/agrivoltaics-project.jpg"
                         alt="Sarhat Mission Solar Farm"
                         fill
-                        className="object-cover object-center opacity-85 group-hover:scale-105 transition-transform duration-700"
-                      />
+                        className="object-cover object-center opacity-85 group-hover:scale-105 transition-transform duration-700" />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent"></div>
 
                       {/* Badge top left */}
@@ -447,8 +432,7 @@ export default function AboutPage() {
                         src="/images/substation-project.jpg"
                         alt="Sarhat Vision Renewable Ecosystem"
                         fill
-                        className="object-cover object-center opacity-85 group-hover:scale-105 transition-transform duration-700"
-                      />
+                        className="object-cover object-center opacity-85 group-hover:scale-105 transition-transform duration-700" />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent"></div>
 
                       {/* Badge top left */}
@@ -483,8 +467,7 @@ export default function AboutPage() {
           <section className="py-10 sm:py-14 bg-[#070D08] border-b border-slate-800/90 relative z-10 text-white overflow-hidden select-none">
             {/* Dynamic Radial Ambient Spotlight shifting with active index */}
             <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-gradient-to-tr from-[#D4E012]/15 via-[#5EE72D]/10 to-transparent rounded-full blur-[150px] pointer-events-none transition-all duration-700"
-            />
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-gradient-to-tr from-[#D4E012]/15 via-[#5EE72D]/10 to-transparent rounded-full blur-[150px] pointer-events-none transition-all duration-700" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <ScrollReveal direction="up" distance={30}>
@@ -503,14 +486,12 @@ export default function AboutPage() {
                     <svg
                       className="absolute -bottom-2 left-0 w-full h-3 text-[#D4E012]"
                       viewBox="0 0 100 20"
-                      preserveAspectRatio="none"
-                    >
+                      preserveAspectRatio="none">
                       <path
                         d="M0 15 Q 50 0 100 15"
                         stroke="currentColor"
                         strokeWidth="3.5"
-                        fill="transparent"
-                      />
+                        fill="transparent" />
                     </svg>
                   </span>
                 </h2>
@@ -534,20 +515,18 @@ export default function AboutPage() {
                         onMouseEnter={() => setActiveValueIndex(index)}
                         whileHover={{ scale: 1.07 }}
                         transition={{ duration: 0.35, ease: "easeOut" }}
-                        className={`relative w-[300px] h-[300px] sm:w-[340px] sm:h-[340px] lg:w-[385px] lg:h-[385px] rounded-full p-7 sm:p-10 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-500 backdrop-blur-2xl ${index > 0 ? "md:-ml-10 lg:-ml-14" : ""
+                        className={`relative w-[300px] h-[300px] sm:w-[340px] sm:h-[340px] lg:w-[385px] lg:h-[385px] rounded-full p-7 sm:p-10 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-500 backdrop-blur-2xl ${index> 0 ? "md:-ml-10 lg:-ml-14" : ""
                           } ${isActive
                             ? "bg-slate-950/95 border-2 border-[#D4E012] shadow-[0_0_60px_rgba(212,224,18,0.45)] z-30 scale-105"
                             : "bg-slate-950/65 border border-white/20 hover:border-[#D4E012]/70 hover:bg-slate-950/85 z-10 opacity-85 hover:opacity-100"
-                          }`}
-                      >
+                          }`}>
                         {/* Double Spinning Arc Rings on Active Circle */}
                         {isActive && (
                           <>
                             <svg
                               className="absolute inset-0 w-full h-full pointer-events-none animate-spin origin-center"
                               style={{ animationDuration: "12s" }}
-                              viewBox="0 0 100 100"
-                            >
+                              viewBox="0 0 100 100">
                               <circle
                                 cx="50"
                                 cy="50"
@@ -556,14 +535,12 @@ export default function AboutPage() {
                                 stroke="#D4E012"
                                 strokeWidth="1.8"
                                 strokeDasharray="40 140"
-                                className="opacity-95"
-                              />
+                                className="opacity-95" />
                             </svg>
                             <svg
                               className="absolute inset-0 w-full h-full pointer-events-none origin-center"
                               style={{ animation: "spin 8s linear infinite reverse" }}
-                              viewBox="0 0 100 100"
-                            >
+                              viewBox="0 0 100 100">
                               <circle
                                 cx="50"
                                 cy="50"
@@ -572,8 +549,7 @@ export default function AboutPage() {
                                 stroke="#5EE72D"
                                 strokeWidth="1.2"
                                 strokeDasharray="25 110"
-                                className="opacity-70"
-                              />
+                                className="opacity-70" />
                             </svg>
                           </>
                         )}
@@ -583,8 +559,7 @@ export default function AboutPage() {
                           className={`absolute top-6 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border transition-all ${isActive
                             ? "bg-[#D4E012] text-slate-950 border-[#D4E012] shadow-sm"
                             : "bg-slate-900/80 text-slate-400 border-white/10"
-                            }`}
-                        >
+                            }`}>
                           VALUE {item.num}
                         </span>
 
@@ -593,8 +568,7 @@ export default function AboutPage() {
                           className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mt-4 mb-4 shadow-lg transition-all duration-300 ${isActive
                             ? "bg-[#D4E012] text-slate-950 shadow-[0_0_25px_rgba(212,224,18,0.6)] scale-110"
                             : "bg-[#D4E012]/20 border border-[#D4E012]/50 text-[#D4E012]"
-                            }`}
-                        >
+                            }`}>
                           <IconComp className="w-7 h-7 text-slate-950 stroke-[2.2]" />
                         </div>
 
@@ -622,8 +596,7 @@ export default function AboutPage() {
                         ? "w-8 bg-[#D4E012] shadow-[0_0_12px_#D4E012]"
                         : "w-2.5 bg-slate-700 hover:bg-slate-500"
                         }`}
-                      title={`Jump to ${v.title}`}
-                    />
+                      title={`Jump to ${v.title}`} />
                   ))}
                 </div>
               </ScrollReveal>
@@ -647,7 +620,20 @@ export default function AboutPage() {
 
                   <h2 className="text-4xl sm:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-6 max-w-3xl text-center">
                     Energy today. <br />
-                    <span className="text-[#D4E012]">More possibilities tomorrow.</span>
+                    <span className="text-[#D4E012] italic relative inline-block">
+                      More possibilities tomorrow.
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-2.5 text-[#D4E012]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden="true">
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent" />
+                      </svg>
+                    </span>
                   </h2>
 
                   <p className="text-slate-300 font-normal text-base sm:text-lg max-w-xl leading-relaxed text-center mx-auto">
@@ -667,8 +653,7 @@ export default function AboutPage() {
             onOpenQuote={() => setQuoteModalOpen(true)}
             headline="Start Your"
             accent="Solar Journey Today."
-            description="Join 80+ clients who trust Sarhat to deliver clean energy at scale. Let's build your energy infrastructure together."
-          />
+            description="Join 80+ clients who trust Sarhat to deliver clean energy at scale. Let's build your energy infrastructure together." />
         </div>
 
         {/* Footer */}

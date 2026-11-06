@@ -29,7 +29,7 @@ export const capabilities: Capability[] = [
     headline: "Utility Solar Parks, Rooftops & C&I Clean Energy Systems",
     description: "Utility ground-mount solar, C&I rooftops, open access and long-term O&M.",
     fullDetails:
-    "Complete turnkey execution and engineering for utility-scale solar parks, commercial & industrial rooftop installations, institutional projects, and 24/7 telemetry asset management.",
+      "Complete turnkey execution and engineering for utility-scale solar parks, commercial & industrial rooftop installations, institutional projects, and 24/7 telemetry asset management.",
     specs: ["Utility Solar Parks", "Rooftops & C&I", "Open Access PPA", "Comprehensive O&M"],
     icon: Sun,
     image: "/images/hero-solar.jpg",
@@ -55,7 +55,7 @@ export const capabilities: Capability[] = [
     headline: "Turnkey Substations, Evacuation Corridors & Site Civil Works",
     description: "AIS/GIS substations, evacuation lines, control buildings and foundation piling.",
     fullDetails:
-    "High-voltage AIS/GIS substations, power evacuation transmission line corridors, SCADA protection bays, heavy-payload access roads, control room buildings, and equipment foundation piling.",
+      "High-voltage AIS/GIS substations, power evacuation transmission line corridors, SCADA protection bays, heavy-payload access roads, control room buildings, and equipment foundation piling.",
     specs: ["AIS/GIS Substations", "EHV Evacuation Lines", "SCADA Protection", "Foundation Piling & Roads"],
     icon: Zap,
     image: "/images/substation-project.jpg",
@@ -67,11 +67,11 @@ export const detailedSolutions = [
   {
     id: "solar-energy",
     title: "Solar Energy Solutions",
-    badge: "01 • SOLAR POWER GENERATION",
+    badge: "SOLAR ENERGY",
     headline:
-    "Utility-scale solar parks, rooftops, and high-efficiency photovoltaic systems.",
+      "Utility-scale solar parks, rooftops, and high-efficiency photovoltaic systems.",
     description:
-    "From land survey to CEIG commissioning and telemetry O&M, we engineer and construct high-yield solar assets with guaranteed performance.",
+      "From land survey to CEIG commissioning and telemetry O&M, we engineer\nand construct high-yield solar assets with guaranteed performance.",
     image: "/images/hero-solar.jpg",
     buttonText: "DISCOVER SOLAR ENERGY SOLUTIONS →",
     breakdownItems: [
@@ -100,11 +100,11 @@ export const detailedSolutions = [
   {
     id: "bess-hybrid",
     title: "BESS & Battery Storage",
-    badge: "02 • ENERGY STORAGE SYSTEMS",
+    badge: "BESS ENERGY",
     headline:
-    "Containerized battery storage systems for grid stability and dispatchable power.",
+      "Containerized battery storage systems for grid stability and dispatchable power.",
     description:
-    "Our engineers integrate modular battery storage with solar assets to enable automated peak shaving, frequency regulation, and steady 24/7 power.",
+      "Our engineers integrate modular battery storage with solar assets to enable\nautomated peak shaving, frequency regulation, and steady 24/7 power.",
     image: "/images/bess-substation.jpg",
     buttonText: "EXPLORE BESS & STORAGE SOLUTIONS →",
     breakdownItems: [
@@ -133,11 +133,11 @@ export const detailedSolutions = [
   {
     id: "infrastructure",
     title: "Grid & Civil Infrastructure",
-    badge: "03 • INTEGRATED INFRASTRUCTURE",
+    badge: "INFRASTRUCTURE",
     headline:
-    "Turnkey substations, power evacuation lines, and heavy industrial civil works.",
+      "Turnkey substations, power evacuation lines, and heavy industrial civil works.",
     description:
-    "From high-voltage AIS/GIS substations to access roads, control rooms, and foundation piling, we construct the physical backbone for utility assets.",
+      "From high-voltage AIS/GIS substations to access roads and control rooms,\nwe construct the physical backbone and foundations for utility assets.",
     image: "/images/substation-project.jpg",
     buttonText: "EXPLORE INFRASTRUCTURE SOLUTIONS →",
     breakdownItems: [

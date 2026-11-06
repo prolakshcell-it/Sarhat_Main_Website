@@ -248,8 +248,7 @@ export default function ExecutionCurve() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       id="execution"
-      className="py-10 sm:py-12 lg:py-14 bg-[#18221B] text-white relative z-10 border-b border-white/10 select-none overflow-clip font-sans-ui"
-    >
+      className="py-10 sm:py-12 lg:py-14 bg-[#18221B] text-white relative z-10 border-b border-white/10 select-none overflow-clip font-sans-ui">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Badge & Editorial Title */}
         <ScrollReveal direction="up" distance={35}>
@@ -259,21 +258,19 @@ export default function ExecutionCurve() {
             </AnimatedPillBadge>
             <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-4">
               A project journey <br />
-              <span className="text-[#D4E012] relative inline-block">
-                with a clear curve.
-                <svg
-                  className="absolute -bottom-2 left-0 w-full h-3 text-[#D4E012]"
-                  viewBox="0 0 100 20"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M0 15 Q 50 0 100 15"
-                    stroke="currentColor"
-                    strokeWidth="3.5"
-                    fill="transparent"
-                  />
-                </svg>
-              </span>
+                <span className="text-[#D4E012] italic relative inline-block">
+                  with a clear curve.
+                  <svg
+                    className="absolute -bottom-2 left-0 w-full h-3 text-[#D4E012]"
+                    viewBox="0 0 100 20"
+                    preserveAspectRatio="none">
+                    <path
+                      d="M0 15 Q 50 0 100 15"
+                      stroke="currentColor"
+                      strokeWidth="3.5"
+                      fill="transparent" />
+                  </svg>
+                </span>
             </h2>
             <p className="text-slate-300 font-light text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
               6 core phases in sequence. The roadmap lights up as the project moves from discovery to long-term operations.
@@ -300,15 +297,13 @@ export default function ExecutionCurve() {
                   style={{
                     borderColor: isActive ? phase.color : undefined,
                     boxShadow: isActive ? `0 0 12px ${phase.color}40` : undefined,
-                  }}
-                >
+                  }}>
                   <span
                     className="w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-bold"
                     style={{
                       backgroundColor: isActive ? phase.color : "rgba(255,255,255,0.08)",
                       color: isActive ? "#000000" : "#94a3b8",
-                    }}
-                  >
+                    }}>
                     {idx + 1}
                   </span>
                   <span>{phase.title}</span>
@@ -326,13 +321,11 @@ export default function ExecutionCurve() {
               exit={{ opacity: 0, y: -12, scale: 0.98 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
               className="relative rounded-3xl bg-[#202C24]/90 border-2 p-5 sm:p-7 backdrop-blur-xl shadow-2xl overflow-hidden"
-              style={{ borderColor: activePhase.color }}
-            >
+              style={{ borderColor: activePhase.color }}>
               {/* Background ambient glow */}
               <div
                 className="absolute inset-0 opacity-20 blur-3xl pointer-events-none transition-all duration-500"
-                style={{ background: activePhase.bgGlow }}
-              ></div>
+                style={{ background: activePhase.bgGlow }}></div>
 
               {/* Card Top Row: Phase Tag & Icon */}
               <div className="flex items-center justify-between gap-3 mb-4 relative z-10">
@@ -342,8 +335,7 @@ export default function ExecutionCurve() {
                     color: activePhase.color,
                     borderColor: `${activePhase.color}50`,
                     backgroundColor: activePhase.bgGlow,
-                  }}
-                >
+                  }}>
                   {activePhase.phaseNumber} OF 06
                 </span>
                 <div
@@ -351,8 +343,7 @@ export default function ExecutionCurve() {
                   style={{
                     backgroundColor: activePhase.color,
                     color: "#000000",
-                  }}
-                >
+                  }}>
                   <ActiveIcon className="w-5 h-5 stroke-[2.2]" />
                 </div>
               </div>
@@ -363,15 +354,13 @@ export default function ExecutionCurve() {
                   src={activePhase.image}
                   alt={activePhase.title}
                   fill
-                  className="object-cover"
-                />
+                  className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#18221B] via-[#18221B]/30 to-transparent"></div>
                 <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] text-slate-200 font-medium bg-[#18221B]/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10">
                   <span className="truncate">{activePhase.caption}</span>
                   <span
                     className="w-2 h-2 rounded-full shrink-0 animate-pulse ml-2"
-                    style={{ backgroundColor: activePhase.color }}
-                  ></span>
+                    style={{ backgroundColor: activePhase.color }}></span>
                 </div>
               </div>
 
@@ -393,12 +382,10 @@ export default function ExecutionCurve() {
                 {activePhase.checklist.map((item) => (
                   <div
                     key={item}
-                    className="flex items-center gap-2.5 text-xs text-slate-200 font-medium bg-black/20 p-2 rounded-xl border border-white/10"
-                  >
+                    className="flex items-center gap-2.5 text-xs text-slate-200 font-medium bg-black/20 p-2 rounded-xl border border-white/10">
                     <CheckCircle2
                       className="w-4 h-4 shrink-0"
-                      style={{ color: activePhase.color }}
-                    />
+                      style={{ color: activePhase.color }} />
                     <span className="leading-snug text-xs">{item}</span>
                   </div>
                 ))}
@@ -417,8 +404,7 @@ export default function ExecutionCurve() {
                 style={{
                   backgroundColor: idx === activeIndex ? activePhase.color : undefined,
                 }}
-                aria-label={`Go to phase ${idx + 1}`}
-              />
+                aria-label={`Go to phase ${idx + 1}`} />
             ))}
           </div>
         </div>
@@ -434,8 +420,7 @@ export default function ExecutionCurve() {
                 viewBox={`0 0 ${VB_W} ${VB_H}`}
                 className="absolute inset-0 w-full h-full overflow-visible pointer-events-none"
                 fill="none"
-                aria-hidden="true"
-              >
+                aria-hidden="true">
                 <defs>
                   <linearGradient id="curve-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={VB_W} y2="0">
                     {phases.map((p, i) => (
@@ -451,8 +436,7 @@ export default function ExecutionCurve() {
                   stroke="url(#curve-grad)"
                   strokeWidth="4"
                   strokeLinecap="round"
-                  style={{ pathLength: reduceMotion ? lineTarget : lineProgress }}
-                />
+                  style={{ pathLength: reduceMotion ? lineTarget : lineProgress }} />
               </svg>
 
               {/* Nodes */}
@@ -472,8 +456,7 @@ export default function ExecutionCurve() {
                     style={{
                       left: `${(points[idx].x / VB_W) * 100}%`,
                       top: `${(points[idx].y / VB_H) * 100}%`,
-                    }}
-                  >
+                    }}>
                     <span
                       className={`relative flex w-12 h-12 lg:w-14 lg:h-14 rounded-2xl items-center justify-center border transition-[transform,background-color,box-shadow] duration-700 ${isActive ? "scale-105 border-white/70" : "bg-[#202C24] border-white/15 group-hover:border-white/40 group-focus-visible:border-white"
                         }`}
@@ -482,8 +465,7 @@ export default function ExecutionCurve() {
                         color: isActive ? "#000" : phase.color,
                         boxShadow: isActive ? `0 8px 24px -8px ${phase.color}80` : undefined,
                         borderColor: isDone ? `${phase.color}99` : undefined,
-                      }}
-                    >
+                      }}>
                       <Icon className="w-6 h-6 stroke-[2.2]" />
                     </span>
                     <span
@@ -491,8 +473,7 @@ export default function ExecutionCurve() {
                         } ${isActive
                           ? "bg-white text-slate-900 border-white"
                           : "bg-[#202C24]/90 text-slate-300 border-white/10 group-hover:text-white"
-                        }`}
-                    >
+                        }`}>
                       <span className="opacity-60 mr-1.5">{phase.phaseNumber.replace("PHASE ", "")}</span>
                       {phase.title}
                     </span>
@@ -511,19 +492,16 @@ export default function ExecutionCurve() {
                   exit={{ opacity: 0, y: -4 }}
                   transition={{ duration: 0.6, ease: [0.45, 0, 0.2, 1] }}
                   className="relative grid grid-cols-5 gap-6 rounded-3xl bg-[#202C24]/80 border p-5 lg:p-6 overflow-hidden"
-                  style={{ borderColor: `${activePhase.color}80` }}
-                >
+                  style={{ borderColor: `${activePhase.color}80` }}>
                   <div
                     className="absolute inset-0 opacity-[0.12] pointer-events-none"
-                    style={{ background: `radial-gradient(60% 80% at 0% 0%, ${activePhase.color}, transparent)` }}
-                  />
+                    style={{ background: `radial-gradient(60% 80% at 0% 0%, ${activePhase.color}, transparent)` }} />
                   <div className="relative col-span-2 h-48 lg:h-56 rounded-2xl overflow-hidden border border-white/10">
                     <Image src={activePhase.image} alt={activePhase.title} fill sizes="400px" className="object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#18221B]/70 via-transparent to-transparent" />
                     <span
                       className="absolute top-3 left-3 text-[10px] font-mono font-bold px-2 py-1 rounded text-black uppercase"
-                      style={{ backgroundColor: activePhase.color }}
-                    >
+                      style={{ backgroundColor: activePhase.color }}>
                       {activePhase.phaseNumber}
                     </span>
                     <span className="absolute bottom-3 left-3 right-3 text-[11px] text-slate-200 bg-[#18221B]/80 px-3 py-1.5 rounded-xl border border-white/10 truncate">
@@ -539,8 +517,7 @@ export default function ExecutionCurve() {
                       {activePhase.checklist.map((item) => (
                         <div
                           key={item}
-                          className="flex items-center gap-2 text-xs text-slate-200 font-medium bg-black/20 p-2 rounded-xl border border-white/10"
-                        >
+                          className="flex items-center gap-2 text-xs text-slate-200 font-medium bg-black/20 p-2 rounded-xl border border-white/10">
                           <CheckCircle2 className="w-4 h-4 shrink-0" style={{ color: activePhase.color }} />
                           <span>{item}</span>
                         </div>
@@ -555,8 +532,7 @@ export default function ExecutionCurve() {
                       style={{ backgroundColor: activePhase.color }}
                       initial={{ scaleX: 0 }}
                       animate={{ scaleX: 1 }}
-                      transition={{ duration: AUTOPLAY_MS / 1000, ease: "linear" }}
-                    />
+                      transition={{ duration: AUTOPLAY_MS / 1000, ease: "linear" }} />
                   )}
                 </motion.div>
               </AnimatePresence>
@@ -573,16 +549,14 @@ export default function ExecutionCurve() {
               setActiveIndex((prev) => (prev === 0 ? phases.length - 1 : prev - 1))
             }
             className="p-2.5 sm:p-3 rounded-full bg-[#202C24] border border-white/15 text-slate-300 hover:text-white hover:border-[#D4E012] transition-colors"
-            aria-label="Previous Phase"
-          >
+            aria-label="Previous Phase">
             <ChevronLeft className="w-5 h-5" />
           </button>
 
           <button
             onClick={() => setActiveIndex((prev) => (prev + 1) % phases.length)}
             className="p-2.5 sm:p-3 rounded-full bg-[#202C24] border border-white/15 text-slate-300 hover:text-white hover:border-[#D4E012] transition-colors"
-            aria-label="Next Phase"
-          >
+            aria-label="Next Phase">
             <ChevronRight className="w-5 h-5" />
           </button>
         </div>
@@ -592,8 +566,7 @@ export default function ExecutionCurve() {
           <div className="mt-10 sm:mt-12 text-center">
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"
-            >
+              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group">
               <span>Explore Project Portfolio</span>
               <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
             </Link>

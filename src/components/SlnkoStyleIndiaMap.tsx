@@ -56,8 +56,7 @@ const OPERATING_METRICS: Record<
     ongoing: number;
     pinPos: { x: number; y: number };
     cardPos: { x: number; y: number };
-  }
-> = {
+  }> = {
   rj: {
     name: "Rajasthan",
     code: "RJ",
@@ -289,7 +288,7 @@ export default function SlnkoStyleIndiaMap({
   // Active state data
   const activeState = useMemo(() => {
     if (!activeTargetId) return null;
-    return stateItems.find((s) => s.id === activeTargetId) || null;
+    return stateItems.find((s) => s.id=== activeTargetId) || null;
   }, [activeTargetId, stateItems]);
 
   // Scalable card positioning near the state in its dedicated non-blocking border zone
@@ -315,8 +314,7 @@ export default function SlnkoStyleIndiaMap({
       {/* Ambient Radial Lighting Glow */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-0 bg-[radial-gradient(ellipse_75%_75%_at_50%_35%,rgba(109,173,69,0.16),rgba(7,19,37,0))]"
-      />
+        className="pointer-events-none absolute inset-0 -z-0 bg-[radial-gradient(ellipse_75%_75%_at_50%_35%,rgba(109,173,69,0.16),rgba(7,19,37,0))]" />
 
       {/* Quick Status Legend Strip */}
       <div className="relative z-10 mb-4 flex flex-wrap items-center justify-between gap-3 px-2 text-xs">
@@ -347,8 +345,7 @@ export default function SlnkoStyleIndiaMap({
         <svg
           viewBox={indiaMap.viewBox || "0 0 612 696"}
           className="h-full w-full select-none filter drop-shadow-[0_25px_45px_rgba(0,0,0,0.95)]"
-          onMouseLeave={scheduleClose}
-        >
+          onMouseLeave={scheduleClose}>
           <defs>
             {/* Inactive Slate State Gradient */}
             <linearGradient id="slateStateGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -387,8 +384,7 @@ export default function SlnkoStyleIndiaMap({
             width="100%"
             height="100%"
             fill="transparent"
-            onMouseEnter={scheduleClose}
-          />
+            onMouseEnter={scheduleClose} />
 
           {/* 3D Extrusion Shadow Layer */}
           <g transform="translate(0, 10)" opacity="0.5" filter="url(#github3DShadow)">
@@ -398,8 +394,7 @@ export default function SlnkoStyleIndiaMap({
                 d={state.path}
                 fill="#060D1A"
                 stroke="#020617"
-                strokeWidth="1.5"
-              />
+                strokeWidth="1.5" />
             ))}
           </g>
 
@@ -439,8 +434,7 @@ export default function SlnkoStyleIndiaMap({
                     filter: isActive
                       ? "url(#sarhatGlow) drop-shadow(0 10px 22px rgba(109, 173, 69, 0.85))"
                       : "none",
-                  }}
-                />
+                  }} />
               );
             })}
           </g>
@@ -460,8 +454,7 @@ export default function SlnkoStyleIndiaMap({
                       r="4.5"
                       fill={isActive ? "#D4E012" : "#6DAD45"}
                       stroke="#FFFFFF"
-                      strokeWidth="1.5"
-                    />
+                      strokeWidth="1.5" />
                   </g>
                 );
               })}
@@ -480,8 +473,7 @@ export default function SlnkoStyleIndiaMap({
               onMouseEnter={cancelClose}
               onMouseLeave={scheduleClose}
               className="absolute z-30 pointer-events-auto"
-              style={cardStyle}
-            >
+              style={cardStyle}>
               <div className="w-[240px] sm:w-[265px] rounded-2xl bg-[#091526]/95 backdrop-blur-2xl border border-[#6DAD45]/45 p-3.5 sm:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.95)] shadow-[#6DAD45]/15 text-white">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.16em] text-[#D4E012] flex items-center gap-1.5">
@@ -496,8 +488,7 @@ export default function SlnkoStyleIndiaMap({
                       setHoveredId(null);
                     }}
                     className="p-1 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-                    aria-label="Close state card"
-                  >
+                    aria-label="Close state card">
                     <X className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -531,8 +522,7 @@ export default function SlnkoStyleIndiaMap({
                     onSelectState?.(activeState.slug);
                     onViewDetails?.(activeState.slug);
                   }}
-                  className="relative mt-3 flex w-full cursor-pointer items-center justify-between rounded-xl bg-gradient-to-r from-[#6DAD45] to-[#7fbe51] hover:from-[#76ba4b] hover:to-[#8ccd5c] px-3 py-2 text-[11px] sm:text-xs font-bold font-sans text-slate-950 shadow-md shadow-[#6DAD45]/25 hover:shadow-lg hover:shadow-[#6DAD45]/40 hover:scale-[1.01] active:scale-[0.98] transition-all duration-200 group"
-                >
+                  className="relative mt-3 flex w-full cursor-pointer items-center justify-between rounded-xl bg-gradient-to-r from-[#6DAD45] to-[#7fbe51] hover:from-[#76ba4b] hover:to-[#8ccd5c] px-3 py-2 text-[11px] sm:text-xs font-bold font-sans text-slate-950 shadow-md shadow-[#6DAD45]/25 hover:shadow-lg hover:shadow-[#6DAD45]/40 hover:scale-[1.01] active:scale-[0.98] transition-all duration-200 group">
                   <span className="truncate font-bold tracking-tight">
                     View {activeState.name} Projects ({activeState.commissioned + activeState.ongoing})
                   </span>

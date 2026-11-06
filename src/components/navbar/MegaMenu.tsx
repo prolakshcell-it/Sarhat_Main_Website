@@ -54,8 +54,7 @@ const LEVELS = [
 const TICK = (
   <span
     aria-hidden
-    className="absolute left-1.5 top-1/2 h-0 w-[3px] -translate-y-1/2 rounded-full bg-gradient-to-b from-[#D2CB0A] to-[#6AB144] transition-all duration-200 group-hover/item:h-4 group-focus-visible/item:h-4"
-  />
+    className="absolute left-1.5 top-1/2 h-0 w-[3px] -translate-y-1/2 rounded-full bg-gradient-to-b from-[#D2CB0A] to-[#6AB144] transition-all duration-200 group-hover/item:h-4 group-focus-visible/item:h-4" />
 );
 
 function ShimmerBorder() {
@@ -96,8 +95,7 @@ function MenuItems({
               aria-haspopup={item.children ? "true" : undefined}
               target={external ? "_blank" : undefined}
               rel={external ? "noopener noreferrer" : undefined}
-              className={`${ITEM} ${item.children ? lv.open : ""}`}
-            >
+              className={`${ITEM} ${item.children ? lv.open : ""}`}>
               {TICK}
               {item.title}
               {item.children && <Arrow aria-hidden className="h-4 w-4 text-[#6AB144]" />}
@@ -106,8 +104,7 @@ function MenuItems({
               <div
                 className={`invisible absolute top-[-8px] opacity-0 transition-opacity duration-200 ${lv.show} ${
                   flip ? "right-full pr-3" : "left-full pl-3"
-                }`}
-              >
+                }`}>
                 <div className={`relative min-w-[210px] ${PANEL}`}>
                   <ShimmerBorder />
                   <MenuItems items={item.children} level={level + 1} flip={flip} onNavigate={onNavigate} />
@@ -140,7 +137,7 @@ const MegaMenu = forwardRef<HTMLDivElement, MegaMenuProps>(function MegaMenu(
       // Line the item text up with the trigger label (panel 8px + item 16px padding).
       const left = t.left - parent.getBoundingClientRect().left - 24;
       // Open flyouts leftwards when they would run off the right edge.
-      const flip = t.left - 24 + PANEL_W + depth * FLYOUT_W > window.innerWidth - 16;
+      const flip = t.left - 24 + PANEL_W + depth * FLYOUT_W> window.innerWidth - 16;
       setPos({ left, flip });
     };
     measure();
@@ -160,8 +157,7 @@ const MegaMenu = forwardRef<HTMLDivElement, MegaMenuProps>(function MegaMenu(
       exit={reduce ? { opacity: 0 } : { opacity: 0, y: -4 }}
       transition={{ duration: 0.18, ease: "easeOut" }}
       style={{ left: pos?.left ?? 0, visibility: pos ? undefined : "hidden" }}
-      className={`absolute top-[calc(100%+10px)] min-w-[250px] ${PANEL} before:absolute before:inset-x-0 before:-top-3 before:h-3 before:content-['']`}
-    >
+      className={`absolute top-[calc(100%+10px)] min-w-[250px] ${PANEL} before:absolute before:inset-x-0 before:-top-3 before:h-3 before:content-['']`}>
       <ShimmerBorder />
       <p className="px-4 pb-2 pt-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#8A8F12]">
         {menu.tag}
@@ -174,8 +170,7 @@ const MegaMenu = forwardRef<HTMLDivElement, MegaMenuProps>(function MegaMenu(
             href="/about/connect"
             data-menu-item
             onClick={onNavigate}
-            className="rounded-sm font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#8A8F12] transition-colors hover:text-[#3C7322] focus:outline-none focus-visible:text-[#3C7322]"
-          >
+            className="rounded-sm font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#8A8F12] transition-colors hover:text-[#3C7322] focus:outline-none focus-visible:text-[#3C7322]">
             Connect with us
           </Link>
           <ul className="flex items-center gap-1.5">
@@ -187,8 +182,7 @@ const MegaMenu = forwardRef<HTMLDivElement, MegaMenuProps>(function MegaMenu(
                   rel="noopener noreferrer"
                   data-menu-item
                   aria-label={`Sarhat on ${s.label}`}
-                  className="flex h-8 w-8 items-center justify-center rounded-full border border-[#6AB144]/30 text-[#3C7322] transition-all duration-200 hover:-translate-y-px hover:border-transparent hover:bg-gradient-to-br hover:from-[#D2CB0A] hover:to-[#6AB144] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6AB144]"
-                >
+                  className="flex h-8 w-8 items-center justify-center rounded-full border border-[#6AB144]/30 text-[#3C7322] transition-all duration-200 hover:-translate-y-px hover:border-transparent hover:bg-gradient-to-br hover:from-[#D2CB0A] hover:to-[#6AB144] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6AB144]">
                   <SocialIcon id={s.id} className="h-3.5 w-3.5" />
                 </a>
               </li>

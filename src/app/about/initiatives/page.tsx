@@ -31,7 +31,7 @@ export default function InitiativesPage() {
   const containerRef = useRef<HTMLElement>(null);
 
   // Parallax & Scroll Fade-out Tracking for Hero
-    const {
+  const {
     isPastHero,
     bgScale,
     bgDim,
@@ -111,15 +111,12 @@ export default function InitiativesPage() {
         {/* HERO SECTION (Sticky Background Image Overlay Hero) */}
         {/* ------------------------------------------------------------- */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
-          aria-hidden={isPastHero}
-        >
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
+          aria-hidden={isPastHero}>
           <section
             ref={containerRef}
-            className="relative h-full w-full flex flex-col items-center justify-center overflow-hidden bg-black text-white select-none"
-          >
+            className="relative h-full w-full flex flex-col items-center justify-center overflow-hidden bg-black text-white select-none">
             {/* Background Image Layer */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
               <Image
@@ -127,8 +124,7 @@ export default function InitiativesPage() {
                 alt="Sarhat Sustainable Initiatives"
                 fill
                 priority
-                className="object-cover object-center opacity-85"
-              />
+                className="object-cover object-center opacity-85" />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
               {/* Soft Dark Vignette Scrim */}
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
@@ -136,8 +132,7 @@ export default function InitiativesPage() {
 
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 flex flex-col items-center text-center will-change-transform"
-            >
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 flex flex-col items-center text-center will-change-transform">
               <ScrollReveal direction="up" distance={30}>
                 <div className="max-w-4xl flex flex-col items-center text-center">
 
@@ -183,14 +178,12 @@ export default function InitiativesPage() {
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden
-                      >
+                        aria-hidden>
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -208,8 +201,7 @@ export default function InitiativesPage() {
                     <ScrollReveal key={item.id} direction="up" distance={40} delay={index * 0.1}>
                       <a
                         href={`#${item.id}`}
-                        className="bg-[#F8FAF8] border-2 border-slate-200/90 hover:border-[#6DAD45] p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 group flex flex-col justify-between h-full relative overflow-hidden"
-                      >
+                        className="bg-[#F8FAF8] border-2 border-slate-200/90 hover:border-[#6DAD45] p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 group flex flex-col justify-between h-full relative overflow-hidden">
                         <div className="absolute -bottom-10 -right-10 w-36 h-36 bg-[#6DAD45]/10 rounded-full blur-2xl group-hover:bg-[#6DAD45]/25 transition-all duration-500 pointer-events-none" />
 
                         <div>
@@ -258,8 +250,7 @@ export default function InitiativesPage() {
                                 src={item.image}
                                 alt={item.title}
                                 fill
-                                className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                              />
+                                className="object-cover object-center group-hover:scale-105 transition-transform duration-700" />
                               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent pointer-events-none" />
                               <div className="absolute bottom-5 left-5 right-5">
                                 <span className="text-[11px] font-mono text-white bg-black/60 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20">
@@ -295,7 +286,7 @@ export default function InitiativesPage() {
 
                             {/* Stat Badge */}
                             <div className="inline-flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-[#F8FAF8] border border-slate-200 text-slate-900">
-                              <span className="text-xl sm:text-2xl font-mono font-extrabold text-[#6DAD45]">
+                              <span className="text-xl sm:text-2xl font-sans-inter tabular-nums font-extrabold text-[#6DAD45]">
                                 {item.stat}
                               </span>
                               <span className="text-xs font-mono text-slate-500 uppercase tracking-wider">
@@ -322,16 +313,14 @@ export default function InitiativesPage() {
                             <div className="pt-4 flex flex-wrap items-center gap-4">
                               <Link
                                 href={item.href}
-                                className="bg-gradient-to-r from-[#6DAD45] to-[#5EE72D] hover:from-[#5cb338] hover:to-[#4ed423] text-slate-950 font-extrabold text-xs uppercase tracking-wider px-6 py-3.5 rounded-full transition-all shadow-md shadow-[#6DAD45]/20 hover:scale-105 inline-flex items-center gap-2"
-                              >
+                                className="bg-gradient-to-r from-[#6DAD45] to-[#5EE72D] hover:from-[#5cb338] hover:to-[#4ed423] text-slate-950 font-extrabold text-xs uppercase tracking-wider px-6 py-3.5 rounded-full transition-all shadow-md shadow-[#6DAD45]/20 hover:scale-105 inline-flex items-center gap-2">
                                 <span>Learn More &amp; Dedicated Page</span>
                                 <ArrowRight className="w-4 h-4 text-slate-950" />
                               </Link>
 
                               <button
                                 onClick={() => setQuoteModalOpen(true)}
-                                className="bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-full transition-all cursor-pointer"
-                              >
+                                className="bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-full transition-all cursor-pointer">
                                 Partner On This Initiative
                               </button>
                             </div>
@@ -359,7 +348,20 @@ export default function InitiativesPage() {
                   </span>
                   <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-white tracking-tight leading-tight mb-4 max-w-2xl text-center">
                     Ready to build clean energy <br />
-                    <span className="text-[#D4E012]">with social &amp; environmental impact?</span>
+                    <span className="text-[#D4E012] italic relative inline-block">
+                      with social &amp; environmental impact?
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-2.5 text-[#D4E012]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden="true">
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent" />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal max-w-xl mx-auto mb-8 text-center">
                     Whether you are looking to decarbonize corporate operations, deploy PM-KUSUM AgroVoltaic solar, or launch technician training in your region, Sarhat is your trusted partner.
@@ -367,8 +369,7 @@ export default function InitiativesPage() {
 
                   <button
                     onClick={() => setQuoteModalOpen(true)}
-                    className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-wider px-8 py-4 rounded-full transition-all shadow-xl shadow-[#D4E012]/30 hover:scale-105 shrink-0 cursor-pointer inline-flex items-center gap-2"
-                  >
+                    className="bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-wider px-8 py-4 rounded-full transition-all shadow-xl shadow-[#D4E012]/30 hover:scale-105 shrink-0 cursor-pointer inline-flex items-center gap-2">
                     <span>START A CONVERSATION</span>
                     <ArrowRight className="w-4 h-4 text-black" />
                   </button>

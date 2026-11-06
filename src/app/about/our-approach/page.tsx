@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import SmoothScroll from "@/components/SmoothScroll";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
@@ -18,8 +18,6 @@ import {
   ChevronRight,
   ArrowRight,
   Quote,
-  Layers,
-  CheckCircle2,
 } from "lucide-react";
 
 export default function OurApproachPage() {
@@ -27,7 +25,7 @@ export default function OurApproachPage() {
   const containerRef = useRef<HTMLElement>(null);
 
   // Parallax & Scroll Fade-out Tracking for Hero
-    const {
+  const {
     isPastHero,
     bgScale,
     bgDim,
@@ -125,31 +123,25 @@ export default function OurApproachPage() {
         {/* 01 / FULL-SCREEN HERO SECTION (Matching Insights & About layout) */}
         {/* ------------------------------------------------------------- */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
-          aria-hidden={isPastHero}
-        >
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
+          aria-hidden={isPastHero}>
           <section
             ref={containerRef}
-            className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none"
-          >
+            className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none">
             {/* Background Image Layer */}
             <motion.div style={{ scale: bgScale }}
-              className="absolute inset-0 z-0 h-full w-full"
-            >
+              className="absolute inset-0 z-0 h-full w-full">
               <Image
                 src="/images/hero-solar.jpg"
                 alt="Sarhat Energy Infrastructure Background"
                 fill
                 priority
                 quality={95}
-                className="object-cover object-center opacity-80"
-              />
+                className="object-cover object-center opacity-80" />
               <motion.div
                 style={{ opacity: bgDim }}
-                className="absolute inset-0 bg-black pointer-events-none"
-              />
+                className="absolute inset-0 bg-black pointer-events-none" />
               {/* Soft Dark Scrim Overlay */}
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
             </motion.div>
@@ -161,8 +153,7 @@ export default function OurApproachPage() {
                 scale: contentScale,
                 opacity: contentOpacity,
               }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-28 flex flex-col items-center text-center will-change-transform"
-            >
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-28 flex flex-col items-center text-center will-change-transform">
               <motion.div
                 initial="hidden"
                 animate="visible"
@@ -176,8 +167,7 @@ export default function OurApproachPage() {
                     },
                   },
                 }}
-                className="max-w-4xl flex flex-col items-center text-center"
-              >
+                className="max-w-4xl flex flex-col items-center text-center">
                 {/* Serif H1 Heading matching Insights page design format */}
                 <motion.h1
                   variants={{
@@ -188,8 +178,7 @@ export default function OurApproachPage() {
                       transition: { duration: 0.8, ease: "easeOut" },
                     },
                   }}
-                  className="text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center max-w-4xl drop-shadow-lg"
-                >
+                  className="text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center max-w-4xl drop-shadow-lg">
                   As project risk falls, <br />
                   <span className="italic font-normal text-white">
                     Sarhat <span className="text-[#D4E012]">value rises.</span>
@@ -206,8 +195,7 @@ export default function OurApproachPage() {
                       transition: { duration: 0.8, ease: "easeOut" },
                     },
                   }}
-                  className="text-base sm:text-lg text-slate-100 font-normal max-w-5xl text-center leading-relaxed drop-shadow-md"
-                >
+                  className="text-base sm:text-lg text-slate-100 font-normal max-w-5xl text-center leading-relaxed drop-shadow-md">
                   Engineering discipline, site-first execution, and transparent handoffs that eliminate friction and maximize asset yields across India&apos;s clean energy transition.
                 </motion.p>
               </motion.div>
@@ -226,7 +214,7 @@ export default function OurApproachPage() {
         {/* MAIN SLIDING CONTENT OVERLAY */}
         {/* ------------------------------------------------------------- */}
         <div className="relative z-10 bg-[#F8FAF8] border-t border-slate-200/60 shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
-          
+
           {/* 02 / FROM CONCEPT TO COMPLETION WE DELIVER (Placed Right After Hero) */}
           <section className="py-10 sm:py-14 bg-[#F8FAF8] text-[#0F172A] relative border-b border-slate-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -243,14 +231,12 @@ export default function OurApproachPage() {
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden
-                      >
+                        aria-hidden>
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -294,8 +280,7 @@ export default function OurApproachPage() {
                         {deliveryBenefits.map((benefit, idx) => (
                           <div
                             key={idx}
-                            className="flex items-center gap-3 bg-[#F8FAF8] p-4 rounded-2xl border border-emerald-100 shadow-sm hover:border-[#6DAD45] hover:shadow-md transition-all group"
-                          >
+                            className="flex items-center gap-3 bg-[#F8FAF8] p-4 rounded-2xl border border-emerald-100 shadow-sm hover:border-[#6DAD45] hover:shadow-md transition-all group">
                             <div className="w-8 h-8 rounded-full bg-[#5EE72D] flex items-center justify-center text-black shrink-0 font-bold shadow-md shadow-[#5EE72D]/30 group-hover:scale-110 transition-transform">
                               <ChevronRight className="w-5 h-5 stroke-[3] text-black" />
                             </div>
@@ -313,15 +298,16 @@ export default function OurApproachPage() {
           </section>
 
           {/* 03 / 5 PRINCIPLES INTERACTIVE SECTION (Obsidian Emerald Theme matching About page values) */}
-          <section className="py-10 sm:py-14 bg-[#09120B] border-b border-slate-800/90 relative z-10 text-white overflow-hidden select-none">
+          <section
+            id="delivery-principles"
+            className="py-12 sm:py-16 md:py-20 bg-[#09120B] border-b border-slate-800/90 relative z-10 text-white overflow-hidden">
             {/* Soft Radial Ambient Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[550px] bg-[#D4E012]/10 rounded-full blur-[140px] pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <ScrollReveal>
                 <FivePrinciplesInteractive
-                  onOpenQuote={() => setQuoteModalOpen(true)}
-                />
+                  onOpenQuote={() => setQuoteModalOpen(true)} />
               </ScrollReveal>
             </div>
           </section>
@@ -342,14 +328,12 @@ export default function OurApproachPage() {
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden
-                      >
+                        aria-hidden>
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -376,14 +360,12 @@ export default function OurApproachPage() {
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden
-                      >
+                        aria-hidden>
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -404,8 +386,7 @@ export default function OurApproachPage() {
                           src={project.image}
                           alt={project.title}
                           fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
-                        />
+                          className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" />
                         <div className="absolute top-3 right-3 bg-[#D4E012] text-black text-[10px] font-mono font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
                           {project.category}
                         </div>
@@ -427,8 +408,7 @@ export default function OurApproachPage() {
 
                         <button
                           onClick={() => setQuoteModalOpen(true)}
-                          className="text-xs font-bold text-[#0F172A] bg-[#D4E012] hover:bg-[#b8c40e] px-4 py-2.5 rounded-full transition-all text-left flex items-center justify-between group-hover:pr-3 cursor-pointer shadow-sm"
-                        >
+                          className="text-xs font-bold text-[#0F172A] bg-[#D4E012] hover:bg-[#b8c40e] px-4 py-2.5 rounded-full transition-all text-left flex items-center justify-between group-hover:pr-3 cursor-pointer shadow-sm">
                           <span>Read the case study</span>
                           <ArrowRight className="w-3.5 h-3.5 text-black" />
                         </button>
@@ -457,7 +437,21 @@ export default function OurApproachPage() {
                     </div>
 
                     <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-[#0F172A] tracking-tight leading-tight">
-                      Owning the outcome at every phase
+                      Owning the outcome <br />
+                      <span className="text-[#6DAD45] italic relative inline-block">
+                        at every phase.
+                        <svg
+                          className="absolute -bottom-2 left-0 w-full h-2.5 text-[#6DAD45]"
+                          viewBox="0 0 100 20"
+                          preserveAspectRatio="none"
+                          aria-hidden="true">
+                          <path
+                            d="M0 15 Q 50 0 100 15"
+                            stroke="currentColor"
+                            strokeWidth="3.5"
+                            fill="transparent" />
+                        </svg>
+                      </span>
                     </h2>
                     <p className="text-slate-600 font-normal text-base sm:text-lg leading-relaxed max-w-lg">
                       An extension of your team, supporting complex clean energy project
@@ -465,7 +459,7 @@ export default function OurApproachPage() {
                     </p>
 
                     <div className="pt-4">
-                      <div className="text-6xl sm:text-8xl font-extrabold font-mono text-[#6DAD45] tracking-tight drop-shadow-sm">
+                      <div className="text-6xl sm:text-8xl font-extrabold font-sans-inter tabular-nums text-[#6DAD45] tracking-tight drop-shadow-sm">
                         150+
                       </div>
                       <p className="text-xs sm:text-sm text-slate-600 font-normal max-w-md mt-2 leading-relaxed">
@@ -512,8 +506,7 @@ export default function OurApproachPage() {
 
         <QuoteModal
           isOpen={quoteModalOpen}
-          onClose={() => setQuoteModalOpen(false)}
-        />
+          onClose={() => setQuoteModalOpen(false)} />
       </main>
     </SmoothScroll>
   );

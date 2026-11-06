@@ -78,14 +78,12 @@ export default function ProjectIntelligence() {
               <svg
                 className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                 viewBox="0 0 100 20"
-                preserveAspectRatio="none"
-              >
+                preserveAspectRatio="none">
                 <path
                   d="M0 15 Q 50 0 100 15"
                   stroke="currentColor"
                   strokeWidth="3.5"
-                  fill="transparent"
-                />
+                  fill="transparent" />
               </svg>
             </span>
           </h2>
@@ -115,8 +113,7 @@ export default function ProjectIntelligence() {
                   type="text"
                   value={formData.pinCode}
                   onChange={(e) => setFormData({ ...formData, pinCode: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-mono text-slate-900 focus:outline-none focus:border-[#707B00] transition-colors"
-                />
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-mono text-slate-900 focus:outline-none focus:border-[#707B00] transition-colors" />
               </div>
 
               {/* State Selection */}
@@ -127,8 +124,7 @@ export default function ProjectIntelligence() {
                 <select
                   value={formData.state}
                   onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-mono text-slate-900 focus:outline-none focus:border-[#707B00] transition-colors"
-                >
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-mono text-slate-900 focus:outline-none focus:border-[#707B00] transition-colors">
                   {states.map((s) => (
                     <option key={s} value={s} className="bg-white text-slate-900">
                       {s}
@@ -145,8 +141,7 @@ export default function ProjectIntelligence() {
                 <select
                   value={formData.landAvailability}
                   onChange={(e) => setFormData({ ...formData, landAvailability: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-mono text-slate-900 focus:outline-none focus:border-[#707B00] transition-colors"
-                >
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-mono text-slate-900 focus:outline-none focus:border-[#707B00] transition-colors">
                   {landOptions.map((opt) => (
                     <option key={opt} value={opt} className="bg-white text-slate-900">
                       {opt}
@@ -165,8 +160,7 @@ export default function ProjectIntelligence() {
                   onChange={(e) =>
                     setFormData({ ...formData, substationDistance: e.target.value })
                   }
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-mono text-slate-900 focus:outline-none focus:border-[#707B00] transition-colors"
-                >
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-mono text-slate-900 focus:outline-none focus:border-[#707B00] transition-colors">
                   {distanceOptions.map((d) => (
                     <option key={d} value={d} className="bg-white text-slate-900">
                       {d}
@@ -183,8 +177,7 @@ export default function ProjectIntelligence() {
                 <select
                   value={formData.targetCod}
                   onChange={(e) => setFormData({ ...formData, targetCod: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-mono text-slate-900 focus:outline-none focus:border-[#707B00] transition-colors"
-                >
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-mono text-slate-900 focus:outline-none focus:border-[#707B00] transition-colors">
                   {codOptions.map((c) => (
                     <option key={c} value={c} className="bg-white text-slate-900">
                       {c}
@@ -201,8 +194,7 @@ export default function ProjectIntelligence() {
                 <select
                   value={formData.epcScope}
                   onChange={(e) => setFormData({ ...formData, epcScope: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-mono text-slate-900 focus:outline-none focus:border-[#707B00] transition-colors"
-                >
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-mono text-slate-900 focus:outline-none focus:border-[#707B00] transition-colors">
                   {scopeOptions.map((sc) => (
                     <option key={sc} value={sc} className="bg-white text-slate-900">
                       {sc}
@@ -214,8 +206,7 @@ export default function ProjectIntelligence() {
               <div className="sm:col-span-2 pt-4">
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest py-4 rounded-xl shadow-xl shadow-[#D4E012]/25 flex items-center justify-center gap-2 transition-all cursor-pointer"
-                >
+                  className="w-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest py-4 rounded-xl shadow-xl shadow-[#D4E012]/25 flex items-center justify-center gap-2 transition-all cursor-pointer">
                   <Calculator className="w-4 h-4 text-black" />
                   <span>Run Project Screen →</span>
                 </button>
@@ -268,8 +259,7 @@ export default function ProjectIntelligence() {
             <div className="pt-6 border-t border-slate-800 space-y-3">
               <a
                 href="#contact"
-                className="w-full bg-white hover:bg-slate-100 text-slate-900 font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-md"
-              >
+                className="w-full bg-white hover:bg-slate-100 text-slate-900 font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-md">
                 Download Detailed Feasibility Report
               </a>
               <p className="text-[10px] text-slate-400 text-center font-mono font-semibold">
@@ -283,8 +273,7 @@ export default function ProjectIntelligence() {
         <div className="mt-14 text-center">
           <Link
             href="/solutions"
-            className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"
-          >
+            className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group">
             <span>Explore Technical Capabilities</span>
             <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
           </Link>

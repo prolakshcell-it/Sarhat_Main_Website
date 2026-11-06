@@ -23,6 +23,7 @@ import {
   HardHat,
   MapPin,
   ArrowRight,
+  ArrowUpRight,
   Zap,
   Sparkles,
   type LucideIcon,
@@ -103,7 +104,7 @@ export default function EngineeringPage() {
   const timelineRef = useRef<HTMLDivElement>(null);
 
   // Hero: transform + opacity only, so scrolling stays on the compositor
-    const {
+  const {
     isPastHero,
     bgScale,
     bgDim,
@@ -127,18 +128,14 @@ export default function EngineeringPage() {
 
         {/* 01 / HERO */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
-          aria-hidden={isPastHero}
-        >
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
+          aria-hidden={isPastHero}>
           <section
             ref={heroRef}
-            className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none"
-          >
+            className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none">
             <motion.div style={{ scale: bgScale }}
-              className="absolute inset-0 z-0 h-full w-full will-change-transform"
-            >
+              className="absolute inset-0 z-0 h-full w-full will-change-transform">
               <Image
                 src="/images/hero-solar.jpg"
                 alt="Sarhat engineering team planning a solar plant"
@@ -146,294 +143,302 @@ export default function EngineeringPage() {
                 priority
                 quality={85}
                 sizes="100vw"
-                className="object-cover object-center opacity-85"
-              />
+                className="object-cover object-center opacity-85" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
             </motion.div>
 
+            {/* Luminous Glow Behind Subject */}
+            <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#D4E012]/15 rounded-full blur-3xl pointer-events-none" />
+
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-24 flex flex-col items-center text-center will-change-transform"
-            >
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-32 sm:pt-36 pb-4 flex flex-col items-center text-center will-change-transform">
               <div className="max-w-4xl flex flex-col items-center text-center">
-                <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 leading-[1.08] drop-shadow-lg">
-                  Engineering that starts <br />
-                  <span className="text-[#D4E012] italic font-normal">on your land</span>
+                {/* Hero Headline */}
+                <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.1] mb-6 [text-shadow:_0_4px_24px_rgba(0,0,0,0.95)] [text-wrap:balance]">
+                  Engineering that starts
+                  <br />
+                  <span className="italic font-normal text-[#D4E012] relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
+                    on your land.
+                    <svg
+                      className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
+                      viewBox="0 0 100 20"
+                      preserveAspectRatio="none"
+                      aria-hidden>
+                      <path
+                        d="M0 15 Q 50 0 100 15"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        fill="transparent" />
+                    </svg>
+                  </span>
                 </h1>
-                <p className="text-base sm:text-xl text-slate-200 max-w-3xl leading-relaxed font-normal drop-shadow-md">
-                  Sarhat&apos;s engineers take a solar plant from a plot of land to a working grid connection, and stay until it is energised.
+
+                {/* Sub-headline */}
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-100 font-normal max-w-2xl leading-relaxed tracking-wide [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)] [text-wrap:balance]">
+                  Sarhat&apos;s engineers take a solar plant from a plot of land to a working grid connection,
+                  <br className="hidden sm:inline" />
+                  {" "}and stay until the plant is energised.
                 </p>
               </div>
             </motion.div>
 
-            <ScrollIndicator opacity={indicatorOpacity} />
-          </section>
-        </div>
+        <ScrollIndicator opacity={indicatorOpacity} />
+      </section>
+    </div>
 
-        {/* Scroll Spacer (Matches Hero height to establish scroll track) */}
-        <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
+    {/* Scroll Spacer (Matches Hero height to establish scroll track) */ }
+    <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
 
-
-        {/* 02 / CONTENT SHEET */}
-        <div className="relative z-10 border-t border-slate-200/60 bg-[#F8FAF8] shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
-          {/* Who we engineer for, grounded in the real portfolio */}
-          <section className="py-16 sm:py-24 bg-[#F8FAF8] border-b border-slate-200/80">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <ScrollReveal>
-                <div className="text-center max-w-4xl mx-auto">
-                  <AnimatedPillBadge className="mb-6">OUR ENGINEERING</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-                    <span className="inline-block">Practical design</span> <br />
-                    <span className="text-[#6DAD45] italic relative inline-block">
-                      for plants that get built
-                      <svg
-                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
-                        viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
-                        <path
-                          d="M0 15 Q 50 0 100 15"
-                          stroke="currentColor"
-                          strokeWidth="3.5"
-                          fill="transparent"
-                        />
-                      </svg>
-                    </span>
-                  </h2>
-                  <p className="mt-5 text-slate-600 text-base sm:text-lg leading-relaxed">
-                    Our work is mostly KUSUM-scheme and utility-connected solar plants of a few megawatts each. Every one sits on different ground and connects to a different substation, so we do not reuse a template. We engineer each plant for its own site.
-                  </p>
-                  <p className="mt-4 text-slate-600 text-base sm:text-lg leading-relaxed">
-                    The same engineers who survey the site also sign off the design and support the build. Fewer handovers means fewer gaps between the drawing and what is on the ground.
-                  </p>
-                </div>
-              </ScrollReveal>
-
-              <ScrollReveal delay={0.1}>
-                <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-                  {portfolio.map((s) => (
-                    <div
-                      key={s.label}
-                      className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm"
-                    >
-                      <div className="text-3xl sm:text-4xl font-mono font-bold text-slate-900">{s.value}</div>
-                      <div className="mt-2 text-xs sm:text-sm text-slate-500 leading-snug">{s.label}</div>
-                    </div>
-                  ))}
-                </div>
-              </ScrollReveal>
-            </div>
-          </section>
-
-          {/* How an engagement runs: scroll-drawn timeline */}
-          <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
-            <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-              <ScrollReveal>
-                <div className="text-center max-w-4xl mx-auto mb-14 sm:mb-16">
-                  <AnimatedPillBadge className="mb-6">HOW WE WORK</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-                    <span className="inline-block">From first site visit</span> <br />
-                    <span className="text-[#6DAD45] italic relative inline-block">
-                      to energisation
-                      <svg
-                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
-                        viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
-                        <path
-                          d="M0 15 Q 50 0 100 15"
-                          stroke="currentColor"
-                          strokeWidth="3.5"
-                          fill="transparent"
-                        />
-                      </svg>
-                    </span>
-                  </h2>
-                  <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-                    Four stages, one team, and no point where responsibility quietly changes hands.
-                  </p>
-                </div>
-              </ScrollReveal>
-
-              <div ref={timelineRef} className="relative">
-                {/* Track + progress line */}
-                <div className="absolute left-5 sm:left-6 top-2 bottom-2 w-px bg-slate-200" aria-hidden />
-                <motion.div
-                  style={{ scaleY: lineScale }}
-                  className="absolute left-5 sm:left-6 top-2 bottom-2 w-px origin-top bg-gradient-to-b from-[#6DAD45] to-[#D4E012] will-change-transform"
-                  aria-hidden
-                />
-
-                <ol className="space-y-10 sm:space-y-12">
-                  {phases.map((p, idx) => {
-                    const Icon = p.icon;
-                    const Scene = stageScenes[idx];
-                    return (
-                      <li key={p.step} className="relative pl-16 sm:pl-20">
-                        <span className="absolute left-0 top-0 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-slate-900 text-[#D4E012] shadow-md ring-4 ring-white">
-                          <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
-                        </span>
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center">
-                          <ScrollReveal>
-                            <div className="font-mono text-xs font-bold tracking-widest text-[#6DAD45]">
-                              STAGE {p.step}
-                            </div>
-                            <h3 className="mt-1 text-xl sm:text-2xl font-serif-display font-medium text-slate-900">
-                              {p.title}
-                            </h3>
-                            <p className="mt-3 text-slate-600 leading-relaxed">{p.body}</p>
-                            <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-[#F8FAF8] px-4 py-1.5 text-xs font-medium text-slate-700">
-                              <Zap className="h-3.5 w-3.5 text-[#6DAD45]" />
-                              {p.outcome}
-                            </div>
-                          </ScrollReveal>
-                          <Scene />
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ol>
-              </div>
-            </div>
-          </section>
-
-          {/* Site conditions by state, derived from the project sheet */}
-          <section className="py-16 sm:py-24 bg-[#F8FAF8] border-b border-slate-200/80">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <ScrollReveal>
-                <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-14">
-                  <AnimatedPillBadge className="mb-6">ACROSS INDIA</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-                    <span className="inline-block">Every state asks</span> <br />
-                    <span className="text-[#6DAD45] italic relative inline-block">
-                      something different of the design
-                      <svg
-                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
-                        viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
-                        <path
-                          d="M0 15 Q 50 0 100 15"
-                          stroke="currentColor"
-                          strokeWidth="3.5"
-                          fill="transparent"
-                        />
-                      </svg>
-                    </span>
-                  </h2>
-                  <p className="mt-4 text-slate-600 text-base sm:text-lg">
-                    Soil, weather, land shape and access change from one region to the next. This is what we plan for in each place we work.
-                  </p>
-                </div>
-              </ScrollReveal>
-
-              <div className="flex flex-wrap justify-center gap-5">
-                {regionList.map((r) => (
-                  <ScrollReveal key={r.name} className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]">
-                    <Link
-                      href={`/projects/${r.slug}`}
-                      className="group block h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-1 hover:border-[#6DAD45]/60 hover:shadow-lg"
-                    >
-                      <div className="flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-2 text-slate-900">
-                          <MapPin className="h-4 w-4 text-[#6DAD45]" />
-                          <h3 className="font-serif-display text-lg font-medium">{r.name}</h3>
-                        </div>
-                        {r.summary && (
-                          <span className="font-mono text-xs text-slate-400">{r.summary.capacityMW.toFixed(1)} MW</span>
-                        )}
-                      </div>
-                      <p className="mt-3 text-sm text-slate-600 leading-relaxed">{regionFocus[r.name]}</p>
-                      <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-slate-900">
-                        See projects
-                        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+          {/* 02 / CONTENT SHEET */ }
+          <div className="relative z-10 border-t border-slate-200/60 bg-[#F8FAF8] shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
+            {/* Who we engineer for, grounded in the real portfolio */ }
+            <section className="py-16 sm:py-24 bg-[#F8FAF8] border-b border-slate-200/80">
+              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <ScrollReveal>
+                  <div className="text-center max-w-4xl mx-auto">
+                    <AnimatedPillBadge className="mb-6">OUR ENGINEERING</AnimatedPillBadge>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                      <span className="inline-block">Practical design</span> <br />
+                      <span className="text-[#6DAD45] italic relative inline-block">
+                        for plants that get built
+                        <svg
+                          className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                          viewBox="0 0 100 20"
+                          preserveAspectRatio="none">
+                          <path
+                            d="M0 15 Q 50 0 100 15"
+                            stroke="currentColor"
+                            strokeWidth="3.5"
+                            fill="transparent" />
+                        </svg>
                       </span>
-                    </Link>
-                  </ScrollReveal>
-                ))}
+                    </h2>
+                    <p className="mt-5 text-slate-600 text-base sm:text-lg max-w-3xl mx-auto text-center leading-relaxed">
+                      Our work is mostly KUSUM-scheme and utility-connected solar plants of a few megawatts each. Every one sits on different ground and connects to a different substation, so we do not reuse a template. We engineer each plant for its own site.
+                    </p>
+                    <p className="mt-4 text-slate-600 text-base sm:text-lg max-w-3xl mx-auto text-center leading-relaxed">
+                      The same engineers who survey the site also sign off the design and support the build. Fewer handovers means fewer gaps between the drawing and what is on the ground.
+                    </p>
+                  </div>
+                </ScrollReveal>
+
+                <ScrollReveal delay={0.1}>
+                  <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+                    {portfolio.map((s) => (
+                      <div
+                        key={s.label}
+                        className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
+                        <div className="text-3xl sm:text-4xl font-sans-inter tabular-nums font-bold text-slate-900">{s.value}</div>
+                        <div className="mt-2 text-xs sm:text-sm text-slate-500 leading-snug">{s.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </ScrollReveal>
               </div>
-            </div>
-          </section>
+              </section>
 
-          {/* Go deeper: teasers only, details live on the sub-pages */}
-          <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <ScrollReveal>
-                <div className="text-center max-w-4xl mx-auto mb-12">
-                  <AnimatedPillBadge className="mb-6">GO DEEPER</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-                    <span className="inline-block">Two ways to look</span> <br />
-                    <span className="text-[#6DAD45] italic relative inline-block">
-                      inside our engineering
-                      <svg
-                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
-                        viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
-                        <path
-                          d="M0 15 Q 50 0 100 15"
-                          stroke="currentColor"
-                          strokeWidth="3.5"
-                          fill="transparent"
-                        />
-                      </svg>
-                    </span>
-                  </h2>
-                </div>
-              </ScrollReveal>
+    {/* How an engagement runs: scroll-drawn timeline */ }
+    <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <ScrollReveal>
+          <div className="text-center max-w-4xl mx-auto mb-14 sm:mb-16">
+            <AnimatedPillBadge className="mb-6">HOW WE WORK</AnimatedPillBadge>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+              <span className="inline-block">From first site visit</span> <br />
+              <span className="text-[#6DAD45] italic relative inline-block">
+                to energisation
+                <svg
+                  className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                  viewBox="0 0 100 20"
+                  preserveAspectRatio="none">
+                  <path
+                    d="M0 15 Q 50 0 100 15"
+                    stroke="currentColor"
+                    strokeWidth="3.5"
+                    fill="transparent" />
+                </svg>
+              </span>
+            </h2>
+            <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+              Four stages, one team, and no point where responsibility quietly changes hands.
+            </p>
+          </div>
+        </ScrollReveal>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {[
-                  {
-                    href: "/solutions/engineering/innovation",
-                    icon: Sparkles,
-                    tag: "Innovation",
-                    title: "Where we try to do better",
-                    body: "The ideas we use to get more energy from each site and make plants last longer in the field.",
-                  },
-                  {
-                    href: "/solutions/engineering/system-design",
-                    icon: PencilRuler,
-                    tag: "System Design",
-                    title: "What we design and hand over",
-                    body: "The electrical and structural design of the plant, and the drawing package your contractors build from.",
-                  },
-                ].map((c) => {
-                  const Icon = c.icon;
-                  return (
-                    <ScrollReveal key={c.href}>
-                      <Link
-                        href={c.href}
-                        className="group flex h-full flex-col rounded-3xl bg-slate-900 p-8 sm:p-10 text-white transition-transform duration-200 hover:-translate-y-1"
-                      >
-                        <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-[#D4E012]">
-                          <Icon className="h-5 w-5" />
-                        </span>
-                        <div className="mt-6 font-mono text-xs uppercase tracking-wider text-[#D4E012]">{c.tag}</div>
-                        <h3 className="mt-2 font-serif-display text-2xl sm:text-3xl font-medium">{c.title}</h3>
-                        <p className="mt-3 flex-1 text-sm sm:text-base text-slate-300 font-light leading-relaxed">{c.body}</p>
-                        <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold">
-                          Explore {c.tag}
-                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                        </span>
-                      </Link>
+        <div ref={timelineRef} className="relative">
+          {/* Track + progress line */}
+          <div className="absolute left-5 sm:left-6 top-2 bottom-2 w-px bg-slate-200" aria-hidden />
+          <motion.div
+            style={{ scaleY: lineScale }}
+            className="absolute left-5 sm:left-6 top-2 bottom-2 w-px origin-top bg-gradient-to-b from-[#6DAD45] to-[#D4E012] will-change-transform"
+            aria-hidden />
+
+          <ol className="space-y-10 sm:space-y-12">
+            {phases.map((p, idx) => {
+              const Icon = p.icon;
+              const Scene = stageScenes[idx];
+              return (
+                <li key={p.step} className="relative pl-16 sm:pl-20">
+                  <span className="absolute left-0 top-0 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-slate-900 text-[#D4E012] shadow-md ring-4 ring-white">
+                    <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
+                  </span>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center">
+                    <ScrollReveal>
+                      <div className="font-mono text-xs font-bold tracking-widest text-[#6DAD45]">
+                        STAGE {p.step}
+                      </div>
+                      <h3 className="mt-1 text-xl sm:text-2xl font-serif-display font-medium text-slate-900">
+                        {p.title}
+                      </h3>
+                      <p className="mt-3 text-slate-600 leading-relaxed">{p.body}</p>
+                      <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-[#F8FAF8] px-4 py-1.5 text-xs font-medium text-slate-700">
+                        <Zap className="h-3.5 w-3.5 text-[#6DAD45]" />
+                        {p.outcome}
+                      </div>
                     </ScrollReveal>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-
-          {/* RELATED SOLUTIONS */}
-          <RelatedSolutionsSection currentHref="/solutions/engineering" />
-
-          {/* Final CTA */}
-          <FinalCTA onOpenQuote={() => setQuoteModalOpen(true)} />
-          <Footer />
+                    <Scene />
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
         </div>
+      </div>
+              </section>
 
-        <QuoteModal isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} />
-      </main>
-    </SmoothScroll>
-  );
+    {/* Site conditions by state, derived from the project sheet */ }
+    <section className="py-16 sm:py-24 bg-[#F8FAF8] border-b border-slate-200/80">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <ScrollReveal>
+          <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-14">
+            <AnimatedPillBadge className="mb-6">ACROSS INDIA</AnimatedPillBadge>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+              <span className="inline-block">Every state asks</span> <br />
+              <span className="text-[#6DAD45] italic relative inline-block">
+                something different of the design
+                <svg
+                  className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                  viewBox="0 0 100 20"
+                  preserveAspectRatio="none">
+                  <path
+                    d="M0 15 Q 50 0 100 15"
+                    stroke="currentColor"
+                    strokeWidth="3.5"
+                    fill="transparent" />
+                </svg>
+              </span>
+            </h2>
+            <p className="mt-4 text-slate-600 text-base sm:text-lg">
+              Soil, weather, land shape and access change from one region to the next. This is what we plan for in each place we work.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        <div className="flex flex-wrap justify-center gap-5">
+          {regionList.map((r) => (
+            <ScrollReveal key={r.name} className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]">
+              <Link
+                href={`/projects/${r.slug}`}
+                className="group block h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-1 hover:border-[#6DAD45]/60 hover:shadow-lg">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2 text-slate-900">
+                    <MapPin className="h-4 w-4 text-[#6DAD45]" />
+                    <h3 className="font-serif-display text-lg font-medium">{r.name}</h3>
+                  </div>
+                  {r.summary && (
+                    <span className="font-mono text-xs text-slate-400">{r.summary.capacityMW.toFixed(1)} MW</span>
+                  )}
+                </div>
+                <p className="mt-3 text-sm text-slate-600 leading-relaxed">{regionFocus[r.name]}</p>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-slate-900">
+                  See projects
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
+            </ScrollReveal>
+          ))}
+        </div>
+      </div>
+              </section>
+
+    {/* Go deeper: teasers only, details live on the sub-pages */ }
+    <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <ScrollReveal>
+          <div className="text-center max-w-4xl mx-auto mb-12">
+            <AnimatedPillBadge className="mb-6">GO DEEPER</AnimatedPillBadge>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+              <span className="inline-block">Two ways to look</span> <br />
+              <span className="text-[#6DAD45] italic relative inline-block">
+                inside our engineering
+                <svg
+                  className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                  viewBox="0 0 100 20"
+                  preserveAspectRatio="none">
+                  <path
+                    d="M0 15 Q 50 0 100 15"
+                    stroke="currentColor"
+                    strokeWidth="3.5"
+                    fill="transparent" />
+                </svg>
+              </span>
+            </h2>
+          </div>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {[
+            {
+              href: "/solutions/engineering/innovation",
+              icon: Sparkles,
+              tag: "Innovation",
+              title: "Where we try to do better",
+              body: "The ideas we use to get more energy from each site and make plants last longer in the field.",
+            },
+            {
+              href: "/solutions/engineering/system-design",
+              icon: PencilRuler,
+              tag: "System Design",
+              title: "What we design and hand over",
+              body: "The electrical and structural design of the plant, and the drawing package your contractors build from.",
+            },
+          ].map((c) => {
+            const Icon = c.icon;
+            return (
+              <ScrollReveal key={c.href}>
+                <Link
+                  href={c.href}
+                  className="group flex h-full flex-col rounded-3xl bg-slate-900 p-8 sm:p-10 text-white transition-transform duration-200 hover:-translate-y-1">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-[#D4E012]">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <div className="mt-6 font-mono text-xs uppercase tracking-wider text-[#D4E012]">{c.tag}</div>
+                  <h3 className="mt-2 font-serif-display text-2xl sm:text-3xl font-medium">{c.title}</h3>
+                  <p className="mt-3 flex-1 text-sm sm:text-base text-slate-300 font-light leading-relaxed">{c.body}</p>
+                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold">
+                    Explore {c.tag}
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </Link>
+              </ScrollReveal>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    {/* RELATED SOLUTIONS */ }
+    <RelatedSolutionsSection currentHref = "/solutions/engineering" />
+
+      {/* Final CTA */ }
+      <FinalCTA onOpenQuote = {() => setQuoteModalOpen(true)
+} />
+  <Footer />
+  </div>
+
+  <QuoteModal isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} />
+</main>
+</SmoothScroll>
+);
 }

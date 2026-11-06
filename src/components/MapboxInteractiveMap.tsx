@@ -92,7 +92,7 @@ export default function MapboxInteractiveMap({ markers, selectedKey, onSelectMar
 
     if (markers.length === 1) {
       map.flyTo([markers[0].lat, markers[0].lng], 8, { duration: 0.8 });
-    } else if (markers.length > 1) {
+    } else if (markers.length> 1) {
       map.flyToBounds(L.latLngBounds(markers.map((m) => [m.lat, m.lng] as [number, number])), {
         padding: [60, 60],
         maxZoom: 8,
@@ -108,7 +108,7 @@ export default function MapboxInteractiveMap({ markers, selectedKey, onSelectMar
     markerRefs.current.forEach((marker, key) => {
       const el = marker.getElement()?.querySelector<HTMLElement>(".sarhat-marker");
       if (!el) return;
-      const isSel = key === selectedKey;
+      const isSel = key=== selectedKey;
       if (isSel && !el.classList.contains("is-selected")) void el.offsetWidth;
       el.classList.toggle("is-selected", isSel);
     });
@@ -132,8 +132,7 @@ export default function MapboxInteractiveMap({ markers, selectedKey, onSelectMar
           type="button"
           onClick={handleResetView}
           aria-label="Reset map view"
-          className={`${ctrl} h-10 gap-1.5 rounded-xl px-3.5 text-xs font-bold`}
-        >
+          className={`${ctrl} h-10 gap-1.5 rounded-xl px-3.5 text-xs font-bold`}>
           <RotateCcw className="h-3.5 w-3.5 text-slate-600" />
           <span>Reset View</span>
         </button>
@@ -152,8 +151,7 @@ export default function MapboxInteractiveMap({ markers, selectedKey, onSelectMar
       {/* Map canvas */}
       <div
         ref={mapContainerRef}
-        className="z-10 h-[340px] w-full cursor-grab active:cursor-grabbing sm:h-[440px] lg:h-[540px]"
-      />
+        className="z-10 h-[340px] w-full cursor-grab active:cursor-grabbing sm:h-[440px] lg:h-[540px]" />
     </div>
   );
 }

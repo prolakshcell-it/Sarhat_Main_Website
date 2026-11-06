@@ -44,7 +44,7 @@ export default function KusumGuidePage() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPos = window.scrollY + 160;
-      for (let i = TOC_ITEMS.length - 1; i >= 0; i--) {
+      for (let i = TOC_ITEMS.length - 1; i>= 0; i--) {
         const el = document.getElementById(TOC_ITEMS[i].id);
         if (el && el.offsetTop <= scrollPos) {
           setActiveSection(TOC_ITEMS[i].id);
@@ -82,8 +82,7 @@ export default function KusumGuidePage() {
               fill
               priority
               quality={95}
-              className="object-cover object-center opacity-80"
-            />
+              className="object-cover object-center opacity-80" />
             {/* Soft Dark Scrim Overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90 pointer-events-none" />
             <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#D4E012]/10 rounded-full blur-3xl pointer-events-none" />
@@ -106,8 +105,7 @@ export default function KusumGuidePage() {
                   },
                 },
               }}
-              className="max-w-4xl flex flex-col items-center text-center"
-            >
+              className="max-w-4xl flex flex-col items-center text-center">
               {/* Serif H1 Heading matching format */}
               <motion.h1
                 variants={{
@@ -118,8 +116,7 @@ export default function KusumGuidePage() {
                     transition: { duration: 0.8, ease: "easeOut" },
                   },
                 }}
-                className="text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center max-w-4xl drop-shadow-lg"
-              >
+                className="text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center max-w-4xl drop-shadow-lg">
                 PM-KUSUM solar plants, <br />
                 <span className="italic font-normal text-white">
                   from land <span className="text-[#D4E012]">to grid.</span>
@@ -136,8 +133,7 @@ export default function KusumGuidePage() {
                     transition: { duration: 0.8, ease: "easeOut" },
                   },
                 }}
-                className="text-base sm:text-lg text-slate-100 font-normal max-w-3xl text-center leading-relaxed drop-shadow-md mx-auto"
-              >
+                className="text-base sm:text-lg text-slate-100 font-normal max-w-3xl text-center leading-relaxed drop-shadow-md mx-auto">
                 Turn farmland near a substation into a 25-year solar income, or solarise an agricultural feeder, with one EPC partner.
               </motion.p>
             </motion.div>
@@ -173,8 +169,7 @@ export default function KusumGuidePage() {
                                 isActive
                                   ? "border-[#6DAD45] font-bold text-slate-900 bg-[#6DAD45]/5 rounded-r-md"
                                   : "border-transparent text-slate-500 hover:text-slate-900 hover:border-slate-400"
-                              }`}
-                            >
+                              }`}>
                               {item.label}
                             </button>
                           </li>
@@ -193,8 +188,7 @@ export default function KusumGuidePage() {
                     </p>
                     <button
                       onClick={() => setQuoteModalOpen(true)}
-                      className="w-full inline-flex items-center justify-center gap-2 bg-[#0B132B] hover:bg-slate-900 text-white font-mono font-bold text-xs uppercase tracking-wider px-4 py-3 rounded-full transition-all shadow cursor-pointer"
-                    >
+                      className="w-full inline-flex items-center justify-center gap-2 bg-[#0B132B] hover:bg-slate-900 text-white font-mono font-bold text-xs uppercase tracking-wider px-4 py-3 rounded-full transition-all shadow cursor-pointer">
                       <span>Discuss</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
@@ -433,8 +427,7 @@ export default function KusumGuidePage() {
                           href="https://renewablewatch.in/2026/03/31/mnre-extends-timelines-for-projects-under-pm-kusum-scheme/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[#6DAD45] hover:underline inline-flex items-center gap-1"
-                        >
+                          className="text-[#6DAD45] hover:underline inline-flex items-center gap-1">
                           <span>MNRE extends timelines for projects under PM-KUSUM (Renewable Watch, Mar 2026)</span>
                           <ExternalLink className="w-3 h-3" />
                         </a>
@@ -444,8 +437,7 @@ export default function KusumGuidePage() {
                           href="https://www.energetica-india.net/news/pm-kusum-scheme-installs-1311-gw-by-march-2026-ppa-projects-extended-until-march-2027"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[#6DAD45] hover:underline inline-flex items-center gap-1"
-                        >
+                          className="text-[#6DAD45] hover:underline inline-flex items-center gap-1">
                           <span>PM-KUSUM installs 13.11 GW by March 2026 (Energetica India)</span>
                           <ExternalLink className="w-3 h-3" />
                         </a>
@@ -455,8 +447,7 @@ export default function KusumGuidePage() {
                           href="https://pmkusum.mnre.gov.in/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[#6DAD45] hover:underline inline-flex items-center gap-1"
-                        >
+                          className="text-[#6DAD45] hover:underline inline-flex items-center gap-1">
                           <span>MNRE PM-KUSUM scheme portal</span>
                           <ExternalLink className="w-3 h-3" />
                         </a>
@@ -493,14 +484,12 @@ export default function KusumGuidePage() {
                       className="absolute -bottom-2 left-0 w-full h-3 text-[#D4E012]"
                       viewBox="0 0 100 20"
                       preserveAspectRatio="none"
-                      aria-hidden
-                    >
+                      aria-hidden>
                       <path
                         d="M0 15 Q 50 0 100 15"
                         stroke="currentColor"
                         strokeWidth="3.5"
-                        fill="transparent"
-                      />
+                        fill="transparent" />
                     </svg>
                   </span>
                 </h2>
@@ -511,8 +500,7 @@ export default function KusumGuidePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
               <Link
                 href="/products/ground-mounted-pv"
-                className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#D4E012]/50 hover:bg-white/[0.08] transition-all flex flex-col justify-between"
-              >
+                className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#D4E012]/50 hover:bg-white/[0.08] transition-all flex flex-col justify-between">
                 <div>
                   <div className="font-mono text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2 group-hover:text-[#D4E012] transition-colors">
                     01 · PRODUCT
@@ -532,8 +520,7 @@ export default function KusumGuidePage() {
 
               <Link
                 href="/solutions/engineering"
-                className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#D4E012]/50 hover:bg-white/[0.08] transition-all flex flex-col justify-between"
-              >
+                className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#D4E012]/50 hover:bg-white/[0.08] transition-all flex flex-col justify-between">
                 <div>
                   <div className="font-mono text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2 group-hover:text-[#D4E012] transition-colors">
                     02 · SOLUTIONS
@@ -553,8 +540,7 @@ export default function KusumGuidePage() {
 
               <Link
                 href="/projects/rajasthan"
-                className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#D4E012]/50 hover:bg-white/[0.08] transition-all flex flex-col justify-between"
-              >
+                className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#D4E012]/50 hover:bg-white/[0.08] transition-all flex flex-col justify-between">
                 <div>
                   <div className="font-mono text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2 group-hover:text-[#D4E012] transition-colors">
                     03 · PROJECTS
@@ -575,8 +561,7 @@ export default function KusumGuidePage() {
               <button
                 type="button"
                 onClick={() => setQuoteModalOpen(true)}
-                className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#D4E012]/50 hover:bg-white/[0.08] transition-all flex flex-col justify-between text-left cursor-pointer"
-              >
+                className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#D4E012]/50 hover:bg-white/[0.08] transition-all flex flex-col justify-between text-left cursor-pointer">
                 <div>
                   <div className="font-mono text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2 group-hover:text-[#D4E012] transition-colors">
                     04 · DISCUSS
@@ -607,8 +592,7 @@ export default function KusumGuidePage() {
                 <Link
                   key={idx}
                   href={st.href}
-                  className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#D4E012]/30 px-4 py-2 text-xs sm:text-sm text-slate-300 hover:text-white transition-colors"
-                >
+                  className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#D4E012]/30 px-4 py-2 text-xs sm:text-sm text-slate-300 hover:text-white transition-colors">
                   {st.name}
                 </Link>
               ))}
@@ -635,14 +619,12 @@ export default function KusumGuidePage() {
                       className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                       viewBox="0 0 100 20"
                       preserveAspectRatio="none"
-                      aria-hidden
-                    >
+                      aria-hidden>
                       <path
                         d="M0 15 Q 50 0 100 15"
                         stroke="currentColor"
                         strokeWidth="3.5"
-                        fill="transparent"
-                      />
+                        fill="transparent" />
                     </svg>
                   </span>
                 </h2>
@@ -654,8 +636,7 @@ export default function KusumGuidePage() {
               <ScrollReveal delay={0.1}>
                 <Link
                   href="/insights/open-access-guide"
-                  className="group block rounded-[26px] bg-white border border-slate-200/90 hover:border-[#6DAD45] p-7 sm:p-8 relative overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 h-full flex flex-col justify-between"
-                >
+                  className="group block rounded-[26px] bg-white border border-slate-200/90 hover:border-[#6DAD45] p-7 sm:p-8 relative overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 h-full flex flex-col justify-between">
                   {/* Pale corner accent */}
                   <div className="absolute top-0 right-0 w-24 h-24 bg-[#EAF087]/25 rounded-bl-[56px] pointer-events-none transition-all group-hover:bg-[#EAF087]/45" />
 
@@ -684,8 +665,7 @@ export default function KusumGuidePage() {
               <ScrollReveal delay={0.2}>
                 <Link
                   href="/insights/surya-sarovar"
-                  className="group block rounded-[26px] bg-white border border-[#6DAD45] p-7 sm:p-8 relative overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 h-full flex flex-col justify-between"
-                >
+                  className="group block rounded-[26px] bg-white border border-[#6DAD45] p-7 sm:p-8 relative overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 h-full flex flex-col justify-between">
                   {/* Pale corner accent */}
                   <div className="absolute top-0 right-0 w-24 h-24 bg-[#EAF087]/35 rounded-bl-[56px] pointer-events-none transition-all group-hover:bg-[#EAF087]/50" />
 
@@ -714,8 +694,7 @@ export default function KusumGuidePage() {
               <ScrollReveal delay={0.3}>
                 <Link
                   href="/insights/canal-top-guide"
-                  className="group block rounded-[26px] bg-white border border-slate-200/90 hover:border-[#6DAD45] p-7 sm:p-8 relative overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 h-full flex flex-col justify-between"
-                >
+                  className="group block rounded-[26px] bg-white border border-slate-200/90 hover:border-[#6DAD45] p-7 sm:p-8 relative overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 h-full flex flex-col justify-between">
                   {/* Pale corner accent */}
                   <div className="absolute top-0 right-0 w-24 h-24 bg-[#EAF087]/25 rounded-bl-[56px] pointer-events-none transition-all group-hover:bg-[#EAF087]/45" />
 
@@ -763,14 +742,12 @@ export default function KusumGuidePage() {
                           className="absolute -bottom-2 left-0 w-full h-3 text-[#D4E012]"
                           viewBox="0 0 100 20"
                           preserveAspectRatio="none"
-                          aria-hidden
-                        >
+                          aria-hidden>
                           <path
                             d="M0 15 Q 50 0 100 15"
                             stroke="currentColor"
                             strokeWidth="3.5"
-                            fill="transparent"
-                          />
+                            fill="transparent" />
                         </svg>
                       </span>
                     </h2>
@@ -782,15 +759,13 @@ export default function KusumGuidePage() {
                     <div className="pt-6 border-t border-slate-800 flex flex-wrap items-center gap-6 sm:gap-8 font-mono text-xs sm:text-sm text-slate-300">
                       <a
                         href="mailto:info@sarhatenergy.com"
-                        className="flex items-center gap-2 hover:text-[#D4E012] transition-colors"
-                      >
+                        className="flex items-center gap-2 hover:text-[#D4E012] transition-colors">
                         <Mail className="w-4 h-4 text-[#D4E012]" />
                         <span>info@sarhatenergy.com</span>
                       </a>
                       <a
                         href="tel:+919266711125"
-                        className="flex items-center gap-2 hover:text-[#D4E012] transition-colors"
-                      >
+                        className="flex items-center gap-2 hover:text-[#D4E012] transition-colors">
                         <Phone className="w-4 h-4 text-[#D4E012]" />
                         <span>+91 9266 7111 25</span>
                       </a>
@@ -805,15 +780,13 @@ export default function KusumGuidePage() {
                   <div className="flex flex-col gap-3.5 sm:min-w-[250px]">
                     <button
                       onClick={() => setQuoteModalOpen(true)}
-                      className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-mono font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-full shadow-lg shadow-[#D4E012]/20 hover:scale-105 transition-all cursor-pointer whitespace-nowrap"
-                    >
+                      className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-mono font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-full shadow-lg shadow-[#D4E012]/20 hover:scale-105 transition-all cursor-pointer whitespace-nowrap">
                       <span>LET&apos;S DISCUSS A PROJECT</span>
                       <ArrowUpRight className="w-4 h-4" />
                     </button>
                     <Link
                       href="/contact?product=PM-KUSUM#inquiry"
-                      className="w-full inline-flex items-center justify-center gap-2 bg-transparent hover:bg-white/5 border border-white/20 text-white font-mono font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-full transition-all cursor-pointer whitespace-nowrap hover:border-white/40"
-                    >
+                      className="w-full inline-flex items-center justify-center gap-2 bg-transparent hover:bg-white/5 border border-white/20 text-white font-mono font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-full transition-all cursor-pointer whitespace-nowrap hover:border-white/40">
                       <span>OPEN ENQUIRY PAGE</span>
                     </Link>
                   </div>
@@ -827,8 +800,7 @@ export default function KusumGuidePage() {
         <QuoteModal
           isOpen={quoteModalOpen}
           onClose={() => setQuoteModalOpen(false)}
-          defaultProduct="PM-KUSUM"
-        />
+          defaultProduct="PM-KUSUM" />
       </main>
     </SmoothScroll>
   );

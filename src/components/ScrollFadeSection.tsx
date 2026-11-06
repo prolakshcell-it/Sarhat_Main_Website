@@ -10,7 +10,7 @@ interface ScrollFadeSectionProps {
 
 export default function ScrollFadeSection({
   children,
-  className = "",
+  className="",
   id,
 }: ScrollFadeSectionProps) {
   return (

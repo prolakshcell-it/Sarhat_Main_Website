@@ -13,6 +13,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import { useHeroScroll } from "@/hooks/useHeroScroll";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
+import ProductFAQ from "@/components/ProductFAQ";
 import { PROJECT_ROWS } from "@/data/projects";
 import {
   CheckCircle2,
@@ -22,8 +23,6 @@ import {
   HardHat,
   Wrench,
   Search,
-  Plus,
-  Minus,
   Waves,
   Sun,
   Droplets,
@@ -226,7 +225,7 @@ export default function SuryaSarovarPage() {
   const [selectedState, setSelectedState] = useState<string | null>(null);
 
   const heroRef = useRef<HTMLElement>(null);
-    const {
+  const {
     isPastHero,
     bgScale,
     bgDim,
@@ -242,8 +241,8 @@ export default function SuryaSarovarPage() {
 
   const filteredProjects = selectedState
     ? PROJECT_ROWS.filter(
-        (p) => p.state.toLowerCase() === selectedState.toLowerCase()
-      )
+      (p) => p.state.toLowerCase() === selectedState.toLowerCase()
+    )
     : [];
 
   return (
@@ -253,19 +252,15 @@ export default function SuryaSarovarPage() {
 
         {/* 01 / HERO SECTION (STICKY PARALLAX) */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
-          aria-hidden={isPastHero}
-        >
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
+          aria-hidden={isPastHero}>
           <section
             ref={heroRef}
-            className="relative h-full w-full flex flex-col items-center justify-center overflow-hidden bg-black text-white select-none"
-          >
+            className="relative h-full w-full flex flex-col items-center justify-center overflow-hidden bg-black text-white select-none">
             {/* Background Floating Solar Aerial Image */}
             <motion.div style={{ scale: bgScale }}
-              className="absolute inset-0 z-0 h-full w-full"
-            >
+              className="absolute inset-0 z-0 h-full w-full">
               <Image
                 src="/images/surya-sarovar.jpg"
                 alt="Surya Sarovar: solar that floats on water — Sarhat Energy"
@@ -273,12 +268,10 @@ export default function SuryaSarovarPage() {
                 priority
                 sizes="100vw"
                 quality={85}
-                className="object-cover object-center"
-              />
+                className="object-cover object-center" />
               <motion.div
                 style={{ opacity: bgDim }}
-                className="absolute inset-0 bg-black/55 pointer-events-none"
-              />
+                className="absolute inset-0 bg-black/55 pointer-events-none" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
             </motion.div>
 
@@ -289,8 +282,7 @@ export default function SuryaSarovarPage() {
                 scale: contentScale,
                 opacity: contentOpacity,
               }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-20 sm:pt-24 flex flex-col items-center text-center"
-            >
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-20 sm:pt-24 flex flex-col items-center text-center">
               <ScrollReveal direction="up" distance={30}>
                 <div className="max-w-4xl flex flex-col items-center text-center">
                   <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 leading-[1.08] drop-shadow-lg">
@@ -330,14 +322,12 @@ export default function SuryaSarovarPage() {
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden
-                      >
+                        aria-hidden>
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -448,14 +438,12 @@ export default function SuryaSarovarPage() {
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden
-                      >
+                        aria-hidden>
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -502,31 +490,27 @@ export default function SuryaSarovarPage() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <ScrollReveal>
-                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                <div className="text-center max-w-5xl mx-auto mb-10 sm:mb-14">
                   <AnimatedPillBadge darkBg className="mb-6">SOLUTIONS</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-4">
-                    Want to develop a project under <br className="hidden sm:inline" />
-                    Surya Sarovar? <br className="hidden sm:inline" />
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-serif-display font-medium text-white tracking-tight leading-[1.2] mb-4 [text-wrap:balance]">
+                    Want to develop a Surya Sarovar project? <br className="hidden sm:inline" />
                     <span className="text-[#D4E012] italic relative inline-block">
                       Look at our solutions.
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#D4E012]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden
-                      >
+                        aria-hidden>
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
-                  <p className="mt-4 text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-                    Each stage of your Surya Sarovar project is handled by a dedicated Sarhat solution
-                    team, and they all work from one project plan.
+                  <p className="mt-4 text-slate-300 text-base sm:text-lg max-w-4xl mx-auto text-center leading-relaxed">
+                    Each stage of your Surya Sarovar project is handled by a dedicated Sarhat solution team, and they all work from one project plan.
                   </p>
                 </div>
               </ScrollReveal>
@@ -563,8 +547,7 @@ export default function SuryaSarovarPage() {
                         <div className="relative z-10 pt-4 border-t border-slate-100">
                           <Link
                             href={sol.href}
-                            className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-slate-900 hover:text-[#6DAD45] uppercase tracking-wider transition-colors group/link"
-                          >
+                            className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-slate-900 hover:text-[#6DAD45] uppercase tracking-wider transition-colors group/link">
                             <span>{sol.linkText}</span>
                             <span className="text-base group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform">
                               ↗
@@ -609,8 +592,7 @@ export default function SuryaSarovarPage() {
                         <div className="relative z-10 pt-4 border-t border-slate-100">
                           <Link
                             href={sol.href}
-                            className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-slate-900 hover:text-[#6DAD45] uppercase tracking-wider transition-colors group/link"
-                          >
+                            className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-slate-900 hover:text-[#6DAD45] uppercase tracking-wider transition-colors group/link">
                             <span>{sol.linkText}</span>
                             <span className="text-base group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform">
                               ↗
@@ -639,14 +621,12 @@ export default function SuryaSarovarPage() {
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden
-                      >
+                        aria-hidden>
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -663,8 +643,7 @@ export default function SuryaSarovarPage() {
                   <ScrollReveal key={st.code} delay={idx * 0.08}>
                     <Link
                       href={`/projects/${st.state.toLowerCase().replace(/\s+/g, "-")}`}
-                      className="w-full text-left rounded-2xl sm:rounded-3xl bg-white border border-slate-200/80 hover:border-[#6DAD45]/50 p-6 sm:p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md cursor-pointer flex items-center justify-between group block"
-                    >
+                      className="w-full text-left rounded-2xl sm:rounded-3xl bg-white border border-slate-200/80 hover:border-[#6DAD45]/50 p-6 sm:p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md cursor-pointer flex items-center justify-between group block">
                       <div>
                         <div className="font-mono text-xs font-bold text-[#6DAD45] tracking-widest uppercase mb-1.5">
                           {st.code} • PROJECTS
@@ -700,8 +679,7 @@ export default function SuryaSarovarPage() {
                       <Link
                         key={stName}
                         href={`/projects/${stName.toLowerCase().replace(/\s+/g, "-")}`}
-                        className="rounded-full px-5 py-2.5 text-xs sm:text-sm font-medium border border-slate-300 bg-white text-slate-700 hover:border-[#6DAD45] hover:text-[#6DAD45] transition-all cursor-pointer"
-                      >
+                        className="rounded-full px-5 py-2.5 text-xs sm:text-sm font-medium border border-slate-300 bg-white text-slate-700 hover:border-[#6DAD45] hover:text-[#6DAD45] transition-all cursor-pointer">
                         Explore projects in {stName}
                       </Link>
                     );
@@ -709,8 +687,7 @@ export default function SuryaSarovarPage() {
 
                   <Link
                     href="/projects"
-                    className="rounded-full px-5 py-2.5 text-xs sm:text-sm font-bold bg-[#D4E012] text-slate-950 border border-[#D4E012] hover:bg-[#c2ce0d] transition-colors shadow-sm inline-flex items-center gap-1.5"
-                  >
+                    className="rounded-full px-5 py-2.5 text-xs sm:text-sm font-bold bg-[#D4E012] text-slate-950 border border-[#D4E012] hover:bg-[#c2ce0d] transition-colors shadow-sm inline-flex items-center gap-1.5">
                     <span>View all 49.22 MW of projects</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </Link>
@@ -719,14 +696,13 @@ export default function SuryaSarovarPage() {
 
               {/* Interactive State Project Drawer */}
               <AnimatePresence>
-                {selectedState && filteredProjects.length > 0 && (
+                {selectedState && filteredProjects.length> 0 && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.35, ease: "easeInOut" }}
-                    className="mt-8 overflow-hidden"
-                  >
+                    className="mt-8 overflow-hidden">
                     <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#6DAD45]/40 shadow-xl">
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
                         <div>
@@ -740,8 +716,7 @@ export default function SuryaSarovarPage() {
                         <button
                           type="button"
                           onClick={() => setSelectedState(null)}
-                          className="text-xs font-mono font-bold text-slate-500 hover:text-slate-900 uppercase cursor-pointer"
-                        >
+                          className="text-xs font-mono font-bold text-slate-500 hover:text-slate-900 uppercase cursor-pointer">
                           ✕ Close View
                         </button>
                       </div>
@@ -750,22 +725,19 @@ export default function SuryaSarovarPage() {
                         {filteredProjects.map((p, idx) => (
                           <div
                             key={idx}
-                            className="p-4 rounded-2xl bg-[#F8FAF8] border border-slate-200/80 flex flex-col justify-between"
-                          >
+                            className="p-4 rounded-2xl bg-[#F8FAF8] border border-slate-200/80 flex flex-col justify-between">
                             <div>
                               <div className="flex items-center justify-between gap-2 mb-2">
                                 <span className="text-xs font-mono font-bold text-slate-500">
                                   {p.location || selectedState}
                                 </span>
                                 <span
-                                  className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full ${
-                                    p.status === "Commissioned"
-                                      ? "bg-emerald-100 text-emerald-800"
-                                      : p.status === "Ongoing"
+                                  className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full ${p.status === "Commissioned"
+                                    ? "bg-emerald-100 text-emerald-800"
+                                    : p.status === "Ongoing"
                                       ? "bg-amber-100 text-amber-800"
                                       : "bg-slate-200 text-slate-700"
-                                  }`}
-                                >
+                                    }`}>
                                   {p.status}
                                 </span>
                               </div>
@@ -803,66 +775,26 @@ export default function SuryaSarovarPage() {
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden
-                      >
+                        aria-hidden>
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
                 </div>
               </ScrollReveal>
 
-              <div className="space-y-4">
-                {faqs.map((faq, idx) => {
-                  const isOpen = openFaqIndex === idx;
-                  return (
-                    <ScrollReveal key={idx} delay={idx * 0.06}>
-                      <div className="rounded-2xl border border-slate-200 bg-[#F8FAF8] overflow-hidden transition-all duration-200 hover:border-slate-300">
-                        <button
-                          type="button"
-                          onClick={() => toggleFaq(idx)}
-                          className="w-full px-6 py-5 sm:py-6 flex items-center justify-between gap-4 text-left cursor-pointer"
-                        >
-                          <span className="font-serif-display font-medium text-slate-900 text-lg sm:text-xl leading-snug">
-                            {faq.question}
-                          </span>
-                          <span className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[#6DAD45] shrink-0 font-bold">
-                            {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                          </span>
-                        </button>
-
-                        <AnimatePresence>
-                          {isOpen && (
-                            <motion.div
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: "auto" }}
-                              exit={{ opacity: 0, height: 0 }}
-                              transition={{ duration: 0.25, ease: "easeInOut" }}
-                            >
-                              <div className="px-6 pb-6 text-slate-600 text-sm sm:text-base leading-relaxed border-t border-slate-100 pt-4">
-                                {faq.answer}
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    </ScrollReveal>
-                  );
-                })}
-              </div>
+              <ProductFAQ faqs={faqs} openIndex={openFaqIndex} onToggle={toggleFaq} />
 
               {/* More Answers Link */}
               <ScrollReveal delay={0.3}>
                 <div className="mt-8 pt-4">
                   <Link
                     href="/insights"
-                    className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-[#528731] hover:text-[#3d6823] tracking-widest uppercase transition-colors"
-                  >
+                    className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-[#528731] hover:text-[#3d6823] tracking-widest uppercase transition-colors">
                     <span>MORE ANSWERS IN THE SURYA SAROVAR GUIDE</span>
                     <span className="text-base font-bold">↗</span>
                   </Link>
@@ -885,14 +817,12 @@ export default function SuryaSarovarPage() {
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden
-                      >
+                        aria-hidden>
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -904,8 +834,7 @@ export default function SuryaSarovarPage() {
                   <ScrollReveal key={prod.title} delay={idx * 0.1}>
                     <Link
                       href={prod.href}
-                      className="group block rounded-3xl bg-white border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-2xl hover:border-[#6DAD45]/50 transition-all duration-300 hover:-translate-y-2 h-full flex flex-col"
-                    >
+                      className="group block rounded-3xl bg-white border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-2xl hover:border-[#6DAD45]/50 transition-all duration-300 hover:-translate-y-2 h-full flex flex-col">
                       {/* Image Thumbnail */}
                       <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-900">
                         <Image
@@ -913,8 +842,7 @@ export default function SuryaSarovarPage() {
                           alt={prod.title}
                           fill
                           sizes="(min-width: 1024px) 384px, 100vw"
-                          className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
+                          className="object-cover transition-transform duration-700 group-hover:scale-105" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity" />
                       </div>
 
@@ -976,38 +904,32 @@ export default function SuryaSarovarPage() {
                       <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
                         <Link
                           href="/insights/surya-sarovar#what-is-floating-solar"
-                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors"
-                        >
+                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors">
                           What is floating solar?
                         </Link>
                         <Link
                           href="/insights/surya-sarovar#why-build-on-water"
-                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors"
-                        >
+                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors">
                           Why build on water
                         </Link>
                         <Link
                           href="/insights/surya-sarovar#main-components"
-                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors"
-                        >
+                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors">
                           Main components
                         </Link>
                         <Link
                           href="/insights/surya-sarovar#is-water-body-suitable"
-                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors"
-                        >
+                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors">
                           Site suitability
                         </Link>
                         <Link
                           href="/insights/surya-sarovar#economics"
-                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors"
-                        >
+                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors">
                           Economics
                         </Link>
                         <Link
                           href="/insights/surya-sarovar#project-steps"
-                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors"
-                        >
+                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors">
                           Project steps
                         </Link>
                       </div>
@@ -1017,8 +939,7 @@ export default function SuryaSarovarPage() {
                     <div className="shrink-0 flex items-center">
                       <Link
                         href="/insights/surya-sarovar"
-                        className="inline-flex items-center justify-center gap-2 bg-[#D4E012] hover:bg-[#c2ce0d] text-slate-950 font-mono font-bold text-xs sm:text-sm uppercase tracking-wider px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all cursor-pointer whitespace-nowrap"
-                      >
+                        className="inline-flex items-center justify-center gap-2 bg-[#D4E012] hover:bg-[#c2ce0d] text-slate-950 font-mono font-bold text-xs sm:text-sm uppercase tracking-wider px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all cursor-pointer whitespace-nowrap">
                         <span>READ THE SURYA SAROVAR GUIDE</span>
                         <ArrowUpRight className="w-4 h-4" />
                       </Link>
@@ -1036,8 +957,7 @@ export default function SuryaSarovarPage() {
         <QuoteModal
           isOpen={quoteModalOpen}
           onClose={() => setQuoteModalOpen(false)}
-          defaultProduct="Surya Sarovar"
-        />
+          defaultProduct="Surya Sarovar" />
       </main>
     </SmoothScroll>
   );
