@@ -93,7 +93,10 @@ export default function SolutionNavigator() {
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const indexFromHash = useCallback(() => {
-    const id = window.location.hash.replace("#", "");
+    let id = window.location.hash.replace("#", "");
+    if (id === "renewable-energy") id = "solar-energy";
+    if (id === "bess-storage") id = "bess-hybrid";
+    if (id === "energy-infrastructure" || id === "civil-infrastructure") id = "infrastructure";
     return capabilities.findIndex((c) => c.id === id);
   }, []);
 
@@ -202,17 +205,15 @@ export default function SolutionNavigator() {
                     onClick={() => select(i, true)}
                     onKeyDown={(e) => onTabKeyDown(e, i)}
                     onPointerEnter={(e) => e.pointerType === "mouse" && select(i)}
-                    className={`group relative flex shrink-0 cursor-pointer items-center gap-4 rounded-2xl border px-4 py-3.5 text-left transition-colors duration-200 lg:px-5 lg:py-4 ${FOCUS} ${
-                      isActive
-                        ? "border-[#6DAD45] bg-[#6DAD45]/[0.08] shadow-sm"
-                        : "border-slate-200 bg-[#F8FAF8] hover:border-slate-300 hover:bg-white"
-                    }`}
+                    className={`group relative flex shrink-0 cursor-pointer items-center gap-4 rounded-2xl border px-4 py-3.5 text-left transition-colors duration-200 lg:px-5 lg:py-4 ${FOCUS} ${isActive
+                      ? "border-[#6DAD45] bg-[#6DAD45]/[0.08] shadow-sm"
+                      : "border-slate-200 bg-[#F8FAF8] hover:border-slate-300 hover:bg-white"
+                      }`}
                   >
                     <span className={`font-mono text-xs font-bold ${isActive ? "text-[#707B00]" : "text-slate-400"}`}>{pad(i)}</span>
                     <span
-                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition-all duration-200 group-hover:scale-[1.03] ${
-                        isActive ? "border-[#D4E012] bg-[#D4E012] text-black" : "border-slate-200 bg-white text-slate-500"
-                      }`}
+                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition-all duration-200 group-hover:scale-[1.03] ${isActive ? "border-[#D4E012] bg-[#D4E012] text-black" : "border-slate-200 bg-white text-slate-500"
+                        }`}
                     >
                       <Icon className="h-5 w-5" strokeWidth={1.75} />
                     </span>

@@ -325,6 +325,34 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: "/news",
+        destination: "/insights/news",
+      },
+      {
+        source: "/news/:path*",
+        destination: "/insights/news/:path*",
+      },
+      {
+        source: "/case-studies",
+        destination: "/insights/case-studies",
+      },
+      {
+        source: "/case-studies/:path*",
+        destination: "/insights/case-studies/:path*",
+      },
+      {
+        source: "/articles",
+        destination: "/insights/articles",
+      },
+      {
+        source: "/articles/:path*",
+        destination: "/insights/articles/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;

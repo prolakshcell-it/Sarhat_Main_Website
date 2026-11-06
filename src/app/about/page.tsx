@@ -54,37 +54,37 @@ export default function AboutPage() {
       name: "Lalit Kumarr",
       role: "Founder & Managing Director",
       bio: "Seasoned leader with over 35 years of global experience across the energy sector, spanning solar, nuclear, thermal, and hydro power.",
-      linkedin: "https://linkedin.com",
+      linkedin: "https://www.linkedin.com/company/sarhatenergy/",
     },
     {
       name: "Ajay Singh",
       role: "Chief Financial Officer (CFO)",
       bio: "Chartered Accountant with over 30 years of experience in working as CFO & Board member across leading infrastructure enterprises.",
-      linkedin: "https://linkedin.com",
+      linkedin: "https://www.linkedin.com/company/sarhatenergy/",
     },
     {
       name: "Shrikant Bartakke",
       role: "Chief Growth Officer",
       bio: "Seasoned business leader with over 20 years of experience across telecommunications, infrastructure and renewable energy.",
-      linkedin: "https://linkedin.com",
+      linkedin: "https://www.linkedin.com/company/sarhatenergy/",
     },
     {
       name: "Ajit Shah",
       role: "Vice President",
       bio: "Over 18 years of diverse experience as a Business Development Leader, specializing in stakeholder management, government liaison, and project financial management.",
-      linkedin: "https://linkedin.com",
+      linkedin: "https://www.linkedin.com/company/sarhatenergy/",
     },
     {
       name: "Rajesh Kumar",
       role: "General Manager - Projects & Operation",
       bio: "Over 24 years of vast experience in Project Management, Operation Management, Grid Substation Execution and Solar O&M.",
-      linkedin: "https://linkedin.com",
+      linkedin: "https://www.linkedin.com/company/sarhatenergy/",
     },
     {
       name: "Harshita Arora",
       role: "Business Growth & Strategic Partnerships",
       bio: "Dynamic leader driving business growth through client acquisition, strategic partnerships, proposal management, and strengthening the company's business pipeline.",
-      linkedin: "https://linkedin.com",
+      linkedin: "https://www.linkedin.com/company/sarhatenergy/",
     },
   ];
 

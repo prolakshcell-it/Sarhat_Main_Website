@@ -40,7 +40,7 @@ const executiveTeam: ExecutiveLeader[] = [
       "Lalit Kumarr is the Founder & Managing Director of Sarhat Energy. With over 35 years of global energy industry leadership, he has steered multi-gigawatt power, solar EPC, and civil infrastructure projects across India. Prior to founding Sarhat, he held senior executive positions across major energy corporations, pioneering sustainable engineering, regulatory compliance, and execution discipline.",
     education: "B.E. Electrical Engineering · Global Energy Management Program",
     image: "/images/hero-solar.jpg",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
     id: "ajay-singh",
@@ -54,7 +54,7 @@ const executiveTeam: ExecutiveLeader[] = [
       "Ajay Singh serves as CFO, bringing over 30 years of financial governance, risk management, and capital allocation experience. A Chartered Accountant by background, he has managed multi-crore project financing, utility contract structures, corporate governance, and fiscal compliance for leading energy and infrastructure enterprises across India.",
     education: "FCA Chartered Accountant · B.Com (Hons)",
     image: "/images/substation-project.jpg",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
     id: "shrikant-bartakke",
@@ -68,7 +68,7 @@ const executiveTeam: ExecutiveLeader[] = [
       "Shrikant Bartakke leads strategic market expansion and commercial partnerships at Sarhat Energy. With 20+ years of leadership in telecommunications and renewable energy scaling, he oversees enterprise client acquisitions, strategic joint ventures, utility PPAs, and expansion into emerging storage & agrovoltaic sectors.",
     education: "MBA Marketing & Strategy · B.Tech Mechanical",
     image: "/images/partner-hero-bg.jpg",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
     id: "ajit-shah",
@@ -82,7 +82,7 @@ const executiveTeam: ExecutiveLeader[] = [
       "Ajit Shah brings over 18 years of diverse experience as a Business Development Leader, specializing in utility-scale solar origination, government liaison, DISCOM regulatory approvals, land banking frameworks, and power purchase agreement (PPA) financial management.",
     education: "M.Sc Energy Economics · B.E. Civil Engineering",
     image: "/images/bess-substation.jpg",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
     id: "rajesh-kumar",
@@ -96,7 +96,7 @@ const executiveTeam: ExecutiveLeader[] = [
       "Rajesh Kumar oversees complete field EPC execution, grid substation integration (33kV to 400kV), EHV transmission corridor clearances, site safety protocols, and long-term asset O&M performance across all operational project sites nationwide.",
     education: "B.Tech Electrical & Electronics · Certified PMP",
     image: "/images/agrivoltaics-project.jpg",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
     id: "harshita-arora",
@@ -110,7 +110,7 @@ const executiveTeam: ExecutiveLeader[] = [
       "Harshita Arora leads corporate client relations, project proposals, ESG integration, and strategic alliances across Sarhat's solar, BESS storage, and agrovoltaic initiatives, strengthening Sarhat's national business footprint.",
     education: "MBA International Business · B.Sc Environmental Science",
     image: "/images/about-hero-bg-bright.jpg",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
     id: "vikram-sharma",
@@ -124,7 +124,7 @@ const executiveTeam: ExecutiveLeader[] = [
       "Vikram Sharma directs electrical and structural engineering design, microgrid integration, SCADA automation, shadow analysis, and technical quality control standards across utility and C&I solar installations.",
     education: "M.Tech Electrical Power Systems · B.Tech Electrical",
     image: "/images/hero-solar.jpg",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
     id: "pooja-malhotra",
@@ -138,7 +138,7 @@ const executiveTeam: ExecutiveLeader[] = [
       "Pooja Malhotra leads talent acquisition, organizational culture, safety policies, and leadership development programs to foster a high-performance, inclusive environment across site and corporate teams.",
     education: "MBA Human Resources · B.A. Psychology",
     image: "/images/about-hero-bg.jpg",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
     id: "sanjay-verma",
@@ -152,7 +152,7 @@ const executiveTeam: ExecutiveLeader[] = [
       "Sanjay Verma manages global tier-1 solar module procurement, inverter sourcing, civil material logistics, and strategic vendor alliances to ensure seamless project delivery and cost optimization.",
     education: "B.Tech Mechanical · Diploma in Supply Chain Management",
     image: "/images/partner-hero-bg.jpg",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
 ];
 
@@ -163,7 +163,7 @@ export default function LeadershipPage() {
   const containerRef = useRef<HTMLElement>(null);
 
   // Parallax & Scroll Fade-out Tracking for Hero
-    const {
+  const {
     isPastHero,
     bgScale,
     bgDim,
@@ -183,9 +183,8 @@ export default function LeadershipPage() {
         {/* HERO SECTION (Sticky Background Image Overlay Hero) */}
         {/* ------------------------------------------------------------- */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
           aria-hidden={isPastHero}
         >
           <section

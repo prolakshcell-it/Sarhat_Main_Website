@@ -20,14 +20,13 @@ export default function AnimatedPillBadge({
 
       {/* Inner Pill Content Box */}
       <div
-        className={`relative z-10 inline-flex items-center justify-center px-6 sm:px-8 py-2 sm:py-2.5 rounded-full font-mono font-bold text-xs sm:text-sm uppercase tracking-[0.2em] transition-colors ${
-          darkBg
-            ? "bg-slate-900 text-[#D4E012]"
-            : "bg-white text-[#707B00]"
+      className={`relative z-10 inline-flex items-center justify-center px-4 sm:px-8 py-1.5 sm:py-2.5 rounded-full font-mono font-bold text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.16em] sm:tracking-[0.2em] text-center max-w-full transition-colors ${darkBg
+          ? "bg-slate-900 text-[#D4E012]"
+          : "bg-white text-[#707B00]"
         }`}
       >
-        {children}
-      </div>
+      {children}
     </div>
+    </div >
   );
 }

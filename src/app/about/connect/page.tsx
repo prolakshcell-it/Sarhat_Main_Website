@@ -50,12 +50,18 @@ const InstagramIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
   </svg>
 );
 
+const FacebookIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+  </svg>
+);
+
 export default function ConnectWithUsPage() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const containerRef = useRef<HTMLElement>(null);
 
   // Parallax & Scroll Fade-out Tracking for Hero
-    const {
+  const {
     isPastHero,
     bgScale,
     bgDim,
@@ -68,8 +74,8 @@ export default function ConnectWithUsPage() {
   const socialHandles = [
     {
       name: "LinkedIn",
-      handle: "@sarhat-energy",
-      url: "https://linkedin.com/company/sarhat",
+      handle: "@sarhatenergy",
+      url: "https://www.linkedin.com/company/sarhatenergy/",
       description: "Follow Sarhat for corporate announcements, project milestone videos, procurement tenders, and executive insights.",
       icon: LinkedinIcon,
       accentBorder: "hover:border-blue-500/50",
@@ -77,12 +83,21 @@ export default function ConnectWithUsPage() {
     },
     {
       name: "Instagram",
-      handle: "@sarhat_infrastructure",
-      url: "https://instagram.com/sarhatenergy",
+      handle: "@sarhatenergy",
+      url: "https://www.instagram.com/sarhatenergy/?hl=en",
       description: "Behind-the-scenes look at site life, safety drills, engineering teams, field exchange programs, and green culture.",
       icon: InstagramIcon,
       accentBorder: "hover:border-pink-500/50",
       btnBg: "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white",
+    },
+    {
+      name: "Facebook",
+      handle: "Sarhat Energy",
+      url: "https://www.facebook.com/people/Sarhat-Energy/61573073332164/",
+      description: "Community updates, outreach stories, project highlights, and official Sarhat announcements.",
+      icon: FacebookIcon,
+      accentBorder: "hover:border-blue-600/50",
+      btnBg: "bg-blue-700 hover:bg-blue-600 text-white",
     },
     {
       name: "YouTube",
@@ -116,9 +131,8 @@ export default function ConnectWithUsPage() {
             1. HERO SECTION (Sticky background & Centered Content)
             ========================================== */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
           aria-hidden={isPastHero}
         >
           <section

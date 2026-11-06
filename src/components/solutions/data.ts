@@ -1,4 +1,4 @@
-import { Sun, Battery, Zap, Building2, type LucideIcon } from "lucide-react";
+import { Sun, Battery, Zap, type LucideIcon } from "lucide-react";
 
 export interface Capability {
   id: string;
@@ -23,70 +23,57 @@ export interface ServiceStage {
 
 export const capabilities: Capability[] = [
   {
-    id: "renewable-energy",
+    id: "solar-energy",
     tag: "CORE SOLUTION 01",
-    title: "Renewable Energy",
-    headline: "Utility Solar, Wind & C&I Systems",
-    description: "Solar Parks, Rooftops, C&I Open Access, Wind Farms & Long-term O&M",
+    title: "Solar Energy",
+    headline: "Utility Solar Parks, Rooftops & C&I Clean Energy Systems",
+    description: "Utility ground-mount solar, C&I rooftops, open access and long-term O&M.",
     fullDetails:
-      "Complete turnkey execution and engineering for utility-scale solar parks, commercial & industrial rooftop installations, wind energy generation, and 24/7 O&M telemetry asset management.",
-    specs: ["Solar Parks", "Rooftops & C&I", "Wind Farms", "Comprehensive O&M"],
+    "Complete turnkey execution and engineering for utility-scale solar parks, commercial & industrial rooftop installations, institutional projects, and 24/7 telemetry asset management.",
+    specs: ["Utility Solar Parks", "Rooftops & C&I", "Open Access PPA", "Comprehensive O&M"],
     icon: Sun,
     image: "/images/hero-solar.jpg",
     accentColor: "#6DAD45",
   },
   {
-    id: "bess-storage",
+    id: "bess-hybrid",
     tag: "CORE SOLUTION 02",
-    title: "BESS & Battery Storage",
-    headline: "Grid Stability & Energy Storage",
-    description: "Containerized BESS, Solar + Storage Hybrids, Backup & Peak Shaving",
+    title: "BESS & Hybrid",
+    headline: "Containerized Storage Systems for Grid Stability & Firm Dispatch",
+    description: "Containerized BESS, solar + storage hybrids, backup power and peak shaving.",
     fullDetails:
       "Utility-scale containerized Battery Energy Storage Systems (BESS), solar + storage hybrid integration, emergency backup power, and automated peak-load shaving.",
-    specs: ["Containerized BESS", "Solar + Storage Hybrids", "Backup Power", "Peak Shaving"],
+    specs: ["Containerized BESS", "Solar + Storage Hybrids", "Grid Frequency Support", "Peak Shaving"],
     icon: Battery,
     image: "/images/bess-substation.jpg",
     accentColor: "#5EE72D",
   },
   {
-    id: "energy-infrastructure",
+    id: "infrastructure",
     tag: "CORE SOLUTION 03",
-    title: "Energy & Grid Infrastructure",
-    headline: "Substations & DISCOM Evacuation",
-    description: "11kV/765kV/220kV Substations, Transmission Lines & SCADA",
+    title: "Infrastructure",
+    headline: "Turnkey Substations, Evacuation Corridors & Site Civil Works",
+    description: "AIS/GIS substations, evacuation lines, control buildings and foundation piling.",
     fullDetails:
-      "High-voltage AIS/GIS substations, power evacuation transmission line corridors, relay protection panels, remote SCADA, and turnkey DISCOM grid connectivity.",
-    specs: ["Substations (AIS/GIS)", "11kV/765kV/220kV Bays", "Evacuation Lines", "SCADA Protection"],
+    "High-voltage AIS/GIS substations, power evacuation transmission line corridors, SCADA protection bays, heavy-payload access roads, control room buildings, and equipment foundation piling.",
+    specs: ["AIS/GIS Substations", "EHV Evacuation Lines", "SCADA Protection", "Foundation Piling & Roads"],
     icon: Zap,
     image: "/images/substation-project.jpg",
     accentColor: "#D4E012",
-  },
-  {
-    id: "civil-infrastructure",
-    tag: "CORE SOLUTION 04",
-    title: "Civil & Industrial Infrastructure",
-    headline: "Heavy Piling, Buildings & Works",
-    description: "Access Roads, Foundation Piling, Control Buildings & Drainage",
-    fullDetails:
-      "Heavy-payload access roads, control room buildings, equipment foundation piling, industrial civil works, and comprehensive project site sub-structure.",
-    specs: ["Access Roads", "Control Room Buildings", "Equipment Piling", "Site Drainage"],
-    icon: Building2,
-    image: "/images/agrivoltaics-project.jpg",
-    accentColor: "#6DAD45",
   },
 ];
 
 export const detailedSolutions = [
   {
-    id: "renewable-energy",
-    title: "Renewable Energy Solutions",
-    badge: "01 • RENEWABLE POWER GENERATION",
+    id: "solar-energy",
+    title: "Solar Energy Solutions",
+    badge: "01 • SOLAR POWER GENERATION",
     headline:
-      "Renewable energy and battery storage technologies provide customers with cost-effective, reliable and rapidly deployable power generation.",
+    "Utility-scale solar parks, rooftops, and high-efficiency photovoltaic systems.",
     description:
-      "With our in-house expertise in development, engineering, site design, procurement, construction management and asset services, we deliver safe, scalable, environmentally and socially responsible utility-scale solar, wind, and storage solutions.",
+    "From land survey to CEIG commissioning and telemetry O&M, we engineer and construct high-yield solar assets with guaranteed performance.",
     image: "/images/hero-solar.jpg",
-    buttonText: "DISCOVER SOLAR & RENEWABLE SOLUTIONS →",
+    buttonText: "DISCOVER SOLAR ENERGY SOLUTIONS →",
     breakdownItems: [
       {
         name: "Solar Parks",
@@ -94,7 +81,7 @@ export const detailedSolutions = [
         metric: "47+ MW Executed",
       },
       {
-        name: "Rooftops",
+        name: "Rooftops & C&I",
         desc: "C&I roof-mounted systems converting factory roofs into high-yield captive energy generators.",
         metric: "35% Cost Savings",
       },
@@ -104,11 +91,6 @@ export const detailedSolutions = [
         metric: "Zero Tariff Volatility",
       },
       {
-        name: "Wind Energy",
-        desc: "High-hub wind turbines complementing solar generation profiles for firm power.",
-        metric: "High Capacity Factor",
-      },
-      {
         name: "Comprehensive O&M",
         desc: "24/7 telemetry monitoring, automated solar washing, and preventive asset maintenance.",
         metric: "99.2% Uptime",
@@ -116,13 +98,13 @@ export const detailedSolutions = [
     ],
   },
   {
-    id: "bess-storage",
+    id: "bess-hybrid",
     title: "BESS & Battery Storage",
     badge: "02 • ENERGY STORAGE SYSTEMS",
     headline:
-      "Battery energy storage systems (BESS) support grid stability by storing electricity when supply is high and releasing it when needed most.",
+    "Containerized battery storage systems for grid stability and dispatchable power.",
     description:
-      "Our engineers design and optimize containerized battery storage systems, ensuring seamless integration into renewable energy assets to guarantee round-the-clock firm power purchase agreements.",
+    "Our engineers integrate modular battery storage with solar assets to enable automated peak shaving, frequency regulation, and steady 24/7 power.",
     image: "/images/bess-substation.jpg",
     buttonText: "EXPLORE BESS & STORAGE SOLUTIONS →",
     breakdownItems: [
@@ -146,23 +128,18 @@ export const detailedSolutions = [
         desc: "Shifting daytime peak solar power to high-demand evening tariff windows.",
         metric: "Peak Demand Control",
       },
-      {
-        name: "AI Battery Telemetry",
-        desc: "Predictive cell health analytics tracking State-of-Charge (SoC) and thermal safety.",
-        metric: "Smart BMS",
-      },
     ],
   },
   {
-    id: "energy-infrastructure",
-    title: "Energy & Grid Infrastructure",
-    badge: "03 • ENERGY INFRASTRUCTURE",
+    id: "infrastructure",
+    title: "Grid & Civil Infrastructure",
+    badge: "03 • INTEGRATED INFRASTRUCTURE",
     headline:
-      "Reliable power energy infrastructure connecting clean energy assets directly to state transmission utilities.",
+    "Turnkey substations, power evacuation lines, and heavy industrial civil works.",
     description:
-      "We engineer, construct, and commission 33kV, 132kV, and 220kV substations, transmission lines, and SCADA protection bays to ensure zero-delay DISCOM synchronization.",
+    "From high-voltage AIS/GIS substations to access roads, control rooms, and foundation piling, we construct the physical backbone for utility assets.",
     image: "/images/substation-project.jpg",
-    buttonText: "VIEW GRID SUBSTATION SOLUTIONS →",
+    buttonText: "EXPLORE INFRASTRUCTURE SOLUTIONS →",
     breakdownItems: [
       {
         name: "AIS & GIS Substations",
@@ -170,38 +147,15 @@ export const detailedSolutions = [
         metric: "33kV / 132kV / 220kV",
       },
       {
-        name: "Terminal Bays",
-        desc: "Dedicated state DISCOM evacuation bays equipped with SF6 circuit breakers.",
-        metric: "Full CEIG Clearance",
-      },
-      {
         name: "EHV Evacuation Lines",
-        desc: "Overhead transmission lines and underground cabling routes for evacuation.",
-        metric: "Zero-Loss Conductor",
+        desc: "Overhead transmission lines and underground cabling routes engineered for direct DISCOM sync.",
+        metric: "Full CEIG Clearance",
       },
       {
         name: "SCADA & Protection",
         desc: "Numerical protection relays, RTU, and remote telemetry system integration.",
         metric: "Real-Time Telemetry",
       },
-      {
-        name: "Grid Charging",
-        desc: "Turnkey inspection, cold/hot testing, and state utility synchronization.",
-        metric: "Zero-Defect COD",
-      },
-    ],
-  },
-  {
-    id: "civil-infrastructure",
-    title: "Civil & Industrial Infrastructure",
-    badge: "04 • HEAVY CIVIL WORKS",
-    headline:
-      "Heavy-duty civil infrastructure built to withstand severe environmental loads and support utility energy assets.",
-    description:
-      "From heavy-payload access roads and control room buildings to foundation piling and drainage systems, our field engineering teams deliver durable site civil works.",
-    image: "/images/agrivoltaics-project.jpg",
-    buttonText: "DISCUSS CIVIL INFRASTRUCTURE →",
-    breakdownItems: [
       {
         name: "Equipment Foundations",
         desc: "Transformer plinths, inverter room slabs, and MMS pile foundation load testing.",
@@ -216,16 +170,6 @@ export const detailedSolutions = [
         name: "Control Buildings",
         desc: "Civil control room buildings housing SCADA servers, relay racks, and staff facilities.",
         metric: "Pre-Engineered Civil",
-      },
-      {
-        name: "Site Infrastructure",
-        desc: "Peripheral security fencing, lighting towers, water supply networks, and drainage.",
-        metric: "Turnkey Site Prep",
-      },
-      {
-        name: "Industrial Earthworks",
-        desc: "Precision site leveling, grading, and slope stabilization across rugged terrain.",
-        metric: "LIDAR Precision",
       },
     ],
   },

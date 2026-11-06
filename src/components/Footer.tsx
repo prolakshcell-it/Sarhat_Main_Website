@@ -39,33 +39,28 @@ const SocialYoutube = () => (
 );
 
 const SOCIALS = [
-  { href: "https://linkedin.com", label: "LinkedIn", Icon: SocialLinkedin },
-  { href: "https://instagram.com", label: "Instagram", Icon: SocialInstagram },
-  { href: "https://youtube.com", label: "YouTube", Icon: SocialYoutube },
-  { href: "https://facebook.com", label: "Facebook", Icon: SocialFacebook },
-  { href: "https://twitter.com", label: "Twitter / X", Icon: SocialTwitter },
+  { href: "https://www.linkedin.com/company/sarhatenergy/", label: "LinkedIn", Icon: SocialLinkedin },
+  { href: "https://www.instagram.com/sarhatenergy/?hl=en", label: "Instagram", Icon: SocialInstagram },
+  { href: "https://youtube.com/@sarhatenergy", label: "YouTube", Icon: SocialYoutube },
+  { href: "https://www.facebook.com/people/Sarhat-Energy/61573073332164/", label: "Facebook", Icon: SocialFacebook },
+  { href: "https://x.com/sarhatenergy", label: "Twitter / X", Icon: SocialTwitter },
 ];
 
 const COLUMNS = [
   {
     title: "Solutions",
     links: [
-      { href: "/solutions#renewable-energy", label: "Solar & Wind Energy" },
-      { href: "/solutions#bess-storage", label: "BESS & Storage" },
-      { href: "/solutions#energy-infrastructure", label: "Substations & Grid" },
-      {
-        href: "/solutions#civil-infrastructure",
-        label: "Civil Infrastructure",
-      },
+      { href: "/solutions#solar-energy", label: "Solar Energy" },
+      { href: "/solutions#bess-hybrid", label: "BESS & Hybrid" },
+      { href: "/solutions#infrastructure", label: "Infrastructure" },
     ],
   },
   {
-    title: "Company",
+    title: "Quick Links",
     links: [
       { href: "/about", label: "About Sarhat" },
-      { href: "/about/our-story", label: "Our Story & Milestones" },
-      { href: "/about/initiatives", label: "Sustainability" },
-      { href: "/contact#inquiry", label: "Project Enquiry" },
+      { href: "/about/our-approach", label: "Our Approach" },
+      { href: "/about/leadership", label: "Our Team" },
       { href: "/careers", label: "Careers & Life" },
       { href: "/insights", label: "Insights & News" },
     ],
@@ -74,9 +69,7 @@ const COLUMNS = [
     title: "Ecosystem & Network",
     links: [
       { href: "/projects", label: "Projects & Footprints" },
-      { href: "/partners", label: "Partnership Programs" },
       { href: "/supply-partners", label: "Supply Partners & OEMs" },
-      { href: "/execution-contractors", label: "Execution Contractors" },
     ],
   },
 ];
@@ -167,7 +160,7 @@ export default function Footer() {
 
               <div className="flex items-center gap-2 font-mono text-[11px] font-semibold text-[#6DAD45]">
                 <ShieldCheck className="h-4 w-4 shrink-0" />
-                <span>ISO 9001:2015 &amp; ISO 45001 CERTIFIED</span>
+                <span>ISO 9001:2015 CERTIFIED</span>
               </div>
 
               <div className="flex flex-wrap items-center gap-2">
@@ -224,7 +217,7 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between lg:gap-8">
-            <span>© {year} SARHAT EPC PVT. LTD. ALL RIGHTS RESERVED.</span>
+            <span>© {year} SARHAT ENERGY PRIVATE LIMITED. ALL RIGHTS RESERVED.</span>
             <div className="flex items-center justify-between gap-6">
               <span className="font-bold uppercase tracking-widest">
                 Powered by{" "}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import SmoothScroll from "@/components/SmoothScroll";
 import { X, Clock, Calendar, BookOpen } from "lucide-react";
@@ -22,6 +22,9 @@ interface Article {
   excerpt: string;
   image: string;
   readTime: string;
+  category: "Market" | "Policy" | "Engineering" | "Case Study";
+  overlay?: "why-solar-2026" | "cochin-airport" | "pm-kusum";
+  keyTakeaways?: string[];
   content: string[];
 }
 
@@ -32,13 +35,23 @@ const articles: Article[] = [
     date: "Jul 11, 2026",
     author: "Sarhat",
     title: "Why Everyone Around You Is Suddenly Talking About Solar, And What's Really Happening in India's Solar Market Right Now",
-    excerpt: "Discover why everyone is talking about solar in 2026. Explore India's rapidly growing solar market, rooftop solar adoption, open access power, battery storage, government initiatives, and what those trends mean for homeowners and businesses.",
+    excerpt: "Discover why everyone is talking about solar in 2026. Explore India's rapidly growing solar market, rooftop solar adoption, open access power, battery storage, government initiatives, and what these trends mean for homeowners and businesses.",
     image: "https://images.unsplash.com/photo-1509391365360-2e959784a276?q=80&w=1200&auto=format&fit=crop",
     readTime: "5 min read",
+    category: "Market",
+    overlay: "why-solar-2026",
+    keyTakeaways: [
+      "Solar levelized cost of electricity is now over 50% cheaper than conventional grid tariffs across India.",
+      "Corporate C&I procurement has shifted from optional CSR green-washing to essential balance sheet cost reduction.",
+      "PM Surya Ghar Muft Bijli Yojana has catalyzed residential rooftop solar adoption to historic all-time monthly highs.",
+      "Battery Energy Storage Systems (BESS) are ending intermittency, paving the way for 24/7 firm renewable delivery.",
+    ],
     content: [
-      "India’s solar capacity addition has reached unprecedented momentum driven by favorable DISCOM net-metering policies, declining module costs, and corporate sustainability commitments.",
-      "Commercial & Industrial (C&I) consumers are aggressively transitioning towards open-access solar models to hedge against long-term grid tariff escalation. Simultaneously, PM-KUSUM Component B & C solarization of agricultural feeders is unlocking tremendous rural energy independence.",
-      "As battery energy storage system (BESS) costs align with grid parity, round-the-clock (RTC) renewable power purchase agreements are becoming the standard benchmark for utility-scale procurement.",
+      "If you've noticed more solar panels on neighborhood rooftops, industrial shed roofs, and highway corridors lately, you aren't imagining things. In 2026, solar energy in India has crossed a psychological and economic tipping point.",
+      "What was once viewed as an expensive environmental hobby has transformed into the single most financially compelling capital upgrade for homeowners, commercial factories, hospitals, and agricultural pump operators alike.",
+      "Three core dynamics are driving this transformation: module efficiencies crossing 23% with bifacial TOPCon cells, aggressive central policy backing through subsidies like PM Surya Ghar and PM-KUSUM, and escalating commercial power tariffs across state electricity distribution companies (DISCOMs).",
+      "For commercial and industrial enterprises, open-access solar power purchase agreements (PPAs) are delivering verified savings of 30% to 45% on monthly utility bills. For homeowners, rooftop arrays provide immediate bill neutrality with 3-to-4 year capital payback periods.",
+      "At Sarhat Energy, our turnkey EPC engineering teams are executing high-yield solar installations across north and central India, combining civil engineering precision, high-voltage substations, and long-term asset health management.",
     ],
   },
   {
@@ -50,10 +63,19 @@ const articles: Article[] = [
     excerpt: "Discover how Cochin International Airport became the world's first fully solar-powered airport, proving that renewable energy can reliably power even the most energy-intensive infrastructure. From a modest 100 kWp pilot project to a 50 MW solar ecosystem, this inspiring journey offers valuable lessons for businesses looking to reduce energy costs, improve sustainability, and embrace the future of clean power.",
     image: "https://images.unsplash.com/photo-1508873696983-2df515122519?q=80&w=1200&auto=format&fit=crop",
     readTime: "6 min read",
+    category: "Case Study",
+    overlay: "cochin-airport",
+    keyTakeaways: [
+      "World's first fully solar-powered airport, handling 10M+ passengers annually on 100% clean power.",
+      "Scaled systematically from a 100 kWp pilot to over 50 MWp across ground, floating, and carport arrays.",
+      "Pioneered agrivoltaics: cultivated 90+ metric tons of organic vegetables yearly beneath the solar panels.",
+      "Capital investment repaid in under 5 years, saving tens of crores of rupees in utility costs every year.",
+    ],
     content: [
-      "Cochin International Airport Limited (CIAL) became the world's first fully solar-powered airport, operating on over 40 MWp of solar installations spread across vacant land and carports.",
-      "For large industrial hubs, airports, and universities, CIAL demonstrates that solar power is not merely a CSR initiative—it is a high-return capital investment that eliminates electricity operational expenditure over a 25-year lifecycle.",
-      "Integrating rooftop, ground-mounted, and floating solar arrays allows facilities to maximize spatial efficiency while providing grid support back to state power DISCOMs.",
+      "Cochin International Airport Limited (CIAL) in Kerala, India, made global aviation history by becoming the first airport in the world to be powered completely by solar energy. Operating international terminals, radar systems, baggage handling, cooling towers, and high-intensity runway lighting demands enormous 24/7 electrical reliability.",
+      "The airport's clean energy journey began in 2013 with a modest 100 kWp solar PV installation on the arrival terminal. Today, CIAL's total installed solar capacity exceeds 50 MWp across ground-mounted arrays, floating solar on reservoirs, and 1,400-vehicle solar carports, producing over 250,000 units of green electricity daily.",
+      "Beyond energy generation, CIAL pioneered agrivoltaics: cultivating organic vegetables beneath solar panels across 45 acres, harvesting over 90 metric tons annually while preventing weed overgrowth and grass fires.",
+      "For industrial complexes, universities, and commercial developers across India, CIAL proves that solar power eliminates recurrent electricity operational expenditure while future-proofing facilities against grid tariff escalations.",
     ],
   },
   {
@@ -62,13 +84,23 @@ const articles: Article[] = [
     date: "Apr 1, 2026",
     author: "Sarhat",
     title: "PM-KUSUM Extension: A New Lifeline for Solar",
-    excerpt: "The MNRE has officially extended the PM-KUSUM execution timelines, offering a vital lifeline to developers and farmers facing financing hurdles. With commissioning deadlines now pushed to 2027 for many projects, this move clears the 'financing logjam' and provides a stable bridge toward the upcoming KUSUM 2.0 framework. It's a pragmatic shift that ensures India's decentralized solar targets stay within reach while giving the industry the breathing room it needs to deliver quality results.",
+    excerpt: "The MNRE has officially extended the PM-KUSUM execution timelines, offering a vital lifeline to developers and farmers facing financing hurdles. With commissioning deadlines now pushed to 2027 for many projects, this move clears the \"financing logjam\" and provides a stable bridge toward the upcoming KUSUM 2.0 framework. It's a pragmatic shift that ensures India's decentralized solar targets stay within reach while giving the industry the breathing room it needs to deliver quality results.",
     image: "/images/agrivoltaics-project.jpg",
     readTime: "4 min read",
+    category: "Policy",
+    overlay: "pm-kusum",
+    keyTakeaways: [
+      "MNRE officially extends project commissioning deadlines to 2027, preventing bank guarantee liquidations.",
+      "Clears financing logjams by enabling regional rural banks and NBFCs to re-open sanctioned credit lines.",
+      "Acts as a regulatory bridge toward KUSUM 2.0 with streamlined DISCOM bay allotments and automated escrow.",
+      "Sarhat Energy's rural EPC task forces provide turnkey DPR, land vetting, and substation intertie support.",
+    ],
     content: [
-      "The Ministry of New and Renewable Energy (MNRE) extended the PM-KUSUM scheme execution timelines to ensure state implementation agencies and solar developers can complete feeder-level solarization without penalty.",
-      "Component C of PM-KUSUM enables farmers to solarize existing grid-connected agriculture pumps, selling surplus clean electricity back to DISCOMs to generate supplementary revenue.",
-      "At Sarhat Energy, our turnkey EPC execution teams in Uttar Pradesh and neighboring states assist regional developers with land procurement, DISCOM bay clearance, and rapid sub-station integration.",
+      "The Ministry of New and Renewable Energy (MNRE) has formally extended the implementation timelines for the Pradhan Mantri Kisan Urja Suraksha evam Utthaan Mahabhiyan (PM-KUSUM) scheme through 2027.",
+      "This decisive policy move provides critical breathing space to agricultural solar developers, EPC contractors, and regional farmers who faced project delays stemming from transformer delivery lead times and DISCOM bay clearance schedules.",
+      "Under Component A and Component C, the timeline relaxation prevents bank guarantee encashments and enables regional rural financing institutions to disburse pending capital tranches.",
+      "The extension acts as a stable regulatory bridge toward KUSUM 2.0, establishing automated escrow payment protections, standard PPAs, and mandatory feeder-level SCADA telemetry.",
+      "At Sarhat Energy, our turnkey EPC task forces in Uttar Pradesh, Haryana, and Rajasthan guide landowners and developers through DPR vetting, grid interconnection, and accelerated COD commissioning.",
     ],
   },
   {
@@ -78,12 +110,20 @@ const articles: Article[] = [
     author: "Sarhat",
     title: "India's Solar Boom Continues: 29.5 GW Added in First Nine Months of 2025",
     excerpt: "India's clean energy transition gained unprecedented momentum in the first nine months of 2025, with solar capacity additions soaring 70% year-on-year to a record 29.5 GW. The surge was fueled by rapid deployment across both utility-scale and consumer rooftop segments, as per data from JMK Research.",
-    image: "/images/hero-solar.jpg",
-    readTime: "5 min read",
+    image: "/images/insights/insight-card-4.jpg",
+    readTime: "4 min read",
+    category: "Market",
+    keyTakeaways: [
+      "Record-breaking 29.5 GW of solar installations completed within 9 months, marking a 70% YoY surge.",
+      "Utility-scale ground-mounted projects comprised over 74% of capacity additions, anchored in western corridors.",
+      "Rooftop solar additions surged 140% YoY backed by central capital subsidies and simplified digital net-metering.",
+      "Grid transmission availability and substation evacuation remain the critical bottleneck for developers.",
+    ],
     content: [
-      "India registered a monumental 29.5 GW of solar installations within nine months, solidifying its position as one of the fastest-growing solar markets globally.",
-      "Utility-scale ground-mounted projects contributed over 75% of total capacity, while rooftop solar installations surged due to domestic subsidies under PM Surya Ghar Muft Bijli Yojana.",
-      "Grid integration challenges are now shifting developer focus toward hybrid solar-wind projects backed by BESS energy storage solutions to stabilize transmission frequencies.",
+      "India's clean energy transition has broken all prior historical records, with solar capacity additions reaching 29.5 GW during the first nine months of 2025—a massive 70% year-on-year increase according to JMK Research data.",
+      "Utility-scale ground-mounted projects formed the anchor of this deployment, contributing over 74% of capacity in key high-irradiance states like Rajasthan and Gujarat.",
+      "Simultaneously, rooftop solar installations witnessed a parabolic surge of over 140% driven by direct digital capital subsidies under the PM Surya Ghar Muft Bijli Yojana.",
+      "With domestic module manufacturing stabilizing under ALMM regulations, the primary focus for developers and EPC contractors has shifted to transmission infrastructure, substation evacuation bays, and BESS hybrid integration.",
     ],
   },
   {
@@ -93,12 +133,20 @@ const articles: Article[] = [
     author: "Sarhat",
     title: "Bihar Powers Up: Bold New Renewable Energy Policy Set to Spark Investment and Job Growth",
     excerpt: "The Bihar government has introduced the Bihar Renewable Energy Policy 2025 to make the state a clean energy leader. The goal is to build 23.97 GW of renewable energy (like solar and wind) and 6.1 GWh of energy storage by the year 2030. This policy comes just before state elections and is designed to attract companies and create jobs by offering many benefits to investors and developers.",
-    image: "/images/timeline-2025.jpg",
+    image: "/images/insights/insight-card-5.jpg",
     readTime: "4 min read",
+    category: "Policy",
+    keyTakeaways: [
+      "State targets 23.97 GW renewable capacity and 6.1 GWh of battery energy storage (BESS) by 2030.",
+      "100% stamp duty exemption, land conversion fee waivers, and single-window statutory approvals.",
+      "Special incentives for agrivoltaics and canal-top solar to optimize high-density agricultural land use.",
+      "Projected to unlock over ₹80,000 crore in clean energy investments and create 65,000+ technical jobs.",
+    ],
     content: [
-      "Bihar's latest Renewable Energy Policy offers targeted incentives for agrivoltaics, pump storage systems, and industrial rooftop installations across its agricultural heartlands.",
-      "The state government has introduced single-window clearance mechanisms for land acquisition and evacuation infrastructure, lowering regulatory hurdles for solar EPC developers.",
-      "This policy framework creates substantial employment opportunities for site engineers, O&M technicians, and regional supply chain partners across eastern India.",
+      "In a major policy milestone for eastern India, the Bihar state cabinet has ratified the ambitious Bihar Renewable Energy Policy 2025, setting a target of 23.97 GW renewable capacity and 6.1 GWh energy storage by 2030.",
+      "The policy introduces comprehensive investor incentives including 100% reimbursement of stamp duty on project land, land conversion fee waivers, and guaranteed 25-year open-access priority grid dispatch.",
+      "Recognizing the fertile agricultural nature of Bihar's terrain, the framework prioritizes agrivoltaics and canal-top installations that generate clean electricity while conserving water and enhancing farmer incomes.",
+      "Sarhat Energy's regional presence and turnkey EPC capabilities in eastern India position us to assist developers in deploying high-reliability solar assets under this progressive policy.",
     ],
   },
   {
@@ -107,13 +155,21 @@ const articles: Article[] = [
     date: "Jul 4, 2025",
     author: "Sarhat",
     title: "Grounding of Solar system: Safety consideration",
-    excerpt: "When installing a Solar Photo-voltaic system (PV), it is extremely important all the equipment is grounded correctly.",
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200&auto=format&fit=crop",
-    readTime: "7 min read",
+    excerpt: "When installing a solar Photo-voltaic system (PV), it is extremely important all the equipment is grounded correctly.",
+    image: "/images/insights/insight-card-6.jpg",
+    readTime: "5 min read",
+    category: "Engineering",
+    keyTakeaways: [
+      "Grounding is mandatory to eliminate lethal touch-potential shock hazards from up to 1500V DC arrays.",
+      "Equipment Grounding Conductors (EGC) bond all metal frames and racks to trigger GFDI relays on faults.",
+      "Lightning Protection Systems (LPS) and Type 1/2 SPDs protect sensitive inverter electronics from surges.",
+      "IS 3043 and IEEE 80 standards mandate earth pit resistance below 1.0 Ohm using chemical earthing.",
+    ],
     content: [
-      "Earthing and lightning protection systems (LPS) are critical safeguards for solar PV plants against high-voltage surges, fault currents, and atmospheric strikes.",
-      "Proper equipment grounding conductors (EGC) and system grounding must conform strictly to IS 3043 / IEC 62305 standards to prevent inverter tripping, equipment damage, and electrical hazards.",
-      "Routine earth pit resistance testing and chemical earthing compound inspection ensure long-term equipment integrity and operational reliability throughout the plant's 25-year design lifespan.",
+      "When installing a solar Photo-voltaic system (PV), it is extremely important all the equipment is grounded correctly. Solar arrays operate outdoors in exposed environments, continuously subjected to high DC voltages (up to 1500V in utility installations), lightning transients, and induced electromagnetic surges.",
+      "A comprehensive solar earthing system requires dual protection: Equipment Grounding Conductors (EGC) that bond non-current-carrying metal frames and mounting racks to eliminate touch-potential shock hazards, and System Grounding that stabilizes reference potential.",
+      "Adherence to IS 3043 and IEEE 80 earthing standards requires earth pit resistance values under 1.0 Ohm, achieved through chemical earthing electrodes and moisture-retaining bentonite compounds.",
+      "Routine testing with 3-point fall-of-potential testers and thermal imaging inspections protects both field maintenance crews and high-value inverter electronics over the 25-year plant lifecycle.",
     ],
   },
   {
@@ -125,6 +181,7 @@ const articles: Article[] = [
     excerpt: "In a country like India where the sun shines almost all year round, solar energy is one of the smartest ways to meet our growing power needs. And among the many ways to tap solar power, solar parks are becoming very popular – and for good reason.",
     image: "/images/timeline-2024.jpg",
     readTime: "5 min read",
+    category: "Engineering",
     content: [
       "Utility solar parks pool shared infrastructure like high-voltage transmission lines, access roads, and substation bays to drastically lower per-megawatt capital expenditure.",
       "By consolidating land and DISCOM grid clearances in dedicated renewable power corridors, solar parks allow developers to achieve commercial operation dates in record timelines.",
@@ -140,6 +197,7 @@ const articles: Article[] = [
     excerpt: "With rising electricity bills and increasing awareness about climate change, more and more Indians are turning to solar energy. The good news? In 2025, the Government of India continues to support this green transition through attractive subsidies and tax benefits, making solar power more affordable than ever.",
     image: "/images/partner-hero-bg.jpg",
     readTime: "6 min read",
+    category: "Policy",
     content: [
       "Government incentives under PM Surya Ghar Muft Bijli Yojana provide direct central financial assistance (CFA) for rooftop solar installations up to 3kW.",
       "For commercial and industrial enterprises, accelerated depreciation benefits of up to 40% allow businesses to write off capital investments faster while slashing corporate electricity tariffs.",
@@ -155,6 +213,7 @@ const articles: Article[] = [
     excerpt: "Learn about the factors that affect solar panel efficiency and how to maximize energy production from your solar installation.",
     image: "/images/timeline-2027.jpg",
     readTime: "5 min read",
+    category: "Engineering",
     content: [
       "Solar panel efficiency measures the percentage of sunlight hitting the PV cell surface that gets converted into usable direct current (DC) electricity.",
       "Modern TOPCon and N-type bifacial modules achieve efficiency ratings over 22-23%, outperforming older polycrystalline panels especially in high-temperature ambient conditions.",
@@ -170,6 +229,7 @@ const articles: Article[] = [
     excerpt: "India, a country blessed with abundant sunlight, is rapidly moving toward solar energy as a key source of power. With rising population, increasing energy demands, and growing environmental concerns, solar energy is not just an option for India — it's becoming a necessity.",
     image: "/images/timeline-2026.jpg",
     readTime: "6 min read",
+    category: "Market",
     content: [
       "India is targeting 500 GW of non-fossil energy capacity by 2030, with solar power forming the backbone of this historic energy transformation.",
       "Advancements in BESS energy storage, floating solar arrays on reservoirs, and PM-KUSUM feeder solarization are bringing clean power directly to urban centers and agricultural farmlands.",
@@ -178,9 +238,18 @@ const articles: Article[] = [
   },
 ];
 
+const CATEGORIES = [
+  { id: "all", label: "All Insights", count: 10 },
+  { id: "market", label: "Market Trends", count: 3 },
+  { id: "policy", label: "Policies & Schemes", count: 3 },
+  { id: "engineering", label: "Engineering & Safety", count: 3 },
+  { id: "case-study", label: "Case Studies", count: 1 },
+] as const;
+
 export default function InsightsPage() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>("all");
 
   const {
     isPastHero,
@@ -191,6 +260,15 @@ export default function InsightsPage() {
     contentOpacity,
     indicatorOpacity,
   } = useHeroScroll();
+
+  const filteredArticles = useMemo(() => {
+    if (activeCategory === "all") return articles;
+    if (activeCategory === "market") return articles.filter((a) => a.category === "Market");
+    if (activeCategory === "policy") return articles.filter((a) => a.category === "Policy");
+    if (activeCategory === "engineering") return articles.filter((a) => a.category === "Engineering");
+    if (activeCategory === "case-study") return articles.filter((a) => a.category === "Case Study");
+    return articles;
+  }, [activeCategory]);
 
   return (
     <SmoothScroll>
