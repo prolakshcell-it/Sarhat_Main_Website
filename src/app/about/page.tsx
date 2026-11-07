@@ -193,16 +193,16 @@ export default function AboutPage() {
                 <span className="text-[#D4E012] italic font-normal relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
                   Progress in every project.
                   <svg
-                        className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
-                        viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                        aria-hidden="true">
-                        <path
-                          d="M0 15 Q 50 0 100 15"
-                          stroke="currentColor"
-                          strokeWidth="3.5"
-                          fill="transparent" />
-                      </svg>
+                    className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
+                    viewBox="0 0 100 20"
+                    preserveAspectRatio="none"
+                    aria-hidden="true">
+                    <path
+                      d="M0 15 Q 50 0 100 15"
+                      stroke="currentColor"
+                      strokeWidth="3.5"
+                      fill="transparent" />
+                  </svg>
                 </span>
               </h1>
 
@@ -335,9 +335,9 @@ export default function AboutPage() {
                     </h2>
 
                     {/* Long Editorial Paragraph */}
-                      <p className="text-slate-600 font-normal text-base sm:text-lg leading-relaxed">
-                        Sarhat Energy is an execution-led energy and infrastructure company rooted in India, driven to earn trust globally. We combine engineering precision with hands-on delivery to build dependable assets that power businesses and connect communities. From rooftops to solar parks, our clean-energy expertise spans engineering through commissioning and long-term maintenance. Our capabilities extend to transmission lines, substations, roads, bridges and buildings. Safety, unity and ownership guide every project as we turn ambition into infrastructure that creates lasting value for clients, communities and India’s future.
-                      </p>
+                    <p className="text-slate-600 font-normal text-base sm:text-lg leading-relaxed">
+                      Sarhat Energy is an execution-led energy and infrastructure company rooted in India, driven to earn trust globally. We combine engineering precision with hands-on delivery to build dependable assets that power businesses and connect communities. From rooftops to solar parks, our clean-energy expertise spans engineering through commissioning and long-term maintenance. Our capabilities extend to transmission lines, substations, roads, bridges and buildings. Safety, unity and ownership guide every project as we turn ambition into infrastructure that creates lasting value for clients, communities and India’s future.
+                    </p>
                   </ScrollReveal>
                 </div>
 
@@ -528,7 +528,7 @@ export default function AboutPage() {
                         onMouseEnter={() => setActiveValueIndex(index)}
                         whileHover={{ scale: 1.07 }}
                         transition={{ duration: 0.35, ease: "easeOut" }}
-                        className={`relative w-[300px] h-[300px] sm:w-[340px] sm:h-[340px] lg:w-[385px] lg:h-[385px] rounded-full p-7 sm:p-10 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-500 backdrop-blur-2xl ${index> 0 ? "md:-ml-10 lg:-ml-14" : ""
+                        className={`relative w-[300px] h-[300px] sm:w-[340px] sm:h-[340px] lg:w-[385px] lg:h-[385px] rounded-full p-7 sm:p-10 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-500 backdrop-blur-2xl ${index > 0 ? "md:-ml-10 lg:-ml-14" : ""
                           } ${isActive
                             ? "bg-slate-950/95 border-2 border-[#D4E012] shadow-[0_0_60px_rgba(212,224,18,0.45)] z-30 scale-105"
                             : "bg-slate-950/65 border border-white/20 hover:border-[#D4E012]/70 hover:bg-slate-950/85 z-10 opacity-85 hover:opacity-100"
