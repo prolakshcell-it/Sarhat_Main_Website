@@ -29,129 +29,185 @@ interface ExecutiveLeader {
 
 const executiveTeam: ExecutiveLeader[] = [
   {
-    id: "lalit-kumarr",
-    name: "Lalit Kumarr",
-    role: "Founder & Managing Director",
+    id: "satish-chaudhary",
+    name: "Satish Chaudhary",
+    role: "Managing Director",
     categoryTag: "EXECUTIVE LEADERSHIP",
-    experience: "35+ Years Industry Leadership",
+    experience: "13 Years Experience",
     shortBio:
-      "Lalit leads the business, bringing over 35 years of global energy and infrastructure vision to steer Sarhat to the next level.",
+      "Satish leads executive management, corporate strategy, and the overall direction of Sarhat Energy across India.",
     fullBio:
-      "Lalit Kumarr is the Founder & Managing Director of Sarhat Energy. With over 35 years of global energy industry leadership, he has steered multi-gigawatt power, solar EPC, and civil infrastructure projects across India. Prior to founding Sarhat, he held senior executive positions across major energy corporations, pioneering sustainable engineering, regulatory compliance, and execution discipline.",
-    education: "B.E. Electrical Engineering · Global Energy Management Program",
+      "Satish Chaudhary serves as Managing Director of Sarhat Energy. With 13 years of leadership in energy, infrastructure, and enterprise execution, he guides Sarhat's corporate vision, strategic project origination, capital allocation, and multi-gigawatt clean energy execution across India.",
+    education: "Executive Leadership & Energy Management",
     image: "/images/hero-solar.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
-    id: "ajay-singh",
-    name: "Ajay Singh",
-    role: "Chief Financial Officer (CFO)",
-    categoryTag: "FINANCE & GOVERNANCE",
-    experience: "30+ Years Financial Governance",
+    id: "avishek-anand",
+    name: "Avishek Anand",
+    role: "Director Operations",
+    categoryTag: "OPERATIONS LEADERSHIP",
+    experience: "12 Years Experience",
     shortBio:
-      "In his current role as Chief Financial Officer, Ajay leads the financial strategy, capital allocation, and risk management.",
+      "Avishek directs company-wide engineering operations, site construction protocols, and quality execution.",
     fullBio:
-      "Ajay Singh serves as CFO, bringing over 30 years of financial governance, risk management, and capital allocation experience. A Chartered Accountant by background, he has managed multi-crore project financing, utility contract structures, corporate governance, and fiscal compliance for leading energy and infrastructure enterprises across India.",
-    education: "FCA Chartered Accountant · B.Com (Hons)",
-    image: "/images/substation-project.jpg",
-    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
-  },
-  {
-    id: "shrikant-bartakke",
-    name: "Shrikant Bartakke",
-    role: "Chief Growth Officer (CGO)",
-    categoryTag: "STRATEGIC EXPANSION",
-    experience: "20+ Years Strategic Expansion",
-    shortBio:
-      "Shrikant leads strategic commercial expansion, enterprise partnerships, and multi-state renewable energy scaling.",
-    fullBio:
-      "Shrikant Bartakke leads strategic market expansion and commercial partnerships at Sarhat Energy. With 20+ years of leadership in telecommunications and renewable energy scaling, he oversees enterprise client acquisitions, strategic joint ventures, utility PPAs, and expansion into emerging storage & agrovoltaic sectors.",
-    education: "MBA Marketing & Strategy · B.Tech Mechanical",
-    image: "/images/partner-hero-bg.jpg",
-    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
-  },
-  {
-    id: "ajit-shah",
-    name: "Ajit Shah",
-    role: "Vice President — Business Development",
-    categoryTag: "BUSINESS DEVELOPMENT",
-    experience: "18+ Years Business Development",
-    shortBio:
-      "Ajit specializes in utility-scale solar origination, state regulatory liaison, land banking, and PPA negotiations.",
-    fullBio:
-      "Ajit Shah brings over 18 years of diverse experience as a Business Development Leader, specializing in utility-scale solar origination, government liaison, DISCOM regulatory approvals, land banking frameworks, and power purchase agreement (PPA) financial management.",
-    education: "M.Sc Energy Economics · B.E. Civil Engineering",
+      "Avishek Anand serves as Director Operations at Sarhat Energy. Bringing 12 years of specialized operational expertise, he oversees turnkey site execution, multi-state project delivery timelines, field engineering coordination, and high-standard safety compliance across all utility-scale and commercial projects.",
+    education: "B.Tech Engineering & Project Management",
     image: "/images/bess-substation.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
-    id: "rajesh-kumar",
-    name: "Rajesh Kumar",
-    role: "General Manager — Projects & Operations",
-    categoryTag: "PROJECT EXECUTION",
-    experience: "24+ Years Grid & Solar O&M",
-    shortBio:
-      "Rajesh oversees field EPC execution, grid substation integration (33kV to 400kV), and long-term asset O&M performance.",
-    fullBio:
-      "Rajesh Kumar oversees complete field EPC execution, grid substation integration (33kV to 400kV), EHV transmission corridor clearances, site safety protocols, and long-term asset O&M performance across all operational project sites nationwide.",
-    education: "B.Tech Electrical & Electronics · Certified PMP",
-    image: "/images/agrivoltaics-project.jpg",
-    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
-  },
-  {
-    id: "harshita-arora",
-    name: "Harshita Arora",
-    role: "Head — Business Growth & Strategic Alliances",
-    categoryTag: "STRATEGIC ALLIANCES",
-    experience: "Strategic Partnerships",
-    shortBio:
-      "Harshita leads corporate client relations, project proposals, ESG integration, and strategic alliances nationwide.",
-    fullBio:
-      "Harshita Arora leads corporate client relations, project proposals, ESG integration, and strategic alliances across Sarhat's solar, BESS storage, and agrovoltaic initiatives, strengthening Sarhat's national business footprint.",
-    education: "MBA International Business · B.Sc Environmental Science",
-    image: "/images/about-hero-bg-bright.jpg",
-    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
-  },
-  {
-    id: "vikram-sharma",
-    name: "Vikram Sharma",
-    role: "Chief Technical Officer (CTO)",
-    categoryTag: "ENGINEERING & INNOVATION",
-    experience: "22+ Years Technical Design",
-    shortBio:
-      "Vikram directs electrical & structural engineering, microgrid integration, SCADA automation, and quality control.",
-    fullBio:
-      "Vikram Sharma directs electrical and structural engineering design, microgrid integration, SCADA automation, shadow analysis, and technical quality control standards across utility and C&I solar installations.",
-    education: "M.Tech Electrical Power Systems · B.Tech Electrical",
-    image: "/images/hero-solar.jpg",
-    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
-  },
-  {
-    id: "pooja-malhotra",
-    name: "Pooja Malhotra",
-    role: "Chief HR & People Officer",
+    id: "radha-kumari",
+    name: "Radha Kumari",
+    role: "Head of HR",
     categoryTag: "PEOPLE & CULTURE",
-    experience: "16+ Years Organizational Culture",
+    experience: "6 Years Experience",
     shortBio:
-      "Pooja leads talent acquisition, organizational culture, safety policies, and leadership development programs.",
+      "Radha leads human resources, talent acquisition, organizational culture, and employee welfare programs.",
     fullBio:
-      "Pooja Malhotra leads talent acquisition, organizational culture, safety policies, and leadership development programs to foster a high-performance, inclusive environment across site and corporate teams.",
-    education: "MBA Human Resources · B.A. Psychology",
+      "Radha Kumari leads Human Resources at Sarhat Energy. With 6 years of focused HR and talent leadership, she spearheads human capital management, organizational culture, workforce inclusion, policy frameworks, and continuous skill upskilling across on-site execution crews and corporate departments.",
+    education: "MBA Human Resources Management",
     image: "/images/about-hero-bg.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
-    id: "sanjay-verma",
-    name: "Sanjay Verma",
-    role: "Head — Supply Chain & Procurement",
-    categoryTag: "SUPPLY CHAIN & LOGISTICS",
-    experience: "20+ Years Global Sourcing",
+    id: "naresh-kumar",
+    name: "Naresh Kumar",
+    role: "Head Business Growth & Strategic Alliances",
+    categoryTag: "STRATEGIC ALLIANCES",
+    experience: "14 Years Experience",
     shortBio:
-      "Sanjay manages tier-1 solar module procurement, inverter logistics, civil material sourcing, and vendor alliances.",
+      "Naresh drives enterprise growth, institutional partnerships, strategic joint ventures, and market expansion.",
     fullBio:
-      "Sanjay Verma manages global tier-1 solar module procurement, inverter sourcing, civil material logistics, and strategic vendor alliances to ensure seamless project delivery and cost optimization.",
-    education: "B.Tech Mechanical · Diploma in Supply Chain Management",
+      "Naresh Kumar leads Business Growth and Strategic Alliances at Sarhat Energy. With over 14 years of industry experience, he manages institutional developer alliances, corporate PPA origination, state regulatory liaison, and strategic business expansion in solar, BESS storage, and agrovoltaic sectors.",
+    education: "MBA Business Strategy & Marketing",
     image: "/images/partner-hero-bg.jpg",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+  },
+  {
+    id: "ayush-raj",
+    name: "Ayush Raj",
+    role: "Manager Business Development",
+    categoryTag: "BUSINESS DEVELOPMENT",
+    experience: "3 Years Experience",
+    shortBio:
+      "Ayush manages market origination, client engagement, bid preparation, and clean energy pipeline development.",
+    fullBio:
+      "Ayush Raj serves as Manager Business Development at Sarhat Energy. Bringing 3 years of dynamic business development and client engagement experience, he focuses on pipeline origination, tender analytics, commercial proposals, and client relationship management for commercial and utility clients.",
+    education: "B.E. / B.Tech & Business Management",
+    image: "/images/about-hero-bg-bright.jpg",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+  },
+  {
+    id: "avishek-jha",
+    name: "Avishek Jha",
+    role: "Head Operations",
+    categoryTag: "OPERATIONS EXCELLENCE",
+    experience: "12 Years Experience",
+    shortBio:
+      "Avishek leads multi-site execution operations, contractor management, and field mobilization across India.",
+    fullBio:
+      "Avishek Jha serves as Head Operations at Sarhat Energy. With 12 years of hands-on technical and operational leadership, he directs site mobilization, field contractor performance, milestone scheduling, and inter-departmental logistics across high-voltage substation and solar generation sites.",
+    education: "B.Tech Electrical & Electronics",
+    image: "/images/substation-project.jpg",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+  },
+  {
+    id: "amar-nath-jha",
+    name: "Amar Nath Jha",
+    role: "Head Supply Chain Management",
+    categoryTag: "SUPPLY CHAIN & LOGISTICS",
+    experience: "10 Years Experience",
+    shortBio:
+      "Amar Nath oversees Tier-1 vendor procurement, logistics coordination, and equipment quality assurance.",
+    fullBio:
+      "Amar Nath Jha leads Supply Chain Management at Sarhat Energy. Bringing 10 years of specialized procurement and supply chain experience, he steers vendor qualification, Tier-1 solar module & inverter procurement, logistics optimization, and material delivery assurance to maintain site schedules.",
+    education: "Supply Chain & Operations Management",
+    image: "/images/timeline-2025.jpg",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+  },
+  {
+    id: "kana-sharma",
+    name: "Kana Sharma",
+    role: "Manager Projects & Liaison",
+    categoryTag: "PROJECTS & LIAISON",
+    experience: "4 Years Experience",
+    shortBio:
+      "Kana manages statutory approvals, DISCOM liaison, ROW clearances, and project coordination.",
+    fullBio:
+      "Kana Sharma serves as Manager Projects & Liaison at Sarhat Energy. With 4 years of dedicated liaison and project management experience, she coordinates state electricity board clearances, DISCOM grid approvals, statutory compliance, and smooth inter-agency communication for swift commissioning.",
+    education: "B.Tech Engineering & Regulatory Management",
+    image: "/images/agrivoltaics-project.jpg",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+  },
+  {
+    id: "prawesh-kumar-jha",
+    name: "Prawesh Kumar Jha",
+    role: "Manager Design & Engg",
+    categoryTag: "DESIGN & ENGINEERING",
+    experience: "4 Years Experience",
+    shortBio:
+      "Prawesh directs detailed engineering design, SLDs, structural layout modeling, and electrical schematics.",
+    fullBio:
+      "Prawesh Kumar Jha serves as Manager Design & Engineering at Sarhat Energy. With 4 years of specialized engineering design expertise, he oversees plant layout optimization, 3D modeling, shadow analysis, single line diagrams (SLD), and structural validation to maximize energy yield.",
+    education: "B.Tech Electrical / Power Systems",
+    image: "/images/stage-02-plant-design.jpg",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+  },
+  {
+    id: "mrityunjay-kumar-jha",
+    name: "Mrityunjay Kumar Jha",
+    role: "Manager Accounts",
+    categoryTag: "FINANCE & ACCOUNTS",
+    experience: "13 Years Experience",
+    shortBio:
+      "Mrityunjay oversees financial accounting, statutory audits, project cash flows, and fiscal compliance.",
+    fullBio:
+      "Mrityunjay Kumar Jha serves as Manager Accounts at Sarhat Energy. Bringing 13 years of rigorous accounting and financial governance experience, he oversees corporate fiscal reporting, vendor accounting, budget allocations, statutory taxation, and financial compliance across all projects.",
+    education: "M.Com / Chartered Financial Accounting",
+    image: "/images/commercial-buildings.jpg",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+  },
+  {
+    id: "amar-kumar-rauniyar",
+    name: "Amar Kumar Rauniyar",
+    role: "Manager Projects & O&M",
+    categoryTag: "PROJECTS & O&M",
+    experience: "8 Years Experience",
+    shortBio:
+      "Amar manages on-site project construction, plant testing, preventative O&M, and asset availability.",
+    fullBio:
+      "Amar Kumar Rauniyar serves as Manager Projects & O&M at Sarhat Energy. With 8 years of dedicated field execution and operations & maintenance expertise, he manages turnkey solar site erection, testing & commissioning, preventative maintenance cycles, and SCADA-monitored plant performance.",
+    education: "B.Tech Electrical / Mechanical Engineering",
+    image: "/images/stage-04-plant-build.jpg",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+  },
+  {
+    id: "srimanta-das",
+    name: "Srimanta Das",
+    role: "Assistant Project Manager",
+    categoryTag: "PROJECT MANAGEMENT",
+    experience: "6 Years Experience",
+    shortBio:
+      "Srimanta coordinates site civil works, daily execution tracking, and contractor quality compliance.",
+    fullBio:
+      "Srimanta Das serves as Assistant Project Manager at Sarhat Energy. With 6 years of ground execution and management experience, he coordinates civil foundations, piling schedules, structural assembly inspections, and contractor progress tracking across active solar sites.",
+    education: "Diploma / B.Tech Civil Engineering",
+    image: "/images/stage-01-site-survey.jpg",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+  },
+  {
+    id: "abhishek-jha",
+    name: "Abhishek Jha",
+    role: "Assistant Project Manager SCM",
+    categoryTag: "SUPPLY CHAIN MANAGEMENT",
+    experience: "2 Years Experience",
+    shortBio:
+      "Abhishek coordinates procurement tracking, warehouse inventory, and on-time site material dispatches.",
+    fullBio:
+      "Abhishek Jha serves as Assistant Project Manager SCM at Sarhat Energy. With 2 years of supply chain and logistics coordination experience, he supports procurement scheduling, inventory tracking, bill of materials (BOM) auditing, and delivery dispatch logistics across project sites.",
+    education: "B.Tech / SCM Operations",
+    image: "/images/industrial-buildings.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
 ];
