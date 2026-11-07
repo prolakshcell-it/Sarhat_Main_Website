@@ -95,7 +95,7 @@ const executiveTeam: ExecutiveLeader[] = [
     fullBio:
       "Ayush Raj serves as Manager Business Development at Sarhat Energy. Bringing 3 years of dynamic business development and client engagement experience, he focuses on pipeline origination, tender analytics, commercial proposals, and client relationship management for commercial and utility clients.",
     education: "B.E. / B.Tech & Business Management",
-    image: "/team-heads/ayush-raj.jpg",
+    image: "/team-heads/ayush-raj-v2.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
@@ -193,7 +193,7 @@ const executiveTeam: ExecutiveLeader[] = [
     fullBio:
       "Srimanta Das serves as Assistant Project Manager at Sarhat Energy. With 6 years of ground execution and management experience, he coordinates civil foundations, piling schedules, structural assembly inspections, and contractor progress tracking across active solar sites.",
     education: "Diploma / B.Tech Civil Engineering",
-    image: "/team-heads/srimanta-das.png",
+    image: "/team-heads/srimanta-das-v2.png",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
