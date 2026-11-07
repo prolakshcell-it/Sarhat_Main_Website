@@ -137,7 +137,7 @@ export default function InitiativesPage() {
                 <div className="max-w-4xl flex flex-col items-center text-center">
 
 
-                  <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 text-center leading-[1.08] drop-shadow-lg">
+                  <h1 className="text-4xl sm:text-6xl md:text-6xl font-serif-display font-medium tracking-tight text-white mb-6 text-center leading-[1.08] drop-shadow-lg">
                     Pioneering Sustainable Growth <br />
                     <span className="text-[#D4E012] italic font-normal relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
                       &amp; Social Impact

@@ -99,8 +99,8 @@ export const detailedSolutions = [
   },
   {
     id: "bess-hybrid",
-    title: "BESS & Battery Storage",
-    badge: "BESS ENERGY",
+    title: "BESS & Hybrid Solutions",
+    badge: "BESS & HYBRID",
     headline:
       "Containerized battery storage systems for grid stability and dispatchable power.",
     description:
