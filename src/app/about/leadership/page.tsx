@@ -35,9 +35,9 @@ const executiveTeam: ExecutiveLeader[] = [
     categoryTag: "EXECUTIVE LEADERSHIP",
     experience: "13 Years Experience",
     shortBio:
-    "Satish leads executive management, corporate strategy, and the overall direction of Sarhat Energy across India.",
+      "Satish leads executive management, corporate strategy, and the overall direction of Sarhat Energy across India.",
     fullBio:
-    "Satish Chaudhary serves as Managing Director of Sarhat Energy. With 13 years of leadership in energy, infrastructure, and enterprise execution, he guides Sarhat's corporate vision, strategic project origination, capital allocation, and multi-gigawatt clean energy execution across India.",
+      "Satish Chaudhary serves as Managing Director of Sarhat Energy. With 13 years of leadership in energy, infrastructure, and enterprise execution, he guides Sarhat's corporate vision, strategic project origination, capital allocation, and multi-gigawatt clean energy execution across India.",
     education: "Executive Leadership & Energy Management",
     image: "/team-heads/satish-chaudhary.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
@@ -49,9 +49,9 @@ const executiveTeam: ExecutiveLeader[] = [
     categoryTag: "OPERATIONS LEADERSHIP",
     experience: "12 Years Experience",
     shortBio:
-    "Avishek directs company-wide engineering operations, site construction protocols, and quality execution.",
+      "Avishek directs company-wide engineering operations, site construction protocols, and quality execution.",
     fullBio:
-    "Avishek Anand serves as Director Operations at Sarhat Energy. Bringing 12 years of specialized operational expertise, he oversees turnkey site execution, multi-state project delivery timelines, field engineering coordination, and high-standard safety compliance across all utility-scale and commercial projects.",
+      "Avishek Anand serves as Director Operations at Sarhat Energy. Bringing 12 years of specialized operational expertise, he oversees turnkey site execution, multi-state project delivery timelines, field engineering coordination, and high-standard safety compliance across all utility-scale and commercial projects.",
     education: "B.Tech Engineering & Project Management",
     image: "/team-heads/avishek-anand.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
@@ -63,9 +63,9 @@ const executiveTeam: ExecutiveLeader[] = [
     categoryTag: "PEOPLE & CULTURE",
     experience: "6 Years Experience",
     shortBio:
-    "Radha leads human resources, talent acquisition, organizational culture, and employee welfare programs.",
+      "Radha leads human resources, talent acquisition, organizational culture, and employee welfare programs.",
     fullBio:
-    "Radha Kumari leads Human Resources at Sarhat Energy. With 6 years of focused HR and talent leadership, she spearheads human capital management, organizational culture, workforce inclusion, policy frameworks, and continuous skill upskilling across on-site execution crews and corporate departments.",
+      "Radha Kumari leads Human Resources at Sarhat Energy. With 6 years of focused HR and talent leadership, she spearheads human capital management, organizational culture, workforce inclusion, policy frameworks, and continuous skill upskilling across on-site execution crews and corporate departments.",
     education: "MBA Human Resources Management",
     image: "/team-heads/radha-kumari.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
@@ -91,9 +91,9 @@ const executiveTeam: ExecutiveLeader[] = [
     categoryTag: "BUSINESS DEVELOPMENT",
     experience: "3 Years Experience",
     shortBio:
-    "Ayush manages market origination, client engagement, bid preparation, and clean energy pipeline development.",
+      "Ayush manages market origination, client engagement, bid preparation, and clean energy pipeline development.",
     fullBio:
-    "Ayush Raj serves as Manager Business Development at Sarhat Energy. Bringing 3 years of dynamic business development and client engagement experience, he focuses on pipeline origination, tender analytics, commercial proposals, and client relationship management for commercial and utility clients.",
+      "Ayush Raj serves as Manager Business Development at Sarhat Energy. Bringing 3 years of dynamic business development and client engagement experience, he focuses on pipeline origination, tender analytics, commercial proposals, and client relationship management for commercial and utility clients.",
     education: "B.E. / B.Tech & Business Management",
     image: "/team-heads/ayush-raj.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
@@ -105,9 +105,9 @@ const executiveTeam: ExecutiveLeader[] = [
     categoryTag: "OPERATIONS EXCELLENCE",
     experience: "12 Years Experience",
     shortBio:
-    "Avishek leads multi-site execution operations, contractor management, and field mobilization across India.",
+      "Avishek leads multi-site execution operations, contractor management, and field mobilization across India.",
     fullBio:
-    "Avishek Jha serves as Head Operations at Sarhat Energy. With 12 years of hands-on technical and operational leadership, he directs site mobilization, field contractor performance, milestone scheduling, and inter-departmental logistics across high-voltage substation and solar generation sites.",
+      "Avishek Jha serves as Head Operations at Sarhat Energy. With 12 years of hands-on technical and operational leadership, he directs site mobilization, field contractor performance, milestone scheduling, and inter-departmental logistics across high-voltage substation and solar generation sites.",
     education: "B.Tech Electrical & Electronics",
     image: "/team-heads/avishek-jha.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
@@ -147,9 +147,9 @@ const executiveTeam: ExecutiveLeader[] = [
     categoryTag: "DESIGN & ENGINEERING",
     experience: "4 Years Experience",
     shortBio:
-    "Prawesh directs detailed engineering design, SLDs, structural layout modeling, and electrical schematics.",
+      "Prawesh directs detailed engineering design, SLDs, structural layout modeling, and electrical schematics.",
     fullBio:
-    "Prawesh Kumar Jha serves as Manager Design & Engineering at Sarhat Energy. With 4 years of specialized engineering design expertise, he oversees plant layout optimization, 3D modeling, shadow analysis, single line diagrams (SLD), and structural validation to maximize energy yield.",
+      "Prawesh Kumar Jha serves as Manager Design & Engineering at Sarhat Energy. With 4 years of specialized engineering design expertise, he oversees plant layout optimization, 3D modeling, shadow analysis, single line diagrams (SLD), and structural validation to maximize energy yield.",
     education: "B.Tech Electrical / Power Systems",
     image: "/team-heads/prawesh-kumar-jha.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
@@ -161,9 +161,9 @@ const executiveTeam: ExecutiveLeader[] = [
     categoryTag: "FINANCE & ACCOUNTS",
     experience: "13 Years Experience",
     shortBio:
-    "Mrityunjay oversees financial accounting, statutory audits, project cash flows, and fiscal compliance.",
+      "Mrityunjay oversees financial accounting, statutory audits, project cash flows, and fiscal compliance.",
     fullBio:
-    "Mrityunjay Kumar Jha serves as Manager Accounts at Sarhat Energy. Bringing 13 years of rigorous accounting and financial governance experience, he oversees corporate fiscal reporting, vendor accounting, budget allocations, statutory taxation, and financial compliance across all projects.",
+      "Mrityunjay Kumar Jha serves as Manager Accounts at Sarhat Energy. Bringing 13 years of rigorous accounting and financial governance experience, he oversees corporate fiscal reporting, vendor accounting, budget allocations, statutory taxation, and financial compliance across all projects.",
     education: "M.Com / Chartered Financial Accounting",
     image: "/team-heads/mrityunjay-kumar-jha.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
@@ -175,9 +175,9 @@ const executiveTeam: ExecutiveLeader[] = [
     categoryTag: "PROJECTS & O&M",
     experience: "8 Years Experience",
     shortBio:
-    "Amar manages on-site project construction, plant testing, preventative O&M, and asset availability.",
+      "Amar manages on-site project construction, plant testing, preventative O&M, and asset availability.",
     fullBio:
-    "Amar Kumar Rauniyar serves as Manager Projects & O&M at Sarhat Energy. With 8 years of dedicated field execution and operations & maintenance expertise, he manages turnkey solar site erection, testing & commissioning, preventative maintenance cycles, and SCADA-monitored plant performance.",
+      "Amar Kumar Rauniyar serves as Manager Projects & O&M at Sarhat Energy. With 8 years of dedicated field execution and operations & maintenance expertise, he manages turnkey solar site erection, testing & commissioning, preventative maintenance cycles, and SCADA-monitored plant performance.",
     education: "B.Tech Electrical / Mechanical Engineering",
     image: "/team-heads/amar-kumar-rauniyar.png",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
@@ -189,9 +189,9 @@ const executiveTeam: ExecutiveLeader[] = [
     categoryTag: "PROJECT MANAGEMENT",
     experience: "6 Years Experience",
     shortBio:
-    "Srimanta coordinates site civil works, daily execution tracking, and contractor quality compliance.",
+      "Srimanta coordinates site civil works, daily execution tracking, and contractor quality compliance.",
     fullBio:
-    "Srimanta Das serves as Assistant Project Manager at Sarhat Energy. With 6 years of ground execution and management experience, he coordinates civil foundations, piling schedules, structural assembly inspections, and contractor progress tracking across active solar sites.",
+      "Srimanta Das serves as Assistant Project Manager at Sarhat Energy. With 6 years of ground execution and management experience, he coordinates civil foundations, piling schedules, structural assembly inspections, and contractor progress tracking across active solar sites.",
     education: "Diploma / B.Tech Civil Engineering",
     image: "/team-heads/srimanta-das.png",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
