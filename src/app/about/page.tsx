@@ -190,7 +190,20 @@ export default function AboutPage() {
 
               <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center max-w-4xl drop-shadow-lg [text-wrap:balance]">
                 People at the centre. <br />
-                <span className="text-[#D4E012] italic font-normal">Progress in every project.</span>
+                <span className="text-[#D4E012] italic font-normal relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
+                  Progress in every project.
+                  <svg
+                        className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden="true">
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent" />
+                      </svg>
+                </span>
               </h1>
 
               <p className="text-base sm:text-lg md:text-xl text-slate-200 font-normal max-w-2xl text-center leading-relaxed drop-shadow-md mb-8 [text-wrap:balance]">

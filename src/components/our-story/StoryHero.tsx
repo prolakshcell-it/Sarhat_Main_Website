@@ -95,8 +95,19 @@ export default function StoryHero() {
             transition={{ duration: 0.9, delay: 0.35, ease: EASE }}
             className="mb-6 font-serif-display text-4xl font-medium leading-[1.08] tracking-tight drop-shadow-lg sm:text-6xl md:text-7xl [text-wrap:balance]">
             Rooted in India. <br />
-            <span className="font-normal italic text-[#D4E012]">
+            <span className="font-normal italic text-[#D4E012] relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
               Trusted Globally.
+              <svg
+                        className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden="true">
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent" />
+                      </svg>
             </span>
           </motion.h1>
 

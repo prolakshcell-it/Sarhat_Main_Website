@@ -115,7 +115,20 @@ export default function HybridPlantsGuidePage() {
                 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center max-w-4xl drop-shadow-lg">
                 Hybrid wind, solar &amp; BESS, <br />
                 <span className="italic font-normal text-white">
-                  firm round-the-clock <span className="text-[#D4E012]">power.</span>
+                  firm round-the-clock <span className="text-[#D4E012] relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
+                    power.
+                    <svg
+                      className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
+                      viewBox="0 0 100 20"
+                      preserveAspectRatio="none"
+                      aria-hidden="true">
+                      <path
+                        d="M0 15 Q 50 0 100 15"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        fill="transparent" />
+                    </svg>
+                  </span>
                 </span>
               </motion.h1>
 

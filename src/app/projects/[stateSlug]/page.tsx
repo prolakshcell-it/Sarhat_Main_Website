@@ -90,7 +90,21 @@ export default function StatePortfolioPage({ params }: PageProps) {
 
               <div className="max-w-4xl flex flex-col items-center text-center mb-6">
                 <h1 className="text-4xl sm:text-6xl font-serif-display font-medium text-white tracking-tight text-center drop-shadow-lg mb-4">
-                  {stateData.name} <span className="text-[#5EE72D] italic">Footprint</span>
+                  {stateData.name}{" "}
+                  <span className="text-[#D4E012] italic font-normal relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
+                    Footprint
+                    <svg
+                      className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
+                      viewBox="0 0 100 20"
+                      preserveAspectRatio="none"
+                      aria-hidden="true">
+                      <path
+                        d="M0 15 Q 50 0 100 15"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        fill="transparent" />
+                    </svg>
+                  </span>
                 </h1>
                 <p className="text-zinc-200 font-normal text-base sm:text-lg max-w-2xl text-center leading-relaxed drop-shadow-md">
                   {stateData.summary}
