@@ -16,7 +16,7 @@ function AnimatedMetricItem({
   unit = "",
   label,
 }: MetricItemProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref=useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-20px" });
 
   const targetNum = parseFloat(value) || 0;
@@ -112,13 +112,11 @@ export default function MetricsTicker() {
   return (
     <section
       ref={containerRef}
-      className="relative z-20 overflow-hidden select-none"
-    >
+      className="relative z-20 overflow-hidden select-none">
       {/* Precision Translucent Background Wash (No heavy blur, allows sharp solar panels to show through) */}
       <motion.div
         className="absolute inset-0 bg-[#F8FAF8] pointer-events-none"
-        style={{ opacity: bgOpacity }}
-      />
+        style={{ opacity: bgOpacity }} />
 
       {/* Content Layer with upward glide and opacity emergence */}
       <motion.div
@@ -126,8 +124,7 @@ export default function MetricsTicker() {
           opacity: contentOpacity,
           y: contentY,
         }}
-        className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 will-change-transform"
-      >
+        className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 will-change-transform">
         {/* Horizontal Metric Strip Layout (No cards, pure typography) */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8 items-center justify-between">
           {metrics.map((item, idx) => (
@@ -137,14 +134,12 @@ export default function MetricsTicker() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.05 }}
-              className="min-w-0"
-            >
+              className="min-w-0">
               <AnimatedMetricItem
                 value={item.value}
                 numSuffix={item.numSuffix}
                 unit={item.unit}
-                label={item.label}
-              />
+                label={item.label} />
             </motion.div>
           ))}
         </div>

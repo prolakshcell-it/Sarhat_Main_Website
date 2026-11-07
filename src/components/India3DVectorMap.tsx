@@ -264,12 +264,12 @@ export default function India3DVectorMap({ selectedStateSlug, onSelectState }: I
   const activeStateObj = useMemo(() => {
     if (!selectedStateSlug || selectedStateSlug === "all") return null;
     return ALL_INDIA_STATES.find(
-      (s) => s.id === selectedStateSlug || s.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === selectedStateSlug
+      (s) => s.id=== selectedStateSlug || s.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === selectedStateSlug
     );
   }, [selectedStateSlug]);
 
   const activeStateId = activeStateObj?.id || hoveredStateId || "uttar-pradesh";
-  const displayState = ALL_INDIA_STATES.find((s) => s.id === activeStateId) || ALL_INDIA_STATES[0];
+  const displayState = ALL_INDIA_STATES.find((s) => s.id=== activeStateId) || ALL_INDIA_STATES[0];
 
   // Retrieve rich state project data
   const richStateInfo = useMemo(() => {
@@ -288,23 +288,23 @@ export default function India3DVectorMap({ selectedStateSlug, onSelectState }: I
     let ongoingCount = stateProjects.filter((p) => p.status === "Ongoing" || p.status === "NA" || p.status === "Not Started").length;
 
     // Rich portfolio scaling for UP showcase demo
-    if (displayState.id === "uttar-pradesh") {
+    if (displayState.id=== "uttar-pradesh") {
       totalCapacityMW = 928.57;
       commissionedCount = 25;
       ongoingCount = 51;
-    } else if (displayState.id === "rajasthan") {
+    } else if (displayState.id=== "rajasthan") {
       totalCapacityMW = 412.30;
       commissionedCount = 18;
       ongoingCount = 24;
-    } else if (displayState.id === "haryana") {
+    } else if (displayState.id=== "haryana") {
       totalCapacityMW = 185.40;
       commissionedCount = 8;
       ongoingCount = 14;
-    } else if (displayState.id === "madhya-pradesh") {
+    } else if (displayState.id=== "madhya-pradesh") {
       totalCapacityMW = 240.10;
       commissionedCount = 12;
       ongoingCount = 19;
-    } else if (displayState.id === "bihar") {
+    } else if (displayState.id=== "bihar") {
       totalCapacityMW = 150.80;
       commissionedCount = 6;
       ongoingCount = 11;
@@ -335,8 +335,7 @@ export default function India3DVectorMap({ selectedStateSlug, onSelectState }: I
         <svg
           viewBox="0 0 850 930"
           className="w-full max-w-[720px] h-auto drop-shadow-[0_25px_40px_rgba(0,0,0,0.95)] select-none"
-          style={{ transformStyle: "preserve-3d" }}
-        >
+          style={{ transformStyle: "preserve-3d" }}>
           <defs>
             {/* Gradients & Filters */}
             <linearGradient id="slate3D" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -390,8 +389,7 @@ export default function India3DVectorMap({ selectedStateSlug, onSelectState }: I
                     filter: isHighlighted ? "url(#activeGlow) drop-shadow(0 8px 18px rgba(234, 88, 12, 0.6))" : "none",
                     transform: isHighlighted ? "translateY(-6px) scale(1.02)" : "translateY(0px) scale(1)",
                     transformOrigin: `${state.tooltipPos.x}px ${state.tooltipPos.y}px`,
-                  }}
-                />
+                  }} />
               );
             })}
           </g>
@@ -405,10 +403,9 @@ export default function India3DVectorMap({ selectedStateSlug, onSelectState }: I
                 transform={`translate(${pin.x}, ${pin.y})`}
                 className="cursor-pointer"
                 onClick={() => {
-                  const stateObj = ALL_INDIA_STATES.find((s) => s.name === pin.state);
+                  const stateObj = ALL_INDIA_STATES.find((s) => s.name=== pin.state);
                   if (stateObj) handleStateClick(stateObj);
-                }}
-              >
+                }}>
                 <circle r="12" fill={isPinActive ? "#F97316" : "#38BDF8"} opacity="0.35" className="animate-ping" />
                 <circle r="5" fill={isPinActive ? "#FDBA74" : "#E0F2FE"} stroke="#0F172A" strokeWidth="2" />
               </g>
@@ -430,8 +427,7 @@ export default function India3DVectorMap({ selectedStateSlug, onSelectState }: I
                 top: `${Math.min(Math.max(displayState.tooltipPos.y / 9.3, 20), 65)}%`,
                 left: `${Math.min(Math.max(displayState.tooltipPos.x / 8.5, 25), 68)}%`,
                 transform: "translate(-50%, -50%)",
-              }}
-            >
+              }}>
               <div className="w-[285px] sm:w-[325px] rounded-2xl bg-[#0B132B]/90 backdrop-blur-xl border border-slate-700/70 p-4 sm:p-5 shadow-[0_20px_50px_rgba(0,0,0,0.85)] text-white">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#F59E0B]">

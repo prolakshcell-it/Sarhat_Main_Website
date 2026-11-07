@@ -44,8 +44,7 @@ function MobileItem({
           rel={external ? "noopener noreferrer" : undefined}
           className={`flex min-h-[44px] flex-1 items-center transition-colors hover:text-[#5EE72D] ${
             depth === 0 ? "text-[15px] font-semibold text-slate-100" : "text-sm text-slate-300"
-          } ${FOCUS}`}
-        >
+          } ${FOCUS}`}>
           {item.title}
         </Link>
         {item.children && (
@@ -54,8 +53,7 @@ function MobileItem({
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
             aria-label={`${open ? "Hide" : "Show"} ${item.title} pages`}
-            className={`flex h-11 w-11 cursor-pointer items-center justify-center rounded-md text-slate-400 hover:text-white ${FOCUS}`}
-          >
+            className={`flex h-11 w-11 cursor-pointer items-center justify-center rounded-md text-slate-400 hover:text-white ${FOCUS}`}>
             <ChevronDown className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`} />
           </button>
         )}
@@ -67,8 +65,7 @@ function MobileItem({
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: reduce ? 0 : 0.2, ease: "easeOut" }}
-            className="ml-1 overflow-hidden border-l border-[#5EE72D]/60 pl-4"
-          >
+            className="ml-1 overflow-hidden border-l border-[#5EE72D]/60 pl-4">
             {item.children.map((child) => (
               <MobileItem key={child.id} item={child} depth={depth + 1} reduce={reduce} onNavigate={onNavigate} />
             ))}
@@ -109,8 +106,7 @@ function MobileAccordion({
           href={entry.href}
           onClick={onNavigate}
           aria-current={active ? "page" : undefined}
-          className={`${ROW} ${FOCUS} ${active ? "text-[#5EE72D]" : "text-white"}`}
-        >
+          className={`${ROW} ${FOCUS} ${active ? "text-[#5EE72D]" : "text-white"}`}>
           <span>{entry.label}</span>
           <ArrowUpRight className="h-5 w-5 text-slate-400" />
         </Link>
@@ -124,8 +120,7 @@ function MobileAccordion({
         onClick={onToggle}
         aria-expanded={open}
         aria-controls={panelId}
-        className={`${ROW} ${FOCUS} ${open || active ? "text-[#5EE72D]" : "text-white"}`}
-      >
+        className={`${ROW} ${FOCUS} ${open || active ? "text-[#5EE72D]" : "text-white"}`}>
         <span>{entry.label}</span>
         {open ? (
           <Minus className="h-5 w-5" />
@@ -141,9 +136,17 @@ function MobileAccordion({
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: reduce ? 0 : 0.25, ease: "easeOut" }}
-              className="overflow-hidden"
-            >
+              className="overflow-hidden">
               <ul className="px-3 pb-3 pt-1">
+                <li className="mb-2 pb-1.5 border-b border-white/10">
+                  <Link
+                    href={entry.href}
+                    onClick={onNavigate}
+                    className={`flex items-center justify-between py-2 text-xs font-mono font-bold uppercase tracking-wider text-[#D4E012] hover:text-white transition-colors ${FOCUS}`}>
+                    <span>{entry.label} Overview</span>
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </Link>
+                </li>
                 {entry.items.map((item) => (
                   <MobileItem key={item.id} item={item} depth={0} reduce={reduce} onNavigate={onNavigate} />
                 ))}
@@ -153,8 +156,7 @@ function MobileAccordion({
                   <Link
                     href="/about/connect"
                     onClick={onNavigate}
-                    className={`text-xs font-bold uppercase tracking-[0.14em] text-slate-400 hover:text-[#5EE72D] ${FOCUS}`}
-                  >
+                    className={`text-xs font-bold uppercase tracking-[0.14em] text-slate-400 hover:text-[#5EE72D] ${FOCUS}`}>
                     Connect with us
                   </Link>
                   <ul className="flex items-center gap-2">
@@ -165,8 +167,7 @@ function MobileAccordion({
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`Sarhat on ${s.label}`}
-                          className={`flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-slate-200 transition-colors hover:border-[#5EE72D] hover:text-[#5EE72D] ${FOCUS}`}
-                        >
+                          className={`flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-slate-200 transition-colors hover:border-[#5EE72D] hover:text-[#5EE72D] ${FOCUS}`}>
                           <SocialIcon id={s.id} />
                         </a>
                       </li>
@@ -202,7 +203,7 @@ export default function MobileMenu({
     const prev = document.documentElement.style.overflow;
     document.documentElement.style.overflow = "hidden";
     closeRef.current?.focus();
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    const onKey = (e: KeyboardEvent) => e.key=== "Escape" && onClose();
     window.addEventListener("keydown", onKey);
     return () => {
       document.documentElement.style.overflow = prev;
@@ -222,8 +223,7 @@ export default function MobileMenu({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            onClick={onClose}
-          />
+            onClick={onClose} />
           <motion.aside
             key="mobile-panel"
             id="mobile-navigation"
@@ -234,17 +234,14 @@ export default function MobileMenu({
             animate={reduce ? { opacity: 1 } : { clipPath: "circle(150% at calc(100% - 36px) 40px)" }}
             exit={reduce ? { opacity: 0 } : { clipPath: "circle(0% at calc(100% - 36px) 40px)" }}
             transition={{ duration: 0.55, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-[70] flex h-dvh w-full flex-col overflow-hidden bg-[#05080C] font-sans-ui text-white lg:hidden"
-          >
+            className="fixed inset-0 z-[70] flex h-dvh w-full flex-col overflow-hidden bg-[#05080C] font-sans-ui text-white lg:hidden">
             {/* tech grid + glow */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-60 [background-image:linear-gradient(rgba(94,231,45,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(94,231,45,0.07)_1px,transparent_1px)] [background-size:36px_36px] [mask-image:radial-gradient(ellipse_at_top_right,black,transparent_75%)]"
-            />
+              className="pointer-events-none absolute inset-0 opacity-60 [background-image:linear-gradient(rgba(94,231,45,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(94,231,45,0.07)_1px,transparent_1px)] [background-size:36px_36px] [mask-image:radial-gradient(ellipse_at_top_right,black,transparent_75%)]" />
             <div
               aria-hidden
-              className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#5EE72D]/15 blur-3xl"
-            />
+              className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#5EE72D]/15 blur-3xl" />
             {/* one-shot scan line */}
             {!reduce && (
               <motion.div
@@ -252,31 +249,27 @@ export default function MobileMenu({
                 className="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-gradient-to-r from-transparent via-[#5EE72D] to-transparent shadow-[0_0_14px_2px_rgba(94,231,45,0.7)]"
                 initial={{ y: 0, opacity: 1 }}
                 animate={{ y: "100dvh", opacity: [1, 1, 0] }}
-                transition={{ duration: 0.9, delay: 0.25, ease: "easeInOut" }}
-              />
+                transition={{ duration: 0.9, delay: 0.25, ease: "easeInOut" }} />
             )}
             <div className="relative flex shrink-0 items-center justify-between border-b border-[#5EE72D]/30 px-5 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))]">
               <Link
                 href="/"
                 onClick={onClose}
                 aria-label="Sarhat home"
-                className={`rounded-md ${FOCUS}`}
-              >
+                className={`rounded-md ${FOCUS}`}>
                 <Image
                   src="/images/logo.png"
                   alt="SARHAT"
                   width={260}
                   height={88}
-                  className="h-11 w-auto object-contain"
-                />
+                  className="h-11 w-auto object-contain" />
               </Link>
               <button
                 ref={closeRef}
                 type="button"
                 onClick={onClose}
                 aria-label="Close navigation menu"
-                className={`flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-[#5EE72D]/60 bg-white/5 text-white transition-colors hover:bg-white/10 ${FOCUS}`}
-              >
+                className={`flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-[#5EE72D]/60 bg-white/5 text-white transition-colors hover:bg-white/10 ${FOCUS}`}>
                 <X className="h-6 w-6" />
               </button>
             </div>
@@ -285,8 +278,7 @@ export default function MobileMenu({
               aria-label="Mobile"
               className="relative min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-2"
               data-lenis-prevent="true"
-              data-lenis-prevent-scroll="true"
-            >
+              data-lenis-prevent-scroll="true">
               <ul className="pt-2">
                 {navigationConfig.map((entry, i) => (
                   <MobileAccordion
@@ -301,8 +293,7 @@ export default function MobileMenu({
                         cur === entry.key ? null : entry.key,
                       )
                     }
-                    onNavigate={onClose}
-                  />
+                    onNavigate={onClose} />
                 ))}
               </ul>
             </nav>
@@ -314,8 +305,7 @@ export default function MobileMenu({
                   onClose();
                   onQuote();
                 }}
-                className={`flex min-h-[52px] w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] text-sm font-extrabold uppercase tracking-widest text-black shadow-lg shadow-[#D4E012]/20 ${FOCUS}`}
-              >
+                className={`flex min-h-[52px] w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] text-sm font-extrabold uppercase tracking-widest text-black shadow-lg shadow-[#D4E012]/20 ${FOCUS}`}>
                 Discuss a project
                 <ArrowUpRight className="h-4 w-4" />
               </button>

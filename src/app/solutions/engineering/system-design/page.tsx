@@ -172,15 +172,12 @@ export default function SystemDesignPage() {
           className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
             isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
           }`}
-          aria-hidden={isPastHero}
-        >
+          aria-hidden={isPastHero}>
           <section
             ref={heroRef}
-            className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none"
-          >
+            className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none">
             <motion.div style={{ scale: bgScale }}
-              className="absolute inset-0 z-0 h-full w-full will-change-transform"
-            >
+              className="absolute inset-0 z-0 h-full w-full will-change-transform">
               <Image
                 src="/images/substation-project.jpg"
                 alt="Substation and control building at a Sarhat solar site"
@@ -188,19 +185,30 @@ export default function SystemDesignPage() {
                 priority
                 quality={85}
                 sizes="100vw"
-                className="object-cover object-center opacity-85"
-              />
+                className="object-cover object-center opacity-85" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
             </motion.div>
 
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-24 flex flex-col items-center text-center will-change-transform"
-            >
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-24 flex flex-col items-center text-center will-change-transform">
               <div className="max-w-4xl flex flex-col items-center text-center">
                 <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 leading-[1.08] drop-shadow-lg">
                   Drawings your crew <br />
-                  <span className="text-[#D4E012] italic font-normal">can build from</span>
+                  <span className="italic font-normal text-[#D4E012] relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
+                    can build from
+                    <svg
+                      className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
+                      viewBox="0 0 100 20"
+                      preserveAspectRatio="none"
+                      aria-hidden="true">
+                      <path
+                        d="M0 15 Q 50 0 100 15"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        fill="transparent" />
+                    </svg>
+                  </span>
                 </h1>
                 <p className="text-base sm:text-xl text-slate-200 max-w-3xl leading-relaxed font-normal drop-shadow-md">
                   We design every part of the plant, from the first panel to the grid connection, so the people on site have fewer questions and the people who approve it have fewer objections.
@@ -231,14 +239,12 @@ export default function SystemDesignPage() {
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
+                        preserveAspectRatio="none">
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -255,8 +261,7 @@ export default function SystemDesignPage() {
                   className="hidden lg:block absolute top-[22px] left-[7.14%] right-[7.14%] h-[3px] origin-left rounded-full bg-gradient-to-r from-[#6DAD45] to-[#D4E012] will-change-transform"
                   animate={{ scaleX: progress }}
                   transition={{ duration: reduce ? 0 : 0.4, ease: "easeOut" }}
-                  aria-hidden
-                />
+                  aria-hidden />
                 <div className="relative flex lg:grid lg:grid-cols-7 gap-2 overflow-x-auto no-scrollbar pb-2">
                   {chain.map((c, i) => {
                     const Icon = c.icon;
@@ -268,8 +273,7 @@ export default function SystemDesignPage() {
                         type="button"
                         aria-pressed={isActive}
                         onClick={() => setActive(i)}
-                        className="group flex min-w-[84px] lg:min-w-0 flex-col items-center gap-2 cursor-pointer"
-                      >
+                        className="group flex min-w-[84px] lg:min-w-0 flex-col items-center gap-2 cursor-pointer">
                         <span
                           className={`flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors duration-200 ${
                             isActive
@@ -277,15 +281,13 @@ export default function SystemDesignPage() {
                               : reached
                               ? "border-[#6DAD45] bg-white text-[#4f8a2e]"
                               : "border-slate-200 bg-white text-slate-400 group-hover:border-slate-400"
-                          }`}
-                        >
+                          }`}>
                           <Icon className="h-5 w-5" />
                         </span>
                         <span
                           className={`text-xs font-medium transition-colors ${
                             isActive ? "text-slate-900" : "text-slate-500 group-hover:text-slate-700"
-                          }`}
-                        >
+                          }`}>
                           {c.short}
                         </span>
                       </button>
@@ -303,8 +305,7 @@ export default function SystemDesignPage() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: reduce ? 0.1 : 0.25, ease: "easeOut" }}
-                    className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12"
-                  >
+                    className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
                     <div className="lg:col-span-7">
                       <div className="flex items-center gap-3">
                         <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900 text-[#D4E012]">
@@ -345,16 +346,14 @@ export default function SystemDesignPage() {
                             type="button"
                             onClick={() => setActive((a) => Math.max(0, a - 1))}
                             disabled={active === 0}
-                            className="rounded-full border border-slate-700 px-4 py-2 text-xs font-medium text-slate-200 transition-colors hover:bg-slate-800 disabled:opacity-30 cursor-pointer disabled:cursor-default"
-                          >
+                            className="rounded-full border border-slate-700 px-4 py-2 text-xs font-medium text-slate-200 transition-colors hover:bg-slate-800 disabled:opacity-30 cursor-pointer disabled:cursor-default">
                             Previous link
                           </button>
                           <button
                             type="button"
                             onClick={() => setActive((a) => Math.min(chain.length - 1, a + 1))}
                             disabled={active === chain.length - 1}
-                            className="rounded-full bg-[#6DAD45] px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-[#5da037] disabled:opacity-30 cursor-pointer disabled:cursor-default"
-                          >
+                            className="rounded-full bg-[#6DAD45] px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-[#5da037] disabled:opacity-30 cursor-pointer disabled:cursor-default">
                             Next link
                           </button>
                         </div>
@@ -379,14 +378,12 @@ export default function SystemDesignPage() {
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
+                        preserveAspectRatio="none">
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -427,14 +424,12 @@ export default function SystemDesignPage() {
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
+                        preserveAspectRatio="none">
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -460,8 +455,7 @@ export default function SystemDesignPage() {
               <ScrollReveal>
                 <Link
                   href="/solutions/engineering/innovation"
-                  className="group mx-auto mt-12 flex max-w-5xl flex-col items-start justify-between gap-4 rounded-3xl bg-slate-900 p-8 text-white transition-transform duration-200 hover:-translate-y-1 sm:flex-row sm:items-center sm:p-10"
-                >
+                  className="group mx-auto mt-12 flex max-w-5xl flex-col items-start justify-between gap-4 rounded-3xl bg-slate-900 p-8 text-white transition-transform duration-200 hover:-translate-y-1 sm:flex-row sm:items-center sm:p-10">
                   <div>
                     <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-[#D4E012]">
                       <Sparkles className="h-4 w-4" /> Innovation

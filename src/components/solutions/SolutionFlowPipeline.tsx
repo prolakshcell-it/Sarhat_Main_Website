@@ -60,7 +60,7 @@ export default function SolutionFlowPipeline({
 
   const goToStep = (index: number) => {
     if (index === activeStep) return;
-    setDirection(index > activeStep ? 1 : -1);
+    setDirection(index> activeStep ? 1 : -1);
     setActiveStep(index);
   };
 
@@ -84,8 +84,7 @@ export default function SolutionFlowPipeline({
     <div
       className="relative mx-auto max-w-7xl font-sans-ui"
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+      onMouseLeave={() => setIsHovered(false)}>
       {/* 01 / FLOW HEADER & COMPACT SINGLE-LINE NAVIGATION RAIL */}
       <div className="mb-6 sm:mb-8">
         {/* Top telemetry status bar */}
@@ -113,16 +112,14 @@ export default function SolutionFlowPipeline({
                 type="button"
                 onClick={handlePrev}
                 className="w-7 h-7 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 flex items-center justify-center transition-colors shadow-sm cursor-pointer"
-                aria-label="Previous Stage"
-              >
+                aria-label="Previous Stage">
                 <ArrowLeft className="w-3 h-3" />
               </button>
               <button
                 type="button"
                 onClick={handleNext}
                 className="w-7 h-7 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 flex items-center justify-center transition-colors shadow-sm cursor-pointer"
-                aria-label="Next Stage"
-              >
+                aria-label="Next Stage">
                 <ArrowRight className="w-3 h-3" />
               </button>
             </div>
@@ -138,8 +135,7 @@ export default function SolutionFlowPipeline({
               animate={{
                 width: `${(activeStep / Math.max(1, stepCount - 1)) * 100}%`,
               }}
-              transition={smoothTransition}
-            />
+              transition={smoothTransition} />
           </div>
 
           {/* Guaranteed single line: flex with horizontal scroll or auto-fit 6-col grid */}
@@ -154,60 +150,49 @@ export default function SolutionFlowPipeline({
                   key={item.title}
                   type="button"
                   onClick={() => goToStep(idx)}
-                  className={`group relative text-left px-3 py-2 rounded-xl border transition-all duration-200 cursor-pointer flex flex-col justify-between overflow-hidden shrink-0 min-w-[135px] lg:min-w-0 ${
-                    isActive
+                  className={`group relative text-left px-3 py-2 rounded-xl border transition-all duration-200 cursor-pointer flex flex-col justify-between overflow-hidden shrink-0 min-w-[135px] lg:min-w-0 ${isActive
                       ? "bg-slate-900 border-slate-900 text-white shadow-md shadow-slate-900/20 ring-2 ring-[#6DAD45]/40"
                       : "bg-white border-slate-200/90 text-slate-700 hover:border-[#6DAD45]/60 hover:bg-slate-50/80"
-                  }`}
-                >
+                    }`}>
                   {/* Active top highlight line */}
                   {isActive && (
                     <motion.div
                       layoutId="activeFlowRail"
                       className="absolute inset-x-0 top-0 h-[2.5px] bg-[#D4E012]"
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                    />
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }} />
                   )}
 
                   {/* Stage number & status dot */}
                   <div className="flex items-center justify-between mb-1">
                     <span
-                      className={`font-mono text-[11px] font-bold ${
-                        isActive
+                      className={`font-mono text-[11px] font-bold ${isActive
                           ? "text-[#D4E012]"
                           : isCompleted
-                          ? "text-[#6DAD45]"
-                          : "text-slate-400 group-hover:text-slate-600"
-                      }`}
-                    >
+                            ? "text-[#6DAD45]"
+                            : "text-slate-400 group-hover:text-slate-600"
+                        }`}>
                       {numStr}
                     </span>
                     <span
-                      className={`h-1.5 w-1.5 rounded-full transition-colors ${
-                        isActive
+                      className={`h-1.5 w-1.5 rounded-full transition-colors ${isActive
                           ? "bg-[#D4E012]"
                           : isCompleted
-                          ? "bg-[#6DAD45]"
-                          : "bg-slate-200 group-hover:bg-slate-300"
-                      }`}
-                    />
+                            ? "bg-[#6DAD45]"
+                            : "bg-slate-200 group-hover:bg-slate-300"
+                        }`} />
                   </div>
 
                   {/* Stage title in 1-2 tight lines */}
                   <div>
                     <span
-                      className={`block font-mono text-[9px] uppercase tracking-wider mb-0.5 truncate ${
-                        isActive ? "text-slate-300" : "text-slate-400"
-                      }`}
-                    >
+                      className={`block font-mono text-[9px] uppercase tracking-wider mb-0.5 truncate ${isActive ? "text-slate-300" : "text-slate-400"
+                        }`}>
                       {item.tag.split(" ")[0]}
                     </span>
                     <span
-                      className={`block text-[11px] font-medium leading-tight truncate ${
-                        isActive ? "text-white font-semibold" : "text-slate-800"
-                      }`}
-                      title={item.title}
-                    >
+                      className={`block text-[11px] font-medium leading-tight truncate ${isActive ? "text-white font-semibold" : "text-slate-800"
+                        }`}
+                      title={item.title}>
                       {item.title}
                     </span>
                   </div>
@@ -237,10 +222,9 @@ export default function SolutionFlowPipeline({
               x: direction * -20,
             }}
             transition={smoothTransition}
-            className="p-6 sm:p-8 lg:p-10 will-change-transform"
-          >
+            className="p-6 sm:p-8 lg:p-10 will-change-transform">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-              
+
               {/* Left Column: Context, Title, Description & Deliverables */}
               <div className="lg:col-span-7 space-y-5">
                 <div className="flex flex-wrap items-center gap-3">
@@ -309,49 +293,47 @@ export default function SolutionFlowPipeline({
                       <span className="block font-mono text-[11px] text-slate-400 uppercase tracking-wider mb-1">
                         {metricLabel}
                       </span>
-                      <div className="text-3xl sm:text-4xl font-mono font-bold text-white tracking-tight">
-                        <span className="text-[#D4E012]">{activeStat}</span>
+                        <div className="text-3xl sm:text-4xl font-sans-inter tabular-nums font-bold text-white tracking-tight">
+                          <span className="text-[#D4E012]">{activeStat}</span>
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="space-y-1.5 mb-5 text-xs font-mono bg-slate-950/60 p-3 rounded-xl border border-slate-800">
-                      <div className="flex items-center justify-between text-slate-400">
-                        <span>Workflow Stage:</span>
-                        <span className="text-white font-semibold">
-                          0{activeStep + 1} &rarr; 0{((activeStep + 1) % stepCount) + 1}
-                        </span>
+                      <div className="space-y-1.5 mb-5 text-xs font-mono bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+                        <div className="flex items-center justify-between text-slate-400">
+                          <span>Workflow Stage:</span>
+                          <span className="text-white font-semibold">
+                            0{activeStep + 1} &rarr; 0{((activeStep + 1) % stepCount) + 1}
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between text-slate-400">
+                          <span>Domain Scope:</span>
+                          <span className="text-emerald-300 font-semibold">{activeItem.tag}</span>
+                        </div>
                       </div>
-                      <div className="flex items-center justify-between text-slate-400">
-                        <span>Domain Scope:</span>
-                        <span className="text-emerald-300 font-semibold">{activeItem.tag}</span>
+
+                      {/* Step Navigation Buttons */}
+                      <div className="flex items-center gap-2.5">
+                        <button
+                          type="button"
+                          onClick={handlePrev}
+                          className="flex-1 py-2.5 px-3 rounded-xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-slate-200 font-mono text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer group">
+                          <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
+                          <span>Prev</span>
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={handleNext}
+                          className="flex-1 py-2.5 px-3 rounded-xl bg-[#6DAD45] hover:bg-[#5da037] text-white font-mono text-xs font-bold transition-colors shadow-lg shadow-[#6DAD45]/20 flex items-center justify-center gap-1.5 cursor-pointer group">
+                          <span>Next</span>
+                          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                        </button>
                       </div>
-                    </div>
-
-                    {/* Step Navigation Buttons */}
-                    <div className="flex items-center gap-2.5">
-                      <button
-                        type="button"
-                        onClick={handlePrev}
-                        className="flex-1 py-2.5 px-3 rounded-xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-slate-200 font-mono text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer group"
-                      >
-                        <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
-                        <span>Prev</span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={handleNext}
-                        className="flex-1 py-2.5 px-3 rounded-xl bg-[#6DAD45] hover:bg-[#5da037] text-white font-mono text-xs font-bold transition-colors shadow-lg shadow-[#6DAD45]/20 flex items-center justify-center gap-1.5 cursor-pointer group"
-                      >
-                        <span>Next</span>
-                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                      </button>
                     </div>
                   </div>
                 </div>
-              </div>
 
-            </div>
+              </div>
           </motion.div>
         </AnimatePresence>
 
@@ -362,8 +344,7 @@ export default function SolutionFlowPipeline({
             animate={{
               width: `${((activeStep + 1) / stepCount) * 100}%`,
             }}
-            transition={smoothTransition}
-          />
+            transition={smoothTransition} />
         </div>
       </div>
     </div>

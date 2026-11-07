@@ -35,7 +35,7 @@ export default function Home() {
   // hide the fixed hero completely to eliminate GPU compositor repainting & CPU load
   useEffect(() => {
     const handleScroll = () => {
-      setIsPastHero(window.scrollY > window.innerHeight * 1.05);
+      setIsPastHero(window.scrollY> window.innerHeight * 1.05);
     };
 
     handleScroll();
@@ -58,8 +58,7 @@ export default function Home() {
           className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
             isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
           }`}
-          aria-hidden={isPastHero}
-        >
+          aria-hidden={isPastHero}>
           <Hero onOpenQuote={handleOpenQuote} />
         </div>
 

@@ -65,8 +65,7 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
         className={`flex min-h-[44px] shrink-0 cursor-pointer items-center gap-2 rounded-full border py-1.5 pl-3.5 pr-1.5 font-mono text-xs font-bold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6DAD45] focus-visible:ring-offset-2 ${sel
           ? "border-slate-900 bg-slate-900 text-white"
           : "border-slate-200 bg-white text-slate-700 hover:border-[#6DAD45]/60 hover:bg-[#6DAD45]/[0.05]"
-          }`}
-      >
+          }`}>
         <span>{label}</span>
         <span className={`rounded-full px-2.5 py-1 text-[10px] font-bold transition-colors duration-200 ${sel ? "bg-white/15 text-[#D4E012]" : "bg-slate-100 text-slate-500"}`}>
           {formatMW(mw)}
@@ -78,13 +77,11 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
   return (
     <section
       id="footprint"
-      className="relative z-10 overflow-hidden border-b border-slate-200/80 bg-[#F8FAF8] py-[clamp(44px,6vw,80px)] font-sans-ui text-[#0F172A]"
-    >
+      className="relative z-10 overflow-hidden border-b border-slate-200/80 bg-[#F8FAF8] py-[clamp(44px,6vw,80px)] font-sans-ui text-[#0F172A]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 z-0"
-        style={{ background: "radial-gradient(circle at 50% 22%, rgba(109,173,69,0.10), transparent 55%)" }}
-      />
+        style={{ background: "radial-gradient(circle at 50% 22%, rgba(109,173,69,0.10), transparent 55%)" }} />
 
       <motion.div
         initial="hidden"
@@ -92,8 +89,7 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
         viewport={{ once: true, amount: "some" }}
         variants={group}
         className="relative z-10 mx-auto"
-        style={{ width: "min(100% - 32px, 1360px)" }}
-      >
+        style={{ width: "min(100% - 32px, 1360px)" }}>
         {/* Section Header */}
         <div className="mx-auto mb-6 max-w-[820px] text-center sm:mb-8">
           <motion.div variants={item}>
@@ -102,8 +98,7 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
 
           <motion.h2
             variants={item}
-            className="mb-4 font-serif-display text-[clamp(2rem,4.2vw,3.75rem)] font-medium leading-[1.08] text-balance tracking-tight text-slate-900"
-          >
+            className="mb-4 font-serif-display text-[clamp(2rem,4.2vw,3.75rem)] font-medium leading-[1.08] text-balance tracking-tight text-slate-900">
             Our Growing Footprint <br />
             <span className="relative inline-block italic text-[#6DAD45]">
               Building Progress Across States
@@ -114,8 +109,7 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
                   strokeWidth="3.5"
                   fill="transparent"
                   vectorEffect="non-scaling-stroke"
-                  variants={{ hidden: { pathLength: reduce ? 1 : 0 }, visible: { pathLength: 1, transition: { duration: 0.6, delay: 0.5, ease: "easeOut" } } }}
-                />
+                  variants={{ hidden: { pathLength: reduce ? 1 : 0 }, visible: { pathLength: 1, transition: { duration: 0.6, delay: 0.5, ease: "easeOut" } } }} />
               </svg>
             </span>
           </motion.h2>
@@ -130,8 +124,7 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
             ref={chipsRef}
             role="group"
             aria-label="Filter by state"
-            className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1.5 pt-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0 lg:gap-1.5 [&::-webkit-scrollbar]:hidden"
-          >
+            className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1.5 pt-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0 lg:gap-1.5 [&::-webkit-scrollbar]:hidden">
             {chip(ALL, "All States", sumMW(PROJECTS))}
             {STATES.map((s) => chip(s.slug, s.state, s.capacityMW))}
           </div>
@@ -144,13 +137,11 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
             hidden: { opacity: 0, y: reduce ? 0 : 20 },
             visible: { opacity: 1, y: 0, transition: { duration: reduce ? 0.2 : 0.7, ease: "easeOut" } },
           }}
-          className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] border border-slate-800/80 bg-gradient-to-b from-[#0B1728] via-[#071325] to-[#040B17] shadow-[0_30px_90px_rgba(0,0,0,0.85)] p-4 sm:p-7 md:p-9"
-        >
+          className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] border border-slate-800/80 bg-gradient-to-b from-[#0B1728] via-[#071325] to-[#040B17] shadow-[0_30px_90px_rgba(0,0,0,0.85)] p-4 sm:p-7 md:p-9">
           <SlnkoStyleIndiaMap
             selectedStateSlug={stateSlug}
             onSelectState={(slug: string) => selectState(slug)}
-            onViewDetails={(slug: string) => handleViewDetails(slug)}
-          />
+            onViewDetails={(slug: string) => handleViewDetails(slug)} />
         </motion.div>
       </motion.div>
     </section>

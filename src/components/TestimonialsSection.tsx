@@ -135,7 +135,7 @@ export default function TestimonialsSection() {
     if (scrollContainerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
       const step = getScrollStep();
-      if (scrollLeft + clientWidth >= scrollWidth - 40) {
+      if (scrollLeft + clientWidth>= scrollWidth - 40) {
         scrollContainerRef.current.scrollTo({ left: 0, behavior: "smooth" });
       } else {
         scrollContainerRef.current.scrollBy({ left: step, behavior: "smooth" });
@@ -157,8 +157,7 @@ export default function TestimonialsSection() {
   return (
     <section
       id="testimonials"
-      className="py-12 sm:py-16 lg:py-20 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden select-none"
-    >
+      className="py-12 sm:py-16 lg:py-20 bg-[#F8FAF8] relative z-10 border-b border-slate-200/80 font-sans-ui overflow-hidden select-none">
       {/* Background Ambient Glow */}
       <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#D4E012]/10 rounded-full blur-[130px] pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#6DAD45]/10 rounded-full blur-[120px] pointer-events-none" />
@@ -178,14 +177,12 @@ export default function TestimonialsSection() {
                   className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                   viewBox="0 0 100 20"
                   preserveAspectRatio="none"
-                  aria-hidden
-                >
+                  aria-hidden>
                   <path
                     d="M0 15 Q 50 0 100 15"
                     stroke="currentColor"
                     strokeWidth="3.5"
-                    fill="transparent"
-                  />
+                    fill="transparent" />
                 </svg>
               </span>
             </h2>
@@ -198,20 +195,17 @@ export default function TestimonialsSection() {
         {/* Subtle Edge Gradient Fades for Infinite Feel */}
         <div
           aria-hidden
-          className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-24 md:w-36 bg-gradient-to-r from-[#F8FAF8] via-[#F8FAF8]/80 to-transparent z-10"
-        />
+          className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-24 md:w-36 bg-gradient-to-r from-[#F8FAF8] via-[#F8FAF8]/80 to-transparent z-10" />
         <div
           aria-hidden
-          className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-24 md:w-36 bg-gradient-to-l from-[#F8FAF8] via-[#F8FAF8]/80 to-transparent z-10"
-        />
+          className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-24 md:w-36 bg-gradient-to-l from-[#F8FAF8] via-[#F8FAF8]/80 to-transparent z-10" />
 
         {/* Floating Left Navigation Arrow */}
         <button
           type="button"
           onClick={handlePrev}
           aria-label="Previous Testimonial"
-          className="absolute left-3 sm:left-6 lg:left-10 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-white/95 hover:bg-slate-900 border-2 border-slate-200/90 hover:border-[#6DAD45] text-slate-800 hover:text-[#D4E012] shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-md group"
-        >
+          className="absolute left-3 sm:left-6 lg:left-10 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-white/95 hover:bg-slate-900 border-2 border-slate-200/90 hover:border-[#6DAD45] text-slate-800 hover:text-[#D4E012] shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-md group">
           <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-200 group-hover:-translate-x-0.5" />
         </button>
 
@@ -220,8 +214,7 @@ export default function TestimonialsSection() {
           type="button"
           onClick={handleNext}
           aria-label="Next Testimonial"
-          className="absolute right-3 sm:right-6 lg:right-10 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-white/95 hover:bg-slate-900 border-2 border-slate-200/90 hover:border-[#6DAD45] text-slate-800 hover:text-[#D4E012] shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-md group"
-        >
+          className="absolute right-3 sm:right-6 lg:right-10 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-white/95 hover:bg-slate-900 border-2 border-slate-200/90 hover:border-[#6DAD45] text-slate-800 hover:text-[#D4E012] shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-md group">
           <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-200 group-hover:translate-x-0.5" />
         </button>
 
@@ -230,13 +223,11 @@ export default function TestimonialsSection() {
           ref={scrollContainerRef}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
-          className="flex gap-5 sm:gap-6 md:gap-7 overflow-x-auto scroll-smooth py-6 px-8 sm:px-16 md:px-24 snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        >
+          className="flex gap-5 sm:gap-6 md:gap-7 overflow-x-auto scroll-smooth py-6 px-8 sm:px-16 md:px-24 snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {testimonials.map((item) => (
             <div
               key={item.id}
-              className="testimonial-card snap-start w-[310px] sm:w-[380px] md:w-[420px] lg:w-[440px] xl:w-[460px] shrink-0 bg-white rounded-[28px] p-6 sm:p-8 border border-slate-200/90 shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#6DAD45]/15 hover:border-[#6DAD45] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between text-center relative group"
-            >
+              className="testimonial-card snap-start w-[310px] sm:w-[380px] md:w-[420px] lg:w-[440px] xl:w-[460px] shrink-0 bg-white rounded-[28px] p-6 sm:p-8 border border-slate-200/90 shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#6DAD45]/15 hover:border-[#6DAD45] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between text-center relative group">
               <div>
                 {/* Rating & Location Tag */}
                 <div className="flex items-center justify-center gap-3 mb-5">
@@ -284,8 +275,7 @@ export default function TestimonialsSection() {
           <div className="mt-8 sm:mt-10 text-center">
             <Link
               href="/insights"
-              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group cursor-pointer"
-            >
+              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group cursor-pointer">
               <span>Read More Insights &amp; Stories</span>
               <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
             </Link>

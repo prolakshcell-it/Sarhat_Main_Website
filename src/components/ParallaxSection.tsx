@@ -14,7 +14,7 @@ interface ParallaxSectionProps {
 export default function ParallaxSection({
   children,
   speed = 40,
-  className = "",
+  className="",
   bgImage,
   bgOverlayClass = "bg-slate-950/70",
 }: ParallaxSectionProps) {
@@ -33,12 +33,10 @@ export default function ParallaxSection({
       {bgImage && (
         <motion.div
           style={{ y: bgY }}
-          className="absolute inset-0 z-0 h-[120%] -top-[10%] w-full pointer-events-none"
-        >
+          className="absolute inset-0 z-0 h-[120%] -top-[10%] w-full pointer-events-none">
           <div
             className="w-full h-full bg-cover bg-center"
-            style={{ backgroundImage: `url('${bgImage}')` }}
-          />
+            style={{ backgroundImage: `url('${bgImage}')` }} />
           <div className={`absolute inset-0 ${bgOverlayClass}`} />
         </motion.div>
       )}

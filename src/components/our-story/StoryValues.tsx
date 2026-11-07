@@ -21,10 +21,8 @@ function ValueCircle({ value, front }: { value: StoryValue; front: boolean }) {
   const Icon = value.icon;
   return (
     <div
-      className={`flex aspect-square w-full flex-col items-center justify-center rounded-full border px-10 text-center transition-colors duration-500 sm:px-12 ${
-        front ? "border-white/90 bg-[#18221B]" : "border-white/25 hover:border-white/60"
-      }`}
-    >
+      className={`flex aspect-square w-full flex-col items-center justify-center rounded-full border px-10 text-center transition-colors duration-500 sm:px-12 ${front ? "border-white/90 bg-[#18221B]" : "border-white/25 hover:border-white/60"
+        }`}>
       <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-[#D4E012] text-[#18221B]">
         <Icon className="h-6 w-6" strokeWidth={2} />
       </span>
@@ -46,7 +44,7 @@ function SpreadingCircles({ values, progress }: { values: StoryValue[]; progress
   return (
     <div className="relative mx-auto aspect-square w-[min(25rem,31vw)]">
       {values.map((v, i) => {
-        const side = i < mid ? left : i > mid ? right : null;
+        const side = i < mid ? left : i> mid ? right : null;
         return (
           <motion.div
             key={v.title}
@@ -55,8 +53,7 @@ function SpreadingCircles({ values, progress }: { values: StoryValue[]; progress
               x: reduce || !side ? (side ? `${Math.sign(i - mid) * SPREAD * 100}%` : 0) : side,
               opacity: reduce || !side ? 1 : sideOpacity,
               zIndex: side ? 0 : 10,
-            }}
-          >
+            }}>
             <ValueCircle value={v} front={!side} />
           </motion.div>
         );
@@ -68,7 +65,7 @@ function SpreadingCircles({ values, progress }: { values: StoryValue[]; progress
 /** 04 — Our Values: overlapping value circles, with the focused value drawn in front. */
 export default function StoryValues({ values }: { values: StoryValue[] }) {
   const reduce = useReducedMotion();
-  const ref = useRef<HTMLDivElement>(null);
+  const ref=useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 95%", "center 55%"] });
 
   return (
@@ -77,13 +74,26 @@ export default function StoryValues({ values }: { values: StoryValue[] }) {
         <ScrollReveal>
           <div className="mx-auto mb-14 max-w-3xl text-center sm:mb-20">
             <AnimatedPillBadge darkBg className="mb-6">Our Values</AnimatedPillBadge>
-            <h2 className="font-serif-display text-3xl font-normal leading-tight tracking-tight sm:text-5xl">
-              Engineering Excellence for the <br className="hidden sm:block" />
-              Net-Zero Era
-            </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-400">
-              Our foundational execution principles driving engineering quality, site safety, and sustainable impact across India.
-            </p>
+              <h2 className="font-serif-display text-3xl sm:text-5xl font-medium leading-tight tracking-tight text-white mb-4">
+                Engineering Excellence for the <br className="hidden sm:block" />
+                <span className="text-[#D4E012] italic relative inline-block">
+                  Net-Zero Era.
+                  <svg
+                    className="absolute -bottom-2 left-0 w-full h-2.5 text-[#D4E012]"
+                    viewBox="0 0 100 20"
+                    preserveAspectRatio="none"
+                    aria-hidden="true">
+                    <path
+                      d="M0 15 Q 50 0 100 15"
+                      stroke="currentColor"
+                      strokeWidth="3.5"
+                      fill="transparent" />
+                  </svg>
+                </span>
+              </h2>
+              <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-400">
+                Our foundational execution principles driving engineering quality, site safety, and sustainable impact across India.
+              </p>
           </div>
         </ScrollReveal>
 
@@ -100,9 +110,8 @@ export default function StoryValues({ values }: { values: StoryValue[] }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.7, ease: EASE }}
-              className={`relative w-full ${i > 0 ? "-mt-12" : ""}`}
-              style={{ zIndex: i === 1 ? 10 : 0 }}
-            >
+              className={`relative w-full ${i> 0 ? "-mt-12" : ""}`}
+              style={{ zIndex: i === 1 ? 10 : 0 }}>
               <ValueCircle value={v} front={i === 1} />
             </motion.div>
           ))}

@@ -19,7 +19,6 @@ export default function SolutionFlowGrid({
     <SolutionFlowPipeline
       items={items}
       metricLabel={metricLabel}
-      flowStageTitle={flowStageTitle}
-    />
+      flowStageTitle={flowStageTitle} />
   );
 }

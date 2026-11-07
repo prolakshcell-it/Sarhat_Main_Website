@@ -65,7 +65,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
 
   // --- scroll state ---
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY> 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -89,7 +89,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
   // --- Escape closes the desktop menu ---
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && closeMenu(true);
+    const onKey = (e: KeyboardEvent) => e.key=== "Escape" && closeMenu(true);
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open, closeMenu]);
@@ -118,7 +118,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
   };
 
   const onTriggerKeyDown = (key: string, e: React.KeyboardEvent) => {
-    if (e.key === "ArrowDown") {
+    if (e.key=== "ArrowDown") {
       e.preventDefault();
       openLocked(key);
       focusFirstItem();
@@ -143,17 +143,17 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
     if (!items.length) return;
     const idx = items.indexOf(document.activeElement as HTMLElement);
     let next = -1;
-    if (e.key === "ArrowDown") next = (idx + 1) % items.length;
-    else if (e.key === "ArrowUp") next = (idx - 1 + items.length) % items.length;
-    else if (e.key === "Home") next = 0;
-    else if (e.key === "End") next = items.length - 1;
-    if (next >= 0) {
+    if (e.key=== "ArrowDown") next = (idx + 1) % items.length;
+    else if (e.key=== "ArrowUp") next = (idx - 1 + items.length) % items.length;
+    else if (e.key=== "Home") next = 0;
+    else if (e.key=== "End") next = items.length - 1;
+    if (next>= 0) {
       e.preventDefault();
       items[next].focus();
     }
   };
 
-  const activeMenu = navigationConfig.find((m) => m.key === open) ?? null;
+  const activeMenu = navigationConfig.find((m) => m.key=== open) ?? null;
 
   return (
     <header
@@ -161,8 +161,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
       className="fixed left-0 right-0 top-0 z-50 font-sans-ui"
       onPointerEnter={() => leaveTimer.current && clearTimeout(leaveTimer.current)}
       onPointerLeave={onHeaderPointerLeave}
-      onBlur={onHeaderBlur}
-    >
+      onBlur={onHeaderBlur}>
       {/* Invisible click-catcher: closes the menu without dimming or blurring the page */}
       <AnimatePresence>
         {open && (
@@ -174,8 +173,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            onClick={() => closeMenu()}
-          />
+            onClick={() => closeMenu()} />
         )}
       </AnimatePresence>
 
@@ -187,29 +185,25 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
             : open
               ? "lg:border-white/10 lg:bg-[rgba(5,8,12,0.65)] lg:backdrop-blur-xl"
               : "lg:border-transparent lg:bg-transparent"
-        }`}
-      >
+        }`}>
         <div
           className={`mx-auto grid max-w-[1440px] grid-cols-2 items-center px-4 transition-[height] duration-300 sm:px-8 lg:grid-cols-[auto_1fr_auto] lg:gap-6 lg:px-12 ${
             scrolled ? "h-[76px] lg:h-[84px]" : "h-[84px] lg:h-[104px]"
-          }`}
-        >
+          }`}>
           {/* Brand Logo with Dynamic Rotating Words (Left Aligned) */}
           <div className="flex items-center justify-start">
             <Link href="/" className="group flex shrink-0 select-none items-center">
               <div
                 className={`flex origin-left items-center text-xl font-black leading-none tracking-tighter text-white transition-transform duration-300 sm:text-2xl ${
                   scrolled ? "scale-[0.88]" : "scale-100"
-                }`}
-              >
+                }`}>
                 <Image
                   src="/images/logo.png"
                   alt="SARHAT"
                   width={260}
                   height={88}
                   className="h-11 w-auto object-contain sm:h-14 lg:h-[68px]"
-                  priority
-                />
+                  priority />
                 <span className="mx-1.5 inline-block h-2 w-2 shrink-0 translate-y-1 self-center rounded-full bg-[#D4E012] shadow-[0_0_10px_#D4E012] transition-transform group-hover:scale-125 sm:translate-y-2"></span>
 
                 <div className="relative ml-0.5 inline-flex h-5 min-w-[50px] translate-y-1 items-center overflow-hidden sm:min-w-[65px] sm:translate-y-2">
@@ -220,8 +214,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
                       animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
                       exit={{ y: -12, opacity: 0, filter: "blur(3px)" }}
                       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                      className="block text-[10px] font-bold uppercase tracking-wider text-[#D4E012] sm:text-xs"
-                    >
+                      className="block text-[10px] font-bold uppercase tracking-wider text-[#D4E012] sm:text-xs">
                       {ROTATING_WORDS[wordIndex]}
                     </motion.span>
                   </AnimatePresence>
@@ -246,8 +239,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
                   onPointerEnter={(e) => (entry.linkOnly ? open && closeMenu() : onTriggerEnter(entry.key, e))}
                   onPointerLeave={() => hoverTimer.current && clearTimeout(hoverTimer.current)}
                   onClick={(e) => onTriggerClick(entry.key, e)}
-                  onKeyDown={(e) => onTriggerKeyDown(entry.key, e)}
-                />
+                  onKeyDown={(e) => onTriggerKeyDown(entry.key, e)} />
               ))}
             </ul>
           </nav>
@@ -257,12 +249,10 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
             <button
               type="button"
               onClick={onOpenQuote}
-              className="group relative hidden cursor-pointer items-center gap-2 overflow-hidden whitespace-nowrap rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] py-2.5 pl-5 pr-2.5 text-[11px] font-extrabold uppercase tracking-wider text-black shadow-md shadow-[#D4E012]/30 transition-all duration-300 hover:-translate-y-px hover:shadow-lg hover:shadow-[#D4E012]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white active:scale-[0.98] sm:inline-flex"
-            >
+              className="group relative hidden cursor-pointer items-center gap-2 overflow-hidden whitespace-nowrap rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] py-2.5 pl-5 pr-2.5 text-[11px] font-extrabold uppercase tracking-wider text-black shadow-md shadow-[#D4E012]/30 transition-all duration-300 hover:-translate-y-px hover:shadow-lg hover:shadow-[#D4E012]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white active:scale-[0.98] sm:inline-flex">
               <span
                 aria-hidden
-                className="pointer-events-none absolute inset-y-0 -left-full w-1/2 -skew-x-12 bg-white/50 blur-sm transition-transform duration-700 group-hover:translate-x-[400%]"
-              />
+                className="pointer-events-none absolute inset-y-0 -left-full w-1/2 -skew-x-12 bg-white/50 blur-sm transition-transform duration-700 group-hover:translate-x-[400%]" />
               <span className="relative">Discuss a project</span>
               <span className="relative flex h-6 w-6 items-center justify-center rounded-full bg-black text-[#D4E012] transition-transform duration-300 group-hover:rotate-45">
                 <ArrowUpRight className="h-3.5 w-3.5" />
@@ -275,8 +265,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
               aria-label="Open navigation menu"
               aria-expanded={mobileOpen}
               aria-controls="mobile-navigation"
-              className="group flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-[#5EE72D]/60 bg-zinc-900 transition-colors hover:border-[#5EE72D] hover:bg-zinc-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5EE72D] active:scale-95 lg:hidden"
-            >
+              className="group flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-[#5EE72D]/60 bg-zinc-900 transition-colors hover:border-[#5EE72D] hover:bg-zinc-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5EE72D] active:scale-95 lg:hidden">
               <span aria-hidden className="flex w-6 flex-col items-end gap-[6px]">
                 <span className="h-[2px] w-6 rounded-full bg-[#5EE72D] transition-all duration-300 group-hover:w-4" />
                 <span className="h-[2px] w-6 rounded-full bg-white" />
@@ -292,8 +281,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
           style={{ scaleX: reduce ? scrollYProgress : progress }}
           className={`pointer-events-none absolute inset-x-0 bottom-[-1px] h-[2px] origin-left bg-gradient-to-r from-[#D4E012] via-[#5EE72D] to-[#D4E012] shadow-[0_0_8px_rgba(212,224,18,0.6)] transition-opacity duration-300 ${
             scrolled ? "opacity-100" : "opacity-0"
-          }`}
-        />
+          }`} />
 
         {/* Desktop mega menu, attached directly under the bar */}
         <AnimatePresence>
@@ -307,8 +295,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
                 reduce={reduce}
                 onNavigate={() => closeMenu()}
                 onQuote={onOpenQuote}
-                onKeyDown={onPanelKeyDown}
-              />
+                onKeyDown={onPanelKeyDown} />
             </div>
           )}
         </AnimatePresence>
@@ -319,8 +306,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
         pathname={pathname}
         reduce={reduce}
         onClose={() => setMobileOpen(false)}
-        onQuote={onOpenQuote}
-      />
+        onQuote={onOpenQuote} />
     </header>
   );
 }

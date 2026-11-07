@@ -113,37 +113,29 @@ function Rail({
                 type="button"
                 onClick={() => onSelect(i)}
                 aria-current={state === "active" ? "step" : undefined}
-                className="group flex w-full cursor-pointer items-center gap-4 rounded-xl py-3 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6DAD45]"
-              >
+                className="group flex w-full cursor-pointer items-center gap-4 rounded-xl py-3 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6DAD45]">
                 <span
-                  className={`relative z-10 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-colors duration-500 ${
-                    state === "active"
-                      ? "border-[#6DAD45] bg-slate-950"
-                      : state === "done"
-                        ? "border-[#6DAD45] bg-[#6DAD45]"
-                        : "border-slate-300 bg-[#F8FAF8] group-hover:border-[#6DAD45]"
-                  }`}
-                >
+                  className={`relative z-10 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-colors duration-500 ${state === "active"
+                    ? "border-[#6DAD45] bg-slate-950"
+                    : state === "done"
+                      ? "border-[#6DAD45] bg-[#6DAD45]"
+                      : "border-slate-300 bg-[#F8FAF8] group-hover:border-[#6DAD45]"
+                    }`}>
                   <span
-                    className={`h-2 w-2 rounded-full transition-transform duration-500 ${state === "active" ? "scale-100 bg-[#D4E012]" : "scale-0"}`}
-                  />
+                    className={`h-2 w-2 rounded-full transition-transform duration-500 ${state === "active" ? "scale-100 bg-[#D4E012]" : "scale-0"}`} />
                 </span>
                 <span>
                   <span
-                    className={`block font-serif-display text-2xl leading-none transition-colors duration-500 ${
-                      state === "active" ? "text-slate-900" : "text-slate-400 group-hover:text-slate-600"
-                    }`}
-                  >
+                    className={`block font-sans-inter tabular-nums text-2xl font-bold leading-none transition-colors duration-500 ${state === "active" ? "text-slate-900" : "text-slate-400 group-hover:text-slate-600"
+                      }`}>
                     {m.year}
-                  </span>
-                  {m.stage && (
-                    <span
-                      className={`mt-1.5 block whitespace-nowrap font-mono text-[10px] font-bold uppercase tracking-[0.16em] transition-colors duration-500 ${
-                        state === "active" ? "text-[#707B00]" : "text-slate-400"
-                      }`}
-                    >
+                </span>
+                {m.stage && (
+                  <span
+                    className={`mt-1.5 block whitespace-nowrap font-mono text-[10px] font-bold uppercase tracking-[0.16em] transition-colors duration-500 ${state === "active" ? "text-[#707B00]" : "text-slate-400"
+                      }`}>
                       {m.stage}
-                    </span>
+              </span>
                   )}
                 </span>
               </button>
@@ -199,8 +191,7 @@ function PinnedChapters({ moments, reduce }: { moments: KeyMoment[]; reduce: boo
                   key={m.year}
                   aria-hidden={!active}
                   inert={!active}
-                  className={`col-start-1 row-start-1 ${active ? "" : "pointer-events-none"}`}
-                >
+                  className={`col-start-1 row-start-1 ${active ? "" : "pointer-events-none"}`}>
                   <div {...layer(0)}>
                     <p className="mb-3 font-mono text-[11px] font-bold uppercase tracking-[0.26em] text-[#707B00]">
                       {m.stage ? `${m.stage} · ` : ""}
@@ -236,19 +227,14 @@ function PinnedChapters({ moments, reduce }: { moments: KeyMoment[]; reduce: boo
                 <div
                   key={m.year}
                   aria-hidden={!active}
-                  className={`absolute inset-0 ${
-                    reduce
-                      ? `transition-opacity duration-300 ${active ? "z-10 opacity-100" : "opacity-0"}`
-                      : `transition-[clip-path] duration-[900ms] ${EASE_CSS} ${
-                          active ? "z-10 [clip-path:inset(0_0_0_0)]" : "z-0 [clip-path:inset(100%_0_0_0)] delay-[900ms]"
-                        }`
-                  }`}
-                >
+                  className={`absolute inset-0 ${reduce
+                    ? `transition-opacity duration-300 ${active ? "z-10 opacity-100" : "opacity-0"}`
+                    : `transition-[clip-path] duration-[900ms] ${EASE_CSS} ${active ? "z-10 [clip-path:inset(0_0_0_0)]" : "z-0 [clip-path:inset(100%_0_0_0)] delay-[900ms]"
+                    }`
+                    }`}>
                   <div
-                    className={`absolute inset-0 ${reduce ? "" : `transition-transform duration-[1400ms] ${EASE_CSS}`} ${
-                      active || reduce ? "scale-100" : "scale-[1.08]"
-                    }`}
-                  >
+                    className={`absolute inset-0 ${reduce ? "" : `transition-transform duration-[1400ms] ${EASE_CSS}`} ${active || reduce ? "scale-100" : "scale-[1.08]"
+                      }`}>
                     <Image src={m.image} alt={m.headline} fill sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover" />
                   </div>
                   <Caption moment={m} />
@@ -267,7 +253,7 @@ function PinnedChapters({ moments, reduce }: { moments: KeyMoment[]; reduce: boo
 /* ------------------------------------------------------------------ */
 
 function JourneyList({ moments, reduce }: { moments: KeyMoment[]; reduce: boolean }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref=useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 70%", "end 70%"] });
 
   return (
@@ -284,13 +270,12 @@ function JourneyList({ moments, reduce }: { moments: KeyMoment[]; reduce: boolea
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: reduce ? 0.2 : 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="relative pl-10 sm:pl-14"
-          >
+            className="relative pl-10 sm:pl-14">
             <span aria-hidden className="absolute left-0 top-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-[#6DAD45] bg-slate-950">
               <span className="h-2 w-2 rounded-full bg-[#D4E012]" />
             </span>
 
-            <p className="mb-1 font-serif-display text-3xl leading-none text-slate-900">{m.year}</p>
+            <p className="mb-1 font-sans-inter tabular-nums text-3xl font-bold leading-none text-slate-900">{m.year}</p>
             {m.stage && <p className="mb-5 font-mono text-[10px] font-bold uppercase tracking-[0.24em] text-[#707B00]">{m.stage}</p>}
 
             {/* observe the unclipped frame: a fully clipped element never reports as intersecting */}
@@ -298,16 +283,14 @@ function JourneyList({ moments, reduce }: { moments: KeyMoment[]; reduce: boolea
               initial="hidden"
               whileInView="shown"
               viewport={{ once: true, amount: 0.2 }}
-              className="relative mb-6 h-52 overflow-hidden rounded-2xl sm:h-72 md:h-80"
-            >
+              className="relative mb-6 h-52 overflow-hidden rounded-2xl sm:h-72 md:h-80">
               <motion.div
                 variants={{
                   hidden: reduce ? { opacity: 0 } : { clipPath: "inset(100% 0 0 0)" },
                   shown: reduce ? { opacity: 1 } : { clipPath: "inset(0% 0 0 0)" },
                 }}
                 transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute inset-0"
-              >
+                className="absolute inset-0">
                 <Image src={m.image} alt={m.headline} fill sizes="100vw" className="object-cover" />
                 <Caption moment={m} />
               </motion.div>

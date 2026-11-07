@@ -52,8 +52,7 @@ export default function WhoWeAre() {
         <motion.div
           ref={frameRef}
           style={reduce ? { borderRadius: 24 } : { clipPath }}
-          className="group relative mx-auto max-w-6xl overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 shadow-2xl"
-        >
+          className="group relative mx-auto max-w-6xl overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 shadow-2xl">
           <video
             ref={videoRef}
             poster="/images/about-hero-bg-bright.jpg"
@@ -64,16 +63,14 @@ export default function WhoWeAre() {
             className="h-[340px] w-full object-cover sm:h-[480px] md:h-[600px]"
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
-            onEnded={() => setIsPlaying(false)}
-          />
+            onEnded={() => setIsPlaying(false)} />
 
           {!isPlaying && (
             <button
               type="button"
               onClick={() => videoRef.current?.play()}
               aria-label="Play corporate film"
-              className="absolute inset-0 flex cursor-pointer flex-col items-center justify-center bg-slate-950/35 transition-colors duration-300 hover:bg-slate-950/20"
-            >
+              className="absolute inset-0 flex cursor-pointer flex-col items-center justify-center bg-slate-950/35 transition-colors duration-300 hover:bg-slate-950/20">
               <span className="flex h-20 w-20 items-center justify-center rounded-full bg-white pl-1 text-slate-900 shadow-2xl transition-transform duration-300 group-hover:scale-105 sm:h-24 sm:w-24">
                 <Play className="h-9 w-9 fill-slate-900" />
               </span>

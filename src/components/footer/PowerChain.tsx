@@ -64,7 +64,7 @@ const BESS = "M440 210 V172 H536 V210 Z M436 172 H540 " + Array.from({ length: 7
 /* --- Substation ------------------------------------------------------ */
 const lattice = (x: number, top: number) => {
   let d = `M${x - 8} ${GROUND} V${top} M${x + 8} ${GROUND} V${top}`;
-  for (let y = GROUND; y > top; y -= 14) d += ` M${x - 8} ${y} L${x + 8} ${Math.max(y - 14, top)}`;
+  for (let y = GROUND; y> top; y -= 14) d += ` M${x - 8} ${y} L${x + 8} ${Math.max(y - 14, top)}`;
   return d;
 };
 const GANTRIES = `${lattice(640, 112)} ${lattice(860, 112)} M624 112 H876 M632 126 H868`;
@@ -177,8 +177,7 @@ function Chain({ layout: L, className }: { layout: Layout; className: string }) 
       viewBox={`0 0 ${L.w} ${H}`}
       className={`h-auto w-full ${className}`}
       role="img"
-      aria-label="Sunlight on a solar plant, stored and stepped up at a substation, carried by transmission lines to light a city"
-    >
+      aria-label="Sunlight on a solar plant, stored and stepped up at a substation, carried by transmission lines to light a city">
       <defs>
         <linearGradient id={lineId} x1={out} x2={pole} gradientUnits="userSpaceOnUse">
           <stop offset="0" stopColor="#6DAD45" stopOpacity="0.55" />
@@ -218,8 +217,7 @@ function Chain({ layout: L, className }: { layout: Layout; className: string }) 
           stroke="#6DAD45"
           strokeOpacity={0.35}
           strokeWidth={sw(1)}
-          strokeDasharray="4 5"
-        />
+          strokeDasharray="4 5" />
 
         {/* battery storage with - and + polarity signs */}
         <g transform={`translate(${L.bess} 0)`}>
@@ -298,8 +296,8 @@ function Chain({ layout: L, className }: { layout: Layout; className: string }) 
   );
 }
 
-export default function PowerChain({ className = "" }: { className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
+export default function PowerChain({ className="" }: { className?: string }) {
+  const ref=useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = ref.current;

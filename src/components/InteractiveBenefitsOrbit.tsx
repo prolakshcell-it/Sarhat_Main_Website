@@ -202,13 +202,27 @@ export default function InteractiveBenefitsOrbit() {
             Employee Benefits
           </AnimatedPillBadge>
 
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-bold text-slate-900 tracking-tight leading-tight mb-5">
-            What We <span className="text-[#707B00]">Offer You</span>
-          </h2>
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-5">
+              What We{" "}
+              <span className="text-[#6DAD45] italic relative inline-block">
+                Offer You.
+                <svg
+                  className="absolute -bottom-2 left-0 w-full h-2.5 text-[#6DAD45]"
+                  viewBox="0 0 100 20"
+                  preserveAspectRatio="none"
+                  aria-hidden="true">
+                  <path
+                    d="M0 15 Q 50 0 100 15"
+                    stroke="currentColor"
+                    strokeWidth="3.5"
+                    fill="transparent" />
+                </svg>
+              </span>
+            </h2>
 
-          <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-3xl mx-auto">
-            We believe great work deserves great support. Explore each perk below to see what you get when you join Sarhat Energy & Infrastructure.
-          </p>
+            <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-3xl mx-auto">
+              We believe great work deserves great support. Explore each perk below to see what you get when you join Sarhat Energy & Infrastructure.
+            </p>
         </div>
 
         {/* DESKTOP ORBITAL INTERACTIVE VIEW */}
@@ -220,8 +234,7 @@ export default function InteractiveBenefitsOrbit() {
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
+            onMouseLeave={() => setIsHovered(false)}>
             {/* Animated SVG Dotted Orbital Line (Passes precisely through R=35.83% = 215/600) */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 600 600">
               <circle
@@ -232,8 +245,7 @@ export default function InteractiveBenefitsOrbit() {
                 stroke="#D4E012"
                 strokeWidth="2"
                 strokeDasharray="6 6"
-                className="opacity-60"
-              />
+                className="opacity-60" />
               {/* Rotating Gradient Indicator Ring */}
               <circle
                 cx="300"
@@ -243,8 +255,7 @@ export default function InteractiveBenefitsOrbit() {
                 stroke="url(#orbitGradient)"
                 strokeWidth="3"
                 strokeDasharray="85 305"
-                className="animate-spin-slow origin-center"
-              />
+                className="animate-spin-slow origin-center" />
               <defs>
                 <linearGradient id="orbitGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stopColor="#D4E012" stopOpacity="1" />
@@ -257,8 +268,7 @@ export default function InteractiveBenefitsOrbit() {
             {/* DYNAMIC CENTER SPOTLIGHT CARD */}
             <motion.div
               variants={centerVariants}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-64 h-64 lg:w-72 lg:h-72 rounded-full p-2 bg-gradient-to-tr from-[#D4E012] via-[#5EE72D] to-[#707B00] shadow-2xl overflow-hidden flex items-center justify-center group"
-            >
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-64 h-64 lg:w-72 lg:h-72 rounded-full p-2 bg-gradient-to-tr from-[#D4E012] via-[#5EE72D] to-[#707B00] shadow-2xl overflow-hidden flex items-center justify-center group">
               <div className="relative w-full h-full rounded-full overflow-hidden bg-slate-950 flex flex-col items-center justify-center p-6 text-center text-white border-4 border-white shadow-inner">
                 <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/70 to-slate-950 pointer-events-none z-10" />
 
@@ -266,8 +276,7 @@ export default function InteractiveBenefitsOrbit() {
                   src={activeBenefit.image}
                   alt={activeBenefit.title}
                   fill
-                  className="object-cover opacity-35 scale-105 transition-transform duration-700 group-hover:scale-110"
-                />
+                  className="object-cover opacity-35 scale-105 transition-transform duration-700 group-hover:scale-110" />
 
                 {/* Dynamic Content inside Center Ring */}
                 <AnimatePresence mode="wait">
@@ -277,8 +286,7 @@ export default function InteractiveBenefitsOrbit() {
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.9, y: -10 }}
                     transition={{ duration: 0.35, ease: "easeOut" }}
-                    className="relative z-20 flex flex-col items-center text-center px-3"
-                  >
+                    className="relative z-20 flex flex-col items-center text-center px-3">
                     <div className="w-11 h-11 rounded-full bg-[#D4E012] text-slate-950 flex items-center justify-center mb-2 font-bold shadow-lg shadow-[#D4E012]/40">
                       <ActiveIcon className="w-5 h-5" />
                     </div>
@@ -315,8 +323,7 @@ export default function InteractiveBenefitsOrbit() {
                     transform: "translate(-50%, -50%)",
                   }}
                   className="z-30 cursor-pointer group"
-                  onClick={() => setActiveIndex(index)}
-                >
+                  onClick={() => setActiveIndex(index)}>
                   <motion.div variants={nodeVariants}>
                     <div className="relative flex items-center justify-center">
                       {/* Pulsing halo ring if active */}
@@ -326,33 +333,27 @@ export default function InteractiveBenefitsOrbit() {
 
                       {/* Button circle */}
                       <button
-                        className={`w-12 h-12 lg:w-13 lg:h-13 rounded-full border-2 flex items-center justify-center shadow-xl transition-all duration-300 relative z-10 ${
-                          isActive
+                        className={`w-12 h-12 lg:w-13 lg:h-13 rounded-full border-2 flex items-center justify-center shadow-xl transition-all duration-300 relative z-10 ${isActive
                             ? "bg-[#D4E012] border-[#707B00] text-slate-950 scale-125 shadow-lg shadow-[#D4E012]/50"
                             : "bg-white border-[#D4E012]/70 text-[#707B00] hover:border-[#707B00] hover:scale-110 hover:shadow-md"
-                        }`}
-                      >
+                          }`}>
                         <IconComponent className="w-5 h-5 lg:w-6 lg:h-6" />
                       </button>
 
                       {/* Number badge */}
                       <span
-                        className={`absolute -top-1 -right-1 text-[9px] font-mono font-bold w-5 h-5 rounded-full flex items-center justify-center border shadow-sm z-20 ${
-                          isActive
+                        className={`absolute -top-1 -right-1 text-[9px] font-mono font-bold w-5 h-5 rounded-full flex items-center justify-center border shadow-sm z-20 ${isActive
                             ? "bg-slate-900 text-[#D4E012] border-[#D4E012]"
                             : "bg-slate-100 text-slate-600 border-slate-300"
-                        }`}
-                      >
+                          }`}>
                         0{index + 1}
                       </span>
 
                       {/* Text block positioned relative to button */}
                       <div className={pos.labelClass}>
                         <h4
-                          className={`text-xs font-serif-display font-bold transition-colors duration-200 mb-0.5 whitespace-nowrap ${
-                            isActive ? "text-[#707B00] text-xs sm:text-sm font-extrabold" : "text-slate-900 group-hover:text-[#707B00]"
-                          }`}
-                        >
+                          className={`text-xs font-serif-display font-bold transition-colors duration-200 mb-0.5 whitespace-nowrap ${isActive ? "text-[#707B00] text-xs sm:text-sm font-extrabold" : "text-slate-900 group-hover:text-[#707B00]"
+                            }`}>
                           {benefit.title}
                         </h4>
                         <p className="text-[11px] text-slate-500 font-normal leading-tight line-clamp-2">
@@ -377,8 +378,7 @@ export default function InteractiveBenefitsOrbit() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
-              className="bg-gradient-to-br from-[#F8FAF8] to-slate-50 border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6"
-            >
+              className="bg-gradient-to-br from-[#F8FAF8] to-slate-50 border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-2xl bg-[#D4E012]/20 border border-[#D4E012] flex items-center justify-center text-[#707B00] shrink-0 shadow-inner">
                   <ActiveIcon className="w-7 h-7" />
@@ -415,8 +415,7 @@ export default function InteractiveBenefitsOrbit() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
-        >
+          viewport={{ once: true }}>
           {benefitsData.map((b, idx) => {
             const IconComp = b.icon;
             const isSelected = activeIndex === idx;
@@ -425,19 +424,15 @@ export default function InteractiveBenefitsOrbit() {
                 key={b.id}
                 variants={nodeVariants}
                 onClick={() => setActiveIndex(idx)}
-                className={`border rounded-2xl p-5 flex items-start gap-4 transition-all duration-300 cursor-pointer ${
-                  isSelected
+                className={`border rounded-2xl p-5 flex items-start gap-4 transition-all duration-300 cursor-pointer ${isSelected
                     ? "bg-white border-[#707B00] shadow-md ring-2 ring-[#D4E012]"
                     : "bg-[#F8FAF8] border-slate-200/90 hover:border-slate-300"
-                }`}
-              >
+                  }`}>
                 <div
-                  className={`w-12 h-12 rounded-full border flex items-center justify-center shrink-0 transition-colors ${
-                    isSelected
+                  className={`w-12 h-12 rounded-full border flex items-center justify-center shrink-0 transition-colors ${isSelected
                       ? "bg-[#D4E012] border-[#707B00] text-slate-950"
                       : "bg-[#D4E012]/20 border-[#D4E012] text-[#707B00]"
-                  }`}
-                >
+                    }`}>
                   <IconComp className="w-5 h-5" />
                 </div>
                 <div>

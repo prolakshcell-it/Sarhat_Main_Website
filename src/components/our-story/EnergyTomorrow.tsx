@@ -19,7 +19,7 @@ const TOWER = "M0 -14 L-24 190 M0 -14 L24 190 M-34 24 H34 M-30 58 H30 M-26 92 H2
 /** 08 — Energy today. More possibilities tomorrow. The existing Road Ahead block as the closing chapter. */
 export default function EnergyTomorrow({ onOpenQuote }: { onOpenQuote: () => void }) {
   const reduce = useReducedMotion();
-  const ref = useRef<HTMLElement>(null);
+  const ref=useRef<HTMLElement>(null);
   const draw = useDrawOnView(ref, { duration: 2.4, amount: 0.25 });
   // the current only starts flowing once the conductors exist
   const live = useInView(ref, { once: true, amount: 0.25 });
@@ -31,8 +31,7 @@ export default function EnergyTomorrow({ onOpenQuote }: { onOpenQuote: () => voi
         viewBox={`0 0 ${W} 300`}
         preserveAspectRatio="xMidYMin slice"
         className="pointer-events-none absolute inset-x-0 top-0 h-[260px] w-full sm:h-[300px]"
-        aria-hidden
-      >
+        aria-hidden>
         <defs>
           <linearGradient id="energy-fade" x1="0" x2="1">
             <stop offset="0" stopColor="#fff" stopOpacity="1" />
@@ -64,8 +63,7 @@ export default function EnergyTomorrow({ onOpenQuote }: { onOpenQuote: () => voi
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 1, delay: reduce ? 0 : 1.2 }}
-            />
+              transition={{ duration: 1, delay: reduce ? 0 : 1.2 }} />
           ))}
         </g>
         {SPANS.map((d, i) => (
@@ -81,8 +79,7 @@ export default function EnergyTomorrow({ onOpenQuote }: { onOpenQuote: () => voi
                 strokeLinecap="round"
                 pathLength={1}
                 className={styles.current}
-                style={{ animationDelay: `${2.6 + i * 1.3}s` }}
-              />
+                style={{ animationDelay: `${2.6 + i * 1.3}s` }} />
             )}
           </g>
         ))}
@@ -94,8 +91,7 @@ export default function EnergyTomorrow({ onOpenQuote }: { onOpenQuote: () => voi
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.6 }}
           transition={{ duration: 0.7, ease: EASE }}
-          className="mb-6 flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-[#D4E012]"
-        >
+          className="mb-6 flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-[#D4E012]">
           <span className="h-px w-8 bg-[#D4E012]" aria-hidden />
           The Road Ahead
         </motion.p>
@@ -105,8 +101,7 @@ export default function EnergyTomorrow({ onOpenQuote }: { onOpenQuote: () => voi
           whileInView="shown"
           viewport={{ once: true, amount: 0.5 }}
           transition={{ staggerChildren: reduce ? 0 : 0.18 }}
-          className="mb-8 max-w-4xl font-serif-display text-4xl font-medium leading-[1.08] tracking-tight sm:text-6xl md:text-7xl"
-        >
+          className="mb-8 max-w-4xl font-serif-display text-4xl font-medium leading-[1.08] tracking-tight sm:text-6xl md:text-7xl">
           {["Energy today.", "More possibilities tomorrow."].map((line, i) => (
             <motion.span
               key={line}
@@ -115,8 +110,7 @@ export default function EnergyTomorrow({ onOpenQuote }: { onOpenQuote: () => voi
                 shown: reduce ? { opacity: 1 } : { opacity: 1, clipPath: "inset(0 0 0% 0)", y: 0 },
               }}
               transition={{ duration: 0.9, ease: EASE }}
-              className={`block pb-1 ${i === 1 ? "text-[#D4E012]" : ""}`}
-            >
+              className={`block pb-1 ${i === 1 ? "text-[#D4E012]" : ""}`}>
               {line}
             </motion.span>
           ))}
@@ -127,8 +121,7 @@ export default function EnergyTomorrow({ onOpenQuote }: { onOpenQuote: () => voi
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.8, delay: reduce ? 0 : 0.35, ease: EASE }}
-          className="grid grid-cols-1 gap-10 border-t border-white/10 pt-8 md:grid-cols-12"
-        >
+          className="grid grid-cols-1 gap-10 border-t border-white/10 pt-8 md:grid-cols-12">
           <div className="md:col-span-7">
             <p className="mb-4 max-w-xl text-lg leading-relaxed text-slate-200 sm:text-xl">
               Born from Indian roots, shaped by values and execution, strengthened through experience, and built with the ambition to earn trust globally.
@@ -141,15 +134,13 @@ export default function EnergyTomorrow({ onOpenQuote }: { onOpenQuote: () => voi
             <button
               type="button"
               onClick={onOpenQuote}
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#D4E012] px-7 py-3.5 text-sm font-bold text-slate-950 transition-colors duration-300 hover:bg-[#6DAD45] hover:text-white"
-            >
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#D4E012] px-7 py-3.5 text-sm font-bold text-slate-950 transition-colors duration-300 hover:bg-[#6DAD45] hover:text-white">
               Contact Us
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </button>
             <Link
               href="/projects"
-              className="inline-flex items-center justify-center rounded-full border border-white/20 px-7 py-3.5 text-sm font-semibold text-white transition-colors duration-300 hover:border-[#D4E012] hover:bg-white/5"
-            >
+              className="inline-flex items-center justify-center rounded-full border border-white/20 px-7 py-3.5 text-sm font-semibold text-white transition-colors duration-300 hover:border-[#D4E012] hover:bg-white/5">
               See our projects
             </Link>
           </div>

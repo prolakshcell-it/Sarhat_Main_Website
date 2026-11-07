@@ -63,8 +63,7 @@ function StepIcon({ benefit, active, reduce }: { benefit: Benefit; active: boole
         active
           ? "border-[#D4E012] bg-[#D4E012] text-slate-900 shadow-[0_0_22px_rgba(212,224,18,0.55)]"
           : "border-slate-200 bg-slate-50 text-[#707B00]"
-      }`}
-    >
+      }`}>
       {active && !reduce && (
         <motion.span
           key="pulse"
@@ -72,13 +71,11 @@ function StepIcon({ benefit, active, reduce }: { benefit: Benefit; active: boole
           className="absolute inset-0 rounded-xl border border-[#D4E012]"
           initial={{ scale: 1, opacity: 0.7 }}
           animate={{ scale: 1.7, opacity: 0 }}
-          transition={{ duration: 1.1, ease: "easeOut", repeat: 1 }}
-        />
+          transition={{ duration: 1.1, ease: "easeOut", repeat: 1 }} />
       )}
       <Icon
         className={`h-5 w-5 transition-all duration-300 ${active ? "scale-110 -rotate-6" : ""}`}
-        strokeWidth={active ? 2.2 : 1.6}
-      />
+        strokeWidth={active ? 2.2 : 1.6} />
     </span>
   );
 }
@@ -93,8 +90,7 @@ function StepBody({ benefit, index, active, reached }: { benefit: Benefit; index
         <span
           className={`font-mono text-xs font-bold tracking-wider transition-colors duration-300 ${
             active || reached ? "text-[#707B00]" : "text-slate-400"
-          }`}
-        >
+          }`}>
           {pad(index)}
         </span>
       </span>
@@ -135,7 +131,7 @@ function ProgressMeter({
 }
 
 /** "Your growth journey": JOIN → LEARN → GROW → LEAD → IMPACT, lit up as the user climbs. */
-function JourneyPanel({ active, className = "" }: { active: number; className?: string }) {
+function JourneyPanel({ active, className="" }: { active: number; className?: string }) {
   const stage = STAGE_OF_STEP[active];
   return (
     <div className={className}>
@@ -145,8 +141,7 @@ function JourneyPanel({ active, className = "" }: { active: number; className?: 
         <span
           aria-hidden
           className="absolute left-3 top-[11px] h-px bg-[#707B00] transition-[width] duration-700 ease-out"
-          style={{ width: `calc((100% - 1.5rem) * ${stage / (STAGES.length - 1)})` }}
-        />
+          style={{ width: `calc((100% - 1.5rem) * ${stage / (STAGES.length - 1)})` }} />
         {STAGES.map((s, i) => (
           <li key={s.label} className="relative z-10 flex w-14 flex-col items-center gap-2" aria-current={i === stage ? "step" : undefined}>
             <span
@@ -156,13 +151,11 @@ function JourneyPanel({ active, className = "" }: { active: number; className?: 
                   : i === stage
                     ? "border-[#D4E012] bg-[#D4E012] shadow-[0_0_16px_rgba(212,224,18,0.7)]"
                     : "border-slate-300 bg-white"
-              }`}
-            />
+              }`} />
             <span
               className={`font-mono text-xs font-bold uppercase tracking-[0.12em] transition-colors duration-300 ${
                 i === stage ? "text-slate-900" : i < stage ? "text-[#707B00]" : "text-slate-400"
-              }`}
-            >
+              }`}>
               {s.label}
             </span>
           </li>
@@ -227,16 +220,14 @@ function LadderDesktop() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          variants={{ hidden: {}, visible: { transition: { staggerChildren: reduce ? 0 : 0.12, delayChildren: 0.2 } } }}
-        >
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: reduce ? 0 : 0.12, delayChildren: 0.2 } } }}>
           {/* glow that follows the active step */}
           <motion.div
             aria-hidden
             className="pointer-events-none absolute h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full"
             style={{ background: "radial-gradient(circle, rgba(212,224,18,0.22) 0%, rgba(109,173,69,0.08) 45%, transparent 70%)" }}
             animate={{ left: `${cardLeft(active) + CARD_W / 2}%`, top: cardTop(active) + CARD_H / 2 }}
-            transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 70, damping: 18 }}
-          />
+            transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 70, damping: 18 }} />
 
           <JourneyPanel active={active} className="absolute left-0 top-0 w-[38%]" />
 
@@ -253,8 +244,7 @@ function LadderDesktop() {
               initial={{ pathLength: reduce ? 1 : 0 }}
               whileInView={{ pathLength: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 1.4, ease: "easeOut" }}
-            />
+              transition={{ duration: 1.4, ease: "easeOut" }} />
             <motion.path
               d={LADDER_PATH}
               fill="none"
@@ -263,8 +253,7 @@ function LadderDesktop() {
               strokeDasharray="2 8"
               strokeLinecap="round"
               vectorEffect="non-scaling-stroke"
-              variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { delay: 0.8 } } }}
-            />
+              variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { delay: 0.8 } } }} />
             <motion.path
               d={LADDER_PATH}
               fill="none"
@@ -272,8 +261,7 @@ function LadderDesktop() {
               strokeWidth={3}
               strokeLinecap="round"
               vectorEffect="non-scaling-stroke"
-              style={{ pathLength: progress, filter: "drop-shadow(0 0 6px rgba(212,224,18,0.8))" }}
-            />
+              style={{ pathLength: progress, filter: "drop-shadow(0 0 6px rgba(212,224,18,0.8))" }} />
           </svg>
 
           {/* nodes */}
@@ -284,16 +272,14 @@ function LadderDesktop() {
               className={`absolute h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 transition-colors duration-300 ${
                 i <= active ? "border-[#707B00] bg-[#D4E012]" : "border-slate-300 bg-white"
               }`}
-              style={{ left: `${nodeX(i) / 10}%`, top: nodeY(i) }}
-            />
+              style={{ left: `${nodeX(i) / 10}%`, top: nodeY(i) }} />
           ))}
 
           {/* travelling progress point */}
           <motion.span
             aria-hidden
             className="pointer-events-none absolute z-30 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4E012] shadow-[0_0_0_6px_rgba(212,224,18,0.25),0_0_24px_rgba(212,224,18,0.9)]"
-            style={{ left: dotLeft, top: dotTop }}
-          />
+            style={{ left: dotLeft, top: dotTop }} />
 
           {/* steps */}
           <ol className="contents">
@@ -308,8 +294,7 @@ function LadderDesktop() {
                   variants={{
                     hidden: { opacity: 0, y: 28, scale: 0.96 },
                     visible: { opacity: 1, y: 0, scale: 1, transition: { duration: reduce ? 0 : 0.6, ease: EASE } },
-                  }}
-                >
+                  }}>
                   <motion.button
                     type="button"
                     onClick={() => goTo(i)}
@@ -322,16 +307,14 @@ function LadderDesktop() {
                         ? "border-[#D4E012] opacity-100 shadow-[0_22px_44px_-14px_rgba(112,123,0,0.4)]"
                         : "border-slate-200 shadow-sm hover:border-[#D4E012] hover:shadow-[0_14px_32px_-12px_rgba(112,123,0,0.3)] " +
                           (reached ? "opacity-90" : "opacity-70 hover:opacity-100")
-                    }`}
-                  >
+                    }`}>
                     <StepIcon benefit={b} active={isActive} reduce={reduce} />
                     <StepBody benefit={b} index={i} active={isActive} reached={reached} />
                     <span
                       aria-hidden
                       className={`absolute inset-x-0 bottom-0 h-[3px] origin-left bg-gradient-to-r from-[#707B00] to-[#D4E012] transition-transform duration-700 ${
                         isActive || reached ? "scale-x-100" : "scale-x-0"
-                      }`}
-                    />
+                      }`} />
                   </motion.button>
                 </motion.li>
               );
@@ -388,8 +371,7 @@ function JourneyVertical() {
         <motion.span
           aria-hidden
           className="absolute bottom-5 left-[21px] top-5 w-[3px] origin-top rounded-full bg-gradient-to-b from-[#707B00] to-[#D4E012] shadow-[0_0_10px_rgba(212,224,18,0.8)] md:left-1/2 md:-translate-x-1/2"
-          style={{ scaleY: fill }}
-        />
+          style={{ scaleY: fill }} />
         {BENEFITS.map((b, i) => {
           const isActive = i === active;
           const reached = i < active;
@@ -404,8 +386,7 @@ function JourneyVertical() {
               initial={{ opacity: 0, y: reduce ? 0 : 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: reduce ? 0 : 0.5, ease: EASE }}
-            >
+              transition={{ duration: reduce ? 0 : 0.5, ease: EASE }}>
               <span
                 aria-hidden
                 className={`absolute left-0 top-3 flex h-11 w-11 items-center justify-center rounded-full border-2 bg-white font-mono text-xs font-bold transition-all duration-300 ${
@@ -416,8 +397,7 @@ function JourneyVertical() {
                     : reached
                       ? "border-[#707B00] text-[#707B00]"
                       : "border-slate-300 text-slate-400"
-                }`}
-              >
+                }`}>
                 {pad(i)}
               </span>
               <button
@@ -428,16 +408,14 @@ function JourneyVertical() {
                   isActive
                     ? "scale-[1.02] border-[#D4E012] opacity-100 shadow-[0_18px_36px_-14px_rgba(112,123,0,0.4)]"
                     : "border-slate-200 shadow-sm hover:border-[#D4E012] " + (reached ? "opacity-90" : "opacity-75")
-                }`}
-              >
+                }`}>
                 <StepIcon benefit={b} active={isActive} reduce={reduce} />
                 <StepBody benefit={b} index={i} active={isActive} reached={reached} />
                 <span
                   aria-hidden
                   className={`absolute inset-x-0 bottom-0 h-[3px] origin-left bg-gradient-to-r from-[#707B00] to-[#D4E012] transition-transform duration-700 ${
                     isActive || reached ? "scale-x-100" : "scale-x-0"
-                  }`}
-                />
+                  }`} />
               </button>
             </motion.li>
           );
@@ -466,8 +444,7 @@ function BenefitsHeader() {
       </motion.div>
       <motion.h2
         {...fade(0.08)}
-        className="mb-5 font-serif-display text-[clamp(2.5rem,6.2vw,5rem)] font-bold leading-[1.05] tracking-tight text-slate-900"
-      >
+        className="mb-5 font-serif-display text-[clamp(2.5rem,6.2vw,5rem)] font-bold leading-[1.05] tracking-tight text-slate-900">
         What We <span className="text-[#707B00]">Offer You</span>
       </motion.h2>
       <motion.p {...fade(0.16)} className="mx-auto max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
@@ -485,14 +462,12 @@ function CareersCTA() {
       initial={{ opacity: 0, y: reduce ? 0 : 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: reduce ? 0 : 0.7, ease: EASE }}
-    >
+      transition={{ duration: reduce ? 0 : 0.7, ease: EASE }}>
       <span aria-hidden className="mb-6 h-14 w-px bg-gradient-to-b from-[#D4E012] to-transparent shadow-[0_0_12px_rgba(212,224,18,0.8)]" />
       <p className="mb-5 font-serif-display text-2xl font-bold text-slate-900 sm:text-3xl">Your next step starts here.</p>
       <a
         href="#current-openings"
-        className="group inline-flex min-h-[48px] items-center gap-2.5 rounded-full bg-slate-900 px-8 py-3 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_0_4px_rgba(212,224,18,0.25),0_16px_36px_-12px_rgba(112,123,0,0.6)] transition-all hover:bg-[#D4E012] hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#707B00] focus-visible:ring-offset-2"
-      >
+        className="group inline-flex min-h-[48px] items-center gap-2.5 rounded-full bg-slate-900 px-8 py-3 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_0_4px_rgba(212,224,18,0.25),0_16px_36px_-12px_rgba(112,123,0,0.6)] transition-all hover:bg-[#D4E012] hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#707B00] focus-visible:ring-offset-2">
         Explore Open Roles
         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
       </a>
@@ -507,8 +482,7 @@ export default function EmployeeBenefits() {
   return (
     <section
       id="employee-benefits"
-      className="relative z-10 overflow-x-clip border-b border-slate-200/80 bg-gradient-to-b from-white via-[#F8FAF8] to-white pb-20 pt-20 sm:pt-24"
-    >
+      className="relative z-10 overflow-x-clip border-b border-slate-200/80 bg-gradient-to-b from-white via-[#F8FAF8] to-white pb-20 pt-20 sm:pt-24">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <BenefitsHeader />
         <div className={wide ? "" : "mx-auto max-w-3xl"}>{wide ? <LadderDesktop /> : <JourneyVertical />}</div>

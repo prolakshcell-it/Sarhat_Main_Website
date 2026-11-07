@@ -16,7 +16,7 @@ const band = borderBand(BAND_W);
  * Mithila sun and border band that draw themselves over the landscape, not through stock imagery.
  */
 export default function StoryHero() {
-  const ref = useRef<HTMLElement>(null);
+  const ref=useRef<HTMLElement>(null);
   const {
     isPastHero,
     bgScale,
@@ -31,15 +31,12 @@ export default function StoryHero() {
 
   return (
     <div
-      className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-[#140E09] select-none will-change-transform ${
-        isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-      }`}
-      aria-hidden={isPastHero}
-    >
+      className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-[#140E09] select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+        }`}
+      aria-hidden={isPastHero}>
       <section
         ref={ref}
-        className="relative flex h-full w-full select-none flex-col items-center justify-center overflow-hidden bg-[#140E09] text-white"
-      >
+        className="relative flex h-full w-full select-none flex-col items-center justify-center overflow-hidden bg-[#140E09] text-white">
         <motion.div style={{ scale: bgScale }} className="absolute inset-0">
           <Image
             src="/images/about-hero-bg-bright.jpg"
@@ -47,8 +44,7 @@ export default function StoryHero() {
             fill
             preload
             sizes="100vw"
-            className="object-cover object-center"
-          />
+            className="object-cover object-center" />
           {/* warm earth grade: the land first, the technology second */}
           <div className="absolute inset-0 bg-[#2A1A0E]/55 mix-blend-multiply" />
           <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
@@ -57,36 +53,31 @@ export default function StoryHero() {
 
         <motion.div
           style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-          className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center px-4 pt-16 text-center sm:px-6 will-change-transform"
-        >
+          className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center px-4 pt-16 text-center sm:px-6 will-change-transform">
           {/* Mithila sun: the first mark on the page */}
           <svg
             viewBox="-50 -50 100 100"
             className="mb-6 h-14 w-14 sm:h-16 sm:w-16"
-            aria-hidden
-          >
+            aria-hidden>
             <g strokeLinecap="round" strokeLinejoin="round">
               <Draw
                 progress={draw}
                 range={[0, 0.5]}
                 d={SUN.rings[0]}
                 stroke="#E9C46A"
-                strokeWidth={2}
-              />
+                strokeWidth={2} />
               <Draw
                 progress={draw}
                 range={[0.1, 0.55]}
                 d={SUN.rings[1]}
                 stroke="#E9C46A"
-                strokeWidth={1.2}
-              />
+                strokeWidth={1.2} />
               <Draw
                 progress={draw}
                 range={[0.3, 0.9]}
                 d={SUN.rays}
                 stroke="#E07A4F"
-                strokeWidth={1.6}
-              />
+                strokeWidth={1.6} />
             </g>
           </svg>
 
@@ -94,8 +85,7 @@ export default function StoryHero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: EASE }}
-            className="mb-6"
-          >
+            className="mb-6">
             <AnimatedPillBadge darkBg>Our Story</AnimatedPillBadge>
           </motion.div> */}
 
@@ -103,11 +93,21 @@ export default function StoryHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.35, ease: EASE }}
-            className="mb-6 font-serif-display text-4xl font-medium leading-[1.08] tracking-tight drop-shadow-lg sm:text-6xl md:text-7xl"
-          >
+            className="mb-6 font-serif-display text-4xl font-medium leading-[1.08] tracking-tight drop-shadow-lg sm:text-6xl md:text-7xl [text-wrap:balance]">
             Rooted in India. <br />
-            <span className="font-normal italic text-[#D4E012]">
+            <span className="font-normal italic text-[#D4E012] relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
               Trusted Globally.
+              <svg
+                        className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden="true">
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent" />
+                      </svg>
             </span>
           </motion.h1>
 
@@ -115,9 +115,10 @@ export default function StoryHero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.55, ease: EASE }}
-            className="max-w-3xl text-base leading-relaxed text-slate-200 drop-shadow-md sm:text-xl"
-          >
-           Sarhat is an execution led energy and infrastructure company rooted in India, with the ambition to earn trust globally. Engineering discipline, hands-on delivery and continuous learning shape our work. Safety, unity and ownership guide every project.
+            className="max-w-2xl text-base leading-relaxed text-slate-200 drop-shadow-md sm:text-xl [text-wrap:balance]">
+            Execution-led energy and infrastructure rooted in India,
+            <br className="hidden sm:inline" />
+            {" "}driven by engineering discipline and global standards of trust.
           </motion.p>
         </motion.div>
 
@@ -125,13 +126,11 @@ export default function StoryHero() {
         {/* <motion.div
           style={{ opacity: contentOpacity }}
           className="pointer-events-none absolute inset-x-0 bottom-20 sm:bottom-24"
-          aria-hidden
-        >
+          aria-hidden>
           <svg
             viewBox={`0 0 ${BAND_W} 32`}
             preserveAspectRatio="xMidYMid slice"
-            className="h-5 w-full opacity-60 sm:h-6"
-          >
+            className="h-5 w-full opacity-60 sm:h-6">
             {band.rules.map((d) => (
               <Draw
                 key={d}
@@ -139,8 +138,7 @@ export default function StoryHero() {
                 range={[0.1, 1]}
                 d={d}
                 stroke="#E9C46A"
-                strokeWidth={1}
-              />
+                strokeWidth={1} />
             ))}
             <Draw
               progress={draw}
@@ -148,8 +146,7 @@ export default function StoryHero() {
               d={band.zig}
               stroke="#E07A4F"
               strokeWidth={1.2}
-              strokeLinejoin="round"
-            />
+              strokeLinejoin="round" />
           </svg>
         </motion.div> */}
 

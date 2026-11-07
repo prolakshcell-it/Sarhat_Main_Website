@@ -38,6 +38,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import { useHeroScroll } from "@/hooks/useHeroScroll";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
+import ProductFAQ from "@/components/ProductFAQ";
 
 export default function ExecutionContractorsPage() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
@@ -48,7 +49,7 @@ export default function ExecutionContractorsPage() {
   const containerRef = useRef<HTMLElement>(null);
 
   // Parallax & Scroll Fade-out Tracking
-    const {
+  const {
     isPastHero,
     bgScale,
     bgDim,
@@ -356,11 +357,9 @@ export default function ExecutionContractorsPage() {
 
         {/* Sticky Hero Container (100vh Fullscreen Hero) */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
-          aria-hidden={isPastHero}
-        >
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
+          aria-hidden={isPastHero}>
           <section ref={containerRef} className="relative h-full w-full flex flex-col justify-center items-center bg-slate-950 text-white overflow-hidden select-none">
             {/* Cinematic High-Res Fullscreen Background Image Layer */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
@@ -370,772 +369,718 @@ export default function ExecutionContractorsPage() {
                 fill
                 priority
                 quality={100}
-                className="object-cover object-center opacity-90 transform scale-105"
-              />
+                className="object-cover object-center opacity-90 transform scale-105" />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
             </motion.div>
 
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 w-full relative z-10 pt-16 flex flex-col items-center text-center will-change-transform"
-            >
+              className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 w-full relative z-10 pt-16 flex flex-col items-center text-center will-change-transform">
               <ScrollReveal direction="up" distance={40}>
                 {/* Main Headline */}
                 <div className="max-w-4xl flex flex-col items-center text-center">
-                  <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.12] mb-6 text-center drop-shadow-lg">
-                    Empanelled <br />
-                    <span className="text-[#D4E012] italic relative inline-block">
-                      Execution Contractors.
-                    </span>
-                  </h1>
-
-                  {/* Subtitle Paragraph */}
-                  <p className="text-sm sm:text-base md:text-lg text-slate-200 font-normal max-w-3xl text-center leading-relaxed mb-6 tracking-wide drop-shadow-md">
-                    Join Sarhat&apos;s verified contractor network for civil, electrical, substation, and mechanical solar project execution across India. <br className="hidden sm:block" />
-
-                  </p>
-                </div>
-              </ScrollReveal>
-            </motion.div>
-
-            {/* Mouse Scroll Indicator */}
-            <ScrollIndicator opacity={indicatorOpacity} />
-          </section>
-        </div>
-
-        {/* Scroll Spacer (Matches Hero height to establish scroll track) */}
-        <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
-
-
-        {/* Main Content Sections */}
-        <div className="relative z-10 bg-[#F8FAF8] border-t border-slate-200/60 shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
-          {/* ==========================================
-          1. WHY EMPANEL WITH SARHAT (Image 1 Style 4-Column Hexagons)
-          ========================================== */}
-          <section id="why-empanel" className="py-8 sm:py-12 bg-[#F8FAF8] relative z-10 font-sans-ui">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-              <ScrollReveal direction="up" distance={40}>
-                <div className="text-center max-w-4xl mx-auto mb-10">
-                  <AnimatedPillBadge className="mb-6">
-                    Why Empanel
-                  </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-                    <span className="inline-block">Execute with India&apos;s Premier</span> <br />
-                    <span className="text-[#6DAD45] italic relative inline-block">
-                      Solar &amp; Infra EPC
-                      <svg
-                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                      <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.1] mb-6 text-center [text-shadow:_0_4px_24px_rgba(0,0,0,0.95)] [text-wrap:balance]">
+                        <span className="block">Empanelled</span>
+                        <span className="italic font-normal text-[#D4E012] relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)] mt-1">
+                          Execution Contractors.
+                          <svg
+                        className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                      >
+                        aria-hidden="true">
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
-                    </span>
-                  </h2>
-                  <p className="text-slate-600 font-normal text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
-                    Sarhat Energy executes mega-watt solar parks, EHV substations, BESS storage, and industrial civil infrastructure across Uttar Pradesh, Rajasthan, Gujarat, Maharashtra, and Madhya Pradesh. We empanel qualified execution contractors with guaranteed commercial terms and HSE backing.
-                  </p>
-                </div>
-              </ScrollReveal>
-
-              {/* 4 Column Process Steps with Hexagon Styling (Image 1) */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-12">
-                {whyEmpanelSteps.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <ScrollReveal key={item.step} direction="up" distance={30}>
-                      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-lg hover:border-[#D4E012] hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center group h-full">
-                        {/* Step Number Tag */}
-                        <span className="text-xs font-mono font-bold text-[#707B00] mb-3">
-                          {item.step}
                         </span>
+                      </h1>
 
-                        {/* Hexagon-Style Icon Badge */}
-                        <div className="relative w-16 h-16 flex items-center justify-center mb-6">
-                          <div className="absolute inset-0 bg-[#D4E012]/20 rounded-2xl rotate-45 group-hover:rotate-90 group-hover:bg-[#D4E012]/30 transition-all duration-300"></div>
-                          <Icon className="w-8 h-8 text-[#707B00] relative z-10" />
-                        </div>
-
-                        {/* Title & Description */}
-                        <h3 className="text-lg font-serif-display font-bold text-slate-900 mb-2">
-                          {item.title}
-                        </h3>
-                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans-ui">
-                          {item.description}
+                      {/* Subtitle Paragraph */}
+                        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-100 font-normal max-w-4xl mx-auto text-center leading-relaxed tracking-wide [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)]">
+                          Join Sarhat&apos;s verified contractor network for civil, electrical,
+                          <br className="hidden sm:inline" />
+                          {" "}substation, and mechanical solar project execution across India.
                         </p>
                       </div>
                     </ScrollReveal>
-                  );
-                })}
+                  </motion.div>
+
+                  {/* Mouse Scroll Indicator */}
+                  <ScrollIndicator opacity={indicatorOpacity} />
+                </section>
               </div>
 
-              {/* 6 Contractor Benefits Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-                {contractorBenefits.map((item, idx) => {
-                  const Icon = item.icon;
-                  return (
-                    <ScrollReveal key={item.id} direction="up" distance={30} delay={idx * 80}>
-                      <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-lg hover:border-[#D4E012] hover:shadow-xl transition-all duration-300 group flex flex-col justify-between h-full">
-                        <div>
-                          <div className="w-12 h-12 rounded-2xl bg-[#D4E012]/20 border border-[#D4E012]/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                            <Icon className="w-6 h-6 text-[#707B00]" />
-                          </div>
-                          <div className="text-xs font-mono font-bold text-[#707B00] uppercase tracking-wider mb-1.5">
-                            {item.subtitle}
-                          </div>
-                          <h3 className="text-lg font-serif-display font-bold text-slate-900 mb-2">
-                            {item.title}
-                          </h3>
-                          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans-ui">
-                            {item.description}
-                          </p>
-                        </div>
+              {/* Scroll Spacer (Matches Hero height to establish scroll track) */}
+              <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
+
+
+              {/* Main Content Sections */}
+              <div className="relative z-10 bg-[#F8FAF8] border-t border-slate-200/60 shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
+                {/* ==========================================
+          1. WHY EMPANEL WITH SARHAT (Image 1 Style 4-Column Hexagons)
+          ========================================== */}
+                <section id="why-empanel" className="py-8 sm:py-12 bg-[#F8FAF8] relative z-10 font-sans-ui">
+                  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <ScrollReveal direction="up" distance={40}>
+                      <div className="text-center max-w-4xl mx-auto mb-10">
+                        <AnimatedPillBadge className="mb-6">
+                          Why Empanel
+                        </AnimatedPillBadge>
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                          <span className="inline-block">Execute with India&apos;s Premier</span> <br />
+                          <span className="text-[#6DAD45] italic relative inline-block">
+                            Solar &amp; Infra EPC
+                            <svg
+                              className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                              viewBox="0 0 100 20"
+                              preserveAspectRatio="none">
+                              <path
+                                d="M0 15 Q 50 0 100 15"
+                                stroke="currentColor"
+                                strokeWidth="3.5"
+                                fill="transparent" />
+                            </svg>
+                          </span>
+                        </h2>
+                        <p className="text-slate-600 font-normal text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
+                          Sarhat Energy executes mega-watt solar parks, EHV substations, BESS storage, and industrial civil infrastructure across Uttar Pradesh, Rajasthan, Gujarat, Maharashtra, and Madhya Pradesh. We empanel qualified execution contractors with guaranteed commercial terms and HSE backing.
+                        </p>
                       </div>
                     </ScrollReveal>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
 
-          {/* ==========================================
-          2. CONTRACTOR CATEGORIES (Full Cards)
-          ========================================== */}
-          <section id="categories" className="py-8 sm:py-12 bg-slate-50/80 border-t border-slate-200 font-sans-ui">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <ScrollReveal direction="up" distance={40}>
-                <div className="text-center max-w-3xl mx-auto mb-8">
-                  <AnimatedPillBadge className="mb-6">
-                    Specialty Categories
-                  </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-                    <span className="inline-block">Core Trades.</span> <br />
-                    <span className="text-[#6DAD45] italic relative inline-block">
-                      Contractor Disciplines
-                      <svg
-                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
-                        viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
-                        <path
-                          d="M0 15 Q 50 0 100 15"
-                          stroke="currentColor"
-                          strokeWidth="3.5"
-                          fill="transparent"
-                        />
-                      </svg>
-                    </span>
-                  </h2>
-                  <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
-                    We empanel specialized execution teams across five primary renewable energy &amp; civil infrastructure disciplines.
-                  </p>
-                </div>
-              </ScrollReveal>
-
-              {/* Cards Stack */}
-              <div className="space-y-6">
-                {contractorCategories.map((cat) => {
-                  const Icon = cat.icon;
-                  return (
-                    <ScrollReveal key={cat.id} direction="up" distance={40}>
-                      <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xl hover:border-[#D4E012] transition-all duration-300 p-6 sm:p-8 relative overflow-hidden group">
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                          {/* Left Number Visual */}
-                          <div className="lg:col-span-3 flex items-center justify-center">
-                            <div className="relative flex items-center justify-center">
-                              <span className="text-8xl sm:text-9xl font-serif-display font-bold text-slate-100 select-none group-hover:text-[#D4E012]/15 transition-colors">
-                                {cat.number}
+                    {/* 4 Column Process Steps with Hexagon Styling (Image 1) */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-12">
+                      {whyEmpanelSteps.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <ScrollReveal key={item.step} direction="up" distance={30}>
+                            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-lg hover:border-[#D4E012] hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center group h-full">
+                              {/* Step Number Tag */}
+                              <span className="text-xs font-mono font-bold text-[#707B00] mb-3">
+                                {item.step}
                               </span>
-                              <div className="absolute w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#D4E012]/20 border border-[#D4E012]/40 flex items-center justify-center shadow-md">
-                                <Icon className="w-10 h-10 text-[#707B00]" />
+
+                              {/* Hexagon-Style Icon Badge */}
+                              <div className="relative w-16 h-16 flex items-center justify-center mb-6">
+                                <div className="absolute inset-0 bg-[#D4E012]/20 rounded-2xl rotate-45 group-hover:rotate-90 group-hover:bg-[#D4E012]/30 transition-all duration-300"></div>
+                                <Icon className="w-8 h-8 text-[#707B00] relative z-10" />
+                              </div>
+
+                              {/* Title & Description */}
+                              <h3 className="text-lg font-serif-display font-bold text-slate-900 mb-2">
+                                {item.title}
+                              </h3>
+                              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans-ui">
+                                {item.description}
+                              </p>
+                            </div>
+                          </ScrollReveal>
+                        );
+                      })}
+                    </div>
+
+                    {/* 6 Contractor Benefits Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+                      {contractorBenefits.map((item, idx) => {
+                        const Icon = item.icon;
+                        return (
+                          <ScrollReveal key={item.id} direction="up" distance={30} delay={idx * 80}>
+                            <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-lg hover:border-[#D4E012] hover:shadow-xl transition-all duration-300 group flex flex-col justify-between h-full">
+                              <div>
+                                <div className="w-12 h-12 rounded-2xl bg-[#D4E012]/20 border border-[#D4E012]/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                  <Icon className="w-6 h-6 text-[#707B00]" />
+                                </div>
+                                <div className="text-xs font-mono font-bold text-[#707B00] uppercase tracking-wider mb-1.5">
+                                  {item.subtitle}
+                                </div>
+                                <h3 className="text-lg font-serif-display font-bold text-slate-900 mb-2">
+                                  {item.title}
+                                </h3>
+                                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans-ui">
+                                  {item.description}
+                                </p>
                               </div>
                             </div>
-                          </div>
+                          </ScrollReveal>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </section>
 
-                          {/* Middle Details */}
-                          <div className="lg:col-span-6 space-y-4">
-                            <div className="flex flex-wrap items-center gap-3">
-                              <span className="px-3 py-1 rounded-md bg-[#D4E012]/20 text-[#707B00] border border-[#D4E012]/40 font-mono font-bold text-xs uppercase tracking-wider">
-                                {cat.tag}
-                              </span>
-                            </div>
-
-                            <h3 className="text-2xl sm:text-3xl font-serif-display font-medium text-slate-900 tracking-tight">
-                              {cat.title}
-                            </h3>
-
-                            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                              {cat.description}
-                            </p>
-                          </div>
-
-                          {/* Right Specs & Action */}
-                          <div className="lg:col-span-3 space-y-6 lg:border-l lg:border-slate-100 lg:pl-8">
-                            <ul className="space-y-2.5">
-                              {cat.specs.map((spec, idx) => (
-                                <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
-                                  <CheckCircle2 className="w-4 h-4 text-[#6DAD45] shrink-0 mt-0.5" />
-                                  <span>{spec}</span>
-                                </li>
-                              ))}
-                            </ul>
-
-                            <button
-                              onClick={() => selectCategoryCard(cat.title)}
-                              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-7 py-3.5 rounded-full transition-all shadow-lg shadow-[#D4E012]/20 group/btn"
-                            >
-                              <span>Apply for {cat.title}</span>
-                              <ArrowUpRight className="w-4 h-4 text-black group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                            </button>
-                          </div>
-                        </div>
+                {/* ==========================================
+          2. CONTRACTOR CATEGORIES (Full Cards)
+          ========================================== */}
+                <section id="categories" className="py-8 sm:py-12 bg-slate-50/80 border-t border-slate-200 font-sans-ui">
+                  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <ScrollReveal direction="up" distance={40}>
+                      <div className="text-center max-w-3xl mx-auto mb-8">
+                        <AnimatedPillBadge className="mb-6">
+                          Specialty Categories
+                        </AnimatedPillBadge>
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                          <span className="inline-block">Core Trades.</span> <br />
+                          <span className="text-[#6DAD45] italic relative inline-block">
+                            Contractor Disciplines
+                            <svg
+                              className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                              viewBox="0 0 100 20"
+                              preserveAspectRatio="none">
+                              <path
+                                d="M0 15 Q 50 0 100 15"
+                                stroke="currentColor"
+                                strokeWidth="3.5"
+                                fill="transparent" />
+                            </svg>
+                          </span>
+                        </h2>
+                        <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+                          We empanel specialized execution teams across five primary renewable energy &amp; civil infrastructure disciplines.
+                        </p>
                       </div>
                     </ScrollReveal>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
 
-          {/* ==========================================
+                    {/* Cards Stack */}
+                    <div className="space-y-6">
+                      {contractorCategories.map((cat) => {
+                        const Icon = cat.icon;
+                        return (
+                          <ScrollReveal key={cat.id} direction="up" distance={40}>
+                            <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xl hover:border-[#D4E012] transition-all duration-300 p-6 sm:p-8 relative overflow-hidden group">
+                              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                                {/* Left Number Visual */}
+                                <div className="lg:col-span-3 flex items-center justify-center">
+                                  <div className="relative flex items-center justify-center">
+                                    <span className="text-8xl sm:text-9xl font-serif-display font-bold text-slate-100 select-none group-hover:text-[#D4E012]/15 transition-colors">
+                                      {cat.number}
+                                    </span>
+                                    <div className="absolute w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#D4E012]/20 border border-[#D4E012]/40 flex items-center justify-center shadow-md">
+                                      <Icon className="w-10 h-10 text-[#707B00]" />
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* Middle Details */}
+                                <div className="lg:col-span-6 space-y-4">
+                                  <div className="flex flex-wrap items-center gap-3">
+                                    <span className="px-3 py-1 rounded-md bg-[#D4E012]/20 text-[#707B00] border border-[#D4E012]/40 font-mono font-bold text-xs uppercase tracking-wider">
+                                      {cat.tag}
+                                    </span>
+                                  </div>
+
+                                  <h3 className="text-2xl sm:text-3xl font-serif-display font-medium text-slate-900 tracking-tight">
+                                    {cat.title}
+                                  </h3>
+
+                                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                                    {cat.description}
+                                  </p>
+                                </div>
+
+                                {/* Right Specs & Action */}
+                                <div className="lg:col-span-3 space-y-6 lg:border-l lg:border-slate-100 lg:pl-8">
+                                  <ul className="space-y-2.5">
+                                    {cat.specs.map((spec, idx) => (
+                                      <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
+                                        <CheckCircle2 className="w-4 h-4 text-[#6DAD45] shrink-0 mt-0.5" />
+                                        <span>{spec}</span>
+                                      </li>
+                                    ))}
+                                  </ul>
+
+                                  <button
+                                    onClick={() => selectCategoryCard(cat.title)}
+                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-7 py-3.5 rounded-full transition-all shadow-lg shadow-[#D4E012]/20 group/btn">
+                                    <span>Apply for {cat.title}</span>
+                                    <ArrowUpRight className="w-4 h-4 text-black group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </ScrollReveal>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </section>
+
+                {/* ==========================================
           3. HOW EMPANELMENT WORKS (Process Timeline)
           ========================================== */}
-          <section className="py-8 sm:py-12 bg-[#F8FAF8] relative overflow-hidden font-sans-ui border-t border-slate-200">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <ScrollReveal direction="up" distance={40}>
-                <div className="text-center max-w-3xl mx-auto mb-8">
-                  <AnimatedPillBadge className="mb-6">
-                    Empanelment Process
-                  </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-                    <span className="inline-block">How to Become an</span> <br />
-                    <span className="text-[#6DAD45] italic relative inline-block">
-                      Empanelled Contractor
+                <section className="py-8 sm:py-12 bg-[#F8FAF8] relative overflow-hidden font-sans-ui border-t border-slate-200">
+                  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <ScrollReveal direction="up" distance={40}>
+                      <div className="text-center max-w-3xl mx-auto mb-8">
+                        <AnimatedPillBadge className="mb-6">
+                          Empanelment Process
+                        </AnimatedPillBadge>
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                          <span className="inline-block">How to Become an</span> <br />
+                          <span className="text-[#6DAD45] italic relative inline-block">
+                            Empanelled Contractor
+                            <svg
+                              className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                              viewBox="0 0 100 20"
+                              preserveAspectRatio="none">
+                              <path
+                                d="M0 15 Q 50 0 100 15"
+                                stroke="currentColor"
+                                strokeWidth="3.5"
+                                fill="transparent" />
+                            </svg>
+                          </span>
+                        </h2>
+                        <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+                          Follow these 5 simple steps to get enlisted into Sarhat&apos;s active project bidding network.
+                        </p>
+                      </div>
+                    </ScrollReveal>
+
+                    {/* Desktop Curved Step Timeline */}
+                    <div className="relative py-2 hidden lg:block">
+                      {/* SVG Curved Line */}
                       <svg
-                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
-                        viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
+                        className="absolute top-1/2 left-0 w-full h-32 -translate-y-1/2 pointer-events-none z-0"
+                        viewBox="0 0 1200 120"
+                        fill="none"
+                        preserveAspectRatio="none">
                         <path
-                          d="M0 15 Q 50 0 100 15"
-                          stroke="currentColor"
-                          strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          d="M 50 60 Q 200 120, 350 60 T 650 60 T 950 60 T 1150 60"
+                          stroke="#6DAD45"
+                          strokeWidth="2.5"
+                          strokeDasharray="6 6"
+                          fill="none" />
                       </svg>
-                    </span>
-                  </h2>
-                  <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
-                    Follow these 5 simple steps to get enlisted into Sarhat&apos;s active project bidding network.
-                  </p>
-                </div>
-              </ScrollReveal>
 
-              {/* Desktop Curved Step Timeline */}
-              <div className="relative py-2 hidden lg:block">
-                {/* SVG Curved Line */}
-                <svg
-                  className="absolute top-1/2 left-0 w-full h-32 -translate-y-1/2 pointer-events-none z-0"
-                  viewBox="0 0 1200 120"
-                  fill="none"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M 50 60 Q 200 120, 350 60 T 650 60 T 950 60 T 1150 60"
-                    stroke="#6DAD45"
-                    strokeWidth="2.5"
-                    strokeDasharray="6 6"
-                    fill="none"
-                  />
-                </svg>
+                      {/* 5 Step Cards */}
+                      <div className="grid grid-cols-5 gap-4 relative z-10">
+                        {empanelmentSteps.map((item) => {
+                          const Icon = item.icon;
+                          const isTop = item.position === "top";
 
-                {/* 5 Step Cards */}
-                <div className="grid grid-cols-5 gap-4 relative z-10">
-                  {empanelmentSteps.map((item) => {
-                    const Icon = item.icon;
-                    const isTop = item.position === "top";
+                          return (
+                            <div key={item.step} className="flex flex-col items-center text-center">
+                              {/* Top Card */}
+                              {isTop && (
+                                <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-lg hover:border-[#D4E012] transition-all duration-300 w-full mb-6 relative group min-h-[140px] flex flex-col justify-center">
+                                  <div className="text-xs font-mono font-bold text-[#707B00] mb-1">{item.step}</div>
+                                  <h4 className="text-sm font-serif-display font-semibold text-slate-900 mb-1 leading-snug">{item.title}</h4>
+                                  <p className="text-[11px] text-slate-500 leading-relaxed font-sans-ui">{item.description}</p>
+                                </div>
+                              )}
 
-                    return (
-                      <div key={item.step} className="flex flex-col items-center text-center">
-                        {/* Top Card */}
-                        {isTop && (
-                          <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-lg hover:border-[#D4E012] transition-all duration-300 w-full mb-6 relative group min-h-[140px] flex flex-col justify-center">
-                            <div className="text-xs font-mono font-bold text-[#707B00] mb-1">{item.step}</div>
-                            <h4 className="text-sm font-serif-display font-semibold text-slate-900 mb-1 leading-snug">{item.title}</h4>
-                            <p className="text-[11px] text-slate-500 leading-relaxed font-sans-ui">{item.description}</p>
-                          </div>
-                        )}
+                              {/* Circle Node */}
+                              <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#D4E012] to-[#6DAD45] border-4 border-white shadow-xl flex items-center justify-center shrink-0 z-20 my-2 hover:scale-125 transition-transform cursor-pointer">
+                                <Icon className="w-5 h-5 text-black" />
+                              </div>
 
-                        {/* Circle Node */}
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#D4E012] to-[#6DAD45] border-4 border-white shadow-xl flex items-center justify-center shrink-0 z-20 my-2 hover:scale-125 transition-transform cursor-pointer">
-                          <Icon className="w-5 h-5 text-black" />
-                        </div>
-
-                        {/* Bottom Card */}
-                        {!isTop && (
-                          <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-lg hover:border-[#D4E012] transition-all duration-300 w-full mt-6 relative group min-h-[140px] flex flex-col justify-center">
-                            <div className="text-xs font-mono font-bold text-[#707B00] mb-1">{item.step}</div>
-                            <h4 className="text-sm font-serif-display font-semibold text-slate-900 mb-1 leading-snug">{item.title}</h4>
-                            <p className="text-[11px] text-slate-500 leading-relaxed font-sans-ui">{item.description}</p>
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Mobile Layout */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:hidden">
-                {empanelmentSteps.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={item.step} className="bg-white rounded-2xl p-6 border border-slate-200 shadow-md flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-2xl bg-[#D4E012]/20 border border-[#D4E012]/40 flex items-center justify-center shrink-0">
-                        <Icon className="w-6 h-6 text-[#707B00]" />
-                      </div>
-                      <div>
-                        <div className="text-xs font-mono font-bold text-[#707B00] mb-0.5">{item.step}</div>
-                        <h4 className="text-base font-serif-display font-bold text-slate-900 mb-1">{item.title}</h4>
-                        <p className="text-xs text-slate-600 leading-relaxed font-sans-ui">{item.description}</p>
+                              {/* Bottom Card */}
+                              {!isTop && (
+                                <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-lg hover:border-[#D4E012] transition-all duration-300 w-full mt-6 relative group min-h-[140px] flex flex-col justify-center">
+                                  <div className="text-xs font-mono font-bold text-[#707B00] mb-1">{item.step}</div>
+                                  <h4 className="text-sm font-serif-display font-semibold text-slate-900 mb-1 leading-snug">{item.title}</h4>
+                                  <p className="text-[11px] text-slate-500 leading-relaxed font-sans-ui">{item.description}</p>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
 
-          {/* ==========================================
+                    {/* Mobile Layout */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:hidden">
+                      {empanelmentSteps.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <div key={item.step} className="bg-white rounded-2xl p-6 border border-slate-200 shadow-md flex items-start gap-4">
+                            <div className="w-12 h-12 rounded-2xl bg-[#D4E012]/20 border border-[#D4E012]/40 flex items-center justify-center shrink-0">
+                              <Icon className="w-6 h-6 text-[#707B00]" />
+                            </div>
+                            <div>
+                              <div className="text-xs font-mono font-bold text-[#707B00] mb-0.5">{item.step}</div>
+                              <h4 className="text-base font-serif-display font-bold text-slate-900 mb-1">{item.title}</h4>
+                              <p className="text-xs text-slate-600 leading-relaxed font-sans-ui">{item.description}</p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </section>
+
+                {/* ==========================================
           4. CONTRACTOR EMPANELMENT FORM
           ========================================== */}
-          <section id="empanelment-form" className="py-8 sm:py-12 bg-slate-100/80 border-t border-slate-200 font-sans-ui relative">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-              <ScrollReveal direction="up" distance={40}>
-                <div className="text-center max-w-2xl mx-auto mb-8">
-                  <AnimatedPillBadge className="mb-6">
-                    Register Now
-                  </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-                    <span className="inline-block">Join Active Projects.</span> <br />
-                    <span className="text-[#6DAD45] italic relative inline-block">
-                      Contractor Registration
-                      <svg
-                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
-                        viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
-                        <path
-                          d="M0 15 Q 50 0 100 15"
-                          stroke="currentColor"
-                          strokeWidth="3.5"
-                          fill="transparent"
-                        />
-                      </svg>
-                    </span>
-                  </h2>
-                  <p className="text-slate-600 text-sm sm:text-base">
-                    Register your firm into Sarhat&apos;s active execution database.
-                  </p>
-                </div>
-              </ScrollReveal>
-
-              {/* Form Card */}
-              <ScrollReveal direction="up" distance={40}>
-                <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl p-6 sm:p-8">
-                  {isSubmitted ? (
-                    <div className="py-12 text-center space-y-4">
-                      <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
-                        <Check className="w-8 h-8 stroke-[3]" />
+                <section id="empanelment-form" className="py-8 sm:py-12 bg-slate-100/80 border-t border-slate-200 font-sans-ui relative">
+                  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <ScrollReveal direction="up" distance={40}>
+                      <div className="text-center max-w-2xl mx-auto mb-8">
+                        <AnimatedPillBadge className="mb-6">
+                          Register Now
+                        </AnimatedPillBadge>
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                          <span className="inline-block">Join Active Projects.</span> <br />
+                          <span className="text-[#6DAD45] italic relative inline-block">
+                            Contractor Registration
+                            <svg
+                              className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                              viewBox="0 0 100 20"
+                              preserveAspectRatio="none">
+                              <path
+                                d="M0 15 Q 50 0 100 15"
+                                stroke="currentColor"
+                                strokeWidth="3.5"
+                                fill="transparent" />
+                            </svg>
+                          </span>
+                        </h2>
+                        <p className="text-slate-600 text-sm sm:text-base">
+                          Register your firm into Sarhat&apos;s active execution database.
+                        </p>
                       </div>
-                      <h3 className="text-2xl font-serif-display font-bold text-slate-900">Registration Submitted!</h3>
-                      <p className="text-slate-600 text-sm max-w-md mx-auto">
-                        Thank you for registering your contractor firm with Sarhat. Our site procurement manager will review your submission and reach out within 24-48 hours.
-                      </p>
-                      <button
-                        onClick={() => {
-                          setIsSubmitted(false);
-                          setIsVerified(false);
-                          setFormData({
-                            companyName: "",
-                            contactPerson: "",
-                            email: "",
-                            phone: "",
-                            city: "",
-                            state: "",
-                            specialty: "Civil & Earthworks",
-                            teamSize: "10-25 Workers",
-                            experienceYears: "3-5 Years",
-                            gstin: "",
-                            message: "",
-                          });
-                        }}
-                        className="inline-flex items-center gap-2 bg-slate-900 text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-full hover:bg-[#D4E012] hover:text-black transition-colors"
-                      >
-                        Register Another Firm
-                      </button>
-                    </div>
-                  ) : (
-                    <form onSubmit={handleFormSubmit} className="space-y-6">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                        {/* Company / Firm Name */}
-                        <div>
-                          <input
-                            type="text"
-                            name="companyName"
-                            required
-                            placeholder="Company / Firm Name *"
-                            value={formData.companyName}
-                            onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"
-                          />
-                        </div>
+                    </ScrollReveal>
 
-                        {/* Contact Person */}
-                        <div>
-                          <input
-                            type="text"
-                            name="contactPerson"
-                            required
-                            placeholder="Contact Person Name *"
-                            value={formData.contactPerson}
-                            onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"
-                          />
-                        </div>
-
-                        {/* Email */}
-                        <div>
-                          <input
-                            type="email"
-                            name="email"
-                            required
-                            placeholder="Email Address *"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"
-                          />
-                        </div>
-
-                        {/* Phone */}
-                        <div>
-                          <input
-                            type="tel"
-                            name="phone"
-                            required
-                            placeholder="Phone / WhatsApp *"
-                            value={formData.phone}
-                            onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"
-                          />
-                        </div>
-
-                        {/* City / Headquarter */}
-                        <div>
-                          <input
-                            type="text"
-                            name="city"
-                            required
-                            placeholder="Headquarter City *"
-                            value={formData.city}
-                            onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"
-                          />
-                        </div>
-
-                        {/* Primary Operating State */}
-                        <div>
-                          <select
-                            name="state"
-                            required
-                            value={formData.state}
-                            onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-700 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer"
-                          >
-                            <option value="" disabled>
-                              Primary Operating State *
-                            </option>
-                            <option value="Uttar Pradesh">Uttar Pradesh</option>
-                            <option value="Maharashtra">Maharashtra</option>
-                            <option value="Gujarat">Gujarat</option>
-                            <option value="Karnataka">Karnataka</option>
-                            <option value="Rajasthan">Rajasthan</option>
-                            <option value="Delhi NCR">Delhi NCR</option>
-                            <option value="Madhya Pradesh">Madhya Pradesh</option>
-                            <option value="Tamil Nadu">Tamil Nadu</option>
-                            <option value="West Bengal">West Bengal</option>
-                            <option value="Telangana">Telangana</option>
-                            <option value="Haryana">Haryana</option>
-                            <option value="Punjab">Punjab</option>
-                            <option value="Pan-India">Pan-India Coverage</option>
-                          </select>
-                        </div>
-
-                        {/* Contractor Specialty */}
-                        <div>
-                          <select
-                            name="specialty"
-                            required
-                            value={formData.specialty}
-                            onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-[#0F172A] focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer"
-                          >
-                            <option value="" disabled>
-                              Contractor Specialty *
-                            </option>
-                            <option value="Civil & Earthworks">Civil &amp; Earthworks</option>
-                            <option value="Electrical Erection & Cabling">Electrical Erection &amp; Cabling</option>
-                            <option value="Substation & EHV Grid Works">Substation &amp; EHV Grid Works</option>
-                            <option value="Solar PV Structure & Module Mounting">Solar PV Structure &amp; Module Mounting</option>
-                            <option value="General EPC Subcontractor">General EPC Subcontractor</option>
-                          </select>
-                        </div>
-
-                        {/* Team Size */}
-                        <div>
-                          <select
-                            name="teamSize"
-                            required
-                            value={formData.teamSize}
-                            onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-700 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer"
-                          >
-                            <option value="" disabled>
-                              Active On-Site Team Size *
-                            </option>
-                            <option value="5-10 Workers">5 - 10 Workers</option>
-                            <option value="10-25 Workers">10 - 25 Workers</option>
-                            <option value="25-50 Workers">25 - 50 Workers</option>
-                            <option value="50-100 Workers">50 - 100 Workers</option>
-                            <option value="100+ Workers">100+ Workers</option>
-                          </select>
-                        </div>
-
-                        {/* Experience in Field */}
-                        <div>
-                          <select
-                            name="experienceYears"
-                            required
-                            value={formData.experienceYears}
-                            onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-700 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer"
-                          >
-                            <option value="" disabled>
-                              Years in Execution Business *
-                            </option>
-                            <option value="1-3 Years">1 - 3 Years</option>
-                            <option value="3-5 Years">3 - 5 Years</option>
-                            <option value="5-10 Years">5 - 10 Years</option>
-                            <option value="10+ Years">10+ Years</option>
-                          </select>
-                        </div>
-
-                        {/* GSTIN / License Number */}
-                        <div>
-                          <input
-                            type="text"
-                            name="gstin"
-                            placeholder="GSTIN / License Number (Optional)"
-                            value={formData.gstin}
-                            onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Message / Past Experience */}
-                      <div>
-                        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 font-mono">
-                          Past Projects &amp; Equipment Owned
-                        </label>
-                        <textarea
-                          name="message"
-                          rows={4}
-                          placeholder="Briefly describe your major past solar/civil projects, available tools, pile rigs, or electrical testing gear..."
-                          value={formData.message}
-                          onChange={handleInputChange}
-                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"
-                        ></textarea>
-                      </div>
-
-                      {/* Company Profile PDF Upload Field (Image 2 Style) */}
-                      <div>
-                        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5 font-mono">
-                          Company Profile / License Doc <span className="text-slate-400 font-normal lowercase">(optional, PDF only)</span>
-                        </label>
-                        <div className="relative border-2 border-dashed border-slate-200 rounded-xl p-4 bg-slate-50/50 hover:bg-slate-50 hover:border-[#D4E012] transition-all text-center cursor-pointer group">
-                          <input
-                            type="file"
-                            accept=".pdf"
-                            onChange={handleFileChange}
-                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                          />
-                          <div className="flex items-center justify-center gap-3 text-slate-600">
-                            <Upload className="w-5 h-5 text-slate-400 group-hover:text-[#707B00] transition-colors" />
-                            <span className="text-sm font-medium">
-                              {profileFile ? (
-                                <span className="text-[#707B00] font-bold">{profileFile.name}</span>
-                              ) : (
-                                "Click to upload company profile PDF"
-                              )}
-                            </span>
+                    {/* Form Card */}
+                    <ScrollReveal direction="up" distance={40}>
+                      <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl p-6 sm:p-8">
+                        {isSubmitted ? (
+                          <div className="py-12 text-center space-y-4">
+                            <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+                              <Check className="w-8 h-8 stroke-[3]" />
+                            </div>
+                            <h3 className="text-2xl font-serif-display font-bold text-slate-900">Registration Submitted!</h3>
+                            <p className="text-slate-600 text-sm max-w-md mx-auto">
+                              Thank you for registering your contractor firm with Sarhat. Our site procurement manager will review your submission and reach out within 24-48 hours.
+                            </p>
+                            <button
+                              onClick={() => {
+                                setIsSubmitted(false);
+                                setIsVerified(false);
+                                setFormData({
+                                  companyName: "",
+                                  contactPerson: "",
+                                  email: "",
+                                  phone: "",
+                                  city: "",
+                                  state: "",
+                                  specialty: "Civil & Earthworks",
+                                  teamSize: "10-25 Workers",
+                                  experienceYears: "3-5 Years",
+                                  gstin: "",
+                                  message: "",
+                                });
+                              }}
+                              className="inline-flex items-center gap-2 bg-slate-900 text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-full hover:bg-[#D4E012] hover:text-black transition-colors">
+                              Register Another Firm
+                            </button>
                           </div>
-                        </div>
-                      </div>
+                        ) : (
+                          <form onSubmit={handleFormSubmit} className="space-y-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                              {/* Company / Firm Name */}
+                              <div>
+                                <input
+                                  type="text"
+                                  name="companyName"
+                                  required
+                                  placeholder="Company / Firm Name *"
+                                  value={formData.companyName}
+                                  onChange={handleInputChange}
+                                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all" />
+                              </div>
 
-                      {/* Security Verification */}
-                      <div className="pt-1">
-                        <div
-                          onClick={() => setIsVerified(!isVerified)}
-                          className={`inline-flex items-center gap-4 border rounded-lg px-4 py-3 cursor-pointer select-none transition-all ${isVerified
-                              ? "bg-slate-900 border-slate-800 text-white"
-                              : "bg-slate-900/90 border-slate-800 text-slate-200 hover:bg-slate-900"
-                            }`}
-                        >
-                          <div
-                            className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${isVerified
-                                ? "bg-[#D4E012] border-[#D4E012] text-black"
-                                : "border-slate-500 bg-slate-800"
-                              }`}
-                          >
-                            {isVerified && <Check className="w-3.5 h-3.5 stroke-[3]" />}
-                          </div>
-                          <span className="text-xs font-medium">Verify you are human</span>
-                          <div className="ml-auto pl-6 border-l border-slate-700 text-[10px] text-slate-400 font-mono">
-                            CLOUDFLARE
-                          </div>
-                        </div>
-                      </div>
+                              {/* Contact Person */}
+                              <div>
+                                <input
+                                  type="text"
+                                  name="contactPerson"
+                                  required
+                                  placeholder="Contact Person Name *"
+                                  value={formData.contactPerson}
+                                  onChange={handleInputChange}
+                                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all" />
+                              </div>
 
-                      {/* Submit Button */}
-                      <div className="pt-2">
-                        <button
-                          type="submit"
-                          disabled={isSubmitting}
-                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-10 py-4 rounded-xl transition-all shadow-xl shadow-[#D4E012]/20 disabled:opacity-50"
-                        >
-                          {isSubmitting ? (
-                            <span>Submitting Profile...</span>
-                          ) : (
-                            <>
-                              <Send className="w-4 h-4" />
-                              <span>Submit Registration</span>
-                            </>
-                          )}
-                        </button>
-                      </div>
-                    </form>
-                  )}
-                </div>
-              </ScrollReveal>
-            </div>
-          </section>
+                              {/* Email */}
+                              <div>
+                                <input
+                                  type="email"
+                                  name="email"
+                                  required
+                                  placeholder="Email Address *"
+                                  value={formData.email}
+                                  onChange={handleInputChange}
+                                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all" />
+                              </div>
 
-          {/* ==========================================
+                              {/* Phone */}
+                              <div>
+                                <input
+                                  type="tel"
+                                  name="phone"
+                                  required
+                                  placeholder="Phone / WhatsApp *"
+                                  value={formData.phone}
+                                  onChange={handleInputChange}
+                                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all" />
+                              </div>
+
+                              {/* City / Headquarter */}
+                              <div>
+                                <input
+                                  type="text"
+                                  name="city"
+                                  required
+                                  placeholder="Headquarter City *"
+                                  value={formData.city}
+                                  onChange={handleInputChange}
+                                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all" />
+                              </div>
+
+                              {/* Primary Operating State */}
+                              <div>
+                                <select
+                                  name="state"
+                                  required
+                                  value={formData.state}
+                                  onChange={handleInputChange}
+                                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-700 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer">
+                                  <option value="" disabled>
+                                    Primary Operating State *
+                                  </option>
+                                  <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                  <option value="Maharashtra">Maharashtra</option>
+                                  <option value="Gujarat">Gujarat</option>
+                                  <option value="Karnataka">Karnataka</option>
+                                  <option value="Rajasthan">Rajasthan</option>
+                                  <option value="Delhi NCR">Delhi NCR</option>
+                                  <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                  <option value="Tamil Nadu">Tamil Nadu</option>
+                                  <option value="West Bengal">West Bengal</option>
+                                  <option value="Telangana">Telangana</option>
+                                  <option value="Haryana">Haryana</option>
+                                  <option value="Punjab">Punjab</option>
+                                  <option value="Pan-India">Pan-India Coverage</option>
+                                </select>
+                              </div>
+
+                              {/* Contractor Specialty */}
+                              <div>
+                                <select
+                                  name="specialty"
+                                  required
+                                  value={formData.specialty}
+                                  onChange={handleInputChange}
+                                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-[#0F172A] focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer">
+                                  <option value="" disabled>
+                                    Contractor Specialty *
+                                  </option>
+                                  <option value="Civil & Earthworks">Civil &amp; Earthworks</option>
+                                  <option value="Electrical Erection & Cabling">Electrical Erection &amp; Cabling</option>
+                                  <option value="Substation & EHV Grid Works">Substation &amp; EHV Grid Works</option>
+                                  <option value="Solar PV Structure & Module Mounting">Solar PV Structure &amp; Module Mounting</option>
+                                  <option value="General EPC Subcontractor">General EPC Subcontractor</option>
+                                </select>
+                              </div>
+
+                              {/* Team Size */}
+                              <div>
+                                <select
+                                  name="teamSize"
+                                  required
+                                  value={formData.teamSize}
+                                  onChange={handleInputChange}
+                                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-700 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer">
+                                  <option value="" disabled>
+                                    Active On-Site Team Size *
+                                  </option>
+                                  <option value="5-10 Workers">5 - 10 Workers</option>
+                                  <option value="10-25 Workers">10 - 25 Workers</option>
+                                  <option value="25-50 Workers">25 - 50 Workers</option>
+                                  <option value="50-100 Workers">50 - 100 Workers</option>
+                                  <option value="100+ Workers">100+ Workers</option>
+                                </select>
+                              </div>
+
+                              {/* Experience in Field */}
+                              <div>
+                                <select
+                                  name="experienceYears"
+                                  required
+                                  value={formData.experienceYears}
+                                  onChange={handleInputChange}
+                                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-700 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer">
+                                  <option value="" disabled>
+                                    Years in Execution Business *
+                                  </option>
+                                  <option value="1-3 Years">1 - 3 Years</option>
+                                  <option value="3-5 Years">3 - 5 Years</option>
+                                  <option value="5-10 Years">5 - 10 Years</option>
+                                  <option value="10+ Years">10+ Years</option>
+                                </select>
+                              </div>
+
+                              {/* GSTIN / License Number */}
+                              <div>
+                                <input
+                                  type="text"
+                                  name="gstin"
+                                  placeholder="GSTIN / License Number (Optional)"
+                                  value={formData.gstin}
+                                  onChange={handleInputChange}
+                                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all" />
+                              </div>
+                            </div>
+
+                            {/* Message / Past Experience */}
+                            <div>
+                              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 font-mono">
+                                Past Projects &amp; Equipment Owned
+                              </label>
+                              <textarea
+                                name="message"
+                                rows={4}
+                                placeholder="Briefly describe your major past solar/civil projects, available tools, pile rigs, or electrical testing gear..."
+                                value={formData.message}
+                                onChange={handleInputChange}
+                                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"></textarea>
+                            </div>
+
+                            {/* Company Profile PDF Upload Field (Image 2 Style) */}
+                            <div>
+                              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5 font-mono">
+                                Company Profile / License Doc <span className="text-slate-400 font-normal lowercase">(optional, PDF only)</span>
+                              </label>
+                              <div className="relative border-2 border-dashed border-slate-200 rounded-xl p-4 bg-slate-50/50 hover:bg-slate-50 hover:border-[#D4E012] transition-all text-center cursor-pointer group">
+                                <input
+                                  type="file"
+                                  accept=".pdf"
+                                  onChange={handleFileChange}
+                                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                                <div className="flex items-center justify-center gap-3 text-slate-600">
+                                  <Upload className="w-5 h-5 text-slate-400 group-hover:text-[#707B00] transition-colors" />
+                                  <span className="text-sm font-medium">
+                                    {profileFile ? (
+                                      <span className="text-[#707B00] font-bold">{profileFile.name}</span>
+                                    ) : (
+                                      "Click to upload company profile PDF"
+                                    )}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Security Verification */}
+                            <div className="pt-1">
+                              <div
+                                onClick={() => setIsVerified(!isVerified)}
+                                className={`inline-flex items-center gap-4 border rounded-lg px-4 py-3 cursor-pointer select-none transition-all ${isVerified
+                                  ? "bg-slate-900 border-slate-800 text-white"
+                                  : "bg-slate-900/90 border-slate-800 text-slate-200 hover:bg-slate-900"
+                                  }`}>
+                                <div
+                                  className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${isVerified
+                                    ? "bg-[#D4E012] border-[#D4E012] text-black"
+                                    : "border-slate-500 bg-slate-800"
+                                    }`}>
+                                  {isVerified && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                                </div>
+                                <span className="text-xs font-medium">Verify you are human</span>
+                                <div className="ml-auto pl-6 border-l border-slate-700 text-[10px] text-slate-400 font-mono">
+                                  CLOUDFLARE
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Submit Button */}
+                            <div className="pt-2">
+                              <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-10 py-4 rounded-xl transition-all shadow-xl shadow-[#D4E012]/20 disabled:opacity-50">
+                                {isSubmitting ? (
+                                  <span>Submitting Profile...</span>
+                                ) : (
+                                  <>
+                                    <Send className="w-4 h-4" />
+                                    <span>Submit Registration</span>
+                                  </>
+                                )}
+                              </button>
+                            </div>
+                          </form>
+                        )}
+                      </div>
+                    </ScrollReveal>
+                  </div>
+                </section>
+
+                {/* ==========================================
           5. EMPANELMENT FAQ SECTION
           ========================================== */}
-          <section className="py-8 sm:py-12 bg-[#F8FAF8] border-t border-slate-200 font-sans-ui">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-              <ScrollReveal direction="up" distance={40}>
-                <div className="text-center max-w-2xl mx-auto mb-8">
-                  <AnimatedPillBadge className="mb-6">
-                    Got Questions?
-                  </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-                    <span className="inline-block">Common Inquiries.</span> <br />
-                    <span className="text-[#6DAD45] italic relative inline-block">
-                      Frequently Asked Questions
-                      <svg
-                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
-                        viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
-                        <path
-                          d="M0 15 Q 50 0 100 15"
-                          stroke="currentColor"
-                          strokeWidth="3.5"
-                          fill="transparent"
-                        />
-                      </svg>
-                    </span>
-                  </h2>
-                  <p className="text-slate-600 text-sm sm:text-base">
-                    Everything you need to know about Sarhat&apos;s contractor empanelment process and commercial terms.
-                  </p>
-                </div>
-              </ScrollReveal>
+                <section className="py-8 sm:py-12 bg-[#F8FAF8] border-t border-slate-200 font-sans-ui">
+                  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <ScrollReveal direction="up" distance={40}>
+                      <div className="text-center max-w-2xl mx-auto mb-8">
+                        <AnimatedPillBadge className="mb-6">
+                          Got Questions?
+                        </AnimatedPillBadge>
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                          <span className="inline-block">Common Inquiries.</span> <br />
+                          <span className="text-[#6DAD45] italic relative inline-block">
+                            Frequently Asked Questions
+                            <svg
+                              className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                              viewBox="0 0 100 20"
+                              preserveAspectRatio="none">
+                              <path
+                                d="M0 15 Q 50 0 100 15"
+                                stroke="currentColor"
+                                strokeWidth="3.5"
+                                fill="transparent" />
+                            </svg>
+                          </span>
+                        </h2>
+                        <p className="text-slate-600 text-sm sm:text-base">
+                          Everything you need to know about Sarhat&apos;s contractor empanelment process and commercial terms.
+                        </p>
+                      </div>
+                    </ScrollReveal>
 
-              {/* Category Tabs */}
-              <div className="flex items-center justify-center gap-2 mb-8 flex-wrap">
-                {(["Empanellment", "Execution", "Payments"] as const).map((tab) => (
-                  <button
-                    key={tab}
-                    onClick={() => {
-                      setActiveFaqTab(tab);
-                      setOpenFaqIndex(0);
-                    }}
-                    className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${activeFaqTab === tab
-                        ? "bg-slate-900 text-white shadow-md"
-                        : "bg-white text-slate-600 border border-slate-200 hover:border-[#D4E012]"
-                      }`}
-                  >
-                    {tab}
-                  </button>
-                ))}
-              </div>
-
-              {/* FAQ Accordion */}
-              <div className="space-y-4">
-                {faqData[activeFaqTab].map((faq, idx) => {
-                  const isOpen = openFaqIndex === idx;
-                  return (
-                    <div
-                      key={idx}
-                      className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden transition-all"
-                    >
-                      <button
-                        onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                        className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 focus:outline-none"
-                      >
-                        <span className="font-serif-display font-medium text-base sm:text-lg text-slate-900">
-                          {faq.question}
-                        </span>
-                        <ChevronDown
-                          className={`w-5 h-5 text-slate-500 shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 text-[#707B00]" : ""
-                            }`}
-                        />
-                      </button>
-                      <AnimatePresence>
-                        {isOpen && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.25 }}
-                          >
-                            <div className="px-5 sm:px-6 pb-6 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4 font-sans-ui">
-                              {faq.answer}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                    {/* Category Tabs */}
+                    <div className="flex items-center justify-center gap-2 mb-8 flex-wrap">
+                      {(["Empanellment", "Execution", "Payments"] as const).map((tab) => (
+                        <button
+                          key={tab}
+                          onClick={() => {
+                            setActiveFaqTab(tab);
+                            setOpenFaqIndex(0);
+                          }}
+                          className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${activeFaqTab === tab
+                            ? "bg-slate-900 text-white shadow-md"
+                            : "bg-white text-slate-600 border border-slate-200 hover:border-[#D4E012]"
+                            }`}>
+                          {tab}
+                        </button>
+                      ))}
                     </div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-        </div>
 
-        {/* Global Footer */}
-        <Footer />
-      </div>
-    </SmoothScroll>
-  );
+                    {/* FAQ Accordion */}
+                    <ProductFAQ
+                      faqs={faqData[activeFaqTab]}
+                      openIndex={openFaqIndex}
+                      onToggle={(idx) => setOpenFaqIndex(openFaqIndex === idx ? null : idx)} />
+                  </div>
+                </section>
+              </div>
+
+              {/* Global Footer */}
+              <Footer />
+            </div>
+          </SmoothScroll>
+          );
 }

@@ -54,13 +54,11 @@ function Toggle({
       onClick={onChange}
       className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${
         checked ? "bg-[#6DAD45]" : "bg-slate-300"
-      } ${disabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"}`}
-    >
+      } ${disabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"}`}>
       <span
         className={`absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${
           checked ? "translate-x-5" : ""
-        }`}
-      />
+        }`} />
     </button>
   );
 }
@@ -88,7 +86,7 @@ export default function CookieConsent() {
 
   useEffect(() => {
     if (!showSettings) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setShowSettings(false);
+    const onKey = (e: KeyboardEvent) => e.key=== "Escape" && setShowSettings(false);
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [showSettings]);
@@ -124,8 +122,8 @@ export default function CookieConsent() {
   const btnBase =
     "cursor-pointer whitespace-nowrap rounded-full px-5 py-2.5 text-xs font-bold uppercase tracking-wider transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4E012] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B120B]";
 
-  const current = CATEGORIES.find((c) => c.key === active)!;
-  const locked = current.key === "necessary";
+  const current = CATEGORIES.find((c) => c.key=== active)!;
+  const locked = current.key=== "necessary";
 
   return (
     <>
@@ -138,8 +136,7 @@ export default function CookieConsent() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: "100%", opacity: 0 }}
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-x-0 bottom-0 z-50 border-t-2 border-[#D4E012] bg-[#0B120B]/97 font-sans-ui text-white shadow-[0_-12px_40px_rgba(0,0,0,0.5)] backdrop-blur-xl"
-          >
+            className="fixed inset-x-0 bottom-0 z-50 border-t-2 border-[#D4E012] bg-[#0B120B]/97 font-sans-ui text-white shadow-[0_-12px_40px_rgba(0,0,0,0.5)] backdrop-blur-xl">
             <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:px-8">
               <div className="flex items-start gap-3">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#D4E012]/30 bg-[#D4E012]/15 text-[#D4E012]">
@@ -151,8 +148,7 @@ export default function CookieConsent() {
                   Sarhat EPC website. By continuing to use this site, you accept our{" "}
                   <Link
                     href="#"
-                    className="font-semibold text-[#D4E012] underline underline-offset-2 hover:text-white"
-                  >
+                    className="font-semibold text-[#D4E012] underline underline-offset-2 hover:text-white">
                     Cookie Policy
                   </Link>
                   .
@@ -162,20 +158,17 @@ export default function CookieConsent() {
               <div className="flex flex-col gap-2 sm:flex-row sm:items-center lg:shrink-0">
                 <button
                   onClick={() => setShowSettings(true)}
-                  className={`${btnBase} border border-white/25 text-white hover:border-[#D4E012] hover:text-[#D4E012]`}
-                >
+                  className={`${btnBase} border border-white/25 text-white hover:border-[#D4E012] hover:text-[#D4E012]`}>
                   Cookie Settings
                 </button>
                 <button
                   onClick={handleAllowAll}
-                  className={`${btnBase} bg-gradient-to-r from-[#D4E012] to-[#6DAD45] text-black shadow-md hover:brightness-110`}
-                >
+                  className={`${btnBase} bg-gradient-to-r from-[#D4E012] to-[#6DAD45] text-black shadow-md hover:brightness-110`}>
                   Allow All Cookies
                 </button>
                 <button
                   onClick={handleDecline}
-                  className={`${btnBase} bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white`}
-                >
+                  className={`${btnBase} bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white`}>
                   Decline
                 </button>
               </div>
@@ -191,8 +184,7 @@ export default function CookieConsent() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setShowSettings(false)}
-          >
+            onClick={() => setShowSettings(false)}>
             <motion.div
               role="dialog"
               aria-modal="true"
@@ -202,8 +194,7 @@ export default function CookieConsent() {
               exit={{ y: 40, opacity: 0 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="flex max-h-[92vh] w-full max-w-3xl flex-col overflow-hidden rounded-t-2xl bg-white font-sans-ui text-slate-800 shadow-2xl sm:rounded-2xl"
-            >
+              className="flex max-h-[92vh] w-full max-w-3xl flex-col overflow-hidden rounded-t-2xl bg-white font-sans-ui text-slate-800 shadow-2xl sm:rounded-2xl">
               <div className="flex items-center justify-between bg-[#0B120B] px-5 py-4 text-white sm:px-6">
                 <div className="flex items-center gap-3">
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#D4E012]/15 text-[#D4E012]">
@@ -219,8 +210,7 @@ export default function CookieConsent() {
                 <button
                   onClick={() => setShowSettings(false)}
                   aria-label="Close cookie settings"
-                  className="cursor-pointer rounded-lg p-1.5 text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
-                >
+                  className="cursor-pointer rounded-lg p-1.5 text-slate-300 transition-colors hover:bg-white/10 hover:text-white">
                   <X className="h-5 w-5" />
                 </button>
               </div>
@@ -235,8 +225,7 @@ export default function CookieConsent() {
                         active === c.key
                           ? "border-[#6DAD45] bg-white text-[#0B120B] shadow-sm"
                           : "border-transparent text-slate-600 hover:bg-white/70"
-                      }`}
-                    >
+                      }`}>
                       {c.title}
                     </button>
                   ))}
@@ -258,8 +247,7 @@ export default function CookieConsent() {
                             ...p,
                             [current.key]: !p[current.key as keyof Prefs],
                           }))
-                        }
-                      />
+                        } />
                     )}
                   </div>
                   <p className="text-sm leading-relaxed text-slate-600">{current.desc}</p>
@@ -269,20 +257,17 @@ export default function CookieConsent() {
               <div className="flex flex-col gap-2 border-t border-slate-200 bg-slate-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
                 <button
                   onClick={handleDecline}
-                  className={`${btnBase} border border-slate-300 bg-white text-slate-700 hover:border-slate-500`}
-                >
+                  className={`${btnBase} border border-slate-300 bg-white text-slate-700 hover:border-slate-500`}>
                   Reject All
                 </button>
                 <button
                   onClick={handleConfirm}
-                  className={`${btnBase} border border-[#0B120B] bg-[#0B120B] text-white hover:bg-[#1a2a1a]`}
-                >
+                  className={`${btnBase} border border-[#0B120B] bg-[#0B120B] text-white hover:bg-[#1a2a1a]`}>
                   Confirm My Choices
                 </button>
                 <button
                   onClick={handleAllowAll}
-                  className={`${btnBase} bg-gradient-to-r from-[#D4E012] to-[#6DAD45] text-black shadow-md hover:brightness-110`}
-                >
+                  className={`${btnBase} bg-gradient-to-r from-[#D4E012] to-[#6DAD45] text-black shadow-md hover:brightness-110`}>
                   Allow All
                 </button>
               </div>

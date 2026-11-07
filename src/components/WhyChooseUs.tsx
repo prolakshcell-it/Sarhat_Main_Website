@@ -70,14 +70,12 @@ export default function WhyChooseUs() {
                 <svg
                   className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                   viewBox="0 0 100 20"
-                  preserveAspectRatio="none"
-                >
+                  preserveAspectRatio="none">
                   <path
                     d="M0 15 Q 50 0 100 15"
                     stroke="currentColor"
                     strokeWidth="3.5"
-                    fill="transparent"
-                  />
+                    fill="transparent" />
                 </svg>
               </span>
             </h2>
@@ -97,8 +95,7 @@ export default function WhyChooseUs() {
                 <motion.div
                   whileHover={{ y: -2 }}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-xl shadow-slate-200/40 relative overflow-hidden group h-full flex flex-col justify-between hover:border-[#707B00] transition-colors"
-                >
+                  className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-xl shadow-slate-200/40 relative overflow-hidden group h-full flex flex-col justify-between hover:border-[#707B00] transition-colors">
                   {/* Decorative Corner Glow */}
                   <div className="absolute top-0 right-0 w-24 h-24 bg-[#D4E012]/10 rounded-bl-full pointer-events-none group-hover:bg-[#D4E012]/25 transition-all"></div>
 
@@ -142,8 +139,7 @@ export default function WhyChooseUs() {
           <div className="mt-12 text-center">
             <Link
               href="/about"
-              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group"
-            >
+              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-[#D4E012]/20 group">
               <span>Learn More About Sarhat</span>
               <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
             </Link>

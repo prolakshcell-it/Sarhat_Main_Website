@@ -80,14 +80,12 @@ export default function RelatedSolutionsSection({
                   className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                   viewBox="0 0 100 20"
                   preserveAspectRatio="none"
-                  aria-hidden
-                >
+                  aria-hidden>
                   <path
                     d="M0 15 Q 50 0 100 15"
                     stroke="currentColor"
                     strokeWidth="3.5"
-                    fill="transparent"
-                  />
+                    fill="transparent" />
                 </svg>
               </span>
             </h2>
@@ -99,8 +97,7 @@ export default function RelatedSolutionsSection({
             <ScrollReveal key={sol.title} delay={idx * 0.1}>
               <Link
                 href={sol.href}
-                className="group block rounded-3xl bg-white border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-2xl hover:border-[#6DAD45]/50 transition-all duration-300 hover:-translate-y-2 h-full flex flex-col"
-              >
+                className="group block rounded-3xl bg-white border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-2xl hover:border-[#6DAD45]/50 transition-all duration-300 hover:-translate-y-2 h-full flex flex-col">
                 {/* Image Thumbnail */}
                 <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-900">
                   <Image
@@ -108,8 +105,7 @@ export default function RelatedSolutionsSection({
                     alt={sol.title}
                     fill
                     sizes="(min-width: 1024px) 384px, 100vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+                    className="object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity" />
                 </div>
 

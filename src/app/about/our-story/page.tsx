@@ -178,7 +178,21 @@ export default function OurStoryPage() {
                 <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
                   <AnimatedPillBadge className="mb-6">Our Journey</AnimatedPillBadge>
                   <h2 className="mb-4 font-serif-display text-3xl font-medium leading-tight tracking-tight text-slate-900 sm:text-5xl md:text-6xl">
-                    Key Moments <span className="italic text-[#707B00]">from Our Story</span>
+                    Key Moments{" "}
+                    <span className="italic text-[#707B00] relative inline-block">
+                      from Our Story.
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-2.5 text-[#707B00]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden="true">
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent" />
+                      </svg>
+                    </span>
                   </h2>
                   <p className="mx-auto max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
                     The growth trajectory of Sarhat Energy & Infrastructure — from solar EPC and clean EV mobility to multi-state execution.

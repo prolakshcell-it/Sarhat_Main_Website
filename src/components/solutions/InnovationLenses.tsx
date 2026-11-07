@@ -53,8 +53,7 @@ function LensView({ index, active }: { index: number; active: boolean }) {
               initial={{ scale: 0.85, opacity: 0 }}
               animate={active ? { scale: 1, opacity: 1 } : { scale: 0.85, opacity: 0 }}
               transition={t(eye * 0.12)}
-              className="relative aspect-square w-[46%] overflow-hidden rounded-full ring-2 ring-[#D4E012]/60"
-            >
+              className="relative aspect-square w-[46%] overflow-hidden rounded-full ring-2 ring-[#D4E012]/60">
               <Image
                 src={L.src}
                 alt={eye === 0 ? L.alt : ""}
@@ -62,8 +61,7 @@ function LensView({ index, active }: { index: number; active: boolean }) {
                 fill
                 sizes="260px"
                 className="object-cover"
-                style={{ objectPosition: eye === 0 ? "46% 55%" : "54% 55%", transform: "scale(1.25)" }}
-              />
+                style={{ objectPosition: eye === 0 ? "46% 55%" : "54% 55%", transform: "scale(1.25)" }} />
               <div className="absolute inset-0 bg-[radial-gradient(circle,transparent_55%,rgba(0,0,0,0.75)_100%)]" />
             </motion.div>
           ))}
@@ -84,8 +82,7 @@ function LensView({ index, active }: { index: number; active: boolean }) {
                   : L.mode === "monitor"
                   ? "grayscale(0.7) brightness(0.65)"
                   : undefined,
-            }}
-          />
+            }} />
 
           {L.mode === "drone" && (
             <>
@@ -95,16 +92,14 @@ function LensView({ index, active }: { index: number; active: boolean }) {
                   backgroundImage:
                     "linear-gradient(rgba(212,224,18,0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(212,224,18,0.18) 1px, transparent 1px)",
                   backgroundSize: "44px 44px",
-                }}
-              />
+                }} />
               {/* one scan sweep each time this lens becomes active */}
               <motion.div
                 key={active ? "on" : "off"}
                 initial={{ x: "-110%" }}
                 animate={active ? { x: "110%" } : { x: "-110%" }}
                 transition={reduce ? { duration: 0 } : { duration: 1.6, ease: "easeInOut" }}
-                className="absolute inset-y-0 w-1/4 bg-gradient-to-r from-transparent via-[#D4E012]/35 to-transparent will-change-transform"
-              />
+                className="absolute inset-y-0 w-1/4 bg-gradient-to-r from-transparent via-[#D4E012]/35 to-transparent will-change-transform" />
             </>
           )}
 
@@ -120,8 +115,7 @@ function LensView({ index, active }: { index: number; active: boolean }) {
                   vectorEffect="non-scaling-stroke"
                   initial={{ pathLength: 0 }}
                   animate={active ? { pathLength: 1 } : { pathLength: 0 }}
-                  transition={t(k * 0.1, 0.9)}
-                />
+                  transition={t(k * 0.1, 0.9)} />
               ))}
             </svg>
           )}
@@ -141,16 +135,14 @@ function LensView({ index, active }: { index: number; active: boolean }) {
                   animate={active ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
                   transition={t(i * 0.15, 0.6)}
                   className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full blur-xl"
-                  style={{ left: b.x, top: b.y, width: `${b.s}%`, aspectRatio: "1", background: b.c }}
-                />
+                  style={{ left: b.x, top: b.y, width: `${b.s}%`, aspectRatio: "1", background: b.c }} />
               ))}
               <motion.span
                 initial={{ opacity: 0, scale: 0.6 }}
                 animate={active ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.6 }}
                 transition={t(0.9, 0.4)}
                 className="absolute h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-amber-400"
-                style={{ left: "36%", top: "70%" }}
-              />
+                style={{ left: "36%", top: "70%" }} />
             </>
           )}
         </>
@@ -173,8 +165,7 @@ function LensView({ index, active }: { index: number; active: boolean }) {
             initial={{ opacity: 0, y: 6 }}
             animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
             transition={t(0.5 + i * 0.12, 0.35)}
-            className="rounded-full border border-white/25 bg-black/50 px-3 py-1 text-[11px] text-white backdrop-blur-sm"
-          >
+            className="rounded-full border border-white/25 bg-black/50 px-3 py-1 text-[11px] text-white backdrop-blur-sm">
             {c}
           </motion.span>
         ))}
@@ -193,8 +184,7 @@ function Stage({ index }: { index: number }) {
           initial={false}
           animate={{ opacity: i === index ? 1 : 0 }}
           transition={{ duration: 0.45 }}
-          style={{ pointerEvents: i === index ? "auto" : "none" }}
-        >
+          style={{ pointerEvents: i === index ? "auto" : "none" }}>
           <LensView index={i} active={i === index} />
         </motion.div>
       ))}
@@ -203,7 +193,7 @@ function Stage({ index }: { index: number }) {
 }
 
 function StepText({ block, index, onActive }: { block: LensBlock; index: number; onActive: (i: number) => void }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref=useRef<HTMLDivElement>(null);
   // Triggers when the block crosses the middle band of the viewport
   const inView = useInView(ref, { margin: "-45% 0px -45% 0px" });
   useEffect(() => {
@@ -252,8 +242,7 @@ export default function InnovationLenses({ blocks }: { blocks: LensBlock[] }) {
             {LENSES.map((_, i) => (
               <span
                 key={i}
-                className={`h-1.5 rounded-full transition-all duration-300 ${i === active ? "w-8 bg-[#6DAD45]" : "w-2 bg-slate-300"}`}
-              />
+                className={`h-1.5 rounded-full transition-all duration-300 ${i === active ? "w-8 bg-[#6DAD45]" : "w-2 bg-slate-300"}`} />
             ))}
           </div>
         </div>
@@ -274,7 +263,7 @@ export default function InnovationLenses({ blocks }: { blocks: LensBlock[] }) {
 }
 
 function MobileLens({ index }: { index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref=useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.4 });
   return (
     <div ref={ref} className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-xl ring-1 ring-slate-200 bg-slate-950">

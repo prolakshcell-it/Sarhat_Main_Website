@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { motion, useScroll, useTransform, useInView, useMotionValue } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -28,6 +29,7 @@ import {
   FileSearch,
   Pill,
   ChevronsLeftRight,
+  ArrowUpRight,
   type LucideIcon,
 } from "lucide-react";
 
@@ -159,12 +161,10 @@ function ThermalCompare() {
           sizes="(min-width: 1024px) 896px, 100vw"
           quality={80}
           className="object-cover"
-          style={{ filter: "grayscale(1) contrast(1.35) brightness(0.8)" }}
-        />
+          style={{ filter: "grayscale(1) contrast(1.35) brightness(0.8)" }} />
         <div
           className="absolute inset-0 mix-blend-color"
-          style={{ background: "linear-gradient(135deg, #3b0a6b 0%, #b0235a 40%, #f08a1c 75%, #fde047 100%)" }}
-        />
+          style={{ background: "linear-gradient(135deg, #3b0a6b 0%, #b0235a 40%, #f08a1c 75%, #fde047 100%)" }} />
         {findings.map((f, i) => (
           <span key={i} className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left: f.x, top: f.y }}>
             <span className="block h-9 w-9 rounded-full border-2 border-white/90 bg-white/10" />
@@ -199,8 +199,7 @@ function ThermalCompare() {
         defaultValue={50}
         aria-label="Drag to compare normal and thermal view"
         onChange={(e) => pos.set(Number(e.target.value))}
-        className="absolute inset-0 h-full w-full cursor-ew-resize opacity-0"
-      />
+        className="absolute inset-0 h-full w-full cursor-ew-resize opacity-0" />
     </div>
   );
 }
@@ -208,7 +207,7 @@ function ThermalCompare() {
 /* ---------- Patient journey with heartbeat line ---------- */
 
 function Journey() {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref=useRef<HTMLDivElement>(null);
   const seen = useInView(ref, { once: true, amount: 0.3 });
 
   return (
@@ -225,8 +224,7 @@ function Journey() {
           vectorEffect="non-scaling-stroke"
           initial={{ pathLength: 0 }}
           animate={seen ? { pathLength: 1 } : {}}
-          transition={{ duration: 2.2, ease: "easeInOut" }}
-        />
+          transition={{ duration: 2.2, ease: "easeInOut" }} />
       </svg>
 
       <ol className="relative grid grid-cols-1 gap-8 lg:grid-cols-4 lg:gap-6">
@@ -238,8 +236,7 @@ function Journey() {
                 initial={{ scale: 0.6, opacity: 0 }}
                 animate={seen ? { scale: 1, opacity: 1 } : {}}
                 transition={{ duration: 0.4, delay: 0.2 + i * 0.5 }}
-                className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-slate-900 text-[#D4E012] ring-4 ring-white"
-              >
+                className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-slate-900 text-[#D4E012] ring-4 ring-white">
                 <Icon className="h-5 w-5" />
               </motion.span>
               <div>
@@ -262,7 +259,7 @@ export default function HealthCheckupPage() {
   const heroRef = useRef<HTMLElement>(null);
 
   // Transform + opacity only, so scrolling stays on the compositor
-    const {
+  const {
     isPastHero,
     bgScale,
     bgDim,
@@ -279,11 +276,9 @@ export default function HealthCheckupPage() {
 
         {/* 01 / HERO */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
-          aria-hidden={isPastHero}
-        >
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
+          aria-hidden={isPastHero}>
           <section ref={heroRef} className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none">
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full will-change-transform">
               <Image
@@ -293,226 +288,240 @@ export default function HealthCheckupPage() {
                 priority
                 quality={85}
                 sizes="100vw"
-                className="object-cover object-center opacity-85"
-              />
+                className="object-cover object-center opacity-85" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
             </motion.div>
 
+            {/* Luminous Glow Behind Subject */}
+            <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#D4E012]/15 rounded-full blur-3xl pointer-events-none" />
+
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-24 flex flex-col items-center text-center will-change-transform"
-            >
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-32 sm:pt-36 pb-4 flex flex-col items-center text-center will-change-transform">
               <div className="max-w-4xl flex flex-col items-center text-center">
-                <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-4 py-1.5 font-mono text-xs uppercase tracking-widest text-[#D4E012] backdrop-blur-sm">
-                  <HeartPulse className="h-4 w-4" /> Plant health check-up
-                </span>
-                <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 leading-[1.08] drop-shadow-lg">
-                  A check-up for <br />
-                  <span className="text-[#D4E012] italic font-normal">your solar plant</span>
+                {/* Hero Headline */}
+                <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.1] mb-6 [text-shadow:_0_4px_24px_rgba(0,0,0,0.95)] [text-wrap:balance]">
+                  A check-up for
+                  <br />
+                  <span className="italic font-normal text-[#D4E012] relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
+                    your solar plant.
+                    <svg
+                      className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
+                      viewBox="0 0 100 20"
+                      preserveAspectRatio="none"
+                      aria-hidden>
+                      <path
+                        d="M0 15 Q 50 0 100 15"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        fill="transparent" />
+                    </svg>
+                  </span>
                 </h1>
-                <p className="text-base sm:text-xl text-slate-200 max-w-3xl leading-relaxed font-normal drop-shadow-md">
-                  Drones, imaging and electrical tests that examine your plant the way a doctor examines a patient, finding problems early and telling you plainly what to do.
+
+                {/* Sub-headline */}
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-100 font-normal max-w-2xl leading-relaxed tracking-wide [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)] [text-wrap:balance]">
+                  Drones, imaging and electrical tests that examine your plant the way a doctor examines a patient,
+                  <br className="hidden sm:inline" />
+                  {" "}finding problems early and telling you plainly what to do.
                 </p>
               </div>
             </motion.div>
 
-            <ScrollIndicator opacity={indicatorOpacity} />
-          </section>
-        </div>
+        <ScrollIndicator opacity={indicatorOpacity} />
+      </section>
+    </div>
 
-        {/* Scroll Spacer (Matches Hero height to establish scroll track) */}
-        <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
+    {/* Scroll Spacer (Matches Hero height to establish scroll track) */ }
+    <div className="relative z-0 h-screen w-full pointer-events-none" aria-hidden="true" />
 
-
-        {/* 02 / CONTENT SHEET */}
-        <div className="relative z-10 border-t border-slate-200/60 bg-[#F8FAF8] shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
-          {/* Intro */}
-          <section className="pt-16 sm:pt-24 pb-6 bg-[#F8FAF8]">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <ScrollReveal>
-                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12">
-                  <AnimatedPillBadge className="mb-6">PLANT HEALTH CHECK-UP</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-                    <span className="inline-block">Diagnostic Intelligence.</span> <br />
-                    <span className="text-[#6DAD45] italic relative inline-block">
-                      How healthy is your plant today?
-                      <svg
-                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
-                        viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
-                        <path
-                          d="M0 15 Q 50 0 100 15"
-                          stroke="currentColor"
-                          strokeWidth="3.5"
-                          fill="transparent"
-                        />
-                      </svg>
-                    </span>
-                  </h2>
-                  <p className="mt-5 text-slate-600 text-base sm:text-lg leading-relaxed">
-                    Once a plant is designed, built and running, the next question is simple. With modern tools like drones and thermal and cell imaging, we can look inside a plant much as a doctor looks inside a patient, with as little downtime as possible.
-                  </p>
-                </div>
-              </ScrollReveal>
-            </div>
-          </section>
-
-          {/* Vital signs */}
-          <section className="py-12 sm:py-16 bg-[#F8FAF8]">
-            <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-              <ScrollReveal>
-                <div className="mb-10 flex flex-col items-center gap-3 text-center">
-                  <div className="font-mono text-xs font-bold tracking-widest text-[#6DAD45]">VITAL SIGNS</div>
-                  <h2 className="text-3xl sm:text-4xl font-serif-display font-medium text-slate-900">Four things we read first</h2>
-                  {/* pulse line: drawn once, no loop */}
-                  <svg viewBox="0 0 300 40" className="h-8 w-56" aria-hidden>
-                    <motion.path
-                      d="M0 20 H110 L120 20 L128 4 L140 36 L148 20 H170 L178 12 L186 24 L194 20 H300"
-                      fill="none" stroke="#6DAD45" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                      initial={{ pathLength: 0 }}
-                      whileInView={{ pathLength: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1.6, ease: "easeInOut" }}
-                    />
-                  </svg>
-                </div>
-              </ScrollReveal>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                {vitals.map((v, i) => {
-                  const Icon = v.icon;
-                  return (
-                    <ScrollReveal key={v.title} delay={i * 0.06}>
-                      <div className="h-full rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
-                        <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900 text-[#D4E012]">
-                          <Icon className="h-5 w-5" />
-                        </span>
-                        <h3 className="mt-4 font-serif-display text-lg font-medium text-slate-900">{v.title}</h3>
-                        <p className="mt-2 text-sm text-slate-600 leading-relaxed">{v.body}</p>
-                      </div>
-                    </ScrollReveal>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-
-          {/* Compare slider */}
-          <section className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
-            <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-              <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-                  <AnimatedPillBadge className="mb-3">THE SCAN</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    See what the eye cannot
-                  </h2>
-                  <p className="mt-4 text-slate-600 text-base sm:text-lg">
-                    Drag across the plant to switch from a normal view to a thermal view. The circles mark where a scan would flag a problem.
-                  </p>
-                </div>
-              </ScrollReveal>
-              <ScrollReveal>
-                <ThermalCompare />
-              </ScrollReveal>
-            </div>
-          </section>
-
-          {/* Examination */}
-          <section className="py-16 sm:py-24 bg-[#F8FAF8] border-b border-slate-200/80">
-            <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-              <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-12">
-                  <AnimatedPillBadge className="mb-3">THE EXAMINATION</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Six tests, each with a familiar cousin
-                  </h2>
-                </div>
-              </ScrollReveal>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {exams.map((e, i) => {
-                  const Icon = e.icon;
-                  return (
-                    <ScrollReveal key={e.title} delay={(i % 3) * 0.06}>
-                      <div className="group h-full rounded-2xl border border-slate-200 bg-white p-6 transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-1 hover:border-[#6DAD45]/50 hover:shadow-lg">
-                        <div className="flex items-center justify-between">
-                          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 text-[#D4E012]">
-                            <Icon className="h-5 w-5" />
-                          </span>
-                          <span className="rounded-full border border-[#6DAD45]/30 bg-[#6DAD45]/10 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-[#4f8a2e]">
-                            {e.like}
-                          </span>
-                        </div>
-                        <h3 className="mt-4 font-serif-display text-xl font-medium text-slate-900">{e.title}</h3>
-                        <p className="mt-2 text-sm text-slate-600 leading-relaxed">{e.body}</p>
-                      </div>
-                    </ScrollReveal>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-
-          {/* Patient journey */}
-          <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
-            <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-              <ScrollReveal>
-                <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
-                  <AnimatedPillBadge className="mb-3">THE VISIT</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    From check-in to treatment plan
-                  </h2>
-                </div>
-              </ScrollReveal>
-              <Journey />
-            </div>
-          </section>
-
-          {/* Sample report */}
-          <section className="py-16 sm:py-24 bg-[#F8FAF8] border-b border-slate-200/80">
-            <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-              <ScrollReveal>
-                <div className="text-center mb-10">
-                  <AnimatedPillBadge className="mb-3">YOUR REPORT</AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
-                    Results in plain language
-                  </h2>
-                  <p className="mt-4 text-slate-600 text-base sm:text-lg">No jargon to decode. Each part of the plant gets a clear status.</p>
-                </div>
-              </ScrollReveal>
-              <ScrollReveal>
-                <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg">
-                  <div className="flex items-center justify-between border-b border-slate-200 bg-slate-900 px-6 py-4 text-white">
-                    <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-[#D4E012]">
-                      <HeartPulse className="h-4 w-4" /> Plant health report
-                    </div>
-                    <span className="text-[11px] text-slate-400">Sample layout</span>
+          {/* 02 / CONTENT SHEET */ }
+          <div className="relative z-10 border-t border-slate-200/60 bg-[#F8FAF8] shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
+            {/* Intro */ }
+            <section id="diagnostic-scope" className="pt-16 sm:pt-24 pb-6 bg-[#F8FAF8]">
+              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <ScrollReveal>
+                  <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12">
+                    <AnimatedPillBadge className="mb-6">PLANT HEALTH CHECK-UP</AnimatedPillBadge>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+                      <span className="inline-block">Diagnostic Intelligence.</span> <br />
+                      <span className="text-[#6DAD45] italic relative inline-block">
+                        How healthy is your plant today?
+                        <svg
+                          className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                          viewBox="0 0 100 20"
+                          preserveAspectRatio="none">
+                          <path
+                            d="M0 15 Q 50 0 100 15"
+                            stroke="currentColor"
+                            strokeWidth="3.5"
+                            fill="transparent" />
+                        </svg>
+                      </span>
+                    </h2>
+                    <p className="mt-5 text-slate-600 text-base sm:text-lg max-w-3xl mx-auto text-center leading-relaxed">
+                      Once a plant is designed, built and running, the next question is simple. With modern tools like drones and thermal and cell imaging, we can look inside a plant much as a doctor looks inside a patient, with as little downtime as possible.
+                    </p>
                   </div>
-                  <ul className="divide-y divide-slate-100">
-                    {report.map((r) => (
-                      <li key={r.part} className="flex flex-wrap items-center justify-between gap-3 px-6 py-4">
-                        <div>
-                          <div className="font-medium text-slate-900">{r.part}</div>
-                          <div className="text-xs text-slate-500">{r.note}</div>
-                        </div>
-                        <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${statusStyle[r.status]}`}>{r.status}</span>
-                      </li>
-                    ))}
-                  </ul>
+                </ScrollReveal>
+              </div>
+                </section>
+
+    {/* Vital signs */ }
+    <section className="py-12 sm:py-16 bg-[#F8FAF8]">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <ScrollReveal>
+          <div className="mb-10 flex flex-col items-center gap-3 text-center">
+            <div className="font-mono text-xs font-bold tracking-widest text-[#6DAD45]">VITAL SIGNS</div>
+            <h2 className="text-3xl sm:text-4xl font-serif-display font-medium text-slate-900">Four things we read first</h2>
+            {/* pulse line: drawn once, no loop */}
+            <svg viewBox="0 0 300 40" className="h-8 w-56" aria-hidden>
+              <motion.path
+                d="M0 20 H110 L120 20 L128 4 L140 36 L148 20 H170 L178 12 L186 24 L194 20 H300"
+                fill="none" stroke="#6DAD45" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.6, ease: "easeInOut" }} />
+            </svg>
+          </div>
+        </ScrollReveal>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {vitals.map((v, i) => {
+            const Icon = v.icon;
+            return (
+              <ScrollReveal key={v.title} delay={i * 0.06}>
+                <div className="h-full rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
+                  <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900 text-[#D4E012]">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <h3 className="mt-4 font-serif-display text-lg font-medium text-slate-900">{v.title}</h3>
+                  <p className="mt-2 text-sm text-slate-600 leading-relaxed">{v.body}</p>
                 </div>
               </ScrollReveal>
-            </div>
-          </section>
-
-          {/* RELATED SOLUTIONS */}
-          <RelatedSolutionsSection currentHref="/solutions/solar-plant-health-checkup" />
-
-          {/* Final CTA */}
-          <FinalCTA onOpenQuote={() => setQuoteModalOpen(true)} />
-          <Footer />
+            );
+          })}
         </div>
+      </div>
+                </section>
 
-        <QuoteModal isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} />
-      </main>
-    </SmoothScroll>
-  );
+    {/* Compare slider */ }
+    <section className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <ScrollReveal>
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+            <AnimatedPillBadge className="mb-3">THE SCAN</AnimatedPillBadge>
+            <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
+              See what the eye cannot
+            </h2>
+            <p className="mt-4 text-slate-600 text-base sm:text-lg">
+              Drag across the plant to switch from a normal view to a thermal view. The circles mark where a scan would flag a problem.
+            </p>
+          </div>
+        </ScrollReveal>
+        <ScrollReveal>
+          <ThermalCompare />
+        </ScrollReveal>
+      </div>
+                </section>
+
+    {/* Examination */ }
+    <section className="py-16 sm:py-24 bg-[#F8FAF8] border-b border-slate-200/80">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <ScrollReveal>
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <AnimatedPillBadge className="mb-3">THE EXAMINATION</AnimatedPillBadge>
+            <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
+              Six tests, each with a familiar cousin
+            </h2>
+          </div>
+        </ScrollReveal>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {exams.map((e, i) => {
+            const Icon = e.icon;
+            return (
+              <ScrollReveal key={e.title} delay={(i % 3) * 0.06}>
+                <div className="group h-full rounded-2xl border border-slate-200 bg-white p-6 transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-1 hover:border-[#6DAD45]/50 hover:shadow-lg">
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 text-[#D4E012]">
+                      <Icon className="h-5 w-5" />
+                    </span>
+                    <span className="rounded-full border border-[#6DAD45]/30 bg-[#6DAD45]/10 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-[#4f8a2e]">
+                      {e.like}
+                    </span>
+                  </div>
+                  <h3 className="mt-4 font-serif-display text-xl font-medium text-slate-900">{e.title}</h3>
+                  <p className="mt-2 text-sm text-slate-600 leading-relaxed">{e.body}</p>
+                </div>
+              </ScrollReveal>
+            );
+          })}
+        </div>
+      </div>
+                </section>
+
+    {/* Patient journey */ }
+    <section className="py-16 sm:py-24 bg-white border-b border-slate-200/80">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <ScrollReveal>
+          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
+            <AnimatedPillBadge className="mb-3">THE VISIT</AnimatedPillBadge>
+            <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
+              From check-in to treatment plan
+            </h2>
+          </div>
+        </ScrollReveal>
+        <Journey />
+      </div>
+                </section>
+
+    {/* Sample report */ }
+    <section className="py-16 sm:py-24 bg-[#F8FAF8] border-b border-slate-200/80">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <ScrollReveal>
+          <div className="text-center mb-10">
+            <AnimatedPillBadge className="mb-3">YOUR REPORT</AnimatedPillBadge>
+            <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-slate-900 leading-tight">
+              Results in plain language
+            </h2>
+            <p className="mt-4 text-slate-600 text-base sm:text-lg">No jargon to decode. Each part of the plant gets a clear status.</p>
+          </div>
+        </ScrollReveal>
+        <ScrollReveal>
+          <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg">
+            <div className="flex items-center justify-between border-b border-slate-200 bg-slate-900 px-6 py-4 text-white">
+              <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-[#D4E012]">
+                <HeartPulse className="h-4 w-4" /> Plant health report
+              </div>
+              <span className="text-[11px] text-slate-400">Sample layout</span>
+            </div>
+            <ul className="divide-y divide-slate-100">
+              {report.map((r) => (
+                <li key={r.part} className="flex flex-wrap items-center justify-between gap-3 px-6 py-4">
+                  <div>
+                    <div className="font-medium text-slate-900">{r.part}</div>
+                    <div className="text-xs text-slate-500">{r.note}</div>
+                  </div>
+                  <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${statusStyle[r.status]}`}>{r.status}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+
+    {/* RELATED SOLUTIONS */ }
+    <RelatedSolutionsSection currentHref = "/solutions/solar-plant-health-checkup" />
+
+      {/* Final CTA */ }
+      <FinalCTA onOpenQuote = {() => setQuoteModalOpen(true)
+} />
+  <Footer />
+  </div>
+
+  <QuoteModal isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} />
+</main>
+</SmoothScroll>
+);
 }

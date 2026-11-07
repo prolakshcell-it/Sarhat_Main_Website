@@ -8,7 +8,7 @@ export interface NavItemLink {
 }
 
 export interface SocialLink {
-  id: "linkedin" | "instagram" | "x";
+  id: "linkedin" | "instagram" | "x" | "facebook";
   label: string;
   href: string;
 }
@@ -30,8 +30,9 @@ export interface MegaNavEntry {
 }
 
 export const socialLinks: SocialLink[] = [
-  { id: "linkedin", label: "LinkedIn", href: "https://linkedin.com/company/sarhat" },
-  { id: "instagram", label: "Instagram", href: "https://instagram.com/sarhatenergy" },
+  { id: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/company/sarhatenergy/" },
+  { id: "instagram", label: "Instagram", href: "https://www.instagram.com/sarhatenergy/?hl=en" },
+  { id: "facebook", label: "Facebook", href: "https://www.facebook.com/people/Sarhat-Energy/61573073332164/" },
   { id: "x", label: "X", href: "https://x.com/sarhatenergy" },
 ];
 
@@ -46,7 +47,7 @@ export const navigationConfig: MegaNavEntry[] = [
       {
         id: "solar-energy",
         title: "Solar Energy",
-        href: "/solutions#renewable-energy",
+        href: "/solutions",
         children: [
           {
             id: "ground-mounted-pv",
@@ -82,7 +83,7 @@ export const navigationConfig: MegaNavEntry[] = [
       {
         id: "bess-hybrid",
         title: "BESS & Hybrid",
-        href: "/products/bess-hybrid/standalone-bess",
+        href: "/solutions#bess-hybrid",
         children: [
           { id: "standalone-bess", title: "Standalone BESS", href: "/products/bess-hybrid/standalone-bess" },
           { id: "bess-pv-wind", title: "BESS meets PV / Wind", href: "/products/bess-hybrid/bess-pv-wind" },
@@ -91,7 +92,7 @@ export const navigationConfig: MegaNavEntry[] = [
       {
         id: "infrastructure",
         title: "Infrastructure",
-        href: "/infrastructure/substations",
+        href: "/solutions#infrastructure",
         children: [
           { id: "substations", title: "Substations / Switchyards", href: "/infrastructure/substations" },
           { id: "transmission", title: "Transmission Lines", href: "/infrastructure/transmission-lines" },
@@ -131,7 +132,7 @@ export const navigationConfig: MegaNavEntry[] = [
     href: "/projects",
     tag: "Projects",
     items: [
-      { id: "overview", title: "Overview", href: "/projects#overview" },
+      { id: "overview", title: "Overview", href: "/projects" },
       { id: "highlights", title: "Project Highlights", href: "/projects#highlights" },
       { id: "explore", title: "Explore Projects", href: "/projects#explore" },
       { id: "footprints", title: "Footprints", href: "/projects#footprint" },
@@ -154,12 +155,13 @@ export const navigationConfig: MegaNavEntry[] = [
     key: "insights",
     label: "Insights",
     href: "/insights",
+    match: ["/insights/news", "/insights/case-studies", "/insights/articles", "/news", "/case-studies", "/articles"],
     tag: "Insights",
     items: [
       { id: "industry-insights", title: "Industry Insights", href: "/insights" },
-      { id: "news", title: "News & Updates", href: "/insights" },
-      { id: "case-studies", title: "Case Studies", href: "/insights" },
-      { id: "articles", title: "Articles", href: "/insights" },
+      { id: "news", title: "News & Updates", href: "/insights/news" },
+      { id: "case-studies", title: "Case Studies", href: "/insights/case-studies" },
+      { id: "articles", title: "Articles", href: "/insights/articles" },
     ],
   },
   {

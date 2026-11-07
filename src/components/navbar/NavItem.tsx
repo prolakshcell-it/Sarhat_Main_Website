@@ -28,15 +28,13 @@ const NavItem = forwardRef<HTMLButtonElement, NavItemProps>(function NavItem(
           aria-current={isActive ? "page" : undefined}
           className={`group relative flex items-center whitespace-nowrap py-3 normal-case transition-colors duration-200 focus:outline-none focus-visible:text-[#D4E012] ${
             isActive ? "text-[#D4E012]" : "text-slate-100 hover:text-[#D4E012]"
-          }`}
-        >
+          }`}>
           <span>{entry.label}</span>
           <span
             aria-hidden
             className={`absolute inset-x-0 bottom-1 h-[2px] origin-center rounded-full bg-[#D4E012] transition-all duration-300 ${
               isActive ? "scale-x-100 opacity-70" : "scale-x-0 opacity-100 group-hover:scale-x-100 group-focus-visible:scale-x-100"
-            }`}
-          />
+            }`} />
         </Link>
       </li>
     );
@@ -56,8 +54,7 @@ const NavItem = forwardRef<HTMLButtonElement, NavItemProps>(function NavItem(
         onKeyDown={onKeyDown}
         className={`group relative flex cursor-pointer items-center gap-1.5 whitespace-nowrap py-3 transition-colors duration-200 focus:outline-none focus-visible:text-[#D4E012] ${
           isOpen || isActive ? "text-[#D4E012]" : "text-slate-100 hover:text-[#D4E012]"
-        }`}
-      >
+        }`}>
         <span>{entry.label}</span>
         <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
         <span
@@ -68,8 +65,7 @@ const NavItem = forwardRef<HTMLButtonElement, NavItemProps>(function NavItem(
               : isActive
                 ? "scale-x-100 opacity-70"
                 : "scale-x-0 opacity-100 group-hover:scale-x-100 group-focus-visible:scale-x-100"
-          }`}
-        />
+          }`} />
       </button>
     </li>
   );

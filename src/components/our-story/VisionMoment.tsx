@@ -11,7 +11,7 @@ const STATEMENT =
 /** 05 — Vision: the existing Vision Statement, given room as the pause in the story. */
 export default function VisionMoment() {
   const reduce = useReducedMotion();
-  const ref = useRef<HTMLDivElement>(null);
+  const ref=useRef<HTMLDivElement>(null);
   const draw = useDrawOnView(ref, { duration: 1.8, amount: 0.5 });
   const words = STATEMENT.split(" ");
 
@@ -42,8 +42,7 @@ export default function VisionMoment() {
           whileInView="shown"
           viewport={{ once: true, amount: 0.5 }}
           transition={{ staggerChildren: reduce ? 0 : 0.045, delayChildren: 0.2 }}
-          className="mx-auto max-w-4xl font-serif-display text-3xl font-medium leading-[1.2] tracking-tight text-slate-900 sm:text-5xl md:text-6xl"
-        >
+          className="mx-auto max-w-4xl font-serif-display text-3xl font-medium leading-[1.2] tracking-tight text-slate-900 sm:text-5xl md:text-6xl">
           <span className="sr-only">{STATEMENT}</span>
           <span aria-hidden>
             {words.map((w, i) => (
@@ -51,8 +50,7 @@ export default function VisionMoment() {
                 key={i}
                 variants={{ hidden: { opacity: 0, y: reduce ? 0 : 14 }, shown: { opacity: 1, y: 0 } }}
                 transition={{ duration: 0.7, ease: EASE }}
-                className={`inline-block ${w.startsWith("India-rooted") || w.startsWith("globally") ? "italic text-[#707B00]" : ""}`}
-              >
+                className={`inline-block ${w.startsWith("India-rooted") || w.startsWith("globally") ? "italic text-[#707B00]" : ""}`}>
                 {w}
                 {i < words.length - 1 && " "}
               </motion.span>
@@ -65,8 +63,7 @@ export default function VisionMoment() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.8, delay: reduce ? 0 : 0.3, ease: EASE }}
-          className="mx-auto mt-14 grid max-w-4xl grid-cols-1 gap-8 border-t border-slate-200 pt-10 text-left sm:mt-20 md:grid-cols-2 md:gap-12"
-        >
+          className="mx-auto mt-14 grid max-w-4xl grid-cols-1 gap-8 border-t border-slate-200 pt-10 text-left sm:mt-20 md:grid-cols-2 md:gap-12">
           <p className="text-base leading-relaxed text-slate-600 sm:text-lg">
             Building on our solar EPC foundations, we will develop connected capabilities in renewable energy, storage, grid systems and civil infrastructure. We will invest in our people, strengthen our engineering and learn from every project we deliver.
           </p>

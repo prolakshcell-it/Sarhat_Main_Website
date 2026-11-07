@@ -38,7 +38,7 @@ export default function TelecomTowersGuidePage() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPos = window.scrollY + 160;
-      for (let i = TOC_ITEMS.length - 1; i >= 0; i--) {
+      for (let i = TOC_ITEMS.length - 1; i>= 0; i--) {
         const el = document.getElementById(TOC_ITEMS[i].id);
         if (el && el.offsetTop <= scrollPos) {
           setActiveSection(TOC_ITEMS[i].id);
@@ -76,8 +76,7 @@ export default function TelecomTowersGuidePage() {
               fill
               priority
               quality={95}
-              className="object-cover object-center opacity-80"
-            />
+              className="object-cover object-center opacity-80" />
             {/* Soft Dark Scrim Overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90 pointer-events-none" />
             <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#D4E012]/10 rounded-full blur-3xl pointer-events-none" />
@@ -100,8 +99,7 @@ export default function TelecomTowersGuidePage() {
                   },
                 },
               }}
-              className="max-w-4xl flex flex-col items-center text-center"
-            >
+              className="max-w-4xl flex flex-col items-center text-center">
               {/* Serif H1 Heading matching format */}
               <motion.h1
                 variants={{
@@ -112,11 +110,23 @@ export default function TelecomTowersGuidePage() {
                     transition: { duration: 0.8, ease: "easeOut" },
                   },
                 }}
-                className="text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center max-w-4xl drop-shadow-lg"
-              >
+                className="text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center max-w-4xl drop-shadow-lg">
                 Telecom tower infrastructure, <br />
                 <span className="italic font-normal text-white">
-                  connecting digital <span className="text-[#D4E012]">frontiers.</span>
+                  connecting digital <span className="text-[#D4E012] relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
+                    frontiers.
+                    <svg
+                      className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
+                      viewBox="0 0 100 20"
+                      preserveAspectRatio="none"
+                      aria-hidden="true">
+                      <path
+                        d="M0 15 Q 50 0 100 15"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        fill="transparent" />
+                    </svg>
+                  </span>
                 </span>
               </motion.h1>
 
@@ -130,8 +140,7 @@ export default function TelecomTowersGuidePage() {
                     transition: { duration: 0.8, ease: "easeOut" },
                   },
                 }}
-                className="text-base sm:text-lg text-slate-100 font-normal max-w-3xl text-center leading-relaxed drop-shadow-md mx-auto"
-              >
+                className="text-base sm:text-lg text-slate-100 font-normal max-w-3xl text-center leading-relaxed drop-shadow-md mx-auto">
                 Turnkey civil foundations, 4-legged lattice tower erection, solar hybrid power systems, and rapid deployment across urban and remote sites.
               </motion.p>
             </motion.div>
@@ -166,8 +175,7 @@ export default function TelecomTowersGuidePage() {
                               className={`block text-left text-xs leading-relaxed py-2 pl-4 -ml-[2px] border-l-2 transition-all cursor-pointer ${isActive
                                   ? "border-[#6DAD45] font-bold text-slate-900 bg-[#6DAD45]/5 rounded-r-md"
                                   : "border-transparent text-slate-500 hover:text-slate-900 hover:border-slate-400"
-                                }`}
-                            >
+                                }`}>
                               {item.label}
                             </button>
                           </li>
@@ -186,8 +194,7 @@ export default function TelecomTowersGuidePage() {
                     </p>
                     <button
                       onClick={() => setQuoteModalOpen(true)}
-                      className="w-full inline-flex items-center justify-center gap-2 bg-[#0B132B] hover:bg-slate-900 text-white font-mono font-bold text-xs uppercase tracking-wider px-4 py-3 rounded-full transition-all shadow cursor-pointer"
-                    >
+                      className="w-full inline-flex items-center justify-center gap-2 bg-[#0B132B] hover:bg-slate-900 text-white font-mono font-bold text-xs uppercase tracking-wider px-4 py-3 rounded-full transition-all shadow cursor-pointer">
                       <span>DISCUSS &gt;</span>
                     </button>
                   </div>
@@ -304,14 +311,12 @@ export default function TelecomTowersGuidePage() {
                       className="absolute -bottom-2 left-0 w-full h-3 text-[#D4E012]"
                       viewBox="0 0 100 20"
                       preserveAspectRatio="none"
-                      aria-hidden
-                    >
+                      aria-hidden>
                       <path
                         d="M0 15 Q 50 0 100 15"
                         stroke="currentColor"
                         strokeWidth="3.5"
-                        fill="transparent"
-                      />
+                        fill="transparent" />
                     </svg>
                   </span>
                 </h2>
@@ -323,8 +328,7 @@ export default function TelecomTowersGuidePage() {
               {/* Card 1 */}
               <Link
                 href="/infrastructure/telecom-towers"
-                className="group rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#D4E012]/50 p-6 transition-all duration-300 flex flex-col justify-between"
-              >
+                className="group rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#D4E012]/50 p-6 transition-all duration-300 flex flex-col justify-between">
                 <div>
                   <div className="font-mono text-[11px] font-bold text-[#D4E012] tracking-wider uppercase mb-3">
                     01 • PRODUCT
@@ -341,8 +345,7 @@ export default function TelecomTowersGuidePage() {
               {/* Card 2 */}
               <Link
                 href="/solutions"
-                className="group rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#D4E012]/50 p-6 transition-all duration-300 flex flex-col justify-between"
-              >
+                className="group rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#D4E012]/50 p-6 transition-all duration-300 flex flex-col justify-between">
                 <div>
                   <div className="font-mono text-[11px] font-bold text-[#D4E012] tracking-wider uppercase mb-3">
                     02 • SOLUTIONS
@@ -359,8 +362,7 @@ export default function TelecomTowersGuidePage() {
               {/* Card 3 */}
               <Link
                 href="/projects"
-                className="group rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#D4E012]/50 p-6 transition-all duration-300 flex flex-col justify-between"
-              >
+                className="group rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#D4E012]/50 p-6 transition-all duration-300 flex flex-col justify-between">
                 <div>
                   <div className="font-mono text-[11px] font-bold text-[#D4E012] tracking-wider uppercase mb-3">
                     03 • PROJECTS
@@ -377,8 +379,7 @@ export default function TelecomTowersGuidePage() {
               {/* Card 4 */}
               <button
                 onClick={() => setQuoteModalOpen(true)}
-                className="group rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#D4E012]/50 p-6 transition-all duration-300 text-left flex flex-col justify-between cursor-pointer"
-              >
+                className="group rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#D4E012]/50 p-6 transition-all duration-300 text-left flex flex-col justify-between cursor-pointer">
                 <div>
                   <div className="font-mono text-[11px] font-bold text-[#D4E012] tracking-wider uppercase mb-3">
                     04 • DISCUSS
@@ -403,8 +404,7 @@ export default function TelecomTowersGuidePage() {
                 <Link
                   key={idx}
                   href={st.href}
-                  className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#D4E012]/30 px-4 py-2 text-xs sm:text-sm text-slate-300 hover:text-white transition-colors"
-                >
+                  className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#D4E012]/30 px-4 py-2 text-xs sm:text-sm text-slate-300 hover:text-white transition-colors">
                   {st.name}
                 </Link>
               ))}
@@ -428,14 +428,12 @@ export default function TelecomTowersGuidePage() {
                       className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                       viewBox="0 0 100 20"
                       preserveAspectRatio="none"
-                      aria-hidden
-                    >
+                      aria-hidden>
                       <path
                         d="M0 15 Q 50 0 100 15"
                         stroke="currentColor"
                         strokeWidth="3.5"
-                        fill="transparent"
-                      />
+                        fill="transparent" />
                     </svg>
                   </span>
                 </h2>
@@ -447,8 +445,7 @@ export default function TelecomTowersGuidePage() {
               <ScrollReveal delay={0.1}>
                 <Link
                   href="/insights/substations-guide"
-                  className="group block rounded-[26px] bg-white border border-slate-200/90 hover:border-[#6DAD45] p-7 sm:p-8 relative overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 h-full flex flex-col justify-between"
-                >
+                  className="group block rounded-[26px] bg-white border border-slate-200/90 hover:border-[#6DAD45] p-7 sm:p-8 relative overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 h-full flex flex-col justify-between">
                   <div className="absolute top-0 right-0 w-24 h-24 bg-[#EAF087]/25 rounded-bl-[56px] pointer-events-none transition-all group-hover:bg-[#EAF087]/45" />
 
                   <div>
@@ -475,8 +472,7 @@ export default function TelecomTowersGuidePage() {
               <ScrollReveal delay={0.2}>
                 <Link
                   href="/insights/transmission-lines-guide"
-                  className="group block rounded-[26px] bg-white border border-slate-200/90 hover:border-[#6DAD45] p-7 sm:p-8 relative overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 h-full flex flex-col justify-between"
-                >
+                  className="group block rounded-[26px] bg-white border border-slate-200/90 hover:border-[#6DAD45] p-7 sm:p-8 relative overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 h-full flex flex-col justify-between">
                   <div className="absolute top-0 right-0 w-24 h-24 bg-[#EAF087]/25 rounded-bl-[56px] pointer-events-none transition-all group-hover:bg-[#EAF087]/45" />
 
                   <div>
@@ -503,8 +499,7 @@ export default function TelecomTowersGuidePage() {
               <ScrollReveal delay={0.3}>
                 <Link
                   href="/insights/piling-foundations-guide"
-                  className="group block rounded-[26px] bg-white border border-slate-200/90 hover:border-[#6DAD45] p-7 sm:p-8 relative overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 h-full flex flex-col justify-between"
-                >
+                  className="group block rounded-[26px] bg-white border border-slate-200/90 hover:border-[#6DAD45] p-7 sm:p-8 relative overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 h-full flex flex-col justify-between">
                   <div className="absolute top-0 right-0 w-24 h-24 bg-[#EAF087]/25 rounded-bl-[56px] pointer-events-none transition-all group-hover:bg-[#EAF087]/45" />
 
                   <div>
@@ -550,14 +545,12 @@ export default function TelecomTowersGuidePage() {
                           className="absolute -bottom-2 left-0 w-full h-3 text-[#D4E012]"
                           viewBox="0 0 100 20"
                           preserveAspectRatio="none"
-                          aria-hidden
-                        >
+                          aria-hidden>
                           <path
                             d="M0 15 Q 50 0 100 15"
                             stroke="currentColor"
                             strokeWidth="3.5"
-                            fill="transparent"
-                          />
+                            fill="transparent" />
                         </svg>
                       </span>
                     </h2>
@@ -569,15 +562,13 @@ export default function TelecomTowersGuidePage() {
                     <div className="pt-6 border-t border-slate-800 flex flex-wrap items-center gap-6 sm:gap-8 font-mono text-xs sm:text-sm text-slate-300">
                       <a
                         href="mailto:info@sarhatenergy.com"
-                        className="flex items-center gap-2 hover:text-[#D4E012] transition-colors"
-                      >
+                        className="flex items-center gap-2 hover:text-[#D4E012] transition-colors">
                         <Mail className="w-4 h-4 text-[#D4E012]" />
                         <span>info@sarhatenergy.com</span>
                       </a>
                       <a
                         href="tel:+919266711125"
-                        className="flex items-center gap-2 hover:text-[#D4E012] transition-colors"
-                      >
+                        className="flex items-center gap-2 hover:text-[#D4E012] transition-colors">
                         <Phone className="w-4 h-4 text-[#D4E012]" />
                         <span>+91 9266 7111 25</span>
                       </a>
@@ -592,15 +583,13 @@ export default function TelecomTowersGuidePage() {
                   <div className="flex flex-col gap-3.5 sm:min-w-[250px]">
                     <button
                       onClick={() => setQuoteModalOpen(true)}
-                      className="w-full inline-flex items-center justify-center gap-2 bg-[#D4E012] hover:bg-[#c2ce0d] text-black font-mono font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-full shadow-lg shadow-[#D4E012]/20 hover:scale-105 transition-all cursor-pointer whitespace-nowrap"
-                    >
+                      className="w-full inline-flex items-center justify-center gap-2 bg-[#D4E012] hover:bg-[#c2ce0d] text-black font-mono font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-full shadow-lg shadow-[#D4E012]/20 hover:scale-105 transition-all cursor-pointer whitespace-nowrap">
                       <span>LET&apos;S DISCUSS A PROJECT</span>
                       <ArrowUpRight className="w-4 h-4" />
                     </button>
                     <Link
                       href="/contact?product=Telecommunication+Towers#inquiry"
-                      className="w-full inline-flex items-center justify-center gap-2 bg-transparent hover:bg-white/5 border border-white/20 text-white font-mono font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-full transition-all cursor-pointer whitespace-nowrap hover:border-white/40"
-                    >
+                      className="w-full inline-flex items-center justify-center gap-2 bg-transparent hover:bg-white/5 border border-white/20 text-white font-mono font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-full transition-all cursor-pointer whitespace-nowrap hover:border-white/40">
                       <span>OPEN ENQUIRY PAGE</span>
                     </Link>
                   </div>
@@ -615,8 +604,7 @@ export default function TelecomTowersGuidePage() {
         <QuoteModal
           isOpen={quoteModalOpen}
           onClose={() => setQuoteModalOpen(false)}
-          defaultProduct="Telecommunication Towers"
-        />
+          defaultProduct="Telecommunication Towers" />
       </main>
     </SmoothScroll>
   );

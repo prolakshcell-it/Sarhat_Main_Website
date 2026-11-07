@@ -121,15 +121,12 @@ export default function EngineeringInnovationPage() {
           className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
             isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
           }`}
-          aria-hidden={isPastHero}
-        >
+          aria-hidden={isPastHero}>
           <section
             ref={heroRef}
-            className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none"
-          >
+            className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none">
             <motion.div style={{ scale: bgScale }}
-              className="absolute inset-0 z-0 h-full w-full will-change-transform"
-            >
+              className="absolute inset-0 z-0 h-full w-full will-change-transform">
               <Image
                 src="/images/agrivoltaics-project.jpg"
                 alt="Aerial view of a Sarhat solar site"
@@ -137,19 +134,30 @@ export default function EngineeringInnovationPage() {
                 priority
                 quality={85}
                 sizes="100vw"
-                className="object-cover object-center opacity-85"
-              />
+                className="object-cover object-center opacity-85" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
             </motion.div>
 
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-24 flex flex-col items-center text-center will-change-transform"
-            >
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-24 flex flex-col items-center text-center will-change-transform">
               <div className="max-w-4xl flex flex-col items-center text-center">
                 <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 leading-[1.08] drop-shadow-lg">
                   See the plant <br />
-                  <span className="text-[#D4E012] italic font-normal">before it exists</span>
+                  <span className="italic font-normal text-[#D4E012] relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
+                    before it exists
+                    <svg
+                      className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
+                      viewBox="0 0 100 20"
+                      preserveAspectRatio="none"
+                      aria-hidden="true">
+                      <path
+                        d="M0 15 Q 50 0 100 15"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        fill="transparent" />
+                    </svg>
+                  </span>
                 </h1>
                 <p className="text-base sm:text-xl text-slate-200 max-w-3xl leading-relaxed font-normal drop-shadow-md">
                   Drones, 3D models and virtual reality help us understand the land, show you the plan and catch problems while they are still cheap to fix.
@@ -180,14 +188,12 @@ export default function EngineeringInnovationPage() {
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
+                        preserveAspectRatio="none">
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -219,14 +225,12 @@ export default function EngineeringInnovationPage() {
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
+                        preserveAspectRatio="none">
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -276,8 +280,7 @@ export default function EngineeringInnovationPage() {
                     <ScrollReveal key={c.href}>
                       <Link
                         href={c.href}
-                        className="group flex h-full flex-col rounded-3xl bg-slate-900 p-8 sm:p-10 text-white transition-transform duration-200 hover:-translate-y-1"
-                      >
+                        className="group flex h-full flex-col rounded-3xl bg-slate-900 p-8 sm:p-10 text-white transition-transform duration-200 hover:-translate-y-1">
                         <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-[#D4E012]">
                           <Icon className="h-5 w-5" />
                         </span>

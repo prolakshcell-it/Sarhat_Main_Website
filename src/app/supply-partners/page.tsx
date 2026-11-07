@@ -30,6 +30,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import { useHeroScroll } from "@/hooks/useHeroScroll";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
+import ProductFAQ from "@/components/ProductFAQ";
 
 export default function SupplyPartnersPage() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
@@ -38,7 +39,7 @@ export default function SupplyPartnersPage() {
   const containerRef = useRef<HTMLElement>(null);
 
   // Parallax & Scroll Fade-out Tracking
-    const {
+  const {
     isPastHero,
     bgScale,
     bgDim,
@@ -214,11 +215,9 @@ export default function SupplyPartnersPage() {
 
         {/* Sticky Hero Container (100vh Fullscreen Hero) */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
-          aria-hidden={isPastHero}
-        >
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
+          aria-hidden={isPastHero}>
           <section ref={containerRef} className="relative h-full w-full flex flex-col justify-center items-center bg-slate-950 text-white overflow-hidden select-none">
             {/* Cinematic High-Res Fullscreen Background Image Layer */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
@@ -228,35 +227,46 @@ export default function SupplyPartnersPage() {
                 fill
                 priority
                 quality={100}
-                className="object-cover object-center opacity-90 transform scale-105"
-              />
+                className="object-cover object-center opacity-90 transform scale-105" />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
             </motion.div>
 
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 w-full relative z-10 pt-16 flex flex-col items-center text-center will-change-transform"
-            >
+              className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 w-full relative z-10 pt-16 flex flex-col items-center text-center will-change-transform">
               <ScrollReveal direction="up" distance={40}>
 
 
                 {/* Main Headline */}
-                <div className="max-w-4xl flex flex-col items-center text-center">
-                  <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.12] mb-6 text-center drop-shadow-lg">
-                    Empanelled <br />
-                    <span className="text-[#D4E012] italic relative inline-block">
-                      Supply Partners (OEMs).
-                    </span>
-                  </h1>
+                  <div className="max-w-5xl flex flex-col items-center text-center w-full">
+                    <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.1] mb-6 text-center [text-shadow:_0_4px_24px_rgba(0,0,0,0.95)] [text-wrap:balance]">
+                      <span className="block">Empanelled</span>
+                      <span className="italic font-normal text-[#D4E012] relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)] mt-1">
+                        Supply Partners (OEMs).
+                        <svg
+                        className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden="true">
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent" />
+                      </svg>
+                      </span>
+                    </h1>
 
                   {/* Subtitle Paragraph */}
-                  <p className="text-sm sm:text-base md:text-lg text-slate-200 font-normal max-w-4xl text-center leading-relaxed mb-6 tracking-wide drop-shadow-md">
-                    Join Sarhat&apos;s empanelled vendor network for Tier-1 solar modules, inverters, cables, transformers, mounting structures, and electrical equipment across India.
+                  <p className="text-xs sm:text-sm md:text-base lg:text-lg text-slate-100 font-normal max-w-5xl mx-auto text-center leading-relaxed tracking-wide [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)]">
+                    <span className="block sm:whitespace-nowrap">
+                      Join Sarhat&apos;s empanelled vendor network for Tier-1 solar modules, inverters, cables,
+                    </span>
+                    <span className="block sm:whitespace-nowrap mt-1 sm:mt-1.5">
+                      transformers, mounting structures, and electrical equipment across India.
+                    </span>
                   </p>
-
-                  {/* Accent Yellow Underline */}
-                  <div className="w-20 h-1.5 bg-[#D4E012] rounded-full shadow-[0_0_12px_#D4E012] mx-auto"></div>
                 </div>
               </ScrollReveal>
             </motion.div>
@@ -289,14 +299,12 @@ export default function SupplyPartnersPage() {
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
+                        preserveAspectRatio="none">
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -356,14 +364,12 @@ export default function SupplyPartnersPage() {
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
+                        preserveAspectRatio="none">
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -433,14 +439,12 @@ export default function SupplyPartnersPage() {
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
+                        preserveAspectRatio="none">
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -477,8 +481,7 @@ export default function SupplyPartnersPage() {
                             message: "",
                           });
                         }}
-                        className="inline-flex items-center gap-2 bg-slate-900 text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-full hover:bg-[#D4E012] hover:text-black transition-colors"
-                      >
+                        className="inline-flex items-center gap-2 bg-slate-900 text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-full hover:bg-[#D4E012] hover:text-black transition-colors">
                         Submit Another Vendor Profile
                       </button>
                     </div>
@@ -494,8 +497,7 @@ export default function SupplyPartnersPage() {
                             placeholder="Company Name *"
                             value={formData.companyName}
                             onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"
-                          />
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all" />
                         </div>
 
                         {/* Contact Person */}
@@ -507,8 +509,7 @@ export default function SupplyPartnersPage() {
                             placeholder="Contact Person *"
                             value={formData.contactPerson}
                             onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"
-                          />
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all" />
                         </div>
 
                         {/* Email */}
@@ -520,8 +521,7 @@ export default function SupplyPartnersPage() {
                             placeholder="Email *"
                             value={formData.email}
                             onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"
-                          />
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all" />
                         </div>
 
                         {/* Phone */}
@@ -533,8 +533,7 @@ export default function SupplyPartnersPage() {
                             placeholder="Phone *"
                             value={formData.phone}
                             onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"
-                          />
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all" />
                         </div>
 
                         {/* City */}
@@ -546,8 +545,7 @@ export default function SupplyPartnersPage() {
                             placeholder="City *"
                             value={formData.city}
                             onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"
-                          />
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all" />
                         </div>
 
                         {/* Primary Supply Category */}
@@ -557,8 +555,7 @@ export default function SupplyPartnersPage() {
                             required
                             value={formData.supplyCategory}
                             onChange={handleInputChange}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-[#0F172A] focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer"
-                          >
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-[#0F172A] focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer">
                             <option value="" disabled>
                               Primary Supply Category *
                             </option>
@@ -585,8 +582,7 @@ export default function SupplyPartnersPage() {
                           placeholder="Share certifications, product details, and capacity."
                           value={formData.message}
                           onChange={handleInputChange}
-                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"
-                        ></textarea>
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all"></textarea>
                       </div>
 
                       {/* Company Brochure PDF Upload Field (Image 2) */}
@@ -599,8 +595,7 @@ export default function SupplyPartnersPage() {
                             type="file"
                             accept=".pdf"
                             onChange={handleFileChange}
-                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                          />
+                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
                           <div className="flex items-center justify-center gap-3 text-slate-600">
                             <Upload className="w-5 h-5 text-slate-400 group-hover:text-[#707B00] transition-colors" />
                             <span className="text-sm font-medium">
@@ -618,19 +613,15 @@ export default function SupplyPartnersPage() {
                       <div className="pt-1">
                         <div
                           onClick={() => setIsVerified(!isVerified)}
-                          className={`inline-flex items-center gap-4 border rounded-lg px-4 py-3 cursor-pointer select-none transition-all ${
-                            isVerified
-                              ? "bg-slate-900 border-slate-800 text-white"
-                              : "bg-slate-900/90 border-slate-800 text-slate-200 hover:bg-slate-900"
-                          }`}
-                        >
+                          className={`inline-flex items-center gap-4 border rounded-lg px-4 py-3 cursor-pointer select-none transition-all ${isVerified
+                            ? "bg-slate-900 border-slate-800 text-white"
+                            : "bg-slate-900/90 border-slate-800 text-slate-200 hover:bg-slate-900"
+                            }`}>
                           <div
-                            className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
-                              isVerified
-                                ? "bg-[#D4E012] border-[#D4E012] text-black"
-                                : "border-slate-500 bg-slate-800"
-                            }`}
-                          >
+                            className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${isVerified
+                              ? "bg-[#D4E012] border-[#D4E012] text-black"
+                              : "border-slate-500 bg-slate-800"
+                              }`}>
                             {isVerified && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                           </div>
                           <span className="text-xs font-medium">Verify you are human</span>
@@ -645,8 +636,7 @@ export default function SupplyPartnersPage() {
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-10 py-4 rounded-xl transition-all shadow-xl shadow-[#D4E012]/20 disabled:opacity-50"
-                        >
+                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] text-black font-extrabold text-xs uppercase tracking-widest px-10 py-4 rounded-xl transition-all shadow-xl shadow-[#D4E012]/20 disabled:opacity-50">
                           {isSubmitting ? (
                             <span>Submitting Registration...</span>
                           ) : (
@@ -681,14 +671,12 @@ export default function SupplyPartnersPage() {
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                      >
+                        preserveAspectRatio="none">
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -707,57 +695,20 @@ export default function SupplyPartnersPage() {
                       setActiveFaqTab(tab);
                       setOpenFaqIndex(0);
                     }}
-                    className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${
-                      activeFaqTab === tab
-                        ? "bg-slate-900 text-white shadow-md"
-                        : "bg-white text-slate-600 border border-slate-200 hover:border-[#D4E012]"
-                    }`}
-                  >
+                    className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${activeFaqTab === tab
+                      ? "bg-slate-900 text-white shadow-md"
+                      : "bg-white text-slate-600 border border-slate-200 hover:border-[#D4E012]"
+                      }`}>
                     {tab}
                   </button>
                 ))}
               </div>
 
               {/* FAQ Accordion */}
-              <div className="space-y-3">
-                {faqData[activeFaqTab].map((faq, idx) => {
-                  const isOpen = openFaqIndex === idx;
-                  return (
-                    <div
-                      key={idx}
-                      className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden transition-all"
-                    >
-                      <button
-                        onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                        className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 focus:outline-none"
-                      >
-                        <span className="font-serif-display font-medium text-base sm:text-lg text-slate-900">
-                          {faq.question}
-                        </span>
-                        <ChevronDown
-                          className={`w-5 h-5 text-slate-500 shrink-0 transition-transform duration-300 ${
-                            isOpen ? "rotate-180 text-[#707B00]" : ""
-                          }`}
-                        />
-                      </button>
-                      <AnimatePresence>
-                        {isOpen && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.25 }}
-                          >
-                            <div className="px-5 sm:px-6 pb-6 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4 font-sans-ui">
-                              {faq.answer}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                })}
-              </div>
+              <ProductFAQ
+                faqs={faqData[activeFaqTab]}
+                openIndex={openFaqIndex}
+                onToggle={(idx) => setOpenFaqIndex(openFaqIndex === idx ? null : idx)} />
             </div>
           </section>
         </div>

@@ -29,130 +29,186 @@ interface ExecutiveLeader {
 
 const executiveTeam: ExecutiveLeader[] = [
   {
-    id: "lalit-kumarr",
-    name: "Lalit Kumarr",
-    role: "Founder & Managing Director",
+    id: "satish-chaudhary",
+    name: "Satish Chaudhary",
+    role: "Managing Director",
     categoryTag: "EXECUTIVE LEADERSHIP",
-    experience: "35+ Years Industry Leadership",
+    experience: "13 Years Experience",
     shortBio:
-      "Lalit leads the business, bringing over 35 years of global energy and infrastructure vision to steer Sarhat to the next level.",
+      "Satish leads executive management, corporate strategy, and the overall direction of Sarhat Energy across India.",
     fullBio:
-      "Lalit Kumarr is the Founder & Managing Director of Sarhat Energy. With over 35 years of global energy industry leadership, he has steered multi-gigawatt power, solar EPC, and civil infrastructure projects across India. Prior to founding Sarhat, he held senior executive positions across major energy corporations, pioneering sustainable engineering, regulatory compliance, and execution discipline.",
-    education: "B.E. Electrical Engineering · Global Energy Management Program",
-    image: "/images/hero-solar.jpg",
-    linkedin: "https://linkedin.com",
+      "Satish Chaudhary serves as Managing Director of Sarhat Energy. With 13 years of leadership in energy, infrastructure, and enterprise execution, he guides Sarhat's corporate vision, strategic project origination, capital allocation, and multi-gigawatt clean energy execution across India.",
+    education: "Executive Leadership & Energy Management",
+    image: "/team-heads/satish-chaudhary.jpg",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
-    id: "ajay-singh",
-    name: "Ajay Singh",
-    role: "Chief Financial Officer (CFO)",
-    categoryTag: "FINANCE & GOVERNANCE",
-    experience: "30+ Years Financial Governance",
+    id: "avishek-anand",
+    name: "Avishek Anand",
+    role: "Director Operations",
+    categoryTag: "OPERATIONS LEADERSHIP",
+    experience: "12 Years Experience",
     shortBio:
-      "In his current role as Chief Financial Officer, Ajay leads the financial strategy, capital allocation, and risk management.",
+      "Avishek directs company-wide engineering operations, site construction protocols, and quality execution.",
     fullBio:
-      "Ajay Singh serves as CFO, bringing over 30 years of financial governance, risk management, and capital allocation experience. A Chartered Accountant by background, he has managed multi-crore project financing, utility contract structures, corporate governance, and fiscal compliance for leading energy and infrastructure enterprises across India.",
-    education: "FCA Chartered Accountant · B.Com (Hons)",
-    image: "/images/substation-project.jpg",
-    linkedin: "https://linkedin.com",
+      "Avishek Anand serves as Director Operations at Sarhat Energy. Bringing 12 years of specialized operational expertise, he oversees turnkey site execution, multi-state project delivery timelines, field engineering coordination, and high-standard safety compliance across all utility-scale and commercial projects.",
+    education: "B.Tech Engineering & Project Management",
+    image: "/team-heads/avishek-anand.jpg",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
-    id: "shrikant-bartakke",
-    name: "Shrikant Bartakke",
-    role: "Chief Growth Officer (CGO)",
-    categoryTag: "STRATEGIC EXPANSION",
-    experience: "20+ Years Strategic Expansion",
-    shortBio:
-      "Shrikant leads strategic commercial expansion, enterprise partnerships, and multi-state renewable energy scaling.",
-    fullBio:
-      "Shrikant Bartakke leads strategic market expansion and commercial partnerships at Sarhat Energy. With 20+ years of leadership in telecommunications and renewable energy scaling, he oversees enterprise client acquisitions, strategic joint ventures, utility PPAs, and expansion into emerging storage & agrovoltaic sectors.",
-    education: "MBA Marketing & Strategy · B.Tech Mechanical",
-    image: "/images/partner-hero-bg.jpg",
-    linkedin: "https://linkedin.com",
-  },
-  {
-    id: "ajit-shah",
-    name: "Ajit Shah",
-    role: "Vice President — Business Development",
-    categoryTag: "BUSINESS DEVELOPMENT",
-    experience: "18+ Years Business Development",
-    shortBio:
-      "Ajit specializes in utility-scale solar origination, state regulatory liaison, land banking, and PPA negotiations.",
-    fullBio:
-      "Ajit Shah brings over 18 years of diverse experience as a Business Development Leader, specializing in utility-scale solar origination, government liaison, DISCOM regulatory approvals, land banking frameworks, and power purchase agreement (PPA) financial management.",
-    education: "M.Sc Energy Economics · B.E. Civil Engineering",
-    image: "/images/bess-substation.jpg",
-    linkedin: "https://linkedin.com",
-  },
-  {
-    id: "rajesh-kumar",
-    name: "Rajesh Kumar",
-    role: "General Manager — Projects & Operations",
-    categoryTag: "PROJECT EXECUTION",
-    experience: "24+ Years Grid & Solar O&M",
-    shortBio:
-      "Rajesh oversees field EPC execution, grid substation integration (33kV to 400kV), and long-term asset O&M performance.",
-    fullBio:
-      "Rajesh Kumar oversees complete field EPC execution, grid substation integration (33kV to 400kV), EHV transmission corridor clearances, site safety protocols, and long-term asset O&M performance across all operational project sites nationwide.",
-    education: "B.Tech Electrical & Electronics · Certified PMP",
-    image: "/images/agrivoltaics-project.jpg",
-    linkedin: "https://linkedin.com",
-  },
-  {
-    id: "harshita-arora",
-    name: "Harshita Arora",
-    role: "Head — Business Growth & Strategic Alliances",
-    categoryTag: "STRATEGIC ALLIANCES",
-    experience: "Strategic Partnerships",
-    shortBio:
-      "Harshita leads corporate client relations, project proposals, ESG integration, and strategic alliances nationwide.",
-    fullBio:
-      "Harshita Arora leads corporate client relations, project proposals, ESG integration, and strategic alliances across Sarhat's solar, BESS storage, and agrovoltaic initiatives, strengthening Sarhat's national business footprint.",
-    education: "MBA International Business · B.Sc Environmental Science",
-    image: "/images/about-hero-bg-bright.jpg",
-    linkedin: "https://linkedin.com",
-  },
-  {
-    id: "vikram-sharma",
-    name: "Vikram Sharma",
-    role: "Chief Technical Officer (CTO)",
-    categoryTag: "ENGINEERING & INNOVATION",
-    experience: "22+ Years Technical Design",
-    shortBio:
-      "Vikram directs electrical & structural engineering, microgrid integration, SCADA automation, and quality control.",
-    fullBio:
-      "Vikram Sharma directs electrical and structural engineering design, microgrid integration, SCADA automation, shadow analysis, and technical quality control standards across utility and C&I solar installations.",
-    education: "M.Tech Electrical Power Systems · B.Tech Electrical",
-    image: "/images/hero-solar.jpg",
-    linkedin: "https://linkedin.com",
-  },
-  {
-    id: "pooja-malhotra",
-    name: "Pooja Malhotra",
-    role: "Chief HR & People Officer",
+    id: "radha-kumari",
+    name: "Radha Kumari",
+    role: "Head of HR",
     categoryTag: "PEOPLE & CULTURE",
-    experience: "16+ Years Organizational Culture",
+    experience: "6 Years Experience",
     shortBio:
-      "Pooja leads talent acquisition, organizational culture, safety policies, and leadership development programs.",
+      "Radha leads human resources, talent acquisition, organizational culture, and employee welfare programs.",
     fullBio:
-      "Pooja Malhotra leads talent acquisition, organizational culture, safety policies, and leadership development programs to foster a high-performance, inclusive environment across site and corporate teams.",
-    education: "MBA Human Resources · B.A. Psychology",
-    image: "/images/about-hero-bg.jpg",
-    linkedin: "https://linkedin.com",
+      "Radha Kumari leads Human Resources at Sarhat Energy. With 6 years of focused HR and talent leadership, she spearheads human capital management, organizational culture, workforce inclusion, policy frameworks, and continuous skill upskilling across on-site execution crews and corporate departments.",
+    education: "MBA Human Resources Management",
+    image: "/team-heads/radha-kumari.jpg",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
-    id: "sanjay-verma",
-    name: "Sanjay Verma",
-    role: "Head — Supply Chain & Procurement",
-    categoryTag: "SUPPLY CHAIN & LOGISTICS",
-    experience: "20+ Years Global Sourcing",
+    id: "naresh-kumar",
+    name: "Naresh Kumar",
+    role: "Head Business Growth & Strategic Alliances",
+    categoryTag: "STRATEGIC ALLIANCES",
+    experience: "14 Years Experience",
     shortBio:
-      "Sanjay manages tier-1 solar module procurement, inverter logistics, civil material sourcing, and vendor alliances.",
+      "Naresh drives enterprise growth, institutional partnerships, strategic joint ventures, and market expansion.",
     fullBio:
-      "Sanjay Verma manages global tier-1 solar module procurement, inverter sourcing, civil material logistics, and strategic vendor alliances to ensure seamless project delivery and cost optimization.",
-    education: "B.Tech Mechanical · Diploma in Supply Chain Management",
-    image: "/images/partner-hero-bg.jpg",
-    linkedin: "https://linkedin.com",
+      "Naresh Kumar leads Business Growth and Strategic Alliances at Sarhat Energy. With over 14 years of industry experience, he manages institutional developer alliances, corporate PPA origination, state regulatory liaison, and strategic business expansion in solar, BESS storage, and agrovoltaic sectors.",
+    education: "MBA Business Strategy & Marketing",
+    image: "/team-heads/naresh-kumar.jpg",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+  },
+  {
+    id: "ayush-raj",
+    name: "Ayush Raj",
+    role: "Manager Business Development",
+    categoryTag: "BUSINESS DEVELOPMENT",
+    experience: "3 Years Experience",
+    shortBio:
+      "Ayush manages market origination, client engagement, bid preparation, and clean energy pipeline development.",
+    fullBio:
+      "Ayush Raj serves as Manager Business Development at Sarhat Energy. Bringing 3 years of dynamic business development and client engagement experience, he focuses on pipeline origination, tender analytics, commercial proposals, and client relationship management for commercial and utility clients.",
+    education: "B.E. / B.Tech & Business Management",
+    image: "/team-heads/ayush-raj-v2.jpg",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+  },
+  {
+    id: "avishek-jha",
+    name: "Avishek Jha",
+    role: "Head Operations",
+    categoryTag: "OPERATIONS EXCELLENCE",
+    experience: "12 Years Experience",
+    shortBio:
+      "Avishek leads multi-site execution operations, contractor management, and field mobilization across India.",
+    fullBio:
+      "Avishek Jha serves as Head Operations at Sarhat Energy. With 12 years of hands-on technical and operational leadership, he directs site mobilization, field contractor performance, milestone scheduling, and inter-departmental logistics across high-voltage substation and solar generation sites.",
+    education: "B.Tech Electrical & Electronics",
+    image: "/team-heads/avishek-jha.jpg",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+  },
+  {
+    id: "amar-nath-jha",
+    name: "Amar Nath Jha",
+    role: "Head Supply Chain Management",
+    categoryTag: "SUPPLY CHAIN & LOGISTICS",
+    experience: "10 Years Experience",
+    shortBio:
+      "Amar Nath oversees Tier-1 vendor procurement, logistics coordination, and equipment quality assurance.",
+    fullBio:
+      "Amar Nath Jha leads Supply Chain Management at Sarhat Energy. Bringing 10 years of specialized procurement and supply chain experience, he steers vendor qualification, Tier-1 solar module & inverter procurement, logistics optimization, and material delivery assurance to maintain site schedules.",
+    education: "Supply Chain & Operations Management",
+    image: "/team-heads/amar-nath-jha.png",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+  },
+  {
+    id: "kana-sharma",
+    name: "Kana Sharma",
+    role: "Manager Projects & Liaison",
+    categoryTag: "PROJECTS & LIAISON",
+    experience: "4 Years Experience",
+    shortBio:
+      "Kana manages statutory approvals, DISCOM liaison, ROW clearances, and project coordination.",
+    fullBio:
+      "Kana Sharma serves as Manager Projects & Liaison at Sarhat Energy. With 4 years of dedicated liaison and project management experience, she coordinates state electricity board clearances, DISCOM grid approvals, statutory compliance, and smooth inter-agency communication for swift commissioning.",
+    education: "B.Tech Engineering & Regulatory Management",
+    image: "/team-heads/kana-sharma.jpg",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+  },
+  {
+    id: "prawesh-kumar-jha",
+    name: "Prawesh Kumar Jha",
+    role: "Manager Design & Engg",
+    categoryTag: "DESIGN & ENGINEERING",
+    experience: "4 Years Experience",
+    shortBio:
+      "Prawesh directs detailed engineering design, SLDs, structural layout modeling, and electrical schematics.",
+    fullBio:
+      "Prawesh Kumar Jha serves as Manager Design & Engineering at Sarhat Energy. With 4 years of specialized engineering design expertise, he oversees plant layout optimization, 3D modeling, shadow analysis, single line diagrams (SLD), and structural validation to maximize energy yield.",
+    education: "B.Tech Electrical / Power Systems",
+    image: "/team-heads/prawesh-kumar-jha.jpg",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+  },
+  {
+    id: "mrityunjay-kumar-jha",
+    name: "Mrityunjay Kumar Jha",
+    role: "Manager Accounts",
+    categoryTag: "FINANCE & ACCOUNTS",
+    experience: "13 Years Experience",
+    shortBio:
+      "Mrityunjay oversees financial accounting, statutory audits, project cash flows, and fiscal compliance.",
+    fullBio:
+      "Mrityunjay Kumar Jha serves as Manager Accounts at Sarhat Energy. Bringing 13 years of rigorous accounting and financial governance experience, he oversees corporate fiscal reporting, vendor accounting, budget allocations, statutory taxation, and financial compliance across all projects.",
+    education: "M.Com / Chartered Financial Accounting",
+    image: "/team-heads/mrityunjay-kumar-jha.jpg",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+  },
+  {
+    id: "amar-kumar-rauniyar",
+    name: "Amar Kumar Rauniyar",
+    role: "Manager Projects & O&M",
+    categoryTag: "PROJECTS & O&M",
+    experience: "8 Years Experience",
+    shortBio:
+      "Amar manages on-site project construction, plant testing, preventative O&M, and asset availability.",
+    fullBio:
+      "Amar Kumar Rauniyar serves as Manager Projects & O&M at Sarhat Energy. With 8 years of dedicated field execution and operations & maintenance expertise, he manages turnkey solar site erection, testing & commissioning, preventative maintenance cycles, and SCADA-monitored plant performance.",
+    education: "B.Tech Electrical / Mechanical Engineering",
+    image: "/team-heads/amar-kumar-rauniyar.png",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+  },
+  {
+    id: "srimanta-das",
+    name: "Srimanta Das",
+    role: "Assistant Project Manager",
+    categoryTag: "PROJECT MANAGEMENT",
+    experience: "6 Years Experience",
+    shortBio:
+      "Srimanta coordinates site civil works, daily execution tracking, and contractor quality compliance.",
+    fullBio:
+      "Srimanta Das serves as Assistant Project Manager at Sarhat Energy. With 6 years of ground execution and management experience, he coordinates civil foundations, piling schedules, structural assembly inspections, and contractor progress tracking across active solar sites.",
+    education: "Diploma / B.Tech Civil Engineering",
+    image: "/team-heads/srimanta-das-v2.png",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+  },
+  {
+    id: "abhishek-jha",
+    name: "Abhishek Jha",
+    role: "Assistant Project Manager SCM",
+    categoryTag: "SUPPLY CHAIN MANAGEMENT",
+    experience: "2 Years Experience",
+    shortBio:
+      "Abhishek coordinates procurement tracking, warehouse inventory, and on-time site material dispatches.",
+    fullBio:
+      "Abhishek Jha serves as Assistant Project Manager SCM at Sarhat Energy. With 2 years of supply chain and logistics coordination experience, he supports procurement scheduling, inventory tracking, bill of materials (BOM) auditing, and delivery dispatch logistics across project sites.",
+    education: "B.Tech / SCM Operations",
+    image: "/team-heads/abhishek-jha.png",
+    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
 ];
 
@@ -163,7 +219,7 @@ export default function LeadershipPage() {
   const containerRef = useRef<HTMLElement>(null);
 
   // Parallax & Scroll Fade-out Tracking for Hero
-    const {
+  const {
     isPastHero,
     bgScale,
     bgDim,
@@ -183,15 +239,12 @@ export default function LeadershipPage() {
         {/* HERO SECTION (Sticky Background Image Overlay Hero) */}
         {/* ------------------------------------------------------------- */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
-          aria-hidden={isPastHero}
-        >
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
+          aria-hidden={isPastHero}>
           <section
             ref={containerRef}
-            className="relative h-full w-full flex flex-col items-center justify-center overflow-hidden bg-black text-white select-none"
-          >
+            className="relative h-full w-full flex flex-col items-center justify-center overflow-hidden bg-black text-white select-none">
             {/* Background Image Layer */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
               <Image
@@ -199,8 +252,7 @@ export default function LeadershipPage() {
                 alt="Sarhat Executive Leadership"
                 fill
                 priority
-                className="object-cover object-center opacity-85"
-              />
+                className="object-cover object-center opacity-85" />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
               {/* Soft Dark Vignette Scrim */}
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
@@ -208,17 +260,36 @@ export default function LeadershipPage() {
 
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 flex flex-col items-center text-center will-change-transform"
-            >
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 flex flex-col items-center text-center will-change-transform">
               <ScrollReveal direction="up" distance={30}>
-                <div className="max-w-4xl flex flex-col items-center text-center">
-                  <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 text-center leading-[1.08] drop-shadow-lg">
-                    Guided by Decades of <br />
-                    <span className="text-[#D4E012] italic font-normal">Energy & Engineering Excellence</span>
+                <div className="max-w-5xl lg:max-w-6xl flex flex-col items-center text-center w-full">
+                  <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 text-center leading-[1.1] [text-shadow:_0_4px_24px_rgba(0,0,0,0.95)]">
+                    <span className="block sm:whitespace-nowrap">Guided by Decades of</span>
+                    <span className="block mt-1">
+                      <span className="text-[#D4E012] italic font-normal relative inline-block sm:whitespace-nowrap drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
+                        Energy &amp; Engineering Excellence
+                        <svg
+                          className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
+                          viewBox="0 0 100 20"
+                          preserveAspectRatio="none"
+                          aria-hidden="true">
+                          <path
+                            d="M0 15 Q 50 0 100 15"
+                            stroke="currentColor"
+                            strokeWidth="3.5"
+                            fill="transparent" />
+                        </svg>
+                      </span>
+                    </span>
                   </h1>
 
-                  <p className="text-base sm:text-xl text-slate-200 max-w-5xl text-center leading-relaxed font-normal drop-shadow-md">
-                    Our executive team leads our culture of innovation, inclusion, and operational excellence—supporting our teams across India to thrive and succeed in driving the clean energy transition.
+                  <p className="text-xs sm:text-sm md:text-base lg:text-lg text-slate-100 font-normal max-w-5xl mx-auto text-center leading-relaxed tracking-wide [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)]">
+                    <span className="block sm:whitespace-nowrap">
+                      Our executive team leads our culture of innovation, inclusion, and operational excellence—
+                    </span>
+                    <span className="block sm:whitespace-nowrap mt-1 sm:mt-1.5">
+                      supporting our teams across India to thrive and succeed in driving the clean energy transition.
+                    </span>
                   </p>
                 </div>
               </ScrollReveal>
@@ -252,14 +323,12 @@ export default function LeadershipPage() {
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden
-                      >
+                        aria-hidden>
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -278,16 +347,14 @@ export default function LeadershipPage() {
                       {/* 3D Flip Card Container */}
                       <div
                         onClick={() => setSelectedLeader(leader)}
-                        className="relative w-full aspect-[4/3] rounded-2xl transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] cursor-pointer shadow-lg hover:shadow-2xl border border-slate-200/90 hover:border-[#6DAD45]"
-                      >
+                        className="relative w-full aspect-[4/3] rounded-2xl transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] cursor-pointer shadow-lg hover:shadow-2xl border border-slate-200/90 hover:border-[#6DAD45]">
                         {/* ---------------- CARD FRONT ---------------- */}
                         <div className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden [backface-visibility:hidden] z-10 bg-slate-100">
                           <Image
                             src={leader.image}
                             alt={leader.name}
                             fill
-                            className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                          />
+                            className="object-cover object-top group-hover:scale-105 transition-transform duration-700" />
                           {/* Soft Bottom Scrim */}
                           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
 
@@ -309,8 +376,7 @@ export default function LeadershipPage() {
                             src={leader.image}
                             alt={leader.name}
                             fill
-                            className="object-cover object-center opacity-25 filter blur-[2px] brightness-75 transition-transform duration-700 scale-105 pointer-events-none"
-                          />
+                            className="object-cover object-top opacity-25 filter blur-[2px] brightness-75 transition-transform duration-700 scale-105 pointer-events-none" />
                           {/* Dark Glass Overlay */}
                           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/85 to-slate-950/95 pointer-events-none" />
 
@@ -344,8 +410,7 @@ export default function LeadershipPage() {
                                 e.stopPropagation();
                                 setSelectedLeader(leader);
                               }}
-                              className="bg-gradient-to-r from-[#6DAD45] to-[#5EE72D] hover:from-[#5cb338] hover:to-[#4ed423] text-slate-950 font-extrabold text-[11px] uppercase tracking-wider px-5 py-2 rounded-full transition-all shadow-md shadow-[#6DAD45]/30 hover:scale-105 cursor-pointer inline-flex items-center gap-1.5"
-                            >
+                              className="bg-gradient-to-r from-[#6DAD45] to-[#5EE72D] hover:from-[#5cb338] hover:to-[#4ed423] text-slate-950 font-extrabold text-[11px] uppercase tracking-wider px-5 py-2 rounded-full transition-all shadow-md shadow-[#6DAD45]/30 hover:scale-105 cursor-pointer inline-flex items-center gap-1.5">
                               <span>READ FULL BIO</span>
                               <ArrowUpRight className="w-3.5 h-3.5 text-slate-950" />
                             </button>
@@ -357,8 +422,7 @@ export default function LeadershipPage() {
                       <div className="mt-4 text-left">
                         <h3
                           onClick={() => setSelectedLeader(leader)}
-                          className="text-lg sm:text-xl font-serif-display font-bold text-[#0F172A] group-hover:text-[#6DAD45] transition-colors cursor-pointer leading-tight mb-1"
-                        >
+                          className="text-lg sm:text-xl font-serif-display font-bold text-[#0F172A] group-hover:text-[#6DAD45] transition-colors cursor-pointer leading-tight mb-1">
                           {leader.name}
                         </h3>
                         <p className="text-xs sm:text-sm font-mono font-medium text-slate-600">
@@ -385,8 +449,7 @@ export default function LeadershipPage() {
                       src="/images/hero-solar.jpg"
                       alt="Sarhat Energy Team"
                       fill
-                      className="object-cover object-center opacity-90"
-                    />
+                      className="object-cover object-center opacity-90" />
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-slate-950/90 hidden lg:block" />
                   </div>
 
@@ -398,8 +461,22 @@ export default function LeadershipPage() {
                       SARHAT CULTURE & VALUES
                     </span>
 
-                    <h2 className="text-3xl sm:text-5xl font-serif-display font-bold text-white tracking-tight leading-tight mb-6">
-                      Our culture and people
+                    <h2 className="text-3xl sm:text-5xl font-serif-display font-medium text-white tracking-tight leading-tight mb-6">
+                      Our culture <br />
+                      <span className="text-[#D4E012] italic relative inline-block">
+                        and people.
+                        <svg
+                          className="absolute -bottom-2 left-0 w-full h-2.5 text-[#D4E012]"
+                          viewBox="0 0 100 20"
+                          preserveAspectRatio="none"
+                          aria-hidden="true">
+                          <path
+                            d="M0 15 Q 50 0 100 15"
+                            stroke="currentColor"
+                            strokeWidth="3.5"
+                            fill="transparent" />
+                        </svg>
+                      </span>
                     </h2>
 
                     <p className="text-sm sm:text-base text-slate-300 font-normal leading-relaxed mb-8">
@@ -409,8 +486,7 @@ export default function LeadershipPage() {
                     <div>
                       <Link
                         href="/about/culture-people"
-                        className="inline-flex items-center gap-2 bg-gradient-to-r from-[#6DAD45] to-[#5EE72D] hover:from-[#5cb338] hover:to-[#4ed423] text-slate-950 font-extrabold text-xs uppercase tracking-wider px-7 py-4 rounded-full transition-all shadow-lg shadow-[#6DAD45]/30 cursor-pointer"
-                      >
+                        className="inline-flex items-center gap-2 bg-gradient-to-r from-[#6DAD45] to-[#5EE72D] hover:from-[#5cb338] hover:to-[#4ed423] text-slate-950 font-extrabold text-xs uppercase tracking-wider px-7 py-4 rounded-full transition-all shadow-lg shadow-[#6DAD45]/30 cursor-pointer">
                         <span>READ MORE</span>
                         <ArrowRight className="w-4 h-4 text-slate-950" />
                       </Link>
@@ -438,14 +514,12 @@ export default function LeadershipPage() {
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="bg-white border-2 border-slate-200 rounded-3xl max-w-2xl w-full relative shadow-2xl overflow-hidden text-slate-900"
-              >
+                className="bg-white border-2 border-slate-200 rounded-3xl max-w-2xl w-full relative shadow-2xl overflow-hidden text-slate-900">
                 {/* Header Banner */}
                 <div className="bg-[#0F172A] p-6 sm:p-8 text-white relative bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#6DAD45]/30 via-[#0F172A] to-[#0F172A]">
                   <button
                     onClick={() => setSelectedLeader(null)}
-                    className="absolute top-6 right-6 text-slate-400 hover:text-white p-2 rounded-full bg-black/40 border border-white/10 transition-colors cursor-pointer"
-                  >
+                    className="absolute top-6 right-6 text-slate-400 hover:text-white p-2 rounded-full bg-black/40 border border-white/10 transition-colors cursor-pointer">
                     <X className="w-5 h-5" />
                   </button>
 
@@ -455,8 +529,7 @@ export default function LeadershipPage() {
                         src={selectedLeader.image}
                         alt={selectedLeader.name}
                         fill
-                        className="object-cover object-center"
-                      />
+                        className="object-cover object-top" />
                     </div>
                     <div>
                       <h3 className="text-2xl sm:text-3xl font-serif-display font-medium text-[#6DAD45] mb-1">
@@ -491,8 +564,7 @@ export default function LeadershipPage() {
                       href={selectedLeader.linkedin}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#6DAD45] hover:text-slate-950 transition-colors"
-                    >
+                      className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#6DAD45] hover:text-slate-950 transition-colors">
                       <span>LinkedIn Profile</span>
                       <ArrowUpRight className="w-4 h-4 text-[#6DAD45]" />
                     </a>

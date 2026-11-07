@@ -31,8 +31,8 @@ function Layer({ show, delay = 0, children }: { show: boolean; delay?: number; c
 }
 
 export default function ConstructionScene({ stage }: { stage: number }) {
-  const on = (n: number) => stage >= n;
-  const energised = stage >= 5;
+  const on = (n: number) => stage>= n;
+  const energised = stage>= 5;
 
   return (
     <svg viewBox="0 0 480 300" role="img" aria-label="A solar plant being built, stage by stage, from site set-up to energisation" className="block h-full w-full">
@@ -48,8 +48,7 @@ export default function ConstructionScene({ stage }: { stage: number }) {
       <rect
         width="480" height="300" fill="#1E3A5F"
         className="transition-opacity duration-700 motion-reduce:transition-none"
-        style={{ opacity: energised ? 0.55 : 0 }}
-      />
+        style={{ opacity: energised ? 0.55 : 0 }} />
       <circle cx="240" cy="70" r="90" fill="url(#cs-sun)" className="transition-opacity duration-700 motion-reduce:transition-none" style={{ opacity: energised ? 1 : 0 }} />
 
       {/* ground (always present) */}
@@ -99,8 +98,7 @@ export default function ConstructionScene({ stage }: { stage: number }) {
             <rect
               x={x - 36} y="148" width="72" height="9" rx="2" fill={LIME}
               className="transition-opacity duration-700 motion-reduce:transition-none"
-              style={{ opacity: energised ? 0.35 : 0 }}
-            />
+              style={{ opacity: energised ? 0.35 : 0 }} />
           </g>
         </Layer>
       ))}

@@ -222,8 +222,7 @@ export default function RealIndiaGisMap({ selectedStateSlug, onSelectState }: Re
         <button
           type="button"
           onClick={handleResetView}
-          className="flex items-center gap-1.5 rounded-xl border border-slate-700 bg-[#0B132B]/90 px-3.5 py-2 font-mono text-xs font-bold text-white shadow-lg backdrop-blur-md transition-all hover:bg-slate-800"
-        >
+          className="flex items-center gap-1.5 rounded-xl border border-slate-700 bg-[#0B132B]/90 px-3.5 py-2 font-mono text-xs font-bold text-white shadow-lg backdrop-blur-md transition-all hover:bg-slate-800">
           <RotateCcw className="h-3.5 w-3.5 text-amber-400" />
           <span>Reset India View</span>
         </button>
@@ -246,8 +245,7 @@ export default function RealIndiaGisMap({ selectedStateSlug, onSelectState }: Re
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -10, scale: 0.95 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="absolute bottom-6 right-6 z-20 pointer-events-auto"
-        >
+          className="absolute bottom-6 right-6 z-20 pointer-events-auto">
           <div className="w-[290px] sm:w-[330px] rounded-2xl bg-[#0B132B]/95 backdrop-blur-xl border border-slate-700/80 p-5 shadow-[0_25px_60px_rgba(0,0,0,0.9)] text-white">
             <div className="flex items-center justify-between">
               <span className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#F59E0B]">

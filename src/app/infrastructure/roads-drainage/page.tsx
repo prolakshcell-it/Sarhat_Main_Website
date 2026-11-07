@@ -13,6 +13,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import { useHeroScroll } from "@/hooks/useHeroScroll";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
+import ProductFAQ from "@/components/ProductFAQ";
 import { PROJECT_ROWS } from "@/data/projects";
 import {
   CheckCircle2,
@@ -22,7 +23,6 @@ import {
   HardHat,
   Wrench,
   Search,
-  Plus,
   Minus,
 } from "lucide-react";
 
@@ -222,7 +222,7 @@ export default function RoadsDrainagePage() {
   const [selectedState, setSelectedState] = useState<string | null>(null);
 
   const heroRef = useRef<HTMLElement>(null);
-    const {
+  const {
     isPastHero,
     bgScale,
     bgDim,
@@ -238,8 +238,8 @@ export default function RoadsDrainagePage() {
 
   const filteredProjects = selectedState
     ? PROJECT_ROWS.filter(
-        (p) => p.state.toLowerCase() === selectedState.toLowerCase()
-      )
+      (p) => p.state.toLowerCase() === selectedState.toLowerCase()
+    )
     : [];
 
   return (
@@ -249,19 +249,15 @@ export default function RoadsDrainagePage() {
 
         {/* 01 / HERO SECTION (STICKY PARALLAX) */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
-          aria-hidden={isPastHero}
-        >
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
+          aria-hidden={isPastHero}>
           <section
             ref={heroRef}
-            className="relative h-full w-full flex flex-col items-center justify-center overflow-hidden bg-black text-white select-none"
-          >
+            className="relative h-full w-full flex flex-col items-center justify-center overflow-hidden bg-black text-white select-none">
             {/* Background Roads & Drainage Image */}
             <motion.div style={{ scale: bgScale }}
-              className="absolute inset-0 z-0 h-full w-full"
-            >
+              className="absolute inset-0 z-0 h-full w-full">
               <Image
                 src="/images/roads-drainage.jpg"
                 alt="Roads and drainage that keep projects moving — Sarhat Energy"
@@ -269,12 +265,10 @@ export default function RoadsDrainagePage() {
                 priority
                 sizes="100vw"
                 quality={85}
-                className="object-cover object-center"
-              />
+                className="object-cover object-center" />
               <motion.div
                 style={{ opacity: bgDim }}
-                className="absolute inset-0 bg-black/60 pointer-events-none"
-              />
+                className="absolute inset-0 bg-black/60 pointer-events-none" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
             </motion.div>
 
@@ -285,13 +279,25 @@ export default function RoadsDrainagePage() {
                 scale: contentScale,
                 opacity: contentOpacity,
               }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-20 sm:pt-24 flex flex-col items-center text-center"
-            >
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-20 sm:pt-24 flex flex-col items-center text-center">
               <ScrollReveal direction="up" distance={30}>
                 <div className="max-w-4xl flex flex-col items-center text-center">
                   <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 leading-[1.08] drop-shadow-lg">
                     Roads and drainage, <br />
-                    <span className="text-[#D4E012] italic font-normal">that keep projects moving</span>
+                    <span className="italic font-normal text-[#D4E012] relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
+                    that keep projects moving
+                    <svg
+                      className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
+                      viewBox="0 0 100 20"
+                      preserveAspectRatio="none"
+                      aria-hidden="true">
+                      <path
+                        d="M0 15 Q 50 0 100 15"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        fill="transparent" />
+                    </svg>
+                  </span>
                   </h1>
 
                   <p className="text-base sm:text-xl text-slate-200 max-w-3xl leading-relaxed font-normal drop-shadow-md mb-10">
@@ -302,15 +308,13 @@ export default function RoadsDrainagePage() {
                   <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-center">
                     <button
                       onClick={() => setQuoteModalOpen(true)}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#D4E012] hover:bg-[#c2ce0d] text-slate-950 font-mono font-bold text-xs sm:text-sm uppercase tracking-wider px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all cursor-pointer"
-                    >
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#D4E012] hover:bg-[#c2ce0d] text-slate-950 font-mono font-bold text-xs sm:text-sm uppercase tracking-wider px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all cursor-pointer">
                       <span>DISCUSS YOUR ROADS &amp; DRAINAGE PROJECT</span>
                       <ArrowUpRight className="w-4 h-4" />
                     </button>
                     <a
                       href="#what-is-roads-drainage"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 font-mono font-bold text-xs sm:text-sm uppercase tracking-wider px-8 py-4 rounded-full backdrop-blur-md hover:scale-105 transition-all"
-                    >
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 font-mono font-bold text-xs sm:text-sm uppercase tracking-wider px-8 py-4 rounded-full backdrop-blur-md hover:scale-105 transition-all">
                       <span>EXPLORE SERVICES</span>
                       <span className="text-base font-normal">↓</span>
                     </a>
@@ -341,24 +345,22 @@ export default function RoadsDrainagePage() {
                     01 / IN SIMPLE TERMS
                   </AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
-                      What is{" "}
-                      <span className="text-[#6DAD45] italic relative inline-block">
-                        Roads &amp; Drainage?
-                        <svg
-                          className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
-                          viewBox="0 0 100 20"
-                          preserveAspectRatio="none"
-                          aria-hidden
-                        >
-                          <path
-                            d="M0 15 Q 50 0 100 15"
-                            stroke="currentColor"
-                            strokeWidth="3.5"
-                            fill="transparent"
-                          />
-                        </svg>
-                      </span>
-                    </h2>
+                    What is{" "}
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Roads &amp; Drainage?
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden>
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent" />
+                      </svg>
+                    </span>
+                  </h2>
                 </div>
               </ScrollReveal>
 
@@ -465,14 +467,12 @@ export default function RoadsDrainagePage() {
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden
-                      >
+                        aria-hidden>
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -517,30 +517,28 @@ export default function RoadsDrainagePage() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <ScrollReveal>
-                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+                <div className="text-center max-w-5xl mx-auto mb-10 sm:mb-14">
                   <AnimatedPillBadge className="mb-6">
                     03 / SOLUTIONS
                   </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-4">
-                    Want to develop a project under Roads &amp; Drainage?{" "}
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-serif-display font-medium text-white tracking-tight leading-[1.2] mb-4 [text-wrap:balance]">
+                    Want to develop a Roads &amp; Drainage project? <br className="hidden sm:inline" />
                     <span className="text-[#6DAD45] italic relative inline-block">
                       Look at our solutions.
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden
-                      >
+                        aria-hidden>
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
-                  <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+                  <p className="mt-4 text-slate-300 text-base sm:text-lg max-w-4xl mx-auto text-center leading-relaxed">
                     Each stage of your Roads &amp; Drainage project is handled by a dedicated Sarhat solution team, and they all work from one project plan.
                   </p>
                 </div>
@@ -553,8 +551,7 @@ export default function RoadsDrainagePage() {
                     <ScrollReveal key={sol.title} delay={idx * 0.08}>
                       <Link
                         href={sol.href}
-                        className="group block p-8 rounded-3xl bg-white/[0.04] border border-white/10 hover:border-[#6DAD45]/50 hover:bg-white/[0.08] transition-all duration-300 h-full flex flex-col justify-between hover:-translate-y-1.5"
-                      >
+                        className="group block p-8 rounded-3xl bg-white/[0.04] border border-white/10 hover:border-[#6DAD45]/50 hover:bg-white/[0.08] transition-all duration-300 h-full flex flex-col justify-between hover:-translate-y-1.5">
                         <div>
                           <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#6DAD45] mb-6 group-hover:scale-110 group-hover:bg-[#6DAD45] group-hover:text-slate-950 transition-all duration-300">
                             <Icon className="w-6 h-6" />
@@ -601,14 +598,12 @@ export default function RoadsDrainagePage() {
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden
-                      >
+                        aria-hidden>
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -624,8 +619,7 @@ export default function RoadsDrainagePage() {
                   <ScrollReveal key={st.code} delay={idx * 0.1}>
                     <Link
                       href={`/projects/${st.state.toLowerCase().replace(/\s+/g, "-")}`}
-                      className="group w-full text-left p-8 rounded-3xl bg-white border border-slate-200/90 shadow-sm hover:shadow-2xl hover:border-[#6DAD45]/50 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between cursor-pointer block"
-                    >
+                      className="group w-full text-left p-8 rounded-3xl bg-white border border-slate-200/90 shadow-sm hover:shadow-2xl hover:border-[#6DAD45]/50 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between cursor-pointer block">
                       <div>
                         <div className="flex items-center justify-between mb-4">
                           <span className="font-mono text-xs font-bold text-[#6DAD45] uppercase tracking-widest">
@@ -664,15 +658,13 @@ export default function RoadsDrainagePage() {
                   <Link
                     key={st}
                     href={`/projects/${st.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="rounded-full bg-white hover:bg-slate-100 border border-slate-200 px-4 py-2 text-xs sm:text-sm font-mono font-medium text-slate-700 hover:text-slate-950 transition-colors shadow-sm cursor-pointer"
-                  >
+                    className="rounded-full bg-white hover:bg-slate-100 border border-slate-200 px-4 py-2 text-xs sm:text-sm font-mono font-medium text-slate-700 hover:text-slate-950 transition-colors shadow-sm cursor-pointer">
                     Explore projects in {st}
                   </Link>
                 ))}
                 <Link
                   href="/projects"
-                  className="rounded-full bg-slate-900 hover:bg-slate-800 text-white px-5 py-2 text-xs sm:text-sm font-mono font-bold uppercase tracking-wider transition-colors shadow-sm"
-                >
+                  className="rounded-full bg-slate-900 hover:bg-slate-800 text-white px-5 py-2 text-xs sm:text-sm font-mono font-bold uppercase tracking-wider transition-colors shadow-sm">
                   View all 49.22 MW of projects →
                 </Link>
               </div>
@@ -687,16 +679,14 @@ export default function RoadsDrainagePage() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4"
-                onClick={() => setSelectedState(null)}
-              >
+                onClick={() => setSelectedState(null)}>
                 <motion.div
                   initial={{ y: "100%", opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: "100%", opacity: 0 }}
                   transition={{ type: "spring", damping: 30, stiffness: 300 }}
                   onClick={(e) => e.stopPropagation()}
-                  className="bg-white rounded-t-3xl sm:rounded-3xl max-w-3xl w-full max-h-[85vh] overflow-hidden flex flex-col shadow-2xl border border-slate-200"
-                >
+                  className="bg-white rounded-t-3xl sm:rounded-3xl max-w-3xl w-full max-h-[85vh] overflow-hidden flex flex-col shadow-2xl border border-slate-200">
                   {/* Drawer Header */}
                   <div className="p-6 sm:p-8 border-b border-slate-200 flex items-center justify-between bg-slate-50">
                     <div>
@@ -710,8 +700,7 @@ export default function RoadsDrainagePage() {
                     <button
                       onClick={() => setSelectedState(null)}
                       className="p-2 rounded-full hover:bg-slate-200 text-slate-500 hover:text-slate-900 transition-colors cursor-pointer"
-                      aria-label="Close drawer"
-                    >
+                      aria-label="Close drawer">
                       <Minus className="w-5 h-5 rotate-45" />
                     </button>
                   </div>
@@ -726,8 +715,7 @@ export default function RoadsDrainagePage() {
                       filteredProjects.map((proj, idx) => (
                         <div
                           key={idx}
-                          className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-[#6DAD45]/50 transition-colors"
-                        >
+                          className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-[#6DAD45]/50 transition-colors">
                           <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                             <span className="font-serif-display font-bold text-lg text-slate-900">
                               {proj.location || proj.state}
@@ -761,8 +749,7 @@ export default function RoadsDrainagePage() {
                         setSelectedState(null);
                         setQuoteModalOpen(true);
                       }}
-                      className="inline-flex items-center gap-2 bg-[#6DAD45] hover:bg-[#5c993a] text-slate-950 font-mono font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-full shadow hover:scale-105 transition-all cursor-pointer"
-                    >
+                      className="inline-flex items-center gap-2 bg-[#6DAD45] hover:bg-[#5c993a] text-slate-950 font-mono font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-full shadow hover:scale-105 transition-all cursor-pointer">
                       <span>Inquire for {selectedState}</span>
                       <ArrowUpRight className="w-4 h-4" />
                     </button>
@@ -788,69 +775,25 @@ export default function RoadsDrainagePage() {
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden
-                      >
+                        aria-hidden>
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
                 </div>
               </ScrollReveal>
 
-              <div className="space-y-4">
-                {faqs.map((faq, idx) => {
-                  const isOpen = openFaqIndex === idx;
-                  return (
-                    <ScrollReveal key={idx} delay={idx * 0.05}>
-                      <div className="rounded-3xl bg-white border border-slate-200/90 overflow-hidden shadow-sm transition-all duration-300">
-                        <button
-                          onClick={() => toggleFaq(idx)}
-                          className="w-full p-6 sm:p-8 text-left flex items-center justify-between gap-4 hover:bg-slate-50/50 transition-colors cursor-pointer"
-                        >
-                          <span className="font-serif-display font-bold text-lg sm:text-2xl text-slate-900">
-                            {faq.question}
-                          </span>
-                          <span className="p-2 rounded-full bg-slate-100 text-slate-600 shrink-0">
-                            {isOpen ? (
-                              <Minus className="w-4 h-4" />
-                            ) : (
-                              <Plus className="w-4 h-4" />
-                            )}
-                          </span>
-                        </button>
-
-                        <AnimatePresence>
-                          {isOpen && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.3 }}
-                              className="overflow-hidden"
-                            >
-                              <div className="px-6 sm:px-8 pb-6 sm:pb-8 text-slate-600 text-sm sm:text-base leading-relaxed border-t border-slate-100 pt-4">
-                                {faq.answer}
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    </ScrollReveal>
-                  );
-                })}
-              </div>
+              <ProductFAQ faqs={faqs} openIndex={openFaqIndex} onToggle={toggleFaq} />
 
               {/* Guide link under FAQs */}
               <div className="mt-12 text-center">
                 <Link
                   href="/insights/roads-drainage-guide"
-                  className="inline-flex items-center gap-2 font-mono text-xs sm:text-sm font-bold text-slate-900 hover:text-[#6DAD45] uppercase tracking-wider transition-colors"
-                >
+                  className="inline-flex items-center gap-2 font-mono text-xs sm:text-sm font-bold text-slate-900 hover:text-[#6DAD45] uppercase tracking-wider transition-colors">
                   <span>MORE ANSWERS IN THE ROADS &amp; DRAINAGE GUIDE</span>
                   <ArrowUpRight className="w-4 h-4" />
                 </Link>
@@ -874,14 +817,12 @@ export default function RoadsDrainagePage() {
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden
-                      >
+                        aria-hidden>
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
                           strokeWidth="3.5"
-                          fill="transparent"
-                        />
+                          fill="transparent" />
                       </svg>
                     </span>
                   </h2>
@@ -893,8 +834,7 @@ export default function RoadsDrainagePage() {
                   <ScrollReveal key={prod.title} delay={idx * 0.1}>
                     <Link
                       href={prod.href}
-                      className="group block rounded-3xl bg-white border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-2xl hover:border-[#6DAD45]/50 transition-all duration-300 hover:-translate-y-2 h-full flex flex-col"
-                    >
+                      className="group block rounded-3xl bg-white border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-2xl hover:border-[#6DAD45]/50 transition-all duration-300 hover:-translate-y-2 h-full flex flex-col">
                       {/* Image Thumbnail */}
                       <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-900">
                         <Image
@@ -902,8 +842,7 @@ export default function RoadsDrainagePage() {
                           alt={prod.title}
                           fill
                           sizes="(min-width: 1024px) 384px, 100vw"
-                          className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
+                          className="object-cover transition-transform duration-700 group-hover:scale-105" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity" />
                       </div>
 
@@ -964,26 +903,22 @@ export default function RoadsDrainagePage() {
                       <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
                         <Link
                           href="/insights/roads-drainage-guide#the-overlooked-scope"
-                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors"
-                        >
+                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors">
                           The overlooked scope
                         </Link>
                         <Link
                           href="/insights/roads-drainage-guide#drainage-design-basics"
-                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors"
-                        >
+                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors">
                           Drainage design basics
                         </Link>
                         <Link
                           href="/insights/roads-drainage-guide#roads"
-                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors"
-                        >
+                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors">
                           Roads &amp; internal crossings
                         </Link>
                         <Link
                           href="/insights/roads-drainage-guide#maintenance"
-                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors"
-                        >
+                          className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors">
                           Monsoon maintenance
                         </Link>
                       </div>
@@ -991,8 +926,7 @@ export default function RoadsDrainagePage() {
                       <div className="mt-2.5">
                         <Link
                           href="/about"
-                          className="inline-block rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors"
-                        >
+                          className="inline-block rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-4 py-2 text-xs sm:text-sm text-slate-300 font-normal transition-colors">
                           Why Sarhat
                         </Link>
                       </div>
@@ -1002,8 +936,7 @@ export default function RoadsDrainagePage() {
                     <div className="shrink-0 flex items-center">
                       <Link
                         href="/insights/roads-drainage-guide"
-                        className="inline-flex items-center justify-center gap-2 bg-[#D4E012] hover:bg-[#c2ce0d] text-slate-950 font-mono font-bold text-xs sm:text-sm uppercase tracking-wider px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all cursor-pointer whitespace-nowrap"
-                      >
+                        className="inline-flex items-center justify-center gap-2 bg-[#D4E012] hover:bg-[#c2ce0d] text-slate-950 font-mono font-bold text-xs sm:text-sm uppercase tracking-wider px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all cursor-pointer whitespace-nowrap">
                         <span>READ THE ROADS & DRAINAGE GUIDE</span>
                         <ArrowUpRight className="w-4 h-4" />
                       </Link>
@@ -1021,8 +954,7 @@ export default function RoadsDrainagePage() {
         <QuoteModal
           isOpen={quoteModalOpen}
           onClose={() => setQuoteModalOpen(false)}
-          defaultProduct="Roads & Drainage"
-        />
+          defaultProduct="Roads & Drainage" />
       </main>
     </SmoothScroll>
   );
