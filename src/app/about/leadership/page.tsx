@@ -39,7 +39,7 @@ const executiveTeam: ExecutiveLeader[] = [
     fullBio:
     "Satish Chaudhary serves as Managing Director of Sarhat Energy. With 13 years of leadership in energy, infrastructure, and enterprise execution, he guides Sarhat's corporate vision, strategic project origination, capital allocation, and multi-gigawatt clean energy execution across India.",
     education: "Executive Leadership & Energy Management",
-    image: "/director/Satish.jpg",
+    image: "/team-heads/satish-chaudhary.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
@@ -53,7 +53,7 @@ const executiveTeam: ExecutiveLeader[] = [
     fullBio:
     "Avishek Anand serves as Director Operations at Sarhat Energy. Bringing 12 years of specialized operational expertise, he oversees turnkey site execution, multi-state project delivery timelines, field engineering coordination, and high-standard safety compliance across all utility-scale and commercial projects.",
     education: "B.Tech Engineering & Project Management",
-    image: "/director/Avishek_.jpg",
+    image: "/team-heads/avishek-anand.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
@@ -67,7 +67,7 @@ const executiveTeam: ExecutiveLeader[] = [
     fullBio:
     "Radha Kumari leads Human Resources at Sarhat Energy. With 6 years of focused HR and talent leadership, she spearheads human capital management, organizational culture, workforce inclusion, policy frameworks, and continuous skill upskilling across on-site execution crews and corporate departments.",
     education: "MBA Human Resources Management",
-    image: "/director/Radha.jpg",
+    image: "/team-heads/radha-kumari.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
@@ -81,7 +81,7 @@ const executiveTeam: ExecutiveLeader[] = [
     fullBio:
       "Naresh Kumar leads Business Growth and Strategic Alliances at Sarhat Energy. With over 14 years of industry experience, he manages institutional developer alliances, corporate PPA origination, state regulatory liaison, and strategic business expansion in solar, BESS storage, and agrovoltaic sectors.",
     education: "MBA Business Strategy & Marketing",
-    image: "/images/partner-hero-bg.jpg",
+    image: "/team-heads/naresh-kumar.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
@@ -95,7 +95,7 @@ const executiveTeam: ExecutiveLeader[] = [
     fullBio:
     "Ayush Raj serves as Manager Business Development at Sarhat Energy. Bringing 3 years of dynamic business development and client engagement experience, he focuses on pipeline origination, tender analytics, commercial proposals, and client relationship management for commercial and utility clients.",
     education: "B.E. / B.Tech & Business Management",
-    image: "/team/Ayush-Raj.jpg",
+    image: "/team-heads/ayush-raj.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
@@ -109,7 +109,7 @@ const executiveTeam: ExecutiveLeader[] = [
     fullBio:
     "Avishek Jha serves as Head Operations at Sarhat Energy. With 12 years of hands-on technical and operational leadership, he directs site mobilization, field contractor performance, milestone scheduling, and inter-departmental logistics across high-voltage substation and solar generation sites.",
     education: "B.Tech Electrical & Electronics",
-    image: "/team/Avishek-Jha.jpg",
+    image: "/team-heads/avishek-jha.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
@@ -123,7 +123,7 @@ const executiveTeam: ExecutiveLeader[] = [
     fullBio:
       "Amar Nath Jha leads Supply Chain Management at Sarhat Energy. Bringing 10 years of specialized procurement and supply chain experience, he steers vendor qualification, Tier-1 solar module & inverter procurement, logistics optimization, and material delivery assurance to maintain site schedules.",
     education: "Supply Chain & Operations Management",
-    image: "/team/Amar-Nath-Jha.png",
+    image: "/team-heads/amar-nath-jha.png",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
@@ -137,7 +137,7 @@ const executiveTeam: ExecutiveLeader[] = [
     fullBio:
       "Kana Sharma serves as Manager Projects & Liaison at Sarhat Energy. With 4 years of dedicated liaison and project management experience, she coordinates state electricity board clearances, DISCOM grid approvals, statutory compliance, and smooth inter-agency communication for swift commissioning.",
     education: "B.Tech Engineering & Regulatory Management",
-    image: "/team/Kana-Sharma.jpg",
+    image: "/team-heads/kana-sharma.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
@@ -151,7 +151,7 @@ const executiveTeam: ExecutiveLeader[] = [
     fullBio:
     "Prawesh Kumar Jha serves as Manager Design & Engineering at Sarhat Energy. With 4 years of specialized engineering design expertise, he oversees plant layout optimization, 3D modeling, shadow analysis, single line diagrams (SLD), and structural validation to maximize energy yield.",
     education: "B.Tech Electrical / Power Systems",
-    image: "/team/Prawesh.jpg",
+    image: "/team-heads/prawesh-kumar-jha.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
@@ -165,7 +165,7 @@ const executiveTeam: ExecutiveLeader[] = [
     fullBio:
     "Mrityunjay Kumar Jha serves as Manager Accounts at Sarhat Energy. Bringing 13 years of rigorous accounting and financial governance experience, he oversees corporate fiscal reporting, vendor accounting, budget allocations, statutory taxation, and financial compliance across all projects.",
     education: "M.Com / Chartered Financial Accounting",
-    image: "/team/Mritunjay-Jha.jpg",
+    image: "/team-heads/mrityunjay-kumar-jha.jpg",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
@@ -179,7 +179,7 @@ const executiveTeam: ExecutiveLeader[] = [
     fullBio:
     "Amar Kumar Rauniyar serves as Manager Projects & O&M at Sarhat Energy. With 8 years of dedicated field execution and operations & maintenance expertise, he manages turnkey solar site erection, testing & commissioning, preventative maintenance cycles, and SCADA-monitored plant performance.",
     education: "B.Tech Electrical / Mechanical Engineering",
-    image: "/team/Amar-Kumar-Rauniyar.png",
+    image: "/team-heads/amar-kumar-rauniyar.png",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
@@ -193,7 +193,7 @@ const executiveTeam: ExecutiveLeader[] = [
     fullBio:
     "Srimanta Das serves as Assistant Project Manager at Sarhat Energy. With 6 years of ground execution and management experience, he coordinates civil foundations, piling schedules, structural assembly inspections, and contractor progress tracking across active solar sites.",
     education: "Diploma / B.Tech Civil Engineering",
-    image: "/team/Srimanta-Das.png",
+    image: "/team-heads/srimanta-das.png",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
   {
@@ -207,7 +207,7 @@ const executiveTeam: ExecutiveLeader[] = [
     fullBio:
       "Abhishek Jha serves as Assistant Project Manager SCM at Sarhat Energy. With 2 years of supply chain and logistics coordination experience, he supports procurement scheduling, inventory tracking, bill of materials (BOM) auditing, and delivery dispatch logistics across project sites.",
     education: "B.Tech / SCM Operations",
-    image: "/team/Abhishek-Jha.png",
+    image: "/team-heads/abhishek-jha.png",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
 ];
@@ -354,7 +354,7 @@ export default function LeadershipPage() {
                             src={leader.image}
                             alt={leader.name}
                             fill
-                            className="object-cover object-center group-hover:scale-105 transition-transform duration-700" />
+                            className="object-cover object-top group-hover:scale-105 transition-transform duration-700" />
                           {/* Soft Bottom Scrim */}
                           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
 
@@ -376,7 +376,7 @@ export default function LeadershipPage() {
                             src={leader.image}
                             alt={leader.name}
                             fill
-                            className="object-cover object-center opacity-25 filter blur-[2px] brightness-75 transition-transform duration-700 scale-105 pointer-events-none" />
+                            className="object-cover object-top opacity-25 filter blur-[2px] brightness-75 transition-transform duration-700 scale-105 pointer-events-none" />
                           {/* Dark Glass Overlay */}
                           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/85 to-slate-950/95 pointer-events-none" />
 
@@ -529,7 +529,7 @@ export default function LeadershipPage() {
                         src={selectedLeader.image}
                         alt={selectedLeader.name}
                         fill
-                        className="object-cover object-center" />
+                        className="object-cover object-top" />
                     </div>
                     <div>
                       <h3 className="text-2xl sm:text-3xl font-serif-display font-medium text-[#6DAD45] mb-1">
