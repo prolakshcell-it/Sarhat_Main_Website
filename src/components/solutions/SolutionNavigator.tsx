@@ -101,18 +101,14 @@ export default function SolutionNavigator() {
   useEffect(() => {
     const sync = () => {
       const i = indexFromHash();
-      if (i>= 0) {
+      if (i >= 0) {
         setActive(i);
         setOpenMobile(i);
       }
     };
     sync();
-    // Smooth-scroll/Lenis can reset the browser's own hash jump, so land on the section explicitly.
-    const id=window.location.hash.replace("#", "");
-    const t = id ? setTimeout(() => document.getElementById(id)?.scrollIntoView({ block: "start" }), 400) : undefined;
     window.addEventListener("hashchange", sync);
     return () => {
-      if (t) clearTimeout(t);
       window.removeEventListener("hashchange", sync);
     };
   }, [indexFromHash]);
