@@ -83,7 +83,7 @@ export const navigationConfig: MegaNavEntry[] = [
       {
         id: "bess-hybrid",
         title: "BESS & Hybrid",
-        href: "/products/bess-hybrid",
+        href: "/solutions#bess-hybrid",
         children: [
           { id: "standalone-bess", title: "Standalone BESS", href: "/products/bess-hybrid/standalone-bess" },
           { id: "bess-pv-wind", title: "BESS meets PV / Wind", href: "/products/bess-hybrid/bess-pv-wind" },
@@ -92,7 +92,7 @@ export const navigationConfig: MegaNavEntry[] = [
       {
         id: "infrastructure",
         title: "Infrastructure",
-        href: "/infrastructure",
+        href: "/solutions#infrastructure",
         children: [
           { id: "substations", title: "Substations / Switchyards", href: "/infrastructure/substations" },
           { id: "transmission", title: "Transmission Lines", href: "/infrastructure/transmission-lines" },

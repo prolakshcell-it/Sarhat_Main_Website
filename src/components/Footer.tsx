@@ -51,8 +51,8 @@ const COLUMNS = [
     title: "Solutions",
     links: [
       { href: "/solutions", label: "Solar Energy" },
-      { href: "/products/bess-hybrid", label: "BESS & Hybrid" },
-      { href: "/infrastructure", label: "Infrastructure" },
+      { href: "/solutions#bess-hybrid", label: "BESS & Hybrid" },
+      { href: "/solutions#infrastructure", label: "Infrastructure" },
     ],
   },
   {
