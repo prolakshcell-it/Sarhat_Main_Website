@@ -132,7 +132,7 @@ export const navigationConfig: MegaNavEntry[] = [
     href: "/projects",
     tag: "Projects",
     items: [
-      { id: "overview", title: "Overview", href: "/projects#overview" },
+      { id: "overview", title: "Overview", href: "/projects" },
       { id: "highlights", title: "Project Highlights", href: "/projects#highlights" },
       { id: "explore", title: "Explore Projects", href: "/projects#explore" },
       { id: "footprints", title: "Footprints", href: "/projects#footprint" },

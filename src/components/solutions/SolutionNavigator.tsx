@@ -90,28 +90,28 @@ export default function SolutionNavigator() {
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const indexFromHash = useCallback(() => {
-    let id=window.location.hash.replace("#", "");
-    if (id=== "renewable-energy") id="solar-energy";
-    if (id=== "bess-storage") id="bess-hybrid";
-    if (id=== "energy-infrastructure" || id=== "civil-infrastructure") id="infrastructure";
-    return capabilities.findIndex((c) => c.id=== id);
+    let id = window.location.hash.replace("#", "");
+    if (id === "renewable-energy") id = "solar-energy";
+    if (id === "bess-storage") id = "bess-hybrid";
+    if (id === "energy-infrastructure" || id === "civil-infrastructure") id = "infrastructure";
+    return capabilities.findIndex((c) => c.id === id);
   }, []);
 
   // Honour existing #anchor links (e.g. /solutions#bess-storage) and keep in sync with hash changes.
   useEffect(() => {
     const sync = () => {
       const i = indexFromHash();
-      if (i >= 0) {
-        setActive(i);
-        setOpenMobile(i);
-      }
-    };
-    sync();
-    window.addEventListener("hashchange", sync);
-    return () => {
-      window.removeEventListener("hashchange", sync);
-    };
-  }, [indexFromHash]);
+        if (i >= 0) {
+          setActive(i);
+          setOpenMobile(i);
+        }
+      };
+      sync();
+      window.addEventListener("hashchange", sync);
+      return () => {
+        window.removeEventListener("hashchange", sync);
+      };
+    }, [indexFromHash]);
 
   const select = (i: number, writeHash = false) => {
     setActive(i);
@@ -120,10 +120,10 @@ export default function SolutionNavigator() {
 
   const onTabKeyDown = (e: React.KeyboardEvent, i: number) => {
     let next = i;
-    if (e.key=== "ArrowDown" || e.key=== "ArrowRight") next = (i + 1) % capabilities.length;
-    else if (e.key=== "ArrowUp" || e.key=== "ArrowLeft") next = (i - 1 + capabilities.length) % capabilities.length;
-    else if (e.key=== "Home") next = 0;
-    else if (e.key=== "End") next = capabilities.length - 1;
+    if (e.key === "ArrowDown" || e.key === "ArrowRight") next = (i + 1) % capabilities.length;
+    else if (e.key === "ArrowUp" || e.key === "ArrowLeft") next = (i - 1 + capabilities.length) % capabilities.length;
+    else if (e.key === "Home") next = 0;
+    else if (e.key === "End") next = capabilities.length - 1;
     else return;
     e.preventDefault();
     select(next, true);
@@ -162,11 +162,11 @@ export default function SolutionNavigator() {
                 </svg>
               </span>
             </h2>
-              <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed [text-wrap:balance]">
-                Explore our turnkey capabilities across utility-scale solar,
-                <br className="hidden sm:inline" />
-                {" "}energy storage, substations, and site infrastructure.
-              </p>
+            <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed [text-wrap:balance]">
+              Explore our turnkey capabilities across utility-scale solar,
+              <br className="hidden sm:inline" />
+              {" "}energy storage, substations, and site infrastructure.
+            </p>
           </div>
         </ScrollReveal>
 
