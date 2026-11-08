@@ -65,7 +65,7 @@ export default function ExecutionCurve() {
         "Site Assessment & Feasibility",
         "Risks & Viability Review",
       ],
-      image: "/images/hero-solar.jpg",
+      image: "/images/Discover.png",
       caption: "Understand the Vision. Assess the Potential.",
     },
     {
@@ -84,7 +84,7 @@ export default function ExecutionCurve() {
         "Technology & Material Selection",
         "Performance & Cost Optimisation",
       ],
-      image: "/images/bess-substation.jpg",
+      image: "/images/Design.png",
       caption: "Lasting performance begins with thoughtful design.",
     },
     {
@@ -103,7 +103,7 @@ export default function ExecutionCurve() {
         "Contracts & Approval Coordination",
         "Resource & Site Readiness",
       ],
-      image: "/images/india-map-tactical.jpg",
+      image: "/images/Prepare.png",
       caption: "Strong preparation sets execution in motion.",
     },
     {
@@ -122,7 +122,7 @@ export default function ExecutionCurve() {
         "Safety & Quality Control",
         "Schedule & Progress Tracking",
       ],
-      image: "/images/hero-solar.jpg",
+      image: "/images/Build.png",
       caption: "Where engineering meets execution.",
     },
     {
@@ -141,7 +141,7 @@ export default function ExecutionCurve() {
         "Commissioning & Grid Integration",
         "Documentation & Client Handover",
       ],
-      image: "/images/bess-substation.jpg",
+      image: "/images/Commission.png",
       caption: "Where execution becomes operation.",
     },
     {
@@ -160,7 +160,7 @@ export default function ExecutionCurve() {
         "Performance Monitoring & Optimisation",
         "System Upgrades & Modernisation",
       ],
-      image: "/images/bess-substation.jpg",
+      image: "/images/sustain.png",
       caption: "Lasting value needs lasting commitment.",
     },
   ];
@@ -349,12 +349,13 @@ export default function ExecutionCurve() {
               </div>
 
               {/* Phase Image Preview */}
-              <div className="relative w-full h-44 sm:h-52 rounded-2xl overflow-hidden mb-4 border border-white/10 shadow-md">
+              <div className="relative w-full aspect-video rounded-2xl overflow-hidden mb-4 border border-white/10 shadow-md">
                 <Image
                   src={activePhase.image}
                   alt={activePhase.title}
                   fill
-                  className="object-cover" />
+                  sizes="(max-width: 1024px) 100vw, 480px"
+                  className="object-cover object-center" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#18221B] via-[#18221B]/30 to-transparent"></div>
                 <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] text-slate-200 font-medium bg-[#18221B]/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10">
                   <span className="truncate">{activePhase.caption}</span>
@@ -496,8 +497,8 @@ export default function ExecutionCurve() {
                   <div
                     className="absolute inset-0 opacity-[0.12] pointer-events-none"
                     style={{ background: `radial-gradient(60% 80% at 0% 0%, ${activePhase.color}, transparent)` }} />
-                  <div className="relative col-span-2 h-48 lg:h-56 rounded-2xl overflow-hidden border border-white/10">
-                    <Image src={activePhase.image} alt={activePhase.title} fill sizes="400px" className="object-cover" />
+                  <div className="relative col-span-2 self-start aspect-video rounded-2xl overflow-hidden border border-white/10">
+                    <Image src={activePhase.image} alt={activePhase.title} fill sizes="(max-width: 1280px) 40vw, 520px" className="object-cover object-center" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#18221B]/70 via-transparent to-transparent" />
                     <span
                       className="absolute top-3 left-3 text-[10px] font-mono font-bold px-2 py-1 rounded text-black uppercase"

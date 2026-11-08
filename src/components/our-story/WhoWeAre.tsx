@@ -56,7 +56,7 @@ export default function WhoWeAre() {
           <video
             ref={videoRef}
             poster="/images/about-hero-bg-bright.jpg"
-            src="/generate_professional_and_attr.mp4"
+            src="/videos/about-us.mp4"
             controls
             playsInline
             preload="metadata"

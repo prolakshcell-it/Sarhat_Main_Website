@@ -143,14 +143,17 @@ export default function ConstructionPage() {
           aria-hidden={isPastHero}>
           <section ref={heroRef} className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none">
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full will-change-transform">
-              <Image
-                src="/images/timeline-2026.jpg"
-                alt="Sarhat crew working at a substation"
-                fill
-                priority
-                quality={85}
-                sizes="100vw"
-                className="object-cover object-center opacity-85" />
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full object-cover object-center">
+                <source src="/videos/construction-hero.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.55)_100%)]" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
             </motion.div>
 

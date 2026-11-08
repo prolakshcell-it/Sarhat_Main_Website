@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
-import Image from "next/image";
 import ScrollIndicator from "./ScrollIndicator";
 
 interface HeroProps {
@@ -10,6 +9,16 @@ interface HeroProps {
 }
 
 export default function Hero({ onOpenQuote }: HeroProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (v) {
+      v.muted = true;
+      v.play().catch(() => {});
+    }
+  }, []);
+
   // Window scroll tracking for the fixed Hero
   const { scrollY } = useScroll();
 
@@ -57,12 +66,19 @@ export default function Hero({ onOpenQuote }: HeroProps) {
       className="relative h-full min-h-[560px] sm:min-h-[680px] w-full flex flex-col justify-between items-center overflow-hidden bg-slate-950 select-none">
       {/* Cinematic Background Image Layer with Dynamic Zoom & Scrim */}
       <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
-        <Image
-          src="/images/hero-solar.jpg"
-          alt="SARHAT EPC Solar Power Plant"
-          fill
-          priority
-          className="object-cover object-center opacity-90" />
+
+        {/* Cinematic Background Video (poster image shown until ready) */}
+        <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover object-center">
+            <source src="/videos/home-hero.mp4" type="video/mp4" />
+          </video>
 
         {/* Dynamic Darkening Scrim on Scroll */}
         <motion.div
@@ -71,6 +87,10 @@ export default function Hero({ onOpenQuote }: HeroProps) {
 
         {/* High-Contrast Readability Gradient Scrim with Soft Lower Third */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
+
+        {/* Premium vignette + soft brand tint for depth */}
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.55)_100%)]"></div>
+        <div className="absolute inset-x-0 bottom-0 h-1/3 pointer-events-none bg-gradient-to-t from-black/60 to-transparent"></div>
       </motion.div>
 
       {/* Main Content Container (Immediate scroll-fade + motion blur + scale float on scroll down) */}

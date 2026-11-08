@@ -43,7 +43,7 @@ export const capabilities: Capability[] = [
     fullDetails: "Utility-scale containerized Battery Energy Storage Systems (BESS), solar + storage integration, emergency backup power, and automated peak-load shaving for grid stability.",
     specs: ["Containerized BESS", "Solar + Storage Hybrids", "Grid Stability", "Peak-Load Shaving"],
     icon: Battery,
-    image: "/images/bess-substation.jpg",
+    image: "/images/BESS.jpeg",
     accentColor: "#5EE72D",
   },
   {
@@ -55,7 +55,7 @@ export const capabilities: Capability[] = [
     fullDetails: "Turnkey electrical and civil infrastructure including AIS/GIS substations, power evacuation line corridors, DISCOM grid connectivity, control rooms, and heavy site civil works.",
     specs: ["AIS/GIS Substations", "Evacuation Lines", "Grid Connectivity", "Civil & Foundation Works"],
     icon: Zap,
-    image: "/images/substation-project.jpg",
+    image: "/images/Infrastructure.JPG",
     accentColor: "#5EE72D",
   },
 ];

@@ -74,7 +74,7 @@ export default function EPCCapabilities() {
               {/* Overlapping Bottom-Right Foreground Substation Image Frame */}
               <div className="absolute -bottom-4 -right-2 sm:-bottom-6 sm:-right-4 w-2/3 aspect-[16/10] rounded-2xl overflow-hidden border-4 border-white shadow-2xl z-20">
                 <Image
-                  src="/images/bess-substation.jpg"
+                  src="/images/Battery-Storage.JPG"
                   alt="Sarhat Substation & BESS Infrastructure"
                   fill
                   className="object-cover object-center" />

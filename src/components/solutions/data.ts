@@ -58,7 +58,7 @@ export const capabilities: Capability[] = [
       "High-voltage AIS/GIS substations, power evacuation transmission line corridors, SCADA protection bays, heavy-payload access roads, control room buildings, and equipment foundation piling.",
     specs: ["AIS/GIS Substations", "EHV Evacuation Lines", "SCADA Protection", "Foundation Piling & Roads"],
     icon: Zap,
-    image: "/images/substation-project.jpg",
+    image: "/images/Infrastructure.JPG",
     accentColor: "#D4E012",
   },
 ];
@@ -138,7 +138,7 @@ export const detailedSolutions = [
       "Turnkey substations, power evacuation lines, and heavy industrial civil works.",
     description:
       "From high-voltage AIS/GIS substations to access roads and control rooms,\nwe construct the physical backbone and foundations for utility assets.",
-    image: "/images/substation-project.jpg",
+    image: "/images/Infrastructure.JPG",
     buttonText: "EXPLORE INFRASTRUCTURE SOLUTIONS →",
     breakdownItems: [
       {

@@ -39,14 +39,14 @@ export default function StoryHero() {
         className="relative flex h-full w-full select-none flex-col items-center justify-center overflow-hidden bg-[#140E09] text-white">
         <motion.div style={{ scale: bgScale }} className="absolute inset-0">
           <Image
-            src="/images/about-hero-bg-bright.jpg"
+            src="/images/Our-Story.png"
             alt="Our Story — Sarhat Energy"
             fill
             preload
             sizes="100vw"
             className="object-cover object-center" />
           {/* warm earth grade: the land first, the technology second */}
-          <div className="absolute inset-0 bg-[#2A1A0E]/55 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-[#2A1A0E]/25 mix-blend-multiply" />
           <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#140E09]/80 via-[#140E09]/25 via-45% to-[#140E09]/40" />
         </motion.div>
