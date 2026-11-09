@@ -176,7 +176,7 @@ const faqs: FAQItem[] = [
   {
     question: "What is the current deadline for KUSUM projects?",
     answer:
-      "The Ministry of New and Renewable Energy (MNRE) has extended the PM-KUSUM scheme timeline up to March 31, 2026. State DISCOMs release periodic expressions of interest and tenders for feeder solarisation and substation bay allocations. Early application ensures allocation before local substation bay capacities are saturated.",
+      "The Ministry of New and Renewable Energy (MNRE) has extended the PM-KUSUM scheme timeline up to March 31, 2027. State DISCOMs release periodic expressions of interest and tenders for feeder solarisation and substation bay allocations. Early application ensures allocation before local substation bay capacities are saturated.",
   },
   {
     question: "What is the difference between Component A and Component C?",
@@ -293,19 +293,19 @@ export default function GroundMountedPVPage() {
                   <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white mb-6 leading-[1.08] drop-shadow-lg">
                     PM-KUSUM solar plants, <br />
                     <span className="italic font-normal text-[#D4E012] relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
-                    from land to grid
-                    <svg
-                      className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
-                      viewBox="0 0 100 20"
-                      preserveAspectRatio="none"
-                      aria-hidden="true">
-                      <path
-                        d="M0 15 Q 50 0 100 15"
-                        stroke="currentColor"
-                        strokeWidth="3.5"
-                        fill="transparent" />
-                    </svg>
-                  </span>
+                      from land to grid
+                      <svg
+                        className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden="true">
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent" />
+                      </svg>
+                    </span>
                   </h1>
 
                   <p className="text-base sm:text-xl text-slate-200 max-w-3xl leading-relaxed font-normal drop-shadow-md">
@@ -747,7 +747,7 @@ export default function GroundMountedPVPage() {
 
               {/* Interactive State Project Drawer */}
               <AnimatePresence>
-                {selectedState && filteredProjects.length> 0 && (
+                {selectedState && filteredProjects.length > 0 && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
