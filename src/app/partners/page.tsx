@@ -373,14 +373,16 @@ export default function PartnersPage() {
                   <div className="absolute w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] rounded-full border border-dashed border-[#6DAD45]/40"></div>
 
                   {/* Center Sun Orb */}
-                  <div className="z-20 w-36 h-36 sm:w-48 sm:h-48 rounded-full bg-gradient-to-tr from-[#D4E012] via-[#6DAD45] to-[#5EE72D] p-1 shadow-[0_0_50px_rgba(212,224,18,0.4)] flex flex-col items-center justify-center text-center text-black font-extrabold select-none hover:scale-105 transition-transform duration-300 cursor-pointer">
-                    <div className="w-full h-full rounded-full border border-white/50 flex flex-col items-center justify-center p-4 bg-gradient-to-b from-lime-300/30 to-green-600/30 backdrop-blur-sm">
-                      <div className="text-[10px] sm:text-xs tracking-widest uppercase text-slate-950 font-mono font-bold mb-1">
-                        SARHAT ENERGY
-                      </div>
-                      <div className="text-xs sm:text-sm font-black text-slate-950 uppercase tracking-wider leading-tight font-sans-ui">
-                        LIMITED.
-                      </div>
+                  <div className="z-20 w-36 h-36 sm:w-48 sm:h-48 rounded-full bg-gradient-to-tr from-[#D4E012] via-[#6DAD45] to-[#5EE72D] p-1.5 sm:p-2 shadow-[0_0_50px_rgba(212,224,18,0.45)] flex items-center justify-center select-none hover:scale-105 transition-transform duration-300 cursor-pointer group">
+                    <div className="w-full h-full rounded-full bg-white/95 backdrop-blur-md border border-white shadow-[inset_0_2px_8px_rgba(0,0,0,0.06)] flex items-center justify-center p-3 sm:p-4">
+                      <Image
+                        src="/images/logo.png"
+                        alt="Sarhat Energy"
+                        width={220}
+                        height={75}
+                        priority
+                        className="w-24 sm:w-32 h-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                      />
                     </div>
                   </div>
 
