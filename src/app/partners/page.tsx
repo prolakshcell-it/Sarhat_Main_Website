@@ -270,7 +270,7 @@ export default function PartnersPage() {
             {/* Cinematic High-Res Fullscreen Background Image Layer */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
               <Image
-                src="/images/partner-hero-bg.jpg"
+                src="/images/hero-solar-partner.jpg"
                 alt="Sarhat Solar Energy Business Partnership"
                 fill
                 priority
@@ -306,13 +306,8 @@ export default function PartnersPage() {
                     </h1>
 
                     {/* Subtitle Paragraph */}
-                    <p className="text-xs sm:text-sm md:text-base lg:text-lg text-slate-100 font-normal max-w-5xl mx-auto text-center leading-relaxed tracking-wide [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)]">
-                      <span className="block sm:whitespace-nowrap">
-                        Join India&apos;s growing solar economy. Earn commissions on lead referrals or co-execute projects
-                      </span>
-                      <span className="block sm:whitespace-nowrap mt-1 sm:mt-1.5">
-                        as a Solar Project Partner — with Sarhat&apos;s full technical, marketing, and lead support behind you.
-                      </span>
+                    <p className="w-full max-w-[22rem] sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto px-2 text-sm sm:text-base md:text-lg text-slate-100 font-normal text-center leading-relaxed tracking-wide [text-wrap:balance] [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)]">
+                      Join India&apos;s growing solar economy. Earn commissions on lead referrals or co-execute projects as a Solar Project Partner — with Sarhat&apos;s full technical, marketing, and lead support behind you.
                     </p>
                   </div>
               </ScrollReveal>
@@ -372,16 +367,50 @@ export default function PartnersPage() {
                   <div className="absolute w-[320px] h-[320px] sm:w-[440px] sm:h-[440px] rounded-full border border-[#D4E012]/30 animate-[spin_60s_linear_infinite]"></div>
                   <div className="absolute w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] rounded-full border border-dashed border-[#6DAD45]/40"></div>
 
-                  {/* Center Sun Orb */}
-                  <div className="z-20 w-36 h-36 sm:w-48 sm:h-48 rounded-full bg-gradient-to-tr from-[#D4E012] via-[#6DAD45] to-[#5EE72D] p-1 shadow-[0_0_50px_rgba(212,224,18,0.4)] flex flex-col items-center justify-center text-center text-black font-extrabold select-none hover:scale-105 transition-transform duration-300 cursor-pointer">
-                    <div className="w-full h-full rounded-full border border-white/50 flex flex-col items-center justify-center p-4 bg-gradient-to-b from-lime-300/30 to-green-600/30 backdrop-blur-sm">
-                      <div className="text-[10px] sm:text-xs tracking-widest uppercase text-slate-950 font-mono font-bold mb-1">
-                        SARHAT ENERGY
-                      </div>
-                      <div className="text-xs sm:text-sm font-black text-slate-950 uppercase tracking-wider leading-tight font-sans-ui">
-                        LIMITED.
-                      </div>
+                  {/* Center Sun Orb with Sarhat logo */}
+                  <div className="group z-20 relative w-36 h-36 sm:w-48 sm:h-48 flex items-center justify-center select-none cursor-pointer">
+                    {/* Soft pulsing aura */}
+                    <motion.span
+                      aria-hidden="true"
+                      className="absolute -inset-6 sm:-inset-8 rounded-full bg-[radial-gradient(circle,rgba(212,224,18,0.45)_0%,rgba(109,173,69,0.2)_45%,transparent_70%)] blur-xl"
+                      animate={{ scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} />
+                    {/* Rotating conic gradient ring */}
+                    <motion.span
+                      aria-hidden="true"
+                      className="absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,#D4E012,#5EE72D,#6DAD45,transparent_55%,#D4E012)] shadow-[0_0_50px_rgba(212,224,18,0.4)]"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 10, repeat: Infinity, ease: "linear" }} />
+                    {/* Counter-rotating dashed ring */}
+                    <motion.span
+                      aria-hidden="true"
+                      className="absolute -inset-2.5 sm:-inset-3 rounded-full border-2 border-dashed border-[#6DAD45]/50"
+                      animate={{ rotate: -360 }}
+                      transition={{ duration: 30, repeat: Infinity, ease: "linear" }} />
+                    {/* Glass disc */}
+                    <div className="relative w-[calc(100%-8px)] h-[calc(100%-8px)] rounded-full bg-gradient-to-b from-white via-white to-lime-50 shadow-inner flex items-center justify-center overflow-hidden transition-transform duration-500 group-hover:scale-105">
+                      <span aria-hidden="true" className="absolute inset-0 rounded-full bg-gradient-to-br from-white/80 via-transparent to-[#D4E012]/20" />
+                      <motion.div
+                        className="relative w-[72%] h-[72%]"
+                        animate={{ y: [0, -4, 0] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
+                        <Image
+                          src="/images/logo-icon-crop.png"
+                          alt="Sarhat Energy Limited"
+                          fill
+                          sizes="(max-width: 640px) 100px, 140px"
+                          priority
+                          className="object-contain drop-shadow-[0_6px_14px_rgba(109,173,69,0.35)] transition-transform duration-700 group-hover:rotate-[30deg]" />
+                      </motion.div>
                     </div>
+                    {/* Orbiting spark */}
+                    <motion.span
+                      aria-hidden="true"
+                      className="absolute inset-0"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 6, repeat: Infinity, ease: "linear" }}>
+                      <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#D4E012] shadow-[0_0_14px_4px_rgba(212,224,18,0.8)]" />
+                    </motion.span>
                   </div>
 
                   {/* 6 Orbiting Satellite Benefit Nodes */}

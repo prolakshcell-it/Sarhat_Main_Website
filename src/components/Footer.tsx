@@ -58,7 +58,7 @@ const COLUMNS = [
   {
     title: "Quick Links",
     links: [
-      { href: "/about", label: "About Sarhat" },
+      { href: "/about/our-story", label: "About Sarhat" },
       { href: "/about/our-approach", label: "Our Approach" },
       { href: "/about/leadership", label: "Our Team" },
       { href: "/careers", label: "Careers & Life" },

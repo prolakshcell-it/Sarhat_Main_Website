@@ -222,7 +222,7 @@ export default function SupplyPartnersPage() {
             {/* Cinematic High-Res Fullscreen Background Image Layer */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
               <Image
-                src="/images/bess-substation.jpg"
+                src="/images/hero-vendor-supply.jpg"
                 alt="Supply Partners Sarhat Energy"
                 fill
                 priority

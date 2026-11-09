@@ -40,7 +40,7 @@ const executiveTeam: ExecutiveLeader[] = [
       "Satish Chaudhary serves as Managing Director of Sarhat Energy. With 13 years of leadership in energy, infrastructure, and enterprise execution, he guides Sarhat's corporate vision, strategic project origination, capital allocation, and multi-gigawatt clean energy execution across India.",
     education: "Executive Leadership & Energy Management",
     image: "/team-heads/satish-chaudhary.jpg",
-    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+    linkedin: "https://www.linkedin.com/in/satishrio",
   },
   {
     id: "avishek-anand",

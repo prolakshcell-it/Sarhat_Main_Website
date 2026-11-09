@@ -364,7 +364,7 @@ export default function ExecutionContractorsPage() {
             {/* Cinematic High-Res Fullscreen Background Image Layer */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
               <Image
-                src="/images/hero-solar.jpg"
+                src="/images/hero-contractors.jpg"
                 alt="Execution Contractors Sarhat Energy"
                 fill
                 priority

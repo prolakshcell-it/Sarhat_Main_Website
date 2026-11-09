@@ -167,7 +167,7 @@ export const navigationConfig: MegaNavEntry[] = [
   {
     key: "about",
     label: "About",
-    href: "/about",
+    href: "/about/our-story",
     tag: "About Sarhat",
     social: true,
     items: [

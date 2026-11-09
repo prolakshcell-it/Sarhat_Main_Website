@@ -39,6 +39,7 @@ import QuoteModal from "@/components/QuoteModal";
 import FinalCTA from "@/components/FinalCTA";
 import FootprintMap from "@/components/FootprintMap";
 import SmoothScroll from "@/components/SmoothScroll";
+import HeroPhotoSlider from "@/components/HeroPhotoSlider";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import { useHeroScroll } from "@/hooks/useHeroScroll";
@@ -651,12 +652,7 @@ export default function MainProjectsPage() {
           aria-hidden={isPastHero}>
           <section className="relative h-full w-full flex flex-col items-center justify-center overflow-hidden bg-black select-none">
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
-              <Image
-                src="/images/hero-solar.jpg"
-                alt="Sarhat Solar EPC Execution Infrastructure"
-                fill
-                priority
-                className="object-cover object-center opacity-85" />
+              <HeroPhotoSlider className="opacity-90" />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
             </motion.div>

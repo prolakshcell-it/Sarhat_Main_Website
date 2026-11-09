@@ -1,5 +1,6 @@
 "use client";
 
+import HeroVideoBackground from "@/components/HeroVideoBackground";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
@@ -51,13 +52,11 @@ export default function SolutionsPage() {
           <section className="relative h-full w-full flex flex-col justify-between items-center overflow-hidden bg-black select-none">
             {/* Background Image Layer */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
-              <Image
-                src="/images/hero-solar.jpg"
-                alt="Sarhat Solutions Hero"
-                fill
-                priority
-                quality={95}
-                className="object-cover object-center opacity-85" />
+              <HeroVideoBackground
+                desktopSrc="/videos/solutions-hero.mp4"
+                mobileSrc="/videos/solutions-hero-mobile.mp4"
+                poster="/videos/solutions-hero-poster.jpg"
+                alt="Aerial view of Sarhat solar plant at Karanpura" />
               <motion.div
                 style={{ opacity: bgDim }}
                 className="absolute inset-0 bg-black pointer-events-none" />
