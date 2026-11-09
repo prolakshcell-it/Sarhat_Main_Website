@@ -67,7 +67,7 @@ const executiveTeam: ExecutiveLeader[] = [
     fullBio:
       "Radha Kumari leads Human Resources at Sarhat Energy. With 6 years of focused HR and talent leadership, she spearheads human capital management, organizational culture, workforce inclusion, policy frameworks, and continuous skill upskilling across on-site execution crews and corporate departments.",
     education: "MBA Human Resources Management",
-    image: "/team-heads/radha-kumari.jpg",
+    image: "/team-heads/radha-kumari-v4.jpg",
     linkedin: "https://www.linkedin.com/in/radha-jha-530b2820a",
   },
   {
