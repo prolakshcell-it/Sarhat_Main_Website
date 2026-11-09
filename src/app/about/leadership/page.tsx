@@ -54,7 +54,7 @@ const executiveTeam: ExecutiveLeader[] = [
       "Avishek Anand serves as Director Operations at Sarhat Energy. Bringing 12 years of specialized operational expertise, he oversees turnkey site execution, multi-state project delivery timelines, field engineering coordination, and high-standard safety compliance across all utility-scale and commercial projects.",
     education: "B.Tech Engineering & Project Management",
     image: "/team-heads/avishek-anand.jpg",
-    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+    linkedin: "https://www.linkedin.com/in/avishek-anand-79b2aa79",
   },
   {
     id: "radha-kumari",
@@ -68,7 +68,7 @@ const executiveTeam: ExecutiveLeader[] = [
       "Radha Kumari leads Human Resources at Sarhat Energy. With 6 years of focused HR and talent leadership, she spearheads human capital management, organizational culture, workforce inclusion, policy frameworks, and continuous skill upskilling across on-site execution crews and corporate departments.",
     education: "MBA Human Resources Management",
     image: "/team-heads/radha-kumari.jpg",
-    linkedin: "https://www.linkedin.com/company/sarhatenergy/",
+    linkedin: "https://www.linkedin.com/in/radha-jha-530b2820a",
   },
   {
     id: "naresh-kumar",
