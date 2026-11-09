@@ -25,7 +25,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import { useHeroScroll } from "@/hooks/useHeroScroll";
-import { API_BASE_URL } from "@/lib/api";
+import { API_BASE_URL, createInquiry } from "@/lib/api";
 import { toast } from "sonner";
 
 const PRODUCT_SLUG_MAP: Record<string, string> = {
@@ -172,17 +172,26 @@ function ContactPageInner() {
     setIsSubmitting(true);
     setSubmitError("");
     try {
-      const res = await fetch(`${API_BASE_URL}/api/contact`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+      await createInquiry({
+        fullName: formData.name,
+        company: formData.company,
+        email: formData.email,
+        phone: formData.phone,
+        product: formData.product,
+        state: formData.state,
+        projectSize: formData.scope,
+        projectDetails: formData.details,
       });
-      const data = await res.json().catch(() => ({ success: true }));
       setSubmitted(true);
       toast.success("Enquiry received! Our team will contact you within 24 hours.");
     } catch (err: any) {
-      setSubmitted(true);
-      toast.success("Enquiry received! Our team will contact you within 24 hours.");
+      const msg =
+        err?.response?.data?.message ||
+        err?.response?.data?.error?.message ||
+        err?.message ||
+        "Failed to submit enquiry. Please try again.";
+      setSubmitError(msg);
+      toast.error(msg);
     } finally {
       setIsSubmitting(false);
     }
@@ -476,6 +485,7 @@ function ContactPageInner() {
                                     PRODUCT
                                   </label>
                                   <select
+                                    required
                                     value={formData.product}
                                     onChange={(e) =>
                                       setFormData({ ...formData, product: e.target.value })
@@ -515,6 +525,7 @@ function ContactPageInner() {
                                     PROJECT STATE
                                   </label>
                                   <select
+                                    required
                                     value={formData.state}
                                     onChange={(e) =>
                                       setFormData({ ...formData, state: e.target.value })
@@ -563,6 +574,12 @@ function ContactPageInner() {
                                   }
                                   className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all resize-y" />
                               </div>
+
+                              {submitError && (
+                                <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700">
+                                  {submitError}
+                                </div>
+                              )}
 
                               {/* Send Enquiry Button */}
                               <div className="pt-2">

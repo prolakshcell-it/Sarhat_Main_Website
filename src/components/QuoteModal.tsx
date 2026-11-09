@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, CheckCircle2, ArrowUpRight } from "lucide-react";
+import { createInquiry } from "@/lib/api";
+import { toast } from "sonner";
 
 interface QuoteModalProps {
   isOpen: boolean;
@@ -26,6 +28,8 @@ export default function QuoteModal({
   defaultProduct,
 }: QuoteModalProps) {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [form, setForm] = useState({
     name: "",
     company: "",
@@ -54,13 +58,39 @@ export default function QuoteModal({
     };
   }, [isOpen]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setSubmitError("");
+    try {
+      await createInquiry({
+        fullName: form.name,
+        company: form.company,
+        email: form.email,
+        phone: form.phone,
+        product: form.product,
+        state: form.state,
+        projectSize: form.scope,
+        projectDetails: form.details,
+      });
+      setSubmitted(true);
+      toast.success("Enquiry received! Our team will contact you within 24 hours.");
+    } catch (err: any) {
+      const msg =
+        err?.response?.data?.message ||
+        err?.response?.data?.error?.message ||
+        err?.message ||
+        "Failed to submit enquiry. Please try again.";
+      setSubmitError(msg);
+      toast.error(msg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
     setSubmitted(false);
+    setSubmitError("");
     onClose();
   };
 
@@ -190,6 +220,7 @@ export default function QuoteModal({
                       PRODUCT
                     </label>
                     <select
+                      required
                       value={form.product}
                       onChange={(e) =>
                         setForm({ ...form, product: e.target.value })
@@ -255,6 +286,7 @@ export default function QuoteModal({
                       PROJECT STATE
                     </label>
                     <select
+                      required
                       value={form.state}
                       onChange={(e) =>
                         setForm({ ...form, state: e.target.value })
@@ -302,12 +334,19 @@ export default function QuoteModal({
                     className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-[#6DAD45] focus:ring-1 focus:ring-[#6DAD45] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none transition-all resize-y" />
                 </div>
 
+                {submitError && (
+                  <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700">
+                    {submitError}
+                  </div>
+                )}
+
                 {/* Submit button */}
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] px-7 py-3.5 text-xs font-mono font-extrabold uppercase tracking-wider text-black shadow-lg shadow-[#D4E012]/30 transition-all duration-200 hover:-translate-y-px cursor-pointer">
-                    <span>SEND ENQUIRY</span>
+                    disabled={isSubmitting}
+                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0d] hover:to-[#4ed423] px-7 py-3.5 text-xs font-mono font-extrabold uppercase tracking-wider text-black shadow-lg shadow-[#D4E012]/30 transition-all duration-200 hover:-translate-y-px cursor-pointer disabled:opacity-60">
+                    <span>{isSubmitting ? "SENDING..." : "SEND ENQUIRY"}</span>
                     <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
                   </button>
                 </div>
