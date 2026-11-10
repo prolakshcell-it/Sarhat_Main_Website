@@ -31,6 +31,8 @@ import ScrollIndicator from "@/components/ScrollIndicator";
 import { useHeroScroll } from "@/hooks/useHeroScroll";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import ProductFAQ from "@/components/ProductFAQ";
+import { toast } from "sonner";
+import { registerVendor } from "@/lib/api";
 
 export default function SupplyPartnersPage() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
@@ -54,6 +56,8 @@ export default function SupplyPartnersPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [brochureFile, setBrochureFile] = useState<File | null>(null);
+  const [submitError, setSubmitError] = useState("");
+  const [vendorApplicationId, setVendorApplicationId] = useState("");
 
   const [formData, setFormData] = useState({
     companyName: "",
@@ -61,7 +65,7 @@ export default function SupplyPartnersPage() {
     email: "",
     phone: "",
     city: "",
-    supplyCategory: "Solar Modules (Tier-1 ALMM)",
+    primarySupplyCategory: "Solar Modules (Tier-1 ALMM)",
     message: "",
   });
 
@@ -78,17 +82,48 @@ export default function SupplyPartnersPage() {
     }
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isVerified) {
-      alert("Please verify that you are human before submitting.");
+      toast.error("Please verify that you are human before submitting.");
       return;
     }
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setSubmitError("");
+    try {
+      const data = new FormData();
+      data.append("companyName", formData.companyName.trim());
+      data.append("contactPerson", formData.contactPerson.trim());
+      data.append("email", formData.email.trim());
+      data.append("phone", formData.phone.trim());
+      data.append("city", formData.city.trim());
+      data.append("primarySupplyCategory", formData.primarySupplyCategory);
+      if (formData.message) {
+        data.append("message", formData.message.trim());
+      }
+      if (brochureFile) {
+        data.append("companyBrochure", brochureFile);
+      }
+
+      const res = await registerVendor(data);
+
+      if (!res.success) {
+        throw new Error(res.message || "Failed to submit vendor registration");
+      }
+
+      setVendorApplicationId(res.data?._id || "");
       setIsSubmitted(true);
-    }, 1200);
+      toast.success(res.message || "Vendor registration submitted successfully!");
+    } catch (err: any) {
+      const msg =
+        err?.response?.data?.message ||
+        err?.message ||
+        "Failed to submit vendor registration. Please try again.";
+      setSubmitError(msg);
+      toast.error(msg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Why Register 4 Steps (Image 1 Content)
@@ -463,6 +498,11 @@ export default function SupplyPartnersPage() {
                         <Check className="w-8 h-8 stroke-[3]" />
                       </div>
                       <h3 className="text-2xl font-serif-display font-bold text-slate-900">Application Submitted!</h3>
+                      {vendorApplicationId && (
+                        <div className="inline-block bg-slate-900 text-[#D4E012] font-mono text-xs font-bold px-3 py-1 rounded-lg border border-slate-700">
+                          Vendor ID: {vendorApplicationId}
+                        </div>
+                      )}
                       <p className="text-slate-600 text-sm max-w-md mx-auto">
                         Thank you for submitting your vendor profile to Sarhat Energy. Our procurement team will review your product catalog and contact you within 24-48 hours.
                       </p>
@@ -470,6 +510,8 @@ export default function SupplyPartnersPage() {
                         onClick={() => {
                           setIsSubmitted(false);
                           setIsVerified(false);
+                          setSubmitError("");
+                          setVendorApplicationId("");
                           setBrochureFile(null);
                           setFormData({
                             companyName: "",
@@ -477,7 +519,7 @@ export default function SupplyPartnersPage() {
                             email: "",
                             phone: "",
                             city: "",
-                            supplyCategory: "Solar Modules (Tier-1 ALMM)",
+                            primarySupplyCategory: "Solar Modules (Tier-1 ALMM)",
                             message: "",
                           });
                         }}
@@ -551,9 +593,9 @@ export default function SupplyPartnersPage() {
                         {/* Primary Supply Category */}
                         <div>
                           <select
-                            name="supplyCategory"
+                            name="primarySupplyCategory"
                             required
-                            value={formData.supplyCategory}
+                            value={formData.primarySupplyCategory}
                             onChange={handleInputChange}
                             className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-[#0F172A] focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer">
                             <option value="" disabled>
@@ -566,7 +608,7 @@ export default function SupplyPartnersPage() {
                             <option value="Transformers & Switchgear">Transformers &amp; Switchgear</option>
                             <option value="BESS & Battery Components">BESS &amp; Battery Components</option>
                             <option value="Electrical Balance of Plant (eBoP)">Electrical Balance of Plant (eBoP)</option>
-                            <option value="Other">Other Equipment</option>
+                            <option value="Other Equipment">Other Equipment</option>
                           </select>
                         </div>
                       </div>
@@ -630,6 +672,13 @@ export default function SupplyPartnersPage() {
                           </div>
                         </div>
                       </div>
+
+                      {/* Error Alert */}
+                      {submitError && (
+                        <p className="text-xs text-red-600 bg-red-50 p-3 rounded-xl border border-red-200">
+                          {submitError}
+                        </p>
+                      )}
 
                       {/* Submit Button (Image 2) */}
                       <div className="pt-2">

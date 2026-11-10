@@ -35,12 +35,14 @@ import ScrollIndicator from "@/components/ScrollIndicator";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import ProductFAQ from "@/components/ProductFAQ";
 import { useHeroScroll } from "@/hooks/useHeroScroll";
+import { toast } from "sonner";
+import { registerPartner } from "@/lib/api";
 
 export default function PartnersPage() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [activeFaqTab, setActiveFaqTab] = useState<"Partnership" | "Joining" | "Responsibilities">("Partnership");
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
-  const [selectedPartnerType, setSelectedPartnerType] = useState<string>("Solar Project Partner");
+  const [selectedPartnerType, setSelectedPartnerType] = useState<string>("Solar Project Partner (Sales & Execution)");
   const [activeOrbitNode, setActiveOrbitNode] = useState<number | null>(0);
   const {
     isPastHero,
@@ -56,6 +58,8 @@ export default function PartnersPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [partnerApplicationId, setPartnerApplicationId] = useState("");
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -64,8 +68,8 @@ export default function PartnersPage() {
     city: "",
     state: "",
     profession: "",
-    partnerType: "Solar Project Partner",
-    experience: "",
+    partnerType: "Solar Project Partner (Sales & Execution)",
+    solarExperience: "",
     message: "",
   });
 
@@ -74,22 +78,57 @@ export default function PartnersPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isVerified) {
-      alert("Please verify that you are human before submitting.");
+      toast.error("Please verify that you are human before submitting.");
       return;
     }
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setSubmitError("");
+    try {
+      const res = await registerPartner({
+        fullName: formData.fullName.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        city: formData.city.trim(),
+        profession: formData.profession,
+        state: formData.state,
+        partnerType: formData.partnerType,
+        solarExperience: formData.solarExperience,
+        message: formData.message.trim(),
+      });
+
+      if (!res.success) {
+        throw new Error(res.message || "Failed to submit partner application");
+      }
+
+      setPartnerApplicationId(res.data?._id || "");
       setIsSubmitted(true);
-    }, 1200);
+      toast.success(res.message || "Partner application submitted successfully!");
+    } catch (err: any) {
+      const msg =
+        err?.response?.data?.message ||
+        err?.message ||
+        "Failed to submit application. Please try again.";
+      setSubmitError(msg);
+      toast.error(msg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const selectPartnerTypeCard = (type: string) => {
-    setSelectedPartnerType(type);
-    setFormData((prev) => ({ ...prev, partnerType: type }));
+    let fullPartnerType = type;
+    if (type.includes("Project")) {
+      fullPartnerType = "Solar Project Partner (Sales & Execution)";
+    } else if (type.includes("Supply")) {
+      fullPartnerType = "Supply Partner (Vendors & OEMs)";
+    } else if (type.includes("Execution")) {
+      fullPartnerType = "Execution Partner (Contractor)";
+    }
+    setSelectedPartnerType(fullPartnerType);
+    setFormData((prev) => ({ ...prev, partnerType: fullPartnerType }));
     const formElement = document.getElementById("apply");
     if (formElement) {
       formElement.scrollIntoView({ behavior: "smooth" });
@@ -826,6 +865,11 @@ export default function PartnersPage() {
                         <Check className="w-8 h-8 stroke-[3]" />
                       </div>
                       <h3 className="text-2xl font-serif-display font-bold text-slate-900">Application Submitted!</h3>
+                      {partnerApplicationId && (
+                        <div className="inline-block bg-slate-900 text-[#D4E012] font-mono text-xs font-bold px-3 py-1 rounded-lg border border-slate-700">
+                          Reference ID: {partnerApplicationId}
+                        </div>
+                      )}
                       <p className="text-slate-600 text-sm max-w-md mx-auto">
                         Thank you for applying to become a Sarhat Solar Partner. Our regional partnership manager will review your submission and contact you within 24 hours.
                       </p>
@@ -833,6 +877,8 @@ export default function PartnersPage() {
                         onClick={() => {
                           setIsSubmitted(false);
                           setIsVerified(false);
+                          setSubmitError("");
+                          setPartnerApplicationId("");
                           setFormData({
                             fullName: "",
                             email: "",
@@ -840,8 +886,8 @@ export default function PartnersPage() {
                             city: "",
                             state: "",
                             profession: "",
-                            partnerType: "Solar Project Partner",
-                            experience: "",
+                            partnerType: "Solar Project Partner (Sales & Execution)",
+                            solarExperience: "",
                             message: "",
                           });
                         }}
@@ -911,12 +957,12 @@ export default function PartnersPage() {
                             <option value="" disabled>
                               Profession *
                             </option>
-                            <option value="Real Estate Agent">Real Estate Agent / Consultant</option>
-                            <option value="Electrical Contractor">Electrical / Civil Contractor</option>
-                            <option value="Financial Advisor">Financial / Insurance Advisor</option>
-                            <option value="Engineer">Engineer / Architect</option>
-                            <option value="Business Owner">Business Owner / Merchant</option>
-                            <option value="Equipment Vendor">Solar / Electrical Equipment Vendor</option>
+                            <option value="Real Estate Agent / Consultant">Real Estate Agent / Consultant</option>
+                            <option value="Electrical / Civil Contractor">Electrical / Civil Contractor</option>
+                            <option value="Financial / Insurance Advisor">Financial / Insurance Advisor</option>
+                            <option value="Engineer / Architect">Engineer / Architect</option>
+                            <option value="Business Owner / Merchant">Business Owner / Merchant</option>
+                            <option value="Solar / Electrical Equipment Vendor">Solar / Electrical Equipment Vendor</option>
                             <option value="Other">Other</option>
                           </select>
                         </div>
@@ -944,7 +990,16 @@ export default function PartnersPage() {
                             <option value="Telangana">Telangana</option>
                             <option value="Haryana">Haryana</option>
                             <option value="Punjab">Punjab</option>
-                            <option value="Other">Other State</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Chhattisgarh">Chhattisgarh</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Uttarakhand">Uttarakhand</option>
+                            <option value="Other State">Other State</option>
                           </select>
                         </div>
 
@@ -959,27 +1014,27 @@ export default function PartnersPage() {
                             <option value="" disabled>
                               Partner Type *
                             </option>
-                            <option value="Solar Project Partner">Solar Project Partner (Sales &amp; Execution)</option>
-                            <option value="Supply Partner">Supply Partner (Vendors &amp; OEMs)</option>
-                            <option value="Execution Partner">Execution Partner (Contractor)</option>
+                            <option value="Solar Project Partner (Sales & Execution)">Solar Project Partner (Sales &amp; Execution)</option>
+                            <option value="Supply Partner (Vendors & OEMs)">Supply Partner (Vendors &amp; OEMs)</option>
+                            <option value="Execution Partner (Contractor)">Execution Partner (Contractor)</option>
                           </select>
                         </div>
 
                         {/* Experience in Solar Industry */}
                         <div>
                           <select
-                            name="experience"
+                            name="solarExperience"
                             required
-                            value={formData.experience}
+                            value={formData.solarExperience}
                             onChange={handleInputChange}
                             className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-700 focus:outline-none focus:border-[#D4E012] focus:ring-2 focus:ring-[#D4E012]/30 font-medium transition-all cursor-pointer">
                             <option value="" disabled>
                               Experience in Solar Industry *
                             </option>
-                            <option value="None">No Prior Experience</option>
-                            <option value="Under 1 Year">Less than 1 Year</option>
-                            <option value="1-3 Years">1 - 3 Years</option>
-                            <option value="3-5 Years">3 - 5 Years</option>
+                            <option value="No Prior Experience">No Prior Experience</option>
+                            <option value="Less than 1 Year">Less than 1 Year</option>
+                            <option value="1 - 3 Years">1 - 3 Years</option>
+                            <option value="3 - 5 Years">3 - 5 Years</option>
                             <option value="5+ Years">5+ Years</option>
                           </select>
                         </div>
@@ -1020,6 +1075,13 @@ export default function PartnersPage() {
                           </div>
                         </div>
                       </div>
+
+                      {/* Error Alert */}
+                      {submitError && (
+                        <p className="text-xs text-red-600 bg-red-50 p-3 rounded-xl border border-red-200">
+                          {submitError}
+                        </p>
+                      )}
 
                       {/* Submit Button */}
                       <div className="pt-2">

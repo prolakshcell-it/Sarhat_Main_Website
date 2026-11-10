@@ -104,14 +104,14 @@ function DiscussProjectContent() {
     setSubmitError("");
     try {
       await createInquiry({
-        fullName: form.name,
-        company: form.company,
-        email: form.email,
-        phone: form.phone,
+        fullName: form.name.trim(),
+        company: form.company.trim(),
+        email: form.email.trim(),
+        phone: form.phone.trim(),
         product: form.product,
         state: form.state,
-        projectSize: form.scope,
-        projectDetails: form.details,
+        projectSize: form.scope.trim(),
+        projectDetails: form.details.trim(),
       });
       setSubmitted(true);
       toast.success("Enquiry received! Our team will contact you within 24 hours.");

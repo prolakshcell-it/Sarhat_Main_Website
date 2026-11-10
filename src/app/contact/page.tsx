@@ -25,7 +25,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import { useHeroScroll } from "@/hooks/useHeroScroll";
-import { API_BASE_URL, createInquiry } from "@/lib/api";
+import { API_BASE_URL, createInquiry, createSupportTicket } from "@/lib/api";
 import { toast } from "sonner";
 
 const PRODUCT_SLUG_MAP: Record<string, string> = {
@@ -158,8 +158,8 @@ function ContactPageInner() {
     phone: "",
     email: "",
     projectId: "",
-    issueCategory: "Inverter & SCADA Telemetry",
-    priority: "Normal / Standard SLA",
+    serviceCategory: "Inverter & SCADA Telemetry",
+    priority: "Normal",
     description: "",
   });
   const [supportSubmitted, setSupportSubmitted] = useState(false);
@@ -173,14 +173,14 @@ function ContactPageInner() {
     setSubmitError("");
     try {
       await createInquiry({
-        fullName: formData.name,
-        company: formData.company,
-        email: formData.email,
-        phone: formData.phone,
+        fullName: formData.name.trim(),
+        company: formData.company.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
         product: formData.product,
         state: formData.state,
-        projectSize: formData.scope,
-        projectDetails: formData.details,
+        projectSize: formData.scope.trim(),
+        projectDetails: formData.details.trim(),
       });
       setSubmitted(true);
       toast.success("Enquiry received! Our team will contact you within 24 hours.");
@@ -202,30 +202,39 @@ function ContactPageInner() {
     setIsSupportSubmitting(true);
     setSupportError("");
     try {
-      const res = await fetch(`${API_BASE_URL}/api/support`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(supportData),
+      const fullDescription = supportData.projectId?.trim()
+        ? `[Project ID: ${supportData.projectId.trim()}] ${supportData.description}`
+        : supportData.description;
+
+      const res = await createSupportTicket({
+        fullName: supportData.name,
+        company: supportData.company,
+        email: supportData.email,
+        phone: supportData.phone,
+        serviceCategory: supportData.serviceCategory,
+        priority: supportData.priority,
+        description: fullDescription,
       });
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || "Failed to submit support ticket");
-      }
-      setTicketId(data.ticketId || "");
+
+      setTicketId(res._id || "");
       setSupportSubmitted(true);
-      toast.success(`Support ticket ${data.ticketId} created successfully!`);
+      toast.success("Support ticket created successfully!");
       setSupportData({
         name: "",
         company: "",
         phone: "",
         email: "",
         projectId: "",
-        issueCategory: "Inverter & SCADA Telemetry",
-        priority: "Normal / Standard SLA",
+        serviceCategory: "Inverter & SCADA Telemetry",
+        priority: "Normal",
         description: "",
       });
     } catch (err: any) {
-      const msg = err.message || "Failed to submit support ticket. Please try again.";
+      const msg =
+        err?.response?.data?.message ||
+        err?.response?.data?.error?.message ||
+        err?.message ||
+        "Failed to submit support ticket. Please try again.";
       setSupportError(msg);
       toast.error(msg);
     } finally {
@@ -703,6 +712,12 @@ function ContactPageInner() {
                               <p className="text-sm text-slate-600 max-w-xs mx-auto font-light">
                                 Your service request has been registered. Our O&M engineer will contact you within 2 hours.
                               </p>
+                              <button
+                                type="button"
+                                onClick={() => setSupportSubmitted(false)}
+                                className="inline-flex items-center gap-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-mono font-bold text-xs uppercase tracking-wider px-6 py-2.5 transition-all cursor-pointer">
+                                Raise another ticket
+                              </button>
                             </motion.div>
                           ) : (
                             <form onSubmit={handleSupportSubmit} className="space-y-4">
@@ -717,6 +732,7 @@ function ContactPageInner() {
                                   className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] outline-none transition-colors" />
                                 <input
                                   type="text"
+                                  required
                                   placeholder="Plant / Company Name"
                                   value={supportData.company}
                                   onChange={(e) => setSupportData({ ...supportData, company: e.target.value })}
@@ -752,8 +768,8 @@ function ContactPageInner() {
 
                                 <div className="relative">
                                   <select
-                                    value={supportData.issueCategory}
-                                    onChange={(e) => setSupportData({ ...supportData, issueCategory: e.target.value })}
+                                    value={supportData.serviceCategory}
+                                    onChange={(e) => setSupportData({ ...supportData, serviceCategory: e.target.value })}
                                     className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-xs sm:text-sm text-[#0F172A] outline-none transition-colors appearance-none cursor-pointer pr-10">
                                     <option value="Inverter & SCADA Telemetry">Inverter & SCADA Telemetry</option>
                                     <option value="Grid Synchronization Outage">Grid Synchronization Outage</option>
@@ -771,9 +787,9 @@ function ContactPageInner() {
                                   value={supportData.priority}
                                   onChange={(e) => setSupportData({ ...supportData, priority: e.target.value })}
                                   className="w-full bg-[#F8FAF8] border border-slate-200 focus:border-[#707B00] rounded-xl px-4 py-3.5 text-sm text-[#0F172A] outline-none transition-colors appearance-none cursor-pointer pr-10">
-                                  <option value="Normal / Standard SLA">Priority: Normal (24-Hr SLA)</option>
-                                  <option value="Urgent">Priority: High / Urgent (6-Hr SLA)</option>
-                                  <option value="Critical Outage">Priority: Critical Plant Outage (2-Hr SLA)</option>
+                                  <option value="Normal">Priority: Normal (24-Hr SLA)</option>
+                                  <option value="High / Urgent">Priority: High / Urgent (6-Hr SLA)</option>
+                                  <option value="Critical Plant Outage">Priority: Critical Plant Outage (2-Hr SLA)</option>
                                 </select>
                                 <ChevronDown className="w-4 h-4 text-slate-400 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                               </div>
