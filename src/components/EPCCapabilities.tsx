@@ -62,22 +62,26 @@ export default function EPCCapabilities() {
           {/* Right Column: Overlapping Dual Image Showcase Frame */}
           <div className="lg:col-span-6 relative pb-8 pr-4 sm:pb-10 sm:pr-8">
             <ScrollReveal direction="right" distance={40}>
-              <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-slate-200">
+              {/* Main Primary Solar Asset Image */}
+              <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-slate-200/80 group">
                 <Image
-                  src="/images/hero-solar.jpg"
-                  alt="Sarhat Solar Farm Aerial View"
+                  src="/images/about-hero-bg-bright.jpg"
+                  alt="Sarhat Clean Energy & Solar Infrastructure"
                   fill
-                  className="object-cover object-center transform hover:scale-[1.02] transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover object-center transform group-hover:scale-105 transition-transform duration-700 ease-out" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
               </div>
 
-              {/* Overlapping Bottom-Right Foreground Substation Image Frame */}
-              <div className="absolute -bottom-4 -right-2 sm:-bottom-6 sm:-right-4 w-2/3 aspect-[16/10] rounded-2xl overflow-hidden border-4 border-white shadow-2xl z-20">
+              {/* Overlapping Bottom-Right Foreground Substation & Grid Infrastructure */}
+              <div className="absolute -bottom-4 -right-2 sm:-bottom-6 sm:-right-4 w-2/3 aspect-[16/10] rounded-2xl overflow-hidden border-4 border-white shadow-2xl z-20 group">
                 <Image
-                  src="/images/Battery-Storage.JPG"
-                  alt="Sarhat Substation & BESS Infrastructure"
+                  src="/images/substation-project.jpg"
+                  alt="Sarhat Electrical Substation & Transmission Infrastructure"
                   fill
-                  className="object-cover object-center" />
+                  sizes="(max-width: 1024px) 60vw, 30vw"
+                  className="object-cover object-center transform group-hover:scale-105 transition-transform duration-700 ease-out" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent pointer-events-none"></div>
               </div>
             </ScrollReveal>
           </div>

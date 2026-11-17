@@ -25,11 +25,10 @@ function BrandCard({ item, isMatch }: { item: PartnerBrand; isMatch: boolean }) 
       title={item.name}
       aria-label={`${item.name} - ${item.sector}`}
       style={{ "--brand": item.badgeColor } as React.CSSProperties}
-      className={`group relative overflow-hidden bg-white rounded-2xl p-3 border flex flex-col items-center gap-2.5 shrink-0 w-[190px] cursor-pointer outline-none transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-[var(--brand)]/25 hover:border-[var(--brand)] focus-visible:border-[var(--brand)] focus-visible:ring-2 focus-visible:ring-[var(--brand)]/40 ${
-        isMatch
-          ? "opacity-100 border-slate-200/90 scale-100 shadow-md shadow-slate-200/60"
-          : "opacity-25 grayscale border-slate-100 scale-90 blur-[1px]"
-      }`}>
+      className={`group relative overflow-hidden bg-white rounded-2xl p-3 border flex flex-col items-center gap-2.5 shrink-0 w-[190px] cursor-pointer outline-none transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-[var(--brand)]/25 hover:border-[var(--brand)] focus-visible:border-[var(--brand)] focus-visible:ring-2 focus-visible:ring-[var(--brand)]/40 ${isMatch
+        ? "opacity-100 border-slate-200/90 scale-100 shadow-md shadow-slate-200/60"
+        : "opacity-25 grayscale border-slate-100 scale-90 blur-[1px]"
+        }`}>
       {/* Shine sweep on hover */}
       <span className="pointer-events-none absolute inset-y-0 -left-full w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-white/80 to-transparent transition-all duration-700 group-hover:left-[150%] z-10" />
       {/* Brand colour glow on hover */}
@@ -37,9 +36,8 @@ function BrandCard({ item, isMatch }: { item: PartnerBrand; isMatch: boolean }) 
 
       {/* Brand Logo Tile */}
       <div
-        className={`h-20 w-full rounded-xl flex items-center justify-center px-4 border transition-transform duration-500 group-hover:scale-105 ${
-          item.darkTile ? "bg-slate-800 border-slate-700" : "bg-[#F8FAF8] border-slate-100"
-        }`}>
+        className={`h-20 w-full rounded-xl flex items-center justify-center px-4 border transition-transform duration-500 group-hover:scale-105 ${item.darkTile ? "bg-slate-800 border-slate-700" : "bg-[#F8FAF8] border-slate-100"
+          }`}>
         {item.logoSrc ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -440,7 +438,7 @@ export default function TrustedByLogos() {
               TRUSTED BY INDUSTRY LEADERS
             </AnimatedPillBadge>
 
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-4">
+            {/* <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif-display font-medium text-slate-900 tracking-tight leading-snug mb-4">
               Strong relationships coordinated delivery<br />
               <span className="text-[#6DAD45] italic relative inline-block">
                 Working with Leading Brands & Utilities.
@@ -455,7 +453,7 @@ export default function TrustedByLogos() {
                     fill="transparent" />
                 </svg>
               </span>
-            </h2>
+            </h2> */}
 
             <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
               A trusted supplier network, reliable technology & coordinated expertise-supporting your project at every stage.
@@ -464,7 +462,7 @@ export default function TrustedByLogos() {
         </ScrollReveal>
 
         {/* Sector Filter Chips */}
-        <div className="flex items-center justify-center flex-wrap gap-2 mb-8">
+        {/* <div className="flex items-center justify-center flex-wrap gap-2 mb-8">
           {filterTabs.map((tab, i) => (
             <motion.button
               key={tab.key}
@@ -475,11 +473,10 @@ export default function TrustedByLogos() {
               whileHover={{ scale: 1.06 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setActiveFilter(tab.key)}
-              className={`relative text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider px-4 py-2 rounded-full cursor-pointer border transition-colors ${
-                activeFilter === tab.key
-                  ? "text-[#D4E012] border-slate-900"
-                  : "bg-white text-slate-600 border-slate-200/90 hover:border-[#6DAD45] hover:text-slate-900"
-              }`}>
+              className={`relative text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider px-4 py-2 rounded-full cursor-pointer border transition-colors ${activeFilter === tab.key
+                ? "text-[#D4E012] border-slate-900"
+                : "bg-white text-slate-600 border-slate-200/90 hover:border-[#6DAD45] hover:text-slate-900"
+                }`}>
               {activeFilter === tab.key && (
                 <motion.span
                   layoutId="trusted-active-chip"
@@ -489,7 +486,7 @@ export default function TrustedByLogos() {
               <span className="relative z-10">{tab.label}</span>
             </motion.button>
           ))}
-        </div>
+        </div> */}
       </div>
 
       {/* Marquee Container with Left & Right Gradient Fade Masks */}

@@ -69,7 +69,6 @@ export default function PeopleFirst() {
         {/* 3 Editorial Cards Grid with Side Slide Motion */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {values.map((val, idx) => {
-            const IconComp = val.icon;
             const xOffset = 0;
             const yOffset = 16;
 
@@ -87,7 +86,6 @@ export default function PeopleFirst() {
                     <span className="text-[10px] font-mono font-bold tracking-widest text-[#707B00] uppercase">
                       {val.tag}
                     </span>
-                    <IconComp className="w-5 h-5 text-slate-400" />
                   </div>
                   <h3 className="text-2xl font-serif-display font-bold text-slate-900 mb-3">
                     {val.title}
