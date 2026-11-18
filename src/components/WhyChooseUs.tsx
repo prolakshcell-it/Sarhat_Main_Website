@@ -66,7 +66,7 @@ export default function WhyChooseUs() {
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-3">
               The Sarhat Advantage
               <span className="block mt-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif-display font-normal text-[#6DAD45] italic relative mx-auto w-fit">
-                Built for Performance. Accountable at Every Step.
+                Accountable at Every Step.
                 <svg
                   className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                   viewBox="0 0 100 20"
@@ -89,7 +89,6 @@ export default function WhyChooseUs() {
         {/* 4 Core Differentiators Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-4.5 mb-12">
           {reasons.map((item, idx) => {
-            const IconComp = item.icon;
             return (
               <ScrollReveal key={item.num} direction="up" delay={idx * 0.06} distance={20}>
                 <motion.div
@@ -100,14 +99,11 @@ export default function WhyChooseUs() {
                   <div className="absolute top-0 right-0 w-24 h-24 bg-[#D4E012]/10 rounded-bl-full pointer-events-none group-hover:bg-[#D4E012]/25 transition-all"></div>
 
                   <div>
-                    {/* Top Row: Number & Icon */}
+                    {/* Top Row: Number */}
                     <div className="flex items-center justify-between mb-5">
                       <span className="text-xs font-mono font-black text-[#707B00] uppercase tracking-widest px-3 py-1 bg-[#F8FAF8] rounded-full border border-[#707B00]/20">
                         {item.num}
                       </span>
-                      <div className="w-10 h-10 rounded-2xl bg-[#F8FAF8] flex items-center justify-center border border-slate-200/80 group-hover:bg-[#D4E012] group-hover:border-[#D4E012] transition-colors shadow-sm">
-                        <IconComp className="w-5 h-5 text-slate-700 group-hover:text-black transition-colors" />
-                      </div>
                     </div>
 
                     {/* Title */}

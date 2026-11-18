@@ -426,7 +426,13 @@ export default function FivePrinciplesInteractive({
 
                                           <button
                                             type="button"
-                                            onClick={onOpenQuote}
+                                            onClick={() => {
+                                              if (onOpenQuote) {
+                                                onOpenQuote();
+                                              } else if (typeof window !== "undefined") {
+                                                window.location.href = "/discuss-a-project";
+                                              }
+                                            }}
                                             className="w-full sm:w-auto shrink-0 bg-gradient-to-r from-[#D4E012] to-[#6DAD45] hover:opacity-95 text-slate-950 font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-full shadow-md hover:shadow-lg transition-all cursor-pointer flex items-center justify-center gap-2">
                                             <span>Start the conversation</span>
                                             <ArrowRight className="w-4 h-4" />

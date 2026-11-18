@@ -37,7 +37,7 @@ import ProductFAQ from "@/components/ProductFAQ";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import { useHeroScroll } from "@/hooks/useHeroScroll";
-import { API_BASE_URL } from "@/lib/api";
+import { API_BASE_URL, applyCareer } from "@/lib/api";
 import { toast } from "sonner";
 import EmployeeBenefits from "@/components/employee-benefits/EmployeeBenefits";
 import InspiringCultureSection from "@/components/InspiringCultureSection";
@@ -241,30 +241,31 @@ export default function CareersPage() {
       alert("Please check the verification box to prove you are human.");
       return;
     }
+    if (!formData.cvFile) {
+      alert("Please attach your CV (PDF, DOC, or Image) before submitting.");
+      return;
+    }
     setIsSubmitting(true);
     setSubmitError("");
     try {
       const data = new FormData();
-      data.append("fullName", formData.fullName);
-      data.append("email", formData.email);
-      data.append("phone", formData.phone);
-      data.append("role", formData.role);
+      data.append("fullName", formData.fullName.trim());
+      data.append("email", formData.email.trim());
+      data.append("phone", formData.phone.trim());
+      data.append("roleOfInterest", formData.role);
       if (formData.cvFile) {
-        data.append("cvFile", formData.cvFile);
+        data.append("cv", formData.cvFile);
       }
 
-      const res = await fetch(`${API_BASE_URL}/api/apply`, {
-        method: "POST",
-        body: data,
-      });
-      const result = await res.json();
-      if (!res.ok || !result.success) {
-        throw new Error(result.error || "Failed to submit application");
+      const result = await applyCareer(data);
+      if (!result || result.success === false) {
+        throw new Error(result?.message || "Failed to submit application");
       }
 
-      setApplicationId(result.applicationId || "");
+      const returnedId = result.data?._id || result.applicationId || "";
+      setApplicationId(returnedId);
       setSubmitSuccess(true);
-      toast.success(`Application submitted! Reference: ${result.applicationId}`);
+      toast.success(result.message || "Application submitted successfully!");
       setFormData({
         fullName: "",
         email: "",

@@ -45,7 +45,7 @@ export default function PeopleFirst() {
             </AnimatedPillBadge>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
               When people rise, <br />
-              <span className="text-[#6DAD45] italic relative inline-block">
+              <span className="block mt-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif-display font-normal text-[#6DAD45] italic relative mx-auto w-fit">
                 the company rises.
                 <svg
                   className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
@@ -69,7 +69,6 @@ export default function PeopleFirst() {
         {/* 3 Editorial Cards Grid with Side Slide Motion */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {values.map((val, idx) => {
-            const IconComp = val.icon;
             const xOffset = 0;
             const yOffset = 16;
 
@@ -87,7 +86,6 @@ export default function PeopleFirst() {
                     <span className="text-[10px] font-mono font-bold tracking-widest text-[#707B00] uppercase">
                       {val.tag}
                     </span>
-                    <IconComp className="w-5 h-5 text-slate-400" />
                   </div>
                   <h3 className="text-2xl font-serif-display font-bold text-slate-900 mb-3">
                     {val.title}

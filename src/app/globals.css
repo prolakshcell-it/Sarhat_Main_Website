@@ -236,6 +236,29 @@ p.text-left {
   line-height: 1.625;
 }
 
+/* Section Subheadings / Lead Intros on Home Page: Preserved Centered and Balanced */
+.home-page .text-center p,
+.home-page p.text-center,
+.home-page p[class*="mx-auto"],
+.home-page .text-center h1+p,
+.home-page .text-center h2+p,
+.home-page .hero-subheading {
+  text-align: center !important;
+  text-align-last: center !important;
+  text-wrap: balance !important;
+  -webkit-text-wrap: balance !important;
+  word-spacing: normal !important;
+  letter-spacing: normal !important;
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+}
+
+/* Home Page Body Paragraphs (cards, long editorial descriptions, FAQ answers) */
+.home-page p:not(.text-center p):not(p.text-center):not(p[class*="mx-auto"]):not(h1+p):not(h2+p):not(footer p):not(nav p):not([role="dialog"] p) {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
 /* Hide scrollbars globally while preserving scroll functionality */
 html,
 body {

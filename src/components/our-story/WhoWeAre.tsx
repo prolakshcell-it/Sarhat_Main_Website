@@ -34,17 +34,28 @@ export default function WhoWeAre() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="mx-auto mb-12 max-w-4xl text-center sm:mb-16">
-            {/* the pill is the heading; the statement below carries the section */}
-            <h2 className="sr-only">Who We Are</h2>
-            <AnimatedPillBadge className="mb-8">WHO WE ARE</AnimatedPillBadge>
-            <p className="mx-auto max-w-4xl font-serif-display text-2xl font-medium leading-snug tracking-tight text-[#0F172A] sm:text-4xl md:text-[2.75rem] md:leading-[1.25]">
+            <AnimatedPillBadge className="mb-6">WHO WE ARE</AnimatedPillBadge>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6 [text-wrap:balance]">
               We built around one strength:{" "}
-              <span className="italic text-[#6DAD45]">execution.</span> We turn
-              clean-energy ambition into projects delivered with engineering
-              discipline, ownership and care.{" "}
-              <span className="italic text-[#707B00]">
-                Discover what makes us different.
+              <span className="text-[#6DAD45] italic relative inline-block">
+                execution.
+                <svg
+                  className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                  viewBox="0 0 100 20"
+                  preserveAspectRatio="none">
+                  <path
+                    d="M0 15 Q 50 0 100 15"
+                    stroke="currentColor"
+                    strokeWidth="3.5"
+                    fill="transparent" />
+                </svg>
               </span>
+            </h2>
+            <p className="mx-auto max-w-3xl font-normal text-slate-600 text-base sm:text-lg md:text-xl leading-relaxed mb-4 [text-wrap:balance]">
+              We turn clean-energy ambition into projects delivered with engineering discipline, ownership and care.
+            </p>
+            <p className="text-sm sm:text-base font-serif-display italic text-[#6DAD45] font-semibold tracking-wide">
+              Discover what makes us different.
             </p>
           </div>
         </ScrollReveal>

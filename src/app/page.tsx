@@ -12,9 +12,7 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import TrustedByLogos from "@/components/TrustedByLogos";
 import FootprintMap from "@/components/FootprintMap";
 import PeopleFirst from "@/components/PeopleFirst";
-import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
-import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import ScrollFadeSection from "@/components/ScrollFadeSection";
@@ -49,7 +47,7 @@ export default function Home() {
 
   return (
     <SmoothScroll>
-      <main className="min-h-screen bg-[#F8FAF8] text-[#0F172A] selection:bg-[#D4E012] selection:text-black relative overflow-x-clip font-sans-ui">
+      <main className="home-page min-h-screen bg-[#F8FAF8] text-[#0F172A] selection:bg-[#D4E012] selection:text-black relative overflow-x-clip font-sans-ui">
         {/* Navigation */}
         <Navbar onOpenQuote={handleOpenQuote} />
 
@@ -111,19 +109,9 @@ export default function Home() {
             <PeopleFirst />
           </ScrollFadeSection>
 
-          {/* 08 / Client & Partner Testimonials */}
-          <ScrollFadeSection>
-            <TestimonialsSection />
-          </ScrollFadeSection>
-
-          {/* 09 / Frequently Asked Questions */}
+          {/* 08 / Frequently Asked Questions */}
           <ScrollFadeSection>
             <FAQSection />
-          </ScrollFadeSection>
-
-          {/* Final Call To Action */}
-          <ScrollFadeSection>
-            <FinalCTA onOpenQuote={handleOpenQuote} />
           </ScrollFadeSection>
 
           {/* Footer */}

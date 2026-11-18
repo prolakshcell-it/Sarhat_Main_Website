@@ -75,7 +75,7 @@ export default function SolutionsGrid() {
             <AnimatedPillBadge className="mb-6">
               SOLUTIONS CAPABILITIES
             </AnimatedPillBadge>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
+            {/* <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
               <span className="inline-block xl:whitespace-nowrap">Built on Solar. Growing into infrastructure.</span> <br />
               <span className="text-[#6DAD45] italic relative inline-block xl:whitespace-nowrap">
                 One connected way to build.
@@ -90,7 +90,7 @@ export default function SolutionsGrid() {
                     fill="transparent" />
                 </svg>
               </span>
-            </h2>
+            </h2> */}
             <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
               From renewable generation and storage to grid and civil infrastructure, our solutions are designed to work together.
             </p>
@@ -115,8 +115,8 @@ export default function SolutionsGrid() {
                   onMouseEnter={() => setActiveIndex(index)}
                   onClick={() => setActiveIndex(index)}
                   className={`relative overflow-hidden cursor-pointer transition-all duration-700 ease-[0.22,1,0.36,1] border-2 border-white shadow-2xl ${isActive
-                      ? "lg:flex-[3.5] h-[460px] lg:h-full rounded-2xl z-20 shadow-slate-950/70"
-                      : "lg:flex-[1.1] h-[110px] lg:h-full rounded-2xl border-white/90 hover:border-[#D4E012] bg-slate-950 z-10"
+                    ? "lg:flex-[3.5] h-[460px] lg:h-full rounded-2xl z-20 shadow-slate-950/70"
+                    : "lg:flex-[1.1] h-[110px] lg:h-full rounded-2xl border-white/90 hover:border-[#D4E012] bg-slate-950 z-10"
                     } lg:-skew-x-[6deg] group`}>
                   {/* Un-skew Inner Wrapper so text and photos remain 100% straight */}
                   <div className="relative h-full w-full lg:skew-x-[6deg] lg:scale-110">
@@ -133,8 +133,8 @@ export default function SolutionsGrid() {
                     {/* Soft Gradient Overlay at Bottom only (leaving top/middle image 100% clear & bright) */}
                     <div
                       className={`absolute inset-0 transition-opacity duration-700 ${isActive
-                          ? "bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"
-                          : "bg-slate-950/40 hover:bg-slate-950/20"
+                        ? "bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"
+                        : "bg-slate-950/40 hover:bg-slate-950/20"
                         }`} />
 
                     {/* ACTIVE EXPANDED CARD CONTENT */}

@@ -256,7 +256,7 @@ export default function ExecutionCurve() {
             <AnimatedPillBadge darkBg className="mb-4 sm:mb-6">
               THE CURVE OF EXECUTION
             </AnimatedPillBadge>
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-4">
+            {/* <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display font-medium text-white tracking-tight leading-tight mb-4">
               A project journey <br />
                 <span className="text-[#D4E012] italic relative inline-block">
                   with a clear curve.
@@ -271,7 +271,7 @@ export default function ExecutionCurve() {
                       fill="transparent" />
                   </svg>
                 </span>
-            </h2>
+            </h2> */}
             <p className="text-slate-300 font-light text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
               6 core phases in sequence. The roadmap lights up as the project moves from discovery to long-term operations.
             </p>

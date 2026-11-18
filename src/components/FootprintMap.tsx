@@ -96,7 +96,7 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
             <AnimatedPillBadge className="mb-4">PAN-INDIA OPERATIONAL FOOTPRINT</AnimatedPillBadge>
           </motion.div>
 
-          <motion.h2
+          {/* <motion.h2
             variants={item}
             className="mb-4 font-serif-display text-[clamp(2rem,4.2vw,3.75rem)] font-medium leading-[1.08] text-balance tracking-tight text-slate-900">
             Our Growing Footprint <br />
@@ -112,14 +112,14 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
                   variants={{ hidden: { pathLength: reduce ? 1 : 0 }, visible: { pathLength: 1, transition: { duration: 0.6, delay: 0.5, ease: "easeOut" } } }} />
               </svg>
             </span>
-          </motion.h2>
+          </motion.h2> */}
 
           <motion.p variants={item} className="mx-auto max-w-[720px] text-[clamp(14px,1.2vw,17px)] leading-relaxed text-slate-600">
             <span>Explore the projects, places & teams shaping Sarhat's growing energy & infrastructure presence.</span>          </motion.p>
         </div>
 
         {/* State filters (generated from the dataset) */}
-        <motion.div variants={item} className="relative mb-5 sm:mb-6">
+        {/* <motion.div variants={item} className="relative mb-5 sm:mb-6">
           <div
             ref={chipsRef}
             role="group"
@@ -129,7 +129,7 @@ export default function FootprintMap({ selectedStateSlug, onSelectState }: Footp
             {STATES.map((s) => chip(s.slug, s.state, s.capacityMW))}
           </div>
           <div aria-hidden className="pointer-events-none absolute inset-y-0 right-[-16px] w-10 bg-gradient-to-l from-[#F8FAF8] to-transparent sm:hidden" />
-        </motion.div>
+        </motion.div> */}
 
         {/* 3D India Map Showcase */}
         <motion.div
