@@ -45,7 +45,7 @@ export default function PeopleFirst() {
             </AnimatedPillBadge>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
               When people rise, <br />
-              <span className="text-[#6DAD45] italic relative inline-block">
+              <span className="block mt-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif-display font-normal text-[#6DAD45] italic relative mx-auto w-fit">
                 the company rises.
                 <svg
                   className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
