@@ -6,7 +6,7 @@ import ScrollReveal from "./ScrollReveal";
 
 export interface FAQItem {
   question: string;
-  answer: string;
+  answer: React.ReactNode;
 }
 
 interface ProductFAQProps {

@@ -40,88 +40,43 @@ const values: StoryValue[] = [
 const keyMoments: KeyMoment[] = [
   {
     year: "2024",
-    stage: "Foundation",
+    yearDisplay: "2024",
+    stage: "FOUNDATION",
     headline: "Sarhat Begins",
-    tag: "FOUNDATION & OWNERSHIP",
-    subtitle: "ESTABLISHED BY INDUSTRY ENGINEERS",
     description:
-      "After more than a decade in the energy industry, two engineers and friends founded Sarhat with a shared belief: when people are trusted to grow and take ownership, they can build projects that make a lasting difference.",
-    metrics: ["2 Founder Engineers", "Solar EPC Focus", "Zero Safety Incidents"],
-    achievements: [
-      "Founded with engineering discipline & execution-first culture",
-      "Delivered initial commercial rooftop & ground-mount solar installations",
-      "Established standardized site safety & quality assurance frameworks",
-    ],
-    image: "/images/timeline-2024.jpg",
-    imageCaption: "Initial Rooftop Solar & Site Quality Standards",
+      "After more than a decade in the energy industry, two engineers and friends founded Sarhat with a shared belief: give people room to grow and the responsibility to deliver.",
+    image: "/images/story-2024.jpg",
+    imageCaption: "Illustrative image",
   },
   {
     year: "2025",
-    stage: "Early Work",
-    headline: "Solar & EV Infrastructure",
-    tag: "EV MOBILITY & FAST CHARGING",
-    subtitle: "SOLAR + EV CHARGING HUBS",
-    description:
-      "Pioneered integrated solar-assisted EV fast-charging stations and corporate fleet charging hubs, seamlessly connecting solar power generation with electric mobility infrastructure.",
-    metrics: ["Solar EV Hubs", "DC Fast Chargers", "Smart Fleet Power"],
-    achievements: [
-      "Deployed solar-assisted EV fast-charging stations for industrial & commercial fleets",
-      "Integrated smart load management & grid balancing for electric vehicle hubs",
-      "Established automated remote telemetry & real-time charging network O&M",
-    ],
-    image: "/images/timeline-ev-charging.jpg",
-    imageCaption: "Solar-Powered EV Fast Charging Infrastructure",
-  },
-  {
-    year: "2025+",
-    stage: "Growth",
+    yearDisplay: "2025",
+    stage: "GROWTH",
     headline: "Our Footprint Grows",
-    tag: "3 STATES DELIVERED",
-    subtitle: "REGIONAL SCALE & MULTI-SITE EXECUTION",
     description:
-      "Sarhat installed solar projects across three major industrial states, turning early vision into high-yielding operational clean energy assets on the ground.",
-    metrics: ["3 States Active", "15+ Project Sites", "100% On-Time COD"],
-    achievements: [
-      "Executed commercial, industrial (C&I) & utility solar parks across 3 states",
-      "Built dedicated in-house Operations & Maintenance (O&M) service capabilities",
-      "Expanded site engineering, procurement & land clearance teams",
-    ],
-    image: "/images/timeline-2025.jpg",
-    imageCaption: "Multi-State Commercial & Industrial Solar Parks",
+      "Sarhat installed solar projects across three states, turning its early ambition into work delivered on the ground.",
+    image: "/images/story-2025.jpg",
+    imageCaption: "Illustrative image",
   },
   {
     year: "2026",
-    stage: "Today",
+    yearDisplay: "2026",
+    stage: "WIDER REACH",
     headline: "New Capabilities, Wider Reach",
-    tag: "7 STATES & MULTI-INFRASTRUCTURE",
-    subtitle: "GRID SUBSTATIONS & BESS INTEGRATION",
     description:
-      "Sarhat expanded into battery storage (BESS), 11kV/765kV/220kV grid substations, and civil infrastructure, extending delivery across seven states.",
-    metrics: ["7 States Presence", "220kV Grid Substations", "Containerized BESS"],
-    achievements: [
-      "Constructed 33kV / 132kV / 220kV grid substations and SCADA systems",
-      "Integrated utility-scale containerized BESS & solar-storage hybrids",
-      "Delivered site access roads, piling foundations & drainage infrastructure",
-    ],
-    image: "/images/timeline-2026.jpg",
-    imageCaption: "220kV High-Voltage Substation & BESS Storage",
+      "Sarhat expanded into energy and civil infrastructure, began developing projects, and extended its work across nine states.",
+    image: "/images/story-2026.jpg",
+    imageCaption: "Illustrative image",
   },
   {
-    year: "2027+",
-    stage: "What Comes Next",
-    headline: "Next-Gen Energy & Global Horizon",
-    tag: "FUTURE INFRASTRUCTURE",
-    subtitle: "AGROVOLTAICS & GREEN HYDROGEN",
+    year: "2027",
+    yearDisplay: "2027 onward",
+    stage: "WHAT'S NEXT",
+    headline: "Agrivoltaics & Green Hydrogen",
     description:
-      "Pioneering agrovoltaics, green hydrogen infrastructure, and smart microgrids, carrying Sarhat's trusted execution model to national and global markets.",
-    metrics: ["Agrovoltaics", "Green Hydrogen", "Global Expansion"],
-    achievements: [
-      "Developing dual-use agrovoltaic solar projects combining farming & power",
-      "Pioneering green hydrogen generation & storage infrastructure",
-      "Forging global strategic alliances for large-scale energy transition",
-    ],
-    image: "/images/timeline-2027.jpg",
-    imageCaption: "Agrovoltaics & Green Hydrogen Infrastructure",
+      "Sarhat plans to advance projects that combine farming and solar generation, and explore green hydrogen infrastructure.",
+    image: "/images/story-2027.jpg",
+    imageCaption: "Concept illustration",
   },
 ];
 
@@ -176,13 +131,24 @@ export default function OurStoryPage() {
             <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
                 <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
-                  <AnimatedPillBadge className="mb-6">Our Journey</AnimatedPillBadge>
+                  {/* Half Sun motif */}
+                  <div className="flex items-center justify-center gap-4 mb-4">
+                    <div className="h-px w-16 bg-slate-200" />
+                    <svg viewBox="0 0 48 24" className="w-12 h-6" fill="none">
+                      <path d="M 6 24 A 18 18 0 0 1 42 24" stroke="#E07A4F" strokeWidth="1.8" />
+                      <path d="M 12 24 A 12 12 0 0 1 36 24" stroke="#E9C46A" strokeWidth="1.5" />
+                      {/* Sun rays */}
+                      <path d="M 24 5 L 24 1 M 14 8 L 10 4 M 34 8 L 38 4 M 7 15 L 2 13 M 41 15 L 46 13" stroke="#E07A4F" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                    <div className="h-px w-16 bg-slate-200" />
+                  </div>
+                  <AnimatedPillBadge className="mb-6">OUR JOURNEY</AnimatedPillBadge>
                   <h2 className="mb-4 font-serif-display text-3xl font-medium leading-tight tracking-tight text-slate-900 sm:text-5xl md:text-6xl">
-                    Key Moments{" "}
-                    <span className="italic text-[#707B00] relative inline-block">
-                      from Our Story.
+                    Key moments in{" "}
+                    <span className="italic text-[#6DAD45] relative inline-block">
+                      our story.
                       <svg
-                        className="absolute -bottom-2 left-0 w-full h-2.5 text-[#707B00]"
+                        className="absolute -bottom-2 left-0 w-full h-2.5 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
                         aria-hidden="true">
@@ -195,7 +161,7 @@ export default function OurStoryPage() {
                     </span>
                   </h2>
                   <p className="mx-auto max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
-                    The growth trajectory of Sarhat Energy & Infrastructure — from solar EPC and clean EV mobility to multi-state execution.
+                    From our solar EPC beginnings to delivering projects across states.
                   </p>
                 </div>
               </ScrollReveal>

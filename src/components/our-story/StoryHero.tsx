@@ -94,20 +94,20 @@ export default function StoryHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.35, ease: EASE }}
             className="mb-6 font-serif-display text-4xl font-medium leading-[1.08] tracking-tight drop-shadow-lg sm:text-6xl md:text-7xl [text-wrap:balance]">
-            Rooted in India. <br />
+            Sarhat Energy <br />
             <span className="font-normal italic text-[#D4E012] relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
-              Trusted Globally.
+              Building across states
               <svg
-                        className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
-                        viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                        aria-hidden="true">
-                        <path
-                          d="M0 15 Q 50 0 100 15"
-                          stroke="currentColor"
-                          strokeWidth="3.5"
-                          fill="transparent" />
-                      </svg>
+                className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
+                viewBox="0 0 100 20"
+                preserveAspectRatio="none"
+                aria-hidden="true">
+                <path
+                  d="M0 15 Q 50 0 100 15"
+                  stroke="currentColor"
+                  strokeWidth="3.5"
+                  fill="transparent" />
+              </svg>
             </span>
           </motion.h1>
 
@@ -115,11 +115,28 @@ export default function StoryHero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.55, ease: EASE }}
-            className="max-w-2xl text-base leading-relaxed text-slate-200 drop-shadow-md sm:text-xl [text-wrap:balance]">
-            Execution-led energy and infrastructure rooted in India,
-            <br className="hidden sm:inline" />
-            {" "}driven by engineering discipline and global standards of trust.
+            className="mb-8 max-w-2xl text-base leading-relaxed text-slate-200 drop-shadow-md sm:text-xl [text-wrap:balance]">
+            Execution-led energy and infrastructure rooted in India, driven by engineering discipline and global standards of trust.
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7, ease: EASE }}>
+            <button
+              type="button"
+              onClick={() => {
+                const el = document.getElementById("who-we-are");
+                if (el) {
+                  el.scrollIntoView({ behavior: "smooth" });
+                } else {
+                  window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+                }
+              }}
+              className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full bg-[#D4E012] px-8 py-3.5 text-base font-bold text-slate-950 shadow-lg transition-transform duration-300 hover:scale-105 hover:bg-[#c2ce10]">
+              Read our story ↓
+            </button>
+          </motion.div>
         </motion.div>
 
         {/* Madhubani border band drawn across the ground line */}

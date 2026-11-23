@@ -253,33 +253,33 @@ export default function SupplyPartnersPage() {
           className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
             }`}
           aria-hidden={isPastHero}>
-          <section ref={containerRef} className="relative h-full w-full flex flex-col justify-center items-center bg-slate-950 text-white overflow-hidden select-none">
+          <section ref={containerRef} className="relative h-full w-full flex flex-col items-center justify-center bg-slate-950 text-white overflow-hidden select-none">
             {/* Cinematic High-Res Fullscreen Background Image Layer */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
               <Image
-                src="/images/hero-vendor-supply.jpg"
-                alt="Supply Partners Sarhat Energy"
+                src="/images/vendor-hero-bg.jpg"
+                alt="Vendor Registration Sarhat Energy"
                 fill
                 priority
-                quality={100}
-                className="object-cover object-center opacity-90 transform scale-105" />
+                quality={95}
+                className="object-cover object-center opacity-85" />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
+              {/* Soft Dark Scrim Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/40 via-50% to-black/75 pointer-events-none" />
             </motion.div>
 
+            {/* Main Centered Content */}
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 w-full relative z-10 pt-16 flex flex-col items-center text-center will-change-transform">
-              <ScrollReveal direction="up" distance={40}>
-
-
-                {/* Main Headline */}
-                  <div className="max-w-5xl flex flex-col items-center text-center w-full">
-                    <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.1] mb-6 text-center [text-shadow:_0_4px_24px_rgba(0,0,0,0.95)] [text-wrap:balance]">
-                      <span className="block">Empanelled</span>
-                      <span className="italic font-normal text-[#D4E012] relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)] mt-1">
-                        Supply Partners (OEMs).
-                        <svg
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-24 sm:pt-28 flex flex-col items-center text-center will-change-transform">
+              <ScrollReveal direction="up" distance={30} className="w-full">
+                <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
+                  {/* Main Headline */}
+                  <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center max-w-4xl drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
+                    Supply to Sarhat. <br />
+                    <span className="text-[#D4E012] italic font-normal relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
+                      Build with us.
+                      <svg
                         className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
@@ -290,18 +290,29 @@ export default function SupplyPartnersPage() {
                           strokeWidth="3.5"
                           fill="transparent" />
                       </svg>
-                      </span>
-                    </h1>
+                    </span>
+                  </h1>
 
                   {/* Subtitle Paragraph */}
-                  <p className="text-xs sm:text-sm md:text-base lg:text-lg text-slate-100 font-normal max-w-5xl mx-auto text-center leading-relaxed tracking-wide [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)]">
-                    <span className="block sm:whitespace-nowrap">
-                      Join Sarhat&apos;s empanelled vendor network for Tier-1 solar modules, inverters, cables,
-                    </span>
-                    <span className="block sm:whitespace-nowrap mt-1 sm:mt-1.5">
-                      transformers, mounting structures, and electrical equipment across India.
-                    </span>
+                  <p className="text-sm sm:text-base md:text-lg text-slate-200 font-normal max-w-3xl text-center leading-relaxed mb-8 drop-shadow-md">
+                    Manufacturers, authorised distributors and suppliers can register for solar, storage and electrical infrastructure projects across India.
                   </p>
+
+                  {/* Action Button */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const el = document.getElementById("vendor-application");
+                      if (el) {
+                        el.scrollIntoView({ behavior: "smooth" });
+                      } else {
+                        window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+                      }
+                    }}
+                    className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#D4E012] hover:bg-[#c2ce0f] text-slate-950 font-bold text-sm tracking-wide transition-all shadow-[0_0_30px_rgba(212,224,18,0.35)] hover:shadow-[0_0_40px_rgba(212,224,18,0.6)] hover:scale-[1.02] active:scale-[0.98] cursor-pointer">
+                    <span>Register as a vendor</span>
+                    <span className="text-base font-bold">→</span>
+                  </button>
                 </div>
               </ScrollReveal>
             </motion.div>

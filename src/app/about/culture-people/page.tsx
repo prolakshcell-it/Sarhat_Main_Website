@@ -12,7 +12,6 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import { useHeroScroll } from "@/hooks/useHeroScroll";
 import SmoothScroll from "@/components/SmoothScroll";
-import FinalCTA from "@/components/FinalCTA";
 import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 
 import {
@@ -31,7 +30,8 @@ import {
   Shield,
   Smile,
   Flame,
-  Quote,
+  HardHat,
+  ClipboardCheck,
 } from "lucide-react";
 
 export default function CulturePeoplePage() {
@@ -39,7 +39,7 @@ export default function CulturePeoplePage() {
   const containerRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
 
-  // Subtle scroll-reveal for the VIBES section: fade + small upward drift
+  // Subtle scroll-reveal helper
   const reveal = (delay = 0) => ({
     initial: reduceMotion ? { opacity: 1 } : { opacity: 0, y: 16 },
     whileInView: { opacity: 1, y: 0 },
@@ -48,7 +48,7 @@ export default function CulturePeoplePage() {
   });
 
   // Parallax & Scroll Fade-out Tracking for Hero
-    const {
+  const {
     isPastHero,
     bgScale,
     bgDim,
@@ -57,14 +57,6 @@ export default function CulturePeoplePage() {
     contentOpacity,
     indicatorOpacity,
   } = useHeroScroll();
-
-  const vibesPills = [
-    { letter: "V", title: "Volunteering", desc: "Community outreach, solar literacy & site stewardship" },
-    { letter: "I", title: "Inclusivity", desc: "Equal voice & diverse perspectives celebrated across teams" },
-    { letter: "B", title: "Belonging", desc: "A safe, supportive workplace where everyone thrives" },
-    { letter: "E", title: "Engagement", desc: "Active listening, field exchange & transparent forums" },
-    { letter: "S", title: "Social", desc: "Team celebrations, sports events & field camaraderie" },
-  ];
 
   return (
     <SmoothScroll>
@@ -84,28 +76,34 @@ export default function CulturePeoplePage() {
           aria-hidden={isPastHero}>
           <section
             ref={containerRef}
-            className="relative h-full w-full flex flex-col justify-between items-center bg-black text-white overflow-hidden select-none">
+            className="relative h-full w-full flex flex-col items-center justify-center overflow-hidden bg-black text-white select-none">
             {/* Background Image Layer with Parallax Zoom */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
               <Image
                 src="/images/hero-solar.jpg"
-                alt="Sarhat Culture & People"
+                alt="Sarhat Culture & People - Safety, Unity & Ownership"
                 fill
                 priority
-                className="object-cover object-center opacity-85" />
+                className="object-cover object-center opacity-90" />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
-              {/* Dark Gradient Overlay Scrim */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
+              {/* Balanced Dark Gradient Overlay Scrim for centered content readability */}
+              <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/60 pointer-events-none" />
             </motion.div>
 
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-28 sm:pt-32 pb-4 my-auto flex flex-col items-center text-center will-change-transform">
-              <ScrollReveal direction="up" distance={30}>
-                <div className="max-w-4xl flex flex-col items-center text-center">
-                  <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center drop-shadow-lg">
-                    Safety, Unity & Ownership <br />
-                    <span className="text-[#D4E012] italic font-normal relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
+              className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-28 sm:pt-32 pb-6 my-auto flex flex-col items-center text-center will-change-transform">
+              <ScrollReveal direction="up" distance={30} className="w-full">
+                <div className="max-w-4xl mx-auto w-full flex flex-col items-center text-center">
+                  {/* Eyebrow Label matching mockup */}
+                  <div className="text-xs sm:text-sm font-semibold tracking-[0.25em] text-white/90 uppercase mb-4 sm:mb-6 font-mono text-center">
+                    CULTURE &amp; PEOPLE
+                  </div>
+
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-5 sm:mb-6 text-center drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
+                    Safety, Unity &amp; Ownership <br />
+                    <span className="text-[#D4E012] italic font-normal relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)] mt-1">
                       guide every project.
                       <svg
                         className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
@@ -121,9 +119,25 @@ export default function CulturePeoplePage() {
                     </span>
                   </h1>
 
-                  <p className="text-base sm:text-lg text-slate-200 font-normal max-w-5xl text-center leading-relaxed mb-8 drop-shadow-md">
-                    At Sarhat, our strength lies in our people. We foster an execution-driven, safety-first culture where engineering excellence meets deep mutual respect.
+                  <p className="text-sm sm:text-base md:text-lg text-slate-200 font-normal max-w-2xl text-center leading-relaxed mb-8 drop-shadow-md mx-auto">
+                    From design reviews to site handovers, we work across teams, raise issues early and take responsibility for the work we deliver.
                   </p>
+
+                  {/* Call to action button matching mockup */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const target = document.getElementById("how-we-work");
+                      if (target) {
+                        target.scrollIntoView({ behavior: "smooth" });
+                      } else {
+                        window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
+                      }
+                    }}
+                    className="inline-flex items-center gap-2 px-6 py-2.5 sm:px-7 sm:py-3 rounded-full border border-white/60 hover:border-white bg-black/20 hover:bg-white/10 text-white font-medium text-xs sm:text-sm tracking-wide transition-all duration-300 backdrop-blur-sm cursor-pointer shadow-lg hover:shadow-white/10 hover:scale-[1.02] active:scale-[0.98]">
+                    <span>How We Work</span>
+                    <span className="text-sm">↓</span>
+                  </button>
                 </div>
               </ScrollReveal>
             </motion.div>
@@ -143,58 +157,23 @@ export default function CulturePeoplePage() {
         <div className="relative z-10 bg-[#F8FAF8] border-t border-slate-200/60 shadow-[0_-25px_60px_rgba(0,0,0,0.25)]">
 
           {/* ------------------------------------------------------------- */}
-          {/* SECTION 1: CULTURE STATEMENT OVERVIEW */}
+          {/* SECTION 1: HOW WE WORK AT SARHAT */}
           {/* ------------------------------------------------------------- */}
-          <section className="py-10 sm:py-14 bg-white border-b border-slate-200/80 relative z-10 overflow-hidden">
-            {/* Subtle background quote mark watermark */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-slate-100 font-serif text-[280px] sm:text-[340px] leading-none pointer-events-none select-none opacity-40">
-              &ldquo;
-            </div>
-
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-              <ScrollReveal direction="up" distance={30}>
-                <AnimatedPillBadge className="mb-6">
-                  CULTURE & PURPOSE
-                </AnimatedPillBadge>
-
-                {/* Big Inverted Quote Icon Accent Box */}
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-br from-[#D4E012]/30 to-[#6DAD45]/20 border border-[#D4E012]/50 flex items-center justify-center mx-auto mb-8 shadow-sm">
-                  <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-[#707B00] rotate-180" />
-                </div>
-
-                <p className="text-xl sm:text-2xl md:text-3xl font-serif-display font-normal text-slate-900 leading-relaxed tracking-tight max-w-4xl mx-auto relative">
-                  <span className="text-[#6DAD45] font-serif text-4xl sm:text-6xl inline-block -translate-y-1 sm:-translate-y-2 mr-1 sm:mr-2 select-none">&ldquo;</span>
-                  <span className="font-semibold text-slate-950">Our culture, core values and team members drive our success.</span> We are a values-led company which informs how we engage with others as we aim to create{" "}
-                  <span className="text-[#6DAD45] italic font-normal">sustained value for our people, partners and planet</span>. At Sarhat, we pride ourselves on creating a culture of safety, being respectful and working with integrity. Through our VIBES programme, we foster a sense of belonging, understanding and inclusivity. Our people are the foundation of our success; we invest in their continuous growth and development, supporting driven people with a range of diverse perspectives to thrive.
-                  <span className="text-[#6DAD45] font-serif text-4xl sm:text-6xl inline-block translate-y-2 sm:translate-y-3 ml-1 sm:ml-2 select-none">&rdquo;</span>
-                </p>
-              </ScrollReveal>
-            </div>
-          </section>
-
-          {/* ------------------------------------------------------------- */}
-          {/* SECTION 2: OUR VIBES - INCLUSIVITY PROGRAMME */}
-          {/* ------------------------------------------------------------- */}
-          <section className="py-10 sm:py-14 bg-[#FAFBF9] border-b border-slate-200/80 relative z-10 overflow-hidden">
-            {/* Ambient Background Glow */}
-            <div className="absolute top-1/3 right-0 w-72 sm:w-96 h-72 sm:h-96 bg-[#D4E012]/15 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-64 sm:w-80 h-64 sm:h-80 bg-[#6DAD45]/10 rounded-full blur-3xl pointer-events-none" />
-
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-              <ScrollReveal direction="up" distance={30}>
-                <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
-                  <AnimatedPillBadge className="mb-6">
-                    OUR VIBES PROGRAMME
-                  </AnimatedPillBadge>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
-                    Inclusivity &amp;{" "}
+          <section id="how-we-work" className="py-14 sm:py-16 md:py-20 bg-white border-b border-slate-200/80 relative z-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              {/* Header with green vertical bar */}
+              <ScrollReveal direction="up" distance={20}>
+                <div className="flex items-center gap-3 mb-8 sm:mb-12">
+                  <div className="w-1.5 h-8 sm:h-10 bg-[#6DAD45] rounded-full shrink-0" />
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif-display font-medium text-slate-900 tracking-tight">
+                    How we work at{" "}
                     <span className="text-[#6DAD45] italic relative inline-block">
-                      Belonging.
+                      Sarhat
                       <svg
-                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
+                        className="absolute -bottom-1.5 left-0 w-full h-2.5 text-[#6DAD45]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
-                        aria-hidden>
+                        aria-hidden="true">
                         <path
                           d="M0 15 Q 50 0 100 15"
                           stroke="currentColor"
@@ -203,74 +182,123 @@ export default function CulturePeoplePage() {
                       </svg>
                     </span>
                   </h2>
-                  <p className="text-slate-600 text-base sm:text-lg font-normal max-w-2xl mx-auto leading-relaxed">
-                    For our people and by our people, VIBES is focused on building an inclusive, empowering, and supportive culture across Sarhat Energy.
-                  </p>
                 </div>
               </ScrollReveal>
 
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-
-                {/* Left Editorial Block */}
-                <div className="lg:col-span-7 min-w-0">
-                  <motion.div {...reveal(0.14)} className="text-[11px] sm:text-sm font-mono font-bold text-[#707B00] uppercase tracking-wider mb-8 bg-[#D4E012]/15 border border-[#D4E012]/40 inline-block px-4 py-2 rounded-xl max-w-full">
-                    VIBES: Volunteering • Inclusivity • Belonging • Engagement • Social
-                  </motion.div>
-
-                  <motion.p {...reveal(0.2)} className="text-slate-700 text-base sm:text-lg font-normal leading-relaxed mb-12 pl-5 sm:pl-6 border-l-2 border-[#6DAD45]/60 max-w-2xl">
-                    For our people and by our people, VIBES is focused on building an inclusive and supportive culture. Through the various volunteering, social and wellbeing events, we unite around shared purposes, build connections and cultivate an environment where people can make a positive impact within Sarhat and in the communities in which we work. It&apos;s how we continue to grow and succeed - it&apos;s our vibe!
-                  </motion.p>
-
-                  {/* V.I.B.E.S Editorial List */}
-                  <ul className="border-t border-slate-300/70">
-                    {vibesPills.map((item, i) => (
-                      <motion.li
-                        key={item.title}
-                        {...reveal(0.1 + i * 0.07)}
-                        className="group border-b border-slate-300/70 py-5 sm:py-6 flex items-start gap-4 sm:gap-6 transition-all duration-300 hover:translate-x-1 hover:border-[#6DAD45]/60 motion-reduce:hover:translate-x-0">
-                        <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-[#D4E012] to-[#6DAD45] text-slate-950 font-black text-base flex items-center justify-center shrink-0 shadow-sm ring-4 ring-[#D4E012]/10 transition-shadow duration-300 group-hover:shadow-md">
-                          {item.letter}
-                        </div>
-                        <div className="min-w-0 flex-1 sm:flex sm:items-baseline sm:justify-between sm:gap-8">
-                          <div className="text-sm font-bold text-slate-900 uppercase tracking-[0.14em] font-sans sm:w-40 shrink-0">{item.title}</div>
-                          <div className="text-sm sm:text-[15px] text-slate-600 mt-1 sm:mt-0 leading-relaxed sm:flex-1">{item.desc}</div>
-                        </div>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Right Visual Graphic Block */}
-                <div className="lg:col-span-5 min-w-0 lg:sticky lg:top-28">
-                  <motion.div {...reveal(0.15)} className="flex justify-center lg:justify-end">
-                    <div className="relative w-full max-w-md lg:max-w-none bg-slate-950 border border-slate-800 rounded-[2rem] p-8 sm:p-12 lg:p-14 shadow-2xl text-center overflow-hidden group transition-transform duration-500 hover:-translate-y-1 motion-reduce:hover:translate-y-0">
-                      {/* Subtle Glow inside Card */}
-                      <div className="absolute inset-0 bg-gradient-to-tr from-[#D4E012]/10 via-[#6DAD45]/15 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
-                      <div className="absolute inset-3 sm:inset-4 rounded-[1.5rem] border border-white/10 pointer-events-none" />
-
-                      <div className="relative z-10 py-4 sm:py-6">
-                        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-white/20 text-[#D4E012] text-[10px] font-mono font-bold uppercase tracking-[0.2em] mb-8">
-                          CULTURE INITIATIVE
-                        </div>
-
-                        {/* Vibrant Brand Yellow-Green VIBES Typography */}
-                        <h3 className="text-6xl sm:text-7xl lg:text-8xl font-black font-sans-ui tracking-tight bg-gradient-to-r from-[#D4E012] via-[#6DAD45] to-[#5EE72D] bg-clip-text text-transparent drop-shadow-[0_4px_20px_rgba(212,224,18,0.3)] select-none py-2">
-                          VIBES
-                        </h3>
-
-                        <p className="text-slate-300 text-xs font-normal leading-relaxed mt-5">
-                          Volunteering • Inclusivity • Belonging • Engagement • Social
-                        </p>
-
-                        <div className="mt-10 pt-6 border-t border-white/15 flex items-center justify-center gap-2 text-xs font-mono font-bold text-[#D4E012] uppercase tracking-wider">
-                          <Smile className="w-4 h-4 text-[#D4E012]" />
-                          <span>IT&apos;S OUR VIBE!</span>
-                        </div>
-                      </div>
+              {/* 3 Value Cards: Safety, Unity, Ownership */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                {/* Safety Card */}
+                <ScrollReveal direction="up" distance={25} delay={0.05}>
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-7 sm:p-9 shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col justify-start">
+                    <div className="mb-6">
+                      <HardHat className="w-11 h-11 text-[#6DAD45] stroke-[1.6]" />
                     </div>
-                  </motion.div>
+                    <h3 className="text-2xl font-serif-display font-bold text-slate-900 mb-3 tracking-tight">
+                      Safety
+                    </h3>
+                    <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-sans font-normal">
+                      We discuss site hazards before work begins and raise concerns as soon as we spot them.
+                    </p>
+                  </div>
+                </ScrollReveal>
+
+                {/* Unity Card */}
+                <ScrollReveal direction="up" distance={25} delay={0.12}>
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-7 sm:p-9 shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col justify-start">
+                    <div className="mb-6">
+                      <Users className="w-11 h-11 text-[#6DAD45] stroke-[1.6]" />
+                    </div>
+                    <h3 className="text-2xl font-serif-display font-bold text-slate-900 mb-3 tracking-tight">
+                      Unity
+                    </h3>
+                    <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-sans font-normal">
+                      Design, procurement and site teams coordinate early so drawings, materials and site readiness stay aligned.
+                    </p>
+                  </div>
+                </ScrollReveal>
+
+                {/* Ownership Card */}
+                <ScrollReveal direction="up" distance={25} delay={0.19}>
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-7 sm:p-9 shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col justify-start">
+                    <div className="mb-6">
+                      <ClipboardCheck className="w-11 h-11 text-[#6DAD45] stroke-[1.6]" />
+                    </div>
+                    <h3 className="text-2xl font-serif-display font-bold text-slate-900 mb-3 tracking-tight">
+                      Ownership
+                    </h3>
+                    <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-sans font-normal">
+                      Every open issue has a named owner who follows it through to resolution.
+                    </p>
+                  </div>
+                </ScrollReveal>
+              </div>
+            </div>
+          </section>
+
+          {/* ------------------------------------------------------------- */}
+          {/* SECTION 2: VIBES AT SARHAT */}
+          {/* ------------------------------------------------------------- */}
+          <section className="py-14 sm:py-16 md:py-20 bg-[#F4F7F2] border-b border-slate-200/80 relative z-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              {/* Header with green vertical bar */}
+              <ScrollReveal direction="up" distance={20}>
+                <div className="flex items-center gap-3 mb-8 sm:mb-10">
+                  <div className="w-1.5 h-8 sm:h-10 bg-[#6DAD45] rounded-full shrink-0" />
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif-display font-medium text-slate-900 tracking-tight">
+                    VIBES at{" "}
+                    <span className="text-[#6DAD45] italic relative inline-block">
+                      Sarhat
+                      <svg
+                        className="absolute -bottom-1.5 left-0 w-full h-2.5 text-[#6DAD45]"
+                        viewBox="0 0 100 20"
+                        preserveAspectRatio="none"
+                        aria-hidden="true">
+                        <path
+                          d="M0 15 Q 50 0 100 15"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          fill="transparent" />
+                      </svg>
+                    </span>
+                  </h2>
+                </div>
+              </ScrollReveal>
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+                {/* Left Column: Text & VIBES Categories */}
+                <div className="lg:col-span-5 flex flex-col justify-center">
+                  <ScrollReveal direction="up" distance={20} delay={0.05}>
+                    <p className="text-base sm:text-lg md:text-xl text-slate-800 font-normal leading-relaxed">
+                      VIBES brings people across Sarhat together through volunteering, shared learning and team activities.
+                    </p>
+
+                    <div className="mt-8 sm:mt-12 text-xs sm:text-sm font-medium text-slate-600 tracking-wide">
+                      <span>Volunteering</span>
+                      <span className="mx-2 text-slate-400">·</span>
+                      <span>Inclusivity</span>
+                      <span className="mx-2 text-slate-400">·</span>
+                      <span>Belonging</span>
+                      <span className="mx-2 text-slate-400">·</span>
+                      <span>Engagement</span>
+                      <span className="mx-2 text-slate-400">·</span>
+                      <span>Social</span>
+                    </div>
+                  </ScrollReveal>
                 </div>
 
+                {/* Right Column: Collaboration Team Image */}
+                <div className="lg:col-span-7">
+                  <ScrollReveal direction="up" distance={20} delay={0.12}>
+                    <div className="relative w-full aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-slate-200/80 bg-slate-100">
+                      <Image
+                        src="/images/culture-vibes-team.jpg"
+                        alt="VIBES team collaboration at Sarhat Energy"
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 55vw"
+                        className="object-cover object-center" />
+                    </div>
+                  </ScrollReveal>
+                </div>
               </div>
             </div>
           </section>
@@ -400,9 +428,54 @@ export default function CulturePeoplePage() {
 
 
           {/* ------------------------------------------------------------- */}
-          {/* FINAL CTA SECTION */}
+          {/* REVISED CLOSURE SECTION: BUILD YOUR CAREER AT SARHAT */}
           {/* ------------------------------------------------------------- */}
-          <FinalCTA onOpenQuote={() => setQuoteModalOpen(true)} />
+          <section className="py-14 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="max-w-7xl mx-auto">
+              <ScrollReveal direction="up" distance={30}>
+                <div className="bg-slate-950 border border-slate-800/90 rounded-3xl sm:rounded-[2rem] p-8 sm:p-12 lg:p-16 shadow-2xl relative overflow-hidden">
+                  {/* Ambient Soft Glow */}
+                  <div className="absolute top-0 right-0 w-96 h-96 bg-[#D4E012]/10 rounded-full blur-[120px] pointer-events-none" />
+                  <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#6DAD45]/10 rounded-full blur-[100px] pointer-events-none" />
+
+                  <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-12">
+                    <div className="max-w-2xl">
+                      <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif-display font-medium text-white tracking-tight leading-[1.15] mb-4 sm:mb-5">
+                        Build your career <br />
+                        <span className="text-[#D4E012] italic font-normal relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.7)]">
+                          at Sarhat.
+                          <svg
+                            className="absolute -bottom-1.5 left-0 w-full h-2.5 sm:h-3 text-[#D4E012]"
+                            viewBox="0 0 100 20"
+                            preserveAspectRatio="none"
+                            aria-hidden="true">
+                            <path
+                              d="M0 15 Q 50 0 100 15"
+                              stroke="currentColor"
+                              strokeWidth="3.5"
+                              fill="transparent" />
+                          </svg>
+                        </span>
+                      </h2>
+
+                      <p className="text-sm sm:text-base text-slate-300 font-normal leading-relaxed max-w-xl">
+                        Work alongside engineering, procurement and site teams delivering solar and energy infrastructure projects, from design through commissioning.
+                      </p>
+                    </div>
+
+                    <div className="shrink-0 w-full sm:w-auto">
+                      <Link
+                        href="/careers"
+                        className="inline-flex items-center justify-center gap-2 px-7 py-3.5 sm:px-8 sm:py-4 rounded-full bg-gradient-to-r from-[#D4E012] to-[#5EE72D] hover:from-[#c2ce0f] hover:to-[#52d326] text-slate-950 font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-[0_0_35px_rgba(212,224,18,0.4)] hover:shadow-[0_0_45px_rgba(212,224,18,0.65)] hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap cursor-pointer w-full sm:w-auto">
+                        <span>EXPLORE CAREERS AT SARHAT</span>
+                        <ArrowUpRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </ScrollReveal>
+            </div>
+          </section>
 
         </div>
 

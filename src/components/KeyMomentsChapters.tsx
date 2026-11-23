@@ -6,12 +6,13 @@ import { motion, useMotionValueEvent, useScroll, useTransform, type MotionValue 
 
 export interface KeyMoment {
   year: string;
+  yearDisplay?: string;
   headline: string;
-  tag: string;
-  subtitle: string;
+  tag?: string;
+  subtitle?: string;
   description: string;
-  metrics: string[];
-  achievements: string[];
+  metrics?: string[];
+  achievements?: string[];
   image: string;
   imageCaption: string;
   /** Where this moment sits in the journey, e.g. "Foundation" or "What comes next". */
@@ -43,39 +44,12 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
 /* Shared pieces                                                        */
 /* ------------------------------------------------------------------ */
 
-function Metrics({ items }: { items: string[] }) {
-  return (
-    <ul className="flex flex-wrap gap-x-5 gap-y-2">
-      {items.map((m) => (
-        <li key={m} className="flex items-center gap-2 text-sm font-medium text-slate-800">
-          <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-[#6DAD45]" />
-          {m}
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function Achievements({ items }: { items: string[] }) {
-  return (
-    <ul className="space-y-2.5 border-t border-slate-200 pt-5">
-      {items.map((a) => (
-        <li key={a} className="grid grid-cols-[1rem_1fr] gap-3 text-sm leading-relaxed text-slate-600">
-          <span aria-hidden className="mt-[0.6rem] h-px w-full bg-[#707B00]" />
-          {a}
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 function Caption({ moment }: { moment: KeyMoment }) {
   return (
-    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent p-5 pt-16 text-white sm:p-6 sm:pt-20">
-      <span className="mb-2 inline-block rounded-full border border-white/20 bg-white/10 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-[#D4E012] backdrop-blur-sm">
-        {moment.tag}
+    <div className="absolute bottom-4 left-5 z-20 text-white/90 drop-shadow-md">
+      <span className="font-serif-display text-xs italic tracking-wide text-white/90">
+        {moment.imageCaption || "Illustrative image"}
       </span>
-      <p className="font-serif-display text-lg leading-snug sm:text-xl">{moment.imageCaption}</p>
     </div>
   );
 }
@@ -193,26 +167,17 @@ function PinnedChapters({ moments, reduce }: { moments: KeyMoment[]; reduce: boo
                   inert={!active}
                   className={`col-start-1 row-start-1 ${active ? "" : "pointer-events-none"}`}>
                   <div {...layer(0)}>
-                    <p className="mb-3 font-mono text-[11px] font-bold uppercase tracking-[0.26em] text-[#707B00]">
-                      {m.stage ? `${m.stage} · ` : ""}
-                      {m.subtitle}
+                    <p className="mb-3 font-mono text-[11px] font-bold uppercase tracking-[0.24em] text-[#6DAD45]">
+                      OUR JOURNEY
                     </p>
                   </div>
                   <div {...layer(80)}>
-                    <h3 className="mb-5 font-serif-display text-3xl font-medium leading-[1.15] tracking-tight text-slate-900 xl:text-[2.6rem]">
-                      <span className="text-[#6DAD45]">{m.year}</span> — {m.headline}
+                    <h3 className="mb-5 font-serif-display text-3xl font-medium leading-[1.2] tracking-tight text-slate-900 xl:text-[2.5rem]">
+                      <span className="text-[#6DAD45]">{m.yearDisplay || m.year}</span> · {m.headline}
                     </h3>
                   </div>
                   <div {...layer(160)}>
-                    <p className="mb-6 text-base leading-relaxed text-slate-600">{m.description}</p>
-                  </div>
-                  <div {...layer(240)}>
-                    <div className="mb-6">
-                      <Metrics items={m.metrics} />
-                    </div>
-                  </div>
-                  <div {...layer(320)}>
-                    <Achievements items={m.achievements} />
+                    <p className="max-w-xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">{m.description}</p>
                   </div>
                 </article>
               );
@@ -296,13 +261,11 @@ function JourneyList({ moments, reduce }: { moments: KeyMoment[]; reduce: boolea
               </motion.div>
             </motion.div>
 
-            <p className="mb-2 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-slate-500">{m.subtitle}</p>
-            <h3 className="mb-3 font-serif-display text-2xl font-medium leading-snug text-slate-900 sm:text-3xl">{m.headline}</h3>
-            <p className="mb-5 text-sm leading-relaxed text-slate-600 sm:text-base">{m.description}</p>
-            <div className="mb-5">
-              <Metrics items={m.metrics} />
-            </div>
-            <Achievements items={m.achievements} />
+            <p className="mb-2 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-[#6DAD45]">OUR JOURNEY</p>
+            <h3 className="mb-3 font-serif-display text-2xl font-medium leading-snug text-slate-900 sm:text-3xl">
+              <span className="text-[#6DAD45]">{m.yearDisplay || m.year}</span> · {m.headline}
+            </h3>
+            <p className="text-base leading-relaxed text-slate-600">{m.description}</p>
           </motion.li>
         ))}
       </ol>
