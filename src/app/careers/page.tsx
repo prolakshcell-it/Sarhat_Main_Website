@@ -309,11 +309,7 @@ export default function CareersPage() {
             {/* Background Image Layer */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
               <Image
-<<<<<<< HEAD
-                src="/images/hero-careers.jpg"
-=======
                 src="/images/career-hero-bg.jpg"
->>>>>>> development
                 alt="Careers at Sarhat Energy"
                 fill
                 priority
