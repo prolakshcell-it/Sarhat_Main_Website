@@ -40,7 +40,6 @@ import { useHeroScroll } from "@/hooks/useHeroScroll";
 import { API_BASE_URL, applyCareer } from "@/lib/api";
 import { toast } from "sonner";
 import EmployeeBenefits from "@/components/employee-benefits/EmployeeBenefits";
-import InspiringCultureSection from "@/components/InspiringCultureSection";
 
 interface JobRole {
   id: string;
@@ -139,8 +138,15 @@ const jobOpenings: JobRole[] = [
 const faqs = [
   {
     question: "How can I apply for a job at Sarhat?",
-    answer:
-      "You can apply directly through the interactive application form on this page or send your CV to our recruitment team at hr@sarhat.in. Shortlisted candidates are contacted promptly for an initial interview.",
+    answer: (
+      <span>
+        You can apply directly through the interactive application form on this page or send your CV to our recruitment team at{" "}
+        <a href="mailto:hr@sarhatenergy.com" className="text-[#16A34A] font-semibold underline hover:text-[#15803d]">
+          hr@sarhatenergy.com
+        </a>
+        . Shortlisted candidates are contacted promptly for an initial interview.
+      </span>
+    ),
   },
   {
     question: "What is the work environment like at Sarhat?",
@@ -303,56 +309,48 @@ export default function CareersPage() {
             {/* Background Image Layer */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
               <Image
-                src="/images/hero-solar.jpg"
+                src="/images/career-hero-bg.jpg"
                 alt="Careers at Sarhat Energy"
                 fill
                 priority
-                className="object-cover object-center opacity-85" />
+                className="object-cover object-right opacity-95" />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
-              {/* Soft Dark Vignette Scrim */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
+              {/* Soft Dark Scrim for text legibility on left */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/40 via-35% to-transparent pointer-events-none w-full md:w-3/5 lg:w-1/2" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/40 pointer-events-none" />
             </motion.div>
 
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 flex flex-col items-center text-center will-change-transform">
-              <ScrollReveal direction="up" distance={30}>
-                <div className="max-w-4xl flex flex-col items-center text-center">
-                  <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center drop-shadow-lg [text-wrap:balance]">
-                    Build the people <br />
-                    <span className="text-[#D4E012] italic font-normal relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
-                      who build India.
-                      <svg
-                        className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
-                        viewBox="0 0 100 20"
-                        preserveAspectRatio="none"
-                        aria-hidden="true">
-                        <path
-                          d="M0 15 Q 50 0 100 15"
-                          stroke="currentColor"
-                          strokeWidth="3.5"
-                          fill="transparent" />
-                      </svg>
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-24 sm:pt-28 pb-6 my-auto flex flex-col items-start text-left will-change-transform">
+              <ScrollReveal direction="up" distance={30} className="w-full">
+                <div className="max-w-md lg:max-w-lg w-full flex flex-col items-start text-left">
+                  <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-5 text-left drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
+                    Build your career. <br />
+                    <span className="text-[#D4E012] italic font-normal inline-block relative mt-1.5">
+                      Help build India.
+                      <span className="block h-[2.5px] w-full bg-[#D4E012] mt-1.5" />
                     </span>
                   </h1>
 
-                  <p className="text-base sm:text-lg text-slate-200 font-normal max-w-2xl text-center leading-relaxed mb-8 drop-shadow-md [text-wrap:balance]">
-                    Join Sarhat as we expand across renewable energy, storage and infrastructure.
-                    <br className="hidden sm:inline" />
-                    {" "}We value ownership, learning, safety, and people who want to build things that last.
+                  <p className="text-sm sm:text-base md:text-lg text-slate-200 font-normal max-w-md text-left leading-relaxed mb-8 drop-shadow-md">
+                    Work on renewable energy, battery storage and infrastructure projects with teams that value safety, ownership and learning.
                   </p>
 
-                  {/* Current Openings Pill Outline Button */}
+                  {/* Solid Lime/Yellow Action Button matching Image 2 mockup (shifted right) */}
                   <button
+                    type="button"
                     onClick={() => {
                       const el = document.getElementById("current-openings");
                       if (el) {
                         el.scrollIntoView({ behavior: "smooth" });
+                      } else {
+                        window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
                       }
                     }}
-                    className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full border border-white text-white font-sans-ui text-sm sm:text-base font-medium tracking-wide hover:bg-white hover:text-slate-950 transition-all duration-300 shadow-xl hover:scale-105 active:scale-95 group cursor-pointer">
-                    <span>Current Openings</span>
-                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    className="inline-flex items-center gap-2.5 ml-12 sm:ml-24 lg:ml-32 px-7 py-3 rounded-full bg-[#D4E012] hover:bg-[#c2ce10] text-slate-950 font-semibold text-sm tracking-wide transition-all duration-300 shadow-lg hover:shadow-[#D4E012]/30 hover:scale-105 active:scale-95 cursor-pointer">
+                    <span>View open roles</span>
+                    <span className="text-sm font-bold">↓</span>
                   </button>
                 </div>
               </ScrollReveal>
@@ -401,7 +399,7 @@ export default function CareersPage() {
 
                   {/* Subtitle */}
                   <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-3xl mx-auto">
-                    At Sarhat, you work on real solar & infrastructure projects from day one. Site engineers are on the ground at multi-megawatt industrial installations. Sales executives are closing projects that will power factories for 25+ years.
+                    At Sarhat, engineering, site and commercial teams work together to deliver solar and infrastructure projects. You&apos;ll see how decisions made in the office shape what happens on site.
                   </p>
                 </div>
               </ScrollReveal>
@@ -417,10 +415,10 @@ export default function CareersPage() {
                       <Rocket className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg sm:text-xl font-serif-display font-bold text-slate-900 mb-2 leading-snug">
-                      Fast-Track Growth
+                      Take Ownership Early
                     </h3>
                     <p className="text-xs text-slate-600 font-normal leading-relaxed max-w-[220px]">
-                      High-performers move quickly at Sarhat. We&apos;re a growing company that promotes based on results, not tenure.
+                      Take responsibility for work that moves a project forward, with support from your team.
                     </p>
                   </motion.div>
 
@@ -435,7 +433,7 @@ export default function CareersPage() {
                       Meaningful Work
                     </h3>
                     <p className="text-xs text-slate-600 font-normal leading-relaxed max-w-[220px]">
-                      Every project you touch contributes to India&apos;s clean energy transition. The panels you install will generate clean power for 25+ years.
+                      Contribute to renewable energy and infrastructure projects built for long-term use.
                     </p>
                   </motion.div>
 
@@ -450,7 +448,7 @@ export default function CareersPage() {
                       Collaborative Team
                     </h3>
                     <p className="text-xs text-slate-600 font-normal leading-relaxed max-w-[220px]">
-                      A tight-knit team of 37+ engineers, salespeople, and project managers who share knowledge and support each other on every project.
+                      Work with colleagues across engineering, operations and business development.
                     </p>
                   </motion.div>
 
@@ -462,10 +460,10 @@ export default function CareersPage() {
                       <TrendingUp className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg sm:text-xl font-serif-display font-bold text-slate-900 mb-2 leading-snug">
-                      Booming Industry
+                      Build Skills Across Projects
                     </h3>
                     <p className="text-xs text-slate-600 font-normal leading-relaxed max-w-[220px]">
-                      Solar is India&apos;s fastest-growing energy sector. The skills you build here will be in high demand for decades.
+                      Learn how design, procurement, installation and commissioning fit together.
                     </p>
                   </motion.div>
                 </div>
@@ -477,175 +475,6 @@ export default function CareersPage() {
           {/* SECTION 2: EMPLOYEE BENEFITS (CAREER GROWTH LADDER) */}
           {/* ------------------------------------------------------------- */}
           <EmployeeBenefits />
-
-          {/* ------------------------------------------------------------- */}
-          {/* SECTION: A CULTURE THAT INSPIRES, A TEAM THAT EMPOWERS */}
-          {/* ------------------------------------------------------------- */}
-          <InspiringCultureSection />
-
-          {/* ------------------------------------------------------------- */}
-          {/* SECTION: LIFE @ SARHAT ENERGY (REFERENCE IMAGE) */}
-          {/* ------------------------------------------------------------- */}
-          <section className="py-10 sm:py-14 bg-[#F8FAF8] border-b border-slate-200/80 relative z-10">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <ScrollReveal direction="up" distance={30}>
-                <div className="text-center max-w-4xl mx-auto mb-16">
-                  {/* Yellow/Lime Pill Badge */}
-                  <AnimatedPillBadge className="mb-6">
-                    Life @ Sarhat
-                  </AnimatedPillBadge>
-
-                  {/* Main Headline */}
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-                    <span className="inline-block">Culture &amp; Team.</span> <br />
-                    <span className="text-[#6DAD45] italic relative inline-block">
-                      Life @ Sarhat Energy
-                      <svg
-                        className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
-                        viewBox="0 0 100 20"
-                        preserveAspectRatio="none">
-                        <path
-                          d="M0 15 Q 50 0 100 15"
-                          stroke="currentColor"
-                          strokeWidth="3.5"
-                          fill="transparent" />
-                      </svg>
-                    </span>
-                  </h2>
-
-                  {/* Subtitle */}
-                  <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-3xl mx-auto">
-                    A culture rooted in engineering discipline, shared ownership, continuous learning, and mutual respect across every site and office.
-                  </p>
-                </div>
-              </ScrollReveal>
-
-              {/* 2x2 Grid of Visual Cards */}
-              <ScrollReveal direction="up" distance={40} delay={0.15}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10">
-                  {/* Card 1: Work-Life Balance */}
-                  <motion.div
-                    whileHover={{ y: -6 }}
-                    className="bg-white border border-slate-200/90 hover:border-[#D4E012] rounded-3xl overflow-hidden shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/20 transition-all duration-300 group flex flex-col justify-between">
-                    <div>
-                      {/* Image Banner */}
-                      <div className="relative w-full h-56 sm:h-64 overflow-hidden bg-slate-900">
-                        <Image
-                          src="/images/about-hero-bg-bright.jpg"
-                          alt="Work-Life Balance at Sarhat"
-                          fill
-                          className="object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-90" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-                        <span className="absolute bottom-4 left-6 px-3 py-1 rounded-full bg-[#D4E012] text-slate-950 text-[10px] font-mono font-bold uppercase tracking-wider shadow-md">
-                          HOLISTIC CULTURE
-                        </span>
-                      </div>
-
-                      {/* Content */}
-                      <div className="p-6 sm:p-8">
-                        <h3 className="text-2xl font-serif-display font-bold text-slate-900 mb-3 group-hover:text-[#707B00] transition-colors">
-                          Work-Life Balance
-                        </h3>
-                        <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed">
-                          We believe in the benefits of a holistic life, which involves the optimal blend of work challenges, recreation, and relaxation. Our work culture and people policies promote balance and we constantly strive to ensure that these are reinstated in spirit, not just in words.
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Card 2: Workplace Engagement */}
-                  <motion.div
-                    whileHover={{ y: -6 }}
-                    className="bg-white border border-slate-200/90 hover:border-[#D4E012] rounded-3xl overflow-hidden shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/20 transition-all duration-300 group flex flex-col justify-between">
-                    <div>
-                      {/* Image Banner */}
-                      <div className="relative w-full h-56 sm:h-64 overflow-hidden bg-slate-900">
-                        <Image
-                          src="/images/partner-hero-bg.jpg"
-                          alt="Workplace Engagement at Sarhat"
-                          fill
-                          className="object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-90" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-                        <span className="absolute bottom-4 left-6 px-3 py-1 rounded-full bg-[#D4E012] text-slate-950 text-[10px] font-mono font-bold uppercase tracking-wider shadow-md">
-                          TEAM UNITY
-                        </span>
-                      </div>
-
-                      {/* Content */}
-                      <div className="p-6 sm:p-8">
-                        <h3 className="text-2xl font-serif-display font-bold text-slate-900 mb-3 group-hover:text-[#707B00] transition-colors">
-                          Workplace Engagement
-                        </h3>
-                        <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed">
-                          The Sarhat Energy work-family gets together for various employee engagement events. This fosters a sense of belonging and ties in well with our philosophy of work-life balance. We also encourage a culture of cooperation rather than competition, resulting in greater levels of achievement.
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Card 3: Career Growth */}
-                  <motion.div
-                    whileHover={{ y: -6 }}
-                    className="bg-white border border-slate-200/90 hover:border-[#D4E012] rounded-3xl overflow-hidden shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/20 transition-all duration-300 group flex flex-col justify-between">
-                    <div>
-                      {/* Image Banner */}
-                      <div className="relative w-full h-56 sm:h-64 overflow-hidden bg-slate-900">
-                        <Image
-                          src="/images/substation-project.jpg"
-                          alt="Career Growth at Sarhat"
-                          fill
-                          className="object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-90" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-                        <span className="absolute bottom-4 left-6 px-3 py-1 rounded-full bg-[#D4E012] text-slate-950 text-[10px] font-mono font-bold uppercase tracking-wider shadow-md">
-                          SKILL ELEVATION
-                        </span>
-                      </div>
-
-                      {/* Content */}
-                      <div className="p-6 sm:p-8">
-                        <h3 className="text-2xl font-serif-display font-bold text-slate-900 mb-3 group-hover:text-[#707B00] transition-colors">
-                          Career Growth
-                        </h3>
-                        <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed">
-                          Sarhat Energy encourages our people to stay relevant and even ahead of the curve by facilitating upgradation of their skills and developing new ones, through regular workshops and seminars. We reward performance, initiatives, and constantly mentor those that show promise.
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Card 4: Diversity at the Workplace */}
-                  <motion.div
-                    whileHover={{ y: -6 }}
-                    className="bg-white border border-slate-200/90 hover:border-[#D4E012] rounded-3xl overflow-hidden shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-[#D4E012]/20 transition-all duration-300 group flex flex-col justify-between">
-                    <div>
-                      {/* Image Banner */}
-                      <div className="relative w-full h-56 sm:h-64 overflow-hidden bg-slate-900">
-                        <Image
-                          src="/images/agrivoltaics-project.jpg"
-                          alt="Diversity at the Workplace at Sarhat"
-                          fill
-                          className="object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-90" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-                        <span className="absolute bottom-4 left-6 px-3 py-1 rounded-full bg-[#D4E012] text-slate-950 text-[10px] font-mono font-bold uppercase tracking-wider shadow-md">
-                          INCLUSIVE MINDSET
-                        </span>
-                      </div>
-
-                      {/* Content */}
-                      <div className="p-6 sm:p-8">
-                        <h3 className="text-2xl font-serif-display font-bold text-slate-900 mb-3 group-hover:text-[#707B00] transition-colors">
-                          Diversity at the Workplace
-                        </h3>
-                        <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed">
-                          With a workforce that comprises talent from across regions and disciplines, we recognize that every individual is unique and brings to the table their irreplaceable combination of talents, experiences, culture, learnings, and values. Our diverse workforce delivers outstanding business outcomes and team strength.
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                </div>
-              </ScrollReveal>
-            </div>
-          </section>
 
           {/* ------------------------------------------------------------- */}
           {/* SECTION 3: OPEN POSITIONS & APPLICATION FORM (REFERENCE IMAGE 3) */}
@@ -961,10 +790,10 @@ export default function CareersPage() {
                   </AnimatedPillBadge>
 
                   {/* Main Headline */}
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-6">
-                    <span className="inline-block">Common Inquiries.</span> <br />
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
+                    Careers{" "}
                     <span className="text-[#6DAD45] italic relative inline-block">
-                      Frequently Asked Questions
+                      FAQs
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
@@ -980,7 +809,7 @@ export default function CareersPage() {
 
                   {/* Subtitle */}
                   <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed">
-                    Quick answers about working at Sarhat, applying for a role, training, and growth opportunities.
+                    What to know before you apply.
                   </p>
                 </div>
               </ScrollReveal>
@@ -999,25 +828,36 @@ export default function CareersPage() {
           <section className="py-16 bg-[#F8FAF8] relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal direction="up" distance={30}>
-                <div className="bg-slate-950 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden text-white">
+                <div className="bg-[#071325] border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden text-white">
                   <div className="absolute top-0 right-0 w-64 h-64 bg-[#D4E012]/10 rounded-full blur-3xl pointer-events-none" />
 
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 relative z-10">
+                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
                     <div className="space-y-2">
-                      <div className="text-xs font-mono font-bold text-[#D4E012] uppercase tracking-widest">
-                        CONTACT HR
-                      </div>
-                      <h3 className="text-2xl sm:text-4xl font-serif-display font-bold text-white tracking-tight">
-                        Have a question? We&apos;d love to hear from you.
+                      <h3 className="text-2xl sm:text-4xl font-serif-display font-medium text-white tracking-tight leading-tight">
+                        Build what India needs. <br />
+                        <span className="text-[#D4E012] italic">Build your future here.</span>
                       </h3>
+                      <p className="text-sm sm:text-base text-slate-300 font-normal leading-relaxed max-w-xl">
+                        Join the teams behind Sarhat&apos;s energy and infrastructure projects.
+                      </p>
                     </div>
 
-                    <a
-                      href="mailto:hr@sarhat.in"
-                      className="inline-flex items-center gap-2 bg-[#D4E012] hover:bg-[#c2ce0f] text-slate-950 font-extrabold text-xs uppercase tracking-wider px-7 py-4 rounded-xl transition-all shadow-lg shadow-[#D4E012]/20 shrink-0 self-start sm:self-auto cursor-pointer">
-                      <Mail className="w-4 h-4 text-slate-950" />
-                      <span>hr@sarhat.in</span>
-                    </a>
+                    <div className="flex flex-wrap items-center gap-4 shrink-0">
+                      <button
+                        onClick={() => {
+                          const el = document.getElementById("current-openings");
+                          if (el) el.scrollIntoView({ behavior: "smooth" });
+                        }}
+                        className="inline-flex items-center gap-2 bg-[#D4E012] hover:bg-[#c2ce0f] text-slate-950 font-bold text-xs sm:text-sm px-6 sm:px-7 py-3.5 sm:py-4 rounded-full transition-all shadow-lg shadow-[#D4E012]/20 hover:scale-105 active:scale-95 cursor-pointer">
+                        <span>Explore open roles ↑</span>
+                      </button>
+                      <a
+                        href="mailto:hr@sarhatenergy.com"
+                        className="inline-flex items-center gap-2 bg-transparent hover:bg-white/10 text-white font-medium text-xs sm:text-sm px-6 sm:px-7 py-3.5 sm:py-4 rounded-full border border-white/30 hover:border-white transition-all cursor-pointer">
+                        <Mail className="w-4 h-4 text-[#D4E012]" />
+                        <span>Contact HR</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </ScrollReveal>

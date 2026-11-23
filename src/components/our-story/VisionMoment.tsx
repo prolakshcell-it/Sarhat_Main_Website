@@ -57,20 +57,6 @@ export default function VisionMoment() {
             ))}
           </span>
         </motion.h2>
-
-        <motion.div
-          initial={{ opacity: 0, y: reduce ? 0 : 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.8, delay: reduce ? 0 : 0.3, ease: EASE }}
-          className="mx-auto mt-14 grid max-w-4xl grid-cols-1 gap-8 border-t border-slate-200 pt-10 text-left sm:mt-20 md:grid-cols-2 md:gap-12">
-          <p className="text-base leading-relaxed text-slate-600 sm:text-lg">
-            Building on our solar EPC foundations, we will develop connected capabilities in renewable energy, storage, grid systems and civil infrastructure. We will invest in our people, strengthen our engineering and learn from every project we deliver.
-          </p>
-          <p className="text-base font-medium leading-relaxed text-slate-900 sm:text-lg">
-            We will measure our progress by the trust we earn, the capability we build and the lasting value our projects create for customers, partners, communities and the environment.
-          </p>
-        </motion.div>
       </div>
     </section>
   );

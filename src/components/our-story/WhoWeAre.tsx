@@ -30,7 +30,7 @@ export default function WhoWeAre() {
   );
 
   return (
-    <section className="relative bg-white py-16 sm:py-24">
+    <section id="who-we-are" className="relative bg-white py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="mx-auto mb-12 max-w-4xl text-center sm:mb-16">
@@ -51,12 +51,22 @@ export default function WhoWeAre() {
                 </svg>
               </span>
             </h2>
-            <p className="mx-auto max-w-3xl font-normal text-slate-600 text-base sm:text-lg md:text-xl leading-relaxed mb-4 [text-wrap:balance]">
+            <p className="mx-auto max-w-3xl font-normal text-slate-600 text-base sm:text-lg md:text-xl leading-relaxed mb-6 [text-wrap:balance]">
               We turn clean-energy ambition into projects delivered with engineering discipline, ownership and care.
             </p>
-            <p className="text-sm sm:text-base font-serif-display italic text-[#6DAD45] font-semibold tracking-wide">
-              Discover what makes us different.
-            </p>
+            <div>
+              <button
+                type="button"
+                onClick={() => {
+                  if (videoRef.current) {
+                    videoRef.current.play();
+                    setIsPlaying(true);
+                  }
+                }}
+                className="inline-flex cursor-pointer items-center justify-center gap-2.5 rounded-full border border-[#166534] bg-white px-7 py-3 text-sm sm:text-base font-semibold text-[#166534] shadow-sm transition-all duration-300 hover:bg-[#166534] hover:text-white">
+                <span className="text-xs">►</span> Discover Sarhat Energy
+              </button>
+            </div>
           </div>
         </ScrollReveal>
 

@@ -1,328 +1,57 @@
 "use client";
 
-import AnimatedPillBadge from "@/components/AnimatedPillBadge";
 import { useRef } from "react";
-import { motion, useInView, useMotionValue, useReducedMotion, useScroll, type MotionValue } from "framer-motion";
-import {
-  Draw,
-  EASE,
-  Fade,
-  FishMedallion,
-  GREEN,
-  INK,
-  LIME,
-  LOTUS,
-  OCHRE,
-  OLIVE,
-  VERMILION,
-  borderBand,
-  circle,
-} from "./motifs";
+import Image from "next/image";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import AnimatedPillBadge from "@/components/AnimatedPillBadge";
+import { EASE, borderBand } from "./motifs";
+import mithilaConceptImg from "@/../public/images/mithila-concept-illustration.jpg";
+
+const BAND_W = 1600;
+const wideBand = borderBand(BAND_W);
 
 export interface Pillar {
   title: string;
   description: string;
 }
 
-/* ------------------------------------------------------------------ */
-/* Journey geometry: Mithila roots → Foundation → Sarhat → India → Global */
-/* ------------------------------------------------------------------ */
-
-type Pt = { x: number; y: number };
-type JourneyNode = Pt & { label: string; sub: string; anchor: "start" | "middle" | "end"; lx: number; ly: number };
-
-interface Layout {
-  viewBox: string;
-  origin: Pt & { scale: number; lx: number; ly: number };
-  start: Pt;
-  nodes: JourneyNode[]; // Foundation, Sarhat, India, Global
-  vertical: boolean;
-  /** outward points of the network around the Global node */
-  reach: Pt[];
-  /** index pairs into `reach` that are linked to each other */
-  mesh: [number, number][];
-}
-
-/** Smooth S-curve between two points with tangents along the travel axis (midpoint is exactly halfway). */
-const seg = (a: Pt, b: Pt, vertical: boolean) =>
-  vertical
-    ? ` C${a.x} ${(a.y + b.y) / 2} ${b.x} ${(a.y + b.y) / 2} ${b.x} ${b.y}`
-    : ` C${(a.x + b.x) / 2} ${a.y} ${(a.x + b.x) / 2} ${b.y} ${b.x} ${b.y}`;
-const mid = (a: Pt, b: Pt): Pt => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
-
-const NODE_TEXT = [
-  { label: "Foundation", sub: "Values" },
-  { label: "Sarhat", sub: "Engineering · Execution" },
-  { label: "India", sub: "Rooted in India" },
-  { label: "Global", sub: "Global Ambition" },
-];
-
-const DESKTOP: Layout = {
-  viewBox: "0 50 1200 360",
-  vertical: false,
-  origin: { x: 150, y: 210, scale: 1, lx: 150, ly: 352 },
-  start: { x: 262, y: 210 },
-  nodes: [
-    { x: 440, y: 280, anchor: "middle" as const, lx: 440, ly: 320 },
-    { x: 640, y: 190, anchor: "middle" as const, lx: 640, ly: 150 },
-    { x: 840, y: 262, anchor: "middle" as const, lx: 840, ly: 302 },
-    { x: 1040, y: 205, anchor: "end" as const, lx: 1022, ly: 150 },
-  ].map((p, i) => ({ ...p, ...NODE_TEXT[i] })),
-  reach: [
-    { x: 1112, y: 92 },
-    { x: 1168, y: 158 },
-    { x: 1182, y: 246 },
-    { x: 1140, y: 332 },
-    { x: 1068, y: 378 },
-    { x: 1052, y: 62 },
-  ],
-  mesh: [[0, 1], [1, 2], [2, 3], [3, 4], [5, 0]],
-};
-
-const MOBILE: Layout = {
-  viewBox: "0 0 360 960",
-  vertical: true,
-  origin: { x: 180, y: 118, scale: 0.86, lx: 180, ly: 232 },
-  start: { x: 180, y: 262 },
-  nodes: [
-    { x: 96, y: 390, anchor: "start" as const },
-    { x: 264, y: 540, anchor: "end" as const },
-    { x: 96, y: 690, anchor: "start" as const },
-    { x: 180, y: 850, anchor: "middle" as const },
-  ].map((p, i) => ({
-    ...p,
-    ...NODE_TEXT[i],
-    lx: p.anchor === "start" ? p.x + 26 : p.anchor === "end" ? p.x - 26 : p.x,
-    ly: p.anchor === "middle" ? p.y + 66 : p.y - 2,
-  })),
-  reach: [
-    { x: 68, y: 790 },
-    { x: 120, y: 740 },
-    { x: 250, y: 744 },
-    { x: 306, y: 800 },
-    { x: 318, y: 900 },
-    { x: 46, y: 900 },
-  ],
-  mesh: [[0, 1], [2, 3], [3, 4], [5, 0]],
-};
-
-/* Scroll budget: medallion → heritage line → modern line → global network */
-const R = {
-  medallion: [0, 0.3] as [number, number],
-  heritage: [0.24, 0.52] as [number, number],
-  modern: [0.5, 0.76] as [number, number],
-  network: [0.74, 0.98] as [number, number],
-};
-const NODE_AT = [0.4, 0.52, 0.64, 0.76];
-
-const LEAF = "M0 -9 C-5 -4 -5 4 0 9 C5 4 5 -4 0 -9 Z M0 -6 V6";
-const PYLON = "M0 -16 L-7 12 M0 -16 L7 12 M-4.6 3 H4.6 M-2.6 -5 H2.6 M-10 -10 H10 M-10 -10 V-7 M10 -10 V-7";
-
-function JourneyArt({ layout, progress, className }: { layout: Layout; progress: MotionValue<number>; className: string }) {
-  const { origin, start, nodes, vertical, reach, mesh } = layout;
-  const [F, S, I, G] = nodes;
-  const heritage = `M${start.x} ${start.y}` + seg(start, F, vertical) + seg(F, S, vertical);
-  const modern = `M${S.x} ${S.y}` + seg(S, I, vertical) + seg(I, G, vertical);
-  // the hand-drawn second stroke of a Madhubani double outline
-  const offset = vertical ? "translate(6 0)" : "translate(0 6)";
-  const gradId = vertical ? "journey-grad-v" : "journey-grad-h";
-
-  return (
-    <svg viewBox={layout.viewBox} className={className} role="img" aria-labelledby={`${gradId}-title`}>
-      <title id={`${gradId}-title`}>
-        From Mithila roots to foundation, to Sarhat, to India, to a global network
-      </title>
-      <defs>
-        <linearGradient
-          id={gradId}
-          gradientUnits="userSpaceOnUse"
-          x1={S.x}
-          y1={S.y}
-          x2={vertical ? S.x : G.x}
-          y2={vertical ? G.y : S.y}>
-          <stop offset="0" stopColor={OLIVE} />
-          <stop offset="1" stopColor={GREEN} />
-        </linearGradient>
-      </defs>
-
-      {/* Origin: paired fish medallion */}
-      <g transform={`translate(${origin.x} ${origin.y}) scale(${origin.scale})`}>
-        <FishMedallion progress={progress} range={R.medallion} />
-      </g>
-      <Fade progress={progress} range={[0.18, 0.28]}>
-        <text x={origin.lx} y={origin.ly} textAnchor="middle" className="fill-[#2B2118] font-mono text-[13px] font-bold uppercase tracking-[0.2em]">
-          Mithila Roots
-        </text>
-        <text x={origin.lx} y={origin.ly + 18} textAnchor="middle" className="fill-[#7A6A58] text-[12px]">
-          Origin
-        </text>
-      </Fade>
-
-      {/* Heritage line: double, ink + vermilion, with leaf marks */}
-      <g strokeLinecap="round">
-        <Draw progress={progress} range={R.heritage} d={heritage} stroke={INK} strokeWidth={1.8} />
-        <Draw progress={progress} range={[R.heritage[0] + 0.02, R.heritage[1] + 0.02]} d={heritage} stroke={VERMILION} strokeWidth={1.1} transform={offset} />
-      </g>
-      {[mid(start, F), mid(F, S)].map((p, i) => (
-        <Fade key={i} progress={progress} range={[0.32 + i * 0.1, 0.4 + i * 0.1]}>
-          <path d={LEAF} transform={`translate(${p.x + (vertical ? 18 : 0)} ${p.y - (vertical ? 0 : 20)})`} fill="none" stroke={OCHRE} strokeWidth={1.2} />
-        </Fade>
-      ))}
-
-      {/* Modern line: one clean conductor, a quieter parallel, pylons */}
-      <Draw progress={progress} range={R.modern} d={modern} stroke={`url(#${gradId})`} strokeWidth={2.4} strokeLinecap="round" />
-      <Fade progress={progress} range={[0.6, 0.76]}>
-        <path d={modern} transform={offset} fill="none" stroke={GREEN} strokeOpacity={0.45} strokeWidth={1} strokeDasharray="2 7" strokeLinecap="round" />
-      </Fade>
-      {[mid(S, I), mid(I, G)].map((p, i) => (
-        <Fade key={i} progress={progress} range={[0.58 + i * 0.1, 0.66 + i * 0.1]}>
-          <path d={PYLON} transform={`translate(${p.x + (vertical ? 22 : 0)} ${p.y - (vertical ? 0 : 24)})`} fill="none" stroke={OLIVE} strokeWidth={1.2} strokeLinecap="round" />
-        </Fade>
-      ))}
-
-      {/* Global field: the network opens outward from the last node */}
-      <Fade progress={progress} range={[0.8, 0.98]}>
-        <path d={circle(vertical ? 110 : 120, G.x, G.y)} fill="none" stroke={GREEN} strokeOpacity={0.25} strokeDasharray="1 6" strokeLinecap="round" />
-        <path d={circle(vertical ? 160 : 180, G.x, G.y)} fill="none" stroke={GREEN} strokeOpacity={0.15} strokeDasharray="1 8" strokeLinecap="round" />
-      </Fade>
-      {reach.map((p, i) => (
-        <Draw
-          key={`r${i}`}
-          progress={progress}
-          range={[R.network[0] + i * 0.02, R.network[0] + 0.12 + i * 0.02]}
-          d={`M${G.x} ${G.y} L${p.x} ${p.y}`}
-          stroke={GREEN}
-          strokeWidth={1.2}
-          strokeLinecap="round" />
-      ))}
-      {mesh.map(([a, b], i) => (
-        <Draw
-          key={`m${i}`}
-          progress={progress}
-          range={[R.network[0] + 0.1 + i * 0.015, R.network[1]]}
-          d={`M${reach[a].x} ${reach[a].y} L${reach[b].x} ${reach[b].y}`}
-          stroke={GREEN}
-          strokeOpacity={0.5}
-          strokeWidth={1} />
-      ))}
-      {reach.map((p, i) => (
-        <Fade key={`n${i}`} progress={progress} range={[R.network[0] + 0.1 + i * 0.02, R.network[0] + 0.16 + i * 0.02]}>
-          <circle cx={p.x} cy={p.y} r={4} fill={LIME} stroke={OLIVE} strokeWidth={1} />
-        </Fade>
-      ))}
-
-      {/* Journey nodes + labels */}
-      {nodes.map((n, i) => {
-        const modernNode = i>= 1;
-        return (
-          <Fade key={n.label} progress={progress} range={[NODE_AT[i] - 0.04, NODE_AT[i]]}>
-            <circle cx={n.x} cy={n.y} r={i === 3 ? 10 : 8} fill={modernNode ? "#0F172A" : "#F5EFE3"} stroke={modernNode ? GREEN : INK} strokeWidth={2} />
-            <circle cx={n.x} cy={n.y} r={3} fill={modernNode ? LIME : VERMILION} />
-            <text x={n.lx} y={n.ly} textAnchor={n.anchor} className="fill-[#2B2118] font-mono text-[13px] font-bold uppercase tracking-[0.2em]">
-              {n.label}
-            </text>
-            <text x={n.lx} y={n.ly + 18} textAnchor={n.anchor} className="fill-[#7A6A58] text-[12px]">
-              {n.sub}
-            </text>
-          </Fade>
-        );
-      })}
-    </svg>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* Pillars: rise from a drawn foundation band, one after another        */
-/* ------------------------------------------------------------------ */
-
-const BAND_W = 1200;
-const band = borderBand(BAND_W);
-const wideBand = borderBand(1600);
-
-function Pillars({ pillars }: { pillars: Pillar[] }) {
+/**
+ * 04 — Rooted in Mithila. Building for tomorrow.
+ * Displays the Madhubani artwork tapestry and the 3 circular emblems:
+ * Mithila Roots → Realistic India → Global Ambition.
+ */
+export default function MithilaFoundation({ pillars }: { pillars?: Pillar[] }) {
   const reduce = useReducedMotion();
-  const ref=useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.25 });
-  const draw = {
-    initial: { pathLength: reduce ? 1 : 0, opacity: 0 },
-    animate: inView ? { pathLength: 1, opacity: 1 } : undefined,
-    transition: { duration: reduce ? 0.2 : 1.1, ease: EASE },
-  };
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
-    <div ref={ref} className="relative">
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
-        {pillars.map((p, i) => (
-          <motion.article
-            key={p.title}
-            initial={reduce ? { opacity: 0 } : { opacity: 0, clipPath: "inset(100% 0 0 0)" }}
-            animate={inView ? (reduce ? { opacity: 1 } : { opacity: 1, clipPath: "inset(0% 0 0 0)" }) : undefined}
-            transition={{ duration: 0.9, delay: reduce ? 0 : 0.7 + i * 0.22, ease: EASE }}
-            className="relative flex flex-col rounded-2xl border border-[#2B2118]/10 bg-white/85 p-7 shadow-[0_20px_40px_-24px_rgba(43,33,24,0.35)] backdrop-blur-sm sm:p-8">
-            <span aria-hidden className="absolute inset-x-7 top-0 h-0.5 bg-gradient-to-r from-[#D4E012] to-[#6DAD45] sm:inset-x-8" />
-            <span className="mb-10 font-mono text-xs font-bold text-[#707B00]">{String(i + 1).padStart(2, "0")}</span>
-            <h3 className="mb-3 font-serif-display text-2xl font-medium text-[#1E1812] sm:text-3xl">{p.title}</h3>
-            <p className="text-sm leading-relaxed text-[#5B5146] sm:text-base">{p.description}</p>
-          </motion.article>
+    <section ref={ref} className="relative overflow-hidden bg-[#FAF6EF] py-16 sm:py-24">
+      {/* Top decorative Madhubani border rule */}
+      <svg
+        viewBox="0 0 1600 32"
+        preserveAspectRatio="xMidYMid slice"
+        className="absolute inset-x-0 top-0 h-6 w-full opacity-25"
+        aria-hidden>
+        {wideBand.rules.map((d) => (
+          <path key={d} d={d} fill="none" stroke="#2B2118" strokeWidth={1} />
         ))}
-      </div>
-
-      {/* the foundation the pillars stand on */}
-      <div className="mt-5 flex items-center gap-4 md:mt-6">
-        <span className="shrink-0 font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-[#9A3B22]">Foundation</span>
-        <svg viewBox={`0 0 ${BAND_W} 32`} preserveAspectRatio="xMinYMid slice" className="h-5 min-w-0 flex-1 sm:h-6" aria-hidden>
-          {band.rules.map((d) => (
-            <motion.path key={d} {...draw} d={d} fill="none" stroke={INK} strokeOpacity={0.5} strokeWidth={1} />
-          ))}
-          <motion.path {...draw} d={band.zig} fill="none" stroke={VERMILION} strokeWidth={1.2} strokeLinejoin="round" />
-        </svg>
-      </div>
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* Section                                                              */
-/* ------------------------------------------------------------------ */
-
-/** 07 — What Guides Us / Our Foundation & Pillars, told as Mithila roots growing into a global network. */
-export default function MithilaFoundation({ pillars }: { pillars: Pillar[] }) {
-  const reduce = useReducedMotion();
-  const artRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: artRef, offset: ["start 90%", "center 45%"] });
-  const complete = useMotionValue(1);
-  const progress = reduce ? complete : scrollYProgress;
-
-  return (
-    <section className="relative overflow-hidden bg-[#F5EFE3] py-16 sm:py-24">
-      {/* Madhubani borders frame the chapter, quietly */}
-      <svg viewBox="0 0 1600 32" preserveAspectRatio="xMidYMid slice" className="absolute inset-x-0 top-0 h-6 w-full opacity-25" aria-hidden>
-        {wideBand.rules.map((d) => <path key={d} d={d} fill="none" stroke={INK} strokeWidth={1} />)}
-        <path d={wideBand.zig} fill="none" stroke={VERMILION} strokeWidth={1.2} />
-      </svg>
-      {/* a lotus held faintly behind the pillars */}
-      <svg viewBox="-60 -60 120 90" className="pointer-events-none absolute -right-24 bottom-10 hidden w-[420px] opacity-[0.07] md:block" aria-hidden>
-        {LOTUS.petals.map((p) => (
-          <g key={p.deg} transform={`rotate(${p.deg})`} fill="none" stroke={INK} strokeWidth={1.2}>
-            <path d={p.outer} />
-            <path d={p.inner} />
-          </g>
-        ))}
-        <path d={LOTUS.base} fill="none" stroke={INK} strokeWidth={1.2} />
+        <path d={wideBand.zig} fill="none" stroke="#C85A32" strokeWidth={1.2} />
       </svg>
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: reduce ? 0 : 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
+          viewport={{ once: true, margin: "100px" }}
           transition={{ duration: 0.7, ease: EASE }}
-          className="mx-auto max-w-3xl text-center">
-          <AnimatedPillBadge className="mb-6">What Guides Us</AnimatedPillBadge>
-          <h2 className="mb-6 font-serif-display text-3xl font-medium leading-tight tracking-tight text-[#1E1812] sm:text-5xl">
-            Our Foundation &amp;{" "}
+          className="mx-auto mb-10 max-w-3xl text-center sm:mb-14">
+          <AnimatedPillBadge className="mb-4">WHAT GUIDES US</AnimatedPillBadge>
+          <h2 className="mb-4 font-serif-display text-3xl font-medium leading-tight tracking-tight text-[#1E1812] sm:text-4xl md:text-5xl [text-wrap:balance]">
+            Rooted in Mithila.{" "}
             <span className="italic text-[#707B00] relative inline-block">
-              Pillars.
+              Building for tomorrow.
               <svg
                 className="absolute -bottom-2 left-0 w-full h-2.5 text-[#707B00]"
                 viewBox="0 0 100 20"
@@ -336,17 +65,288 @@ export default function MithilaFoundation({ pillars }: { pillars: Pillar[] }) {
               </svg>
             </span>
           </h2>
-          <p className="text-base leading-relaxed text-[#5B5146] sm:text-lg">
-            Our foundation began in the Mithila region. These are our roots &mdash; and from these roots, we are building toward the world.
+          <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#5B5146] sm:text-lg">
+            Our roots in Mithila, Bihar, inspire this depiction of what we build.
           </p>
         </motion.div>
 
-        <div ref={artRef} className="mx-auto my-12 max-w-md sm:my-16 md:max-w-none">
-          <JourneyArt layout={DESKTOP} progress={progress} className="hidden h-auto w-full md:block" />
-          <JourneyArt layout={MOBILE} progress={progress} className="h-auto w-full md:hidden" />
-        </div>
+        {/* 1. Madhubani Artwork Tapestry Container */}
+        <motion.div
+          initial={{ opacity: 0, scale: reduce ? 1 : 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "100px" }}
+          transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
+          className="relative mx-auto mb-16 max-w-5xl overflow-hidden rounded-2xl border-2 border-[#D4C3A3]/70 bg-[#FAF6EF] p-2 sm:p-3 shadow-[0_20px_50px_-20px_rgba(43,33,24,0.25)]">
+          <div className="relative aspect-[1024/580] w-full overflow-hidden rounded-xl border border-[#2B2118]/15 bg-[#F7F2EA]">
+            <Image
+              src={mithilaConceptImg}
+              alt="Rooted in Mithila. Building for tomorrow. Madhubani art depicting solar, battery storage, civil infrastructure and hybrid energy."
+              fill
+              sizes="(min-width: 1024px) 1000px, 100vw"
+              className="object-contain object-center"
+              priority
+              unoptimized
+            />
+          </div>
+        </motion.div>
 
-        <Pillars pillars={pillars} />
+        {/* 2. Three Circular Emblems Connected by Vines (Mithila Roots -> Realistic India -> Global) */}
+        <motion.div
+          initial={{ opacity: 0, y: reduce ? 0 : 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "100px" }}
+          transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
+          className="relative mx-auto max-w-5xl rounded-3xl border border-[#2B2118]/10 bg-white/70 p-6 sm:p-10 shadow-sm backdrop-blur-sm">
+          
+          {/* Note badge at top right */}
+          <div className="mb-6 flex justify-end">
+            <span className="inline-flex items-center rounded-full border border-[#2B2118]/15 bg-[#FAF6EF] px-3.5 py-1 text-[11px] font-medium text-[#7A6A58] shadow-sm">
+              From Mithila roots to India drawn in Madhubani style
+            </span>
+          </div>
+
+          {/* Desktop & Tablet SVG Flow */}
+          <div className="relative w-full overflow-x-auto pb-4">
+            <svg
+              viewBox="0 0 1000 240"
+              className="mx-auto min-w-[760px] w-full max-w-[960px] select-none"
+              fill="none"
+              role="img"
+              aria-label="Journey from Mithila Roots to India and Global Ambition">
+              
+              {/* Vine 1: Connecting Mithila Roots (x=160) to India (x=500) */}
+              <g strokeLinecap="round">
+                {/* Main curved vine */}
+                <path
+                  d="M 230 110 Q 365 170 430 110"
+                  stroke="#4E7238"
+                  strokeWidth="2.5"
+                  fill="none"
+                />
+                {/* Secondary decorative double line in terracotta */}
+                <path
+                  d="M 232 114 Q 365 174 428 114"
+                  stroke="#C85A32"
+                  strokeWidth="1.2"
+                  strokeDasharray="2 6"
+                  fill="none"
+                  opacity="0.8"
+                />
+                {/* Hanging leafy fronds along vine 1 */}
+                {[
+                  { cx: 270, cy: 122, angle: 25 },
+                  { cx: 305, cy: 135, angle: 15 },
+                  { cx: 340, cy: 142, angle: 0 },
+                  { cx: 375, cy: 140, angle: -15 },
+                  { cx: 405, cy: 128, angle: -25 },
+                ].map((leaf, idx) => (
+                  <g key={`v1-leaf-${idx}`} transform={`translate(${leaf.cx}, ${leaf.cy}) rotate(${leaf.angle})`}>
+                    <path
+                      d="M 0 0 C -4 8 -2 16 0 20 C 2 16 4 8 0 0 Z"
+                      fill="#6DAD45"
+                      fillOpacity="0.85"
+                      stroke="#4E7238"
+                      strokeWidth="1"
+                    />
+                    <line x1="0" y1="0" x2="0" y2="16" stroke="#4E7238" strokeWidth="0.8" />
+                  </g>
+                ))}
+              </g>
+
+              {/* Vine 2: Connecting India (x=500) to Global (x=840) */}
+              <g strokeLinecap="round">
+                <path
+                  d="M 570 110 Q 705 170 770 110"
+                  stroke="#4E7238"
+                  strokeWidth="2.5"
+                  fill="none"
+                />
+                <path
+                  d="M 572 114 Q 705 174 768 114"
+                  stroke="#C85A32"
+                  strokeWidth="1.2"
+                  strokeDasharray="2 6"
+                  fill="none"
+                  opacity="0.8"
+                />
+                {/* Hanging leafy fronds along vine 2 */}
+                {[
+                  { cx: 610, cy: 122, angle: 25 },
+                  { cx: 645, cy: 135, angle: 15 },
+                  { cx: 680, cy: 142, angle: 0 },
+                  { cx: 715, cy: 140, angle: -15 },
+                  { cx: 745, cy: 128, angle: -25 },
+                ].map((leaf, idx) => (
+                  <g key={`v2-leaf-${idx}`} transform={`translate(${leaf.cx}, ${leaf.cy}) rotate(${leaf.angle})`}>
+                    <path
+                      d="M 0 0 C -4 8 -2 16 0 20 C 2 16 4 8 0 0 Z"
+                      fill="#6DAD45"
+                      fillOpacity="0.85"
+                      stroke="#4E7238"
+                      strokeWidth="1"
+                    />
+                    <line x1="0" y1="0" x2="0" y2="16" stroke="#4E7238" strokeWidth="0.8" />
+                  </g>
+                ))}
+              </g>
+
+              {/* ========================================================= */}
+              {/* EMBLEM 1: MITHILA ROOTS (Origin)                          */}
+              {/* User note: "In the mithila roots image trto avoid overlapping rest is ok" */}
+              {/* ========================================================= */}
+              <g transform="translate(160, 110)">
+                {/* Outer ring with notches */}
+                <circle cx="0" cy="0" r="66" fill="#FAF6EF" stroke="#C85A32" strokeWidth="2" />
+                <circle cx="0" cy="0" r="60" fill="none" stroke="#E9A844" strokeWidth="1.5" strokeDasharray="3 3" />
+                <circle cx="0" cy="0" r="54" fill="#FAF6EF" stroke="#2B2118" strokeWidth="1.2" />
+
+                {/* Clean non-overlapping Madhubani Sun & Lotus center */}
+                {/* Sun ring with 16 neat rays */}
+                <circle cx="0" cy="0" r="34" fill="#F4ECE1" stroke="#C85A32" strokeWidth="1.5" />
+                {[...Array(16)].map((_, i) => {
+                  const deg = (i * 360) / 16;
+                  const rad = (deg * Math.PI) / 180;
+                  const x1 = Math.cos(rad) * 36;
+                  const y1 = Math.sin(rad) * 36;
+                  const x2 = Math.cos(rad) * 44;
+                  const y2 = Math.sin(rad) * 44;
+                  return (
+                    <line
+                      key={`ray-${i}`}
+                      x1={x1}
+                      y1={y1}
+                      x2={x2}
+                      y2={y2}
+                      stroke="#E9A844"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                    />
+                  );
+                })}
+
+                {/* Inner central solar circle */}
+                <circle cx="0" cy="0" r="20" fill="#E9C46A" fillOpacity="0.25" stroke="#C85A32" strokeWidth="1.8" />
+                <circle cx="0" cy="0" r="10" fill="#E9A844" fillOpacity="0.4" stroke="#2B2118" strokeWidth="1" />
+                <circle cx="0" cy="0" r="3" fill="#C85A32" />
+
+                {/* Lotus base petals below central circle - clean & balanced */}
+                <path
+                  d="M -16 6 C -12 18 12 18 16 6 C 10 14 -10 14 -16 6 Z"
+                  fill="#C85A32"
+                  fillOpacity="0.75"
+                  stroke="#2B2118"
+                  strokeWidth="1"
+                />
+              </g>
+
+              {/* Label for Emblem 1 */}
+              <text x="160" y="200" textAnchor="middle" className="fill-[#2B2118] font-mono text-[12px] font-bold uppercase tracking-[0.2em]">
+                MITHILA ROOTS
+              </text>
+              <text x="160" y="218" textAnchor="middle" className="fill-[#7A6A58] text-[11px] font-medium">
+                Origin
+              </text>
+
+              {/* ========================================================= */}
+              {/* EMBLEM 2: INDIA (Rooted in India)                         */}
+              {/* User note: "Make india's map as much as realistic"        */}
+              {/* ========================================================= */}
+              <g transform="translate(500, 110)">
+                {/* Outer ring */}
+                <circle cx="0" cy="0" r="66" fill="#FAF6EF" stroke="#C85A32" strokeWidth="2" />
+                <circle cx="0" cy="0" r="60" fill="none" stroke="#E9A844" strokeWidth="1.5" strokeDasharray="3 3" />
+                <circle cx="0" cy="0" r="54" fill="#FAF6EF" stroke="#2B2118" strokeWidth="1.2" />
+
+                {/* Clipped circular viewport for the realistic India map */}
+                <clipPath id="india-circle-clip">
+                  <circle cx="0" cy="0" r="51" />
+                </clipPath>
+
+                <g clipPath="url(#india-circle-clip)">
+                  <circle cx="0" cy="0" r="51" fill="#FAF6EF" />
+                  
+                  {/* Embedded Authentic Realistic India Map SVG from @svg-maps/india */}
+                  {/* Scaled and centered to fit within r=51 circle */}
+                  <g transform="translate(-40, -46) scale(0.132)">
+                    <image
+                      href="/images/realistic-india-map.svg"
+                      width="612"
+                      height="696"
+                    />
+                  </g>
+                </g>
+              </g>
+
+              {/* Label for Emblem 2 */}
+              <text x="500" y="200" textAnchor="middle" className="fill-[#2B2118] font-mono text-[12px] font-bold uppercase tracking-[0.2em]">
+                INDIA
+              </text>
+              <text x="500" y="218" textAnchor="middle" className="fill-[#7A6A58] text-[11px] font-medium">
+                Rooted in India
+              </text>
+
+              {/* ========================================================= */}
+              {/* EMBLEM 3: GLOBAL (Global Ambition)                        */}
+              {/* ========================================================= */}
+              <g transform="translate(840, 110)">
+                {/* Outer ring */}
+                <circle cx="0" cy="0" r="66" fill="#FAF6EF" stroke="#4E7238" strokeWidth="2" />
+                <circle cx="0" cy="0" r="60" fill="none" stroke="#6DAD45" strokeWidth="1.5" strokeDasharray="3 3" />
+                <circle cx="0" cy="0" r="54" fill="#FAF6EF" stroke="#2B2118" strokeWidth="1.2" />
+
+                {/* Globe sphere */}
+                <circle cx="0" cy="0" r="48" fill="#F4ECE1" stroke="#4E7238" strokeWidth="1.5" />
+                
+                {/* Latitude lines */}
+                <ellipse cx="0" cy="0" rx="46" ry="14" fill="none" stroke="#6DAD45" strokeOpacity="0.4" strokeWidth="1" />
+                <ellipse cx="0" cy="-18" rx="40" ry="10" fill="none" stroke="#6DAD45" strokeOpacity="0.3" strokeWidth="0.8" />
+                <ellipse cx="0" cy="18" rx="40" ry="10" fill="none" stroke="#6DAD45" strokeOpacity="0.3" strokeWidth="0.8" />
+
+                {/* Longitude lines */}
+                <ellipse cx="0" cy="0" rx="16" ry="46" fill="none" stroke="#6DAD45" strokeOpacity="0.4" strokeWidth="1" />
+                <ellipse cx="0" cy="0" rx="32" ry="46" fill="none" stroke="#6DAD45" strokeOpacity="0.3" strokeWidth="0.8" />
+                
+                {/* Connected network mesh nodes on globe */}
+                <line x1="-24" y1="-14" x2="-6" y2="4" stroke="#4E7238" strokeWidth="1" strokeOpacity="0.6" />
+                <line x1="-6" y1="4" x2="22" y2="-10" stroke="#4E7238" strokeWidth="1" strokeOpacity="0.6" />
+                <line x1="-6" y1="4" x2="14" y2="18" stroke="#4E7238" strokeWidth="1" strokeOpacity="0.6" />
+                <line x1="22" y1="-10" x2="30" y2="10" stroke="#4E7238" strokeWidth="1" strokeOpacity="0.6" />
+                <line x1="14" y1="18" x2="30" y2="10" stroke="#4E7238" strokeWidth="1" strokeOpacity="0.6" />
+                <line x1="-24" y1="-14" x2="-10" y2="-28" stroke="#4E7238" strokeWidth="1" strokeOpacity="0.6" />
+                <line x1="-10" y1="-28" x2="16" y2="-24" stroke="#4E7238" strokeWidth="1" strokeOpacity="0.6" />
+
+                {/* Nodes */}
+                {[
+                  { cx: -24, cy: -14, r: 3.5, color: "#6DAD45" },
+                  { cx: -6, cy: 4, r: 4, color: "#D4E012" },
+                  { cx: 22, cy: -10, r: 3.5, color: "#E9C46A" },
+                  { cx: 14, cy: 18, r: 3.5, color: "#6DAD45" },
+                  { cx: 30, cy: 10, r: 3, color: "#D4E012" },
+                  { cx: -10, cy: -28, r: 3, color: "#E07A4F" },
+                  { cx: 16, cy: -24, r: 3.5, color: "#6DAD45" },
+                ].map((node, i) => (
+                  <circle
+                    key={`globe-node-${i}`}
+                    cx={node.cx}
+                    cy={node.cy}
+                    r={node.r}
+                    fill={node.color}
+                    stroke="#2B2118"
+                    strokeWidth="1"
+                  />
+                ))}
+              </g>
+
+              {/* Label for Emblem 3 */}
+              <text x="840" y="200" textAnchor="middle" className="fill-[#2B2118] font-mono text-[12px] font-bold uppercase tracking-[0.2em]">
+                GLOBAL
+              </text>
+              <text x="840" y="218" textAnchor="middle" className="fill-[#7A6A58] text-[11px] font-medium">
+                Global Ambition
+              </text>
+            </svg>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

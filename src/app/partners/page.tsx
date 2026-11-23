@@ -305,32 +305,33 @@ export default function PartnersPage() {
           className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
             }`}
           aria-hidden={isPastHero}>
-          <section className="relative h-full w-full flex flex-col justify-center items-center bg-black text-white overflow-hidden select-none">
+          <section className="relative h-full w-full flex flex-col items-center justify-center bg-black text-white overflow-hidden select-none">
             {/* Cinematic High-Res Fullscreen Background Image Layer */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
               <Image
                 src="/images/partner-hero-bg.jpg"
-                alt="Sarhat Solar Energy Business Partnership"
+                alt="Sarhat Solar Partner Program"
                 fill
                 priority
-                quality={100}
-                className="object-cover object-center opacity-90 transform scale-105" />
+                quality={95}
+                className="object-cover object-center opacity-85" />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
-              {/* High-Contrast Readability Gradient Overlay Scrims */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none"></div>
+              {/* Soft Dark Scrim Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/40 via-50% to-black/75 pointer-events-none" />
             </motion.div>
 
+            {/* Main Centered Content */}
             <motion.div
               style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
-              className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 w-full relative z-10 pt-16 flex flex-col items-center text-center will-change-transform">
-              <ScrollReveal direction="up" distance={40}>
-                  <div className="max-w-5xl flex flex-col items-center text-center w-full">
-                    {/* Main Headline */}
-                    <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-medium tracking-tight text-white leading-[1.12] mb-6 text-center drop-shadow-lg">
-                      Become a Sarhat <br />
-                      <span className="text-[#D4E012] italic font-normal relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
-                        Solar Partner.
-                        <svg
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto pt-24 sm:pt-28 flex flex-col items-center text-center will-change-transform">
+              <ScrollReveal direction="up" distance={30} className="w-full">
+                <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
+                  {/* Main Headline */}
+                  <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] font-serif-display font-medium tracking-tight text-white leading-[1.08] mb-6 text-center max-w-4xl drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
+                    Grow your solar business <br />
+                    <span className="text-[#D4E012] italic font-normal relative inline-block drop-shadow-[0_0_35px_rgba(212,224,18,0.8)]">
+                      with Sarhat.
+                      <svg
                         className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D4E012]"
                         viewBox="0 0 100 20"
                         preserveAspectRatio="none"
@@ -341,19 +342,30 @@ export default function PartnersPage() {
                           strokeWidth="3.5"
                           fill="transparent" />
                       </svg>
-                      </span>
-                    </h1>
+                    </span>
+                  </h1>
 
-                    {/* Subtitle Paragraph */}
-                    <p className="text-xs sm:text-sm md:text-base lg:text-lg text-slate-100 font-normal max-w-5xl mx-auto text-center leading-relaxed tracking-wide [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)]">
-                      <span className="block sm:whitespace-nowrap">
-                        Join India&apos;s growing solar economy. Earn commissions on lead referrals or co-execute projects
-                      </span>
-                      <span className="block sm:whitespace-nowrap mt-1 sm:mt-1.5">
-                        as a Solar Project Partner — with Sarhat&apos;s full technical, marketing, and lead support behind you.
-                      </span>
-                    </p>
-                  </div>
+                  {/* Subtitle Paragraph */}
+                  <p className="text-sm sm:text-base md:text-lg text-slate-200 font-normal max-w-3xl text-center leading-relaxed mb-8 drop-shadow-md">
+                    Refer solar opportunities or work with Sarhat to deliver projects in your region.
+                  </p>
+
+                  {/* Action Button */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const el = document.getElementById("apply");
+                      if (el) {
+                        el.scrollIntoView({ behavior: "smooth" });
+                      } else {
+                        window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+                      }
+                    }}
+                    className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#D4E012] hover:bg-[#c2ce0f] text-slate-950 font-bold text-sm tracking-wide transition-all shadow-[0_0_30px_rgba(212,224,18,0.35)] hover:shadow-[0_0_40px_rgba(212,224,18,0.6)] hover:scale-[1.02] active:scale-[0.98] cursor-pointer">
+                    <span>Become a partner</span>
+                    <span className="text-base font-bold">→</span>
+                  </button>
+                </div>
               </ScrollReveal>
             </motion.div>
 

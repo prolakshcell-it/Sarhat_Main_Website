@@ -293,9 +293,33 @@ function ContactPageInner() {
                     </span>
                   </h1>
 
-                  <p className="text-lg sm:text-xl text-slate-200 font-normal max-w-5xl text-center leading-relaxed drop-shadow-md">
-                    Share the project, location, capacity and challenge. We will route the requirement to the right team.
+                  <p className="text-base sm:text-lg md:text-xl text-slate-200 font-normal max-w-3xl text-center leading-relaxed drop-shadow-md mb-8">
+                    Planning a solar or energy infrastructure project? <br className="hidden sm:inline" />
+                    Tell us what you&apos;re working on and how we can help.
                   </p>
+
+                  <div className="flex flex-wrap items-center justify-center gap-4">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setActiveSubheading("inquiry");
+                        const el = document.getElementById("inquiry");
+                        if (el) el.scrollIntoView({ behavior: "smooth" });
+                      }}
+                      className="bg-[#D4E012] hover:bg-[#c2ce0d] text-slate-950 font-bold text-sm sm:text-base px-7 py-3.5 rounded-2xl transition-all duration-300 shadow-lg shadow-[#D4E012]/20 cursor-pointer">
+                      Discuss Your Project
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setActiveSubheading("support");
+                        const el = document.getElementById("inquiry");
+                        if (el) el.scrollIntoView({ behavior: "smooth" });
+                      }}
+                      className="bg-transparent hover:bg-white/10 text-white font-semibold text-sm sm:text-base px-7 py-3.5 rounded-2xl border border-white/60 hover:border-white transition-all duration-300 cursor-pointer">
+                      Get O&M Support
+                    </button>
+                  </div>
                 </div>
               </ScrollReveal>
             </motion.div>
@@ -320,12 +344,12 @@ function ContactPageInner() {
               <ScrollReveal direction="up" distance={30}>
                 <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
                   <AnimatedPillBadge className="mb-6">
-                    GET IN TOUCH
+                    CONTACT SARHAT ENERGY
                   </AnimatedPillBadge>
                   <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-display font-medium text-slate-900 tracking-tight leading-tight mb-4">
-                    Let&apos;s build something{" "}
+                    Let&apos;s talk about your{" "}
                     <span className="text-[#6DAD45] italic relative inline-block">
-                      great together.
+                      next energy project.
                       <svg
                         className="absolute -bottom-2 left-0 w-full h-3 text-[#6DAD45]"
                         viewBox="0 0 100 20"
@@ -340,7 +364,7 @@ function ContactPageInner() {
                     </span>
                   </h2>
                   <p className="text-slate-600 font-normal text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-                    Connect with our team of solar EPC engineers, project developers, and technical support specialists.
+                    Connect with our team for solar EPC, energy infrastructure, or technical support for your operating solar plant.
                   </p>
                 </div>
               </ScrollReveal>
@@ -355,7 +379,7 @@ function ContactPageInner() {
                       : "text-slate-600 hover:text-slate-950 hover:bg-slate-300/50"
                       }`}>
                     <FileText className="w-4 h-4 text-[#D4E012]" />
-                    <span>INQUIRY</span>
+                    <span>PROJECT ENQUIRY</span>
                   </button>
 
                   <button
@@ -365,7 +389,7 @@ function ContactPageInner() {
                       : "text-slate-600 hover:text-slate-950 hover:bg-slate-300/50"
                       }`}>
                     <Headphones className="w-4 h-4 text-[#D4E012]" />
-                    <span>CUSTOMER SUPPORT</span>
+                    <span>O&M SUPPORT</span>
                   </button>
                 </div>
               </div>
@@ -831,12 +855,12 @@ function ContactPageInner() {
                         <div className="space-y-6">
                           <div>
                             <span className="text-[11px] font-mono text-emerald-600 uppercase tracking-widest font-bold block mb-2 flex items-center gap-1.5">
-                              <Headphones className="w-4 h-4 text-emerald-600" /> 24/7 SUPPORT & O&M HELPLINE
+                              <Headphones className="w-4 h-4 text-emerald-600" /> DEDICATED O&M SUPPORT
                             </span>
                             <h2 className="text-3xl sm:text-4xl font-serif-display font-medium text-[#0F172A] tracking-tight leading-tight">
-                              Dedicated Plant <br />
+                              Technical Support <br />
                               <span className="text-[#6DAD45] italic relative inline-block">
-                                Operations Assistance.
+                                for Your Solar Plant
                                 <svg
                                   className="absolute -bottom-2 left-0 w-full h-2.5 text-[#6DAD45]"
                                   viewBox="0 0 100 20"
@@ -855,7 +879,7 @@ function ContactPageInner() {
                           {/* Direct Hotlines Box */}
                           <div className="bg-slate-900 text-white p-6 rounded-3xl border border-slate-800 shadow-xl space-y-4">
                             <div className="text-xs font-mono text-[#D4E012] uppercase tracking-widest font-bold">
-                              24/7 EMERGENCY TELEMETRY HOTLINE
+                              CONTACT OUR O&M TEAM
                             </div>
                             <div className="space-y-3">
                               <a
@@ -865,7 +889,7 @@ function ContactPageInner() {
                                   <Phone className="w-5 h-5" />
                                 </div>
                                 <div>
-                                  <div className="text-[10px] font-mono text-slate-400 uppercase">O&M Helpline</div>
+                                  <div className="text-[10px] font-mono text-slate-400 uppercase">O&M Support Number</div>
                                   <div className="text-lg font-mono font-bold text-white group-hover:text-[#D4E012] transition-colors">
                                     +91 9266 7111 25
                                   </div>
@@ -893,9 +917,9 @@ function ContactPageInner() {
                             <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-start gap-3">
                               <Wrench className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
                               <div>
-                                <h4 className="text-xs font-mono font-bold uppercase text-slate-900">2-Hour Triage</h4>
+                                <h4 className="text-xs font-mono font-bold uppercase text-slate-900">Remote Diagnostics</h4>
                                 <p className="text-[11px] text-slate-600 font-light mt-0.5 leading-snug">
-                                  Immediate SCADA telemetry diagnostics & remote triage.
+                                  We review plant alarms and performance data where remote monitoring is enabled.
                                 </p>
                               </div>
                             </div>
@@ -903,9 +927,9 @@ function ContactPageInner() {
                             <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-start gap-3">
                               <CheckCircle2 className="w-5 h-5 text-sky-500 shrink-0 mt-0.5" />
                               <div>
-                                <h4 className="text-xs font-mono font-bold uppercase text-slate-900">12-Hour Dispatch</h4>
+                                <h4 className="text-xs font-mono font-bold uppercase text-slate-900">On-Site Service</h4>
                                 <p className="text-[11px] text-slate-600 font-light mt-0.5 leading-snug">
-                                  On-site field technician dispatch across key state hubs.
+                                  Our team coordinates technician visits for issues that require on-site attention.
                                 </p>
                               </div>
                             </div>
@@ -930,14 +954,13 @@ function ContactPageInner() {
                     {/* Left Side Info */}
                     <div className="lg:col-span-6 space-y-4">
                       <div className="text-xs font-mono text-[#D4E012] uppercase tracking-widest">
-                        DIRECT CONNECTION
+                        CONTACT SARHAT ENERGY
                       </div>
                       <h3 className="text-3xl sm:text-4xl font-serif-display font-medium text-white tracking-tight leading-tight">
-                        Talk to the right <br />
-                        Sarhat team.
+                        Talk to our team.
                       </h3>
                       <p className="text-slate-300 font-light text-sm max-w-md leading-relaxed">
-                        For projects, partnerships, careers and technical conversations, use the channel that works best for you.
+                        Get in touch for project enquiries, partnerships, careers, or technical support.
                       </p>
                     </div>
 
@@ -960,7 +983,7 @@ function ContactPageInner() {
                         href="mailto:info@sarhatenergy.com"
                         className="block bg-slate-950/80 border border-slate-800 hover:border-[#D4E012]/60 rounded-2xl p-5 transition-all group">
                         <div className="text-[10px] font-mono text-[#D4E012] uppercase tracking-widest mb-1">
-                          EMAIL
+                          GENERAL ENQUIRIES
                         </div>
                         <div className="text-lg font-mono font-bold text-white group-hover:text-[#D4E012] transition-colors">
                           info@sarhatenergy.com
