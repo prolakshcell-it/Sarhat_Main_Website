@@ -309,15 +309,15 @@ export default function PartnersPage() {
             {/* Cinematic High-Res Fullscreen Background Image Layer */}
             <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 h-full w-full">
               <Image
-                src="/images/partner-hero-bg.jpg"
+                src="/images/partner-hero-hd.jpg"
                 alt="Sarhat Solar Partner Program"
                 fill
                 priority
-                quality={95}
-                className="object-cover object-center opacity-85" />
+                unoptimized
+                className="object-cover object-center opacity-45" />
               <motion.div style={{ opacity: bgDim }} className="absolute inset-0 bg-black pointer-events-none" />
-              {/* Soft Dark Scrim Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/40 via-50% to-black/75 pointer-events-none" />
+              {/* Soft Clean Scrim Overlay (no heavy left dark gradient) */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 pointer-events-none" />
             </motion.div>
 
             {/* Main Centered Content */}
