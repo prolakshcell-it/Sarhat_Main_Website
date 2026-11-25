@@ -162,9 +162,8 @@ export default function LeadershipPage() {
         {/* HERO SECTION (Sticky Background Image Overlay Hero) */}
         {/* ------------------------------------------------------------- */}
         <div
-          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${
-            isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
-          }`}
+          className={`fixed inset-0 w-full h-screen z-0 overflow-hidden bg-slate-950 select-none will-change-transform ${isPastHero ? "invisible pointer-events-none" : "visible pointer-events-auto"
+            }`}
           aria-hidden={isPastHero}>
           <section
             ref={containerRef}
