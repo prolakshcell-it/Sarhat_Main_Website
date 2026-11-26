@@ -354,9 +354,11 @@ export default function LeadershipPage() {
                   {/* Left Side: Photo Frame */}
                   <div className="lg:col-span-6 relative min-h-[300px] sm:min-h-[360px] lg:min-h-[420px] bg-slate-900">
                     <Image
-                      src="/images/leadership-how-we-lead.jpg"
+                      src="/images/leadership-how-we-lead-hd.jpg"
                       alt="How we lead at Sarhat"
                       fill
+                      unoptimized
+                      sizes="(max-width: 1024px) 100vw, 50vw"
                       className="object-cover object-center" />
                   </div>
 
