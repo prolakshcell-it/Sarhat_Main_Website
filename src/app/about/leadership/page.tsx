@@ -61,7 +61,8 @@ const directors: LeaderProfile[] = [
       "Radha Kumari leads Human Resources at Sarhat Energy. With 6 years of focused HR and talent leadership, she spearheads human capital management, organizational culture, workforce inclusion, policy frameworks, and continuous skill upskilling across on-site execution crews and corporate departments.",
     education: "MBA Human Resources Management",
     experience: "6 Years Experience",
-    image: "/team-heads/radha-kumari.jpg",
+    image: "/team-heads/radha-kumari-v4.jpg",
+    initials: "RK",
     linkedin: "https://www.linkedin.com/company/sarhatenergy/",
   },
 ];
@@ -82,7 +83,8 @@ const functionalLeaders: LeaderProfile[] = [
     id: "ayush-raj",
     name: "Ayush Raj",
     role: "Manager – Business Development",
-    image: "/team-heads/ayush-raj.jpg",
+    image: "/team-heads/ayush-raj-v2.jpg",
+    initials: "AR",
     fullBio:
       "Ayush Raj serves as Manager Business Development at Sarhat Energy. Bringing 3 years of dynamic business development and client engagement experience, he focuses on pipeline origination, tender analytics, commercial proposals, and client relationship management for commercial and utility clients.",
     education: "B.E. / B.Tech & Business Management",
@@ -307,16 +309,16 @@ export default function LeadershipPage() {
                     <div className="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 shadow-sm hover:shadow-lg hover:border-slate-300 transition-all duration-300 flex items-center gap-4 group h-full">
                       {/* Avatar Left */}
                       <div className="w-20 h-20 sm:w-22 sm:h-22 rounded-xl overflow-hidden shrink-0 relative bg-slate-100 shadow-inner">
-                        {leader.initials ? (
-                          <div className="w-full h-full bg-[#0B1E36] text-white font-serif-display font-bold text-2xl flex items-center justify-center tracking-wider">
-                            {leader.initials}
-                          </div>
-                        ) : leader.image ? (
+                        {leader.image ? (
                           <Image
                             src={leader.image}
                             alt={leader.name}
                             fill
                             className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                        ) : leader.initials ? (
+                          <div className="w-full h-full bg-[#0B1E36] text-white font-serif-display font-bold text-2xl flex items-center justify-center tracking-wider">
+                            {leader.initials}
+                          </div>
                         ) : null}
                       </div>
 
@@ -424,16 +426,16 @@ export default function LeadershipPage() {
 
                   <div className="flex items-center gap-5">
                     <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border-2 border-[#6DAD45] shrink-0 bg-slate-800 shadow-xl">
-                      {selectedLeader.initials ? (
-                        <div className="w-full h-full bg-[#0B1E36] text-white font-serif-display font-bold text-3xl flex items-center justify-center">
-                          {selectedLeader.initials}
-                        </div>
-                      ) : selectedLeader.image ? (
+                      {selectedLeader.image ? (
                         <Image
                           src={selectedLeader.image}
                           alt={selectedLeader.name}
                           fill
                           className="object-cover object-top" />
+                      ) : selectedLeader.initials ? (
+                        <div className="w-full h-full bg-[#0B1E36] text-white font-serif-display font-bold text-3xl flex items-center justify-center">
+                          {selectedLeader.initials}
+                        </div>
                       ) : null}
                     </div>
                     <div>
