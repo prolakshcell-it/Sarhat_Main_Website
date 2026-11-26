@@ -200,14 +200,13 @@ export default function SupplyChainPage() {
             <motion.div style={{ scale: bgScale }}
               className="absolute inset-0 z-0 h-full w-full will-change-transform">
               <Image
-                src="/images/partner-hero-bg.jpg"
+                src="/images/supply-chain-hero-hd.jpg"
                 alt="Equipment supply for a Sarhat solar project"
                 fill
                 priority
-                quality={85}
-                sizes="100vw"
-                className="object-cover object-center opacity-85" />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/25 via-45% to-black/40 pointer-events-none" />
+                unoptimized
+                className="object-cover object-center opacity-55" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60 pointer-events-none" />
             </motion.div>
 
             {/* Luminous Glow Behind Subject */}
